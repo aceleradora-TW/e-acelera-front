@@ -15,7 +15,6 @@ import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import Image from 'next/image';
 
-const pages = ['Products', 'Pricing', 'Blog'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 interface NavBarProps {
     list:string[],
@@ -56,9 +55,8 @@ export const ResponsiveAppBar:React.FC<NavBarProps> = ({list})=> {
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },
-              fontFamily: 'monospace',
+              fontFamily: 'Poppins',
               fontWeight: 700,
-              letterSpacing: '.3rem',
               color: 'inherit',
               textDecoration: 'none',
             }}
@@ -95,9 +93,9 @@ export const ResponsiveAppBar:React.FC<NavBarProps> = ({list})=> {
                 display: { xs: 'block', md: 'none' },
               }}
             >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
+              {list.map((item) => (
+                <MenuItem key={item} onClick={handleCloseNavMenu}>
+                  <Typography textAlign="center">{item}</Typography>
                 </MenuItem>
               ))}
             </Menu>
@@ -122,13 +120,13 @@ export const ResponsiveAppBar:React.FC<NavBarProps> = ({list})=> {
             LOGO
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {pages.map((page) => (
+            {list.map((item) => (
               <Button
-                key={page}
+                key={item}
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
-                {page}
+                {item}
               </Button>
             ))}
           </Box>

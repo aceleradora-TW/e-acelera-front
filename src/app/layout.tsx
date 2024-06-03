@@ -18,7 +18,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <ResponsiveAppBar list={[]}/>
+        <ResponsiveAppBar list={['Nivelamento', 'Autoestudo']}/>
         {children}</body>
     </html>
   );
