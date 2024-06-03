@@ -1,3 +1,4 @@
+'use client'
 import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -12,6 +13,7 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
+import Image from 'next/image';
 
 const pages = ['Products', 'Pricing', 'Blog'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
@@ -39,15 +41,18 @@ export const ResponsiveAppBar:React.FC<NavBarProps> = ({list})=> {
   };
 
   return (
-    <AppBar position="static">
+    <AppBar position="fixed">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+          {/* <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} /> */}
+          <Image width={43} height={61}
+                  src='/assets/logo.svg'
+                  alt="imagem filme"/>
           <Typography
             variant="h6"
             noWrap
             component="a"
-            href="#app-bar-with-responsive-menu"
+            href="/"
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },
@@ -58,7 +63,7 @@ export const ResponsiveAppBar:React.FC<NavBarProps> = ({list})=> {
               textDecoration: 'none',
             }}
           >
-            LOGO
+            E-Acelera
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -163,3 +168,4 @@ export const ResponsiveAppBar:React.FC<NavBarProps> = ({list})=> {
   );
 }
 export default ResponsiveAppBar;
+// Componente utilizado do Material ui - App bar with responsive menu

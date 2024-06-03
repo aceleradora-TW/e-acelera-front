@@ -15,7 +15,7 @@ export default function Home() {
       <ThemeConfig>
         <Box sx={{ display: 'flex' }}>
           <CssBaseline />
-          <AppBar
+          {/* <AppBar
             position="fixed"
             sx={{
               width: { sm: `calc(100% - ${drawerWidth}px)` },
@@ -48,7 +48,7 @@ export default function Home() {
 
               <Button color="inherit">Login</Button>
             </Toolbar>
-          </AppBar>
+          </AppBar> */}
           <Box
             component="nav"
             sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
