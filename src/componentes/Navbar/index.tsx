@@ -43,11 +43,19 @@ export const ResponsiveAppBar:React.FC<NavBarProps> = ({list})=> {
     <AppBar position="fixed" sx={{  fontFamily: 'Roboto' , backgroundColor:'#FFFFFF', color:'#031D3C' }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters sx={{display:'flex', alignItems:'center'}}>
+          <Box sx={{
+              mr: 2,
+              display: { xs: 'none', md: 'flex' },
+              fontWeight: 700,
+              color: 'inherit',
+              textDecoration: 'none',
+              marginLeft:2}}>
           <Image width={43} height={48}
                   src='/assets/logo.svg'
                   alt="imagem filme"
                   style={{display:'flex'}}
                   className='border-4'/>
+          </Box>
           <Typography
             variant="h6"
             noWrap
@@ -102,7 +110,13 @@ export const ResponsiveAppBar:React.FC<NavBarProps> = ({list})=> {
               ))}
             </Menu>
           </Box>
-          <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+          <Box sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }}>
+          <Image width={43} height={48}
+                  src='/assets/logo.svg'
+                  alt="imagem filme"
+                  style={{display:'flex'}}
+                  className='border-4'/>
+          </Box>
           <Typography
             variant="h5"
             noWrap
@@ -112,7 +126,7 @@ export const ResponsiveAppBar:React.FC<NavBarProps> = ({list})=> {
               mr: 2,
               display: { xs: 'flex', md: 'none' },
               flexGrow: 1,
-              fontWeight: 700,
+              fontWeight: 500,
               letterSpacing: '.3rem',
               color: 'inherit',
               textDecoration: 'none',
