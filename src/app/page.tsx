@@ -7,6 +7,7 @@ import { AppBar, Box, Button, Card, CardActionArea, CardContent, CssBaseline, Ic
 import MenuIcon from '@mui/icons-material/Menu';
 import { ThemeConfig } from '@/componentes/config/theme';
 import OpenButtom from "@/componentes/OpenButtom";
+import StatusButtom from "@/componentes/StatusButtom";
 
 const drawerWidth = 0;
 
@@ -84,6 +85,7 @@ export default function Home() {
             </Card>
            
             <OpenButtom />
+            <StatusButtom />
             <CardContent>
               <Typography variant="h5" component="div" color="black">
                 JavaScript
@@ -107,6 +109,7 @@ export default function Home() {
             </Card>
            
             <OpenButtom />
+            <StatusButtom />
             <CardContent>
               <Typography variant="h5" component="div" color="black">
                 Next.js
@@ -130,6 +133,7 @@ export default function Home() {
                 
               </CardActionArea>
             </Card>
+            <StatusButtom/>
             <OpenButtom/>
           </Box>
         </Box>
