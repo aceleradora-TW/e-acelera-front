@@ -12,10 +12,10 @@ const ColorButton = styled(Button)<ButtonProps>(() => ({
     },
 }));
 
-export default function OpenButtom() {
+export default function NextButton() {
     return (
         <Stack spacing={2} direction="row">
-            <ColorButton variant="contained">Entrar</ColorButton>
+            <ColorButton variant="contained">Próximo exercício</ColorButton>
         </Stack>
     );
 }

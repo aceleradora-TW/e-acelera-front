@@ -6,8 +6,8 @@ import next from "../../public/assets/next.png"
 import { AppBar, Box, Button, Card, CardActionArea, CardContent, CssBaseline, IconButton, Toolbar, Typography } from "@mui/material";
 import MenuIcon from '@mui/icons-material/Menu';
 import { ThemeConfig } from '@/componentes/config/theme';
-import OpenButtom from "@/componentes/OpenButtom";
-import StatusButtom from "@/componentes/StatusButtom";
+import ClickButton from "@/componentes/ClickButton";
+import StatusButton from "@/componentes/StatusButton";
 
 const drawerWidth = 0;
 
@@ -84,8 +84,8 @@ export default function Home() {
               </CardActionArea>
             </Card>
            
-            <OpenButtom />
-            <StatusButtom />
+            <ClickButton />
+            <StatusButton />
             <CardContent>
               <Typography variant="h5" component="div" color="black">
                 JavaScript
@@ -108,8 +108,8 @@ export default function Home() {
               </CardActionArea>
             </Card>
            
-            <OpenButtom />
-            <StatusButtom />
+            <ClickButton />
+            <StatusButton />
             <CardContent>
               <Typography variant="h5" component="div" color="black">
                 Next.js
@@ -133,8 +133,8 @@ export default function Home() {
                 
               </CardActionArea>
             </Card>
-            <StatusButtom/>
-            <OpenButtom/>
+            <StatusButton/>
+            <ClickButton/>
           </Box>
         </Box>
       </ThemeConfig>
