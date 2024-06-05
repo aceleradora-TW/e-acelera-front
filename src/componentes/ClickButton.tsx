@@ -12,10 +12,13 @@ const ColorButton = styled(Button)<ButtonProps>(() => ({
     },
 }));
 
-export default function ClickButton() {
-    return (
-        <Stack spacing={2} direction="row">
-            <ColorButton variant="contained">{}</ColorButton>
-        </Stack>
-    );
+type CardProps = {
+    title: string,
 }
+
+export const ClickButton = ({ title }: CardProps) =>
+    <aside>
+        <Stack spacing={2} direction="row">
+            <ColorButton variant="contained">{title}</ColorButton>
+        </Stack>
+    </aside>
