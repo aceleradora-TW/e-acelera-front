@@ -14,6 +14,7 @@ import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import Image from 'next/image';
 import { DisplaySettings } from '@mui/icons-material';
+import { Avatar, Tooltip } from '@mui/material';
 
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 interface NavBarProps {
@@ -46,18 +47,13 @@ export const ResponsiveAppBar:React.FC<NavBarProps> = ({list})=> {
           <Box sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },
-              fontWeight: 700,
-              color: 'inherit',
-              textDecoration: 'none',
-              marginLeft:2}}>
+              marginLeft:0}}>
           <Image width={43} height={48}
                   src='/assets/logo.svg'
-                  alt="imagem filme"
-                  style={{display:'flex'}}
-                  className='border-4'/>
+                  alt="imagem filme"/>
           </Box>
+          {/* MENU WEB */}
           <Typography
-            variant="h6"
             noWrap
             component="a"
             href="/"
@@ -65,9 +61,10 @@ export const ResponsiveAppBar:React.FC<NavBarProps> = ({list})=> {
               mr: 2,
               display: { xs: 'none', md: 'flex' },
               fontWeight: 700,
-              color: 'inherit',
               textDecoration: 'none',
-              marginLeft:2
+              letterSpacing: '0.15px',
+              lineHeight:'1.6',
+              fontSize:'1.2rem'
             }}
           >
             E-Acelera
@@ -85,6 +82,7 @@ export const ResponsiveAppBar:React.FC<NavBarProps> = ({list})=> {
             >
               <MenuIcon />
             </IconButton>
+
             <Menu
               id="menu-appbar"
               anchorEl={anchorElNav}
@@ -118,28 +116,38 @@ export const ResponsiveAppBar:React.FC<NavBarProps> = ({list})=> {
                   className='border-4'/>
           </Box>
           <Typography
-            variant="h5"
             noWrap
             component="a"
             href="#app-bar-with-responsive-menu"
             sx={{
+              fontSize:'1.25rem',
               mr: 2,
               display: { xs: 'flex', md: 'none' },
               flexGrow: 1,
-              fontWeight: 500,
-              letterSpacing: '.3rem',
-              color: 'inherit',
+              fontWeight: 700,
+              letterSpacing: '0.15px',
+              lineHeight:'1.6',
               textDecoration: 'none',
             }}
           >
             E-Acelera
           </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex', alignItems:'center', justifyContent:'center' }, }}>
+          <Box sx={{ flexGrow: 1, 
+            display: { xs: 'none', 
+            md: 'flex', 
+            alignItems:'center', 
+            justifyContent:'center' }, }}>
             {list.map((item) => (
               <Button
                 key={item}
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: '#031D3C', display: 'block' }}
+                sx={{ my: 2, display: 'block',  
+                  textTransform: 'none', 
+                  fontSize:'1rem', 
+                  lineHeight:'1.7', 
+                  fontWeight:500, 
+                  letterSpacing:'0.4px', 
+                  color:'primary'}}
               >
                 {item}
               </Button>
@@ -147,6 +155,14 @@ export const ResponsiveAppBar:React.FC<NavBarProps> = ({list})=> {
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
+          {/* MENU DO PERFIL WEB  */}
+                <Tooltip title="Open settings">
+                  {/*Item a ser adicionado no IconButton onClick={handleOpenUserMenu}  */}
+              <IconButton 
+              sx={{ p: 0, backgroundColor:'black', visibility:'hidden' }}>
+                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+              </IconButton>
+            </Tooltip> 
             <Menu
               sx={{ mt: '45px' }}
               id="menu-appbar"
