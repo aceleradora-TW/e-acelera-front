@@ -9,7 +9,6 @@ interface TitleProps {
 export const ResponsiveTitle:React.FC<TitleProps> = ({children}) => {
     return (
         <div>
-            <p>{children}</p>
             <Typography
                 color='black'
                 variant="h3"
@@ -24,7 +23,7 @@ export const ResponsiveTitle:React.FC<TitleProps> = ({children}) => {
                 marginTop: 13,
                 marginLeft: 25,
                 }}
-                >Bem vindo ao Nivelamento</Typography>
+                >{children}</Typography>
         </div>
     )
 }

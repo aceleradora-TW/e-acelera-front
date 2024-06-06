@@ -18,7 +18,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <ResponsiveTitle children=""/>
+        <ResponsiveTitle children="Bem vindo ao Nivelamento"/>
+        <ResponsiveTitle children="Exercícios"/>
         {children}</body>
     </html>
   );
