@@ -5,7 +5,7 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 
-export default function StatusButtom() {
+export default function StatusButton() {
   const [status, setStatus] = React.useState<string>("");
   const [backgroundColor, setBackgroundColor] = React.useState<string>("");
 
