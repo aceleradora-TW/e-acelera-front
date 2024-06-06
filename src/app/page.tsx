@@ -6,6 +6,7 @@ import next from "../../public/assets/next.png"
 import { AppBar, Box, Button, Card, CardActionArea, CardContent, CssBaseline, IconButton, Toolbar, Typography } from "@mui/material";
 import MenuIcon from '@mui/icons-material/Menu';
 import { ThemeConfig } from '@/componentes/config/theme';
+// import { theme } from  '@/componentes/config/theme';
 
 const drawerWidth = 0;
 
@@ -26,14 +27,13 @@ export default function Home() {
               <IconButton
                 size="large"
                 edge="start"
-                color="inherit"
                 aria-label="menu"
-                sx={{ mr: 2 }}
+                sx={{ mr: 2, color: 'secondary.dark' }}
               >
                 <MenuIcon />
               </IconButton>
 
-              <Typography variant="h6" noWrap component="div" flexGrow={1} sx={{ cursor: "pointer" }}>
+              <Typography variant="h6" noWrap component="div"  flexGrow={1} sx={{ cursor: "pointer"}}>
                 Home
               </Typography>
               <Typography variant="h6" noWrap component="div" flexGrow={1} sx={{ cursor: "pointer" }}>
@@ -53,15 +53,16 @@ export default function Home() {
             component="nav"
             sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
             aria-label="mailbox folders"
+           
           >
           </Box>
           <Box
             component="main"
-            sx={{ flexGrow: 1, p: 3, width: { sm: `calc(100% - ${drawerWidth}px)` } }}
+            sx={{ flexGrow: 1, p: 3, backgroundColor: 'secondary.dark', width: { sm: `calc(100% - ${drawerWidth}px)` } }}
           >
             <Toolbar />
             <CardContent>
-              <Typography variant="h5" component="div" color="black">
+              <Typography variant="h5" component="div" color="#00000">
                 React
               </Typography>
               <Typography variant="body2" color="black">
@@ -82,7 +83,7 @@ export default function Home() {
               </CardActionArea>
             </Card>
             <CardContent>
-              <Typography variant="h5" component="div" color="black">
+              <Typography variant="h5" component="div" color="primary.main">
                 JavaScript
               </Typography>
               <Typography variant="body2" color="black">
