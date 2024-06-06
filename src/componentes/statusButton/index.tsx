@@ -14,7 +14,7 @@ export default function StatusButton() {
     setStatus(value);
 
     switch (value) {
-      case "green":
+      case "done":
         setBackgroundColor("#9EFF85");
         break;
       case "orange":
@@ -50,9 +50,9 @@ export default function StatusButton() {
             color: "#000000",
           }}
         >
-          <MenuItem value="green">Concluido</MenuItem>
-          <MenuItem value="orange">Em andamento</MenuItem>
-          <MenuItem value="light">Pendente</MenuItem>
+          <MenuItem value="done">Concluido</MenuItem>
+          <MenuItem value="inProgress">Em andamento</MenuItem>
+          <MenuItem value="peding">Pendente</MenuItem>
         </Select>
       </FormControl>
     </Box>
