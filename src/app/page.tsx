@@ -6,6 +6,7 @@ import next from "../../public/assets/next.png"
 import { AppBar, Box, Button, Card, CardActionArea, CardContent, CssBaseline, IconButton, Toolbar, Typography } from "@mui/material";
 import MenuIcon from '@mui/icons-material/Menu';
 import { ThemeConfig } from '@/componentes/config/theme';
+import StatusButton from "@/componentes/StatusButton";
 
 const drawerWidth = 0;
 
@@ -13,9 +14,7 @@ export default function Home() {
 
   return (
     <main>
-      <div className="bg-done text-inProgress">Jorge</div>
-      <div className="bg-inProgress">Jorge</div>
-      <div className="bg-pending">Jorge</div>
+      <StatusButton/>
     </main>
   );
 }
