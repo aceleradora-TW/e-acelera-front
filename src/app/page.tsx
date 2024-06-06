@@ -6,8 +6,8 @@ import next from "../../public/assets/next.png"
 import { AppBar, Box, Button, Card, CardActionArea, CardContent, CssBaseline, IconButton, Toolbar, Typography } from "@mui/material"
 import MenuIcon from '@mui/icons-material/Menu'
 import { ThemeConfig } from '@/componentes/config/theme'
-import StatusButton from "@/componentes/StatusButton"
-import { ClickButton } from "@/componentes/ClickButton"
+import StatusButton from "@/componentes/StatusButton/index"
+import { ClickButton } from "@/componentes/ClickButton/index"
 
 const drawerWidth = 0
 
