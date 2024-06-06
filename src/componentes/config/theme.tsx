@@ -11,6 +11,9 @@ export enum themePalette {
 }
 
 const theme = createTheme({
+    typography: {
+        fontFamily: 'Roboto, sans-serif',
+    },
     palette: {
         mode: "dark",
         background: {

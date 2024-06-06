@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { ResponsiveTitle } from "@/componentes/config/title";
+import { Title } from "@/componentes/config/Title";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,8 +18,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <ResponsiveTitle children="Bem vindo ao Nivelamento"/>
-        <ResponsiveTitle children="Exercícios"/>
+        <Title children="Bem vindo ao Nivelamento"/>
+        <Title children="Exercícios"/>
         {children}</body>
     </html>
   );
