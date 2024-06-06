@@ -122,7 +122,7 @@ export default function Home() {
                 Resume: Aula avançada de next.js.
               </Typography>
             </CardContent>
-            
+
             <Card sx={{ maxWidth: 345 }}>
               <CardActionArea>
                 <Image
@@ -130,12 +130,12 @@ export default function Home() {
                   src={next}
                   alt="imagem filme"
                 />
-                
+
               </CardActionArea>
             </Card>
             <ClickButton title="Próximo exercício" />
             <ClickButton title="Entrar" />
-            <StatusButton/>
+            <StatusButton />
           </Box>
         </Box>
       </ThemeConfig>
