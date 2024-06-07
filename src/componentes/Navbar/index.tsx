@@ -29,6 +29,8 @@ export const ResponsiveAppBar: React.FC<NavBarProps> = ({ list }) => {
   const pathname = usePathname()
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
+  console.log('pathname',pathname)
+ 
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
@@ -48,7 +50,13 @@ export const ResponsiveAppBar: React.FC<NavBarProps> = ({ list }) => {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
-
+  const buttonStyle = (item:string) => {
+    if (`/${item}`==pathname){
+      return 'solid'
+    }else{
+      return 'none'
+    }
+  }
 
   return (
       <AppBar position="fixed" sx={{ fontFamily: 'Roboto', backgroundColor: '#FFFFFF', color: '#031D3C' }}>
@@ -168,13 +176,14 @@ export const ResponsiveAppBar: React.FC<NavBarProps> = ({ list }) => {
                     letterSpacing: '0.4px',
                     margin: '0 0.5rem',
                     color: 'black',
+                    borderBottomWidth: '3px',
+                    borderBottom: buttonStyle(item),
+                    borderBottomColors: 'black',
+                    borderRadius: '0',
+
                     '&:active': {
-                      // boxShadow: 'none',
-                      // borderColor: '#005cbf',
-                      // borderBottomWidth: '3px',
-                      // borderBottomStyle: 'solid',
-                      // borderBottomColors: 'black',
-                      // borderRadius: '0'
+                      boxShadow: 'none',
+                      borderColor: '#005cbf',
                     },
                   }}
                 >
@@ -189,7 +198,7 @@ export const ResponsiveAppBar: React.FC<NavBarProps> = ({ list }) => {
                 {/*Item a ser adicionado no IconButton onClick={handleOpenUserMenu}  */}
                 <IconButton
                   sx={{ p: 0, backgroundColor: 'black', visibility: 'hidden' }}>
-                  <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                  <Avatar alt="Remy Sharp" src="" />
                 </IconButton>
               </Tooltip>
               <Menu
