@@ -13,12 +13,13 @@ const ColorButton = styled(Button)<ButtonProps>(() => ({
 }))
 
 type CardProps = {
-    title: string
+    title: string,
+    click: () => void
 }
 
-export const ClickButton = ({ title }: CardProps) =>
+export const ClickButton = ({ title, click }: CardProps) =>
     <aside>
-        <Stack spacing={2} direction="row">
+        <Stack spacing={2} direction="row" onClick={click}>
             <ColorButton variant="contained">{title}</ColorButton>
         </Stack>
     </aside>

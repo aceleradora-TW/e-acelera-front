@@ -5,7 +5,7 @@ import MenuItem from "@mui/material/MenuItem"
 import FormControl from "@mui/material/FormControl"
 import Select, { SelectChangeEvent } from "@mui/material/Select"
 
-export default function StatusButton() {
+export default function StatusSelect() {
   const [status, setStatus] = React.useState<string>("")
   const [backgroundColor, setBackgroundColor] = React.useState<string>("")
 
@@ -31,12 +31,12 @@ export default function StatusButton() {
   return (
     <Box sx={{ minWidth: 120, backgroundColor, width: "30%" }}>
       <FormControl fullWidth>
-        <InputLabel id="demo-simple-select-label" sx={{ color: "black" }}>
+        <InputLabel id="statusLevelling" sx={{ color: "black" }}>
           Status
         </InputLabel>
         <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
+          labelId="statusLevelling"
+          id="statusSelect"
           value={status}
           label="Status"
           onChange={handleChange}
