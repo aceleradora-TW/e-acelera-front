@@ -1,5 +1,7 @@
 # This is a CODEOWNERS file
 
-# Project Owners
+## Project Owners
 
-* @barbaraanger @daniellemadrid
+- @barbaraanger @daniellemadrid
+
+- Não mexer sem a permissão prévia de ambos os POs
