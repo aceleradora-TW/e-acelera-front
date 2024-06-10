@@ -15,10 +15,8 @@ import { Avatar, Tooltip } from '@mui/material';
 import { usePathname, useRouter } from 'next/navigation';
 import Link from 'next/link';
 
-
-
-
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+// Opções do login a serem utilizadas em proxima versão do codigo.
+const settings = ['Profile', 'Account', 'Dashboard', 'Logout']
 
 interface NavBarProps {
   list: string[],
@@ -28,9 +26,7 @@ export const ResponsiveAppBar: React.FC<NavBarProps> = ({ list }) => {
   const router = useRouter()
   const pathname = usePathname()
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
-  const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
-  console.log('pathname',pathname)
- 
+  const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null); 
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
@@ -50,7 +46,7 @@ export const ResponsiveAppBar: React.FC<NavBarProps> = ({ list }) => {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
-  const buttonStyle = (item:string) => {
+  const buttonBorderStyle = (item:string) => {
     if (`/${item}`==pathname){
       return 'solid'
     }else{
@@ -177,7 +173,7 @@ export const ResponsiveAppBar: React.FC<NavBarProps> = ({ list }) => {
                     margin: '0 0.5rem',
                     color: 'black',
                     borderBottomWidth: '3px',
-                    borderBottom: buttonStyle(item),
+                    borderBottom: buttonBorderStyle(item),
                     borderBottomColors: 'black',
                     borderRadius: '0',
 
