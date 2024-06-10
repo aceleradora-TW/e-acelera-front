@@ -6,31 +6,31 @@ import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 
 export default function StatusButton() {
-  const [status, setStatus] = React.useState<string>("");
-  const [backgroundColor, setBackgroundColor] = React.useState<string>("");
+  const [status, setStatus] = React.useState<string>("")
+  const [backgroundColor, setBackgroundColor] = React.useState<string>("")
 
   const handleChange = (event: SelectChangeEvent) => {
-    const value = event.target.value as string;
-    setStatus(value);
+    const value = event.target.value as string
+    setStatus(value)
 
     switch (value) {
       case "done":
-        setBackgroundColor("#9EFF85");
-        break;
-      case "orange":
-        setBackgroundColor("#FFDE6B");
-        break;
-      case "light":
-        setBackgroundColor("#ffffff");
-        break;
+        setBackgroundColor("bg-status-color-success")
+        break
+      case "inProgress":
+        setBackgroundColor("bg-status-color-inprogress")
+        break
+      case "pending":
+        setBackgroundColor("bg-button-send")
+        break
       default:
-        setBackgroundColor("");
+        setBackgroundColor("")
     }
-  };
+  }
 
   return (
-    <Box sx={{ minWidth: 120, backgroundColor, width: "30%" }}>
-      <FormControl fullWidth>
+    <Box className={`${backgroundColor}`} sx={{ minWidth: 120, width: "30%" }}>
+      <FormControl  fullWidth>
         <InputLabel id="demo-simple-select-label" sx={{ color: "black" }}>
           Status
         </InputLabel>
@@ -42,19 +42,19 @@ export default function StatusButton() {
           onChange={handleChange}
           sx={{
             "& .MuiOutlinedInput-notchedOutline": {
-              borderColor: "black",
+              borderColor: "black"
             },
             "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-              borderColor: "black",
+              borderColor: "black"
             },
-            color: "#000000",
+            color: "#000000"
           }}
         >
           <MenuItem value="done">Concluido</MenuItem>
           <MenuItem value="inProgress">Em andamento</MenuItem>
-          <MenuItem value="peding">Pendente</MenuItem>
+          <MenuItem value="pending">Pendente</MenuItem>
         </Select>
       </FormControl>
     </Box>
-  );
+  )
 }

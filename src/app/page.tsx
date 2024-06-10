@@ -3,10 +3,10 @@ import Image from "next/image"
 import react from "../../public/assets/react.png"
 import js from "../../public/assets/js.png"
 import next from "../../public/assets/next.png"
-import { AppBar, Box, Button, Card, CardActionArea, CardContent, CssBaseline, IconButton, Toolbar, Typography } from "@mui/material";
+import { AppBar, Box, Button, Card, CardActionArea, CardContent, CssBaseline, FormControl, IconButton, InputLabel, MenuItem, Select, Toolbar, Typography } from "@mui/material";
 import MenuIcon from '@mui/icons-material/Menu';
-import { ThemeConfig } from '@/componentes/config/theme';
-import StatusButton from "@/componentes/StatusButton";
+import { ThemeConfig } from '@/components/config/theme';
+import StatusButton from "@/components/StatusButton";
 
 const drawerWidth = 0;
 
