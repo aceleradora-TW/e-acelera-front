@@ -130,7 +130,7 @@ export const ResponsiveAppBar: React.FC<NavBarProps> = ({ list }) => {
                 src='/assets/logo.svg'
                 alt="imagem filme"
                 style={{ display: 'flex' }}
-                className='border-4' />
+                 />
             </Box>
             <Typography
               noWrap
