@@ -9,6 +9,7 @@ import { ThemeConfig } from '@/components/config/theme'
 import StatusSelect from "@/components/StatusSelect"
 import { ClickButton } from "@/components/ClickButton"
 import { useRouter } from "next/navigation"
+import ListingCard from "@/components/ListingCard"
 
 const drawerWidth = 0
 
@@ -19,7 +20,13 @@ export default function Home() {
   }
   return (
     <main>
-      <ThemeConfig>
+        <ListingCard 
+        image="/assets/next.png" 
+        title="next"
+        description="next é bão"
+        />
+        <ListingCard type="exercise"/>
+      {/* <ThemeConfig>
         <Box sx={{ display: 'flex' }}>
           <CssBaseline />
           <AppBar
@@ -67,6 +74,7 @@ export default function Home() {
             sx={{ flexGrow: 1, p: 3, width: { sm: `calc(100% - ${drawerWidth}px)` } }}
           >
             <Toolbar />
+
             <CardContent>
               <Typography variant="h5" component="div" color="black">
                 React
@@ -143,7 +151,7 @@ export default function Home() {
             <StatusSelect />
           </Box>
         </Box>
-      </ThemeConfig>
+      </ThemeConfig> */}
     </main>
   )
 }
