@@ -6,17 +6,17 @@ type ThemeProp = {
 };
 
 export enum themePalette {
-  buttonText = "RGB(3, 29, 60)",
-  title = "RGB(0, 44, 83)",
-  buttonBg = "RGB(95, 160, 237)",
-  descriptionCard = "RGB(44, 44, 44)",
-  descriptionText = "RGB(0, 0, 0)",
-  statusInProgress = "RGB(225, 222, 107)",
-  statusConcluded = "RGB(3, 29, 60)",
-  statusPending = "RGB(225, 225, 225)",
-  mainBg = "RGB(245, 245, 245)",
-  cardBg = "RGB(255, 255, 255)",
-  shawdowBg = "RGBA(0, 0, 0, 0.25)",
+  buttonText = "rgb(3, 29, 60)",
+  title = "rgb(0, 44, 83)",
+  buttonBg = "rgb(95, 160, 237)",
+  descriptionCard = "rgb(44, 44, 44)",
+  descriptionText = "rgb(0, 0, 0)",
+  statusInProgress = "rgb(225, 222, 107)",
+  statusConcluded = "rgb(3, 29, 60)",
+  statusPending = "rgb(225, 225, 225)",
+  mainBg = "rgb(245, 245, 245)",
+  cardBg = "rgb(255, 255, 255)",
+  shawdowBg = "rgba(0, 0, 0, 0.25)",
 }
 
 const theme = createTheme({
