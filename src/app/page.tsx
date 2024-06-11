@@ -1,15 +1,22 @@
-'use client';
+'use client'
 import Image from "next/image"
 import react from "../../public/assets/react.png"
 import js from "../../public/assets/js.png"
 import next from "../../public/assets/next.png"
-import { AppBar, Box, Button, Card, CardActionArea, CardContent, CssBaseline, IconButton, Toolbar, Typography } from "@mui/material";
-import MenuIcon from '@mui/icons-material/Menu';
-import { ThemeConfig } from '@/componentes/config/theme';
+import { AppBar, Box, Button, Card, CardActionArea, CardContent, CssBaseline, IconButton, Toolbar, Typography } from "@mui/material"
+import MenuIcon from '@mui/icons-material/Menu'
+import { ThemeConfig } from '@/components/config/theme'
+import StatusSelect from "@/components/StatusSelect"
+import { ClickButton } from "@/components/ClickButton"
+import { useRouter } from "next/navigation"
 
-const drawerWidth = 0;
+const drawerWidth = 0
 
 export default function Home() {
+  const router=useRouter()
+  function clickTest(){
+    router.push("/")
+  }
   return (
     <main>
       <ThemeConfig>
@@ -81,6 +88,9 @@ export default function Home() {
                 />
               </CardActionArea>
             </Card>
+            <ClickButton title="Próximo exercício" click={clickTest} />
+            <ClickButton title="Entrar" click={clickTest} />
+            <StatusSelect/>
             <CardContent>
               <Typography variant="h5" component="div" color="black">
                 JavaScript
@@ -102,6 +112,9 @@ export default function Home() {
                 />
               </CardActionArea>
             </Card>
+            <ClickButton title="Próximo exercício" click={clickTest} />
+            <ClickButton title="Entrar" click={clickTest} />
+            <StatusSelect />
             <CardContent>
               <Typography variant="h5" component="div" color="black">
                 Next.js
@@ -114,6 +127,7 @@ export default function Home() {
                 Resume: Aula avançada de next.js.
               </Typography>
             </CardContent>
+
             <Card sx={{ maxWidth: 345 }}>
               <CardActionArea>
                 <Image
@@ -121,11 +135,15 @@ export default function Home() {
                   src={next}
                   alt="imagem filme"
                 />
+
               </CardActionArea>
             </Card>
+            <ClickButton title="Próximo exercício" click={clickTest} />
+            <ClickButton title="Entrar" click={clickTest} />
+            <StatusSelect />
           </Box>
         </Box>
       </ThemeConfig>
     </main>
-  );
+  )
 }
