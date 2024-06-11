@@ -1,7 +1,7 @@
 'use client'
 import React from "react"
 import Typography from "@mui/material/Typography"
-import { ThemeConfig } from "../theme"
+import { ThemeConfig } from "../config/theme"
 interface TitleProps {
     children: string
     variant: "h1"|"h2"
