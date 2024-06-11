@@ -4,23 +4,25 @@ import Typography from "@mui/material/Typography"
 import { ThemeConfig } from "../theme"
 interface TitleProps {
     children: string
+    variant: "h1"|"h2"
+    fontSize: "3rem"|30
 } 
-export const Title:React.FC<TitleProps> = ({children}) => {
+export const Title:React.FC<TitleProps> = ({children, variant, fontSize}) => {
     return (
         <div>
             <ThemeConfig>
                 <Typography
-                    variant="h1"
+                    variant={variant}
                     component="div"
                     sx={{
-                    fontFamily: 'Roboto',
-                    fontSize: 48,
-                    fontWeight: 400,
-                    fontHeight: 56.2,
+                    fontFamily: 'Roboto, sans-serif',
+                    fontSize: {fontSize},
+                    fontWeight: 500,
+                    fontHeight: 1.16,
                     textAlign: "left",
-                    color: 'black',
-                    marginTop: 13,
-                    marginLeft: 25,
+                    color: "RGB(3, 29, 60)",
+                    marginTop: "78px",
+                    marginLeft: "178px",
                     }}
                     >{children}</Typography>
             </ThemeConfig>
