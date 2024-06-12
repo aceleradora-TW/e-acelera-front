@@ -33,7 +33,7 @@ export default function Home() {
                 <MenuIcon />
               </IconButton>
 
-              <Typography variant="h6" noWrap component="div"  flexGrow={1} sx={{ cursor: "pointer"}}>
+              <Typography variant="h1" noWrap component="div"  flexGrow={1} sx={{ cursor: "pointer"}}>
                 Home
               </Typography>
               <Typography variant="h6" noWrap component="div" flexGrow={1} sx={{ cursor: "pointer" }}>
@@ -62,14 +62,14 @@ export default function Home() {
           >
             <Toolbar />
             <CardContent>
-              <Typography variant="h5" component="div" color="#00000">
+              <Typography variant="h2" component="div" color="#00000">
                 React
               </Typography>
-              <Typography variant="body2" color="black">
+              <Typography variant="button" >
                 11/02/2024
               </Typography>
 
-              <Typography variant="body2" color="black">
+              <Typography variant="button" >
                 Resume: Aula avançada de React.
               </Typography>
             </CardContent>
@@ -83,14 +83,14 @@ export default function Home() {
               </CardActionArea>
             </Card>
             <CardContent>
-              <Typography variant="h5" component="div" color="primary.main">
+              <Typography variant="caption" component="div" >
                 JavaScript
               </Typography>
-              <Typography variant="body2" color="black">
+              <Typography variant="body1" >
                 01/02/2024
               </Typography>
 
-              <Typography variant="body2" color="black">
+              <Typography variant="subtitle1" >
                 Resume: Aula avançada de JavaScript.
               </Typography>
             </CardContent>
