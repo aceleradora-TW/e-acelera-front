@@ -14,7 +14,7 @@ export default function Home() {
   return (
     <main>
       <ThemeConfig>
-        <Box sx={{ display: 'flex' }}>
+        <Box className={"md:border-4"}>
           <CssBaseline />
           <AppBar
             position="fixed"
@@ -25,10 +25,11 @@ export default function Home() {
           >
             <Toolbar>
               <IconButton
+              className={'text-color-statusInProgress'}
                 size="large"
                 edge="start"
                 aria-label="menu"
-                sx={{ mr: 2, color: 'secondary.dark' }}
+                sx={{ mr: 2}}
               >
                 <MenuIcon />
               </IconButton>
@@ -62,11 +63,17 @@ export default function Home() {
           >
             <Toolbar />
             <CardContent>
-              <Typography variant="h2" component="div" color="#00000">
+              
+              <Typography className={"text-color-title"}  component="div" variant="h2">
                 React
               </Typography>
-              <Typography variant="button" >
-                11/02/2024
+
+              <Typography className={"text-descriptionText"}  component="div" variant="body1">
+               lorem  lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem
+              </Typography>
+
+              <Typography className={"bg-color-buttonBg text-color-buttonText"} variant="button" >
+                Entrar
               </Typography>
 
               <Typography variant="button" >
