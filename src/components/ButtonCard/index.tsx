@@ -16,15 +16,7 @@ export default function ListingCard(props: any) {
     return (
         <Card sx={{ maxWidth: 368, borderWidth: 2}}>
             <CardActionArea>
-            {props.image && (
-                <CardMedia
-                    component="img"
-                    image={props.image}
-                    alt="green iguana"
-                    sx={{ height: 152, marginBottom: 5.5}}
-                />
-            )}
-                <CardContent sx={{ paddingBottom: 10.63 }}>
+                <CardContent sx={{ paddingBottom: 5 }}>
                     <Typography gutterBottom variant="h5" component="div">
                         {props.title}
                     </Typography>
@@ -34,7 +26,7 @@ export default function ListingCard(props: any) {
                 </CardContent>
             </CardActionArea>
             <CardActions sx={{ paddingBottom: 4}}>
-                <ClickButton title="Entrar" click={clickTest} />
+                <StatusSelect/>
             </CardActions>
         </Card>
     );
