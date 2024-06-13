@@ -10,6 +10,7 @@ import StatusSelect from "@/components/StatusSelect"
 import { ClickButton } from "@/components/ClickButton"
 import { useRouter } from "next/navigation"
 import ListingCard from "@/components/ListingCard"
+import ButtonCard from "@/components/ButtonCard"
 
 const drawerWidth = 0
 
@@ -24,14 +25,17 @@ export default function Home() {
         image="/assets/next.png" 
         title="Next"
         description="
-        It is a long established fact that a reader will be distracted by the readable content of a page when 
-        looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution
-        of letters, as opposed to using 'Content here, content here"
+        texto de exemplo, texto de exemplo, texto de exemplo, 
+        texto de exemplo, texto de exemplo, texto de exemplo, 
+        texto de exemplo"
         />
         <ListingCard 
         title="Javascript"
-        description="Javascript é bão Javascript é bão Javascript é bãoJavascript é bão Javascript é bão" 
-        table="exercise"
+        description="Javascript é bão Javascript é bão Javascript é bãoJavascript é bão Javascript é bão"         
+        />
+        <ButtonCard
+        title="Exercicio 1"
+        description="texto de exemplo, texto de exemplo, texto de exemplo"
         />
       {/* <ThemeConfig>
         <Box sx={{ display: 'flex' }}>
