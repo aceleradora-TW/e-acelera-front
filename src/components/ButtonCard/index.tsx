@@ -4,10 +4,17 @@ import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import { Button, CardActionArea, CardActions } from '@mui/material';
 import StatusSelect from '../StatusSelect';
+import { useRouter } from 'next/navigation';
 
 
 export default function ButtonCard(props: any) {
-     return (
+
+    const router = useRouter()
+    const handlerClicker = (route: string) => {
+        router.push(`/${route}`)
+    }
+
+    return (
         <Card sx={{ maxWidth: 368, borderWidth: 2,
             "&:hover": {
                 transform: "scale(1.1)"
