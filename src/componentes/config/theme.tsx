@@ -1,5 +1,4 @@
 import { CssBaseline, ThemeProvider, createTheme } from "@mui/material";
-import { blue } from "@mui/material/colors";
 import React from "react";
 
 type ThemeProp = {
