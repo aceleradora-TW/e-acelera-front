@@ -15,7 +15,7 @@ export default function Home() {
   return (
     <main>
       <ThemeConfig>
-        <Box sx={{ display: 'flex' }}>
+        <Box className={"md:border-4"}>
           <CssBaseline />
           <AppBar
             position="fixed"
@@ -27,10 +27,13 @@ export default function Home() {
           >
             <Toolbar>
               <IconButton
+              className={'text-color-statusInProgress'}
                 size="large"
                 edge="start"
                 aria-label="menu"
+// <<<<<<< HEAD
                 sx={{ mr: 2, color: 'white' }}
+
               >
                 <MenuIcon />
               </IconButton>
@@ -64,16 +67,13 @@ export default function Home() {
           >
             <Toolbar />
             <CardContent>
-            <Typography variant="h5" component="div" color="black">
-                React
-              </Typography>
-              <Typography variant="body2" color="black">
-                11/02/2024
-              </Typography>
+
+             
 
               <Typography variant="body2" color="black">
                 Resume: Aula avançada de React.
               </Typography>
+            
             </CardContent>
             <Card sx={{ maxWidth: 345 }}>
               <CardActionArea>
@@ -126,7 +126,7 @@ export default function Home() {
                 />
               </CardActionArea>
             </Card>
-          </Box>
+            </Box>
         </Box>
       </ThemeConfig>
     </main>

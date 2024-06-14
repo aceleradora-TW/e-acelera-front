@@ -124,3 +124,4 @@ export const ThemeConfig: React.FC<ThemeProp> = ({ children }) => {
 };
 
 export { theme };
+
