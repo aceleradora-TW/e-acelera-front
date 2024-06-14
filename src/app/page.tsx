@@ -15,7 +15,7 @@ export default function Home() {
   return (
     <main>
       <ThemeConfig>
-        <Box className={"md:border-4"}>
+        <Box sx={{ display: 'flex' }}>
           <CssBaseline />
           <AppBar
             position="fixed"
@@ -27,15 +27,10 @@ export default function Home() {
           >
             <Toolbar>
               <IconButton
-              className={'text-color-statusInProgress'}
                 size="large"
                 edge="start"
                 aria-label="menu"
-
                 sx={{ mr: 2, color: 'white' }}
-
-                sx={{ mr: 2}}
-
               >
                 <MenuIcon />
               </IconButton>
@@ -69,25 +64,11 @@ export default function Home() {
           >
             <Toolbar />
             <CardContent>
-
             <Typography variant="h5" component="div" color="black">
                 React
               </Typography>
               <Typography variant="body2" color="black">
                 11/02/2024
-
-              
-              <Typography className={"text-color-title"}  component="div" variant="h2">
-                React
-              </Typography>
-
-              <Typography className={"text-descriptionText"}  component="div" variant="body1">
-               lorem  lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem
-              </Typography>
-
-              <Typography className={"bg-color-buttonBg text-color-buttonText"} variant="button" >
-                Entrar
-
               </Typography>
 
               <Typography variant="body2" color="black">
@@ -131,7 +112,6 @@ export default function Home() {
               <Typography variant="body2" color="black">
                 13/02/2024
               </Typography>
-
 
               <Typography variant="body2" color="black">
                 Resume: Aula avançada de next.js.
