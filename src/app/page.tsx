@@ -6,7 +6,8 @@ import next from "../../public/assets/next.png"
 import { AppBar, Box, Button, Card, CardActionArea, CardContent, CssBaseline, IconButton, Toolbar, Typography } from "@mui/material";
 import MenuIcon from '@mui/icons-material/Menu';
 import { ThemeConfig } from '@/componentes/config/theme';
-// import { theme } from  '@/componentes/config/theme';
+
+
 
 const drawerWidth = 0;
 
@@ -21,6 +22,7 @@ export default function Home() {
             sx={{
               width: { sm: `calc(100% - ${drawerWidth}px)` },
               ml: { sm: `${drawerWidth}px` },
+             color: 'white' 
             }}
           >
             <Toolbar>
@@ -28,12 +30,12 @@ export default function Home() {
                 size="large"
                 edge="start"
                 aria-label="menu"
-                sx={{ mr: 2, color: 'secondary.dark' }}
+                sx={{ mr: 2, color: 'white' }}
               >
                 <MenuIcon />
               </IconButton>
 
-              <Typography variant="h1" noWrap component="div"  flexGrow={1} sx={{ cursor: "pointer"}}>
+              <Typography variant="h6" noWrap component="div" flexGrow={1} sx={{ cursor: "pointer" }}>
                 Home
               </Typography>
               <Typography variant="h6" noWrap component="div" flexGrow={1} sx={{ cursor: "pointer" }}>
@@ -58,18 +60,18 @@ export default function Home() {
           </Box>
           <Box
             component="main"
-            sx={{ flexGrow: 1, p: 3, backgroundColor: 'secondary.dark', width: { sm: `calc(100% - ${drawerWidth}px)` } }}
+            sx={{ flexGrow: 1, p: 3, backgroundColor: 'white', width: { sm: `calc(100% - ${drawerWidth}px)` } }}
           >
             <Toolbar />
             <CardContent>
-              <Typography variant="h2" component="div" color="#00000">
+            <Typography variant="h5" component="div" color="black">
                 React
               </Typography>
-              <Typography variant="button" >
+              <Typography variant="body2" color="black">
                 11/02/2024
               </Typography>
 
-              <Typography variant="button" >
+              <Typography variant="body2" color="black">
                 Resume: Aula avançada de React.
               </Typography>
             </CardContent>
@@ -83,14 +85,14 @@ export default function Home() {
               </CardActionArea>
             </Card>
             <CardContent>
-              <Typography variant="caption" component="div" >
+            <Typography variant="h5" component="div" color="black">
                 JavaScript
               </Typography>
-              <Typography variant="body1" >
+              <Typography variant="body2" color="black">
                 01/02/2024
               </Typography>
 
-              <Typography variant="subtitle1" >
+              <Typography variant="body2" color="black">
                 Resume: Aula avançada de JavaScript.
               </Typography>
             </CardContent>
@@ -104,7 +106,7 @@ export default function Home() {
               </CardActionArea>
             </Card>
             <CardContent>
-              <Typography variant="h5" component="div" color="black">
+            <Typography variant="h5" component="div" color="black">
                 Next.js
               </Typography>
               <Typography variant="body2" color="black">
