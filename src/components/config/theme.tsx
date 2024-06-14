@@ -41,7 +41,6 @@ const theme = createTheme({
     },
   },
   typography: {
-    //  titulo principal
     h1: {
       fontSize: "3rem",
       lineHeight: 1.16,
@@ -49,7 +48,6 @@ const theme = createTheme({
       letterSpacing: 0.15,
     },
 
-    //  titulo secundario
     h2: {
       fontSize: "1.6rem",
       lineHeight: 1.6,
@@ -57,7 +55,6 @@ const theme = createTheme({
       letterSpacing: 0.15,
     },
 
-    //   botão
     button: {
       fontSize: "1.1rem",
       lineHeight: 1.6,
@@ -71,7 +68,6 @@ const theme = createTheme({
       borderRadius: 4,
     },
 
-    //   texto da navbar
     subtitle1: {
       fontSize: "1.125rem",
       lineHeight: 1.7,
@@ -79,15 +75,12 @@ const theme = createTheme({
       letterSpacing: 0.4,
     },
 
-    //   texto da card
     body1: {
       fontSize: "1rem",
       lineHeight: 1.5,
       fontWeight: 400,
       letterSpacing: 0.15,
     },
-
-    // porcentagem
     caption: {
       fontSize: "1.1rem",
       lineHeight: 1.6,
