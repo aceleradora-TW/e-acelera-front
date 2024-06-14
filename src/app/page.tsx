@@ -112,6 +112,7 @@ export default function Home() {
               <Typography variant="body2" color="black">
                 13/02/2024
               </Typography>
+              
 
               <Typography variant="body2" color="black">
                 Resume: Aula avançada de next.js.
