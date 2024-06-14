@@ -6,6 +6,7 @@ type ThemeProp = {
 };
 
 export enum themePalette {
+
   buttonText = "rgb(3, 29, 60)",
   title = "rgb(0, 44, 83)",
   buttonBg = "rgb(95, 160, 237)",
@@ -17,82 +18,95 @@ export enum themePalette {
   mainBg = "rgb(245, 245, 245)",
   cardBg = "rgb(255, 255, 255)",
   shawdowBg = "rgba(0, 0, 0, 0.25)",
+
 }
 
 const theme = createTheme({
   palette: {
     primary: {
+
       main: themePalette.title,
       light: themePalette.buttonBg,
       dark: themePalette.descriptionText,
       contrastText: themePalette.descriptionCard,
+
     },
 
     secondary: {
+
       main: themePalette.buttonText,
       light: themePalette.statusPending,
       dark: themePalette.statusInProgress,
       contrastText: themePalette.statusConcluded,
+
     },
     info: {
+
       main: themePalette.mainBg,
       light: themePalette.cardBg,
       dark: themePalette.shawdowBg,
+
     },
   },
     typography: {
+
+
         //  titulo principal
         h1: {
             fontSize: '3rem',
             lineHeight: 1.16,
             fontWeight: 500,
-            letterSpacing: 0.15,
-            color: "red"
+            letterSpacing: 0.15
           },
+
+
         //  titulo secundario
         h2: {
-            fontSize: '1.8rem',
+            fontSize: '1.6rem',
             lineHeight: 1.6,
             fontWeight: 500,
-            letterSpacing: 0.15,
-            color: "blue"
+            letterSpacing: 0.15
         },
-       
+
+
         //   botão 
         button: {
-            fontSize: '1rem',
+            fontSize: '1.1rem',
             lineHeight: 1.6,
-            fontWeight: 400,
+            fontWeight: 500,
             letterSpacing: 0.4,
             textTransform: "uppercase",
-            color: "brown"
+            paddingTop: 8,
+            paddingBottom: 8,
+            paddingLeft: 16,
+            paddingRight: 16,
+            borderRadius: 4
+            
         },
+
         //   texto da navbar
         subtitle1: {
-            fontSize: '1rem',
+            fontSize: '1.125rem',
             lineHeight: 1.7,
             fontWeight: 400,
-            letterSpacing: 0.4,
-            color: "purple"
+            letterSpacing: 0.4
         },
-        //   texto da navbar
+
+        //   texto da card
         body1: {
             fontSize: '1rem',
             lineHeight: 1.5,
             fontWeight: 400,
-            letterSpacing: 0.15,
-            color: "white"
+            letterSpacing: 0.15
         },
+
         // porcentagem 
         caption: {
-            fontSize: '1rem',
+            fontSize: '1.1rem',
             lineHeight: 1.6,
             fontWeight: 400,
-            letterSpacing: 0.15,
-            color: "green"
+            letterSpacing: 0.15
         }
-
-
         },
       });
 
