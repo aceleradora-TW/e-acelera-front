@@ -9,7 +9,7 @@ import { ThemeConfig } from '@/components/config/theme'
 import StatusSelect from "@/components/StatusSelect"
 import { ClickButton } from "@/components/ClickButton"
 import { useRouter } from "next/navigation"
-import ListingCard from "@/components/ListingCard"
+import Cards from "@/components/Cards"
 import ButtonCard from "@/components/ButtonCard"
 
 const drawerWidth = 0
@@ -21,7 +21,7 @@ export default function Home() {
   }
   return (
     <main>
-        <ListingCard 
+        <Cards
         image="/assets/next.png" 
         title="Next"
         description="
@@ -29,13 +29,13 @@ export default function Home() {
         texto de exemplo, texto de exemplo, texto de exemplo, 
         texto de exemplo"
         />
-        <ListingCard 
+        <Cards
         title="Javascript"
         description="Javascript é bão Javascript é bão Javascript é bãoJavascript é bão Javascript é bão"         
         />
         <ButtonCard
         title="Exercicio 1"
-        description="texto de exemplo, texto de exemplo, texto de exemplo"
+        description="texto de exemplo, texto de exemplo, texto de exemplo" route={"nivelamento"}        
         />
       {/* <ThemeConfig>
         <Box sx={{ display: 'flex' }}>

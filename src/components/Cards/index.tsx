@@ -7,8 +7,13 @@ import { Button, CardActionArea, CardActions } from '@mui/material';
 import { ClickButton } from '../ClickButton';
 import StatusSelect from '../StatusSelect';
 
+interface CardsProps{
+    title: string;
+    description: string;
+    image?: string;
+}
 
-export default function ListingCard(props: any) {
+export default function Cards(props: CardsProps) {
     function clickTest(): void {
         throw new Error('Function not implemented.');
     }
