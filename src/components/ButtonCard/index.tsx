@@ -2,7 +2,7 @@ import * as React from 'react';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
-import { Button, CardActionArea, CardActions } from '@mui/material';
+import { CardActionArea, CardActions } from '@mui/material';
 import StatusSelect from '../StatusSelect';
 import { useRouter } from 'next/navigation';
 
@@ -13,11 +13,9 @@ interface ButtonCardProps {
 }
 
 
-export default function ButtonCard(props:ButtonCardProps) {
-
+export const ButtonCard: React.FC<ButtonCardProps> = ({title, description, route}) => {
     const router = useRouter()
     const handlerClicker = (route: string) => {
-        console.log(route) 
         router.push(`/${route}`)
     }
     return (
@@ -28,13 +26,13 @@ export default function ButtonCard(props:ButtonCardProps) {
                            
             }
         }}>
-            <CardActionArea onClick={() => handlerClicker(props.route)}>
+            <CardActionArea onClick={() => handlerClicker(route)}>
                 <CardContent sx={{ paddingBottom: 5, paddingTop: 3}}>
                     <Typography gutterBottom variant="h5" component="div">
-                        {props.title}
+                        {title}
                     </Typography>
                     <Typography variant="body2">
-                        {props.description}
+                        {description}
                     </Typography>
                 </CardContent>
             </CardActionArea>
