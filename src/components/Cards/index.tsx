@@ -7,14 +7,14 @@ import { CardActionArea, CardActions } from '@mui/material';
 import { ClickButton } from '../ClickButton';
 import { useRouter } from 'next/navigation';
 
-interface CardsProps{
+interface CardProps{
     title: string;
     description: string;
     image?: string;
     route: string;
 }
 
-export const Cards: React.FC<CardsProps> = ({title, description, image, route}) => {
+export const Cards: React.FC<CardProps> = ({title, description, image, route}) => {
     const router = useRouter()
     const handlerClicker = (route: string) => {
         router.push(`/${route}`)
