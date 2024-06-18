@@ -8,7 +8,7 @@ type ThemeProp = {
 export enum themePalette {
   buttonText = "rgb(3, 29, 60)",
   title = "rgb(0, 44, 83)",
-  buttonBg = "rgb(95, 160, 237)",
+  buttonBg = "rgb(122, 175, 240)",
   descriptionCard = "rgb(44, 44, 44)",
   descriptionText = "rgb(0, 0, 0)",
   statusInProgress = "rgb(225, 222, 107)",
@@ -42,21 +42,21 @@ const theme = createTheme({
   },
   typography: {
     h1: {
-      fontSize: "3rem",
+      fontSize: "48px",
       lineHeight: 1.16,
       fontWeight: 500,
       letterSpacing: 0.15,
     },
 
     h2: {
-      fontSize: "1.6rem",
+      fontSize: "25.6px",
       lineHeight: 1.6,
       fontWeight: 500,
       letterSpacing: 0.15,
     },
 
     button: {
-      fontSize: "1.1rem",
+      fontSize: "17.6px",
       lineHeight: 1.6,
       fontWeight: 500,
       letterSpacing: 0.4,
@@ -69,22 +69,22 @@ const theme = createTheme({
     },
 
     subtitle1: {
-      fontSize: "1.125rem",
+      fontSize: "18px",
       lineHeight: 1.7,
       fontWeight: 400,
       letterSpacing: 0.4,
     },
 
     body1: {
-      fontSize: "1rem",
+      fontSize: "16px",
       lineHeight: 1.5,
       fontWeight: 400,
       letterSpacing: 0.15,
     },
     caption: {
-      fontSize: "1.1rem",
+      fontSize: "22px",
       lineHeight: 1.6,
-      fontWeight: 400,
+      fontWeight: 500,
       letterSpacing: 0.15,
     },
   },
