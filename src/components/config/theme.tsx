@@ -1,9 +1,27 @@
-import { CssBaseline, ThemeProvider, createTheme } from "@mui/material";
+import {
+  CssBaseline,
+  PaletteColor,
+  PaletteColorOptions,
+  ThemeProvider,
+  createTheme,
+} from "@mui/material";
 import React from "react";
 
 type ThemeProp = {
   children: JSX.Element;
 };
+
+declare module "@mui/material/styles" {
+  interface PaletteOptions {
+    customHeader?: PaletteColorOptions; // Define your custom color
+    customClass?: PaletteColorOptions;
+  }
+
+  interface Palette {
+    customHeader?: PaletteColor; // Also extend the Palette interface
+    customClass?: PaletteColor;
+  }
+}
 
 export enum themePalette {
   buttonText = "rgb(3, 29, 60)",
@@ -18,6 +36,23 @@ export enum themePalette {
   cardBg = "rgb(255, 255, 255)",
   shawdowBg = "rgba(0, 0, 0, 0.25)",
 }
+
+const myCustomTheme = createTheme({
+  palette: {
+    customHeader: {
+      main: "#f44336", // Your custom header color
+      light: "#ff7961", // A lighter shade
+      dark: "#ba000d", // A darker shade
+      contrastText: "#fff", // Text color for contrast
+    },
+    customClass: {
+      main: "#2196f3", // Your custom class color
+      light: "#64b5f6", // A lighter shade
+      dark: "#1976d2", // A darker shade
+      contrastText: "#000", // Text color for contrast
+    },
+  },
+});
 
 const theme = createTheme({
   palette: {
