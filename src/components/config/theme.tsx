@@ -13,14 +13,15 @@ type ThemeProp = {
 
 declare module "@mui/material/styles" {
   interface PaletteOptions {
-    customHeader?: PaletteColorOptions; // Define your custom color
+    cabecalho?: PaletteColorOptions; // Define your custom color
     customClass?: PaletteColorOptions;
   }
 
   interface Palette {
-    customHeader?: PaletteColor; // Also extend the Palette interface
+    cabecalho?: PaletteColor; // Also extend the Palette interface
     customClass?: PaletteColor;
   }
+
   interface Theme {
     customStyles: {
       customHeader: {
@@ -29,7 +30,7 @@ declare module "@mui/material/styles" {
         margin: string;
         padding: string;
       };
-      customClass: {
+      cabecalho: {
         backgroundColor: string;
         color: string;
         margin: string;
@@ -46,7 +47,7 @@ declare module "@mui/material/styles" {
         margin?: string;
         padding?: string;
       };
-      customClass?: {
+      cabecalho?: {
         backgroundColor?: string;
         color?: string;
         margin?: string;
@@ -78,7 +79,7 @@ const theme = createTheme({
       margin: "16px",
       padding: "8px",
     },
-    customClass: {
+    cabecalho: {
       backgroundColor: "#673ab7",
       color: "#fff",
       margin: "32px",
@@ -86,13 +87,7 @@ const theme = createTheme({
     },
   },
   palette: {
-    customHeader: {
-      main: "#f44336", // Your custom header color
-      light: "#ff7961", // A lighter shade
-      dark: "#ba000d", // A darker shade
-      contrastText: "#fff", // Text color for contrast
-    },
-    customClass: {
+    cabecalho: {
       main: "#2196f3", // Your custom class color
       light: "#64b5f6", // A lighter shade
       dark: "#1976d2", // A darker shade
@@ -104,7 +99,6 @@ const theme = createTheme({
       dark: themePalette.descriptionText,
       contrastText: themePalette.descriptionCard,
     },
-
     secondary: {
       main: themePalette.buttonText,
       light: themePalette.statusPending,

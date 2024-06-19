@@ -14,7 +14,7 @@ export default function StatusSelect() {
     const value = event.target.value as string;
     const theme = useTheme();
     setStatus(value);
-    theme.customStyles.customClass;
+    theme.customStyles.cabecalho;
     theme.palette.customClass;
 
     switch (value) {
