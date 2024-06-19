@@ -14,7 +14,7 @@ interface CardProps{
     route: string;
 }
 
-export const Cards: React.FC<CardProps> = ({title, description, image, route}) => {
+export const BaseCard: React.FC<CardProps> = ({title, description, image, route}) => {
     const router = useRouter()
     const handlerClicker = (route: string) => {
         router.push(`/${route}`)
