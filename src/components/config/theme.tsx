@@ -21,6 +21,39 @@ declare module "@mui/material/styles" {
     customHeader?: PaletteColor; // Also extend the Palette interface
     customClass?: PaletteColor;
   }
+  interface Theme {
+    customStyles: {
+      customHeader: {
+        backgroundColor: string;
+        color: string;
+        margin: string;
+        padding: string;
+      };
+      customClass: {
+        backgroundColor: string;
+        color: string;
+        margin: string;
+        padding: string;
+      };
+    };
+  }
+
+  interface ThemeOptions {
+    customStyles?: {
+      customHeader?: {
+        backgroundColor?: string;
+        color?: string;
+        margin?: string;
+        padding?: string;
+      };
+      customClass?: {
+        backgroundColor?: string;
+        color?: string;
+        margin?: string;
+        padding?: string;
+      };
+    };
+  }
 }
 
 export enum themePalette {
@@ -37,7 +70,21 @@ export enum themePalette {
   shawdowBg = "rgba(0, 0, 0, 0.25)",
 }
 
-const myCustomTheme = createTheme({
+const theme = createTheme({
+  customStyles: {
+    customHeader: {
+      backgroundColor: "#ff5722",
+      color: "#fff",
+      margin: "16px",
+      padding: "8px",
+    },
+    customClass: {
+      backgroundColor: "#673ab7",
+      color: "#fff",
+      margin: "32px",
+      padding: "16px",
+    },
+  },
   palette: {
     customHeader: {
       main: "#f44336", // Your custom header color
@@ -51,11 +98,6 @@ const myCustomTheme = createTheme({
       dark: "#1976d2", // A darker shade
       contrastText: "#000", // Text color for contrast
     },
-  },
-});
-
-const theme = createTheme({
-  palette: {
     primary: {
       main: themePalette.title,
       light: themePalette.buttonBg,
