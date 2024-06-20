@@ -9,7 +9,7 @@ import { ThemeConfig } from '@/components/config/theme'
 import StatusSelect from "@/components/StatusSelect"
 import { ClickButton } from "@/components/ClickButton"
 import { useRouter } from "next/navigation"
-import { useTheme } from "@mui/material";
+import { theme } from "@/components/config/theme";
 
 const drawerWidth = 0
 
@@ -18,11 +18,9 @@ export default function Home() {
   function clickTest(){
     router.push("/")
   }
-
-  const theme = useTheme();
- theme.customStyles.button;
+ 
   return (
-    <main>
+   
       <ThemeConfig>
         <Box className={"md:border-4"}>
           <CssBaseline />
@@ -51,7 +49,7 @@ export default function Home() {
                 noWrap
                 component="div"
                 flexGrow={1} 
-                sx={{ cursor: "pointer" }}
+                sx={theme.customStyles.button}
               >
                 Home
               </Typography>
@@ -174,6 +172,6 @@ export default function Home() {
           </Box>
         </Box>
       </ThemeConfig>
-    </main>
+    
   )
 }
