@@ -1,4 +1,11 @@
-import { CssBaseline, ThemeProvider, createTheme } from "@mui/material";
+import {
+  CssBaseline,
+  PaletteColor,
+  PaletteColorOptions,
+  ThemeProvider,
+  createTheme,
+} from "@mui/material";
+
 import React from "react";
 
 type ThemeProp = {
@@ -18,7 +25,79 @@ export enum themePalette {
   shawdowBg = "rgba(0, 0, 0, 0.25)",
 }
 
+declare module "@mui/material/styles" {
+  interface PaletteOptions {
+    button?: PaletteColorOptions; // Define your custom color
+    customClass?: PaletteColorOptions;
+  }
+
+  interface Palette {
+   button?: PaletteColor; // Also extend the Palette interface
+    customClass?: PaletteColor;
+  }
+
+  interface Theme {
+    customStyles: {
+      button: {
+        backgroundColor: string;
+        borderColor: string;
+        color: string;
+        fontSize: string;
+        lineHeight: number;
+        fontWeight: number;
+        letterSpacing: number;
+        textTransform: string;
+        paddingTop: number;
+        paddingBottom: number;
+        paddingLeft: number;
+        paddingRight: number;
+        borderRadius: number;
+        border: number;
+      };
+    };
+  }
+
+  interface ThemeOptions {
+    customStyles?: {
+      button?: {
+        backgroundColor?: string;
+        borderColor?: string;
+        color?: string;
+        fontSize?: string;
+        lineHeight?: number;
+        fontWeight?: number;
+        letterSpacing?: number;
+        textTransform?: string;
+        paddingTop?: number;
+        paddingBottom?: number;
+        paddingLeft?: number;
+        paddingRight?: number;
+        borderRadius?: number;
+        border?: number;
+      };
+    };
+  }
+}
+
 const theme = createTheme({
+  customStyles: {
+    button: {
+      backgroundColor: themePalette.button,
+      borderColor: themePalette.button,
+      color: themePalette.button,
+      fontSize: "17.6px",
+      lineHeight: 1.6,
+      fontWeight: 500,
+      letterSpacing: 0.4,
+      textTransform: "uppercase",
+      paddingTop: 8,
+      paddingBottom: 8,
+      paddingLeft: 16,
+      paddingRight: 16,
+      borderRadius: 4,
+      border: 1,
+    },
+  },
   palette: {
     primary: {
       main: themePalette.title,
@@ -26,7 +105,6 @@ const theme = createTheme({
       dark: themePalette.descriptionText,
       contrastText: themePalette.descriptionCard,
     },
-
   },
   typography: {
     h1: {

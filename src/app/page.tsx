@@ -9,6 +9,7 @@ import { ThemeConfig } from '@/components/config/theme'
 import StatusSelect from "@/components/StatusSelect"
 import { ClickButton } from "@/components/ClickButton"
 import { useRouter } from "next/navigation"
+import { useTheme } from "@mui/material";
 
 const drawerWidth = 0
 
@@ -17,6 +18,9 @@ export default function Home() {
   function clickTest(){
     router.push("/")
   }
+
+  const theme = useTheme();
+ theme.customStyles.button;
   return (
     <main>
       <ThemeConfig>
@@ -46,7 +50,7 @@ export default function Home() {
                 variant="h6"
                 noWrap
                 component="div"
-                flexGrow={1}
+                flexGrow={1} 
                 sx={{ cursor: "pointer" }}
               >
                 Home
