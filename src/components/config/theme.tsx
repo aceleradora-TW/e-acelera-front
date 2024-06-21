@@ -17,22 +17,27 @@ export enum themePalette {
   title = "rgb(0, 44, 83)",
   descriptionCard = "rgb(44, 44, 44)",
   descriptionText = "rgb(0, 0, 0)",
-  statusInProgress = "rgb(225, 222, 107)",
+  statusInProgress = "rgb(255, 222, 107)",
   statusConcluded = "rgb(155, 255, 133)",
   statusPending = "rgb(225, 225, 225)",
   mainBg = "rgb(245, 245, 245)",
   whiteBg = "rgb(255, 255, 255)",
-  shawdowBg = "rgba(0, 0, 0, 0.25)",
 }
 
 declare module "@mui/material/styles" {
   interface PaletteOptions {
     button?: PaletteColorOptions; // Define your custom color
+    statusSelect?: PaletteColorOptions;
+    textColor?: PaletteColorOptions;
+    bgColor?: PaletteColorOptions;
     customClass?: PaletteColorOptions;
   }
 
   interface Palette {
-   button?: PaletteColor; // Also extend the Palette interface
+    button?: PaletteColor; // Also extend the Palette interface
+    statusSelect?: PaletteColor;
+    textColor?: PaletteColor;
+    bgColor?: PaletteColor;
     customClass?: PaletteColor;
   }
 
@@ -47,10 +52,10 @@ declare module "@mui/material/styles" {
         fontWeight: number;
         letterSpacing: number;
         textTransform: string;
-        paddingTop: number;
-        paddingBottom: number;
-        paddingLeft: number;
-        paddingRight: number;
+        paddingTop: string;
+        paddingBottom: string;
+        paddingLeft: string;
+        paddingRight: string;
         borderRadius: number;
         border: number;
       };
@@ -68,10 +73,10 @@ declare module "@mui/material/styles" {
         fontWeight?: number;
         letterSpacing?: number;
         textTransform?: string;
-        paddingTop?: number;
-        paddingBottom?: number;
-        paddingLeft?: number;
-        paddingRight?: number;
+        paddingTop?: string;
+        paddingBottom?: string;
+        paddingLeft?: string;
+        paddingRight?: string;
         borderRadius?: number;
         border?: number;
       };
@@ -82,29 +87,38 @@ declare module "@mui/material/styles" {
 const theme = createTheme({
   customStyles: {
     button: {
-      backgroundColor: themePalette.button,
+      backgroundColor: themePalette.whiteBg,
       borderColor: themePalette.button,
       color: themePalette.button,
-      fontSize: "17.6px",
+      fontSize: "16px",
       lineHeight: 1.6,
       fontWeight: 500,
       letterSpacing: 0.4,
       textTransform: "uppercase",
-      paddingTop: 8,
-      paddingBottom: 8,
-      paddingLeft: 16,
-      paddingRight: 16,
-      borderRadius: 4,
+      paddingTop: "8px",
+      paddingBottom: "8px",
+      paddingLeft: "16px",
+      paddingRight: "16px",
+      borderRadius: 2,
       border: 1,
     },
   },
-  palette: {
-    primary: {
-      main: themePalette.title,
-      light: themePalette.button,
-      dark: themePalette.descriptionText,
-      contrastText: themePalette.descriptionCard,
+  palette: { 
+    statusSelect:{
+      main: themePalette.statusPending,
+      light: themePalette.statusConcluded,
+      dark: themePalette.statusInProgress,
     },
+    textColor:{
+      main: themePalette.title,
+      light: themePalette.descriptionCard,
+      dark: themePalette.descriptionText,
+    },
+    bgColor:{
+      main: themePalette.mainBg,
+      light: themePalette.whiteBg,
+    },
+
   },
   typography: {
     h1: {
@@ -119,19 +133,6 @@ const theme = createTheme({
       lineHeight: 1.6,
       fontWeight: 500,
       letterSpacing: 0.15,
-    },
-
-    button: {
-      fontSize: "17.6px",
-      lineHeight: 1.6,
-      fontWeight: 500,
-      letterSpacing: 0.4,
-      textTransform: "uppercase",
-      paddingTop: 8,
-      paddingBottom: 8,
-      paddingLeft: 16,
-      paddingRight: 16,
-      borderRadius: 4,
     },
 
     subtitle1: {
