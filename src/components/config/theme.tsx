@@ -26,7 +26,8 @@ export enum themePalette {
 
 declare module "@mui/material/styles" {
   interface PaletteOptions {
-    button?: PaletteColorOptions; // Define your custom color
+    button?: PaletteColorOptions; 
+    buttonHover?: PaletteColorOptions;
     statusSelect?: PaletteColorOptions;
     textColor?: PaletteColorOptions;
     bgColor?: PaletteColorOptions;
@@ -34,7 +35,8 @@ declare module "@mui/material/styles" {
   }
 
   interface Palette {
-    button?: PaletteColor; // Also extend the Palette interface
+    button?: PaletteColor;
+    buttonHover?: PaletteColor;
     statusSelect?: PaletteColor;
     textColor?: PaletteColor;
     bgColor?: PaletteColor;
@@ -109,6 +111,11 @@ const theme = createTheme({
       light: themePalette.statusConcluded,
       dark: themePalette.statusInProgress,
     },
+    buttonHover:{
+      main: themePalette.button,
+      contrastText: themePalette.whiteBg,
+    },
+    
     textColor:{
       main: themePalette.title,
       light: themePalette.descriptionCard,
