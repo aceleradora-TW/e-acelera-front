@@ -3,31 +3,35 @@ import Box from "@mui/material/Box"
 import InputLabel from "@mui/material/InputLabel"
 import MenuItem from "@mui/material/MenuItem"
 import FormControl from "@mui/material/FormControl"
-import Select, { SelectChangeEvent } from "@mui/material/Select"
+import Select from '@mui/material/Select'
+import { SelectChangeEvent } from '@mui/material/Select'
+import { theme } from "@/components/config/theme"
+
 
 export default function StatusSelect() {
   const [status, setStatus] = React.useState<string>("")
-  const [backgroundColor, setBackgroundColor] = React.useState<string>("")
+  const [backgroundColor, setBackgroundColor] = React.useState<any>("")
 
   const handleChange = (event: SelectChangeEvent) => {
     const value = event.target.value as string
     setStatus(value)
 
     switch (value) {
-      case "green":
-        setBackgroundColor("#9EFF85")
+      case "statusConcluded":
+        setBackgroundColor(theme.palette.statusSelect?.light)
         break
-      case "orange":
-        setBackgroundColor("#FFDE6B")
+      case "statusInProgress":
+        setBackgroundColor(theme.palette.statusSelect?.dark)
         break
-      case "light":
-        setBackgroundColor("#ffffff")
+      case "statusPending":
+        setBackgroundColor(theme.palette.statusSelect?.main)
         break
       default:
         setBackgroundColor("")
+
     }
   }
-
+  
   return (
     <Box sx={{ minWidth: 120, backgroundColor, width: "30%" }}>
       <FormControl fullWidth>
@@ -50,9 +54,9 @@ export default function StatusSelect() {
             color: "#000000"
           }}
         >
-          <MenuItem value="green">Concluido</MenuItem>
-          <MenuItem value="orange">Em andamento</MenuItem>
-          <MenuItem value="light">Pendente</MenuItem>
+          <MenuItem value="statusConcluded">Concluido</MenuItem>
+          <MenuItem value="statusInProgress">Em andamento</MenuItem>
+          <MenuItem value="statusPending">Pendente</MenuItem>
         </Select>
       </FormControl>
     </Box>
