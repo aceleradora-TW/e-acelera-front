@@ -21,7 +21,7 @@ export const BaseCard: React.FC<CardProps> = ({title, description, image, route}
     }
 
     return (
-        <Card sx={{ maxWidth: 368, borderWidth: 2}}>
+        <Card sx={{ maxWidth: 368, borderWidth: 2, maxHeight: 502}}>
             <CardActionArea>
             {image && (
                 <CardMedia
@@ -32,7 +32,10 @@ export const BaseCard: React.FC<CardProps> = ({title, description, image, route}
                 />
             )}
                 <CardContent sx={{ paddingBottom: 10.63 }}>
-                    <Typography gutterBottom variant="h5" component="div">
+                    <Typography gutterBottom variant="h3" component="div" sx={{
+                        maxHeight: 5,
+                        wordWrap: 'break-word'
+                    }}>
                         {title}
                     </Typography>
                     <Typography variant="body2">
