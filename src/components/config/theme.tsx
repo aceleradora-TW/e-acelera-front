@@ -54,10 +54,7 @@ declare module "@mui/material/styles" {
         fontWeight: number;
         letterSpacing: number;
         textTransform: string;
-        paddingTop: string;
-        paddingBottom: string;
-        paddingLeft: string;
-        paddingRight: string;
+        padding: string;
         borderRadius: number;
         border: number;
       };
@@ -75,10 +72,7 @@ declare module "@mui/material/styles" {
         fontWeight?: number;
         letterSpacing?: number;
         textTransform?: string;
-        paddingTop?: string;
-        paddingBottom?: string;
-        paddingLeft?: string;
-        paddingRight?: string;
+        padding?: string;
         borderRadius?: number;
         border?: number;
       };
@@ -97,10 +91,7 @@ const theme = createTheme({
       fontWeight: 500,
       letterSpacing: 0.4,
       textTransform: "uppercase",
-      paddingTop: "8px",
-      paddingBottom: "8px",
-      paddingLeft: "16px",
-      paddingRight: "16px",
+      padding: "8px 16px",
       borderRadius: 2,
       border: 1,
     },
