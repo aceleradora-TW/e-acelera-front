@@ -35,11 +35,11 @@ export default function StatusSelect() {
   return (
     <Box sx={{ minWidth: 120, backgroundColor, width: "30%" }}>
       <FormControl fullWidth>
-        <InputLabel id="statusLevelling" sx={{ color: "black" }}>
+        <InputLabel id="statusLeveling" sx={{ color: "black" }}>
           Status
         </InputLabel>
         <Select
-          labelId="statusLevelling"
+          labelId="statusLeveling"
           id="statusSelect"
           value={status}
           label="Status"
