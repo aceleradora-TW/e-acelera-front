@@ -2,13 +2,14 @@ import * as React from "react"
 import { styled } from "@mui/material/styles"
 import Button, { ButtonProps } from "@mui/material/Button"
 import Stack from "@mui/material/Stack"
+import { theme } from "@/components/config/theme"
 
 
-const ColorButton = styled(Button)<ButtonProps>(() => ({
-    backgroundColor: "#F18E31",
-    color: "#000000",
+const ColorButton = styled(Button)<ButtonProps>(() => ({    
     "&:hover": {
-        backgroundColor: "#F18E31"
+        backgroundColor: theme.palette.buttonHover?.main,
+        color: theme.palette.buttonHover?.contrastText,
+        border: "none"
     }
 }))
 
@@ -18,8 +19,8 @@ type CardProps = {
 }
 
 export const ClickButton = ({ title, click }: CardProps) =>
-    <aside>
+    <aside>        
         <Stack spacing={2} direction="row" onClick={click}>
-            <ColorButton variant="contained">{title}</ColorButton>
+            <ColorButton sx={theme.customStyles.button} variant="contained">{title}</ColorButton>
         </Stack>
     </aside>
