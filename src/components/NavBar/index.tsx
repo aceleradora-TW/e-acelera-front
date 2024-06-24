@@ -14,6 +14,7 @@ import Image from 'next/image';
 import { Avatar, Tooltip } from '@mui/material';
 import { usePathname, useRouter } from 'next/navigation';
 import Link from 'next/link';
+import { theme } from '../config/theme';
 
 // Opções do login a serem utilizadas em proxima versão do codigo.
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout']
@@ -55,7 +56,7 @@ export const ResponsiveAppBar: React.FC<NavBarProps> = ({ list }) => {
   }
 
   return (
-      <AppBar position="fixed" sx={{ fontFamily: 'Roboto', backgroundColor: '#FFFFFF', color: '#031D3C' }}>
+      <AppBar position="fixed" sx={{ backgroundColor: theme.palette.bgColor?.light}}>
         <Container maxWidth="xl">
           <Toolbar disableGutters sx={{ display: 'flex', alignItems: 'center' }}>
             <Box sx={{
@@ -79,7 +80,8 @@ export const ResponsiveAppBar: React.FC<NavBarProps> = ({ list }) => {
                 textDecoration: 'none',
                 letterSpacing: '0.15px',
                 lineHeight: '1.6',
-                fontSize: '1.2rem'
+                fontSize: '19.2px',
+                color: theme.palette.textColor?.main
               }}
             >
               E-Acelera
@@ -137,7 +139,7 @@ export const ResponsiveAppBar: React.FC<NavBarProps> = ({ list }) => {
               component="a"
               href="#app-bar-with-responsive-menu"
               sx={{
-                fontSize: '1.25rem',
+                fontSize: '19.2px',
                 mr: 2,
                 display: { xs: 'flex', md: 'none' },
                 flexGrow: 1,
@@ -145,7 +147,7 @@ export const ResponsiveAppBar: React.FC<NavBarProps> = ({ list }) => {
                 letterSpacing: '0.15px',
                 lineHeight: '1.6',
                 textDecoration: 'none',
-                color: 'black'
+                color: theme.palette.textColor?.main
               }}
             >
               E-Acelera
@@ -166,12 +168,9 @@ export const ResponsiveAppBar: React.FC<NavBarProps> = ({ list }) => {
                   sx={{
                     my: 2, display: 'block',
                     textTransform: 'none',
-                    fontSize: '1rem',
-                    lineHeight: '1.7',
-                    fontWeight: 500,
-                    letterSpacing: '0.4px',
+                    typography: theme.typography.subtitle1,
                     margin: '0 0.5rem',
-                    color: 'black',
+                    color: theme.palette.textColor?.light,
                     borderBottomWidth: '3px',
                     borderBottom: buttonBorderStyle(item),
                     borderBottomColors: 'black',
