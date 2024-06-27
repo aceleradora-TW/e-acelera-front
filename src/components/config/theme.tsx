@@ -26,7 +26,7 @@ export enum themePalette {
 
 declare module "@mui/material/styles" {
   interface PaletteOptions {
-    button?: PaletteColorOptions; 
+    button?: PaletteColorOptions;
     buttonHover?: PaletteColorOptions;
     statusSelect?: PaletteColorOptions;
     textColor?: PaletteColorOptions;
@@ -58,6 +58,43 @@ declare module "@mui/material/styles" {
         borderRadius: number;
         border: number;
       };
+      linkActive: {
+        borderBottom: string;
+        color: string;
+        borderBottomWidth: string;
+        borderBottomColor: string;
+        my: number;
+        display: string;
+        textTransform: string;
+        fontSize: string;
+        lineHeight: number;
+        fontWeight: number;
+        letterSpacing: number;
+        margin: string;
+        borderRadius: string;
+      };
+      link: {
+        color: string;
+        my: number;
+        display: string;
+        textTransform: string;
+        fontSize: string;
+        lineHeight: number;
+        fontWeight: number;
+        letterSpacing: number;
+        margin: string;
+        borderRadius: string;
+      };
+      logoType: {
+        fontSize: string;
+        mr: number;
+        flexGrow: number;
+        fontWeight: number;
+        letterSpacing: string;
+        lineHeight: string;
+        textDecoration: string;
+        color: string;
+      };
     };
   }
 
@@ -76,12 +113,86 @@ declare module "@mui/material/styles" {
         borderRadius?: number;
         border?: number;
       };
+      linkActive: {
+        borderBottom?: string;
+        color?: string;
+        borderBottomWidth?: string;
+        borderBottomColor?: string;
+        my?: number;
+        display?: string;
+        textTransform?: string;
+        fontSize?: string;
+        lineHeight?: number;
+        fontWeight?: number;
+        letterSpacing?: number;
+        margin?: string;
+        borderRadius?: string;
+      };
+      link: {
+        color?: string;
+        my?: number;
+        display?: string;
+        textTransform?: string;
+        fontSize?: string;
+        lineHeight?: number;
+        fontWeight?: number;
+        letterSpacing?: number;
+        margin?: string;
+        borderRadius?: string;
+      };
+      logoType: {
+        fontSize?: string;
+        mr?: number;
+        flexGrow?: number;
+        fontWeight?: number;
+        letterSpacing?: string;
+        lineHeight?: string;
+        textDecoration?: string;
+        color?: string;
+      };
     };
   }
 }
 
 const theme = createTheme({
   customStyles: {
+    linkActive: {
+      borderBottom: "solid",
+      color: themePalette.title,
+      borderBottomWidth: "3px",
+      borderBottomColor: themePalette.title,
+      my: 2,
+      display: "block",
+      textTransform: "none",
+      fontSize: "18px",
+      lineHeight: 1.7,
+      fontWeight: 400,
+      letterSpacing: 0.4,
+      margin: "0 0.5rem",
+      borderRadius: "0",
+    },
+    link: {
+      color: themePalette.descriptionCard,
+      my: 2,
+      display: "block",
+      textTransform: "none",
+      fontSize: "18px",
+      lineHeight: 1.7,
+      fontWeight: 400,
+      letterSpacing: 0.4,
+      margin: "0 0.5rem",
+      borderRadius: "0",
+    },
+    logoType: {
+      fontSize: "19.2px",
+      mr: 2,
+      flexGrow: 1,
+      fontWeight: 700,
+      letterSpacing: "0.15px",
+      lineHeight: "1.6",
+      textDecoration: "none",
+      color: themePalette.title,
+    },
     button: {
       backgroundColor: themePalette.whiteBg,
       borderColor: themePalette.button,
@@ -96,27 +207,26 @@ const theme = createTheme({
       border: 1,
     },
   },
-  palette: { 
-    statusSelect:{
+  palette: {
+    statusSelect: {
       main: themePalette.statusPending,
       light: themePalette.statusConcluded,
       dark: themePalette.statusInProgress,
     },
-    buttonHover:{
+    buttonHover: {
       main: themePalette.button,
       contrastText: themePalette.whiteBg,
     },
-    
-    textColor:{
+
+    textColor: {
       main: themePalette.title,
       light: themePalette.descriptionCard,
       dark: themePalette.descriptionText,
     },
-    bgColor:{
+    bgColor: {
       main: themePalette.mainBg,
       light: themePalette.whiteBg,
     },
-
   },
   typography: {
     h1: {
@@ -132,14 +242,6 @@ const theme = createTheme({
       fontWeight: 500,
       letterSpacing: 0.15,
     },
-
-    subtitle1: {
-      fontSize: "18px",
-      lineHeight: 1.7,
-      fontWeight: 400,
-      letterSpacing: 0.4,
-    },
-
     body1: {
       fontSize: "16px",
       lineHeight: 1.5,
