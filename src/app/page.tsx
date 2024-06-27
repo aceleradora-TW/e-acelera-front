@@ -9,6 +9,7 @@ import { ThemeConfig } from '@/components/config/theme'
 import StatusSelect from "@/components/StatusSelect"
 import { ClickButton } from "@/components/ClickButton"
 import { useRouter } from "next/navigation"
+import { theme } from "@/components/config/theme";
 
 const drawerWidth = 0
 
@@ -17,20 +18,23 @@ export default function Home() {
   function clickTest(){
     router.push("/")
   }
+ 
   return (
-    <main>
+   
       <ThemeConfig>
-        <Box sx={{ display: 'flex' }}>
+        <Box className={"md:border-4"}>
           <CssBaseline />
           <AppBar
             position="fixed"
             sx={{
               width: { sm: `calc(100% - ${drawerWidth}px)` },
               ml: { sm: `${drawerWidth}px` },
+              color: "white",
             }}
           >
             <Toolbar>
               <IconButton
+                className={"text-color-statusInProgress"}
                 size="large"
                 edge="start"
                 color="inherit"
@@ -40,16 +44,40 @@ export default function Home() {
                 <MenuIcon />
               </IconButton>
 
-              <Typography variant="h6" noWrap component="div" flexGrow={1} sx={{ cursor: "pointer" }}>
+              <Typography
+                variant="h6"
+                noWrap
+                component="div"
+                flexGrow={1} 
+                sx={theme.customStyles.button}
+              >
                 Home
               </Typography>
-              <Typography variant="h6" noWrap component="div" flexGrow={1} sx={{ cursor: "pointer" }}>
+              <Typography
+                variant="h6"
+                noWrap
+                component="div"
+                flexGrow={1}
+                sx={{ cursor: "pointer" }}
+              >
                 Nivelamento
               </Typography>
-              <Typography variant="h6" noWrap component="div" flexGrow={1} sx={{ cursor: "pointer" }}>
+              <Typography
+                variant="h6"
+                noWrap
+                component="div"
+                flexGrow={1}
+                sx={{ cursor: "pointer" }}
+              >
                 AutoEstudo
               </Typography>
-              <Typography variant="h6" noWrap component="div" flexGrow={1} sx={{ cursor: "pointer" }}>
+              <Typography
+                variant="h6"
+                noWrap
+                component="div"
+                flexGrow={1}
+                sx={{ cursor: "pointer" }}
+              >
                 Feedback
               </Typography>
 
@@ -60,11 +88,15 @@ export default function Home() {
             component="nav"
             sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
             aria-label="mailbox folders"
-          >
-          </Box>
+          ></Box>
           <Box
             component="main"
-            sx={{ flexGrow: 1, p: 3, width: { sm: `calc(100% - ${drawerWidth}px)` } }}
+            sx={{
+              flexGrow: 1,
+              p: 3,
+              backgroundColor: "white",
+              width: { sm: `calc(100% - ${drawerWidth}px)` },
+            }}
           >
             <Toolbar />
             <CardContent>
@@ -81,11 +113,7 @@ export default function Home() {
             </CardContent>
             <Card sx={{ maxWidth: 345 }}>
               <CardActionArea>
-                <Image
-                  width={300}
-                  src={react}
-                  alt="imagem filme"
-                />
+                <Image width={300} src={react} alt="imagem filme" />
               </CardActionArea>
             </Card>
             <ClickButton title="Próximo exercício" click={clickTest} />
@@ -105,11 +133,7 @@ export default function Home() {
             </CardContent>
             <Card sx={{ maxWidth: 345 }}>
               <CardActionArea>
-                <Image
-                  width={300}
-                  src={js}
-                  alt="imagem filme"
-                />
+                <Image width={300} src={js} alt="imagem filme" />
               </CardActionArea>
             </Card>
             <ClickButton title="Próximo exercício" click={clickTest} />
@@ -121,6 +145,10 @@ export default function Home() {
               </Typography>
               <Typography variant="body2" color="black">
                 13/02/2024
+              </Typography>
+
+              <Typography variant="body2" color="black">
+                Resume: Aula avançada de next.js.
               </Typography>
 
               <Typography variant="body2" color="black">
@@ -144,6 +172,6 @@ export default function Home() {
           </Box>
         </Box>
       </ThemeConfig>
-    </main>
+    
   )
 }
