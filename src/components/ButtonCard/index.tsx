@@ -5,6 +5,7 @@ import Typography from '@mui/material/Typography';
 import { CardActionArea, CardActions } from '@mui/material';
 import StatusSelect from '../StatusSelect';
 import { useRouter } from 'next/navigation';
+import { theme } from '../config/theme';
 
 interface ButtonCardProps {
     title: string;
@@ -20,7 +21,7 @@ export const ButtonCard: React.FC<ButtonCardProps> = ({title, description, route
     }
     return (
 
-        <Card sx={{ maxWidth: 316, borderWidth: 2, maxHeight: 256,
+        <Card sx={{ maxWidth: 316, borderWidth: 2, maxHeight: 256, bgcolor: theme.palette.bgColor?.light,
             "&:hover": {
                 transform: "scale(1.1)"
                            
@@ -29,16 +30,18 @@ export const ButtonCard: React.FC<ButtonCardProps> = ({title, description, route
             <CardActionArea onClick={() => handlerClicker(route)}>
                 <CardContent sx={{ paddingBottom: 1, paddingTop: 3}}>
                 <Typography gutterBottom variant="h2" component="div"  sx={{
-                        fontSize: "25.6px", 
-                        lineHeight: 1.6,
+                       color: theme.palette.textColor?.main,
+                       fontSize: "25.6px", 
+                       lineHeight: 1.6,
                         fontWeight: 500,
                         letterSpacing: 0.15,
-                        wordWrap: 'break-word',
+                       wordWrap: 'break-word',
                         
                     }}>
                         {title}
                     </Typography>
                     <Typography variant="body1"  sx={{
+                       color: theme.palette.textColor?.light,
                        wordWrap: 'break-word',
                        display: '-webkit-box',
                        WebkitBoxOrient: 'vertical',
@@ -51,7 +54,7 @@ export const ButtonCard: React.FC<ButtonCardProps> = ({title, description, route
                     </Typography>
                 </CardContent>
             </CardActionArea>
-            <CardActions sx={{ paddingBottom: 2}}>
+            <CardActions sx={{ paddingBottom: 2, paddingLeft: 2}}>
                 <StatusSelect/>
             </CardActions>
         </Card>

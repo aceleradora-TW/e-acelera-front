@@ -7,6 +7,7 @@ import { CardActionArea, CardActions } from '@mui/material';
 import { ClickButton } from '../ClickButton';
 import { useRouter } from 'next/navigation';
 import { blue, red } from '@mui/material/colors';
+import { theme } from '../config/theme';
 
 interface CardProps{
     title: string;
@@ -23,7 +24,7 @@ export const BaseCard: React.FC<CardProps> = ({title, description, textImage, im
     }
 
     return (
-        <Card sx={{ maxWidth: 368, borderWidth: 2, maxHeight: 502}}>
+        <Card sx={{ maxWidth: 368, borderWidth: 2, maxHeight: 502, bgcolor: theme.palette.bgColor?.light}}>
             <CardActionArea>
             {image && (
                 <CardMedia
@@ -35,18 +36,20 @@ export const BaseCard: React.FC<CardProps> = ({title, description, textImage, im
             )}
 
                 {/* titulo e descrição */}
-                <CardContent sx={{ paddingBottom: 10.63, maxHeight: 250 }}> 
-                    <Typography gutterBottom variant="h2" component="div"  sx={{
+                <CardContent sx={{ paddingBottom: 10.63, maxHeight: 250}}> 
+                    <Typography gutterBottom variant="h2" component="div"   sx={{
+                        color: theme.palette.textColor?.main,
                         fontSize: "25.6px", 
                         lineHeight: 1.6,
-                        fontWeight: 500,
-                        letterSpacing: 0.15,
+                         fontWeight: 500,
+                         letterSpacing: 0.15,
                         wordWrap: 'break-word',
                         
                     }}>
                         {title}
                     </Typography>
                     <Typography variant="body1"  sx={{
+                        color: theme.palette.textColor?.light,
                         wordWrap: 'break-word',
                         display: '-webkit-box',
                         WebkitBoxOrient: 'vertical',
@@ -62,7 +65,7 @@ export const BaseCard: React.FC<CardProps> = ({title, description, textImage, im
 
                     {/* Botão */}
             </CardActionArea>
-            <CardActions sx={{ paddingBottom: 4, height: 20}}>
+            <CardActions sx={{ paddingBottom: 4, height: 20, paddingLeft: 2}}>
                 <ClickButton title="Entrar" click={() => handlerClicker(route)}  />
             </CardActions>
         </Card>

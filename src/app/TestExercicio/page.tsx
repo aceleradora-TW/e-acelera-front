@@ -5,12 +5,14 @@ import js from "../../public/assets/js.png"
 import next from "../../public/assets/next.png"
 import { AppBar, Box, Button, Card, CardActionArea, CardContent, CssBaseline, IconButton, Toolbar, Typography } from "@mui/material"
 import MenuIcon from '@mui/icons-material/Menu'
-import { ThemeConfig } from '@/components/config/theme'
 import StatusSelect from "@/components/StatusSelect"
 import { ClickButton } from "@/components/ClickButton"
 import { useRouter } from "next/navigation"
 import { BaseCard } from "@/components/BaseCard"
 import { ButtonCard } from "@/components/ButtonCard"
+import { theme } from '@/components/config/theme'
+
+
 
 const drawerWidth = 0
 
@@ -19,11 +21,52 @@ export default function Home() {
   function clickTest() {
     router.push("/")
   }
+
+
+ 
   return (
     <main>
-       
-         
-          <Box sx={{display: 'flex', justifyContent: 'space-around' , alignItems: 'center', gap: '5px' ,flexWrap: 'wrap'}}>
+     
+
+        <Box sx={{ display: 'flex' }}>
+          <CssBaseline />
+          <AppBar
+            position="fixed"
+            sx={{
+              width: { sm: `calc(100% - ${drawerWidth}px)` },
+              ml: { sm: `${drawerWidth}px` },
+            }}
+          >
+            <Toolbar>
+              <IconButton
+                size="large"
+                edge="start"
+                color="inherit"
+                aria-label="menu"
+                sx={{ mr: 2 }}
+              >
+                <MenuIcon />
+              </IconButton>
+
+              <Typography variant="h6" noWrap component="div" flexGrow={1} sx={{ cursor: "pointer" }}>
+                Home
+              </Typography>
+              <Typography variant="h6" noWrap component="div" flexGrow={1} sx={{ cursor: "pointer" }}>
+                Nivelamento
+              </Typography>
+              <Typography variant="h6" noWrap component="div" flexGrow={1} sx={{ cursor: "pointer" }}>
+                AutoEstudo
+              </Typography>
+              <Typography variant="h6" noWrap component="div" flexGrow={1} sx={{ cursor: "pointer" }}>
+                Feedback
+              </Typography>
+
+              <Button color="inherit">Login</Button>
+            </Toolbar>
+          </AppBar>
+          </Box>
+
+          <Box sx={{display: 'flex', justifyContent: 'space-around' , alignItems: 'center', gap: '5px' ,flexWrap: 'wrap', padding: 2, marginTop: 10}}>
           <ButtonCard title="Rio de janeiro" description="teerra linda teerra lindateerra lindateerra lindateerra lindateerra lindateerra lindateerra lindateerra lindateerra lindateerra lindateerra lindateerra lindateerra lindateerra lindateerra lindateerra lindateerra lindateerra lindateerra lindateerra lindateerra lindateerra lindateerra lindateerra lindateerra lindateerra lindateerra lindateerra lindateerra lindateerra lindateerra lindateerra lindaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" route="bahia"/>
 
           <ButtonCard title="Rio de janeiro" description="teerra linda teerra lindateerra lindateerra lindateerra lindateerra lindateerra lindateerra lindateerra lindateerra lindateerra lindateerra lindateerra lindateerra lindateerra lindateerra lindateerra lindateerra lindateerra lindateerra lindateerra lindateerra lindateerra lindateerra lindateerra lindateerra lindateerra lindateerra lindateerra lindateerra lindateerra lindateerra lindateerra linda" route="bahia"/>
@@ -33,6 +76,7 @@ export default function Home() {
           <ButtonCard title="Rio de janeiro" description="teerra linda teerra lindateerra lindateerra lindateerra lindateerra lindateerra lindateerra lindateerra lindateerra lindateerra lindateerra lindateerra lindateerra lindateerra lindateerra lindateerra lindateerra lindateerra lindateerra lindateerra lindateerra lindateerra lindateerra lindateerra lindateerra lindateerra lindateerra lindateerra lindateerra lindateerra lindateerra lindateerra linda" route="bahia"/>
 
           </Box>
+          
     
     </main>
   )
