@@ -3,7 +3,7 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
-import { CardActionArea, CardActions } from '@mui/material';
+import { CardActionArea, CardActions, ThemeProvider } from '@mui/material';
 import { ClickButton } from '../ClickButton';
 import { useRouter } from 'next/navigation';
 import { blue, red } from '@mui/material/colors';
@@ -24,6 +24,7 @@ export const BaseCard: React.FC<CardProps> = ({title, description, textImage, im
     }
 
     return (
+        <ThemeProvider theme={theme}>
         <Card sx={{ maxWidth: 368, borderWidth: 2, maxHeight: 502, bgcolor: theme.palette.bgColor?.light}}>
             <CardActionArea>
             {image && (
@@ -39,10 +40,6 @@ export const BaseCard: React.FC<CardProps> = ({title, description, textImage, im
                 <CardContent sx={{ paddingBottom: 10.63, maxHeight: 250}}> 
                     <Typography gutterBottom variant="h2" component="div"   sx={{
                         color: theme.palette.textColor?.main,
-                        fontSize: "25.6px", 
-                        lineHeight: 1.6,
-                         fontWeight: 500,
-                         letterSpacing: 0.15,
                         wordWrap: 'break-word',
                         
                     }}>
@@ -53,7 +50,7 @@ export const BaseCard: React.FC<CardProps> = ({title, description, textImage, im
                         wordWrap: 'break-word',
                         display: '-webkit-box',
                         WebkitBoxOrient: 'vertical',
-                        WebkitLineClamp: 6, // Número máximo de linhas
+                        WebkitLineClamp: 6, 
                         overflow: 'hidden',
                         textOverflow: 'ellipsis'
                         
@@ -69,5 +66,6 @@ export const BaseCard: React.FC<CardProps> = ({title, description, textImage, im
                 <ClickButton title="Entrar" click={() => handlerClicker(route)}  />
             </CardActions>
         </Card>
+        </ThemeProvider>
     );
 }
