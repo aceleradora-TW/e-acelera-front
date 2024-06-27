@@ -49,10 +49,11 @@ export const ResponsiveAppBar: React.FC<NavBarProps> = ({ list }) => {
   };
   const buttonBorderStyle = (item:string) => {
     if (`/${item}`==pathname){
-      return 'solid'
-    }else{
-      return 'none'
+      const styles = {borderBottom: "solid", color: "red"}
+      return styles
     }
+      return 'none'
+
   }
 
   return (
@@ -95,7 +96,7 @@ export const ResponsiveAppBar: React.FC<NavBarProps> = ({ list }) => {
                 aria-controls="menu-appbar"
                 aria-haspopup="true"
                 onClick={handleOpenNavMenu}
-                color="inherit"
+                sx={{color: theme.palette.textColor?.dark}}
               >
                 <MenuIcon />
               </IconButton>
@@ -121,7 +122,7 @@ export const ResponsiveAppBar: React.FC<NavBarProps> = ({ list }) => {
                 {list.map((item) => (
                   <MenuItem key={item} onClick={handleCloseNavMenu}>
                     <Link href={`/${item}`}>
-                      <Typography textAlign="center">{item}</Typography>
+                      <Typography textAlign="center" sx={{color:theme.palette.textColor?.light}}>{item}</Typography>
                     </Link>
                   </MenuItem>
                 ))}
@@ -172,7 +173,7 @@ export const ResponsiveAppBar: React.FC<NavBarProps> = ({ list }) => {
                     margin: '0 0.5rem',
                     color: theme.palette.textColor?.light,
                     borderBottomWidth: '3px',
-                    borderBottom: buttonBorderStyle(item),
+                   buttonBorderStyle(item),
                     borderBottomColors: 'black',
                     borderRadius: '0',
 
