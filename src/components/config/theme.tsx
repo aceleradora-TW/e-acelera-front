@@ -88,10 +88,9 @@ declare module "@mui/material/styles" {
       logoType: {
         fontSize: string;
         mr: number;
-        flexGrow: number;
         fontWeight: number;
         letterSpacing: string;
-        lineHeight: string;
+        lineHeight: number;
         textDecoration: string;
         color: string;
       };
@@ -143,10 +142,9 @@ declare module "@mui/material/styles" {
       logoType: {
         fontSize?: string;
         mr?: number;
-        flexGrow?: number;
         fontWeight?: number;
         letterSpacing?: string;
-        lineHeight?: string;
+        lineHeight?: number;
         textDecoration?: string;
         color?: string;
       };
@@ -186,10 +184,9 @@ const theme = createTheme({
     logoType: {
       fontSize: "19.2px",
       mr: 2,
-      flexGrow: 1,
       fontWeight: 700,
       letterSpacing: "0.15px",
-      lineHeight: "1.6",
+      lineHeight: 1.6,
       textDecoration: "none",
       color: themePalette.title,
     },

@@ -86,7 +86,6 @@ export const ResponsiveAppBar: React.FC<NavBarProps> = ({ list }) => {
             component="a"
             href="/"
             sx={{
-              
               display: { xs: "none", md: "flex"},
               ...theme.customStyles.logoType
             }}
@@ -152,7 +151,8 @@ export const ResponsiveAppBar: React.FC<NavBarProps> = ({ list }) => {
             noWrap
             component="a"
             href="#app-bar-with-responsive-menu"
-            sx={{display: { xs: "flex", md: "none" },
+            sx={{ flexGrow: 1,
+              display: { xs: "flex", md: "none" },
             ...theme.customStyles.logoType}}
           >
             E-Acelera
