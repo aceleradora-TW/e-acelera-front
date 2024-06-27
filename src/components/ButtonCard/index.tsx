@@ -39,11 +39,13 @@ export const ButtonCard: React.FC<ButtonCardProps> = ({title, description, route
                         {title}
                     </Typography>
                     <Typography variant="body1"  sx={{
-                        wordWrap: 'break-word',
-                        display: '-webkit-box',
-                        WebkitLineClamp: 4,
-                        WebkitBoxOrient: 'vertical',
-                        overflowY: 'auto'
+                       wordWrap: 'break-word',
+                       display: '-webkit-box',
+                       WebkitBoxOrient: 'vertical',
+                       WebkitLineClamp: 4, // Número máximo de linhas
+                       overflow: 'hidden',
+                       textOverflow: 'ellipsis'
+                       
                     }}>
                         {description}
                     </Typography>

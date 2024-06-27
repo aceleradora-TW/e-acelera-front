@@ -49,9 +49,11 @@ export const BaseCard: React.FC<CardProps> = ({title, description, textImage, im
                     <Typography variant="body1"  sx={{
                         wordWrap: 'break-word',
                         display: '-webkit-box',
-                        WebkitLineClamp: 6,
                         WebkitBoxOrient: 'vertical',
-                        overflowY: 'auto'
+                        WebkitLineClamp: 6, // Número máximo de linhas
+                        overflow: 'hidden',
+                        textOverflow: 'ellipsis'
+                        
                         
                     }}>
                         {description}
