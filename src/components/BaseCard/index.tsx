@@ -17,53 +17,46 @@ interface CardProps{
     route: string;
 }
 
+const cardStyles = {
+    ...theme.customStyles.cardBody,
+    WebkitLineClamp: 6,
+    }
+
+const cardActionsStyle = {
+    paddingBottom: 4, 
+    height: 20, 
+    paddingLeft: 2
+}
+
 export const BaseCard: React.FC<CardProps> = ({title, description, textImage, image, route}) => {
     const router = useRouter()
-    const handlerClicker = (route: string) => {
+    const handleClicker = (route: string) => {
         router.push(`/${route}`)
     }
 
     return (
         <ThemeProvider theme={theme}>
-        <Card sx={{ maxWidth: 368, borderWidth: 2, maxHeight: 502, bgcolor: theme.palette.bgColor?.light}}>
+        <Card sx={theme.customStyles.cardContainer}>
             <CardActionArea>
             {image && (
                 <CardMedia
                     component="img"
                     image={image}
                     alt={textImage}
-                    sx={{ height: 152, marginBottom: 5.5}}
+                    sx={theme.customStyles.cardMedia}
                 />
             )}
-
-                {/* titulo e descrição */}
-                <CardContent sx={{ paddingBottom: 10.63, maxHeight: 250}}> 
-                    <Typography gutterBottom variant="h2" component="div"   sx={{
-                        color: theme.palette.textColor?.main,
-                        wordWrap: 'break-word',
-                        
-                    }}>
+                <CardContent sx={theme.customStyles.cardContent}> 
+                    <Typography gutterBottom variant="h2" component="div"   sx={theme.customStyles.cardTitle}>
                         {title}
                     </Typography>
-                    <Typography variant="body1"  sx={{
-                        color: theme.palette.textColor?.light,
-                        wordWrap: 'break-word',
-                        display: '-webkit-box',
-                        WebkitBoxOrient: 'vertical',
-                        WebkitLineClamp: 6, 
-                        overflow: 'hidden',
-                        textOverflow: 'ellipsis'
-                        
-                        
-                    }}>
+                    <Typography  variant="body1" sx={cardStyles}>
                         {description}
                     </Typography>
                 </CardContent>
-
-                    {/* Botão */}
             </CardActionArea>
-            <CardActions sx={{ paddingBottom: 4, height: 20, paddingLeft: 2}}>
-                <ClickButton title="Entrar" click={() => handlerClicker(route)}  />
+            <CardActions sx={cardActionsStyle}>
+                <ClickButton title="Entrar" click={() => handleClicker(route)}  />
             </CardActions>
         </Card>
         </ThemeProvider>
