@@ -30,7 +30,7 @@ const cardActionsStyle = {
 
 export const BaseCard: React.FC<CardProps> = ({title, description, textImage, image, route}) => {
     const router = useRouter()
-    const handleClicker = (route: string) => {
+    const handleClick = (route: string) => {
         router.push(`/${route}`)
     }
 
@@ -56,7 +56,7 @@ export const BaseCard: React.FC<CardProps> = ({title, description, textImage, im
                 </CardContent>
             </CardActionArea>
             <CardActions sx={cardActionsStyle}>
-                <ClickButton title="Entrar" click={() => handleClicker(route)}  />
+                <ClickButton title="Entrar" click={() => handleClick(route)}  />
             </CardActions>
         </Card>
         </ThemeProvider>

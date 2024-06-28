@@ -73,10 +73,23 @@ declare module "@mui/material/styles" {
         borderWidth: number, 
         maxHeight: number
       },
+      cardButtonContainer: {
+        backgroundColor: string,
+        maxWidth: number, 
+        borderWidth: number, 
+        maxHeight: number,
+        "&:hover": {
+          transform: string
+      }
+      },
       cardContent: {
         paddingBottom: number, 
         maxHeight: number
       },
+      cardButtonContent:{
+        paddingBottom: number, 
+        paddingTop: number
+      };
       cardMedia: {
         height: number,
         marginBottom: number
@@ -118,9 +131,22 @@ declare module "@mui/material/styles" {
         borderWidth?: number, 
         maxHeight?: number
       };
+      cardButtonContainer: {
+        backgroundColor?: string,
+        maxWidth?: number, 
+        borderWidth?: number, 
+        maxHeight?: number,
+        "&:hover": {
+          transform?: string
+      }
+      };
       cardContent:{
         paddingBottom?: number, 
         maxHeight?: number
+      };
+      cardButtonContent:{
+        paddingBottom?: number, 
+        paddingTop?: number
       };
       cardMedia: {
         height?: number,
@@ -150,7 +176,7 @@ const theme = createTheme({
       border: 1,
     },
     cardBody: {
-      color: themePalette.title,
+      color: themePalette.descriptionCard,
       wordWrap: 'break-word',
       display: '-webkit-box',
       WebkitBoxOrient: 'vertical',
@@ -163,9 +189,22 @@ const theme = createTheme({
       borderWidth: 2,
       backgroundColor:themePalette.whiteBg
     },
+    cardButtonContainer: {
+      backgroundColor: themePalette.whiteBg,
+      maxWidth: 316, 
+      borderWidth: 2, 
+      maxHeight: 256, 
+      "&:hover": {
+       transform: "scale(1.1)"
+      }
+    },
     cardContent:{
       paddingBottom: 10.63,
-      maxHeight: 5.5
+      maxHeight: 250
+    },
+    cardButtonContent:{
+      paddingBottom: 1, 
+      paddingTop: 2
     },
     cardMedia: {
       height: 152,

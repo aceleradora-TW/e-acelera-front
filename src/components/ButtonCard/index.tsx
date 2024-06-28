@@ -13,45 +13,35 @@ interface ButtonCardProps {
     route: string;
 }
 
+const cardStyles = {
+    ...theme.customStyles.cardBody,
+    WebkitLineClamp: 4
+}
+
+const cardActionsStyle = {
+    paddingBottom: 2, 
+    paddingLeft: 2
+}
 
 export const ButtonCard: React.FC<ButtonCardProps> = ({ title, description, route }) => {
     const router = useRouter()
-    const handlerClicker = (route: string) => {
+    const handleClick = (route: string) => {
         router.push(`/${route}`)
     }
     return (
         <ThemeProvider theme={theme}>
-            <Card sx={{
-                maxWidth: 316, borderWidth: 2, maxHeight: 256, bgcolor: theme.palette.bgColor?.light,
-                "&:hover": {
-                    transform: "scale(1.1)"
-
-                }
-            }}>
-                <CardActionArea onClick={() => handlerClicker(route)}>
-                    <CardContent sx={{ paddingBottom: 1, paddingTop: 3 }}>
-                        <Typography gutterBottom variant="h2" component="div" sx={{
-                            color: theme.palette.textColor?.main,
-                            wordWrap: 'break-word',
-
-                        }}>
+            <Card sx={theme.customStyles.cardButtonContainer}>
+                <CardActionArea onClick={() => handleClick(route)}>
+                    <CardContent sx={theme.customStyles.cardButtonContent}>
+                        <Typography gutterBottom variant="h2" component="div" sx={theme.customStyles.cardTitle}>
                             {title}
                         </Typography>
-                        <Typography variant="body1" sx={{
-                            color: theme.palette.textColor?.light,
-                            wordWrap: 'break-word',
-                            display: '-webkit-box',
-                            WebkitBoxOrient: 'vertical',
-                            WebkitLineClamp: 4, 
-                            overflow: 'hidden',
-                            textOverflow: 'ellipsis'
-
-                        }}>
+                        <Typography variant="body1" sx={cardStyles}>
                             {description}
                         </Typography>
                     </CardContent>
                 </CardActionArea>
-                <CardActions sx={{ paddingBottom: 2, paddingLeft: 2 }}>
+                <CardActions sx={{cardActionsStyle}}>
                     <StatusSelect />
                 </CardActions>
             </Card>
