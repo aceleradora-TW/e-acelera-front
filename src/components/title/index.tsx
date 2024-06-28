@@ -1,31 +1,24 @@
 'use client'
 import React from "react"
 import Typography from "@mui/material/Typography"
-import { ThemeConfig } from "../config/theme"
+import { theme } from "../config/theme"
+import { ThemeProvider } from "styled-components"
+import { Box } from "@mui/material"
+
 interface TitleProps {
-    children: string
-    variant: "h1"|"h2"
-    fontSize: "3rem"|30
-} 
-export const Title:React.FC<TitleProps> = ({children, variant, fontSize}) => {
+    text: string
+}
+
+export const Title: React.FC<TitleProps> = ({ text }) => {
     return (
-        <div>
-            <ThemeConfig>
+        <ThemeProvider theme={theme}>
+            <Box>
                 <Typography
-                    variant={variant}
+                    variant="h1"
                     component="div"
-                    sx={{
-                    fontFamily: 'Roboto, sans-serif',
-                    fontSize: {fontSize},
-                    fontWeight: 500,
-                    fontHeight: 1.16,
-                    textAlign: "left",
-                    color: "RGB(3, 29, 60)",
-                    marginTop: "78px",
-                    marginLeft: "178px",
-                    }}
-                    >{children}</Typography>
-            </ThemeConfig>
-        </div>
+                    sx={theme.customStyles.title}
+                >{text}</Typography>
+            </Box>
+        </ThemeProvider>
     )
 }

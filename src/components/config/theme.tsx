@@ -26,7 +26,7 @@ export enum themePalette {
 
 declare module "@mui/material/styles" {
   interface PaletteOptions {
-    button?: PaletteColorOptions; 
+    button?: PaletteColorOptions;
     buttonHover?: PaletteColorOptions;
     statusSelect?: PaletteColorOptions;
     textColor?: PaletteColorOptions;
@@ -58,6 +58,15 @@ declare module "@mui/material/styles" {
         borderRadius: number;
         border: number;
       };
+      title: {
+        textAlign: string,
+        color: string,
+        margin: string,
+        fontSize: string,
+        lineHeight: number,
+        fontWeight: number,
+        letterSpacing: number,
+      }
     };
   }
 
@@ -76,6 +85,15 @@ declare module "@mui/material/styles" {
         borderRadius?: number;
         border?: number;
       };
+      title: {
+        textAlign?: string,
+        color?: string,
+        margin?: string,
+        fontSize?: string,
+        lineHeight?: number,
+        fontWeight?: number,
+        letterSpacing?: number,
+      }
     };
   }
 }
@@ -95,24 +113,33 @@ const theme = createTheme({
       borderRadius: 2,
       border: 1,
     },
+    title: {
+      textAlign: "left",
+      color: themePalette.title,
+      margin: "20px 0",
+      fontSize: "48px",
+      lineHeight: 1.16,
+      fontWeight: 500,
+      letterSpacing: 0.15,
+    }
   },
-  palette: { 
-    statusSelect:{
+  palette: {
+    statusSelect: {
       main: themePalette.statusPending,
       light: themePalette.statusConcluded,
       dark: themePalette.statusInProgress,
     },
-    buttonHover:{
+    buttonHover: {
       main: themePalette.button,
       contrastText: themePalette.whiteBg,
     },
-    
-    textColor:{
+
+    textColor: {
       main: themePalette.title,
       light: themePalette.descriptionCard,
       dark: themePalette.descriptionText,
     },
-    bgColor:{
+    bgColor: {
       main: themePalette.mainBg,
       light: themePalette.whiteBg,
     },

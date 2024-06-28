@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { Title } from "@/components/title/index";
+import { Title } from "@/components/Title/index";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,8 +18,6 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Title children="Bem vindo ao Nivelamento" variant="h1" fontSize={"3rem"}/>
-        <Title children="Exercícios" variant="h2" fontSize={30}/>
         {children}</body>
     </html>
   );
