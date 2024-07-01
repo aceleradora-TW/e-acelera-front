@@ -3,13 +3,11 @@ import Image from "next/image"
 import react from "../../public/assets/react.png"
 import js from "../../public/assets/js.png"
 import next from "../../public/assets/next.png"
-import { AppBar, Box, Button, Card, CardActionArea, CardContent, CssBaseline, IconButton, Toolbar, Typography } from "@mui/material"
-import MenuIcon from '@mui/icons-material/Menu'
+import { Box, Card, CardActionArea, CardContent, CssBaseline, Toolbar, Typography } from "@mui/material"
 import { ThemeConfig } from '@/components/config/theme'
 import StatusSelect from "@/components/StatusSelect"
 import { ClickButton } from "@/components/ClickButton"
 import { useRouter } from "next/navigation"
-import { theme } from "@/components/config/theme";
 
 const drawerWidth = 0
 
@@ -24,66 +22,6 @@ export default function Home() {
       <ThemeConfig>
         <Box className={"md:border-4"}>
           <CssBaseline />
-          {/* <AppBar
-            position="fixed"
-            sx={{
-              width: { sm: `calc(100% - ${drawerWidth}px)` },
-              ml: { sm: `${drawerWidth}px` },
-              color: "white",
-            }}
-          >
-            <Toolbar>
-              <IconButton
-                className={"text-color-statusInProgress"}
-                size="large"
-                edge="start"
-                color="inherit"
-                aria-label="menu"
-                sx={{ mr: 2 }}
-              >
-                <MenuIcon />
-              </IconButton>
-
-              <Typography
-                variant="h6"
-                noWrap
-                component="div"
-                flexGrow={1} 
-                sx={theme.customStyles.button}
-              >
-                Home
-              </Typography>
-              <Typography
-                variant="h6"
-                noWrap
-                component="div"
-                flexGrow={1}
-                sx={{ cursor: "pointer" }}
-              >
-                Nivelamento
-              </Typography>
-              <Typography
-                variant="h6"
-                noWrap
-                component="div"
-                flexGrow={1}
-                sx={{ cursor: "pointer" }}
-              >
-                AutoEstudo
-              </Typography>
-              <Typography
-                variant="h6"
-                noWrap
-                component="div"
-                flexGrow={1}
-                sx={{ cursor: "pointer" }}
-              >
-                Feedback
-              </Typography>
-
-              <Button color="inherit">Login</Button>
-            </Toolbar>
-          </AppBar> */}
           <Box
             component="nav"
             sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
