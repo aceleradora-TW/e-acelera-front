@@ -11,6 +11,7 @@ import { ClickButton } from "@/components/ClickButton"
 import { useRouter } from "next/navigation"
 import { theme } from "@/components/config/theme";
 
+
 const drawerWidth = 0
 
 export default function Home() {
@@ -89,6 +90,7 @@ export default function Home() {
             sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
             aria-label="mailbox folders"
           ></Box>
+          
           <Box
             component="main"
             sx={{
@@ -98,6 +100,7 @@ export default function Home() {
               width: { sm: `calc(100% - ${drawerWidth}px)` },
             }}
           >
+            
             <Toolbar />
             <CardContent>
               <Typography variant="h5" component="div" color="black">

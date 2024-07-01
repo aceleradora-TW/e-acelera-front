@@ -1,8 +1,7 @@
 'use client'
 import React from "react"
 import Typography from "@mui/material/Typography"
-import { theme } from "../config/theme"
-import { ThemeProvider } from "styled-components"
+import { theme, ThemeConfig } from "../config/theme"
 import { Box } from "@mui/material"
 
 interface TitleProps {
@@ -11,7 +10,7 @@ interface TitleProps {
 
 export const Title: React.FC<TitleProps> = ({ text }) => {
     return (
-        <ThemeProvider theme={theme}>
+        <ThemeConfig>
             <Box>
                 <Typography
                     variant="h1"
@@ -19,6 +18,7 @@ export const Title: React.FC<TitleProps> = ({ text }) => {
                     sx={theme.customStyles.title}
                 >{text}</Typography>
             </Box>
-        </ThemeProvider>
+            </ThemeConfig>
+        
     )
 }
