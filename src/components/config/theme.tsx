@@ -81,7 +81,7 @@ declare module "@mui/material/styles" {
         borderRadius?: number;
         border?: number;
       };
-      title: {
+      title?: {
         textAlign?: string,
         color?: string,
         margin?: string,
