@@ -6,9 +6,13 @@ import FormControl from "@mui/material/FormControl"
 import Select from '@mui/material/Select'
 import { SelectChangeEvent } from '@mui/material/Select'
 import { theme } from "@/components/config/theme"
+import { autocompleteClasses } from "@mui/material"
 
+interface StatusSelectProps {
+  width?: "30%" | "70%"
+} 
 
-export default function StatusSelect() {
+export default function StatusSelect({width = "30%"}: StatusSelectProps) {
   const [status, setStatus] = React.useState<string>("")
   const [backgroundColor, setBackgroundColor] = React.useState<any>("")
 
@@ -33,7 +37,7 @@ export default function StatusSelect() {
   }
   
   return (
-    <Box sx={{ minWidth: 120, backgroundColor, width: "30%" }}>
+    <Box sx={{ backgroundColor, width}}>
       <FormControl fullWidth>
         <InputLabel id="statusLeveling" sx={{ color: "black" }}>
           Status
