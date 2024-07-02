@@ -116,7 +116,7 @@ declare module "@mui/material/styles" {
         borderRadius?: number;
         border?: number;
       };
-      cardBody: {
+      cardBody?: {
         color?: string,
         wordWrap?: string,
         display?: string,
@@ -125,13 +125,13 @@ declare module "@mui/material/styles" {
         overflow?: string,
         textOverflow?: string
       };
-      cardContainer: {
+      cardContainer?: {
         backgroundColor?: string,
         maxWidth?: number, 
         borderWidth?: number, 
         maxHeight?: number
       };
-      cardButtonContainer: {
+      cardButtonContainer?: {
         backgroundColor?: string,
         maxWidth?: number, 
         borderWidth?: number, 
@@ -140,19 +140,19 @@ declare module "@mui/material/styles" {
           transform?: string
       }
       };
-      cardContent:{
+      cardContent?:{
         paddingBottom?: number, 
         maxHeight?: number
       };
-      cardButtonContent:{
+      cardButtonContent?:{
         paddingBottom?: number, 
         paddingTop?: number
       };
-      cardMedia: {
+      cardMedia?: {
         height?: number,
         marginBottom?: number
       };
-      cardTitle: {
+      cardTitle?: {
         wordWrap?: string,
         color?: string
       },
