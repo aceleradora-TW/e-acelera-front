@@ -1,12 +1,12 @@
-
-import { MapServer } from "@/components/MapServer"
-import ListServerSide from "@/server"
+import { FetchApiNext } from "@/components/FetchApiNext";
+import { SSRpage } from "@/components/GetServerSideProps";
 
 export default function Home() {
   
   return (
     <>
-      <MapServer/>
+      <FetchApiNext/>
+      {/* <SSRpage/> */}
     </>
   )
 }
