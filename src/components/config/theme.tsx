@@ -62,6 +62,7 @@ declare module "@mui/material/styles" {
         textAlign: string,
         color: string,
         margin: string,
+        width: string,
       }
     };
   }
@@ -85,6 +86,7 @@ declare module "@mui/material/styles" {
         textAlign?: string,
         color?: string,
         margin?: string,
+        width?: string
       }
     };
   }
@@ -109,6 +111,7 @@ const theme = createTheme({
       textAlign: "left",
       color: themePalette.title,
       margin: "20px 0",
+      width: "50%"
     }
   },
   palette: {
