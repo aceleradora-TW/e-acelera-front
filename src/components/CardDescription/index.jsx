@@ -6,8 +6,13 @@ import { ThemeConfig } from "../config/theme";
 function CardDescription() {
   return (
     <ThemeConfig>
-      <Box sx={{display:{xs: "none", md: "flex"},...theme.customStyles.cardDescription}}>
-        <Box >
+      <Box
+        sx={{
+          display: { xs: "none", md: "flex" },
+          ...theme.customStyles.cardDescription,
+        }}
+      >
+        <Box sx={{ width: "45%" }}>
           <Typography variant="body1">
             Bem-vindo ao emocionante universo do TypeScript! Prepare-se para uma
             imersão profunda em uma linguagem de programação que não apenas
@@ -25,15 +30,15 @@ function CardDescription() {
           </Typography>
         </Box>
 
-        <Divider color="black" orientation="vertical" flexItem />
+        <Divider orientation="vertical" flexItem color="black"/>
 
-        <Box >
+        <Box sx={{ width: "45%" }}>
           <Typography variant="body1">
             Diferentemente do que ocorria alguns anos atrás, onde JavaScript era
             utilizada apenas no lado cliente das aplicações, atuando na
             validação de formulários e composição de elementos da interface,
             atualmente temos iniciativas que levam essa linguagem a representar
-            a parte principal de aplicações mobile em frameworks de
+            a parte principal de aplicações mobile (em frameworks de
             desenvolvimento híbrido como Apache.
           </Typography>
           <Typography variant="body1">
