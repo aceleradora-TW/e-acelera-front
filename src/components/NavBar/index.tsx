@@ -77,7 +77,7 @@ export const ResponsiveAppBar: React.FC<NavBarProps> = ({ list }) => {
               width={43}
               height={48}
               src="/assets/logo.svg"
-              alt="imagem filme"
+              alt="logo e-acelera"
             />
           </Box>
           {/* MENU WEB */}
@@ -143,14 +143,14 @@ export const ResponsiveAppBar: React.FC<NavBarProps> = ({ list }) => {
               width={43}
               height={48}
               src="/assets/logo.svg"
-              alt="imagem filme"
+              alt="logo e-acelera"
               style={{ display: "flex" }}
             />
           </Box>
           <Typography
             noWrap
             component="a"
-            href="#app-bar-with-responsive-menu"
+            href="/"
             sx={{ flexGrow: 1,
               display: { xs: "flex", md: "none" },
             ...theme.customStyles.logoType}}
@@ -186,7 +186,7 @@ export const ResponsiveAppBar: React.FC<NavBarProps> = ({ list }) => {
             <Tooltip title="Open settings">
               {/*Item a ser adicionado no IconButton onClick={handleOpenUserMenu}  */}
               <IconButton
-                sx={{ p: 0, backgroundColor: "black", visibility: "hidden" }}
+                sx={{  visibility: "hidden" }}
               >
                 <Avatar alt="Remy Sharp" src="" />
               </IconButton>
@@ -217,6 +217,7 @@ export const ResponsiveAppBar: React.FC<NavBarProps> = ({ list }) => {
         </Toolbar>
       </Container>
     </AppBar>
+ 
   );
 };
 export default ResponsiveAppBar;
