@@ -15,10 +15,11 @@ export const Title: React.FC<TitleProps> = ({ text }) => {
                 <Typography
                     variant="h1"
                     component="div"
-                    sx={theme.customStyles.title}
-                >{text}</Typography>
+                    sx={theme.customStyles.title}>
+                    {text}
+                </Typography>
             </Box>
-            </ThemeConfig>
-        
+        </ThemeConfig>
+
     )
 }
