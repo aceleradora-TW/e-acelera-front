@@ -57,7 +57,7 @@ export default function StatusSelect({width = "30%"}: StatusSelectProps) {
             color: "#000000"
           }}
         >
-          <MenuItem value="statusConcluded">Concluido</MenuItem>
+          <MenuItem value="statusConcluded">Concluído</MenuItem>
           <MenuItem value="statusInProgress">Em andamento</MenuItem>
           <MenuItem value="statusPending">Pendente</MenuItem>
         </Select>

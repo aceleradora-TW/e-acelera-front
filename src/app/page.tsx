@@ -16,7 +16,7 @@ const drawerWidth = 0;
 export default function Home() {
   const router = useRouter();
 
-  function clickTest() {
+  function handleClick() {
     router.push("/");
   }
 
@@ -116,8 +116,8 @@ export default function Home() {
               <Image width={300} src={react} alt="imagem filme" />
             </CardActionArea>
           </Card>
-          <ClickButton title="Próximo exercício" click={clickTest} />
-          <ClickButton title="Entrar" click={clickTest} />
+          <ClickButton title="Próximo exercício" click={handleClick} />
+          <ClickButton title="Entrar" click={handleClick} />
           <StatusSelect />
           <CardContent>
             <Typography variant="h5" component="div" color="black">
@@ -136,8 +136,8 @@ export default function Home() {
               <Image width={300} src={js} alt="imagem filme" />
             </CardActionArea>
           </Card>
-          <ClickButton title="Próximo exercício" click={clickTest} />
-          <ClickButton title="Entrar" click={clickTest} />
+          <ClickButton title="Próximo exercício" click={handleClick} />
+          <ClickButton title="Entrar" click={handleClick} />
           <StatusSelect />
           <CardContent>
             <Typography variant="h5" component="div" color="black">
@@ -157,8 +157,8 @@ export default function Home() {
               <Image width={300} src={next} alt="imagem filme" />
             </CardActionArea>
           </Card>
-          <ClickButton title="Próximo exercício" click={clickTest} />
-          <ClickButton title="Entrar" click={clickTest} />
+          <ClickButton title="Próximo exercício" click={handleClick} />
+          <ClickButton title="Entrar" click={handleClick} />
           <StatusSelect width="30%"/>
         </Box>
       </Box>
