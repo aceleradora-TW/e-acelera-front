@@ -1,7 +1,7 @@
 "use client"
 import { useEffect, useState } from "react";
 
-export const fetchDataClientSide = () => {
+export const FetchDataClientSide = () => {
   const [renderData, setRenderData] = useState<any>()
 
   useEffect(() => {
@@ -24,7 +24,7 @@ export const fetchDataClientSide = () => {
     fetchData()
   },[])
   
-  
+  console.log(renderData)
     
     return(
         <>

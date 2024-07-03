@@ -1,5 +1,7 @@
 import { FetchApiNext } from "@/components/FetchApiNext";
-import { SSRpage } from "@/components/GetServerSideProps";
+import { FetchDataClientSide } from "@/components/FetchDataClientSide";
+import SSRpage from "@/components/GetServerSideProps";
+
 
 export default function Home() {
   
@@ -7,6 +9,7 @@ export default function Home() {
     <>
       <FetchApiNext/>
       {/* <SSRpage/> */}
+      {/* <FetchDataClientSide/> */}
     </>
   )
 }

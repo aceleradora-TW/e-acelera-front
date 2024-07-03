@@ -8,29 +8,27 @@ export const FetchApiNext = () => {
   const [renderData, setRenderData] = useState<any>();
 
   useEffect(() => {
-    const fetchData = async () =>{
-      try {
-        console.log("Fetching data from Next.js API");
-        const data = await fetch("/api/stackby", {
-          method: "GET",
-          cache: "no-store"
-        });
-        const parseData = await data.json();
-        console.log("Data fetched from Next.js API:", parseData);
-        setRenderData(parseData);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
+    const fetchData = async () => {
+        try {
+            const response = await fetch(`/api/stackbyApi/Topics`, {
+                method: "GET",
+            });
+            const parseData = await response.json();
+            setRenderData(parseData);
+        } catch (error) {
+            console.error("Error fetching data:", error);
+        }
     };
+
     fetchData();
-  }, []);
-  
-  console.log(renderData);
+}, []);
+
+console.log(renderData);
     
     return(
         <>
-            {/* <div>
-            {renderData.data.map((element: any, index: any) => ( 
+            <div>
+            {renderData &&  renderData.data.map((element: any, index: any) => ( 
                 <div key={index}>
                   <CardContent>
                     <Typography variant="h5" component="div" color="black">
@@ -46,7 +44,7 @@ export const FetchApiNext = () => {
                   </CardContent>
                 </div>
               ))}
-            </div> */}
+            </div>
         </>
     )
 }
