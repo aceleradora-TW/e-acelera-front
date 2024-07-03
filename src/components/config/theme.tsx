@@ -61,8 +61,8 @@ declare module "@mui/material/styles" {
       title: {
         textAlign: string,
         color: string,
-        margin: string,
-        width: string,
+        margin: string
+        
       }
     };
   }
@@ -85,8 +85,8 @@ declare module "@mui/material/styles" {
       title?: {
         textAlign?: string,
         color?: string,
-        margin?: string,
-        width?: string
+        margin?: string
+       
       }
     };
   }
@@ -110,8 +110,8 @@ const theme = createTheme({
     title: {
       textAlign: "left",
       color: themePalette.title,
-      margin: "20px 0",
-      width: "50%"
+      margin: "20px 0"
+     
     }
   },
   palette: {

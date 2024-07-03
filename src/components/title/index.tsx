@@ -2,7 +2,7 @@
 import React from "react"
 import Typography from "@mui/material/Typography"
 import { theme, ThemeConfig } from "../config/theme"
-import { Box } from "@mui/material"
+import { Box, Grid } from "@mui/material"
 
 interface TitleProps {
     text: string
@@ -11,14 +11,14 @@ interface TitleProps {
 export const Title: React.FC<TitleProps> = ({ text }) => {
     return (
         <ThemeConfig>
-            <Box>
+            <Grid container>  
                 <Typography
                     variant="h1"
                     component="div"
                     sx={theme.customStyles.title}>
                     {text}
                 </Typography>
-            </Box>
+            </Grid>
         </ThemeConfig>
 
     )
