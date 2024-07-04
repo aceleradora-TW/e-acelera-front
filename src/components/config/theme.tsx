@@ -26,7 +26,7 @@ export enum themePalette {
 
 declare module "@mui/material/styles" {
   interface PaletteOptions {
-    button?: PaletteColorOptions; 
+    button?: PaletteColorOptions;
     buttonHover?: PaletteColorOptions;
     statusSelect?: PaletteColorOptions;
     textColor?: PaletteColorOptions;
@@ -58,6 +58,46 @@ declare module "@mui/material/styles" {
         borderRadius: number;
         border: number;
       };
+      cardBody: {
+        color: string,
+        wordWrap: string,
+        display: string,
+        WebkitBoxOrient: string,
+        WebkitLineClamp: number,
+        overflow: string,
+        textOverflow: string
+      };
+      cardContainer: {
+        backgroundColor: string,
+        maxWidth: number, 
+        borderWidth: number, 
+        maxHeight: number
+      },
+      cardButtonContainer: {
+        backgroundColor: string,
+        maxWidth: number, 
+        borderWidth: number, 
+        maxHeight: number,
+        "&:hover": {
+          transform: string
+      }
+      },
+      cardContent: {
+        paddingBottom: number, 
+        maxHeight: number
+      },
+      cardButtonContent:{
+        paddingBottom: number, 
+        paddingTop: number
+      };
+      cardMedia: {
+        height: number,
+        marginBottom: number
+      },
+      cardTitle: {
+        wordWrap: string,
+        color: string
+      },
     };
   }
 
@@ -76,9 +116,49 @@ declare module "@mui/material/styles" {
         borderRadius?: number;
         border?: number;
       };
-    };
+      cardBody?: {
+        color?: string,
+        wordWrap?: string,
+        display?: string,
+        WebkitBoxOrient?: string,
+        WebkitLineClamp?: number,
+        overflow?: string,
+        textOverflow?: string
+      };
+      cardContainer?: {
+        backgroundColor?: string,
+        maxWidth?: number, 
+        borderWidth?: number, 
+        maxHeight?: number
+      };
+      cardButtonContainer?: {
+        backgroundColor?: string,
+        maxWidth?: number, 
+        borderWidth?: number, 
+        maxHeight?: number,
+        "&:hover": {
+          transform?: string
+      }
+      };
+      cardContent?:{
+        paddingBottom?: number, 
+        maxHeight?: number
+      };
+      cardButtonContent?:{
+        paddingBottom?: number, 
+        paddingTop?: number
+      };
+      cardMedia?: {
+        height?: number,
+        marginBottom?: number
+      };
+      cardTitle?: {
+        wordWrap?: string,
+        color?: string
+      },
+      }
+    }
   }
-}
 
 const theme = createTheme({
   customStyles: {
@@ -95,24 +175,63 @@ const theme = createTheme({
       borderRadius: 2,
       border: 1,
     },
+    cardBody: {
+      color: themePalette.descriptionCard,
+      wordWrap: 'break-word',
+      display: '-webkit-box',
+      WebkitBoxOrient: 'vertical',
+      overflow: 'hidden',
+      textOverflow: 'ellipsis'
+    },
+    cardContainer: {
+      maxHeight: 502,
+      maxWidth: 368,
+      borderWidth: 2,
+      backgroundColor:themePalette.whiteBg
+    },
+    cardButtonContainer: {
+      backgroundColor: themePalette.whiteBg,
+      maxWidth: 316, 
+      borderWidth: 2, 
+      maxHeight: 256, 
+      "&:hover": {
+       transform: "scale(1.1)"
+      }
+    },
+    cardContent:{
+      paddingBottom: 10.63,
+      maxHeight: 250
+    },
+    cardButtonContent:{
+      paddingBottom: 1, 
+      paddingTop: 2
+    },
+    cardMedia: {
+      height: 152,
+      marginBottom:5.5
+    },
+    cardTitle:{
+      color: themePalette.title,
+      wordWrap: "break-word"
+    }
   },
-  palette: { 
-    statusSelect:{
+  palette: {
+    statusSelect: {
       main: themePalette.statusPending,
       light: themePalette.statusConcluded,
       dark: themePalette.statusInProgress,
     },
-    buttonHover:{
+    buttonHover: {
       main: themePalette.button,
       contrastText: themePalette.whiteBg,
     },
-    
-    textColor:{
+
+    textColor: {
       main: themePalette.title,
       light: themePalette.descriptionCard,
       dark: themePalette.descriptionText,
     },
-    bgColor:{
+    bgColor: {
       main: themePalette.mainBg,
       light: themePalette.whiteBg,
     },
