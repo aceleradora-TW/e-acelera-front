@@ -112,7 +112,7 @@ const theme = createTheme({
       border: 1,
     },
     cardDescription:{
-      display: 'flex',
+      display: "flex",
       flexDirection: "row",
       justifyContent: "space-between",
       padding: 2,
