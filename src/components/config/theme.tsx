@@ -94,6 +94,46 @@ declare module "@mui/material/styles" {
         textDecoration: string;
         color: string;
       };
+      cardBody: {
+        color: string;
+        wordWrap: string;
+        display: string;
+        WebkitBoxOrient: string;
+        WebkitLineClamp: number;
+        overflow: string;
+        textOverflow: string;
+      };
+      cardContainer: {
+        backgroundColor: string;
+        maxWidth: number;
+        borderWidth: number;
+        maxHeight: number;
+      };
+      cardButtonContainer: {
+        backgroundColor: string;
+        maxWidth: number;
+        borderWidth: number;
+        maxHeight: number;
+        "&:hover": {
+          transform: string;
+      }
+      };
+      cardContent: {
+        paddingBottom: number; 
+        maxHeight: number;
+      };
+      cardButtonContent:{
+        paddingBottom: number;
+        paddingTop: number;
+      };
+      cardMedia: {
+        height: number;
+        marginBottom: number;
+      };
+      cardTitle: {
+        wordWrap: string;
+        color: string;
+      };
     };
   }
 
@@ -149,11 +189,64 @@ declare module "@mui/material/styles" {
         color?: string;
       };
     };
-  }
-}
+      cardBody?: {
+        color?: string;
+        wordWrap?: string;
+        display?: string;
+        WebkitBoxOrient?: string;
+        WebkitLineClamp?: number;
+        overflow?: string;
+        textOverflow?: string;
+      };
+      cardContainer?: {
+        backgroundColor?: string;
+        maxWidth?: number;
+        borderWidth?: number; 
+        maxHeight?: number;
+      };
+      cardButtonContainer?: {
+        backgroundColor?: string;
+        maxWidth?: number;
+        borderWidth?: number; 
+        maxHeight?: number;
+        "&:hover": {
+          transform?: string;
+      }
+      };
+      cardContent?:{
+        paddingBottom?: number;
+        maxHeight?: number;
+      };
+      cardButtonContent?:{
+        paddingBottom?: number; 
+        paddingTop?: number;
+      };
+      cardMedia?: {
+        height?: number;
+        marginBottom?: number;
+      };
+      cardTitle?: {
+        wordWrap?: string;
+        color?: string;
+      };
+      }
+    }
 
 const theme = createTheme({
   customStyles: {
+    button: {
+      backgroundColor: themePalette.whiteBg,
+      borderColor: themePalette.button,
+      color: themePalette.button,
+      fontSize: "16px",
+      lineHeight: 1.6,
+      fontWeight: 500,
+      letterSpacing: 0.4,
+      textTransform: "uppercase",
+      padding: "8px 16px",
+      borderRadius: 2,
+      border: 1,
+    },
     linkActive: {
       borderBottom: "solid",
       color: themePalette.title,
@@ -190,19 +283,45 @@ const theme = createTheme({
       textDecoration: "none",
       color: themePalette.title,
     },
-    button: {
-      backgroundColor: themePalette.whiteBg,
-      borderColor: themePalette.button,
-      color: themePalette.button,
-      fontSize: "16px",
-      lineHeight: 1.6,
-      fontWeight: 500,
-      letterSpacing: 0.4,
-      textTransform: "uppercase",
-      padding: "8px 16px",
-      borderRadius: 2,
-      border: 1,
+    cardBody: {
+      color: themePalette.descriptionCard,
+      wordWrap: 'break-word',
+      display: '-webkit-box',
+      WebkitBoxOrient: 'vertical',
+      overflow: 'hidden',
+      textOverflow: 'ellipsis'
     },
+    cardContainer: {
+      maxHeight: 502,
+      maxWidth: 368,
+      borderWidth: 2,
+      backgroundColor:themePalette.whiteBg
+    },
+    cardButtonContainer: {
+      backgroundColor: themePalette.whiteBg,
+      maxWidth: 316, 
+      borderWidth: 2, 
+      maxHeight: 256, 
+      "&:hover": {
+       transform: "scale(1.1)"
+      }
+    },
+    cardContent:{
+      paddingBottom: 10.63,
+      maxHeight: 250
+    },
+    cardButtonContent:{
+      paddingBottom: 1, 
+      paddingTop: 2
+    },
+    cardMedia: {
+      height: 152,
+      marginBottom:5.5
+    },
+    cardTitle:{
+      color: themePalette.title,
+      wordWrap: "break-word"
+    }
   },
   palette: {
     statusSelect: {
