@@ -4,8 +4,8 @@ import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Container from "@mui/material/Container";
 import { theme } from "../config/theme";
-import { MobileMenu } from "./MobileMenu";
-import { WebMenu } from "./WebMenu";
+import { MobileMenu } from "./MobileNavBar";
+import { WebMenu } from "./WebNavBar";
 
 
 interface NavBarProps {
