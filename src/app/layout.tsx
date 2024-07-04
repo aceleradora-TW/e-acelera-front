@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import ResponsiveAppBar from "@/components/NavBar";
 
+const menuItems = ['Nivelamento', 'Autoestudo'] 
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,7 +20,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <ResponsiveAppBar list={['Nivelamento', 'Autoestudo']}/>
+        <ResponsiveAppBar list={menuItems}/>
         {children}</body>
     </html>
   );
