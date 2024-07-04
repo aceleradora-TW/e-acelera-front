@@ -6,7 +6,6 @@ import Stack from "@mui/material/Stack";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import { usePathname, useRouter } from "next/navigation";
 
-
 export default function BreadCrumb() {
   const pathname = usePathname()
   const breadcrumbs = pathname.split("/");

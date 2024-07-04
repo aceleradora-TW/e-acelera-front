@@ -1,4 +1,4 @@
-import BreadCrumb from "@/components/BreadCrumber";
+import BreadCrumb from "@/components/BreadCrumb";
 
 export default function Page (){
     return(
