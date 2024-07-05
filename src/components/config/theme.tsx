@@ -58,46 +58,82 @@ declare module "@mui/material/styles" {
         borderRadius: number;
         border: number;
       };
+      linkActive: {
+        borderBottom: string;
+        color: string;
+        borderBottomWidth: string;
+        borderBottomColor: string;
+        my: number;
+        display: string;
+        textTransform: string;
+        fontSize: string;
+        lineHeight: number;
+        fontWeight: number;
+        letterSpacing: number;
+        margin: string;
+        borderRadius: string;
+      };
+      link: {
+        color: string;
+        my: number;
+        display: string;
+        textTransform: string;
+        fontSize: string;
+        lineHeight: number;
+        fontWeight: number;
+        letterSpacing: number;
+        margin: string;
+        borderRadius: string;
+      };
+      logoType: {
+        fontSize: string;
+        mr: number;
+        fontWeight: number;
+        letterSpacing: string;
+        lineHeight: number;
+        textDecoration: string;
+        color: string;
+      };
       cardBody: {
-        color: string,
-        wordWrap: string,
-        display: string,
-        WebkitBoxOrient: string,
-        WebkitLineClamp: number,
-        overflow: string,
-        textOverflow: string
+        color: string;
+        wordWrap: string;
+        display: string;
+        WebkitBoxOrient: string;
+        WebkitLineClamp: number;
+        overflow: string;
+        textOverflow: string;
       };
       cardContainer: {
-        backgroundColor: string,
-        maxWidth: number, 
-        borderWidth: number, 
-        maxHeight: number
-      },
+        backgroundColor: string;
+        maxWidth: number;
+        borderWidth: number;
+        maxHeight: number;
+      };
       cardButtonContainer: {
-        backgroundColor: string,
-        maxWidth: number, 
-        borderWidth: number, 
-        maxHeight: number,
+        backgroundColor: string;
+        maxWidth: number;
+        borderWidth: number;
+        maxHeight: number;
         "&:hover": {
-          transform: string
+          transform: string;
       }
-      },
+      };
       cardContent: {
-        paddingBottom: number, 
-        maxHeight: number
-      },
+        paddingBottom: number; 
+        maxHeight: number;
+      };
       cardButtonContent:{
-        paddingBottom: number, 
-        paddingTop: number
+        paddingBottom: number;
+        paddingTop: number;
       };
       cardMedia: {
-        height: number,
-        marginBottom: number
-      },
+        height: number;
+        marginBottom: number;
+      };
       cardTitle: {
-        wordWrap: string,
-        color: string
-      },
+        wordWrap: string;
+        color: string;
+      };
     };
   }
 
@@ -116,47 +152,83 @@ declare module "@mui/material/styles" {
         borderRadius?: number;
         border?: number;
       };
+      linkActive: {
+        borderBottom?: string;
+        color?: string;
+        borderBottomWidth?: string;
+        borderBottomColor?: string;
+        my?: number;
+        display?: string;
+        textTransform?: string;
+        fontSize?: string;
+        lineHeight?: number;
+        fontWeight?: number;
+        letterSpacing?: number;
+        margin?: string;
+        borderRadius?: string;
+      };
+      link: {
+        color?: string;
+        my?: number;
+        display?: string;
+        textTransform?: string;
+        fontSize?: string;
+        lineHeight?: number;
+        fontWeight?: number;
+        letterSpacing?: number;
+        margin?: string;
+        borderRadius?: string;
+      };
+      logoType: {
+        fontSize?: string;
+        mr?: number;
+        fontWeight?: number;
+        letterSpacing?: string;
+        lineHeight?: number;
+        textDecoration?: string;
+        color?: string;
+      };
       cardBody?: {
-        color?: string,
-        wordWrap?: string,
-        display?: string,
-        WebkitBoxOrient?: string,
-        WebkitLineClamp?: number,
-        overflow?: string,
-        textOverflow?: string
+        color?: string;
+        wordWrap?: string;
+        display?: string;
+        WebkitBoxOrient?: string;
+        WebkitLineClamp?: number;
+        overflow?: string;
+        textOverflow?: string;
       };
       cardContainer?: {
-        backgroundColor?: string,
-        maxWidth?: number, 
-        borderWidth?: number, 
-        maxHeight?: number
+        backgroundColor?: string;
+        maxWidth?: number;
+        borderWidth?: number; 
+        maxHeight?: number;
       };
       cardButtonContainer?: {
-        backgroundColor?: string,
-        maxWidth?: number, 
-        borderWidth?: number, 
-        maxHeight?: number,
+        backgroundColor?: string;
+        maxWidth?: number;
+        borderWidth?: number; 
+        maxHeight?: number;
         "&:hover": {
-          transform?: string
+          transform?: string;
       }
       };
       cardContent?:{
-        paddingBottom?: number, 
-        maxHeight?: number
+        paddingBottom?: number;
+        maxHeight?: number;
       };
       cardButtonContent?:{
-        paddingBottom?: number, 
-        paddingTop?: number
+        paddingBottom?: number; 
+        paddingTop?: number;
       };
       cardMedia?: {
-        height?: number,
-        marginBottom?: number
+        height?: number;
+        marginBottom?: number;
       };
       cardTitle?: {
-        wordWrap?: string,
-        color?: string
-      },
-      }
+        wordWrap?: string;
+        color?: string;
+      };
+      };
     }
   }
 
@@ -175,13 +247,50 @@ const theme = createTheme({
       borderRadius: 2,
       border: 1,
     },
+    linkActive: {
+      borderBottom: "solid",
+      color: themePalette.title,
+      borderBottomWidth: "3px",
+      borderBottomColor: themePalette.title,
+      my: 2,
+      display: "block",
+      textTransform: "none",
+      fontSize: "18px",
+      lineHeight: 1.7,
+      fontWeight: 400,
+      letterSpacing: 0.4,
+      margin: "0 0.5rem",
+      borderRadius: "0",
+    },
+    link: {
+      color: themePalette.descriptionCard,
+      my: 2,
+      display: "block",
+      textTransform: "none",
+      fontSize: "18px",
+      lineHeight: 1.7,
+      fontWeight: 400,
+      letterSpacing: 0.4,
+      margin: "0 0.5rem",
+      borderRadius: "0",
+    },
+    logoType: {
+      fontSize: "19.2px",
+      mr: 2,
+      fontWeight: 700,
+      letterSpacing: "0.15px",
+      lineHeight: 1.6,
+      textDecoration: "none",
+      color: themePalette.title,
+    },
     cardBody: {
       color: themePalette.descriptionCard,
       wordWrap: 'break-word',
       display: '-webkit-box',
       WebkitBoxOrient: 'vertical',
+      WebkitLineClamp: 1,
       overflow: 'hidden',
-      textOverflow: 'ellipsis'
+      textOverflow: 'ellipsis',
     },
     cardContainer: {
       maxHeight: 502,
@@ -235,7 +344,6 @@ const theme = createTheme({
       main: themePalette.mainBg,
       light: themePalette.whiteBg,
     },
-
   },
   typography: {
     h1: {
@@ -251,14 +359,6 @@ const theme = createTheme({
       fontWeight: 500,
       letterSpacing: 0.15,
     },
-
-    subtitle1: {
-      fontSize: "18px",
-      lineHeight: 1.7,
-      fontWeight: 400,
-      letterSpacing: 0.4,
-    },
-
     body1: {
       fontSize: "16px",
       lineHeight: 1.5,
