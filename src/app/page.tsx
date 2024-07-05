@@ -7,13 +7,13 @@ import { Box, Card, CardActionArea, CardContent, CssBaseline, Toolbar, Typograph
 import { ThemeConfig } from '@/components/config/theme'
 import { theme } from '@/components/config/theme'
 
-const drawerWidth = 0
+const drawerWidth = 0;
 
 export default function Home() {
+
  
   return (
     <main>
          
     </main>
-  )
-}
+  )}
