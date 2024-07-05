@@ -134,6 +134,12 @@ declare module "@mui/material/styles" {
         wordWrap: string;
         color: string;
       };
+      title: {
+        textAlign: string,
+        color: string,
+        margin: string
+
+      };
     };
   }
 
@@ -227,6 +233,12 @@ declare module "@mui/material/styles" {
       cardTitle?: {
         wordWrap?: string;
         color?: string;
+      };
+      title?: {
+        textAlign?: string,
+        color?: string,
+        margin?: string
+
       };
       };
     }
@@ -322,6 +334,12 @@ const theme = createTheme({
     cardTitle:{
       color: themePalette.title,
       wordWrap: "break-word"
+    },
+    title: {
+      textAlign: "left",
+      color: themePalette.title,
+      margin: "20px 0"
+
     }
   },
   palette: {
