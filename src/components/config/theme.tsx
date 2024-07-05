@@ -188,7 +188,6 @@ declare module "@mui/material/styles" {
         textDecoration?: string;
         color?: string;
       };
-    };
       cardBody?: {
         color?: string;
         wordWrap?: string;
@@ -229,8 +228,9 @@ declare module "@mui/material/styles" {
         wordWrap?: string;
         color?: string;
       };
-      }
+      };
     }
+  }
 
 const theme = createTheme({
   customStyles: {
@@ -288,8 +288,9 @@ const theme = createTheme({
       wordWrap: 'break-word',
       display: '-webkit-box',
       WebkitBoxOrient: 'vertical',
+      WebkitLineClamp: 1,
       overflow: 'hidden',
-      textOverflow: 'ellipsis'
+      textOverflow: 'ellipsis',
     },
     cardContainer: {
       maxHeight: 502,
