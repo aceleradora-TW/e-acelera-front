@@ -382,6 +382,7 @@ const theme = createTheme({
       lineHeight: 1.5,
       fontWeight: 400,
       letterSpacing: 0.15,
+      textDecoration: "none"
     },
     caption: {
       fontSize: "22px",

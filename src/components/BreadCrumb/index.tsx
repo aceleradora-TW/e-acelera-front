@@ -1,38 +1,76 @@
 'use client'
 import * as React from "react";
 import Breadcrumbs from "@mui/material/Breadcrumbs";
-import Link from "next/link";
+import Link from "@mui/material/Link";
 import Stack from "@mui/material/Stack";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
+import { ThemeConfig, theme } from "../config/theme";
+import { Typography } from "@mui/material";
 
-export default function BreadCrumb() {
-  const pathname = usePathname()
-  const breadcrumbs = pathname.split("/");
-  let newRoute = "";
-  const pathConcat = (path: string) => {
-    if (path !== "") {
-      newRoute += `/${path}`;
+export const BreadCrumb: React.FC = () => {
+  const pathname: string = usePathname();
+  const pathnames: string[] = pathname.split('/').filter((x) => x);
+  const [statusCode, setStatusCode] = React.useState<number>()
+
+  React.useEffect(() =>{
+    const fetchData = async () => {
+      try {
+        const data = await fetch(`${pathname}`, {
+          method: "GET"
+        })
+        setStatusCode(data.status)
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    fetchData()
+  }, [])
+
+  const handleBreadcrumbClick = (href: string, event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+    if (href === pathname) {
+      event.preventDefault()
     }
   }
+
   return (
+    <ThemeConfig>
     <Stack spacing={2}>
-      <Breadcrumbs
-        separator={<NavigateNextIcon fontSize="small" />}
+      {statusCode === 200 && (
+        <Breadcrumbs
+        separator={<NavigateNextIcon fontSize="small" sx={{color: theme.palette.textColor?.main}}/>}
         aria-label="breadcrumb"
       >
-        {breadcrumbs.map((path: string) => (
-          <>
-            {pathConcat(path)}
+        
+        {pathnames.length !== 0 && (
+          <Link color="inherit" href="/">
+            <Typography variant="body1" sx={{color: theme.palette.textColor?.main}}>
+              Home
+            </Typography>
+          </Link>
+        )
+        }
+        {pathnames.map((path: string, index: number) => {
+          const routeTo: string = `/${pathnames.slice(0, index + 1).join('/')}`;
+          const isLast: boolean = index === pathnames.length - 1;
+          return (
+            
             <Link
+              key={path}
               color="inherit"
-              href={newRoute==''? '/':newRoute}
+              href={routeTo}
+              aria-current={isLast ? 'page' : undefined}
+              onClick={(e) => handleBreadcrumbClick(routeTo, e)}
             >
-              {path == "" ? "Home" : path}
+              <Typography variant="body1" sx={{color: theme.palette.textColor?.main}}>
+                {path}
+              </Typography>
             </Link>
-          </>
-        ))}
+          );
+        })}
       </Breadcrumbs>
+      )}
     </Stack>
+    </ThemeConfig>
   );
 }
