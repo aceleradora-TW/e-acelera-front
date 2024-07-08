@@ -6,7 +6,6 @@ import Stack from "@mui/material/Stack";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import { usePathname } from "next/navigation";
 import { ThemeConfig, theme } from "../config/theme";
-import { Typography } from "@mui/material";
 
 export const BreadCrumb: React.FC = () => {
   const pathname: string = usePathname();
@@ -39,14 +38,12 @@ export const BreadCrumb: React.FC = () => {
       {statusCode === 200 && (
         <Breadcrumbs
         separator={<NavigateNextIcon fontSize="small" sx={{color: theme.palette.textColor?.main}}/>}
-        aria-label="breadcrumb"
+        aria-label="trilha de navegação"
       >
         
         {pathnames.length !== 0 && (
-          <Link color="inherit" href="/">
-            <Typography variant="body1" sx={{color: theme.palette.textColor?.main}}>
+          <Link  href="/" variant="body1" sx={theme.customStyles.breadCrumb}>
               Home
-            </Typography>
           </Link>
         )
         }
@@ -56,15 +53,14 @@ export const BreadCrumb: React.FC = () => {
           return (
             
             <Link
+              variant="body1"
+              sx={theme.customStyles.breadCrumb}
               key={path}
-              color="inherit"
               href={routeTo}
               aria-current={isLast ? 'page' : undefined}
               onClick={(e) => handleBreadcrumbClick(routeTo, e)}
             >
-              <Typography variant="body1" sx={{color: theme.palette.textColor?.main}}>
                 {path}
-              </Typography>
             </Link>
           );
         })}

@@ -138,7 +138,10 @@ declare module "@mui/material/styles" {
         textAlign: string,
         color: string,
         margin: string
-
+      };
+      breadCrumb: {
+        textDecoration: string;
+        color: string;
       };
     };
   }
@@ -238,7 +241,10 @@ declare module "@mui/material/styles" {
         textAlign?: string,
         color?: string,
         margin?: string
-
+      };
+      breadCrumb?: {
+        textDecoration?: string;
+        color?: string;
       };
       };
     }
@@ -339,8 +345,11 @@ const theme = createTheme({
       textAlign: "left",
       color: themePalette.title,
       margin: "20px 0"
-
-    }
+    },
+    breadCrumb: {
+      textDecoration: "none",
+      color: themePalette.title,
+    },
   },
   palette: {
     statusSelect: {
@@ -382,7 +391,6 @@ const theme = createTheme({
       lineHeight: 1.5,
       fontWeight: 400,
       letterSpacing: 0.15,
-      textDecoration: "none"
     },
     caption: {
       fontSize: "22px",
