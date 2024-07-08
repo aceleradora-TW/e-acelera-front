@@ -58,7 +58,7 @@ declare module "@mui/material/styles" {
         borderRadius: number;
         border: number;
       };
-      cardDescription: {
+      description: {
         display: string;
         flexDirection: string;
         justifyContent: string;
@@ -84,7 +84,7 @@ declare module "@mui/material/styles" {
         borderRadius?: number;
         border?: number;
       };
-      cardDescription?:{
+      description?:{
         display?: string;
         flexDirection?: string;
         justifyContent?: string;
@@ -111,7 +111,7 @@ const theme = createTheme({
       borderRadius: 2,
       border: 1,
     },
-    cardDescription:{
+    description:{
       display: "flex",
       flexDirection: "row",
       justifyContent: "space-between",

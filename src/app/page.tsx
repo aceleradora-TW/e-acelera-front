@@ -10,7 +10,7 @@ import StatusSelect from "@/components/StatusSelect"
 import { ClickButton } from "@/components/ClickButton"
 import { useRouter } from "next/navigation"
 import { theme } from "@/components/config/theme";
-import CardDescription from "@/components/CardDescription/index"
+import Description from "@/components/Description/index"
 
 const drawerWidth = 0
 

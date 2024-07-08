@@ -1,9 +1,9 @@
 import React from "react";
 import { Divider, Box, Typography} from "@mui/material";
-import { theme } from "../config/theme";
-import { ThemeConfig } from "../config/theme";
+import { theme } from "@/components/config/theme";
+import { ThemeConfig } from "@/components/config/theme";
 
-function CardDescription() {
+function ThemeDescription() {
   let text: string = "vimersão profunda em uma linguagem de programação que não ap herda a familiaridade do JavaScript, mas também traz consigo um conjunto robusto de recursos projetados para impulsionar o  desenvolvimento de software rumo a novos patamares de segurança e escalabilidade. Bem-vindo ao emocionante universo do TypeScript! Prepare-se para uma  imersão profunda em uma linguagem de programação que não apenas        herda a familiaridade do JavaScript, mas também trazvimersão profunda em uma linguagem de programação que não ap herda a familiaridade do JavaScript, mas também traz consigo um conjunto robusto de recursos projetados para impulsionar o  desenvolvimento de software rumo a novos patamares de segurança e escalabilidade. Bem-vindo ao emocionante universo do TypeScript! Prepare-se para uma  imersão profunda em uma linguagem de programação que não apenas        herda a familiaridade do JavaScript, mas também traz vimersão profunda em uma linguagem de programação que não ap herda a familiaridade do JavaScript, mas também traz consigo um conjunto robusto de recursos projetados para impulsionar o  desenvolvimento de software rumo a novos patamares de segurança e escalabilidade. Bem-vindo ao emocionante universo do TypeScript! Prepare-se para uma  imersão profunda em uma linguagem de programação que não apenas        herda a familiaridade do JavaScript, mas também traz  consigo u    conjunto robusto de recursos projetados para impulsionar desenvolvimento de software rumo a novos patamares de segurança e escalabilidade.v    "
   let descriptionSize: number = 0
   for(let i:number=0; i< text.length; i++){
@@ -17,7 +17,7 @@ if (descriptionSize >= 1200) {
     <ThemeConfig>
       <Box
         sx={
-          theme.customStyles.cardDescription
+          theme.customStyles.description
         }
       >
         <Box sx={{ width: "45%" }}>
@@ -44,7 +44,7 @@ if (descriptionSize >= 1200) {
   <ThemeConfig>
     <Box
         sx={
-          theme.customStyles.cardDescription
+          theme.customStyles.description
         }
       >
         <Typography variant="body1">
@@ -57,4 +57,4 @@ if (descriptionSize >= 1200) {
 }
 
 
-export default CardDescription;
+export default ThemeDescription;
