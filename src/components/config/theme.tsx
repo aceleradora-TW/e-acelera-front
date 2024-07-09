@@ -140,6 +140,14 @@ declare module "@mui/material/styles" {
         margin: string
 
       };
+      cardDescription: {
+        display: string;
+        flexDirection: string;
+        justifyContent: string;
+        padding: number;
+        boxShadow: string;
+        borderRadius: string;
+      };
     };
   }
 
@@ -239,6 +247,14 @@ declare module "@mui/material/styles" {
         color?: string,
         margin?: string
 
+      };
+      cardDescription?:{
+        display?: string;
+        flexDirection?: string;
+        justifyContent?: string;
+        padding?: number;
+        boxShadow?: string;
+        borderRadius?: string;
       };
       };
     }
@@ -340,7 +356,15 @@ const theme = createTheme({
       color: themePalette.title,
       margin: "20px 0"
 
-    }
+    },
+    cardDescription:{
+      display: "flex",
+      flexDirection: "row",
+      justifyContent: "space-between",
+      padding: 2,
+      boxShadow: "0em 0em 0.4em rgb(44 44 44 / 40% );",
+      borderRadius: "6px",
+    },
   },
   palette: {
     statusSelect: {
@@ -389,6 +413,7 @@ const theme = createTheme({
       fontWeight: 500,
       letterSpacing: 0.15,
     },
+    
   },
 });
 
