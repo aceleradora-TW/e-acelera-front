@@ -10,7 +10,7 @@ import StatusSelect from "@/components/StatusSelect"
 import { ClickButton } from "@/components/ClickButton"
 import { useRouter } from "next/navigation"
 import { theme } from "@/components/config/theme";
-import Description from "@/components/Description/index"
+import ThemeDescription from "@/components/Description/ThemeDescription"
 
 const drawerWidth = 0
 
@@ -170,7 +170,7 @@ export default function Home() {
             <ClickButton title="Próximo exercício" click={clickTest} />
             <ClickButton title="Entrar" click={clickTest} />
             <StatusSelect />
-          <CardDescription  />
+          <ThemeDescription  />
           </Box>
         </Box>
       </ThemeConfig>

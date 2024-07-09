@@ -2,8 +2,6 @@
 import * as React from "react";
 import { theme } from "../config/theme";
 import ThemeDescription from "./ThemeDescription";
-import { Description } from "@mui/icons-material";
-
 
 interface DescriptionProps {
   list: string[];
@@ -12,7 +10,7 @@ interface DescriptionProps {
 export const ResponsiveDescription: React.FC<DescriptionProps> = ({ list }) => {
 
   return (
-    <Description></Description>
+    <ThemeDescription></ThemeDescription>
     // <AppBar
     //   position="fixed"
     //   sx={{ backgroundColor: theme.palette.bgColor?.light }}
