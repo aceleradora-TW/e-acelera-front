@@ -35,7 +35,7 @@ export const getServerSideProps = (async () => {
     const res = await fetch("https://stackby.com/api/betav1/rowlist/stqB2IjOCulBJkhrZB/Themes", {
         method: "GET",
         headers: {
-            "x-api-key": 'jOELi8SJTNSw0qVy',
+            "x-api-key": '',
             "Content-Type": "application/json"
         }
     });
@@ -56,11 +56,10 @@ export const SSRpage = ({
 }
 
 // export const getServerSideProps: GetServerSideProps = async () => {
-//     const apiKey = process.env.STACKBY_SECRET_KEY || "jOELi8SJTNSw0qVy";
 //     const res = await fetch("https://stackby.com/api/betav1/rowlist/stqB2IjOCulBJkhrZB/Themes", {
 //         method: "GET",
 //         headers: {
-//             "x-api-key": 'jOELi8SJTNSw0qVy',
+//             "x-api-key": '',
 //             "Content-Type": "application/json"
 //         }
 //     });
