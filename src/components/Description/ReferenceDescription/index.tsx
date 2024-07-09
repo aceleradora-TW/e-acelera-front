@@ -3,7 +3,6 @@ import React from "react";
 import { Box, Typography, Link } from "@mui/material";
 import { theme } from "@/components/config/theme";
 import { ThemeConfig } from "@/components/config/theme";
-import { FilterTiltShiftSharp } from "@mui/icons-material";
 
 interface ReferenceDescriptionProps {
     referencias:{
