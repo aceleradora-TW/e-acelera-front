@@ -11,6 +11,7 @@ import { ClickButton } from "@/components/ClickButton"
 import { useRouter } from "next/navigation"
 import { theme } from "@/components/config/theme";
 import ThemeDescription from "@/components/Description/ThemeDescription"
+import { ReferenceDescription } from "@/components/Description/ReferenceDescription"
 
 const drawerWidth = 0
 
@@ -171,6 +172,7 @@ export default function Home() {
             <ClickButton title="Entrar" click={clickTest} />
             <StatusSelect />
           <ThemeDescription  />
+          <ReferenceDescription titles={["TypeScript", "React", "Next.js"]} links={["https://www.figma.com/design/iHXQ4VOdO3yojF4Gk4mizL/E-acelera-prot%C3%B3tipo?node-id=407-1492", "https://github.com/orgs/aceleradora-TW/projects/10/views/1", "https://codesandbox.io/dashboard"]}/>
           </Box>
         </Box>
       </ThemeConfig>
