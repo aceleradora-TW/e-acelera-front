@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import ResponsiveAppBar from "@/components/NavBar";
+
+const menuItems = ['Nivelamento', 'Autoestudo'] 
 
 const inter = Inter({ subsets: ["latin"] });
 
