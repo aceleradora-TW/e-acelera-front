@@ -4,7 +4,7 @@ export interface ApiResponse {
 
 export interface DataItem {
     id: string;
-    field: ThemeField | TopicField | VideoField;
+    field: ThemeField | TopicField | VideoField | ExercisesField;
 }
 
 export interface ThemeField {
@@ -46,7 +46,7 @@ export interface TopicField {
     Description: string;
     Video: string;
     References: string | null;
-    Theme: { foreignRowDisplayName: string; foreignRowId: string }[];
+    Theme: string;
     Exercises: string;
     Sequence: string;
   };
