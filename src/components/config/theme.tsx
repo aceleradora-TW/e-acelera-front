@@ -173,6 +173,7 @@ declare module "@mui/material/styles" {
         padding?: number;
         boxShadow?: string;
         borderRadius?: string;
+        margin?: number;
       };
       linkActive: {
         borderBottom?: string;
@@ -282,6 +283,7 @@ const theme = createTheme({
       padding: 2,
       boxShadow: "0em 0em 0.4em rgb(44 44 44 / 40% );",
       borderRadius: "6px",
+      margin: 5,
     },
     linkActive: {
       borderBottom: "solid",
