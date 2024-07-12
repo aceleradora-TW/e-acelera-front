@@ -24,7 +24,6 @@ export default function RootLayout({
       <body className={inter.className}>
       <ResponsiveAppBar list={menuItems}/>
       <BreadCrumb/>{children}</body>
-        {children}</body>
     </html>
   );
 }
