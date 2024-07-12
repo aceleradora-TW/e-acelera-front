@@ -1,35 +1,11 @@
 export interface ApiResponse {
     data: DataItem[];
 }
-
 export interface DataItem {
     id: string;
-    field: ThemeField | TopicField | VideoField | ExercisesField;
+    field: CommonField;
 }
-
-export interface ThemeField {
-    rowId: string;
-    sequence: number;
-    isConfigure: number;
-    favourite: number;
-    totalItems: number | null;
-    completedItems: number | null;
-    dueDateTimestamp: string | null;
-    checklistId: string | null;
-    remainderId: string | null;
-    updatedAt: string;
-    createdAt: string;
-    Title: string;
-    CardDescription: string | null;
-    Description: string | null;
-    Image: Image[] | null;
-    Topics: string;
-    Sequence: string | null;
-    Category: string;
-    TopicDescription: string;
-}
-
-export interface TopicField {
+interface CommonField {
     rowId: string;
     sequence: number;
     isConfigure: number;
@@ -41,53 +17,35 @@ export interface TopicField {
     remainderId: string | null;
     updatedAt: string;
     createdAt: string;
-    Title: string;
-    CardDescription: string;
-    Description: string;
-    Video: string;
-    References: string | null;
-    Theme: string;
-    Exercises: string;
-    Sequence: string;
-  };
-
-  export interface VideoField {
-    rowId: string;
-    sequence: number;
-    isConfigure: number;
-    favourite: number;
-    totalItems: number | null;
-    completedItems: number | null;
-    dueDateTimestamp: string | null;
-    checklistId: string | null;
-    remainderId: string | null;
-    updatedAt: string;
-    createdAt: string;
-    Title: string;
-    Description: string | null;
-    Link: string;
-    Topics: string;
-    Sequence: string | null;
+    title: string;
+    description: string | null;
 }
 
-export interface ExercisesField {
-    rowId: string;
-    sequence: number;
-    isConfigure: number;
-    favourite: number;
-    totalItems: number | null;
-    completedItems: number | null;
-    dueDateTimestamp: string | null;
-    checklistId: string | null;
-    remainderId: string | null;
-    updatedAt: string;
-    createdAt: string;
-    Title: string | null;
-    Description: string | null;
-    Image: Image[] | null;
-    Topics: string;
+export interface ThemeField extends CommonField {
+    cardDescription: string | null;
+    image: Image[] | null;
+    topics: string;
+    category: string;
+    topicDescription: string;
 }
 
+export interface TopicField extends CommonField {
+    cardDescription: string;
+    video: string;
+    references: string | null;
+    theme: string;
+    exercises: string;
+};
+
+export interface VideoField extends CommonField {
+    link: string;
+    topics: string;
+}
+
+export interface ExercisesField extends CommonField {
+    image: Image[] | null;
+    topics: string;
+}
 export interface Image {
     filename: string;
     type: string;
