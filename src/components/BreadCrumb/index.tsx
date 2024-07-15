@@ -20,6 +20,12 @@ export const BreadCrumb: React.FC = () => {
           method: "GET"
         })
         setStatusCode(data.status)
+        const dataId = await fetch("/api/stackbyApi/topics?rowIds[]=rw17195834951124516c5", {
+          method: "GET"
+        }) 
+        const dataParci = await dataId.json()
+         console.log(dataParci)
+         
       } catch (error) {
         console.log(error)
       }
@@ -74,3 +80,4 @@ export const BreadCrumb: React.FC = () => {
     </ThemeConfig>
   );
 }
+
