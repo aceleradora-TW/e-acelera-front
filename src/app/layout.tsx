@@ -23,11 +23,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
-        <ThemeProvider theme={theme}>
-          <ResponsiveAppBar list={menuItems}/>{children}
-        </ThemeProvider>
-      </body>
+      <body className={inter.className} >
+        <ResponsiveAppBar list={menuItems}/>
+        <div style={{height:100}}></div>
+        {children}</body>
     </html>
   );
 }
