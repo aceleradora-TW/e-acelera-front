@@ -142,6 +142,7 @@ declare module "@mui/material/styles" {
       breadCrumb: {
         textDecoration: string;
         color: string;
+        marginTop: number;
       };
     };
   }
@@ -245,6 +246,7 @@ declare module "@mui/material/styles" {
       breadCrumb?: {
         textDecoration?: string;
         color?: string;
+        marginTop?: number;
       };
       };
     }
@@ -349,6 +351,7 @@ const theme = createTheme({
     breadCrumb: {
       textDecoration: "none",
       color: themePalette.title,
+      marginTop: 10.1,
     },
   },
   palette: {
