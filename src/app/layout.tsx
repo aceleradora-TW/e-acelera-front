@@ -5,7 +5,7 @@ import ResponsiveAppBar from "@/components/NavBar";
 import { ThemeProvider } from '@mui/material/styles';
 import { theme } from "@/app/config/theme";
 
-const menuItems = ['Nivelamento', 'Autoestudo'] 
+const menuItems = ["Nivelamento", "Autoestudo"];
 
 const inter = Inter({ subsets: ["latin"] });
 
