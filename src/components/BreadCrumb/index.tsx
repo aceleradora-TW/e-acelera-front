@@ -11,6 +11,7 @@ import { Box } from "@mui/material";
 export const BreadCrumb: React.FC = () => {
   const pathname: string = usePathname();
   const pathnames: string[] = pathname.split('/').filter((x) => x);
+  console.log(pathnames)
   const [statusCode, setStatusCode] = React.useState<number>()
 
   React.useEffect(() => {
@@ -20,11 +21,13 @@ export const BreadCrumb: React.FC = () => {
           method: "GET"
         })
         setStatusCode(data.status)
-        const dataId = await fetch("/api/stackbyApi/topics?rowIds[]=rw17195834951124516c5", {
+
+        const dataId = await fetch("/api/stackbyApi/topics", {
           method: "GET"
         }) 
         const dataParci = await dataId.json()
-         console.log(dataParci)
+        const findName = dataParci.data.find((row: any) => row.id == "rw1719237431883f5c222").field.Title
+        console.log(findName)
          
       } catch (error) {
         console.log(error)
