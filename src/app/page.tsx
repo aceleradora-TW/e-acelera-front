@@ -31,12 +31,10 @@ export default function Home() {
   return (
     <>
     <main>
-      <Box  sx={{margin:'0 80px'  }} >
-        <Title text={`Bem vindo ao ${pagina}`}/>
-      
-      <Grid container  spacing={2} sx={{backgroundColor:'red'}}>
-         {renderData &&  renderData.data.map((element: any, index: any) => ( 
-                <Grid item xs={4} key={index} sx={{backgroundColor:'yellow'}}>                  
+      <Grid container  spacing={2} sx={{margin:'0 80px'}}>
+      <Grid item xs={12}> <Title text={`Bem vindo ao ${pagina}`}/> </Grid>
+         {renderData &&  renderData.data.filter((element:any)=>element.field.category === pagina).map((element: any, index: any) => ( 
+                <Grid item xs={4} key={index}>                  
                   <BaseCard 
                   title={element.field.title} 
                   description={element.field.description} 
@@ -46,7 +44,6 @@ export default function Home() {
                 </Grid>
               ))}
       </Grid>
-          </Box>
     </main>
     </>
   )}
