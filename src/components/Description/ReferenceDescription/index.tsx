@@ -5,22 +5,16 @@ import { theme } from "@/components/config/theme";
 import { ThemeConfig } from "@/components/config/theme";
 
 interface ReferenceDescriptionProps {
-  links: string[];
+  title: string;
+  link: string;
 }
 
-export const ReferenceDescription: React.FC<ReferenceDescriptionProps> = ({
-  links
-}) => {
+export const ReferenceDescription: React.FC<ReferenceDescriptionProps> = ({ title, link }) => {
   return (
     <ThemeConfig>
       <Box sx={theme.customStyles.description}>
         <Box>
-          {links.map((links, index) => (
-              <Typography variant="body1" key={index}>
-                {links}          
-                <Link href={links[index]}></Link>
-              </Typography>        
-          ))}
+                <Link href={link}>{title}</Link>        
         </Box>
       </Box>
     </ThemeConfig>
