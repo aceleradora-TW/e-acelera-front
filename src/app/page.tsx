@@ -40,7 +40,7 @@ export default function Home() {
                   <BaseCard 
                   title={element.field.title} 
                   description={element.field.description} 
-                  route={element.id} 
+                  route={`${element.id}-${element.field.title}`} 
                   image={element.field.image ? element.field.image[0].url: ''}
                   />
                 </Grid>

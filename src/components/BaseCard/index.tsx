@@ -32,7 +32,11 @@ export const BaseCard: React.FC<CardProps> = ({title, description, textImage, im
     const router = useRouter()
     const handleClick = (route: string) => {
         router.push(`/${route}`)
+        // const rotaAtual = router.pathname; // Obtém a rota atual completa
+        // const novaRota = `${rotaAtual}/${route}`; // Concatena com o novo segmento
+        // router.push(novaRota)
     }
+    // console.log(route);
 
     return (
         <ThemeProvider theme={theme}>

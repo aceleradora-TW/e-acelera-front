@@ -4,14 +4,27 @@ import React from "react";
 import { ApiResponse } from "@/types/type";
 import { BaseCard } from "@/components/BaseCard";
 import { Title } from "@/components/title";
-import { usePathname } from "next/navigation";
-//teste de commit
 
-export default function Home({ params }: { params: { id: string } }) {
+
+export default function Home({
+  params,
+}: {
+  params: { detailingTheme: string };
+}) {
   const [renderData, setRenderData] = React.useState<ApiResponse>();
-  const pagina = params.id;
-  const pathname = usePathname();
-  console.log(pathname.slice(1));
+  const id = params.detailingTheme;
+
+  function extractID(pathname: string) {
+    const id = pathname.split("-")[0];
+    return id
+  }
+
+  function TopicsSeparator(topics: string){
+    const topic = topics.split(",")
+    console.log(topic)
+    return topic
+  }
+
 
   React.useEffect(() => {
     const fetchData = async () => {
@@ -35,13 +48,23 @@ export default function Home({ params }: { params: { id: string } }) {
   return (
     <>
       <main>
-        <Grid container spacing={2} sx={{ margin: "0 80px" }}>
+        <Grid container spacing={2} sx={{ margin: "80px 80px" }}>
           {renderData &&
             renderData.data
-              .filter((element: any) => element.id === pathname.slice(1))
+              .filter((element: any) => element.id === extractID(id))
               .map((element: any, index: any) => (
                 <>
                   <Title text={element.field.title} />
+                  <Typography>{element.field.description}</Typography>
+
+                  <Title text={"Tópicos"} />
+                  <Grid>{TopicsSeparator(element.field.topics).map((x: any, y:any) =>(<>
+                    <BaseCard
+                    title={x}
+                    description={TopicsSeparator(element.field.topicsDescription)[y]}
+                    route={TopicsSeparator(element.field.topicsInfo)[y]}
+                  />
+                  </>))}</Grid>
                 </>
               ))}
         </Grid>
