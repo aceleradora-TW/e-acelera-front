@@ -5,6 +5,7 @@ import { ApiResponse } from "@/types/type";
 import { BaseCard } from "@/components/BaseCard";
 import { Title } from "@/components/title";
 import { usePathname } from "next/navigation";
+//teste de commit
 
 export default function Home({ params }: { params: { id: string } }) {
   const [renderData, setRenderData] = React.useState<ApiResponse>();
