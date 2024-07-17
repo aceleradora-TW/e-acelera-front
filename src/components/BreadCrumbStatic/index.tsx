@@ -14,6 +14,7 @@ export default function BreadCrumbStatic() {
     return hyphenIndex !== -1 ? crumb.substring(hyphenIndex + 1) : crumb;
   })
   const breadroutes = pathname.split("/").filter((crumb) => crumb); 
+  
 
   console.log(breadcrumbs)
   console.log(breadroutes)
@@ -31,7 +32,7 @@ export default function BreadCrumbStatic() {
           const route = `/${breadroutes.slice(0, index + 1).join("/")}`
           return (
             <Link key={route} href={route} passHref>         
-                {path}
+                {path !== '' ? decodeURIComponent(path): path}
             </Link>
           );
         })}
