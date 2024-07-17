@@ -8,10 +8,11 @@ import { usePathname } from "next/navigation";
 import { ThemeConfig, theme } from "../config/theme";
 import { Box } from "@mui/material";
 
-export const BreadCrumb: React.FC = () => {
+export const BreadCrumb = (props: any) => {
   const pathname: string = usePathname();
   const pathnames: string[] = pathname.split('/').filter((x) => x);
   const [statusCode, setStatusCode] = React.useState<number>()
+  const [ idExsite, setIdExiste ] = React.useState(false)
 
   React.useEffect(() => {
     const fetchData = async () => {
@@ -25,7 +26,7 @@ export const BreadCrumb: React.FC = () => {
           method: "GET"
         }) 
         const dataParci = await dataId.json()
-        const findName = dataParci.data.find((row: any) => row.id == "rw1719237431883f5c222").field.Title
+        const findName = dataParci.data.find((row: any) => row.id == props.id).field.Title
         console.log(findName)
          
       } catch (error) {
@@ -45,13 +46,11 @@ export const BreadCrumb: React.FC = () => {
     <ThemeConfig>
       <Box sx={{marginLeft: 10}}>
       <Stack spacing={2} sx={theme.customStyles.breadCrumb} >
-        {statusCode === 200 && (
-          
+        {statusCode === 200 && (        
           <Breadcrumbs
             separator={<NavigateNextIcon fontSize="small" sx={{ color: theme.palette.textColor?.main}} />}
             aria-label="trilha de navegação"
           >
-
             {pathnames.length !== 0 && (
                 <Link href="/" variant="body1" sx={theme.customStyles.breadCrumb}>
                   Home

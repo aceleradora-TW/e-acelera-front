@@ -1,37 +1,37 @@
 'use client'
-import * as React from "react";
+import { notFound } from "next/navigation";
+import { NextResponse } from "next/server";
+import { useEffect, useState } from "react";
+
 
 export default function Page ({ params }: { params: { id: any } }){
-  const [ idExsite, setIdExiste ] = React.useState(false)
+  const [response, setResponse] = useState<any>()
 
-    React.useEffect(() => {
+      useEffect(()=> {
         const fetchData = async () => {
-          try {
-            
-            const dataId = await fetch("/api/stackbyApi/topics", {
-              method: "GET"
-            }) 
-            const dataParci = await dataId.json()
-            const findName = dataParci.data.find((row: any) => row.id == params.id).field.Title
-            console.log(findName)
-            setIdExiste(findName ? true : false)
-             
-          } catch (error) {
-            console.log(error)
+          const res = await fetch("/api/stackbyApi/topic")
+
+          console.log(res)
+
+          if(!res.ok){
+            return undefined
           }
+
+          return setResponse(await res.json())
         }
         fetchData()
-      }, [])
+      }, [params.id])
 
-      console.log(idExsite)
-    if(idExsite){
+      console.log(response)
+      
+      if(!response){
+        notFound()
+      }
+
       return(
         <>
         
         </>
     )
-  }
-  else{
-    return false
-  }
+  
 }
