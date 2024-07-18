@@ -1,7 +1,7 @@
 import React from "react";
 import { Divider, Box, Typography, useMediaQuery } from "@mui/material";
-import { theme } from "@/components/config/theme";
-import { ThemeConfig } from "@/components/config/theme";
+import { theme } from "@/app/config/theme";
+import { ThemeConfig } from "@/app/config/theme";
 
 interface ThemeDescriptionProps {
   text: string;
@@ -30,7 +30,6 @@ export const ThemeDescription: React.FC<ThemeDescriptionProps> = ({ text }) => {
   const isSmallScreen: boolean = useMediaQuery(theme.breakpoints.down('sm'));
 
   return (
-    <ThemeConfig>
       <Box sx={theme.customStyles.description}>
         {isSmallScreen ? (
           <Typography variant="body1">
@@ -54,6 +53,5 @@ export const ThemeDescription: React.FC<ThemeDescriptionProps> = ({ text }) => {
           </>
         )}
       </Box>
-    </ThemeConfig>
   );
 };
