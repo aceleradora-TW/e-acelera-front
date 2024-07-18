@@ -60,14 +60,10 @@ export default function Home({
                     {TopicsSeparator(element.field.topics).map(
                       (x: any, y: any) => (
                         <>
-                          <Grid item  xl={12} lg={9} md={6} sm={3}>
+                          <Grid item xl={3} lg={4} md={6} sm={12} >
                             <BaseCard
                               title={x}
-                              description={
-                                TopicsSeparator(
-                                  element.field.topicsDescription
-                                )[y]
-                              }
+                              description={TopicsSeparator(element.field.topicsDescription)[y]}
                               route={
                                 TopicsSeparator(element.field.topicsInfo)[y]
                               }
