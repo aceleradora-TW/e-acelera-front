@@ -3,15 +3,19 @@ import { Divider, Box, Typography, useMediaQuery } from "@mui/material";
 import { theme } from "@/components/config/theme";
 import { ThemeConfig } from "@/components/config/theme";
 
-interface ThemedescriptionProps {
+interface ThemeDescriptionProps {
   text: string;
 }
 
-export const ThemeDescription: React.FC<ThemedescriptionProps> = ({ text }) => {
+const boxStyle: object = {
+  width: "49%"
+}
+
+export const ThemeDescription: React.FC<ThemeDescriptionProps> = ({ text }) => {
   const descriptionSize: number = text.length;
   const middleTextPoint: number = Math.floor(descriptionSize / 2);
 
-  let splitPoint = middleTextPoint;
+  let splitPoint: number = middleTextPoint;
   while (splitPoint > 0 && text[splitPoint] !== ' ') {
     splitPoint--;
   }
@@ -23,7 +27,7 @@ export const ThemeDescription: React.FC<ThemedescriptionProps> = ({ text }) => {
   const textBox1: string = text.substring(0, splitPoint);
   const textBox2: string = text.substring(splitPoint).trim();
 
-  const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
+  const isSmallScreen: boolean = useMediaQuery(theme.breakpoints.down('sm'));
 
   return (
     <ThemeConfig>
@@ -34,15 +38,15 @@ export const ThemeDescription: React.FC<ThemedescriptionProps> = ({ text }) => {
           </Typography>
         ) : (
           <>
-            <Box sx={{ width: "49%" }}>
+            <Box sx={ boxStyle }>
               <Typography variant="body1">
                 {textBox1}
               </Typography>
             </Box>
 
-            <Divider orientation="vertical" flexItem color="black" sx={{ margin: "0 0px" }} />
+            <Divider orientation="vertical" flexItem color="black" sx={{ margin: 0 }} />
 
-            <Box sx={{ width: "49%" }}>
+            <Box sx={ boxStyle }>
               <Typography variant="body1">
                 {textBox2}
               </Typography>
