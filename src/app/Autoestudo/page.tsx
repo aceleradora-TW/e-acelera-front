@@ -1,15 +1,17 @@
 'use client'
 import { Grid } from "@mui/material"
 import React from "react"
+import { ApiResponse, DataItem, ThemeField } from "@/types/type"
 import { BaseCard } from "@/components/BaseCard";
 import { Title } from "@/components/title";
 import { Box } from "@mui/material";
 import { CircularProgress } from "@mui/material";
-import { ApiResponse, DataItem, ThemeField } from "@/types/type"
 
-export default function Home() {
+
+
+export default function Autoestudo() {
   const [renderData, setRenderData] = React.useState<ApiResponse>();
-  const pagina = "Nivelamento";
+  const pagina: string = "Autoestudo";
 
   React.useEffect(() => {
     const fetchData = async () => {
@@ -28,13 +30,13 @@ export default function Home() {
   }, []);
 
   if (!renderData) {
-    return <Box sx={{ display: 'flex', justifyContent:'center', alignItems:'center', height:'100%' }}>
-    <CircularProgress />
-  </Box>
+    return <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+      <CircularProgress />
+    </Box>
   }
 
   return (
-    <Grid container mx={{sm: 1, xl:10, lg: 10}} columns={{ xl: 12, lg: 9, md: 6, sm: 3 }} rowSpacing={3}>
+    <Grid container mx={10} columns={{ xl: 12, lg: 9, md: 6, sm: 3 }} rowSpacing={3}>
       <Grid item xl={12} lg={9} md={6} sm={3}>
         <Title text={`Bem vindo ao ${pagina}`} />
       </Grid>
@@ -44,11 +46,11 @@ export default function Home() {
           const field = element.field as ThemeField;
 
           return (
-            <Grid item xl={4} lg={3} md={3} sm={3} key={index}>
+            <Grid item xl={4} lg={3} md={3} sm={3} justifyContent="center" key={index}>
               <BaseCard
                 title={field.title}
                 description={field.cardDescription}
-                route={`${element.id}-${field.title}`}
+                route={`${element.id} - ${field.title}`}
                 image={field.image ? field.image[0].url : ""}
               />
             </Grid>
