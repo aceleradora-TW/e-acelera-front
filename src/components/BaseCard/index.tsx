@@ -33,7 +33,6 @@ export const BaseCard: React.FC<CardProps> = ({title, description, textImage, im
     const handleClick = (route: string) => {
         router.push(`/${route}`)  
     }
-    // console.log(route);
 
     return (
         <Card sx={theme.customStyles.cardContainer}>
