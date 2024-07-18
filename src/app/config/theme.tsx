@@ -366,7 +366,7 @@ const theme = createTheme({
     },
     cardContent:{
       paddingBottom: 10.63,
-      height: 250
+      height: 200
     },
     cardButtonContent:{
       paddingBottom: 1, 
