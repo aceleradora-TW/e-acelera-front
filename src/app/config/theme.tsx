@@ -153,6 +153,11 @@ declare module "@mui/material/styles" {
         color: string;
         marginTop: number;
       };
+      centralizeContent: {
+        display: string,
+        justifyContent: string,
+        alignItems: string
+      }
     };
   }
 
@@ -266,6 +271,11 @@ declare module "@mui/material/styles" {
         color?: string;
         marginTop?: number;
       };
+      centralizeContent?: {
+        display?: string,
+        justifyContent?: string,
+        alignItems?: string
+      }
       };
     }
   }

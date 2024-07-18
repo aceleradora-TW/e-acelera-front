@@ -1,17 +1,16 @@
 'use client'
 import { Grid } from "@mui/material"
 import React from "react"
-import { ApiResponse, DataItem, ThemeField } from "@/types/type"
 import { BaseCard } from "@/components/BaseCard";
 import { Title } from "@/components/title";
 import { Box } from "@mui/material";
 import { CircularProgress } from "@mui/material";
-
-
+import { ApiResponse, DataItem, ThemeField } from "@/types/type"
+import { theme } from "@/components/config/theme";
 
 export default function Autoestudo() {
   const [renderData, setRenderData] = React.useState<ApiResponse>();
-  const pagina: string = "Autoestudo";
+  const pagina = "Autoestudo";
 
   React.useEffect(() => {
     const fetchData = async () => {
@@ -30,32 +29,34 @@ export default function Autoestudo() {
   }, []);
 
   if (!renderData) {
-    return <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+    return <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
       <CircularProgress />
     </Box>
   }
 
   return (
-    <Grid container mx={10} columns={{ xl: 12, lg: 9, md: 6, sm: 3 }} rowSpacing={3}>
-      <Grid item xl={12} lg={9} md={6} sm={3}>
-        <Title text={`Bem vindo ao ${pagina}`} />
-      </Grid>
-      {renderData.data
-        .filter((element: DataItem) => element.field.category === pagina)
-        .map((element: DataItem, index:number) => {
-          const field = element.field as ThemeField;
+    <Box sx={theme.customStyles.centralizeContent}  mx={{xs: 2, sm: 3,md: 6, lg: 8 ,xl: 8  }}>
+      <Grid container columns={{ xl: 12, lg: 9, md: 6, sm: 3 }} rowSpacing={3}>
+        <Grid item xl={12} lg={9} md={6} sm={3} textAlign={{ xs: 'left', sm: 'center' }}>
+          <Title text={`Bem vindo ao ${pagina}`} />
+        </Grid>
+        {renderData.data
+          .filter((element: DataItem) => element.field.category === pagina)
+          .map((element: DataItem, index: number) => {
+            const field = element.field as ThemeField;
 
-          return (
-            <Grid item xl={4} lg={3} md={3} sm={3} justifyContent="center" key={index}>
-              <BaseCard
-                title={field.title}
-                description={field.cardDescription}
-                route={`${element.id} - ${field.title}`}
-                image={field.image ? field.image[0].url : ""}
-              />
-            </Grid>
-          );
-        })}
-    </Grid>
+            return (
+              <Grid  item xl={3} lg={3} md={3} sm={3} key={index}>
+                <BaseCard
+                  title={field.title}
+                  description={field.cardDescription}
+                  route={`${element.id}-${field.title}`}
+                  image={field.image ? field.image[0].url : ""}
+                />
+              </Grid>
+            );
+          })}
+      </Grid>
+    </Box>
   );
 }
