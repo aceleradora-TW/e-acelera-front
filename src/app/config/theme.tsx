@@ -129,7 +129,7 @@ declare module "@mui/material/styles" {
       };
       cardContent: {
         paddingBottom: number; 
-        maxHeight: number;
+        height: number;
       };
       cardButtonContent:{
         paddingBottom: number;
@@ -242,7 +242,7 @@ declare module "@mui/material/styles" {
       };
       cardContent?:{
         paddingBottom?: number;
-        maxHeight?: number;
+        height?: number;
       };
       cardButtonContent?:{
         paddingBottom?: number; 
@@ -356,7 +356,7 @@ const theme = createTheme({
     },
     cardContent:{
       paddingBottom: 10.63,
-      maxHeight: 250
+      height: 250
     },
     cardButtonContent:{
       paddingBottom: 1, 
