@@ -5,7 +5,6 @@ import { ApiResponse } from "@/types/type";
 import { BaseCard } from "@/components/BaseCard";
 import { Title } from "@/components/title";
 
-
 export default function Home({
   params,
 }: {
@@ -16,15 +15,14 @@ export default function Home({
 
   function extractID(pathname: string) {
     const id = pathname.split("-")[0];
-    return id
+    return id;
   }
 
-  function TopicsSeparator(topics: string){
-    const topic = topics.split(",")
-    console.log(topic)
-    return topic
+  function TopicsSeparator(topics: string) {
+    const topic = topics.split(",");
+    console.log(topic);
+    return topic;
   }
-
 
   React.useEffect(() => {
     const fetchData = async () => {
@@ -48,23 +46,37 @@ export default function Home({
   return (
     <>
       <main>
-        <Grid container spacing={2} sx={{ margin: "80px 80px" }}>
+        <Grid container sx={{ margin: "80px 0px 20px 80px" }}>
           {renderData &&
             renderData.data
               .filter((element: any) => element.id === extractID(id))
               .map((element: any, index: any) => (
                 <>
                   <Title text={element.field.title} />
-                  <Typography>{element.field.description}</Typography>
+                  <Typography sx={{maxWidth: "90ch"}}>{element.field.description}</Typography>
 
                   <Title text={"Tópicos"} />
-                  <Grid>{TopicsSeparator(element.field.topics).map((x: any, y:any) =>(<>
-                    <BaseCard
-                    title={x}
-                    description={TopicsSeparator(element.field.topicsDescription)[y]}
-                    route={TopicsSeparator(element.field.topicsInfo)[y]}
-                  />
-                  </>))}</Grid>
+                  <Grid container spacing={3}>
+                    {TopicsSeparator(element.field.topics).map(
+                      (x: any, y: any) => (
+                        <>
+                          <Grid item  xl={12} lg={9} md={6} sm={3}>
+                            <BaseCard
+                              title={x}
+                              description={
+                                TopicsSeparator(
+                                  element.field.topicsDescription
+                                )[y]
+                              }
+                              route={
+                                TopicsSeparator(element.field.topicsInfo)[y]
+                              }
+                            />
+                          </Grid>
+                        </>
+                      )
+                    )}
+                  </Grid>
                 </>
               ))}
         </Grid>

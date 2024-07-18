@@ -31,12 +31,8 @@ const cardActionsStyle = {
 export const BaseCard: React.FC<CardProps> = ({title, description, textImage, image, route}) => {
     const router = useRouter()
     const handleClick = (route: string) => {
-        router.push(`/${route}`)
-        // const rotaAtual = router.pathname; // Obtém a rota atual completa
-        // const novaRota = `${rotaAtual}/${route}`; // Concatena com o novo segmento
-        // router.push(novaRota)
+        router.push(`/${route}`)  
     }
-    // console.log(route);
 
     return (
         <ThemeProvider theme={theme}>
