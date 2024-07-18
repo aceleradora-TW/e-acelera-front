@@ -1,85 +1,82 @@
-'use client'
-import * as React from "react";
-import Breadcrumbs from "@mui/material/Breadcrumbs";
+'use client';
+import { Stack, Breadcrumbs, Box } from '@mui/material';
 import Link from "@mui/material/Link";
-import Stack from "@mui/material/Stack";
-import NavigateNextIcon from "@mui/icons-material/NavigateNext";
-import { usePathname } from "next/navigation";
+import { usePathname } from 'next/navigation';
+import NavigateNextIcon from '@mui/icons-material/NavigateNext';
+import { MouseEvent, useEffect, useState } from 'react';
 import { ThemeConfig, theme } from "../config/theme";
-import { Box } from "@mui/material";
 
 export const BreadCrumb: React.FC = () => {
   const pathname: string = usePathname();
-  const pathnames: string[] = pathname.split('/').filter((x) => x);
-  const [statusCode, setStatusCode] = React.useState<number>()
+  const [isValidPage, setIsValidPage] = useState<boolean>(false);
 
-  React.useEffect(() => {
-    const fetchData = async () => {
+  useEffect(() => {
+    const checkPageStatus = async () => { 
       try {
-        const data = await fetch(`${pathname}`, {
-          method: "GET"
-        })
-        setStatusCode(data.status)
-
-        const dataId = await fetch("/api/stackbyApi/topics", {
-          method: "GET"
-        }) 
-        const dataParci = await dataId.json()
-        const findName = dataParci.data.find((row: any) => row.id == "rw1719237431883f5c222").field.Title
-        console.log(findName)
-         
+        const response: Response = await fetch(pathname, {
+          method: 'GET',
+        });
+        if (response.status === 200) {
+          setIsValidPage(true);
+        } else {
+          setIsValidPage(false);
+        }
       } catch (error) {
-        console.log(error)
+        console.error('Error fetching page status:', error);
+        setIsValidPage(false);
       }
-    }
-    fetchData()
-  }, [])
+    };
 
-  const handleBreadcrumbClick = (href: string, event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+    checkPageStatus();
+  }, [pathname]);
+
+  const breadcrumbs: string[] = pathname
+    .split('/')
+    .filter((crumb) => crumb)
+    .map((crumb) => {
+      const hyphenIndex = crumb.indexOf('-');
+      return hyphenIndex !== -1 ? crumb.substring(hyphenIndex + 1) : crumb;
+    });
+  const breadroutes: string[] = pathname.split('/').filter((crumb) => crumb);
+
+  const handleBreadcrumbClick = (href: string, event: MouseEvent<HTMLAnchorElement, globalThis.MouseEvent>) => {
     if (href === pathname) {
       event.preventDefault()
     }
   }
 
   return (
+    isValidPage && (
     <ThemeConfig>
       <Box sx={{marginLeft: 10}}>
-      <Stack spacing={2} sx={theme.customStyles.breadCrumb} >
-        {statusCode === 200 && (
-          
-          <Breadcrumbs
-            separator={<NavigateNextIcon fontSize="small" sx={{ color: theme.palette.textColor?.main}} />}
-            aria-label="trilha de navegação"
-          >
-
-            {pathnames.length !== 0 && (
+      <Stack spacing={2} sx={theme.customStyles.breadCrumb}>
+        <Breadcrumbs separator={<NavigateNextIcon fontSize="small" sx={{ color: theme.palette.textColor?.main}} />}
+            aria-label="trilha de navegação">
+          {breadroutes.length !== 0 && (
                 <Link href="/" variant="body1" sx={theme.customStyles.breadCrumb}>
                   Home
                 </Link>
             )
             }
-            {pathnames.map((path: string, index: number) => {
-              const routeTo: string = `/${pathnames.slice(0, index + 1).join('/')}`;
-              const isLast: boolean = index === pathnames.length - 1;
-              return (
-                  <Link
-                    variant="body1"
-                    sx={theme.customStyles.breadCrumb}
-                    key={path}
-                    href={routeTo}
-                    aria-current={isLast ? 'page' : undefined}
-                    onClick={(e) => handleBreadcrumbClick(routeTo, e)}
-                  >
-                    {path}
-                  </Link>
-              );
-            })}
-          </Breadcrumbs>
-        )}
+          {breadcrumbs.map((path: string, index: number) => {
+            const route: string = `/${breadroutes.slice(0, index + 1).join('/')}`;
+            const isLast: boolean = index === breadcrumbs.length - 1;
+            return (
+              <Link 
+              variant="body1"
+              sx={theme.customStyles.breadCrumb}
+              key={path} 
+              href={route}
+              aria-current={isLast ? 'page' : undefined}
+              onClick={(e) => handleBreadcrumbClick(route, e)}>
+                {path !== '' ? decodeURIComponent(path): path}
+              </Link>
+            );
+          })}
+        </Breadcrumbs>
       </Stack>
       </Box>
-      
     </ThemeConfig>
-  );
+  )
+  )
 }
-

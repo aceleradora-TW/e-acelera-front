@@ -2,10 +2,6 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import ResponsiveAppBar from "@/components/NavBar";
-import { BreadCrumb } from "@/components/BreadCrumb";
-import { Box, Grid } from "@mui/material";
-import BreadCrumbStatic from "@/components/BreadCrumbStatic";
-
 
 const menuItems = ['Nivelamento', 'Autoestudo'] 
 
@@ -24,10 +20,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        {/* <Grid>
-          <ResponsiveAppBar list={menuItems}/>
-        </Grid> */}
-        <BreadCrumbStatic/>
+        <ResponsiveAppBar list={menuItems}/>
         {children}</body>
     </html>
   );
