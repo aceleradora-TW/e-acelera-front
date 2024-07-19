@@ -22,6 +22,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
+        <ThemeProvider theme={theme}>
+          <ResponsiveAppBar list={menuItems}/>{children}
+        </ThemeProvider>
         <ResponsiveAppBar list={menuItems}/>
         {children}</body>
     </html>

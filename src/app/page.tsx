@@ -6,7 +6,7 @@ import { Title } from "@/components/title";
 import { Box } from "@mui/material";
 import { CircularProgress } from "@mui/material";
 import { ApiResponse, DataItem, ThemeField } from "@/types/type"
-import { theme } from "@/components/config/theme";
+import { theme } from "@/app/config/theme";
 
 export default function Home() {
   const [renderData, setRenderData] = React.useState<ApiResponse>();

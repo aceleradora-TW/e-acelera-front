@@ -371,6 +371,11 @@ const theme = createTheme({
     cardButtonContent:{
       paddingBottom: 1, 
       paddingTop: 2
+    }, 
+    centralizeContent: {
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center'
     },
     cardMedia: {
       height: 152,
