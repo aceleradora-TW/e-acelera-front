@@ -129,7 +129,7 @@ declare module "@mui/material/styles" {
       };
       cardContent: {
         paddingBottom: number; 
-        maxHeight: number;
+        height: number;
       };
       cardButtonContent:{
         paddingBottom: number;
@@ -153,6 +153,11 @@ declare module "@mui/material/styles" {
         color: string;
         marginTop: number;
       };
+      centralizeContent: {
+        display: string,
+        justifyContent: string,
+        alignItems: string
+      }
     };
   }
 
@@ -242,7 +247,7 @@ declare module "@mui/material/styles" {
       };
       cardContent?:{
         paddingBottom?: number;
-        maxHeight?: number;
+        height?: number;
       };
       cardButtonContent?:{
         paddingBottom?: number; 
@@ -266,6 +271,11 @@ declare module "@mui/material/styles" {
         color?: string;
         marginTop?: number;
       };
+      centralizeContent?: {
+        display?: string,
+        justifyContent?: string,
+        alignItems?: string
+      }
       };
     }
   }
@@ -356,11 +366,16 @@ const theme = createTheme({
     },
     cardContent:{
       paddingBottom: 10.63,
-      maxHeight: 250
+      height: 200
     },
     cardButtonContent:{
       paddingBottom: 1, 
       paddingTop: 2
+    }, 
+    centralizeContent: {
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center'
     },
     cardMedia: {
       height: 152,
