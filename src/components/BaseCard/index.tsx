@@ -11,7 +11,7 @@ import { theme } from '../../app/config/theme';
 
 interface CardProps{
     title: string;
-    description: string | null;
+    description: string;
     textImage?: string; 
     image?: string;
     route: string;
