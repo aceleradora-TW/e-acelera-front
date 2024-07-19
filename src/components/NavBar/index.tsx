@@ -3,7 +3,7 @@ import * as React from "react";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Container from "@mui/material/Container";
-import { theme } from "../config/theme";
+import { theme } from "../../app/config/theme";
 import { MobileMenu } from "./MobileNavBar";
 import { WebMenu } from "./WebNavBar";
 

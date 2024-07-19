@@ -5,7 +5,7 @@ import MenuItem from "@mui/material/MenuItem"
 import FormControl from "@mui/material/FormControl"
 import Select from '@mui/material/Select'
 import { SelectChangeEvent } from '@mui/material/Select'
-import { theme } from "@/components/config/theme"
+import { theme } from "@/app/config/theme"
 
 interface StatusSelectProps {
   width?: "30%" | "70%"

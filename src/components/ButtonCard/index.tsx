@@ -5,7 +5,7 @@ import Typography from '@mui/material/Typography';
 import { CardActionArea, CardActions, ThemeProvider } from '@mui/material';
 import StatusSelect from '../StatusSelect';
 import { useRouter } from 'next/navigation';
-import { theme } from '../config/theme';
+import { theme } from '../../app/config/theme';
 
 interface ButtonCardProps {
     title: string;
