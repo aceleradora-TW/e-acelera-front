@@ -4,6 +4,7 @@ import React from "react";
 import { ApiResponse } from "@/types/type";
 import { BaseCard } from "@/components/BaseCard";
 import { Title } from "@/components/title";
+import { CircularProgress } from "@mui/material";
 
 export default function Home({
   params,
@@ -41,20 +42,23 @@ export default function Home({
     fetchData();
   }, []);
 
-  console.log(renderData);
-
+  if (!renderData) {
+    return <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
+      <CircularProgress />
+    </Box>
+  }
   return (
     <>
-      <main>
-        <Grid container sx={{ margin: "80px 0px 20px 80px" }}>
+      <Box sx={{display: "flex", justifyContent: "center", alignItems:"center"}} mx={{xs: 2, sm: 3,md: 6, lg: 8 ,xl: 8 }}>
+        <Grid container>
           {renderData &&
             renderData.data
               .filter((element: any) => element.id === extractID(id))
               .map((element: any, index: any) => (
                 <>
                   <Title text={element.field.title} />
-                  <Typography sx={{maxWidth: "90ch"}}>{element.field.description}</Typography>
-
+                  <Typography>{element.field.description}</Typography>
+                  
                   <Title text={"Tópicos"} />
                   <Grid container spacing={3}>
                     {TopicsSeparator(element.field.topics).map(
@@ -76,7 +80,7 @@ export default function Home({
                 </>
               ))}
         </Grid>
-      </main>
+      </Box>
     </>
   );
 }
