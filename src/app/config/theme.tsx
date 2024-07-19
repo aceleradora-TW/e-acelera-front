@@ -1,3 +1,4 @@
+'use client';
 import {
   CssBaseline,
   PaletteColor,
@@ -57,6 +58,14 @@ declare module "@mui/material/styles" {
         padding: string;
         borderRadius: number;
         border: number;
+      };
+      description: {
+        display: string;
+        flexDirection: string;
+        justifyContent: string;
+        padding: number;
+        boxShadow: string;
+        borderRadius: string;
       };
       linkActive: {
         borderBottom: string;
@@ -162,6 +171,15 @@ declare module "@mui/material/styles" {
         borderRadius?: number;
         border?: number;
       };
+      description?:{
+        display?: string;
+        flexDirection?: string;
+        justifyContent?: string;
+        padding?: number;
+        boxShadow?: string;
+        borderRadius?: string;
+        margin?: number;
+      };
       linkActive: {
         borderBottom?: string;
         color?: string;
@@ -266,6 +284,15 @@ const theme = createTheme({
       padding: "8px 16px",
       borderRadius: 2,
       border: 1,
+    },
+    description:{
+      display: "flex",
+      flexDirection: "row",
+      justifyContent: "space-between",
+      padding: 2,
+      boxShadow: "0em 0em 0.4em rgb(44 44 44 / 40% );",
+      borderRadius: "6px",
+      margin: 5,
     },
     linkActive: {
       borderBottom: "solid",

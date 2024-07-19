@@ -1,5 +1,5 @@
 'use client'
-import { theme } from "@/components/config/theme";
+import { theme } from "@/app/config/theme";
 import { AppBar, Avatar, Box, Button, Container, IconButton, Toolbar, Tooltip, Typography } from "@mui/material";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
