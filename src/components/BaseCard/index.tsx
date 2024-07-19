@@ -7,7 +7,7 @@ import { CardActionArea, CardActions, ThemeProvider } from '@mui/material';
 import { ClickButton } from '../ClickButton';
 import { useRouter } from 'next/navigation';
 import { blue, red } from '@mui/material/colors';
-import { theme } from '../config/theme';
+import { theme } from '../../app/config/theme';
 
 interface CardProps{
     title: string;
