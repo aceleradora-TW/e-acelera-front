@@ -18,12 +18,12 @@ interface CommonField {
     updatedAt: string;
     createdAt: string;
     title: string;
-    description: string | null;
+    description: string;
     category?:string
 }
 
 export interface ThemeField extends CommonField {
-    cardDescription: string | null;
+    cardDescription: string;
     image: Image[] | null;
     topics: string;
     category: string;
