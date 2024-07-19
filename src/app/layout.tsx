@@ -22,11 +22,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-          <ThemeProvider theme={theme}>
-            <ResponsiveAppBar list={menuItems}/>{children}
-              {children}
-          </ThemeProvider>
-        </body>
+        <ThemeProvider theme={theme}>
+          <ResponsiveAppBar list={menuItems}/>
+            {children}
+        </ThemeProvider>
+      </body>
     </html>
   );
 }

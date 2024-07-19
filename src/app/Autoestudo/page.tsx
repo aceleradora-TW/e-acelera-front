@@ -39,7 +39,7 @@ export default function Autoestudo() {
       <Grid container columns={{ xl: 12, lg: 9, md: 6, sm: 3 }} rowSpacing={3}>
         <Grid item xl={12} lg={9} md={6} sm={3} textAlign={{ xs: 'left', sm: 'center' }}>
           <Title text={`Bem vindo ao ${pagina}`} />
-        </Grid>
+        </Grid> 
         {renderData.data
           .filter((element: DataItem) => element.field.category === pagina)
           .map((element: DataItem, index: number) => {
