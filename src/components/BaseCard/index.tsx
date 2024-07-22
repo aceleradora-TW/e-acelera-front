@@ -31,7 +31,7 @@ const cardActionsStyle = {
 export const BaseCard: React.FC<CardProps> = ({title, description, textImage, image, route}) => {
     const router = useRouter()
     const handleClick = (route: string) => {
-        router.push(`/${route}`)
+        router.push(`/${route}`)  
     }
 
     return (

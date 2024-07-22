@@ -302,7 +302,7 @@ const theme = createTheme({
       padding: 2,
       boxShadow: "0em 0em 0.4em rgb(44 44 44 / 40% );",
       borderRadius: "6px",
-      margin: 5,
+      margin: 0,
     },
     linkActive: {
       borderBottom: "solid",
@@ -393,7 +393,7 @@ const theme = createTheme({
     breadCrumb: {
       textDecoration: "none",
       color: themePalette.title,
-      marginTop: 11.75,
+      // marginTop: 11.75,
     },
   },
   palette: {
