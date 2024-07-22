@@ -6,6 +6,7 @@ import { BaseCard } from "@/components/BaseCard";
 import { Title } from "@/components/title";
 import { CircularProgress } from "@mui/material";
 import { ThemeDescription } from "@/components/Description/ThemeDescription";
+import { BreadCrumb } from "@/components/BreadCrumb";
 
 export default function Home({
   params,
@@ -71,6 +72,7 @@ export default function Home({
               .map((element: any, index: any) => (
                 <>
                   <Grid item xl={12} lg={9} md={6} sm={3}>
+                  <BreadCrumb/>
                     <Title text={element.field.title} />
                   </Grid>
                   <Grid item xl={12} lg={9} md={6} sm={3}>
