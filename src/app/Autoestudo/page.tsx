@@ -7,7 +7,7 @@ import { Box } from "@mui/material";
 import { CircularProgress } from "@mui/material";
 import { ApiResponse, DataItem, ThemeField } from "@/types/type"
 import { theme } from "@/app/config/theme";
-import { BreadCrumb } from "@/components/BreadCrumb";
+import { BreadCrumb } from "@/components/BreadCrumb"; 
 
 export default function Autoestudo() {
   const [renderData, setRenderData] = React.useState<ApiResponse>();
