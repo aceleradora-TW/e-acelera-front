@@ -48,7 +48,7 @@ export const BreadCrumb: React.FC = () => {
   return (
     isValidPage && (
     <ThemeConfig>
-      <Box >
+      <Box sx={{marginLeft: 10}}>
       <Stack spacing={2} sx={theme.customStyles.breadCrumb}>
         <Breadcrumbs separator={<NavigateNextIcon fontSize="small" sx={{ color: theme.palette.textColor?.main}} />}
             aria-label="trilha de navegação">
