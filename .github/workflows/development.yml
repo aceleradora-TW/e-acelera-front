@@ -12,6 +12,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
+      - name: Add Reviewers
+        uses: actions/add-pull-request-reviewer@v1
+        with:
+          reviewers: "barbaraanger, daniellemadrid" 
+          
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
