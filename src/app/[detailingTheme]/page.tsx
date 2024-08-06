@@ -1,5 +1,5 @@
 "use client";
-import { Box, CardContent, Grid, Typography } from "@mui/material";
+import { Box, Grid} from "@mui/material";
 import React from "react";
 import { ApiResponse } from "@/types/type";
 import { BaseCard } from "@/components/BaseCard";
@@ -24,7 +24,6 @@ export default function Home({
 
   function TopicsSeparator(topics: string) {
     const topic = topics.split(",");
-    console.log(topic);
     return topic;
   }
 
@@ -36,7 +35,6 @@ export default function Home({
         });
         const parseData: ApiResponse = await response.json();
         setRenderData(parseData);
-        console.log(await parseData);
       } catch (error) {
         console.error("Error fetching data:", error);
       }

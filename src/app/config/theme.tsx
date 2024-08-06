@@ -4,8 +4,7 @@ import {
   PaletteColor,
   PaletteColorOptions,
   ThemeProvider,
-  createTheme,
-  responsiveFontSizes,
+  createTheme
 } from "@mui/material";
 
 import React from "react";
@@ -399,8 +398,7 @@ const theme = createTheme({
     },
     breadCrumb: {
       textDecoration: "none",
-      color: themePalette.title,
-      // marginTop: 11.75,
+      color: themePalette.title
     },
   },
   palette: {
