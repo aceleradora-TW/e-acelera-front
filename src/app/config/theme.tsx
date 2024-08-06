@@ -145,9 +145,9 @@ declare module "@mui/material/styles" {
         color: string;
       };
       title: {
-        textAlign: string,
-        color: string,
-        margin: string
+        textAlign: string;
+        color: string;
+        margin: string;
       };
       breadCrumb: {
         textDecoration: string;
@@ -155,9 +155,11 @@ declare module "@mui/material/styles" {
         marginTop: number;
       };
       centralizeContent: {
-        display: string,
-        justifyContent: string,
-        alignItems: string
+        display: string;
+        justifyContent: string;
+        alignItems: string;
+        maxWidth: string;
+        margin: string;
       }
     };
   }
@@ -273,9 +275,11 @@ declare module "@mui/material/styles" {
         marginTop?: number;
       };
       centralizeContent?: {
-        display?: string,
-        justifyContent?: string,
-        alignItems?: string
+        display?: string;
+        justifyContent?: string;
+        alignItems?: string;
+        maxWidth?: string;
+        margin?: string;
       }
       };
     }
@@ -376,7 +380,9 @@ const theme = createTheme({
     centralizeContent: {
       display: 'flex',
       justifyContent: 'center',
-      alignItems: 'center'
+      alignItems: 'center',
+      maxWidth: '1630px',
+      margin: '0 auto'
     },
     cardMedia: {
       height: 152,
@@ -455,7 +461,7 @@ const theme = createTheme({
         fontSize: "1.6rem",
       },
       [`@media (min-width:1536px)`]: {
-        fontSize: "3.5rem",
+        fontSize: "1.6rem",
       }
     },
     body1: {
