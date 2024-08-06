@@ -4,7 +4,7 @@ import {
   PaletteColor,
   PaletteColorOptions,
   ThemeProvider,
-  createTheme,
+  createTheme
 } from "@mui/material";
 
 import React from "react";
@@ -144,9 +144,9 @@ declare module "@mui/material/styles" {
         color: string;
       };
       title: {
-        textAlign: string,
-        color: string,
-        margin: string
+        textAlign: string;
+        color: string;
+        margin: string;
       };
       breadCrumb: {
         textDecoration: string;
@@ -154,9 +154,11 @@ declare module "@mui/material/styles" {
         marginTop: number;
       };
       centralizeContent: {
-        display: string,
-        justifyContent: string,
-        alignItems: string
+        display: string;
+        justifyContent: string;
+        alignItems: string;
+        maxWidth: string;
+        margin: string;
       }
     };
   }
@@ -272,9 +274,11 @@ declare module "@mui/material/styles" {
         marginTop?: number;
       };
       centralizeContent?: {
-        display?: string,
-        justifyContent?: string,
-        alignItems?: string
+        display?: string;
+        justifyContent?: string;
+        alignItems?: string;
+        maxWidth?: string;
+        margin?: string;
       }
       };
     }
@@ -375,7 +379,9 @@ const theme = createTheme({
     centralizeContent: {
       display: 'flex',
       justifyContent: 'center',
-      alignItems: 'center'
+      alignItems: 'center',
+      maxWidth: '1630px',
+      margin: '0 auto'
     },
     cardMedia: {
       height: 152,
@@ -419,26 +425,53 @@ const theme = createTheme({
   },
   typography: {
     h1: {
-      fontSize: "48px",
-      lineHeight: 1.16,
       fontWeight: 500,
       letterSpacing: 0.15,
+      lineHeight: "normal",
+      [`@media (min-width:0px)`]: {
+        fontSize: "1.5rem",
+      },
+      [`@media (min-width:600px)`]: {
+        fontSize: "2rem",
+      },
+      [`@media (min-width:900px)`]: {
+        fontSize: "2.5rem",
+      },
+      [`@media (min-width:1200px)`]: {
+        fontSize: "3rem",
+      },
+      [`@media (min-width:1536px)`]: {
+        fontSize: "3.5rem",
+      }
+      
     },
 
     h2: {
-      fontSize: "25.6px",
       lineHeight: 1.6,
       fontWeight: 500,
       letterSpacing: 0.15,
+      [`@media (min-width:0px)`]: {
+        fontSize: "1.2rem",
+      },
+      [`@media (min-width:600px)`]: {
+        fontSize: "1.4rem",
+      },
+      [`@media (min-width:1200px)`]: {
+        fontSize: "1.6rem",
+      },
+      [`@media (min-width:1536px)`]: {
+        fontSize: "1.6rem",
+      }
     },
     body1: {
-      fontSize: "16px",
+      fontSize: "1rem",
       lineHeight: 1.5,
       fontWeight: 400,
       letterSpacing: 0.15,
+      
     },
     caption: {
-      fontSize: "22px",
+      fontSize: "1.4rem",
       lineHeight: 1.6,
       fontWeight: 500,
       letterSpacing: 0.15,
