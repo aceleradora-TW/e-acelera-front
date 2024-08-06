@@ -7,7 +7,6 @@ import { Box } from "@mui/material";
 import { CircularProgress } from "@mui/material";
 import { ApiResponse, DataItem, ThemeField } from "@/types/type"
 import { theme } from "@/app/config/theme";
-import { BreadCrumb } from "@/components/BreadCrumb"; 
 
 export default function Autoestudo() {
   const [renderData, setRenderData] = React.useState<ApiResponse>();
@@ -40,7 +39,6 @@ export default function Autoestudo() {
       <Grid container columns={{ xl: 12, lg: 9, md: 6, sm: 3 }} rowSpacing={3}
       mx={{xs: 2, sm: 3,md: 6, lg: 8 ,xl: 8  }}>
         <Grid item xl={12} lg={9} md={6} sm={3} textAlign={{ xs: 'left', sm: 'center' }}>
-          <BreadCrumb/>
           <Title text={`Bem vindo ao ${pagina}`} />
         </Grid> 
         {renderData.data
