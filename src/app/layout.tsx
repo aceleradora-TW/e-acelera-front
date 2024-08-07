@@ -4,6 +4,7 @@ import "./globals.css";
 import ResponsiveAppBar from "@/components/NavBar";
 import { ThemeProvider } from '@mui/material/styles';
 import { theme } from "@/app/config/theme";
+import { Box } from "@mui/material";
 
 const menuItems = ['Nivelamento', 'Autoestudo'] 
 
@@ -23,7 +24,9 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <ThemeProvider theme={theme}>
-          <ResponsiveAppBar list={menuItems}/>
+          <Box sx={{marginBottom:'80px'}}>
+          <ResponsiveAppBar list={menuItems}/>   
+          </Box>
             {children}
         </ThemeProvider>
       </body>
