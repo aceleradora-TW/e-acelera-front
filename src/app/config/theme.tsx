@@ -113,10 +113,13 @@ declare module "@mui/material/styles" {
         textOverflow: string;
       };
       cardContainer: {
+        display: string,
+        flexDirection: string,
+        justifyContent: string,
         backgroundColor: string;
         maxWidth: number;
-        borderWidth: number;
-        maxHeight: number;
+        height: number;
+        borderWidth: number; 
       };
       cardButtonContainer: {
         backgroundColor: string;
@@ -129,7 +132,7 @@ declare module "@mui/material/styles" {
       };
       cardContent: {
         paddingBottom: number; 
-        height: number;
+        height: string;
       };
       cardButtonContent:{
         paddingBottom: number;
@@ -233,10 +236,13 @@ declare module "@mui/material/styles" {
         textOverflow?: string;
       };
       cardContainer?: {
+        display?: string,
+        flexDirection?: string,
+        justifyContent?: string,
         backgroundColor?: string;
         maxWidth?: number;
+        height?: string;
         borderWidth?: number; 
-        maxHeight?: number;
       };
       cardButtonContainer?: {
         backgroundColor?: string;
@@ -249,7 +255,7 @@ declare module "@mui/material/styles" {
       };
       cardContent?:{
         paddingBottom?: number;
-        height?: number;
+        height?: string;
       };
       cardButtonContent?:{
         paddingBottom?: number; 
@@ -306,7 +312,7 @@ const theme = createTheme({
       padding: 2,
       boxShadow: "0em 0em 0.4em rgb(44 44 44 / 40% );",
       borderRadius: "6px",
-      margin: 5,
+      margin: 5
     },
     linkActive: {
       borderBottom: "solid",
@@ -354,10 +360,13 @@ const theme = createTheme({
       textOverflow: 'ellipsis',
     },
     cardContainer: {
-      maxHeight: 502,
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "space-between",
+      backgroundColor:themePalette.whiteBg,
       maxWidth: 368,
-      borderWidth: 2,
-      backgroundColor:themePalette.whiteBg
+      height: "100%",
+      borderWidth: 2
     },
     cardButtonContainer: {
       backgroundColor: themePalette.whiteBg,
@@ -370,7 +379,7 @@ const theme = createTheme({
     },
     cardContent:{
       paddingBottom: 10.63,
-      height: 200
+      height: "100%"
     },
     cardButtonContent:{
       paddingBottom: 1, 

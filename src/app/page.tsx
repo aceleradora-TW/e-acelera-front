@@ -41,7 +41,7 @@ export default function Home() {
         <Grid item xl={12} lg={9} md={6} sm={3} textAlign={{ xs: 'left', sm: 'center' }}>
           <Title text={`Bem vindo ao ${pagina}`} />
         </Grid>
-        <Grid container spacing={2} >
+        <Grid container spacing={2} alignItems="stretch" >
         {renderData.data
           .filter((element: DataItem) => element.field.category === pagina)
           .map((element: DataItem, index: number) => {

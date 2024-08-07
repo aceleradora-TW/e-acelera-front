@@ -1,4 +1,3 @@
-{/*comentario aqui*/}
 "use client" 
 import { CardActionArea, CardActions, ThemeProvider } from '@mui/material';
 import Card from '@mui/material/Card';
@@ -25,8 +24,8 @@ const cardStyles = {
 
 const cardActionsStyle = {
     paddingBottom: 4, 
-    height: 20, 
-    paddingLeft: 2
+    paddingLeft: 2,
+    height: 20
 }
 
 export const BaseCard: React.FC<CardProps> = ({title, description, textImage, image, route}) => {
