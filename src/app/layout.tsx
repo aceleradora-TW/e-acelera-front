@@ -6,7 +6,7 @@ import { ThemeProvider } from '@mui/material/styles';
 import { theme } from "@/app/config/theme";
 import { Box } from "@mui/material";
 
-const menuItems = ["Nivelamento", "Autoestudo"];
+const menuItems = ['Nivelamento', 'Autoestudo'] 
 
 const inter = Inter({ subsets: ["latin"] });
 
