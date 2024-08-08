@@ -83,7 +83,7 @@ export default function Home({
                   <Grid container spacing={2} >
                     {TopicsSeparator(element.field.topics).map(
                       (x: any, y: any) => (
-                        <Grid item xl={3} lg={4} md={4} sm={12} xs={12}>
+                        <Grid item xl={3} lg={4} md={4} sm={12} xs={12} key={y}>
                         <BaseCard
                           title={x}
                           description={
