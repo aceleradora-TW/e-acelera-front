@@ -24,7 +24,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <ThemeProvider theme={theme}>
-          <Box>
+          <Box sx={{marginBottom:'80px'}}>
           <ResponsiveAppBar list={menuItems}/>   
           </Box>
             {children}
