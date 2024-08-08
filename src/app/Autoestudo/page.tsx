@@ -35,8 +35,9 @@ export default function Autoestudo() {
   }
 
   return (
-    <Box sx={theme.customStyles.centralizeContent}  mx={{xs: 2, sm: 3,md: 6, lg: 8 ,xl: 8  }}>
-      <Grid container columns={{ xl: 12, lg: 9, md: 6, sm: 3 }} rowSpacing={3}>
+    <Box sx={theme.customStyles.centralizeContent}  >
+      <Grid container columns={{ xl: 12, lg: 9, md: 6, sm: 3 }} rowSpacing={3}
+      mx={{xs: 2, sm: 3,md: 6, lg: 8 ,xl: 8  }}>
         <Grid item xl={12} lg={9} md={6} sm={3} textAlign={{ xs: 'left', sm: 'center' }}>
           <Title text={`Bem vindo ao ${pagina}`} />
         </Grid> 
