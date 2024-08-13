@@ -5,19 +5,25 @@ import StatusSelect from "@/components/StatusSelect";
 
 
 function CardVideo() {
+  const videoUrl: string = "https://www.youtube.com/watch?v=KvcneqbMJs4";
   let text: string = "Neste curso ensinarei para você TUDO o que você precisa saber para adquirir uma base sólida no TypeScript, uma das linguagens mais requisitadas no mercado atualmente! Neste curso ensinarei para você TUDO o que você precisa saber para adquirir uma base sólida no TypeScript, uma das linguagens mais requisitadas no mercado atualmente!";
   let titulov: string = "Curso de TypeScript para Completos Iniciantes";
   let creditos: string = "Felipe Rocha • dicasparadevs";
 
+  function getYouTubeEmbedUrl(url: string): string {
+    const videoId = url.split('v=')[1]?.split('&')[0];
+    return `https://www.youtube.com/embed/${videoId}`;
+  }
+
   return (
-    <ThemeConfig>
       <Box sx={ theme.customStyles.cardVideo }>
         <Box sx={ theme.customStyles.cardVideoLink }>
           <iframe
             width="592"
             height="332"
-            src="https://www.youtube.com/embed/ppDsxbUNtNQ?si=Fgxmil4i_Yd5brCx"
+            src={getYouTubeEmbedUrl(videoUrl)}
           ></iframe>
+          
 
           <Box sx={theme.customStyles.cardVideoNumber}>
             <Typography variant="caption">
@@ -39,7 +45,6 @@ function CardVideo() {
           </Box>
         </Box>
       </Box>
-    </ThemeConfig>
   );
 }
 

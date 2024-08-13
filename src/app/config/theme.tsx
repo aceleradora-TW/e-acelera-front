@@ -315,7 +315,7 @@ declare module "@mui/material/styles" {
         maxWidth?: string;
         margin?: string;
       }
-      cardVideo: {
+      cardVideo?: {
         display?: string;
         flexDirection?: string;
         justifyContent?: string;
@@ -326,24 +326,24 @@ declare module "@mui/material/styles" {
         marginLeft?: string;
         marginTop?: string;
       };
-      cardVideoLink:{
+      cardVideoLink?:{
         display?: string, 
         flexDirection?: string, 
         justifyContent?: string 
       };
-      cardVideoNumber:{
+      cardVideoNumber?:{
         display?: string, 
         flexDirection?: string, 
         justifyContent?: string, 
         marginTop?: number
         };
-        cardVideoSelect:{
+        cardVideoSelect?:{
           display?: string, 
           flexDirection?: string, 
           justifyContent?: string, 
           marginTop?: number
           };
-          cardVideoDescription: {
+          cardVideoDescription?: {
             display?: string, 
             flexDirection?: string, 
             justifyContent?: string, 
