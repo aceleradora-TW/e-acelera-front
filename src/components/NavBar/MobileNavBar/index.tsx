@@ -1,4 +1,4 @@
-import { theme } from "@/components/config/theme";
+import { theme } from "@/app/config/theme";
 import {
   AppBar,
   Box,

@@ -1,7 +1,7 @@
 'use client'
 import React from "react"
 import Typography from "@mui/material/Typography"
-import { theme, ThemeConfig } from "../config/theme"
+import { theme, ThemeConfig } from "../../app/config/theme"
 import { Box, Grid } from "@mui/material"
 
 interface TitleProps {

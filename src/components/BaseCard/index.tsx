@@ -1,17 +1,17 @@
-import * as React from 'react';
+"use client" 
+import { CardActionArea, CardActions, ThemeProvider } from '@mui/material';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
-import { CardActionArea, CardActions, ThemeProvider } from '@mui/material';
-import { ClickButton } from '../ClickButton';
 import { useRouter } from 'next/navigation';
-import { blue, red } from '@mui/material/colors';
-import { theme } from '../config/theme';
+import * as React from 'react';
+import { theme } from '../../app/config/theme';
+import { ClickButton } from '../ClickButton';
 
 interface CardProps{
     title: string;
-    description: string;
+    description?: string;
     textImage?: string; 
     image?: string;
     route: string;
@@ -35,7 +35,6 @@ export const BaseCard: React.FC<CardProps> = ({title, description, textImage, im
     }
 
     return (
-        <ThemeProvider theme={theme}>
         <Card sx={theme.customStyles.cardContainer}>
             <CardActionArea>
             {image && (
@@ -59,6 +58,5 @@ export const BaseCard: React.FC<CardProps> = ({title, description, textImage, im
                 <ClickButton title="Entrar" click={() => handleClick(route)}  />
             </CardActions>
         </Card>
-        </ThemeProvider>
     );
 }

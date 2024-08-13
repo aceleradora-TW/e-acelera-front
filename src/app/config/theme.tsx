@@ -1,9 +1,10 @@
+'use client';
 import {
   CssBaseline,
   PaletteColor,
   PaletteColorOptions,
   ThemeProvider,
-  createTheme,
+  createTheme
 } from "@mui/material";
 
 import React from "react";
@@ -57,6 +58,14 @@ declare module "@mui/material/styles" {
         padding: string;
         borderRadius: number;
         border: number;
+      };
+      description: {
+        display: string;
+        flexDirection: string;
+        justifyContent: string;
+        padding: number;
+        boxShadow: string;
+        borderRadius: string;
       };
       linkActive: {
         borderBottom: string;
@@ -120,7 +129,7 @@ declare module "@mui/material/styles" {
       };
       cardContent: {
         paddingBottom: number; 
-        maxHeight: number;
+        height: number;
       };
       cardButtonContent:{
         paddingBottom: number;
@@ -135,46 +144,22 @@ declare module "@mui/material/styles" {
         color: string;
       };
       title: {
-        textAlign: string,
-        color: string,
-        margin: string
-
+        textAlign: string;
+        color: string;
+        margin: string;
       };
-      cardVideo: {
+      breadCrumb: {
+        textDecoration: string;
+        color: string;
+        marginTop: number;
+      };
+      centralizeContent: {
         display: string;
-        flexDirection: string;
         justifyContent: string;
-        padding: number;
-        boxShadow: string;
-        width: string;
-        height: string;
-        marginLeft: string;
-        marginTop: string;
-      };
-      cardVideoLink:{
-        display: string, 
-        flexDirection: string, 
-        justifyContent: string 
-      };
-      cardVideoNumber:{
-        display: string, 
-        flexDirection: string, 
-        justifyContent: string, 
-        marginTop: number
-        };
-      cardVideoSelect:{
-          display: string, 
-          flexDirection: string, 
-          justifyContent: string, 
-          marginTop: number
-      };
-      cardVideoDescription: {
-        display: string, 
-        flexDirection: string, 
-        justifyContent: string, 
-        marginTop: number, 
-        marginRight: number
-      };
+        alignItems: string;
+        maxWidth: string;
+        margin: string;
+      }
     };
   }
 
@@ -192,6 +177,15 @@ declare module "@mui/material/styles" {
         padding?: string;
         borderRadius?: number;
         border?: number;
+      };
+      description?:{
+        display?: string;
+        flexDirection?: string;
+        justifyContent?: string;
+        padding?: number;
+        boxShadow?: string;
+        borderRadius?: string;
+        margin?: number;
       };
       linkActive: {
         borderBottom?: string;
@@ -255,7 +249,7 @@ declare module "@mui/material/styles" {
       };
       cardContent?:{
         paddingBottom?: number;
-        maxHeight?: number;
+        height?: number;
       };
       cardButtonContent?:{
         paddingBottom?: number; 
@@ -273,43 +267,19 @@ declare module "@mui/material/styles" {
         textAlign?: string,
         color?: string,
         margin?: string
-
       };
-      cardVideo: {
+      breadCrumb?: {
+        textDecoration?: string;
+        color?: string;
+        marginTop?: number;
+      };
+      centralizeContent?: {
         display?: string;
-        flexDirection?: string;
         justifyContent?: string;
-        padding?: number;
-        boxShadow?: string;
-        width?: string;
-        height?: string;
-        marginLeft?: string;
-        marginTop?: string;
-      };
-      cardVideoLink:{
-        display?: string, 
-        flexDirection?: string, 
-        justifyContent?: string 
-      };
-      cardVideoNumber:{
-        display?: string, 
-        flexDirection?: string, 
-        justifyContent?: string, 
-        marginTop?: number
-        };
-        cardVideoSelect:{
-          display?: string, 
-          flexDirection?: string, 
-          justifyContent?: string, 
-          marginTop?: number
-          };
-          cardVideoDescription: {
-            display?: string, 
-            flexDirection?: string, 
-            justifyContent?: string, 
-            marginTop?: number, 
-            marginRight?: number
-          };
+        alignItems?: string;
+        maxWidth?: string;
+        margin?: string;
+      }
       };
     }
   }
@@ -328,6 +298,15 @@ const theme = createTheme({
       padding: "8px 16px",
       borderRadius: 2,
       border: 1,
+    },
+    description:{
+      display: "flex",
+      flexDirection: "row",
+      justifyContent: "space-between",
+      padding: 2,
+      boxShadow: "0em 0em 0.4em rgb(44 44 44 / 40% );",
+      borderRadius: "6px",
+      margin: 0,
     },
     linkActive: {
       borderBottom: "solid",
@@ -391,11 +370,18 @@ const theme = createTheme({
     },
     cardContent:{
       paddingBottom: 10.63,
-      maxHeight: 250
+      height: 200
     },
     cardButtonContent:{
       paddingBottom: 1, 
       paddingTop: 2
+    }, 
+    centralizeContent: {
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      maxWidth: '1630px',
+      margin: '0 auto'
     },
     cardMedia: {
       height: 152,
@@ -409,42 +395,10 @@ const theme = createTheme({
       textAlign: "left",
       color: themePalette.title,
       margin: "20px 0"
-
     },
-    cardVideo:{
-      display: "flex",
-        flexDirection: "column",
-        justifyContent: "space-between",
-        padding: 4,
-        boxShadow: "0em 0em 0.4em rgb(44 44 44 / 40%)",
-        width: "661px",
-        height: "936px",
-        marginLeft: "24px",
-        marginTop: "17px"
-    },
-    cardVideoLink:{
-      display: "flex", 
-      flexDirection: "column", 
-      justifyContent: "center" 
-    },
-    cardVideoNumber:{
-    display: "flex", 
-    flexDirection: "column", 
-    justifyContent: "center", 
-    marginTop: 4 
-    },
-    cardVideoSelect:{
-      display: "flex", 
-      flexDirection: "column", 
-      justifyContent: "center", 
-      marginTop: 7 
-    },
-    cardVideoDescription: {
-      display: "flex", 
-      flexDirection: "column", 
-      justifyContent: "center", 
-      marginTop: 5, 
-      marginRight: 1.3
+    breadCrumb: {
+      textDecoration: "none",
+      color: themePalette.title
     },
   },
   palette: {
@@ -470,31 +424,57 @@ const theme = createTheme({
   },
   typography: {
     h1: {
-      fontSize: "48px",
-      lineHeight: 1.16,
       fontWeight: 500,
       letterSpacing: 0.15,
+      lineHeight: "normal",
+      [`@media (min-width:0px)`]: {
+        fontSize: "1.5rem",
+      },
+      [`@media (min-width:600px)`]: {
+        fontSize: "2rem",
+      },
+      [`@media (min-width:900px)`]: {
+        fontSize: "2.5rem",
+      },
+      [`@media (min-width:1200px)`]: {
+        fontSize: "3rem",
+      },
+      [`@media (min-width:1536px)`]: {
+        fontSize: "3.5rem",
+      }
+      
     },
 
     h2: {
-      fontSize: "25.6px",
       lineHeight: 1.6,
       fontWeight: 500,
       letterSpacing: 0.15,
+      [`@media (min-width:0px)`]: {
+        fontSize: "1.2rem",
+      },
+      [`@media (min-width:600px)`]: {
+        fontSize: "1.4rem",
+      },
+      [`@media (min-width:1200px)`]: {
+        fontSize: "1.6rem",
+      },
+      [`@media (min-width:1536px)`]: {
+        fontSize: "1.6rem",
+      }
     },
     body1: {
-      fontSize: "16px",
+      fontSize: "1rem",
       lineHeight: 1.5,
       fontWeight: 400,
       letterSpacing: 0.15,
+      
     },
     caption: {
-      fontSize: "22px",
+      fontSize: "1.4rem",
       lineHeight: 1.6,
       fontWeight: 500,
       letterSpacing: 0.15,
     },
-    
   },
 });
 
