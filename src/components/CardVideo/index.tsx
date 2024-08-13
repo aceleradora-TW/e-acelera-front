@@ -1,6 +1,6 @@
 import React from "react";
 import { Box, Typography } from "@mui/material";
-import { ThemeConfig, theme } from "../config/theme";
+import { ThemeConfig, theme } from "../../app/config/theme";
 import StatusSelect from "@/components/StatusSelect";
 
 
