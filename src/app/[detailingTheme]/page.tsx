@@ -92,8 +92,8 @@ export default function Home({
                             )[y]
                           }
                           route={
-                            TopicsSeparator(element.field.topicsInfo)[y]
-                          }
+                            `${id}/${TopicsSeparator(element.field.topicsInfo)[y]}-${x}`
+                          }                          
                         />
                       </Grid>
                       )

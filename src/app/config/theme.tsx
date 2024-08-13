@@ -145,6 +145,11 @@ declare module "@mui/material/styles" {
       cardTitle: {
         wordWrap: string;
         color: string;
+        display: string;
+        WebkitLineClamp: number;
+        WebkitBoxOrient: string;
+        overflow: string;
+        textOverflow: string;
       };
       title: {
         textAlign: string;
@@ -268,6 +273,11 @@ declare module "@mui/material/styles" {
       cardTitle?: {
         wordWrap?: string;
         color?: string;
+        display?: string;
+        WebkitLineClamp?: number;
+        WebkitBoxOrient?: string;
+        overflow?: string;
+        textOverflow?: string;
       };
       title?: {
         textAlign?: string,
@@ -398,7 +408,12 @@ const theme = createTheme({
     },
     cardTitle:{
       color: themePalette.title,
-      wordWrap: "break-word"
+      wordWrap: "break-word",
+      display: '-webkit-box',
+      WebkitLineClamp: 3,
+      WebkitBoxOrient: 'vertical', 
+      overflow: 'hidden',
+      textOverflow: 'ellipsis'
     },
     title: {
       textAlign: "left",
