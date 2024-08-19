@@ -6,8 +6,9 @@ import { Title } from "@/components/title";
 import { CircularProgress } from "@mui/material";
 import { ThemeDescription } from "@/components/Description/ThemeDescription";
 import { BreadCrumb } from "@/components/BreadCrumb";
-import { theme } from "../config/theme";
+import { theme } from "../../config/theme";
 import { ContainerCardTopics } from "@/components/Container/ContainerCardsTopics";
+import { Loading } from "@/components/Loading";
 
 export default function Home({
   params,
@@ -39,18 +40,7 @@ export default function Home({
   }, []);
 
   if (!renderData) {
-    return (
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          height: "100%",
-        }}
-      >
-        <CircularProgress />
-      </Box>
-    );
+    return <Loading/>
   }
   
   return (
@@ -76,9 +66,7 @@ export default function Home({
                   <ContainerCardTopics
                     topics={element.field.topics}
                     topicsDescription={element.field.topicsDescription}
-                    topicsInfo={element.field.topicsInfo}
-                    id={id}
-                  />
+                    topicsInfo={element.field.topicsInfo}              />
                 </>
               ))}
         </Grid>

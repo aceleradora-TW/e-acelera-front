@@ -1,7 +1,6 @@
-'use client'
+"use client"
 import { Grid } from "@mui/material"
 import React from "react"
-import { BaseCard } from "@/components/BaseCard";
 import { Title } from "@/components/title";
 import { Box } from "@mui/material";
 import { CircularProgress } from "@mui/material";
@@ -10,9 +9,9 @@ import { theme } from "@/app/config/theme";
 import { ContainerCardTheme } from "@/components/Container/ContainerCardsThemes";
 import { Loading } from "@/components/Loading";
 
-export default function Autoestudo() {
+export default function Home() {
   const [renderData, setRenderData] = React.useState<ApiResponse>();
-  const pagina = "Autoestudo";
+  const pagina = "Nivelamento";
 
   React.useEffect(() => {
     const fetchData = async () => {
@@ -29,19 +28,19 @@ export default function Autoestudo() {
 
     fetchData();
   }, []);
-//
+
   if (!renderData) {
     return <Loading/>
   }
 
   return (
-    <Box sx={theme.customStyles.centralizeContent}  >
+    <Box sx={theme.customStyles.centralizeContent}>
       <Grid container columns={{ xl: 12, lg: 9, md: 6, sm: 3 }} rowSpacing={3} 
-      mx= {{xs: 2, sm: 3,md: 6, lg: 8 ,xl: 8 }}>
+      mx= {{xs: 2, sm: 3,md: 6, lg: 8 ,xl: 8  }}>
         <Grid item xl={12} lg={9} md={6} sm={3} textAlign={{ xs: 'left', sm: 'center' }}>
           <Title text={`Bem vindo ao ${pagina}`} />
-        </Grid> 
-       <ContainerCardTheme data={renderData} category={pagina}/>
+        </Grid>
+        <ContainerCardTheme data={renderData} category={pagina}/>
       </Grid>
     </Box>
   );

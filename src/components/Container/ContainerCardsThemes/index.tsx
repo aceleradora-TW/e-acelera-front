@@ -2,6 +2,7 @@ import { Grid, useMediaQuery } from "@mui/material";
 import React from "react";
 import { BaseCard } from "@/components/BaseCard";
 import { ApiResponse, DataItem, ThemeField } from "@/types/type";
+import { usePathname } from "next/navigation";
 
 interface ContainerCardThemeProps {
   data: ApiResponse,
@@ -9,6 +10,10 @@ interface ContainerCardThemeProps {
 }
 
 export const ContainerCardTheme: React.FC<ContainerCardThemeProps> = ({data, category}) => {
+  const pathname = usePathname()
+
+  const currentPath = pathname.slice(1)
+
   return (
     <Grid container spacing={2} alignItems="stretch" >
         {data.data
@@ -20,7 +25,7 @@ export const ContainerCardTheme: React.FC<ContainerCardThemeProps> = ({data, cat
                 <BaseCard
                   title={field.title}
                   description={field.cardDescription}
-                  route={`${element.id}-${field.title}`}
+                  route={`${currentPath}/${element.id}-${field.title}`}
                   image={field.image ? field.image[0].url : ""}
                 />
               </Grid>
