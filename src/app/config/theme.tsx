@@ -117,8 +117,8 @@ declare module "@mui/material/styles" {
         flexDirection: string,
         justifyContent: string,
         backgroundColor: string;
-        maxWidth: number;
-        height: number;
+        maxWidth: string;
+        height: string;
         borderWidth: number; 
       };
       cardButtonContainer: {
@@ -245,7 +245,7 @@ declare module "@mui/material/styles" {
         flexDirection?: string,
         justifyContent?: string,
         backgroundColor?: string;
-        maxWidth?: number;
+        maxWidth?: string;
         height?: string;
         borderWidth?: number; 
       };
@@ -374,7 +374,7 @@ const theme = createTheme({
       flexDirection: "column",
       justifyContent: "space-between",
       backgroundColor:themePalette.whiteBg,
-      maxWidth: 368,
+      maxWidth: "100%",
       height: "100%",
       borderWidth: 2
     },
