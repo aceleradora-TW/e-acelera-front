@@ -28,7 +28,7 @@ export interface ThemeField extends CommonField {
     image: Image[] | null;
     topics: string;
     category: string;
-    topicDescription: string;
+    topicsDescription: string;
 }
 
 export interface TopicField extends CommonField {

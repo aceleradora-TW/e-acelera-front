@@ -18,7 +18,7 @@ export const DetailingThemeContent: React.FC<DetailingContentProps> = ({ data, i
 
   return (
     <>
-      {data.data
+      {data && data.data
         .filter((element: DataItem) => element.id === extractID(id))
         .map((element: DataItem) => {
           const field = element.field as ThemeField;
@@ -36,7 +36,7 @@ export const DetailingThemeContent: React.FC<DetailingContentProps> = ({ data, i
             </Grid>
             <ContainerCardTopics 
               topics={field.topics}
-              topicsDescription={field.topicDescription}
+              topicsDescription={field.topicsDescription}
               topicsInfo={field.topicsInfo}
             />
           </>
