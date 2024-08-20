@@ -8,6 +8,8 @@ import { useRouter } from 'next/navigation';
 import * as React from 'react';
 import { theme } from '../../app/config/theme';
 import { ClickButton } from '../ClickButton';
+import Markdown from 'react-markdown'
+
 
 interface CardProps{
     title: string;
@@ -34,6 +36,8 @@ export const BaseCard: React.FC<CardProps> = ({title, description, textImage, im
         router.push(`/${route}`)
     }
 
+    
+
     return (
         <Card sx={theme.customStyles.cardContainer}>
             <CardActionArea>
@@ -47,10 +51,10 @@ export const BaseCard: React.FC<CardProps> = ({title, description, textImage, im
             )}
                 <CardContent sx={theme.customStyles.cardContent}> 
                     <Typography gutterBottom variant="h2" component="div" sx={theme.customStyles.cardTitle}>
-                        {title}
+                        <Markdown components={{h1: 'h2',}}>{title}</Markdown> 
                     </Typography>
                     <Typography  variant="body1" sx={cardStyles}>
-                        {description}
+                        <Markdown>{description}</Markdown>    
                     </Typography>
                 </CardContent>
             </CardActionArea>
