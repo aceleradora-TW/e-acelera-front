@@ -29,7 +29,6 @@ export const ContainerCardTheme: React.FC<ContainerCardThemeProps> = ({data, cat
                   image={field.image ? field.image[0].url : ""}
                 />
               </Grid>
-
             );
           })}
           </Grid>
