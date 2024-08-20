@@ -6,7 +6,7 @@ import { Box } from "@mui/material";
 import { theme } from "@/app/config/theme";
 import { ContainerCardTheme } from "@/components/PageElements/Container/ContainerCardsThemes";
 import { Loading } from "@/components/Loading";
-import useFetchData from "@/components/fetchData";
+import useFetchData from "@/components/FetchData";
 import { LayoutPage } from "@/components/PageElements/LayoutPage";
 import { PageThemesContent } from "@/components/PageElements/Content/PageThemesContent";
 
