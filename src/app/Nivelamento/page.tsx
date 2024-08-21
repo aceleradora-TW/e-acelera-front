@@ -1,10 +1,5 @@
 "use client"
-import { Grid } from "@mui/material"
 import React from "react"
-import { Title } from "@/components/title";
-import { Box } from "@mui/material";
-import { theme } from "@/app/config/theme";
-import { ContainerCardTheme } from "@/components/PageElements/Container/ContainerCardsThemes";
 import { Loading } from "@/components/Loading";
 import useFetchData from "@/components/FetchData";
 import { LayoutPage } from "@/components/PageElements/LayoutPage";
