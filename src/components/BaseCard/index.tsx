@@ -6,7 +6,7 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { useRouter } from 'next/navigation';
 import * as React from 'react';
-import { theme } from '../../app/config/theme';
+import { theme } from "../../app/config/theme";
 import { ClickButton } from '../ClickButton';
 
 interface CardProps{
@@ -43,13 +43,14 @@ export const BaseCard: React.FC<CardProps> = ({title, description, textImage, im
                     image={image}
                     alt={textImage}
                     sx={theme.customStyles.cardMedia}
+                    datatest-id="card-image"
                 />
             )}
                 <CardContent sx={theme.customStyles.cardContent}> 
                     <Typography gutterBottom variant="h2" component="div" sx={theme.customStyles.cardTitle}>
                         {title}
                     </Typography>
-                    <Typography  variant="body1" sx={cardStyles}>
+                    <Typography variant="body1" sx={cardStyles}>
                         {description}
                     </Typography>
                 </CardContent>
