@@ -2,6 +2,7 @@ import React from "react";
 import { Divider, Box, Typography, useMediaQuery } from "@mui/material";
 import { theme } from "@/app/config/theme";
 import { ThemeConfig } from "@/app/config/theme";
+import ReactMarkdown from "react-markdown";
 
 interface ThemeDescriptionProps {
   text: string;
@@ -10,6 +11,14 @@ interface ThemeDescriptionProps {
 const boxStyle: object = {
   width: "49%"
 }
+interface MarkdownTextProps {
+  markdownContent: string;
+}
+const components = {
+  p: (props: React.HTMLAttributes<HTMLHeadingElement>) => (
+    <Typography variant="body1" {...props} />
+  ),
+};
 
 export const ThemeDescription: React.FC<ThemeDescriptionProps> = ({ text }) => {
   const descriptionSize: number = text.length;
@@ -32,23 +41,23 @@ export const ThemeDescription: React.FC<ThemeDescriptionProps> = ({ text }) => {
   return (
       <Box sx={theme.customStyles.description}>
         {isSmallScreen ? (
-          <Typography variant="body1">
+          <ReactMarkdown components={components}>
             {text}
-          </Typography>
+          </ReactMarkdown>
         ) : (
           <>
             <Box sx={ boxStyle }>
-              <Typography variant="body1">
+              <ReactMarkdown components={components}>
                 {textBox1}
-              </Typography>
+              </ReactMarkdown>
             </Box>
 
             <Divider orientation="vertical" flexItem color="black" sx={{ margin: 0 }} />
 
             <Box sx={ boxStyle }>
-              <Typography variant="body1">
+              <ReactMarkdown components={components}>
                 {textBox2}
-              </Typography>
+              </ReactMarkdown>
             </Box>
           </>
         )}
