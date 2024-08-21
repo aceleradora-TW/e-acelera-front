@@ -1,7 +1,7 @@
 'use client'
 import React from "react";
 import { Loading } from "@/components/Loading";
-import useFetchData from "@/components/FetchData";
+import useFetchData from "@/components/fetchData";
 import { DetailingThemeContent } from "@/components/PageElements/Content/DetailingThemeContent";
 import { LayoutPage } from "@/components/PageElements/LayoutPage";
 
