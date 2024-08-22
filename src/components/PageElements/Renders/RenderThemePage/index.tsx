@@ -1,7 +1,7 @@
 import useFetchData from "@/components/fetchData";
 import { Loading } from "@/components/Loading";
-import { PageThemesContent } from "../Content/PageThemesContent";
-import { LayoutPage } from "../LayoutPage";
+import { PageThemesContent } from "../../Content/PageThemesContent";
+import { LayoutPage } from "../../LayoutPage";
 import React from "react";
 
 
