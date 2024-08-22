@@ -33,6 +33,8 @@ export const ThemeDescription: React.FC<ThemeDescriptionProps> = ({ text }) => {
     splitPoint = middleTextPoint;
   }
 
+
+
   const textBox1: string = text.substring(0, splitPoint);
   const textBox2: string = text.substring(splitPoint).trim();
 
@@ -42,7 +44,7 @@ export const ThemeDescription: React.FC<ThemeDescriptionProps> = ({ text }) => {
       <Box sx={theme.customStyles.description}>
         {isSmallScreen ? (
           <ReactMarkdown components={components}>
-            {text}
+            {text.replace(/\n\n/g, " ")}
           </ReactMarkdown>
         ) : (
           <>
