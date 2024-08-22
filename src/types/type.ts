@@ -23,11 +23,12 @@ interface CommonField {
 }
 
 export interface ThemeField extends CommonField {
+    topicsInfo: string;
     cardDescription: string;
     image: Image[] | null;
     topics: string;
     category: string;
-    topicDescription: string;
+    topicsDescription: string;
 }
 
 export interface TopicField extends CommonField {

@@ -1,9 +1,9 @@
 import React from "react";
 import { Divider, Box, Typography, useMediaQuery } from "@mui/material";
 import { theme } from "@/app/config/theme";
-import ReactMarkdown from "react-markdown";
+import { CardDescription } from "@/components/CardDescription";
 
-interface ThemeDescriptionProps {
+interface ContainerDescriptionDividerProps {
   text: string;
 }
 
@@ -11,13 +11,7 @@ const boxStyle: object = {
   width: "49%"
 }
 
-const components = {
-  p: (props: React.HTMLAttributes<HTMLHeadingElement>) => (
-    <Typography variant="body1" {...props} />
-  ),
-};
-
-export const ThemeDescription: React.FC<ThemeDescriptionProps> = ({ text }) => {
+export const ContainerDescriptionDivider: React.FC<ContainerDescriptionDividerProps> = ({ text }) => {
   const descriptionSize: number = text.length;
   const middleTextPoint: number = Math.floor(descriptionSize / 2);
 
@@ -38,23 +32,17 @@ export const ThemeDescription: React.FC<ThemeDescriptionProps> = ({ text }) => {
   return (
       <Box sx={theme.customStyles.description}>
         {isSmallScreen ? (
-          <ReactMarkdown components={components}>
-            {text.replace(/\n\n/g, " ")}
-          </ReactMarkdown>
+          <CardDescription text={text}/>
         ) : (
           <>
             <Box sx={ boxStyle }>
-              <ReactMarkdown components={components}>
-                {textBox1}
-              </ReactMarkdown>
+                <CardDescription text={textBox1}/>
             </Box>
 
             <Divider orientation="vertical" flexItem color="black" sx={{ margin: 0 }} />
 
             <Box sx={ boxStyle }>
-              <ReactMarkdown components={components}>
-                {textBox2}
-              </ReactMarkdown>
+                <CardDescription text={textBox2}/>
             </Box>
           </>
         )}
