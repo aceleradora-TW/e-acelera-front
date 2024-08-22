@@ -1,7 +1,6 @@
 import React from "react";
 import { Divider, Box, Typography, useMediaQuery } from "@mui/material";
 import { theme } from "@/app/config/theme";
-import { ThemeConfig } from "@/app/config/theme";
 import ReactMarkdown from "react-markdown";
 
 interface ThemeDescriptionProps {
@@ -11,9 +10,7 @@ interface ThemeDescriptionProps {
 const boxStyle: object = {
   width: "49%"
 }
-interface MarkdownTextProps {
-  markdownContent: string;
-}
+
 const components = {
   p: (props: React.HTMLAttributes<HTMLHeadingElement>) => (
     <Typography variant="body1" {...props} />
@@ -32,8 +29,6 @@ export const ThemeDescription: React.FC<ThemeDescriptionProps> = ({ text }) => {
   if (splitPoint === 0) {
     splitPoint = middleTextPoint;
   }
-
-
 
   const textBox1: string = text.substring(0, splitPoint);
   const textBox2: string = text.substring(splitPoint).trim();
