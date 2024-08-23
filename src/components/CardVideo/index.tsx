@@ -19,23 +19,23 @@ function CardVideo() {
       <Box sx={ theme.customStyles.cardVideo }>
         <Box sx={ theme.customStyles.cardVideoLink }>
           <iframe
-            width="592"
+            width="100%"
             height="332"
             src={getYouTubeEmbedUrl(videoUrl)}
           ></iframe>
           
 
           <Box sx={theme.customStyles.cardVideoNumber}>
-            <Typography variant="caption">
+            <Typography variant="h2">
               {titulov}
             </Typography>
-            <Typography variant="subtitle1">
+            <Typography variant="body1" sx={{color:theme.palette.textColor?.light}}>
               {creditos}
             </Typography>
           </Box>
 
           <Box sx={ theme.customStyles.cardVideoDescription}>
-            <Typography variant="subtitle1">
+            <Typography variant="body1"  sx={{color:theme.palette.textColor?.light}}>
               {text}
             </Typography>
           </Box>

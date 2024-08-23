@@ -166,10 +166,11 @@ declare module "@mui/material/styles" {
         justifyContent: string;
         padding: number;
         boxShadow: string;
-        width: string;
+        maxWidth: string;
         height: string;
-        marginLeft: string;
+        margin: string;
         marginTop: string;
+        borderRadius: string,
       };
       cardVideoLink:{
         display: string, 
@@ -321,10 +322,11 @@ declare module "@mui/material/styles" {
         justifyContent?: string;
         padding?: number;
         boxShadow?: string;
-        width?: string;
+        maxWidth?: string;
         height?: string;
-        marginLeft?: string;
+        margin?: string;
         marginTop?: string;
+        borderRadius?: string;
       };
       cardVideoLink?:{
         display?: string, 
@@ -474,12 +476,13 @@ const theme = createTheme({
       display: "flex",
         flexDirection: "column",
         justifyContent: "space-between",
-        padding: 4,
+        padding: 2,
         boxShadow: "0em 0em 0.4em rgb(44 44 44 / 40%)",
-        width: "661px",
-        height: "936px",
-        marginLeft: "24px",
-        marginTop: "17px"
+        maxWidth: "100%",
+        height: "100%",
+        margin: "24px",
+        marginTop: "17px",
+        borderRadius: "6px",
     },
     cardVideoLink:{
       display: "flex", 
