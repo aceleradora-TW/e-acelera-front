@@ -32,7 +32,7 @@ export const CardVideo: React.FC<CardVideoProps>=({ text, title, linkVideo, refe
           width="100%"
           height="332"
           src={getYouTubeEmbedUrl(linkVideo)}
-        ></iframe>
+        />
         <Box sx={theme.customStyles.cardVideoNumber}>
           <ReactMarkdown components={components}>
             {title}
@@ -53,5 +53,3 @@ export const CardVideo: React.FC<CardVideoProps>=({ text, title, linkVideo, refe
     </Box>
   );
 }
-
-export default CardVideo;

@@ -1,5 +1,5 @@
 "use client"
-import CardVideo from "@/components/CardVideo"
+import {CardVideo} from "@/components/CardVideo"
 import { Grid } from "@mui/material"
 
 export default function Teste() {
