@@ -113,10 +113,13 @@ declare module "@mui/material/styles" {
         textOverflow: string;
       };
       cardContainer: {
+        display: string,
+        flexDirection: string,
+        justifyContent: string,
         backgroundColor: string;
-        maxWidth: number;
-        borderWidth: number;
-        maxHeight: number;
+        maxWidth: string;
+        height: string;
+        borderWidth: number; 
       };
       cardButtonContainer: {
         backgroundColor: string;
@@ -129,7 +132,7 @@ declare module "@mui/material/styles" {
       };
       cardContent: {
         paddingBottom: number; 
-        height: number;
+        height: string;
       };
       cardButtonContent:{
         paddingBottom: number;
@@ -142,6 +145,11 @@ declare module "@mui/material/styles" {
       cardTitle: {
         wordWrap: string;
         color: string;
+        display: string;
+        WebkitLineClamp: number;
+        WebkitBoxOrient: string;
+        overflow: string;
+        textOverflow: string;
       };
       title: {
         textAlign: string;
@@ -269,10 +277,13 @@ declare module "@mui/material/styles" {
         textOverflow?: string;
       };
       cardContainer?: {
+        display?: string,
+        flexDirection?: string,
+        justifyContent?: string,
         backgroundColor?: string;
-        maxWidth?: number;
+        maxWidth?: string;
+        height?: string;
         borderWidth?: number; 
-        maxHeight?: number;
       };
       cardButtonContainer?: {
         backgroundColor?: string;
@@ -285,7 +296,7 @@ declare module "@mui/material/styles" {
       };
       cardContent?:{
         paddingBottom?: number;
-        height?: number;
+        height?: string;
       };
       cardButtonContent?:{
         paddingBottom?: number; 
@@ -298,6 +309,11 @@ declare module "@mui/material/styles" {
       cardTitle?: {
         wordWrap?: string;
         color?: string;
+        display?: string;
+        WebkitLineClamp?: number;
+        WebkitBoxOrient?: string;
+        overflow?: string;
+        textOverflow?: string;
       };
       title?: {
         textAlign?: string,
@@ -426,10 +442,13 @@ const theme = createTheme({
       textOverflow: 'ellipsis',
     },
     cardContainer: {
-      maxHeight: 502,
-      maxWidth: 368,
-      borderWidth: 2,
-      backgroundColor:themePalette.whiteBg
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "space-between",
+      backgroundColor:themePalette.whiteBg,
+      maxWidth: "100%",
+      height: "100%",
+      borderWidth: 2
     },
     cardButtonContainer: {
       backgroundColor: themePalette.whiteBg,
@@ -442,7 +461,7 @@ const theme = createTheme({
     },
     cardContent:{
       paddingBottom: 10.63,
-      height: 200
+      height: "100%"
     },
     cardButtonContent:{
       paddingBottom: 1, 
@@ -461,7 +480,12 @@ const theme = createTheme({
     },
     cardTitle:{
       color: themePalette.title,
-      wordWrap: "break-word"
+      wordWrap: "break-word",
+      display: '-webkit-box',
+      WebkitLineClamp: 3,
+      WebkitBoxOrient: 'vertical', 
+      overflow: 'hidden',
+      textOverflow: 'ellipsis'
     },
     title: {
       textAlign: "left",

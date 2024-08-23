@@ -24,8 +24,8 @@ const cardStyles = {
 
 const cardActionsStyle = {
     paddingBottom: 4, 
-    height: 20, 
-    paddingLeft: 2
+    paddingLeft: 2,
+    height: 20
 }
 
 export const BaseCard: React.FC<CardProps> = ({title, description, textImage, image, route}) => {
@@ -46,7 +46,7 @@ export const BaseCard: React.FC<CardProps> = ({title, description, textImage, im
                 />
             )}
                 <CardContent sx={theme.customStyles.cardContent}> 
-                    <Typography gutterBottom variant="h2" component="div"   sx={theme.customStyles.cardTitle}>
+                    <Typography gutterBottom variant="h2" component="div" sx={theme.customStyles.cardTitle}>
                         {title}
                     </Typography>
                     <Typography  variant="body1" sx={cardStyles}>

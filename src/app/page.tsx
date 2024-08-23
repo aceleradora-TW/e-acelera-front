@@ -7,6 +7,7 @@ import { Box } from "@mui/material";
 import { CircularProgress } from "@mui/material";
 import { ApiResponse, DataItem, ThemeField } from "@/types/type"
 import { theme } from "@/app/config/theme";
+import { ContainerCardTheme } from "@/components/Container/ContainerCardTheme";
 
 export default function Home() {
   const [renderData, setRenderData] = React.useState<ApiResponse>();
@@ -41,23 +42,7 @@ export default function Home() {
         <Grid item xl={12} lg={9} md={6} sm={3} textAlign={{ xs: 'left', sm: 'center' }}>
           <Title text={`Bem vindo ao ${pagina}`} />
         </Grid>
-        <Grid container spacing={2} >
-        {renderData.data
-          .filter((element: DataItem) => element.field.category === pagina)
-          .map((element: DataItem, index: number) => {
-            const field = element.field as ThemeField;
-            return (
-              <Grid item xl={3} lg={4} md={4} sm={6} xs={12} key={index}>
-                <BaseCard
-                  title={field.title}
-                  description={field.cardDescription}
-                  route={`${element.id}-${field.title}`}
-                  image={field.image ? field.image[0].url : ""}
-                />
-              </Grid>
-            );
-          })}
-          </Grid>
+        <ContainerCardTheme data={renderData} category={pagina}/>
       </Grid>
     </Box>
   );
