@@ -1,7 +1,8 @@
 import React from "react";
-import { Divider, Box, Typography, useMediaQuery } from "@mui/material";
-import { theme } from "@/app/config/theme";
-import { CardDescription } from "@/components/CardDescription";
+import { Divider, Box, Typography, useMediaQuery, Link } from "@mui/material";
+import { theme, themePalette } from "@/app/config/theme";
+import { TextDescription } from "@/components/TextDescription";
+import ReactMarkdown from "react-markdown";
 
 interface ContainerDescriptionDividerProps {
   text: string;
@@ -24,28 +25,49 @@ export const ContainerDescriptionDivider: React.FC<ContainerDescriptionDividerPr
     splitPoint = middleTextPoint;
   }
 
+  const components = {
+    p: (props: React.HTMLAttributes<HTMLHeadingElement>) => (
+      <Typography variant="body1" {...props} />
+    ),
+    a: (props: React.HTMLAttributes<HTMLAnchorElement>) => (
+      <Link
+        variant="caption" target="_blank" rel="noreferrer"
+        sx={{ color: themePalette.descriptionCard, textDecorationColor: themePalette.descriptionCard, display: "block" }}
+        {...props} />
+    )
+    // a: (props: React.HTMLAttributes<HTMLHeadingElement>) => (
+    //   <Link {...props} />
+    // ) 
+  };
+
   const textBox1: string = text.substring(0, splitPoint);
   const textBox2: string = text.substring(splitPoint).trim();
 
-  const isSmallScreen: boolean = useMediaQuery(theme.breakpoints.down('sm'));
+  const isSmallScreen: boolean = useMediaQuery(theme.breakpoints.down('md'));
 
   return (
-      <Box sx={theme.customStyles.description}>
-        {isSmallScreen ? (
-          <CardDescription text={text}/>
-        ) : (
-          <>
-            <Box sx={ boxStyle }>
-                <CardDescription text={textBox1}/>
-            </Box>
+    <Box sx={theme.customStyles.description}>
+      {isSmallScreen ? (
+        <ReactMarkdown components={components}>
+          {text.replace(/\n\n/g, "</br>")}
+        </ReactMarkdown>
+      ) : (
+        <>
+          <Box sx={boxStyle}>
+            <ReactMarkdown components={components}>
+              {textBox1}
+            </ReactMarkdown>
+          </Box>
 
-            <Divider orientation="vertical" flexItem color="black" sx={{ margin: 0 }} />
+          <Divider orientation="vertical" flexItem color="black" sx={{ margin: 0 }} />
 
-            <Box sx={ boxStyle }>
-                <CardDescription text={textBox2}/>
-            </Box>
-          </>
-        )}
-      </Box>
+          <Box sx={boxStyle}>
+            <ReactMarkdown components={components}>
+              {textBox2}
+            </ReactMarkdown>
+          </Box>
+        </>
+      )}
+    </Box>
   );
 };

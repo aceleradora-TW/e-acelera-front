@@ -4,7 +4,7 @@ import React from "react";
 import { ApiResponse } from "@/types/type";
 import { Title } from "@/components/title";
 import { CircularProgress } from "@mui/material";
-import { ThemeDescription } from "@/components/CardDescription";
+import { ThemeDescription } from "@/components/TextDescription";
 import { BreadCrumb } from "@/components/BreadCrumb";
 import { theme } from "../config/theme";
 import { ContainerCardTopics } from "@/components/Container/ContainerCardsTopics";

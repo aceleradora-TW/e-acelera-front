@@ -94,6 +94,9 @@ declare module "@mui/material/styles" {
         margin: string;
         borderRadius: string;
       };
+      linkReference:{
+        color: string;
+      },
       logoType: {
         fontSize: string;
         mr: number;
@@ -222,6 +225,9 @@ declare module "@mui/material/styles" {
         margin?: string;
         borderRadius?: string;
       };
+      linkReference:{
+        color?: string;
+      },
       logoType: {
         fontSize?: string;
         mr?: number;
@@ -317,7 +323,6 @@ const theme = createTheme({
     },
     description:{
       display: "flex",
-      flexDirection: "row",
       justifyContent: "space-between",
       padding: 2,
       boxShadow: "0em 0em 0.4em rgb(44 44 44 / 40% );",
@@ -350,6 +355,9 @@ const theme = createTheme({
       letterSpacing: 0.4,
       margin: "0 0.5rem",
       borderRadius: "0",
+    },
+    linkReference:{
+      color: themePalette.descriptionCard
     },
     logoType: {
       fontSize: "19.2px",
