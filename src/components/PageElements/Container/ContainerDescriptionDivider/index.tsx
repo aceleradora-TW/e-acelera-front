@@ -46,16 +46,23 @@ export const ContainerDescriptionDivider: React.FC<ContainerDescriptionDividerPr
   const isSmallScreen: boolean = useMediaQuery(theme.breakpoints.down('md'));
 
   return (
-    <Box sx={theme.customStyles.description}>
+    <Box sx={{...theme.customStyles.description, flexDirection: isSmallScreen? "column": "row"}}>
       {isSmallScreen ? (
-        <ReactMarkdown components={components}>
-          {text.replace(/\n\n/g, "</br>")}
-        </ReactMarkdown>
+        <ReactMarkdown
+        components={{
+          p: (props:React.HTMLAttributes<any> ) => (
+            <Typography variant="body1" sx={{marginBottom: 3}} {...props} />
+          ),
+        }}
+      >
+        {text}
+      </ReactMarkdown>
+        
       ) : (
         <>
           <Box sx={boxStyle}>
             <ReactMarkdown components={components}>
-              {textBox1}
+              {textBox1.replace(/\n\n/g, "")}
             </ReactMarkdown>
           </Box>
 
@@ -63,7 +70,7 @@ export const ContainerDescriptionDivider: React.FC<ContainerDescriptionDividerPr
 
           <Box sx={boxStyle}>
             <ReactMarkdown components={components}>
-              {textBox2}
+              {textBox2.replace(/\n\n/g, "")}
             </ReactMarkdown>
           </Box>
         </>
