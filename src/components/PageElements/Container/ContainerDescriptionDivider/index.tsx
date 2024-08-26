@@ -35,10 +35,13 @@ export const ContainerDescriptionDivider: React.FC<ContainerDescriptionDividerPr
         sx={{ color: themePalette.descriptionCard, textDecorationColor: themePalette.descriptionCard, display: "block" }}
         {...props} />
     )
-    // a: (props: React.HTMLAttributes<HTMLHeadingElement>) => (
-    //   <Link {...props} />
-    // ) 
   };
+
+  const typographyBreakLine = {
+    p: (props:React.HTMLAttributes<any> ) => (
+      <Typography variant="body1" sx={{marginBottom: 3}} {...props} />
+    ),
+  }
 
   const textBox1: string = text.substring(0, splitPoint);
   const textBox2: string = text.substring(splitPoint).trim();
@@ -49,11 +52,7 @@ export const ContainerDescriptionDivider: React.FC<ContainerDescriptionDividerPr
     <Box sx={{...theme.customStyles.description, flexDirection: isSmallScreen? "column": "row"}}>
       {isSmallScreen ? (
         <ReactMarkdown
-        components={{
-          p: (props:React.HTMLAttributes<any> ) => (
-            <Typography variant="body1" sx={{marginBottom: 3}} {...props} />
-          ),
-        }}
+        components={typographyBreakLine}
       >
         {text}
       </ReactMarkdown>
