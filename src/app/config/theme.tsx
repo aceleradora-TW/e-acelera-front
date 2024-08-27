@@ -171,6 +171,42 @@ declare module "@mui/material/styles" {
         maxWidth: string;
         margin: string;
       }
+      cardVideo: {
+        display: string;
+        flexDirection: string;
+        justifyContent: string;
+        padding: number;
+        boxShadow: string;
+        maxWidth: string;
+        height: string;
+        margin: string;
+        marginTop: string;
+        borderRadius: string,
+      };
+      cardVideoLink:{
+        display: string, 
+        flexDirection: string, 
+        justifyContent: string 
+      };
+      cardVideoNumber:{
+        display: string, 
+        flexDirection: string, 
+        justifyContent: string, 
+        marginTop: number
+        };
+      cardVideoSelect:{
+          display: string, 
+          flexDirection: string, 
+          justifyContent: string, 
+          marginTop: number
+      };
+      cardVideoDescription: {
+        display: string, 
+        flexDirection: string, 
+        justifyContent: string, 
+        marginTop: number, 
+        marginRight: number
+      };
     };
   }
 
@@ -302,6 +338,42 @@ declare module "@mui/material/styles" {
         maxWidth?: string;
         margin?: string;
       }
+      cardVideo?: {
+        display?: string;
+        flexDirection?: string;
+        justifyContent?: string;
+        padding?: number;
+        boxShadow?: string;
+        maxWidth?: string;
+        height?: string;
+        margin?: string;
+        marginTop?: string;
+        borderRadius?: string;
+      };
+      cardVideoLink?:{
+        display?: string, 
+        flexDirection?: string, 
+        justifyContent?: string 
+      };
+      cardVideoNumber?:{
+        display?: string, 
+        flexDirection?: string, 
+        justifyContent?: string, 
+        marginTop?: number
+        };
+        cardVideoSelect?:{
+          display?: string, 
+          flexDirection?: string, 
+          justifyContent?: string, 
+          marginTop?: number
+          };
+          cardVideoDescription?: {
+            display?: string, 
+            flexDirection?: string, 
+            justifyContent?: string, 
+            marginTop?: number, 
+            marginRight?: number
+          };
       };
     }
   }
@@ -431,6 +503,42 @@ const theme = createTheme({
     breadCrumb: {
       textDecoration: "none",
       color: themePalette.title
+    },
+    cardVideo:{
+      display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-between",
+        padding: 2,
+        boxShadow: "0em 0em 0.4em rgb(44 44 44 / 40%)",
+        maxWidth: "100%",
+        height: "100%",
+        margin: "24px",
+        marginTop: "17px",
+        borderRadius: "6px",
+    },
+    cardVideoLink:{
+      display: "flex", 
+      flexDirection: "column", 
+      justifyContent: "center" 
+    },
+    cardVideoNumber:{
+    display: "flex", 
+    flexDirection: "column", 
+    justifyContent: "center", 
+    marginTop: 4 
+    },
+    cardVideoSelect:{
+      display: "flex", 
+      flexDirection: "column", 
+      justifyContent: "center", 
+      marginTop: 7 
+    },
+    cardVideoDescription: {
+      display: "flex", 
+      flexDirection: "column", 
+      justifyContent: "center", 
+      marginTop: 5, 
+      marginRight: 1.3
     },
   },
   palette: {
