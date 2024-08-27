@@ -14,14 +14,11 @@ export const WebMenu: React.FC<WebMenuProps> = ({ list }) => {
   const pathname = usePathname()
 
   const handlePageRedirect = (pagina: string) => {
-    pagina === 'Autoestudo' ? router.push(`/${pagina}`):router.push('/')
+    pagina ? router.push(`/${pagina}`):router.push('/')
   };
 
   const linkStyle = (item: string) => {
     if (`/${item}` == pathname) {
-      return theme.customStyles.linkActive
-    }
-    if (item == 'Nivelamento' && pathname == '/') {
       return theme.customStyles.linkActive
     }
     return theme.customStyles.link

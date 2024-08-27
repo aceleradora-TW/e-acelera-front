@@ -13,7 +13,7 @@ interface StatusSelectProps {
 
 export default function StatusSelect({width = "30%"}: StatusSelectProps) {
   const [status, setStatus] = React.useState<string>("")
-  const [backgroundColor, setBackgroundColor] = React.useState<any>("")
+  const [backgroundColor, setBackgroundColor] = React.useState<string>("")
 
   const handleChange = (event: SelectChangeEvent) => {
     const value = event.target.value as string
@@ -21,13 +21,13 @@ export default function StatusSelect({width = "30%"}: StatusSelectProps) {
 
     switch (value) {
       case "statusConcluded":
-        setBackgroundColor(theme.palette.statusSelect?.light)
+        setBackgroundColor(theme.palette.statusSelect?.light || "")
         break
       case "statusInProgress":
-        setBackgroundColor(theme.palette.statusSelect?.dark)
+        setBackgroundColor(theme.palette.statusSelect?.dark || "")
         break
       case "statusPending":
-        setBackgroundColor(theme.palette.statusSelect?.main)
+        setBackgroundColor(theme.palette.statusSelect?.main || "")
         break
       default:
         setBackgroundColor("")
