@@ -28,7 +28,7 @@ export const DescriptionExercise: React.FC<DescriptionExerciseProps> = ({
     ),
     a: (props: React.HTMLAttributes<HTMLAnchorElement>) => (
       <Link
-        variant="caption"
+        variant="body1"
         target="_blank"
         rel="noreferrer"
         sx={{
@@ -95,7 +95,6 @@ export const DescriptionExercise: React.FC<DescriptionExerciseProps> = ({
       sx={{
         ...theme.customStyles.description,
         flexDirection: "column",
-        width: "100%",
       }}
     >
       <ReactMarkdown components={components}>{text}</ReactMarkdown>

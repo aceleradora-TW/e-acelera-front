@@ -24,9 +24,6 @@ export const ContainerDescriptionWithVideo: React.FC<ContainerDescriptionWithVid
         sx={{ color: themePalette.descriptionCard, textDecorationColor: themePalette.descriptionCard, display: "block" }}
         {...props} />
     )
-    // a: (props: React.HTMLAttributes<HTMLHeadingElement>) => (
-    //   <Link {...props} />
-    // ) 
   };
 
   return (

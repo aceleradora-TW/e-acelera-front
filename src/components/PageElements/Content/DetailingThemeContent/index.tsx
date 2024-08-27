@@ -5,6 +5,7 @@ import { Title } from "@/components/title";
 import { ContainerCardTopics } from "../../Container/ContainerCardsTopics";
 import { ApiResponse, DataItem, ThemeField } from "@/types/type";
 import { ContainerDescriptionDivider } from "../../Container/ContainerDescriptionDivider";
+import { ContainerReference } from "@/components/PageElements/Container/ContainerReference";
 
 interface DetailingContentProps {
   data: ApiResponse;
