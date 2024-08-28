@@ -69,7 +69,7 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({ list }) => {
         >
           {list.map((item) => (
             <MenuItem key={item} onClick={handleCloseNavMenu}>
-              <Link href={item == "Nivelamento"? `/`: `/${item}`}>
+              <Link href={item ? `/${item}`: `/`}>
                 <Typography
                   textAlign="center"
                   sx={{ color: theme.palette.textColor?.light }}
