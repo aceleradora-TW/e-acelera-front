@@ -4,20 +4,15 @@ import { PageThemesContent } from "../../Content/PageThemesContent";
 import { LayoutPage } from "../../LayoutPage";
 import React from "react";
 
-interface RenderThemePageProps {
-  category: string;
-}
+export const RenderThemePage = (category: string)=> {
+    const { data: renderData } = useFetchData('/api/stackbyApi/Themes');
+    if (!renderData) {
+        return <Loading />
+    }
 
-export const RenderThemePage: React.FC<RenderThemePageProps> = ({ category }) => {
-  const { data: renderData } = useFetchData('/api/stackbyApi/Themes');
-  
-  if (!renderData) {
-    return <Loading />;
-  }
-
-  return (
-    <LayoutPage>
-      <PageThemesContent data={renderData} category={category} />
-    </LayoutPage>
-  );
+    return (
+        <LayoutPage>
+            <PageThemesContent data={renderData} category={category} />
+        </LayoutPage>
+    );
 }

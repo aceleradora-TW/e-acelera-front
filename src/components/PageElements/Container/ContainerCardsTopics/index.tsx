@@ -18,7 +18,7 @@ export const ContainerCardTopics: React.FC<ContainerCardTopicsProps> = ({ topics
   }
 
   return (
-    <Grid container spacing={2} columnSpacing={1} >
+    <Grid container spacing={2} columnSpacing={1}>
       {TopicsSeparator(topics).map((topic, index) => (
         <Grid
           item
