@@ -13,7 +13,7 @@ const components = {
   ),
 };
 interface CardVideoProps{
-  text : string;
+  text: string;
   title: string;
   linkVideo: string;
   references?: string;
@@ -45,9 +45,6 @@ export const CardVideo: React.FC<CardVideoProps>=({ text, title, linkVideo, refe
           <ReactMarkdown components={components}>
             {text}
           </ReactMarkdown>
-        </Box>
-        <Box sx={theme.customStyles.cardVideoSelect}>
-          <StatusSelect />
         </Box>
       </Box>
     </Box>

@@ -179,8 +179,7 @@ declare module "@mui/material/styles" {
         boxShadow: string;
         maxWidth: string;
         height: string;
-        margin: string;
-        marginTop: string;
+        boxSizing: string;
         borderRadius: string,
       };
       cardVideoLink:{
@@ -346,8 +345,7 @@ declare module "@mui/material/styles" {
         boxShadow?: string;
         maxWidth?: string;
         height?: string;
-        margin?: string;
-        marginTop?: string;
+        boxSizing?: string;
         borderRadius?: string;
       };
       cardVideoLink?:{
@@ -512,8 +510,7 @@ const theme = createTheme({
         boxShadow: "0em 0em 0.4em rgb(44 44 44 / 40%)",
         maxWidth: "100%",
         height: "100%",
-        margin: "24px",
-        marginTop: "17px",
+        boxSizing: "border-box",
         borderRadius: "6px",
     },
     cardVideoLink:{
