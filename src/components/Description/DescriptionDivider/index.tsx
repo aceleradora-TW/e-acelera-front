@@ -3,7 +3,7 @@ import { Divider, Box, Typography, useMediaQuery, Link } from "@mui/material";
 import { theme, themePalette } from "@/app/config/theme";
 import ReactMarkdown from "react-markdown";
 
-interface ContainerDescriptionDividerProps {
+interface DescriptionDividerProps {
   text: string;
 }
 
@@ -11,7 +11,7 @@ const boxStyle: object = {
   width: "49%"
 }
 
-export const ContainerDescriptionDivider: React.FC<ContainerDescriptionDividerProps> = ({ text }) => {
+export const DescriptionDivider: React.FC<DescriptionDividerProps> = ({ text }) => {
   const descriptionSize: number = text.length;
   const middleTextPoint: number = Math.floor(descriptionSize / 2);
 

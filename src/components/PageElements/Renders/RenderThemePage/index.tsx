@@ -4,8 +4,6 @@ import { PageThemesContent } from "../../Content/PageThemesContent";
 import { LayoutPage } from "../../LayoutPage";
 import React from "react";
 
-
-
 export const RenderThemePage = (category: string)=> {
     const { data: renderData } = useFetchData('/api/stackbyApi/Themes');
     if (!renderData) {

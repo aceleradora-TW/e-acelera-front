@@ -3,11 +3,11 @@ import { Box, Link, Typography } from "@mui/material";
 import { theme, themePalette } from "@/app/config/theme";
 import ReactMarkdown from "react-markdown";
 
-interface ContainerReferenceProps {
+interface DescriptionReferenceProps {
   text: string;
 }
 
-export const ContainerReference: React.FC<ContainerReferenceProps> = ({
+export const DescriptionReference: React.FC<DescriptionReferenceProps> = ({
   text,
 }) => {
   const components = {

@@ -49,8 +49,8 @@ export const DescriptionExercise: React.FC<DescriptionExerciseProps> = ({
           sx={{
             position: "relative",
             cursor: "pointer",
-            maxWidth: "100%", // Limita a largura para 100%
-            overflowX: "auto", // Adiciona scroll se necessário
+            maxWidth: "100%",
+            overflowX: "auto"
           }}
         >
           <SyntaxHighlighter
@@ -58,7 +58,7 @@ export const DescriptionExercise: React.FC<DescriptionExerciseProps> = ({
             language={match[1]}
             PreTag="div"
             {...props}
-            wrapLongLines // Adiciona wrap para evitar overflow em longas linhas de código
+            wrapLongLines
           >
             {codeString}
           </SyntaxHighlighter>
@@ -85,7 +85,7 @@ export const DescriptionExercise: React.FC<DescriptionExerciseProps> = ({
             backgroundColor: "#f5f5f5",
             padding: "2px 4px",
             borderRadius: "4px",
-            wordBreak: "break-word", // Quebra palavras longas
+            wordBreak: "break-word"
           }}
         >
           {children}

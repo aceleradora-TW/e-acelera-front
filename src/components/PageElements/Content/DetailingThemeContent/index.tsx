@@ -4,8 +4,7 @@ import { BreadCrumb } from "@/components/BreadCrumb";
 import { Title } from "@/components/title";
 import { ContainerCardTopics } from "../../Container/ContainerCardsTopics";
 import { ApiResponse, DataItem, ThemeField } from "@/types/type";
-import { ContainerDescriptionDivider } from "../../Container/ContainerDescriptionDivider";
-import { ContainerReference } from "@/components/PageElements/Container/ContainerReference";
+import { DescriptionDivider } from "../../../Description/DescriptionDivider";
 
 interface DetailingContentProps {
   data: ApiResponse;
@@ -30,7 +29,7 @@ export const DetailingThemeContent: React.FC<DetailingContentProps> = ({ data, i
               <Title text={element.field.title} />
             </Grid>
             <Grid item xl={12} lg={9} md={6} sm={3}>
-              <ContainerDescriptionDivider text={element.field.description} />
+              <DescriptionDivider text={element.field.description} />
             </Grid>
             <Grid item xl={12} lg={9} md={6} sm={3}>
               <Title text={"Tópicos"} />

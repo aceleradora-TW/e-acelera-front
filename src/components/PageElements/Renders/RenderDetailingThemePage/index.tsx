@@ -13,7 +13,6 @@ export const RenderDetailingThemePage = (id: string)=> {
   return (
     <LayoutPage>
       <DetailingThemeContent data={renderData} id={id} />
-      
     </LayoutPage>
   );
 }
