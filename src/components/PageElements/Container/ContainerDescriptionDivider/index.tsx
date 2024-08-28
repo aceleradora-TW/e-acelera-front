@@ -1,7 +1,6 @@
 import React from "react";
 import { Divider, Box, Typography, useMediaQuery, Link } from "@mui/material";
 import { theme, themePalette } from "@/app/config/theme";
-import { TextDescription } from "@/components/TextDescription";
 import ReactMarkdown from "react-markdown";
 
 interface ContainerDescriptionDividerProps {
@@ -38,7 +37,7 @@ export const ContainerDescriptionDivider: React.FC<ContainerDescriptionDividerPr
   };
 
   const typographyBreakLine = {
-    p: (props:React.HTMLAttributes<any> ) => (
+    p: (props:React.HTMLAttributes<HTMLHeadingElement> ) => (
       <Typography variant="body1" sx={{marginBottom: 3}} {...props} />
     ),
   }

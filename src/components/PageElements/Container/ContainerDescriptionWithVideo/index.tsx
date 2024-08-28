@@ -19,7 +19,8 @@ export const ContainerDescriptionWithVideo: React.FC<
 > = ({ text, textVideo, title, linkVideo, references }) => {
   const components = {
     p: (props: React.HTMLAttributes<HTMLHeadingElement>) => (
-      <Typography variant="body1" {...props} />
+      <Typography variant="body1" sx={{marginBottom: 3}} {...props} />
+
     ),
     a: (props: React.HTMLAttributes<HTMLAnchorElement>) => (
       <Link
