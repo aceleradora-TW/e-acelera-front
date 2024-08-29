@@ -7,6 +7,7 @@ import { ApiResponse, DataItem, TopicField } from "@/types/type";
 import { DescriptionDivider } from "../../../Description/DescriptionDivider";
 import { DescriptionReference } from "@/components/Description/DescriptionReference";
 import { ContainerCardsExercises } from "../../Container/ContainerCardsExercises";
+import { DescriptionWithVideo } from "@/components/Description/DescriptionWithVideo";
 
 interface DetailingContentProps {
   data: ApiResponse;
@@ -31,10 +32,8 @@ export const DetailingTopicContent: React.FC<DetailingContentProps> = ({ data, i
             <Grid item xl={12} lg={9} md={6} sm={3}>
               <BreadCrumb />
               <Title text={field.title} />
-            </Grid>
-            <Grid item xl={12} lg={9} md={6} sm={3}>
-              <DescriptionDivider text={field.description} />
-            </Grid>
+            </Grid>           
+              <DescriptionWithVideo textDescription={field.description} textVideo="" title="" linkVideo="" references=""/>
             <Grid item xl={12} lg={9} md={6} sm={3}>
               <Title text={"Exercícios"} />
             </Grid>
@@ -45,9 +44,7 @@ export const DetailingTopicContent: React.FC<DetailingContentProps> = ({ data, i
             <Grid item xl={12} lg={9} md={6} sm={3}>
               <Title text={"Referências"} />
             </Grid>
-            <Grid item xl={12} lg={12} md={12} sm={12}>
               <DescriptionReference text={field.references}/>
-            </Grid>
           </>
         )})}
     </>

@@ -34,7 +34,7 @@ export const DescriptionFull: React.FC<DescriptionFullProps> = ({
         sx={{
           color: themePalette.descriptionCard,
           textDecorationColor: themePalette.descriptionCard,
-          display: "block",
+          display: "inline-block",
         }}
         {...props}
       />
