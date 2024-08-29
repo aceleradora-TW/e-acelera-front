@@ -1,16 +1,16 @@
 import React, { useState } from "react";
-import { Box, Link, Typography, Snackbar, Alert } from "@mui/material";
+import { Box, Link, Typography, Snackbar, Alert, Grid } from "@mui/material";
 import { theme, themePalette } from "@/app/config/theme";
 import ReactMarkdown from "react-markdown";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { materialDark } from "react-syntax-highlighter/dist/cjs/styles/prism";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 
-interface DescriptionExerciseProps {
+interface DescriptionFullProps {
   text: string;
 }
 
-export const DescriptionExercise: React.FC<DescriptionExerciseProps> = ({
+export const DescriptionFull: React.FC<DescriptionFullProps> = ({
   text,
 }) => {
   const [copySuccess, setCopySuccess] = useState(false);
@@ -24,7 +24,7 @@ export const DescriptionExercise: React.FC<DescriptionExerciseProps> = ({
 
   const components = {
     p: (props: React.HTMLAttributes<HTMLParagraphElement>) => (
-      <Typography variant="body1" gutterBottom {...props} />
+      <Typography variant="body1" sx={{ marginBottom: 3 }} {...props} />
     ),
     a: (props: React.HTMLAttributes<HTMLAnchorElement>) => (
       <Link
@@ -45,20 +45,22 @@ export const DescriptionExercise: React.FC<DescriptionExerciseProps> = ({
       return !inline && match ? (
         <Box
           component="div"
-          onClick={() => handleCopy(codeString)}
           sx={{
             position: "relative",
-            cursor: "pointer",
-            maxWidth: "100%",
-            overflowX: "auto"
+            cursor: "pointer"  
           }}
+          onClick={() => handleCopy(codeString)}
         >
           <SyntaxHighlighter
             style={materialDark}
             language={match[1]}
             PreTag="div"
             {...props}
-            wrapLongLines
+            showLineNumbers={true}
+            customStyle={{
+              margin: 0,
+              borderRadius: "4px",
+            }}
           >
             {codeString}
           </SyntaxHighlighter>
@@ -68,6 +70,7 @@ export const DescriptionExercise: React.FC<DescriptionExerciseProps> = ({
               top: "24px",
               right: "16px",
               cursor: "pointer",
+              
             }}
             onClick={(e) => {
               e.stopPropagation();
@@ -85,7 +88,8 @@ export const DescriptionExercise: React.FC<DescriptionExerciseProps> = ({
             backgroundColor: "#f5f5f5",
             padding: "2px 4px",
             borderRadius: "4px",
-            wordBreak: "break-word"
+            wordBreak: "break-word",
+            whiteSpace: "pre-wrap",
           }}
         >
           {children}
@@ -95,12 +99,8 @@ export const DescriptionExercise: React.FC<DescriptionExerciseProps> = ({
   };
 
   return (
-    <Box
-      sx={{
-        ...theme.customStyles.description,
-        flexDirection: "column",
-      }}
-    >
+    <Grid container alignItems="stretch" sx={{...theme.customStyles.description, height: "100%"}}>
+      <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
       <ReactMarkdown components={components}>{text}</ReactMarkdown>
       <Snackbar
         open={copySuccess}
@@ -111,6 +111,7 @@ export const DescriptionExercise: React.FC<DescriptionExerciseProps> = ({
           Código copiado para a área de transferência!
         </Alert>
       </Snackbar>
-    </Box>
+      </Grid>
+    </Grid>
   );
 };

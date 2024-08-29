@@ -28,9 +28,7 @@ export const DetailingThemeContent: React.FC<DetailingContentProps> = ({ data, i
               <BreadCrumb />
               <Title text={element.field.title} />
             </Grid>
-            <Grid item xl={12} lg={9} md={6} sm={3}>
               <DescriptionDivider text={element.field.description} />
-            </Grid>
             <Grid item xl={12} lg={9} md={6} sm={3}>
               <Title text={"Tópicos"} />
             </Grid>
