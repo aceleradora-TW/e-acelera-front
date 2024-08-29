@@ -94,6 +94,9 @@ declare module "@mui/material/styles" {
         margin: string;
         borderRadius: string;
       };
+      linkReference:{
+        color: string;
+      },
       logoType: {
         fontSize: string;
         mr: number;
@@ -176,8 +179,7 @@ declare module "@mui/material/styles" {
         boxShadow: string;
         maxWidth: string;
         height: string;
-        margin: string;
-        marginTop: string;
+        boxSizing: string;
         borderRadius: string,
       };
       cardVideoLink:{
@@ -258,6 +260,9 @@ declare module "@mui/material/styles" {
         margin?: string;
         borderRadius?: string;
       };
+      linkReference:{
+        color?: string;
+      },
       logoType: {
         fontSize?: string;
         mr?: number;
@@ -340,8 +345,7 @@ declare module "@mui/material/styles" {
         boxShadow?: string;
         maxWidth?: string;
         height?: string;
-        margin?: string;
-        marginTop?: string;
+        boxSizing?: string;
         borderRadius?: string;
       };
       cardVideoLink?:{
@@ -389,7 +393,6 @@ const theme = createTheme({
     },
     description:{
       display: "flex",
-      flexDirection: "row",
       justifyContent: "space-between",
       padding: 2,
       boxShadow: "0em 0em 0.4em rgb(44 44 44 / 40% );",
@@ -422,6 +425,9 @@ const theme = createTheme({
       letterSpacing: 0.4,
       margin: "0 0.5rem",
       borderRadius: "0",
+    },
+    linkReference:{
+      color: themePalette.descriptionCard
     },
     logoType: {
       fontSize: "19.2px",
@@ -504,8 +510,7 @@ const theme = createTheme({
         boxShadow: "0em 0em 0.4em rgb(44 44 44 / 40%)",
         maxWidth: "100%",
         height: "100%",
-        margin: "24px",
-        marginTop: "17px",
+        boxSizing: "border-box",
         borderRadius: "6px",
     },
     cardVideoLink:{

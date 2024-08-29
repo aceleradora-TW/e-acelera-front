@@ -2,9 +2,9 @@ import React from "react";
 import { Grid } from "@mui/material";
 import { BreadCrumb } from "@/components/BreadCrumb";
 import { Title } from "@/components/title";
-import { ThemeDescription } from "@/components/Description/ThemeDescription";
 import { ContainerCardTopics } from "../../Container/ContainerCardsTopics";
 import { ApiResponse, DataItem, ThemeField } from "@/types/type";
+import { DescriptionDivider } from "../../../Description/DescriptionDivider";
 
 interface DetailingContentProps {
   data: ApiResponse;
@@ -28,9 +28,7 @@ export const DetailingThemeContent: React.FC<DetailingContentProps> = ({ data, i
               <BreadCrumb />
               <Title text={element.field.title} />
             </Grid>
-            <Grid item xl={12} lg={9} md={6} sm={3}>
-              <ThemeDescription text={element.field.description} />
-            </Grid>
+              <DescriptionDivider text={element.field.description} />
             <Grid item xl={12} lg={9} md={6} sm={3}>
               <Title text={"Tópicos"} />
             </Grid>
