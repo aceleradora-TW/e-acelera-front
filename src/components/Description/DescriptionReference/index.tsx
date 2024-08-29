@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Link, Typography } from "@mui/material";
+import { Box, Grid, Link, Typography } from "@mui/material";
 import { theme, themePalette } from "@/app/config/theme";
 import ReactMarkdown from "react-markdown";
 
@@ -11,9 +11,6 @@ export const DescriptionReference: React.FC<DescriptionReferenceProps> = ({
   text,
 }) => {
   const components = {
-    p: (props: React.HTMLAttributes<HTMLHeadingElement>) => (
-      <Typography variant="body1" {...props} />
-    ),
     a: (props: React.HTMLAttributes<HTMLAnchorElement>) => (
       <Link
         variant="caption"
@@ -29,8 +26,10 @@ export const DescriptionReference: React.FC<DescriptionReferenceProps> = ({
     ),
   };
   return (
-    <Box sx={{...theme.customStyles.description}}>
+    <Grid container alignItems="stretch" sx={{...theme.customStyles.description}}>
+      <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
       <ReactMarkdown components={components}>{text}</ReactMarkdown>
-    </Box>
+      </Grid>
+    </Grid>
   );
 };

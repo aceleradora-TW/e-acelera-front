@@ -2,6 +2,7 @@ import React from "react";
 import { Divider, Box, Typography, useMediaQuery, Link } from "@mui/material";
 import { theme, themePalette } from "@/app/config/theme";
 import ReactMarkdown from "react-markdown";
+import { DescriptionFull } from "../DescriptionFull";
 
 interface DescriptionDividerProps {
   text: string;
@@ -48,16 +49,11 @@ export const DescriptionDivider: React.FC<DescriptionDividerProps> = ({ text }) 
   const isSmallScreen: boolean = useMediaQuery(theme.breakpoints.down('md'));
 
   return (
-    <Box sx={{...theme.customStyles.description, flexDirection: isSmallScreen? "column": "row"}}>
+    <>
       {isSmallScreen ? (
-        <ReactMarkdown
-        components={typographyBreakLine}
-      >
-        {text}
-      </ReactMarkdown>
-        
+        <DescriptionFull text={text}/>
       ) : (
-        <>
+        <Box sx={{...theme.customStyles.description}}>
           <Box sx={boxStyle}>
             <ReactMarkdown components={components}>
               {textBox1.replace(/\n\n/g, "")}
@@ -71,8 +67,8 @@ export const DescriptionDivider: React.FC<DescriptionDividerProps> = ({ text }) 
               {textBox2.replace(/\n\n/g, "")}
             </ReactMarkdown>
           </Box>
-        </>
+        </Box>
       )}
-    </Box>
+    </>
   );
 };
