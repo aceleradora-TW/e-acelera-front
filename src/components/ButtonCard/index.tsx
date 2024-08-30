@@ -2,7 +2,7 @@ import * as React from 'react';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
-import { CardActionArea, CardActions, ThemeProvider } from '@mui/material';
+import { CardActionArea, CardActions } from '@mui/material';
 import StatusSelect from '../StatusSelect';
 import { useRouter } from 'next/navigation';
 import { theme } from '../../app/config/theme';
@@ -29,9 +29,8 @@ export const ButtonCard: React.FC<ButtonCardProps> = ({ title, description, rout
         router.push(`/${route}`)
     }
     return (
-        <ThemeProvider theme={theme}>
             <Card sx={theme.customStyles.cardButtonContainer}>
-                <CardActionArea onClick={() => handleClick(route)}>
+                <CardActionArea onClick={() => handleClick(route)} sx={}>
                     <CardContent sx={theme.customStyles.cardButtonContent}>
                         <Typography gutterBottom variant="h2" component="div" sx={theme.customStyles.cardTitle}>
                             {title}
@@ -41,10 +40,6 @@ export const ButtonCard: React.FC<ButtonCardProps> = ({ title, description, rout
                         </Typography>
                     </CardContent>
                 </CardActionArea>
-                <CardActions sx={{cardActionsStyle}}>
-                    <StatusSelect />
-                </CardActions>
             </Card>
-        </ThemeProvider>
     );
 }

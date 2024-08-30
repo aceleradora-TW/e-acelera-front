@@ -128,7 +128,7 @@ declare module "@mui/material/styles" {
         backgroundColor: string;
         maxWidth: number;
         borderWidth: number;
-        maxHeight: number;
+        height: string;
         "&:hover": {
           transform: string;
       }
@@ -294,7 +294,7 @@ declare module "@mui/material/styles" {
         backgroundColor?: string;
         maxWidth?: number;
         borderWidth?: number; 
-        maxHeight?: number;
+        height?: string;
         "&:hover": {
           transform?: string;
       }
@@ -460,7 +460,7 @@ const theme = createTheme({
       backgroundColor: themePalette.whiteBg,
       maxWidth: 316, 
       borderWidth: 2, 
-      maxHeight: 256, 
+      height: "100%", 
       "&:hover": {
        transform: "scale(1.1)"
       }

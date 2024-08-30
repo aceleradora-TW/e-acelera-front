@@ -18,10 +18,8 @@ export const ContainerCardsExercises: React.FC<ContainerCardsExercisesProps> = (
     return value.split(",");
   }
 
-  console.log("AQUIIIIII ", ExercisesSeparator(exercisesDescription))
-
   return (
-    <Grid container spacing={2} columnSpacing={1}>
+    <Grid container spacing={2} columnSpacing={1} alignItems="stretch">
       {ExercisesSeparator(exercises).map((exercise, index) => (
         <Grid
           item
@@ -37,8 +35,6 @@ export const ContainerCardsExercises: React.FC<ContainerCardsExercisesProps> = (
             title={exercise}
             description={ExercisesSeparator(exercisesDescription)[index]}
             route={`${currentPath}/${ExercisesSeparator(exercisesInfo)[index]}-${exercise}`}/>
-          
-          
         </Grid>
       ))}
     </Grid>
