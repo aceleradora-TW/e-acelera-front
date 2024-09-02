@@ -39,6 +39,9 @@ export interface TopicField extends CommonField {
     exercises: string;
     exercisesDescription: string;
     exercisesInfo: string;
+    videoDescription: string;
+    videoLink: string;
+    videoReference: string
 };
 
 export interface VideoField extends CommonField {

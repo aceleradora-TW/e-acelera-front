@@ -138,8 +138,10 @@ declare module "@mui/material/styles" {
         height: string;
       };
       cardButtonContent:{
-        paddingBottom: number;
-        paddingTop: number;
+        display: string; 
+        flexDirection: string; 
+        alignItems: string;
+        height: string;
       };
       cardMedia: {
         height: number;
@@ -304,8 +306,10 @@ declare module "@mui/material/styles" {
         height?: string;
       };
       cardButtonContent?:{
-        paddingBottom?: number; 
-        paddingTop?: number;
+        display?: string; 
+        flexDirection?: string; 
+        alignItems?: string;
+        height?: string;
       };
       cardMedia?: {
         height?: number;
@@ -470,8 +474,10 @@ const theme = createTheme({
       height: "100%"
     },
     cardButtonContent:{
-      paddingBottom: 1, 
-      paddingTop: 2
+      display: "flex", 
+      flexDirection: "column", 
+      alignItems: "flex-start",
+      height: "100%"
     }, 
     centralizeContent: {
       display: 'flex',

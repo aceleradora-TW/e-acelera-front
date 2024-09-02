@@ -1,4 +1,4 @@
-import { Grid, useMediaQuery } from "@mui/material";
+import { Grid, Typography, useMediaQuery } from "@mui/material";
 import React from "react";
 import { BaseCard } from "@/components/BaseCard";
 import { usePathname } from 'next/navigation';
@@ -9,7 +9,7 @@ interface ContainerCardsExercisesProps {
   exercisesInfo: string;
 }
 
-export const ContainerCardsExercises: React.FC<ContainerCardsExercisesProps> = ({ exercises, exercisesDescription, exercisesInfo}) => {
+export const ContainerCardsExercises: React.FC<ContainerCardsExercisesProps> = ({ exercises, exercisesDescription, exercisesInfo }) => {
   const between = useMediaQuery('(min-width: 800px) and (max-width: 899px)');
   const between2 = useMediaQuery('(min-width: 445px) and (max-width: 599px)');
   const pathname = usePathname()
@@ -19,24 +19,33 @@ export const ContainerCardsExercises: React.FC<ContainerCardsExercisesProps> = (
   }
 
   return (
-    <Grid container spacing={2} columnSpacing={1} alignItems="stretch">
-      {ExercisesSeparator(exercises).map((exercise, index) => (
-        <Grid
-          item
-          xl={3}
-          lg={3}
-          md={4}
-          sm={between ? 4 : 6}
-          xs={between2 ? 6 : 12}
-          key={index}
-          spacing={3}
-        >
-          <ButtonCard 
-            title={exercise}
-            description={ExercisesSeparator(exercisesDescription)[index]}
-            route={`${currentPath}/${ExercisesSeparator(exercisesInfo)[index]}-${exercise}`}/>
-        </Grid>
-      ))}
+    <Grid container spacing={2} columnSpacing={1} >
+      {exercises || exercisesDescription || exercisesInfo ? 
+        
+          ExercisesSeparator(exercises).map((exercise, index) => (
+            <Grid
+              item
+              xl={3}
+              lg={3}
+              md={4}
+              sm={between ? 4 : 6}
+              xs={between2 ? 6 : 12}
+              key={index}
+              spacing={3}
+            >
+              <ButtonCard
+                title={exercise}
+                description={ExercisesSeparator(exercisesDescription)[index]}
+                route={`${currentPath}/${ExercisesSeparator(exercisesInfo)[index]}-${exercise}`} />
+            </Grid>
+          ))
+        
+       : <Typography variant="body1">
+        nenhum exercicio encontrado
+      </Typography>}
     </Grid>
-  );
+  )
+
+
+
 };

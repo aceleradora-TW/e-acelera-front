@@ -19,8 +19,6 @@ export const DetailingTopicContent: React.FC<DetailingContentProps> = ({ data, i
     return pathname.split("-")[0];
   }
 
-  console.log("CONTENT ", id)
-
   return (
     <>
       {data && data.data
@@ -33,7 +31,7 @@ export const DetailingTopicContent: React.FC<DetailingContentProps> = ({ data, i
               <BreadCrumb />
               <Title text={field.title} />
             </Grid>           
-              <DescriptionWithVideo textDescription={field.description} textVideo="" title="" linkVideo="" references=""/>
+              <DescriptionWithVideo textDescription={field.description} textVideo={field.videoDescription} title={field.video} videoLink={field.videoLink} references={field.videoReference}/>
             <Grid item xl={12} lg={9} md={6} sm={3}>
               <Title text={"Exercícios"} />
             </Grid>
