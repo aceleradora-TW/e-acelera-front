@@ -16,6 +16,9 @@ export const ContainerCardsExercises: React.FC<ContainerCardsExercisesProps> = (
   const currentPath = pathname.slice(1)
 
   const splitValues = (value: string):string[] => value.split(",");
+  const exercisesArray = splitValues(exercises);
+  const descriptionsArray = splitValues(exercisesDescription);
+  const infoArray = splitValues(exercisesInfo);
 
   const isInvalidData = exercises.trim() == "Untitle"|| !exercises.trim() || !exercisesDescription.trim() || !exercisesInfo.trim(); 
 
@@ -26,7 +29,7 @@ export const ContainerCardsExercises: React.FC<ContainerCardsExercisesProps> = (
 
   return (
     <Grid container spacing={2} columnSpacing={1} >
-      {splitValues(exercises).map((exercise, index) => (
+      {exercisesArray.map((exercise, index) => (
         <Grid
           item
           xl={3}
@@ -39,8 +42,8 @@ export const ContainerCardsExercises: React.FC<ContainerCardsExercisesProps> = (
         >
           <ButtonCard
             title={exercise}
-            description={splitValues(exercisesDescription)[index]}
-            route={`${currentPath}/${splitValues(exercisesInfo)[index]}-${exercise}`} />
+            description={descriptionsArray[index]}
+            route={`${currentPath}/${infoArray[index]}-${exercise}`} />
         </Grid>
       ))
      }

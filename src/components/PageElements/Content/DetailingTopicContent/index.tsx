@@ -15,14 +15,11 @@ interface DetailingContentProps {
 }
 
 export const DetailingTopicContent: React.FC<DetailingContentProps> = ({ data, id }) => {
-  function extractID(pathname: string) {
-    return pathname.split("-")[0];
-  }
 
   return (
     <>
       {data && data.data
-        .filter((element: DataItem) => element.id === extractID(id))
+        .filter((element: DataItem) => element.id === id.split("-")[0])
         .map((element: DataItem) => {
           const field = element.field as TopicField;
           return (

@@ -7,6 +7,5 @@ export default function DetailingTopic({
 }: {
   params: { detailingTopic: string };
 }) {
-  const id = params.detailingTopic;
-  return RenderDetailingTopicPage(id)
+  return RenderDetailingTopicPage(params.detailingTopic)
 }
