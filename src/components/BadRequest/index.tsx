@@ -5,8 +5,8 @@ import Image from "next/image"
 export const BadRequest = () => {
     return (
         <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", height: "calc(100vh - 80px)", boxSizing: "border-box" }}>
-            <Image src={svgBadRequest} alt="Imagem de gatinho sobre erro de requisição"/>
-            <Typography variant="caption">Opss, estamos enfrentando dificuldades em baixar o conteúdo, tente novamente mais tarde!</Typography>
+            <Image src={svgBadRequest} alt="Ilustração de um gato brincando com um novelo de lã, com os números 503 indicando erro de serviço indisponível."/>
+            <Typography variant="caption">Estamos passando por dificuldades para carregar o conteúdo. Por favor, tente novamente em instantes.</Typography>
             <Link target="_blank" rel="noferrer" href="https://storyset.com/internet">Internet illustrations by Storyset</Link>
         </Box>
     )

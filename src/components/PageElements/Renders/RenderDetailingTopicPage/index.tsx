@@ -9,7 +9,7 @@ import { BadRequest } from "@/components/BadRequest";
 
 export const RenderDetailingTopicPage = (id: string)=> {
     const { data: renderData,  statusCode: code} = useFetchData('/api/stackbyApi/Topics');
-    console.log(code)
+
     if (!renderData) {
         return <Loading/>
     }

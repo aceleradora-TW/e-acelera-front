@@ -33,7 +33,6 @@ export const DescriptionWithVideo: React.FC<DescriptionWithVideoProps> = ({
   references,
 }) => {
 
-console.log(videoLink)
 const isLinkValid = isValidURL(videoLink);
 
   return (

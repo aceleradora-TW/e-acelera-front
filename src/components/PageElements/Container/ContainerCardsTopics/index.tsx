@@ -13,13 +13,12 @@ export const ContainerCardTopics: React.FC<ContainerCardTopicsProps> = ({ topics
   const between2 = useMediaQuery('(min-width: 445px) and (max-width: 599px)');
   const pathname = usePathname()
   const currentPath = pathname.slice(1)
-  function TopicsSeparator(value: string) {
-    return value.split(",");
-  }
+
+  const splitValues = (value: string):string[] => value.split(",");
 
   return (
     <Grid container spacing={2} columnSpacing={1}>
-      {TopicsSeparator(topics).map((topic, index) => (
+      {splitValues(topics).map((topic, index) => (
         <Grid
           item
           xl={3}
@@ -32,8 +31,8 @@ export const ContainerCardTopics: React.FC<ContainerCardTopicsProps> = ({ topics
         >
           <BaseCard
             title={topic}
-            description={TopicsSeparator(topicsDescription)[index]}
-            route={`${currentPath}/${TopicsSeparator(topicsInfo)[index]}-${topic}`}
+            description={splitValues(topicsDescription)[index]}
+            route={`${currentPath}/${splitValues(topicsInfo)[index]}-${topic}`}
           />
         </Grid>
       ))}
