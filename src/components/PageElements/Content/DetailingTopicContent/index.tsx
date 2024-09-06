@@ -2,9 +2,7 @@ import React from "react";
 import { Grid } from "@mui/material";
 import { BreadCrumb } from "@/components/BreadCrumb";
 import { Title } from "@/components/title";
-import { ContainerCardTopics } from "../../Container/ContainerCardsTopics";
 import { ApiResponse, DataItem, TopicField } from "@/types/type";
-import { DescriptionDivider } from "../../../Description/DescriptionDivider";
 import { DescriptionReference } from "@/components/Description/DescriptionReference";
 import { ContainerCardsExercises } from "../../Container/ContainerCardsExercises";
 import { DescriptionWithVideo } from "@/components/Description/DescriptionWithVideo";
@@ -15,33 +13,37 @@ interface DetailingContentProps {
 }
 
 export const DetailingTopicContent: React.FC<DetailingContentProps> = ({ data, id }) => {
+  const filteredData = data?.data.filter((element: DataItem) => element.id === id.split("-")[0]);
+  const TopicContent: React.FC<{ field: TopicField }> = ({ field }) => (
+    <>
+      <Grid item xl={12} lg={9} md={6} sm={3}>
+        <BreadCrumb />
+        <Title text={field.title} />
+      </Grid>
+      <DescriptionWithVideo textDescription={field.description} textVideo={field.videoDescription} title={field.video} videoLink={field.videoLink} references={field.videoReference} />
+      <Grid item xl={12} lg={9} md={6} sm={3}>
+        <Title text={"Exercícios"} />
+      </Grid>
+      <ContainerCardsExercises
+        exercises={field.exercises}
+        exercisesDescription={field.exercisesDescription}
+        exercisesInfo={field.exercisesInfo} />
+      <Grid item xl={12} lg={9} md={6} sm={3}>
+        <Title text={"Referências"} />
+      </Grid>
+      <DescriptionReference text={field.references} />
+    </>
+  )
 
   return (
     <>
-      {data && data.data
-        .filter((element: DataItem) => element.id === id.split("-")[0])
-        .map((element: DataItem) => {
-          const field = element.field as TopicField;
-          return (
-          <>
-            <Grid item xl={12} lg={9} md={6} sm={3}>
-              <BreadCrumb />
-              <Title text={field.title} />
-            </Grid>           
-              <DescriptionWithVideo textDescription={field.description} textVideo={field.videoDescription} title={field.video} videoLink={field.videoLink} references={field.videoReference}/>
-            <Grid item xl={12} lg={9} md={6} sm={3}>
-              <Title text={"Exercícios"} />
-            </Grid>
-            <ContainerCardsExercises  
-              exercises={field.exercises}
-              exercisesDescription={field.exercisesDescription}
-              exercisesInfo={field.exercisesInfo}/>
-            <Grid item xl={12} lg={9} md={6} sm={3}>
-              <Title text={"Referências"} />
-            </Grid>
-              <DescriptionReference text={field.references}/>
-          </>
-        )})}
+
+      {filteredData.map((element: DataItem) => (
+        <TopicContent key={element.id} field={element.field as TopicField} />
+      )
+      )
+      }
+
     </>
   );
 };

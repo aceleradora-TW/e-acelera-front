@@ -15,10 +15,13 @@ export const ContainerCardTopics: React.FC<ContainerCardTopicsProps> = ({ topics
   const currentPath = pathname.slice(1)
 
   const splitValues = (value: string):string[] => value.split(",");
+  const topicsArray = splitValues(topics);
+  const descriptionsArray = splitValues(topicsDescription);
+  const infoArray = splitValues(topicsInfo);
 
   return (
     <Grid container spacing={2} columnSpacing={1}>
-      {splitValues(topics).map((topic, index) => (
+      {topicsArray.map((topic, index) => (
         <Grid
           item
           xl={3}
@@ -31,8 +34,8 @@ export const ContainerCardTopics: React.FC<ContainerCardTopicsProps> = ({ topics
         >
           <BaseCard
             title={topic}
-            description={splitValues(topicsDescription)[index]}
-            route={`${currentPath}/${splitValues(topicsInfo)[index]}-${topic}`}
+            description={descriptionsArray[index]}
+            route={`${currentPath}/${infoArray[index]}-${topic}`}
           />
         </Grid>
       ))}
