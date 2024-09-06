@@ -10,35 +10,32 @@ interface DetailingContentProps {
   data: ApiResponse;
   id: string;
 }
-
+const ThemeContent: React.FC<{ field: ThemeField }> = ({ field }) => (
+  <>
+    <Grid item xl={12} lg={9} md={6} sm={3}>
+      <BreadCrumb />
+      <Title text={field.title} />
+    </Grid>
+    <DescriptionDivider text={field.description} />
+    <Grid item xl={12} lg={9} md={6} sm={3}>
+      <Title text={"Tópicos"} />
+    </Grid>
+    <ContainerCardTopics
+      topics={field.topics}
+      topicsDescription={field.topicsDescription}
+      topicsInfo={field.topicsInfo}
+    />
+  </>
+)
 export const DetailingThemeContent: React.FC<DetailingContentProps> = ({ data, id }) => {
-  function extractID(pathname: string) {
-    return pathname.split("-")[0];
-  }
-
+  const filteredData = data?.data.filter((element: DataItem) => element.id === id.split("-")[0]);
+  
   return (
     <>
-      {data && data.data
-        .filter((element: DataItem) => element.id === extractID(id))
-        .map((element: DataItem) => {
-          const field = element.field as ThemeField;
-          return (
-          <>
-            <Grid item xl={12} lg={9} md={6} sm={3}>
-              <BreadCrumb />
-              <Title text={element.field.title} />
-            </Grid>
-              <DescriptionDivider text={element.field.description} />
-            <Grid item xl={12} lg={9} md={6} sm={3}>
-              <Title text={"Tópicos"} />
-            </Grid>
-            <ContainerCardTopics 
-              topics={field.topics}
-              topicsDescription={field.topicsDescription}
-              topicsInfo={field.topicsInfo}
-            />
-          </>
-        )})}
+      {filteredData
+        .map((element: DataItem) => (
+          <ThemeContent key={element.id} field={element.field as ThemeField} />
+        ))}
     </>
   );
 };

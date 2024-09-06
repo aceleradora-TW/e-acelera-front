@@ -12,22 +12,32 @@ interface DescriptionWithVideoProps {
   textDescription: string;
   textVideo: string;
   title: string;
-  linkVideo: string;
+  videoLink: string;
   references: string;
 }
+
+const isValidURL = (url: string): boolean => {
+  try {
+    new URL(url);
+    return true;
+  } catch (_) {
+    return false;
+  }
+};
 
 export const DescriptionWithVideo: React.FC<DescriptionWithVideoProps> = ({
   textDescription,
   textVideo,
   title,
-  linkVideo,
+  videoLink,
   references,
 }) => {
 
+const isLinkValid = isValidURL(videoLink);
 
   return (
     <>
-      {!linkVideo.trim() || !textVideo.trim() || !title.trim() ? (
+      {!isLinkValid ? (
         <DescriptionFull text={textDescription} />
       ) : (
         <Grid container columnSpacing={3} rowSpacing={3} alignItems="stretch">
@@ -38,7 +48,7 @@ export const DescriptionWithVideo: React.FC<DescriptionWithVideoProps> = ({
             <CardVideo
               text={textVideo}
               title={title}
-              linkVideo={linkVideo}
+              videoLink={videoLink}
               references={references}
             />
           </Grid>

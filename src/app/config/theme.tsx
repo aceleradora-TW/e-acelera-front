@@ -128,7 +128,7 @@ declare module "@mui/material/styles" {
         backgroundColor: string;
         maxWidth: number;
         borderWidth: number;
-        maxHeight: number;
+        height: string;
         "&:hover": {
           transform: string;
       }
@@ -138,8 +138,10 @@ declare module "@mui/material/styles" {
         height: string;
       };
       cardButtonContent:{
-        paddingBottom: number;
-        paddingTop: number;
+        display: string; 
+        flexDirection: string; 
+        alignItems: string;
+        height: string;
       };
       cardMedia: {
         height: number;
@@ -294,7 +296,7 @@ declare module "@mui/material/styles" {
         backgroundColor?: string;
         maxWidth?: number;
         borderWidth?: number; 
-        maxHeight?: number;
+        height?: string;
         "&:hover": {
           transform?: string;
       }
@@ -304,8 +306,10 @@ declare module "@mui/material/styles" {
         height?: string;
       };
       cardButtonContent?:{
-        paddingBottom?: number; 
-        paddingTop?: number;
+        display?: string; 
+        flexDirection?: string; 
+        alignItems?: string;
+        height?: string;
       };
       cardMedia?: {
         height?: number;
@@ -460,7 +464,7 @@ const theme = createTheme({
       backgroundColor: themePalette.whiteBg,
       maxWidth: 316, 
       borderWidth: 2, 
-      maxHeight: 256, 
+      height: "100%", 
       "&:hover": {
        transform: "scale(1.1)"
       }
@@ -470,8 +474,10 @@ const theme = createTheme({
       height: "100%"
     },
     cardButtonContent:{
-      paddingBottom: 1, 
-      paddingTop: 2
+      display: "flex", 
+      flexDirection: "column", 
+      alignItems: "flex-start",
+      height: "100%"
     }, 
     centralizeContent: {
       display: 'flex',

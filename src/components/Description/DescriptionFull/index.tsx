@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Box, Link, Typography, Snackbar, Alert, Grid } from "@mui/material";
+import { Box, Link, Typography, Snackbar, Alert, Grid, List } from "@mui/material";
 import { theme, themePalette } from "@/app/config/theme";
 import ReactMarkdown from "react-markdown";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
@@ -24,7 +24,10 @@ export const DescriptionFull: React.FC<DescriptionFullProps> = ({
 
   const components = {
     p: (props: React.HTMLAttributes<HTMLParagraphElement>) => (
-      <Typography variant="body1" sx={{ marginBottom: 3 }} {...props} />
+      <Typography variant="body1" sx={{marginTop: 2 }} {...props} />
+    ),
+    ul: (props: React.HTMLAttributes<HTMLUListElement>) => (  
+      <ul  {...props}></ul>
     ),
     a: (props: React.HTMLAttributes<HTMLAnchorElement>) => (
       <Link
@@ -34,7 +37,7 @@ export const DescriptionFull: React.FC<DescriptionFullProps> = ({
         sx={{
           color: themePalette.descriptionCard,
           textDecorationColor: themePalette.descriptionCard,
-          display: "block",
+          display: "inline-block",
         }}
         {...props}
       />

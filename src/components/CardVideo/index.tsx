@@ -1,7 +1,6 @@
 import React from "react";
 import { Box, Typography } from "@mui/material";
 import { theme } from "../../app/config/theme";
-import StatusSelect from "@/components/StatusSelect";
 import ReactMarkdown from "react-markdown";
 
 const components = {
@@ -15,10 +14,10 @@ const components = {
 interface CardVideoProps{
   text: string;
   title: string;
-  linkVideo: string;
+  videoLink: string;
   references?: string;
 }
-export const CardVideo: React.FC<CardVideoProps>=({ text, title, linkVideo, references }) => {
+export const CardVideo: React.FC<CardVideoProps>=({ text, title, videoLink, references }) => {
 
   function getYouTubeEmbedUrl(url: string): string {
     const videoId = url.split('v=')[1]?.split('&')[0];
@@ -31,7 +30,8 @@ export const CardVideo: React.FC<CardVideoProps>=({ text, title, linkVideo, refe
         <iframe
           width="100%"
           height="332"
-          src={getYouTubeEmbedUrl(linkVideo)}
+          src={getYouTubeEmbedUrl(videoLink)}
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen
         />
         <Box sx={theme.customStyles.cardVideoNumber}>
           <ReactMarkdown components={components}>

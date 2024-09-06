@@ -34,9 +34,14 @@ export interface ThemeField extends CommonField {
 export interface TopicField extends CommonField {
     cardDescription: string;
     video: string;
-    references: string | null;
+    references: string;
     theme: string;
     exercises: string;
+    exercisesDescription: string;
+    exercisesInfo: string;
+    videoDescription: string;
+    videoLink: string;
+    videoReference: string
 };
 
 export interface VideoField extends CommonField {
