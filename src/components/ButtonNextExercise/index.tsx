@@ -23,6 +23,7 @@ interface ButtonNextProps {
 
 export const ButtonNextExercise: React.FC<ButtonNextProps> = ({ idExercise }) => {
     const { data: renderData } = useFetchData('/api/stackbyApi/Topics');
+    const router = useRouter()
     const pathname = usePathname()
     const partsPathname = pathname.split("/")
     const idExerciseBase = idExercise.split("-")[0]
@@ -40,8 +41,6 @@ export const ButtonNextExercise: React.FC<ButtonNextProps> = ({ idExercise }) =>
         const currentExerciseIndex = exerciseIds.indexOf(idExerciseBase)
         const nextExerciseName = exerciseNames[currentExerciseIndex + 1] || null
         const nextExerciseId = exerciseIds[currentExerciseIndex + 1] || null
-
-        const router = useRouter()
 
         const handleClick = () => {
             router.push(`${nextExerciseId}-${nextExerciseName}`)
