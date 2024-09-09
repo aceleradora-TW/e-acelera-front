@@ -26,8 +26,8 @@ export const AdvanceExercises: React.FC<sequenceExercises> = ({
   });
 
   const EvolutionComponent = styled(Typography)<TypographyProps>(() => ({
-    padding: "0.437rem 2rem", 
-    [theme.breakpoints.up('sm')]: { 
+    padding: "0.437rem 2rem",
+    [theme.breakpoints.up("sm")]: {
       padding: "0.875rem 4rem",
     },
   }));
@@ -38,9 +38,13 @@ export const AdvanceExercises: React.FC<sequenceExercises> = ({
     const idIndex = exerciseInfo.indexOf(idExerciseBase) + 1;
 
     return (
-      <EvolutionComponent variant="caption" sx={theme.customStyles.advanceExercises}>
+      <EvolutionComponent
+        variant="caption"
+        sx={theme.customStyles.advanceExercises}
+      >
         {`${idIndex}/${exerciseInfo.length}`}
       </EvolutionComponent>
     );
   }
+  return null;
 };
