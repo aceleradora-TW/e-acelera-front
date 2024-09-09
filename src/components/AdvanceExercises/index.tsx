@@ -1,16 +1,46 @@
-import { Box, Typography } from "@mui/material";
-import useFetchData from "@/components/fetchData";
+import { Typography, TypographyProps } from "@mui/material";
+import { styled } from "@mui/material/styles";
+import useFetchData from "../fetchData";
+import { DataItem, TopicField } from "@/types/type";
+import { usePathname } from "next/navigation";
+import { theme } from "@/app/config/theme";
+
+function isTopicField(field: any): field is TopicField {
+  return "exercisesInfo" in field;
+}
 
 interface sequenceExercises {
-  text: string;
+  idExercises: string;
 }
 
-export const AdvanceExercises: React.FC<sequenceExercises> = ({text}) =>{
+export const AdvanceExercises: React.FC<sequenceExercises> = ({
+  idExercises,
+}) => {
+  const { data: renderData } = useFetchData("/api/stackbyApi/Topics");
+  const pathname = usePathname();
+  const partsPathname = pathname.split("/");
+  const idExerciseBase = idExercises.split("-")[0];
+  const idTopicBase = partsPathname[partsPathname.length - 2]?.split("-")[0];
+  const currentTopic = renderData?.data.find((element: DataItem) => {
+    return element.field.rowId === idTopicBase;
+  });
 
-  return(
+  const EvolutionComponent = styled(Typography)<TypographyProps>(() => ({
+    padding: "0.437rem 2rem", 
+    [theme.breakpoints.up('sm')]: { 
+      padding: "0.875rem 4rem",
+    },
+  }));
 
-    <Box sx={{display: "flex", flexWrap: "wrap"}}>
-     <Typography variant="caption" sx={{color: "#002C53",backgroundColor: "#FFDE6B", borderRadius: "10px", padding: "14px 64px"}}>{text}</Typography>
-    </Box>
-  )
-}
+  if (currentTopic && isTopicField(currentTopic.field)) {
+    const topicField = currentTopic.field;
+    const exerciseInfo = topicField.exercisesInfo?.split(",") || [];
+    const idIndex = exerciseInfo.indexOf(idExerciseBase) + 1;
+
+    return (
+      <EvolutionComponent variant="caption" sx={theme.customStyles.advanceExercises}>
+        {`${idIndex}/${exerciseInfo.length}`}
+      </EvolutionComponent>
+    );
+  }
+};
