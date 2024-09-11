@@ -26,8 +26,7 @@ const ContainerButtonFail = () => {
 }
 
 function isTopicField(field: CommonField): field is TopicField {
-    return 'exercisesInfo' in field;
-}
+    return field && "exercisesInfo" in field;}
 
 interface ButtonNextProps {
     idExercise: string;
