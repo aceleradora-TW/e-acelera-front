@@ -5,7 +5,7 @@ export interface DataItem {
     id: string;
     field: CommonField | ThemeField | TopicField | VideoField | ExercisesField;
 }
-interface CommonField {
+export interface CommonField {
     rowId: string;
     sequence: number;
     isConfigure: number;

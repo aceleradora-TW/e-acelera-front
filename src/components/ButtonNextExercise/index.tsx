@@ -2,7 +2,7 @@ import { theme } from "@/app/config/theme";
 import { Button, ButtonProps, Stack, styled } from "@mui/material";
 import { useRouter, usePathname } from 'next/navigation';
 import useFetchData from "../fetchData";
-import { DataItem, TopicField } from "@/types/type";
+import { CommonField, DataItem, TopicField } from "@/types/type";
 import { ClickButton } from "../ClickButton";
 
 const ButtonFail = styled(Button)<ButtonProps>(() => ({
@@ -25,7 +25,7 @@ const ContainerButtonFail = () => {
     )
 }
 
-function isTopicField(field: any): field is TopicField {
+function isTopicField(field: CommonField): field is TopicField {
     return 'exercisesInfo' in field;
 }
 
