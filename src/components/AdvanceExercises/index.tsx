@@ -19,9 +19,9 @@ export const AdvanceExercises: React.FC<sequenceExercises> = ({
   const { data: renderData } = useFetchData("/api/stackbyApi/Topics");
   const pathname = usePathname();
   const partsPathname = pathname.split("/");
-  const idExerciseBase = idExercises.split("-")[0];
-  const idTopicBase = partsPathname[partsPathname.length - 2]?.split("-")[0];
-  const currentTopic = renderData?.data.find((element: DataItem) => {
+  const [idExerciseBase] = idExercises.split("-");
+  const [idTopicBase] = partsPathname[partsPathname.length - 2]?.split("-") || [ ];
+  const currentTopic = renderData?.data?.find((element: DataItem) => {
     return element.field.rowId === idTopicBase;
   });
 
@@ -34,7 +34,7 @@ export const AdvanceExercises: React.FC<sequenceExercises> = ({
 
   if (currentTopic && isTopicField(currentTopic.field)) {
     const topicField = currentTopic.field;
-    const exerciseInfo = topicField.exercisesInfo?.split(",") || [];
+    const [exerciseInfo] = topicField.exercisesInfo?.split(",") || [];
     const idIndex = exerciseInfo.indexOf(idExerciseBase) + 1;
 
     return (
