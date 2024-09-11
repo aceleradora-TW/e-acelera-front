@@ -1,11 +1,11 @@
 import { Typography, TypographyProps } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import useFetchData from "../fetchData";
-import { DataItem, TopicField } from "@/types/type";
+import { CommonField, DataItem, TopicField } from "@/types/type";
 import { usePathname } from "next/navigation";
 import { theme } from "@/app/config/theme";
 
-function isTopicField(field: any): field is TopicField {
+function isTopicField(field:CommonField): field is TopicField {
   return "exercisesInfo" in field;
 }
 
@@ -17,13 +17,15 @@ export const AdvanceExercises: React.FC<sequenceExercises> = ({
   idExercises,
 }) => {
   const { data: renderData } = useFetchData("/api/stackbyApi/Topics");
+  if(!renderData) return null
   const pathname = usePathname();
   const partsPathname = pathname.split("/");
   const [idExerciseBase] = idExercises.split("-");
-  const [idTopicBase] = partsPathname[partsPathname.length - 2]?.split("-") || [ ];
+  const [idTopicBase] = partsPathname[partsPathname.length - 2]?.split("-") || [];
   const currentTopic = renderData?.data?.find((element: DataItem) => {
     return element.field.rowId === idTopicBase;
   });
+
 
   const EvolutionComponent = styled(Typography)<TypographyProps>(() => ({
     padding: "0.437rem 2rem",
@@ -31,7 +33,7 @@ export const AdvanceExercises: React.FC<sequenceExercises> = ({
       padding: "0.875rem 4rem",
     },
   }));
-
+ 
   if (currentTopic && isTopicField(currentTopic.field)) {
     const topicField = currentTopic.field;
     const [exerciseInfo] = topicField.exercisesInfo?.split(",") || [];
