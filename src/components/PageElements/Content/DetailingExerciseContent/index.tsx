@@ -1,0 +1,37 @@
+import React from "react";
+import { Grid } from "@mui/material";
+import { BreadCrumb } from "@/components/BreadCrumb";
+import { Title } from "@/components/title";
+import { ApiResponse, DataItem, ExercisesField } from "@/types/type";
+import { DescriptionFull } from "@/components/Description/DescriptionFull";
+import { ButtonNextExercise } from "@/components/ButtonNextExercise";
+
+interface DetailingContentProps {
+  data: ApiResponse;
+  id: string;
+}
+
+const ExerciseContent: React.FC<{ field: ExercisesField, idExercise: string}> = ({ field, idExercise }) => (
+  <>
+    <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
+      <BreadCrumb />
+      <Title text={field.title} />
+    </Grid>
+    <DescriptionFull text={field.description} />
+    <Grid item xl={12} lg={12} md={12} sm={12} xs={12} sx={{ justifyContent: 'end', display: "flex"}}>
+     <ButtonNextExercise idExercise={idExercise}/>
+    </Grid>
+  </>
+)
+
+export const DetailingExerciseContent: React.FC<DetailingContentProps> = ({ data, id }) => {
+  const filteredData = data?.data.filter((element: DataItem) => element.id === id.split("-")[0]);
+
+  return (
+    <>
+      {filteredData.map((element: DataItem) => (
+        <ExerciseContent key={element.id} idExercise={id} field={element.field as ExercisesField} />
+      ))}
+    </>
+  );
+};

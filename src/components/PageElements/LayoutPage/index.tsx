@@ -9,7 +9,7 @@ interface LayoutPageProps {
 export const LayoutPage: React.FC<LayoutPageProps> = ({ children }) => {
   return (
     <Box sx={theme.customStyles.centralizeContent}>
-      <Grid container columns={{ xl: 12, lg: 9, md: 6, sm: 3 }} rowSpacing={3} 
+      <Grid container columns={{ xl: 12, lg: 9, md: 6, sm: 3, xs: 3 }} rowSpacing={3} 
         mx={{ xs: 2, sm: 3, md: 6, lg: 8, xl: 8 }}>
         {children}
       </Grid>
