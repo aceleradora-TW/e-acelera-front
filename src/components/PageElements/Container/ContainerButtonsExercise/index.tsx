@@ -1,10 +1,11 @@
 import { ButtonPreviousExercise } from "@/components/ButtonPreviousExercise";
 import { ButtonNextExercise } from "@/components/ButtonNextExercise";
 import { Grid } from "@mui/material";
+import { ApiResponse } from "@/types/type";
 
 
 interface ContainerButtonsExerciseProps {
-  renderData: string;
+  renderData: ApiResponse;
   idExercise: string;
 }
 

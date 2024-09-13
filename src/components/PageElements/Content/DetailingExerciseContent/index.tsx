@@ -5,17 +5,19 @@ import { Title } from "@/components/title";
 import { ApiResponse, DataItem, ExercisesField } from "@/types/type";
 import { DescriptionFull } from "@/components/Description/DescriptionFull";
 import { AdvanceExercises } from "@/components/AdvanceExercises";
-
+import { ContainerButtonsExercise } from "../../Container/ContainerButtonsExercise";
 
 interface DetailingContentProps {
-  data: ApiResponse;
+  dataTopic: ApiResponse;
+  dataExercise: ApiResponse;
   id: string;
 }
 
 const ExerciseContent: React.FC<{
   field: ExercisesField;
   idExercise: string;
-}> = ({ field, idExercise }) => (
+  dataTopic: ApiResponse;
+}> = ({ field, idExercise, dataTopic }) => (
   <>
     <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
       <BreadCrumb />
@@ -45,14 +47,16 @@ const ExerciseContent: React.FC<{
     </Grid>
 
     <DescriptionFull text={field.description} />
+    <ContainerButtonsExercise renderData={dataTopic} idExercise={idExercise}/>
   </>
 );
 
 export const DetailingExerciseContent: React.FC<DetailingContentProps> = ({
-  data,
+  dataTopic,
+  dataExercise,
   id,
 }) => {
-  const filteredData = data?.data.filter(
+  const filteredData = dataExercise?.data.filter(
     (element: DataItem) => element.id === id.split("-")[0]
   );
 
@@ -60,6 +64,7 @@ export const DetailingExerciseContent: React.FC<DetailingContentProps> = ({
     <>
       {filteredData.map((element: DataItem) => (
         <ExerciseContent
+          dataTopic={dataTopic}
           key={element.id}
           idExercise={id}
           field={element.field as ExercisesField}

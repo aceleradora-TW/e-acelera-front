@@ -6,20 +6,21 @@ import { BadRequest } from "@/components/BadRequest";
 import { DetailingExerciseContent } from "../../Content/DetailingExerciseContent";
 
 export const RenderDetailingExercisePage = (id: string)=> {
-    const { data: renderData,  statusCode: code} = useFetchData('/api/stackbyApi/Exercises');
+    const { data: renderDataExercise,  statusCode: codeExercise} = useFetchData('/api/stackbyApi/Exercises');
+    const { data: renderDataTopic,  statusCode: codeTopic} = useFetchData('/api/stackbyApi/Topic');
 
 
 
-    if (!renderData) {
+    if (!renderDataTopic && !renderDataExercise) {
         return <Loading/>
     }
-    if(code >= 300){
+    if(codeExercise >= 300){
      return <BadRequest/>
     }
 
   return (
     <LayoutPage>
-      <DetailingExerciseContent data={renderData} id={id} />
+      <DetailingExerciseContent dataExercise={renderDataExercise} dataTopic={renderDataTopic} id={id} />
     </LayoutPage>
   );
 }
