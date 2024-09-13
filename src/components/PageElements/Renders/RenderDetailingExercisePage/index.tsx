@@ -7,11 +7,8 @@ import { DetailingExerciseContent } from "../../Content/DetailingExerciseContent
 
 export const RenderDetailingExercisePage = (id: string)=> {
     const { data: renderDataExercise,  statusCode: codeExercise} = useFetchData('/api/stackbyApi/Exercises');
-    const { data: renderDataTopic,  statusCode: codeTopic} = useFetchData('/api/stackbyApi/Topic');
 
-
-
-    if (!renderDataTopic && !renderDataExercise) {
+    if ( !renderDataExercise) {
         return <Loading/>
     }
     if(codeExercise >= 300){
@@ -20,7 +17,7 @@ export const RenderDetailingExercisePage = (id: string)=> {
 
   return (
     <LayoutPage>
-      <DetailingExerciseContent dataExercise={renderDataExercise} dataTopic={renderDataTopic} id={id} />
+      <DetailingExerciseContent dataExercise={renderDataExercise}  id={id} />
     </LayoutPage>
   );
 }

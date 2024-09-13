@@ -8,7 +8,7 @@ import { AdvanceExercises } from "@/components/AdvanceExercises";
 import { ContainerButtonsExercise } from "../../Container/ContainerButtonsExercise";
 
 interface DetailingContentProps {
-  dataTopic: ApiResponse;
+  
   dataExercise: ApiResponse;
   id: string;
 }
@@ -16,8 +16,8 @@ interface DetailingContentProps {
 const ExerciseContent: React.FC<{
   field: ExercisesField;
   idExercise: string;
-  dataTopic: ApiResponse;
-}> = ({ field, idExercise, dataTopic }) => (
+  
+}> = ({ field, idExercise, }) => (
   <>
     <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
       <BreadCrumb />
@@ -47,12 +47,12 @@ const ExerciseContent: React.FC<{
     </Grid>
 
     <DescriptionFull text={field.description} />
-    <ContainerButtonsExercise renderData={dataTopic} idExercise={idExercise}/>
+    <ContainerButtonsExercise idExercise={idExercise}/>
   </>
 );
 
 export const DetailingExerciseContent: React.FC<DetailingContentProps> = ({
-  dataTopic,
+
   dataExercise,
   id,
 }) => {
@@ -64,7 +64,7 @@ export const DetailingExerciseContent: React.FC<DetailingContentProps> = ({
     <>
       {filteredData.map((element: DataItem) => (
         <ExerciseContent
-          dataTopic={dataTopic}
+          
           key={element.id}
           idExercise={id}
           field={element.field as ExercisesField}

@@ -2,16 +2,19 @@ import { ButtonPreviousExercise } from "@/components/ButtonPreviousExercise";
 import { ButtonNextExercise } from "@/components/ButtonNextExercise";
 import { Grid } from "@mui/material";
 import { ApiResponse } from "@/types/type";
+import useFetchData from "@/components/fetchData";
 
 
 interface ContainerButtonsExerciseProps {
-  renderData: ApiResponse;
   idExercise: string;
 }
 
 export const ContainerButtonsExercise: React.FC<
   ContainerButtonsExerciseProps
-> = ({ renderData, idExercise }) => {
+> = ({ idExercise }) => {
+  const { data: renderDataTopic,  statusCode: codeTopic} = useFetchData('/api/stackbyApi/Topics');
+
+  if(renderDataTopic){
   return (
     <Grid
       container
@@ -25,17 +28,20 @@ export const ContainerButtonsExercise: React.FC<
         flexWrap: "wrap",
         justifyContent: "space-between",
         alignItems: "center",
+        margin: "20px 0",
+        gap: "20px"
       }}
     >
       <Grid item>
         <ButtonPreviousExercise
-          renderData={renderData}
+          renderData={renderDataTopic}
           idExercise={idExercise}
         />
       </Grid>
       <Grid item>
-        <ButtonNextExercise renderData={renderData} idExercise={idExercise} />
+        <ButtonNextExercise renderData={renderDataTopic} idExercise={idExercise} />
       </Grid>
     </Grid>
-  );
+  );}
+  return null
 };
