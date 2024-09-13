@@ -4,7 +4,7 @@ import {
   PaletteColor,
   PaletteColorOptions,
   ThemeProvider,
-  createTheme
+  createTheme,
 } from "@mui/material";
 
 import React from "react";
@@ -208,6 +208,12 @@ declare module "@mui/material/styles" {
         marginTop: number, 
         marginRight: number
       };
+      advanceExercises: {
+        color: string,
+        background: string,
+        borderRadius: string,
+        padding: string,
+      };
     };
   }
 
@@ -376,6 +382,12 @@ declare module "@mui/material/styles" {
             marginTop?: number, 
             marginRight?: number
           };
+          advanceExercises?: {
+            color?: string,
+            background?: string,
+            borderRadius?: string,
+            padding?: string,
+          };
       };
     }
   }
@@ -543,6 +555,11 @@ const theme = createTheme({
       marginTop: 5, 
       marginRight: 1.3
     },
+    advanceExercises: {
+      color: themePalette.button,
+      background: themePalette.statusInProgress,
+      borderRadius: "10px",
+    }
   },
   palette: {
     statusSelect: {
@@ -585,9 +602,7 @@ const theme = createTheme({
       [`@media (min-width:1536px)`]: {
         fontSize: "3.5rem",
       }
-      
     },
-
     h2: {
       lineHeight: 1.6,
       fontWeight: 500,
@@ -609,8 +624,7 @@ const theme = createTheme({
       fontSize: "1rem",
       lineHeight: 1.5,
       fontWeight: 400,
-      letterSpacing: 0.15,
-      
+      letterSpacing: 0.15,  
     },
     caption: {
       fontSize: "1.4rem",
