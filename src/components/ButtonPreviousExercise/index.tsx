@@ -18,7 +18,7 @@ const ContainerButtonFail = () => {
         <aside>
             <Stack spacing={2} direction="row">
                 <ButtonFail sx={theme.customStyles.button} variant="contained">
-                    Próximo exercício
+                   Exercício anterior
                 </ButtonFail>
             </Stack>
         </aside>
@@ -33,7 +33,8 @@ interface ButtonNextProps {
     renderData: string;
 }
 
-export const ButtonNextExercise: React.FC<ButtonNextProps> = ({ idExercise, renderData  }) => {
+export const ButtonPreviousExercise: React.FC<ButtonNextProps> = ({ idExercise, renderData }) => {
+    
     const router = useRouter()
     const pathname = usePathname()
 
@@ -52,16 +53,16 @@ export const ButtonNextExercise: React.FC<ButtonNextProps> = ({ idExercise, rend
         const exerciseNames = topicField.exercises?.split(",") || []
 
         const currentExerciseIndex = exerciseIds.indexOf(idExerciseBase)
-        const nextExerciseName = exerciseNames[currentExerciseIndex + 1] || null
-        const nextExerciseId = exerciseIds[currentExerciseIndex + 1] || null
+        const PreviousExerciseName = exerciseNames[currentExerciseIndex - 1] || null
+        const PreviousExerciseId = exerciseIds[currentExerciseIndex - 1] || null
 
         const handleClick = () => {
-            router.push(`${nextExerciseId}-${nextExerciseName}`)
+            router.push(`${PreviousExerciseId}-${PreviousExerciseName}`)
         }
 
-        if (nextExerciseId) {
+        if (PreviousExerciseId) {
             return (
-                <ClickButton title="Próximo exercício" click={handleClick} />
+                <ClickButton title="Exercício anterior" click={handleClick} />
             )
         }
 

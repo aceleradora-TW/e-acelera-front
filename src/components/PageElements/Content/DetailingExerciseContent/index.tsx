@@ -4,8 +4,8 @@ import { BreadCrumb } from "@/components/BreadCrumb";
 import { Title } from "@/components/title";
 import { ApiResponse, DataItem, ExercisesField } from "@/types/type";
 import { DescriptionFull } from "@/components/Description/DescriptionFull";
-import { ButtonNextExercise } from "@/components/ButtonNextExercise";
 import { AdvanceExercises } from "@/components/AdvanceExercises";
+
 
 interface DetailingContentProps {
   data: ApiResponse;
@@ -45,17 +45,6 @@ const ExerciseContent: React.FC<{
     </Grid>
 
     <DescriptionFull text={field.description} />
-    <Grid
-      item
-      xl={12}
-      lg={12}
-      md={12}
-      sm={12}
-      xs={12}
-      sx={{ justifyContent: "end", display: "flex" }}
-    >
-      <ButtonNextExercise idExercise={idExercise} />
-    </Grid>
   </>
 );
 

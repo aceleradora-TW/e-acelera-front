@@ -8,6 +8,8 @@ import { DetailingExerciseContent } from "../../Content/DetailingExerciseContent
 export const RenderDetailingExercisePage = (id: string)=> {
     const { data: renderData,  statusCode: code} = useFetchData('/api/stackbyApi/Exercises');
 
+
+
     if (!renderData) {
         return <Loading/>
     }
