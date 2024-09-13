@@ -7,14 +7,14 @@ import useFetchData from "@/components/fetchData";
 
 interface ContainerButtonsExerciseProps {
   idExercise: string;
+  data: ApiResponse;
 }
 
 export const ContainerButtonsExercise: React.FC<
   ContainerButtonsExerciseProps
-> = ({ idExercise }) => {
-  const { data: renderDataTopic,  statusCode: codeTopic} = useFetchData('/api/stackbyApi/Topics');
+> = ({ idExercise, data }) => {
 
-  if(renderDataTopic){
+  if(data){
   return (
     <Grid
       container
@@ -34,12 +34,12 @@ export const ContainerButtonsExercise: React.FC<
     >
       <Grid item>
         <ButtonPreviousExercise
-          renderData={renderDataTopic}
+          renderData={data}
           idExercise={idExercise}
         />
       </Grid>
       <Grid item>
-        <ButtonNextExercise renderData={renderDataTopic} idExercise={idExercise} />
+        <ButtonNextExercise renderData={data} idExercise={idExercise} />
       </Grid>
     </Grid>
   );}

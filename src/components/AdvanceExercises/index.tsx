@@ -1,7 +1,6 @@
 import { Typography, TypographyProps } from "@mui/material";
 import { styled } from "@mui/material/styles";
-import useFetchData from "../fetchData";
-import { CommonField, DataItem, TopicField } from "@/types/type";
+import { ApiResponse, CommonField, DataItem, TopicField } from "@/types/type";
 import { usePathname } from "next/navigation";
 import { theme } from "@/app/config/theme";
 import { useMemo } from "react";
@@ -12,6 +11,7 @@ function isTopicField(field: CommonField): field is TopicField {
 
 interface SequenceExercises {
   idExercises: string;
+  data: ApiResponse;
 }
 
 const EvolutionComponent = styled(Typography)<TypographyProps>(() => ({
@@ -21,8 +21,7 @@ const EvolutionComponent = styled(Typography)<TypographyProps>(() => ({
   },
 }));
 
-export const AdvanceExercises: React.FC<SequenceExercises> = ({ idExercises }) => {
-  const { data: renderData } = useFetchData("/api/stackbyApi/Topics");
+export const AdvanceExercises: React.FC<SequenceExercises> = ({ idExercises, data }) => {
   const pathname = usePathname();
 
   if (typeof pathname !== 'string') {
@@ -35,10 +34,10 @@ export const AdvanceExercises: React.FC<SequenceExercises> = ({ idExercises }) =
   const idTopicBase = useMemo(() => partsPathname[partsPathname.length - 2]?.split("-")[0] || "", [partsPathname]);
 
   const currentTopic = useMemo(() => {
-    return renderData?.data?.find((element: DataItem) => element.field.rowId === idTopicBase);
-  }, [renderData, idTopicBase]);
+    return data?.data?.find((element: DataItem) => element.field.rowId === idTopicBase);
+  }, [data, idTopicBase]);
 
-  if (!renderData || !currentTopic) return null;
+  if (!data || !currentTopic) return null;
 
   if (isTopicField(currentTopic.field)) {
     const topicField = currentTopic.field;

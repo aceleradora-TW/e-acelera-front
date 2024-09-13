@@ -1,26 +1,47 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo, SetStateAction } from 'react';
 import { ApiResponse } from '@/types/type';
+
+const cache = new Map<string, ApiResponse>();
+
+const fetchData = async (url: string): Promise<ApiResponse> => {
+  if (cache.has(url)) {
+    return cache.get(url)!;
+  }
+
+  const response = await fetch(url);
+  if (!response.ok) {
+    throw new Error('Erro ao buscar dados da API');
+  }
+  const data: ApiResponse = await response.json();
+  
+  cache.set(url, data);
+  return data ;
+};
 
 const useFetchData = (url: string) => {
   const [data, setData] = useState<ApiResponse>();
-  const [statusCode, setStatusCode] = useState<number>(200);
+  const [error, setError] = useState<Error | undefined>();
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchDataFromApi = async () => {
+      setIsLoading(true);
       try {
-        const response = await fetch(url);
-        setStatusCode(response.status)
-        
-        const parseData: ApiResponse = await response.json();
-        setData(parseData);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      } 
+        const result = await fetchData(url);
+        setData(result);
+      } catch (err) {
+        setError(err as Error);
+      } finally {
+        setIsLoading(false);
+      }
     };
-    fetchData();
+
+    fetchDataFromApi();
   }, [url]);
 
-  return { data, statusCode };
+  const memoizedData = useMemo(() => data, [data]);
+
+  return { data: memoizedData, error, isLoading };
 };
 
 export default useFetchData;
