@@ -3,7 +3,7 @@ import { ApiResponse } from '@/types/type';
 
 const useFetchData = (url: string) => {
   const [data, setData] = useState<ApiResponse>();
-  const [statusCode, setStatusCode] = useState<number>();
+  const [statusCode, setStatusCode] = useState<number>(200);
 
   useEffect(() => {
     const fetchData = async () => {
