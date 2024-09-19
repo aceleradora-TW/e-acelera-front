@@ -1,8 +1,7 @@
 import { theme } from "@/app/config/theme";
 import { Button, ButtonProps, Stack, styled } from "@mui/material";
 import { useRouter, usePathname } from 'next/navigation';
-import useFetchData from "../fetchData";
-import { CommonField, DataItem, TopicField } from "@/types/type";
+import { CommonField, DataItem, TopicField, ApiResponse } from "@/types/type";
 import { ClickButton } from "../ClickButton";
 
 const ButtonFail = styled(Button)<ButtonProps>(() => ({
@@ -30,7 +29,7 @@ function isTopicField(field: CommonField): field is TopicField {
 
 interface ButtonNextProps {
     idExercise: string;
-    renderData: string;
+    renderData: ApiResponse;
 }
 
 export const ButtonPreviousExercise: React.FC<ButtonNextProps> = ({ idExercise, renderData }) => {
@@ -66,9 +65,7 @@ export const ButtonPreviousExercise: React.FC<ButtonNextProps> = ({ idExercise, 
             )
         }
 
-        return (
-            <ContainerButtonFail />
-        )
+        return null
     }
 
     return <ContainerButtonFail />
