@@ -24,12 +24,9 @@ const EvolutionComponent = styled(Typography)<TypographyProps>(() => ({
 export const AdvanceExercises: React.FC<SequenceExercises> = ({ idExercises, data }) => {
   const pathname = usePathname();
 
-  if (typeof pathname !== 'string') {
-    console.error('Invalid pathname:', pathname);
-    return null;
-  }
+  const validPathname = typeof pathname === 'string' ? pathname : '';
 
-  const partsPathname = useMemo(() => pathname.split("/"), [pathname]);
+  const partsPathname = useMemo(() => validPathname.split("/"), [validPathname]);
   const idExerciseBase = useMemo(() => idExercises.split("-")[0], [idExercises]);
   const idTopicBase = useMemo(() => partsPathname[partsPathname.length - 2]?.split("-")[0] || "", [partsPathname]);
 
