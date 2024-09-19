@@ -1,21 +1,26 @@
-import { useState, useEffect, useMemo, SetStateAction } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { ApiResponse } from '@/types/type';
 
 const cache = new Map<string, ApiResponse>();
 
-const fetchData = async (url: string): Promise<ApiResponse> => {
-  if (cache.has(url)) {
-    return cache.get(url)!;
-  }
+const fetchData = async (url: string): Promise<ApiResponse | undefined> => {
+  try {
+    const cachedData = cache.get(url)
+ 
+  if (cachedData) return cachedData
 
   const response = await fetch(url);
   if (!response.ok) {
     throw new Error('Erro ao buscar dados da API');
   }
   const data: ApiResponse = await response.json();
-  
   cache.set(url, data);
   return data ;
+  } catch (error) {
+    console.log("Erro " + error)
+    return undefined
+  }
+  
 };
 
 const useFetchData = (url: string) => {
@@ -24,24 +29,33 @@ const useFetchData = (url: string) => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+    let isSubscribed = true
     const fetchDataFromApi = async () => {
       setIsLoading(true);
       try {
         const result = await fetchData(url);
-        setData(result);
+        if (isSubscribed) {
+          setData(result)
+          setError(undefined)
+        }
       } catch (err) {
-        setError(err as Error);
+        if (isSubscribed) {
+          setError(err as Error);
+        }
       } finally {
-        setIsLoading(false);
+        if (isSubscribed) {
+          setIsLoading(false);
+        }
       }
     };
 
     fetchDataFromApi();
+    return () => {
+      isSubscribed = false
+    };
   }, [url]);
 
-  const memoizedData = useMemo(() => data, [data]);
-
-  return { data: memoizedData, error, isLoading };
+  return { data: data, error, isLoading };
 };
 
 export default useFetchData;

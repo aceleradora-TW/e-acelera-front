@@ -33,14 +33,15 @@ export const AdvanceExercises: React.FC<SequenceExercises> = ({ idExercises, dat
   const idExerciseBase = useMemo(() => idExercises.split("-")[0], [idExercises]);
   const idTopicBase = useMemo(() => partsPathname[partsPathname.length - 2]?.split("-")[0] || "", [partsPathname]);
 
-  const currentTopic = useMemo(() => {
+  const getCurrentTopic = useMemo(() => {
+    if (!data) return null;
     return data?.data?.find((element: DataItem) => element.field.rowId === idTopicBase);
   }, [data, idTopicBase]);
 
-  if (!data || !currentTopic) return null;
+  if (!getCurrentTopic) return null;
 
-  if (isTopicField(currentTopic.field)) {
-    const topicField = currentTopic.field;
+  if (isTopicField(getCurrentTopic.field)) {
+    const topicField = getCurrentTopic.field;
     const exerciseInfo = topicField.exercisesInfo?.split(",") || [];
     const idIndex = exerciseInfo.indexOf(idExerciseBase) + 1;
 

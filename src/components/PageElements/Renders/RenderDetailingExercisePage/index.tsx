@@ -5,10 +5,12 @@ import { BadRequest } from "@/components/BadRequest";
 import { DetailingExerciseContent } from "../../Content/DetailingExerciseContent";
 
 export const RenderDetailingExercisePage = (id: string)=> {
-    const {data: renderDataExercise, isLoading: loading, error: error } = useFetchData('/api/stackbyApi/Exercises');
-    const {data: renderDataTopic } = useFetchData('/api/stackbyApi/Topics');
+  const { data: renderDataExercise, isLoading: isExerciseLoading, error: exerciseError } = useFetchData('/api/stackbyApi/Exercises');
+  const { data: renderDataTopic, isLoading: isTopicLoading, error: topicError } = useFetchData('/api/stackbyApi/Topics');
+  const isLoading = isExerciseLoading || isTopicLoading;
+  const error = exerciseError || topicError;
 
-    if ( loading || !renderDataExercise || !renderDataTopic) {
+    if ( isLoading || !renderDataExercise || !renderDataTopic) {
         return <Loading/>
     }
     if(error){

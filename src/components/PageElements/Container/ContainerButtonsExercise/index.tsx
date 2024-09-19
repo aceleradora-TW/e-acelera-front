@@ -2,8 +2,6 @@ import { ButtonPreviousExercise } from "@/components/ButtonPreviousExercise";
 import { ButtonNextExercise } from "@/components/ButtonNextExercise";
 import { Grid } from "@mui/material";
 import { ApiResponse } from "@/types/type";
-import useFetchData from "@/components/fetchData";
-
 
 interface ContainerButtonsExerciseProps {
   idExercise: string;
@@ -14,8 +12,7 @@ export const ContainerButtonsExercise: React.FC<
   ContainerButtonsExerciseProps
 > = ({ idExercise, data }) => {
 
-  if(data){
-  return (
+  return data ?(
     <Grid
       container
       xl={12}
@@ -42,6 +39,6 @@ export const ContainerButtonsExercise: React.FC<
         <ButtonNextExercise renderData={data} idExercise={idExercise} />
       </Grid>
     </Grid>
-  );}
-  return null
+  ): <></>
+  
 };
