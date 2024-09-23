@@ -35,7 +35,7 @@ export const BaseCard: React.FC<CardProps> = ({title, description, textImage, im
 
     return (
         <Card sx={theme.customStyles.cardContainer}>
-            <CardActionArea>
+            <CardActionArea onClick={() => handleClick(route)}>
             {image && (
                 <CardMedia
                     component="img"
