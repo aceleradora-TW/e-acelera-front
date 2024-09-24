@@ -5,7 +5,7 @@ import { RenderDetailingTopicPage } from "@/components/PageElements/Renders/Rend
 export default function DetailingTopic({
   params,
 }: {
-  params: { DetailingTopic: string };
+  params: { detailingTopic: string };
 }) {
-  return RenderDetailingTopicPage(params.DetailingTopic)
+  return RenderDetailingTopicPage(params.detailingTopic)
 }

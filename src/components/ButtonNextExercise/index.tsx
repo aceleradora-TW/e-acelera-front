@@ -1,7 +1,8 @@
 import { theme } from "@/app/config/theme";
 import { Button, ButtonProps, Stack, styled } from "@mui/material";
 import { useRouter, usePathname } from 'next/navigation';
-import { CommonField, DataItem, TopicField, ApiResponse } from "@/types/type";
+import useFetchData from "../fetchData";
+import { ApiResponse, CommonField, DataItem, TopicField } from "@/types/type";
 import { ClickButton } from "../ClickButton";
 
 const ButtonFail = styled(Button)<ButtonProps>(() => ({

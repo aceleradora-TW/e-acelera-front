@@ -1,17 +1,18 @@
 import { ButtonPreviousExercise } from "@/components/ButtonPreviousExercise";
 import { ButtonNextExercise } from "@/components/ButtonNextExercise";
 import { Grid } from "@mui/material";
-
+import { ApiResponse } from "@/types/type";
 
 interface ContainerButtonsExerciseProps {
-  renderData: string;
   idExercise: string;
+  data: ApiResponse;
 }
 
 export const ContainerButtonsExercise: React.FC<
   ContainerButtonsExerciseProps
-> = ({ renderData, idExercise }) => {
-  return (
+> = ({ idExercise, data }) => {
+
+  return data ?(
     <Grid
       container
       xl={12}
@@ -24,17 +25,20 @@ export const ContainerButtonsExercise: React.FC<
         flexWrap: "wrap",
         justifyContent: "space-between",
         alignItems: "center",
+        margin: "20px 0",
+        gap: "20px"
       }}
     >
       <Grid item>
         <ButtonPreviousExercise
-          renderData={renderData}
+          renderData={data}
           idExercise={idExercise}
         />
       </Grid>
       <Grid item>
-        <ButtonNextExercise renderData={renderData} idExercise={idExercise} />
+        <ButtonNextExercise renderData={data} idExercise={idExercise} />
       </Grid>
     </Grid>
-  );
+  ): <></>
+  
 };
