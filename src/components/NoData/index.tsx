@@ -1,5 +1,5 @@
 import { Link, Typography, Grid} from "@mui/material";
-import svgServerError from "../../../public/assets/500-Internal-Server-Error.svg";
+import svgNotFound from "../../../public/assets/404-Error-with-a-cute-animal-bro.svg";
 import { LayoutPage } from "../PageElements/LayoutPage";
 import Image from "next/image";
 
@@ -9,8 +9,8 @@ export const NoData = () => {
       <Grid container direction="column" sx={{justifyContent: "center", alignItems: "center", width: "100%"}}>
         <Grid item >
           <Image
-            src={svgServerError}
-            alt="Ilustração de um cachorro removendo a tomada da parede, com os números 500 indicando erro interno de servidor"
+            src={svgNotFound}
+            alt="Ilustração de um cachorro removendo a tomada da parede, com os números 404 indicando erro interno de servidor"
             style={{display: "block", width: "100%", height: "auto"}}
           />
         </Grid>
