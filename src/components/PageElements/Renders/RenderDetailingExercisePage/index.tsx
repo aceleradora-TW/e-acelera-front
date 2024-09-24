@@ -1,25 +1,29 @@
 import useFetchData from "@/components/fetchData";
 import { Loading } from "@/components/Loading";
 import { LayoutPage } from "../../LayoutPage";
-import React from "react";
 import { BadRequest } from "@/components/BadRequest";
 import { DetailingExerciseContent } from "../../Content/DetailingExerciseContent";
+import { NoData } from "@/components/NoData";
 
-export const RenderDetailingExercisePage = (id: string)=> {
-    const { data: renderData,  statusCode: code} = useFetchData('/api/stackbyApi/Exercises');
+export const RenderDetailingExercisePage = (id: string) => {
+  const { data: renderDataExercise, isLoading: isExerciseLoading, error: exerciseError } = useFetchData('/api/stackbyApi/Exercises');
+  const { data: renderDataTopic, isLoading: isTopicLoading, error: topicError } = useFetchData('/api/stackbyApi/Topics');
+  const isLoading = isExerciseLoading || isTopicLoading;
+  const error = exerciseError || topicError;
 
-
-
-    if (!renderData) {
-        return <Loading/>
-    }
-    if(code >= 300){
-     return <BadRequest/>
-    }
+  if (isLoading) {
+    return <Loading />
+  }
+  if (error) {
+    return <BadRequest />
+  }
+  if (!renderDataTopic || !renderDataExercise) {
+    return <NoData />
+  }
 
   return (
     <LayoutPage>
-      <DetailingExerciseContent data={renderData} id={id} />
+      <DetailingExerciseContent dataExercise={renderDataExercise} dataTopic={renderDataTopic} id={id} />
     </LayoutPage>
   );
 }

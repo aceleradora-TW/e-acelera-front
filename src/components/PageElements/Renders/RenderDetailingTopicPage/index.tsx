@@ -1,21 +1,21 @@
 import useFetchData from "@/components/fetchData";
 import { Loading } from "@/components/Loading";
 import { LayoutPage } from "../../LayoutPage";
-import React from "react";
 import { DetailingTopicContent } from "../../Content/DetailingTopicContent";
-import { DescriptionFull } from "@/components/Description/DescriptionFull";
-import { Box, Typography } from "@mui/material";
 import { BadRequest } from "@/components/BadRequest";
+import { NoData } from "@/components/NoData";
 
 export const RenderDetailingTopicPage = (id: string)=> {
-    const { data: renderData,  statusCode: code} = useFetchData('/api/stackbyApi/Topics');
-
-    if (!renderData) {
-        return <Loading/>
-    }
-    if(code !== 200){
-     return <BadRequest/>
-    }
+  const { data: renderData, isLoading: loading, error: error} = useFetchData('/api/stackbyApi/Topics');
+  if (loading) {
+    return <Loading />
+}
+if (error) {
+    return <BadRequest />
+}
+if (!renderData) {
+    return <NoData/>
+}
 
   return (
     <LayoutPage>
