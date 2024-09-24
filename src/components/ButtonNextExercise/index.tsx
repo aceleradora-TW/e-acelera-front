@@ -65,9 +65,7 @@ export const ButtonNextExercise: React.FC<ButtonNextProps> = ({ idExercise, rend
             )
         }
 
-        return (
-            <ContainerButtonFail />
-        )
+        return null
     }
 
     return <ContainerButtonFail />
