@@ -1,6 +1,6 @@
 'use client'
 import { theme } from "@/app/config/theme";
-import { AppBar, Avatar, Box, Button, Container, IconButton, Toolbar, Tooltip, Typography } from "@mui/material";
+import { AppBar, Avatar, Box, Button, Container, IconButton, Link, Toolbar, Tooltip, Typography } from "@mui/material";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useRouter } from "next/navigation";
@@ -62,7 +62,7 @@ export const WebMenu: React.FC<WebMenuProps> = ({ list }) => {
         }}
       >
         {list.map((item) => (
-          <Button
+          <Link
             key={item}
             onClick={() => handlePageRedirect(item)}
             sx={{
@@ -70,7 +70,7 @@ export const WebMenu: React.FC<WebMenuProps> = ({ list }) => {
             }}
           >
             {item}
-          </Button>
+          </Link>
         ))}
       </Box>
       <Box sx={{ flexGrow: 0 }}>
