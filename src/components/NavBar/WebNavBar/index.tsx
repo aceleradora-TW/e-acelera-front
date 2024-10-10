@@ -1,21 +1,15 @@
 'use client'
 import { theme } from "@/app/config/theme";
-import { AppBar, Avatar, Box, Button, Container, IconButton, Link, Toolbar, Tooltip, Typography } from "@mui/material";
+import { Avatar, Box, IconButton, Link, Tooltip, Typography } from "@mui/material";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { useRouter } from "next/navigation";
 
 interface WebMenuProps {
   list: string[];
 }
 
 export const WebMenu: React.FC<WebMenuProps> = ({ list }) => {
-  const router = useRouter()
   const pathname = usePathname()
-
-  const handlePageRedirect = (pagina: string) => {
-    pagina ? router.push(`/${pagina}`):router.push('/')
-  };
 
   const linkStyle = (item: string) => {
     if (`/${item}` == pathname) {
@@ -24,6 +18,7 @@ export const WebMenu: React.FC<WebMenuProps> = ({ list }) => {
     return theme.customStyles.link
       ;
   };
+
   return (
     <>
       <Box
@@ -39,6 +34,7 @@ export const WebMenu: React.FC<WebMenuProps> = ({ list }) => {
           src="/assets/logo.svg"
           alt="logo e-acelera" />
       </Box>
+
       <Typography
         noWrap
         component="a"
@@ -50,6 +46,7 @@ export const WebMenu: React.FC<WebMenuProps> = ({ list }) => {
       >
         E-Acelera
       </Typography>
+
       <Box
         sx={{
           flexGrow: 1,
@@ -64,7 +61,8 @@ export const WebMenu: React.FC<WebMenuProps> = ({ list }) => {
         {list.map((item) => (
           <Link
             key={item}
-            onClick={() => handlePageRedirect(item)}
+            href={`/${item}`}
+            underline="none"
             sx={{
               ...linkStyle(item),
             }}
