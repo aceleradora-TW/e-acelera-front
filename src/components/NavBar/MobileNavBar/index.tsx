@@ -1,17 +1,14 @@
 import { theme } from "@/app/config/theme";
 import {
-  AppBar,
   Box,
-  Container,
   IconButton,
   Menu,
   MenuItem,
-  Toolbar,
   Typography,
+  Link
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import Image from "next/image";
-import Link from "next/link";
 import * as React from "react";
 
 interface MobileMenuProps {
@@ -69,13 +66,13 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({ list }) => {
         >
           {list.map((item) => (
             <MenuItem key={item} onClick={handleCloseNavMenu}>
-              <Link href={item ? `/${item}`: `/`}>
-                <Typography
+              <Link href={item ? `/${item}`: `/`}
+                  underline="none"
                   textAlign="center"
                   sx={{ color: theme.palette.textColor?.light }}
                 >
                   {item}
-                </Typography>
+             
               </Link>
             </MenuItem>
           ))}

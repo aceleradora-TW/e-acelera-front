@@ -61,7 +61,7 @@ export const WebMenu: React.FC<WebMenuProps> = ({ list }) => {
         {list.map((item) => (
           <Link
             key={item}
-            href={`/${item}`}
+            href={item ? `/${item}`: `/`}
             underline="none"
             sx={{
               ...linkStyle(item),
