@@ -87,6 +87,7 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({ list }) => {
           style={{ display: "flex" }}
         />
       </Box>
+      
       <Typography
         noWrap
         component="a"
