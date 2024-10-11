@@ -1,5 +1,5 @@
-"use client";
-import { theme } from "@/app/config/theme";
+"use client"
+import { theme } from "@/app/config/theme"
 import {
   Avatar,
   Box,
@@ -7,23 +7,23 @@ import {
   Link,
   Tooltip,
   Typography,
-} from "@mui/material";
-import Image from "next/image";
-import { usePathname } from "next/navigation";
+} from "@mui/material"
+import Image from "next/image"
+import { usePathname } from "next/navigation"
 
 interface WebMenuProps {
-  list: string[];
+  list: string[]
 }
 
 export const WebMenu: React.FC<WebMenuProps> = ({ list }) => {
-  const pathname = usePathname();
+  const pathname = usePathname()
 
   const linkStyle = (item: string) => {
     if (`/${item}` == pathname) {
-      return theme.customStyles.linkActive;
+      return theme.customStyles.linkActive
     }
-    return theme.customStyles.link;
-  };
+    return theme.customStyles.link
+  }
 
   return (
     <>
@@ -91,5 +91,5 @@ export const WebMenu: React.FC<WebMenuProps> = ({ list }) => {
         </Tooltip>
       </Box>
     </>
-  );
-};
+  )
+}

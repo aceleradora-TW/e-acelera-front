@@ -1,4 +1,4 @@
-import { theme } from "@/app/config/theme";
+import { theme } from "@/app/config/theme"
 import {
   Box,
   IconButton,
@@ -6,32 +6,32 @@ import {
   MenuItem,
   Typography,
   Link
-} from "@mui/material";
-import MenuIcon from "@mui/icons-material/Menu";
-import Image from "next/image";
-import * as React from "react";
+} from "@mui/material"
+import MenuIcon from "@mui/icons-material/Menu"
+import Image from "next/image"
+import * as React from "react"
 
 interface MobileMenuProps {
-  list: string[];
+  list: string[]
 }
 export const MobileMenu: React.FC<MobileMenuProps> = ({ list }) => {
-  const [anchorNav, setAnchorNav] = React.useState<null | HTMLElement>(null);
-  const [anchorUser, setAnchorUser] = React.useState<null | HTMLElement>(null);
+  const [anchorNav, setAnchorNav] = React.useState<null | HTMLElement>(null)
+  const [anchorUser, setAnchorUser] = React.useState<null | HTMLElement>(null)
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorNav(event.currentTarget);
-  };
+    setAnchorNav(event.currentTarget)
+  }
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorUser(event.currentTarget);
-  };
+    setAnchorUser(event.currentTarget)
+  }
 
   const handleCloseNavMenu = () => {
-    setAnchorNav(null);
-  };
+    setAnchorNav(null)
+  }
 
   const handleCloseUserMenu = () => {
-    setAnchorUser(null);
-  };
+    setAnchorUser(null)
+  }
   return (
     <>
       <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
@@ -101,5 +101,5 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({ list }) => {
         E-Acelera
       </Typography>
     </>
-  );
-};
+  )
+}
