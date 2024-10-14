@@ -1,15 +1,15 @@
-import React from "react";
-import { Grid } from "@mui/material";
-import { BreadCrumb } from "@/components/BreadCrumb";
-import { Title } from "@/components/title";
-import { ApiResponse, DataItem, TopicField } from "@/types/type";
-import { DescriptionReference } from "@/components/Description/DescriptionReference";
-import { ContainerCardsExercises } from "../../Container/ContainerCardsExercises";
-import { DescriptionWithVideo } from "@/components/Description/DescriptionWithVideo";
+import React from "react"
+import { Grid } from "@mui/material"
+import { BreadCrumb } from "@/components/BreadCrumb"
+import { Title } from "@/components/title"
+import { ApiResponse, DataItem, TopicField } from "@/types/type"
+import { DescriptionReference } from "@/components/Description/DescriptionReference"
+import { ContainerCardsExercises } from "../../Container/ContainerCardsExercises"
+import { DescriptionWithVideo } from "@/components/Description/DescriptionWithVideo"
 
 interface DetailingContentProps {
-  data: ApiResponse;
-  id: string;
+  data: ApiResponse
+  id: string
 }
 
 const TopicContent: React.FC<{ field: TopicField }> = ({ field }) => (
