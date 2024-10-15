@@ -1,7 +1,6 @@
 import { theme } from "@/app/config/theme";
 import { ClickButton } from "@/components/ClickButton";
-import { AppBar, Avatar, Box, Button, Container, IconButton, Toolbar, Tooltip, Typography } from "@mui/material";
-import { getServerSession } from "next-auth";
+import { Avatar, Box, Button, IconButton,Tooltip, Typography } from "@mui/material";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
@@ -15,8 +14,6 @@ export const WebMenu: React.FC<WebMenuProps> = ({ list }) => {
   const router = useRouter()
   const pathname = usePathname()
   const { data: session } = useSession()
-
-
   const handlePageRedirect = (pagina: string) => {
     pagina ? router.push(`/${pagina}`):router.push('/')
   };
