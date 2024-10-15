@@ -1,6 +1,8 @@
-'use client'
 import { theme } from "@/app/config/theme";
+import { ClickButton } from "@/components/ClickButton";
 import { AppBar, Avatar, Box, Button, Container, IconButton, Toolbar, Tooltip, Typography } from "@mui/material";
+import { getServerSession } from "next-auth";
+import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useRouter } from "next/navigation";
@@ -12,6 +14,8 @@ interface WebMenuProps {
 export const WebMenu: React.FC<WebMenuProps> = ({ list }) => {
   const router = useRouter()
   const pathname = usePathname()
+  const { data: session } = useSession()
+
 
   const handlePageRedirect = (pagina: string) => {
     pagina ? router.push(`/${pagina}`):router.push('/')
@@ -74,13 +78,21 @@ export const WebMenu: React.FC<WebMenuProps> = ({ list }) => {
         ))}
       </Box>
       <Box sx={{ flexGrow: 0 }}>
+        {!session ? (
+          <ClickButton title="LOGIN" click={()=> handlePageRedirect("Login")}/>
+        ): (
         <Tooltip title="Open settings">
           <IconButton
-            sx={{ display: { xs: 'none', md: 'flex' }, visibility: "hidden" }}
+            sx={{ display: { xs: 'none', md: 'flex' }}}
           >
-            <Avatar alt="Remy Sharp" src="" />
+            <Avatar alt="Remy Sharp" src={`${session.user?.image}`} />
           </IconButton>
         </Tooltip>
+        )
+        
+        }
+        
+        
       </Box>
 
     </>
