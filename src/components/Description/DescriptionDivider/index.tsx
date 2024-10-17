@@ -27,7 +27,7 @@ export const DescriptionDivider: React.FC<DescriptionDividerProps> = ({ text }) 
 
   const components = {
     p: (props: React.HTMLAttributes<HTMLHeadingElement>) => (
-      <Typography variant="body1" {...props} />
+      <Typography variant="body1" sx={{ whiteSpace: "pre-wrap", marginTop: 2 }} {...props} />
     ),
     a: (props: React.HTMLAttributes<HTMLAnchorElement>) => (
       <Link
@@ -56,15 +56,15 @@ export const DescriptionDivider: React.FC<DescriptionDividerProps> = ({ text }) 
         <Box sx={{...theme.customStyles.description}}>
           <Box sx={boxStyle}>
             <ReactMarkdown components={components}>
-              {textBox1.replace(/\n\n/g, "")}
+              {textBox1}
             </ReactMarkdown>
           </Box>
 
-          <Divider orientation="vertical" flexItem color="black" sx={{ margin: 0 }} />
+          <Divider orientation="vertical" flexItem color="black" sx={{ marginTop: 2 }} />
 
           <Box sx={boxStyle}>
             <ReactMarkdown components={components}>
-              {textBox2.replace(/\n\n/g, "")}
+              {textBox2}
             </ReactMarkdown>
           </Box>
         </Box>
