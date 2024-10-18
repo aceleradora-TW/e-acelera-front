@@ -29,6 +29,7 @@ export interface ThemeField extends CommonField {
     topics: string;
     category: string;
     topicsDescription: string;
+    alt: string;
 }
 
 export interface TopicField extends CommonField {

@@ -11,7 +11,7 @@ import { ClickButton } from '../ClickButton';
 interface CardProps{
     title: string;
     description?: string;
-    textImage?: string; 
+    textImage: string; 
     image?: string;
     route: string;
 }
@@ -41,7 +41,12 @@ export const BaseCard: React.FC<CardProps> = ({title, description, textImage, im
                     component="img"
                     image={image}
                     alt={textImage}
-                    sx={theme.customStyles.cardMedia}
+                    sx={{
+                        width: '100%',   
+                        height: 190,  
+                        objectFit: 'cover'
+                    }}
+                    
                 />
             )}
                 <CardContent sx={theme.customStyles.cardContent}> 
