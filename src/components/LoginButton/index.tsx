@@ -3,13 +3,16 @@ import { styled } from "@mui/material/styles"
 import Button, { ButtonProps } from "@mui/material/Button"
 import Stack from "@mui/material/Stack"
 import { theme } from "@/app/config/theme"
-import Image from "next/image"
+import Image, { StaticImageData } from "next/image"
 import { Box, Typography } from "@mui/material"
 
+interface ColorButtonProps extends ButtonProps {
+    hoverColor: string
+}
 
-const ColorButton = styled(Button)<ButtonProps>(() => ({
+const ColorButton = styled(Button)<ColorButtonProps>(({hoverColor}) => ({
     "&:hover": {
-        backgroundColor: theme.palette.buttonHover?.main,
+        backgroundColor: hoverColor,
         color: theme.palette.buttonHover?.contrastText,
         border: "none"
     }
@@ -18,14 +21,17 @@ const ColorButton = styled(Button)<ButtonProps>(() => ({
 type CardProps = {
     website: string,
     click: () => void,
-    icon: string
+    icon: StaticImageData,
+    hoverColor: string
 }
 
-export const LoginButton = ({ website, click, icon }: CardProps) =>
+export const LoginButton = ({ website, click, icon, hoverColor }: CardProps) =>
     <aside>
         <Stack spacing={2} direction="row" onClick={click}>
-            <ColorButton sx={{
-                fontSize: "16px",
+            <ColorButton 
+            hoverColor={hoverColor}
+            sx={{
+                fontSize: 2,
                 lineHeight: 1.6,
                 fontWeight: 500,
                 letterSpacing: 0.4,
@@ -35,7 +41,7 @@ export const LoginButton = ({ website, click, icon }: CardProps) =>
             }} > 
                 <Box sx={{display: "flex", alignItems: "center", justifyContent: "center", width: "100%" }}>
                     <Image src={icon} alt={`Icone da plataforma ${website}`} width={38} height={38}/>
-                    <Typography variant="body1" sx={{minWidth: "165px", textAlign: "left", marginLeft: "16px"}}>Entrar com {website}</Typography>
+                    <Typography variant="body1" sx={{minWidth: "10.31rem", textAlign: "left", marginLeft: 3, fontWeight: "550"}}>Entrar com {website}</Typography>
                 </Box>
 
                 </ColorButton>
