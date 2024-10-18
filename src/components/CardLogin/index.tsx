@@ -7,6 +7,7 @@ import facebookLogo from "../../../public/assets/facebook-icon.png"
 import googleLogo from "../../../public/assets/google-icon.png"
 import linkedinLogo from "../../../public/assets/linkedin-icon.png"
 import { LoginButton } from "../LoginButton";
+import { signIn } from "next-auth/react";
 
 export const CardLogin = () => {
   const isMobileScreen = useMediaQuery('(min-width: 0px) and (max-width: 600px)')
@@ -61,16 +62,16 @@ export const CardLogin = () => {
           </Grid>
           <Grid container item xl={12} lg={12} md={12} sm={12} xs={12} spacing={2.5}>
             <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
-              <LoginButton hoverColor="rgb(72, 72, 72, 100)" icon={githubLogo} website="GitHub" click={() => alert()} />
+              <LoginButton hoverColor="rgb(72, 72, 72, 100)" icon={githubLogo} website="GitHub" onClick={() => signIn("github", {callbackUrl: "/Nivelamento"})} />
             </Grid>
             <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
-              <LoginButton hoverColor="rgb(145, 26, 26, 100)" icon={googleLogo} website="Google" click={() => alert()} />
+              <LoginButton hoverColor="rgb(145, 26, 26, 100)" icon={googleLogo} website="Google" onClick={() => signIn("google", {callbackUrl: "/Nivelamento"})} />
             </Grid>
             <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
-              <LoginButton hoverColor="rgb(18, 76, 129, 100)" icon={linkedinLogo} website="Linkedin" click={() => alert()} />
+              <LoginButton hoverColor="rgb(18, 76, 129, 100)" icon={linkedinLogo} website="Linkedin" onClick={() => signIn("linkedin", {callbackUrl: "/Nivelamento"})} />
             </Grid>
             <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
-              <LoginButton hoverColor="rgb(42, 81, 138, 100)" icon={facebookLogo} website="Facebook" click={() => alert()} />
+              <LoginButton hoverColor="rgb(42, 81, 138, 100)" icon={facebookLogo} website="Facebook" onClick={() => signIn("facebook", {callbackUrl: "/Nivelamento"})} />
             </Grid>
           </Grid>
         </Grid>
