@@ -29,17 +29,22 @@ export const ButtonCard: React.FC<ButtonCardProps> = ({ title, description, rout
         router.push(`/${route}`)
     }
     return (
-            <Card sx={theme.customStyles.cardButtonContainer}>
-                <CardActionArea onClick={() => handleClick(route)} sx={{height: "100%"}}>
-                    <CardContent sx={theme.customStyles.cardButtonContent}>
-                        <Typography gutterBottom variant="h2" component="div" sx={theme.customStyles.cardTitle}>
-                            {title}
-                        </Typography>
-                        <Typography variant="body1" sx={cardStyles}>
-                            {description}
-                        </Typography>
-                    </CardContent>
-                </CardActionArea>
-            </Card>
+        <Card sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between',  ...theme.customStyles.cardButtonContainer }}>
+        <CardActionArea onClick={() => handleClick(route)} sx={{ flexGrow: 1 }}> 
+            <CardContent sx={theme.customStyles.cardButtonContent}>
+                <Typography gutterBottom variant="h2" component="div" sx={theme.customStyles.cardTitle}>
+                    {title}
+                </Typography>
+                <Typography variant="body1" sx={cardStyles}>
+                    {description}
+                </Typography>
+            </CardContent>
+        </CardActionArea>
+    
+        <Typography sx={{ padding: 2 }}>
+            <StatusSelect width='70%'/>
+        </Typography>
+    </Card>
+    
     );
 }

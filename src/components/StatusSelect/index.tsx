@@ -38,7 +38,7 @@ export default function StatusSelect({width = "30%"}: StatusSelectProps) {
   return (
     <Box sx={{ backgroundColor, width}}>
       <FormControl fullWidth>
-        <InputLabel id="statusLeveling" sx={{ color: "black" }}>
+        <InputLabel shrink={true} id="statusLeveling" sx={{ color: "black"}}>
           Status
         </InputLabel>
         <Select
