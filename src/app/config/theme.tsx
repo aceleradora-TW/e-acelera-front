@@ -63,7 +63,7 @@ declare module "@mui/material/styles" {
         display: string;
         flexDirection: string;
         justifyContent: string;
-        padding: number;
+        padding: string;
         boxShadow: string;
         borderRadius: string;
       };
@@ -240,7 +240,7 @@ declare module "@mui/material/styles" {
         display?: string;
         flexDirection?: string;
         justifyContent?: string;
-        padding?: number;
+        padding?: string;
         boxShadow?: string;
         borderRadius?: string;
         margin?: number;
@@ -418,7 +418,7 @@ const theme = createTheme({
     description:{
       display: "flex",
       justifyContent: "space-between",
-      padding: 2,
+      padding: "0px 16px 16px 16px",
       boxShadow: "0em 0em 0.4em rgb(44 44 44 / 40% );",
       borderRadius: "6px",
       margin: 0,
