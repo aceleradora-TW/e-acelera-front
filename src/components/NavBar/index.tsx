@@ -6,8 +6,6 @@ import Container from "@mui/material/Container";
 import { theme } from "../../app/config/theme";
 import { MobileMenu } from "./MobileNavBar";
 import { WebMenu } from "./WebNavBar";
-import { SessionProvider } from "next-auth/react";
-
 
 interface NavBarProps {
   list: string[];
@@ -22,8 +20,8 @@ export const ResponsiveAppBar: React.FC<NavBarProps> = ({ list }) => {
     >
       <Container maxWidth="xl">
         <Toolbar disableGutters sx={{ display: "flex", alignItems: "center" }}>
-          <WebMenu list={list}/>
           <MobileMenu list={list}/>
+          <WebMenu list={list}/>
         </Toolbar>
       </Container>
       

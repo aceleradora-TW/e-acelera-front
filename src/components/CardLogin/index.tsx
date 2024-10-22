@@ -12,6 +12,12 @@ import { signIn } from "next-auth/react";
 export const CardLogin = () => {
   const isMobileScreen = useMediaQuery('(max-width: 600px)');
 
+  const getRedirectUrl = () => {
+
+    const redirectUrl = localStorage.getItem("redirectAfterLogin")
+    return redirectUrl ? redirectUrl : "/"
+  }
+
   return (
     <Box sx={{ height: "100%", display: "flex", justifyContent: "center", marginTop: 4 }}>
       <Box sx={theme.customStyles.cardLoginBox}>
@@ -74,7 +80,7 @@ export const CardLogin = () => {
               hoverBackgroundColor="rgba(72, 72, 72, 1)"
               platformIcon={githubLogo}
               platformName="GitHub"
-              onClick={() => signIn("github", { callbackUrl: "/Nivelamento" })}
+              onClick={() => signIn("github", { callbackUrl: getRedirectUrl() })}
             />
           </Grid>
           <Grid item xs={12}>
@@ -82,7 +88,7 @@ export const CardLogin = () => {
               hoverBackgroundColor="rgba(145, 26, 26, 1)"
               platformIcon={googleLogo}
               platformName="Google"
-              onClick={() => signIn("google", { callbackUrl: "/Nivelamento" })}
+              onClick={() => signIn("google", { callbackUrl: getRedirectUrl() })}
             />
           </Grid>
           <Grid item xs={12}>
@@ -90,7 +96,7 @@ export const CardLogin = () => {
               hoverBackgroundColor="rgba(18, 76, 129, 1)"
               platformIcon={linkedinLogo}
               platformName="LinkedIn"
-              onClick={() => signIn("linkedin", { callbackUrl: "/Nivelamento" })}
+              onClick={() => signIn("linkedin", { callbackUrl: getRedirectUrl() })}
             />
           </Grid>
           <Grid item xs={12}>
@@ -98,7 +104,7 @@ export const CardLogin = () => {
               hoverBackgroundColor="rgba(42, 81, 138, 1)"
               platformIcon={facebookLogo}
               platformName="Facebook"
-              onClick={() => signIn("facebook", { callbackUrl: "/Nivelamento" })}
+              onClick={() => signIn("facebook", { callbackUrl: getRedirectUrl() })}
             />
           </Grid>
         </Grid>
