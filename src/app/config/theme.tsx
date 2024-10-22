@@ -156,6 +156,18 @@ declare module "@mui/material/styles" {
         overflow: string;
         textOverflow: string;
       };
+      cardLoginBox: {
+        width: {
+          xs: string,
+          sm: string,
+          md: string,
+          lg: string,
+          xl: string
+        },
+        height: string,
+        boxShadow: string,
+        padding: string,
+      };
       title: {
         textAlign: string;
         color: string;
@@ -329,6 +341,18 @@ declare module "@mui/material/styles" {
         WebkitBoxOrient?: string;
         overflow?: string;
         textOverflow?: string;
+      };
+      cardLoginBox?: {
+        width?: {
+          xs: string,
+          sm: string,
+          md: string,
+          lg: string,
+          xl: string
+        },
+        height?: string,
+        boxShadow?: string,
+        padding?: string,
       };
       title?: {
         textAlign?: string,
@@ -510,6 +534,18 @@ const theme = createTheme({
       WebkitBoxOrient: 'vertical', 
       overflow: 'hidden',
       textOverflow: 'ellipsis'
+    },
+    cardLoginBox: {
+      width: {
+        xs: "90%",
+        sm: "60%",
+        md: "45%",
+        lg: "35%",
+        xl: "30%",
+      },
+      height: "30%",
+      boxShadow: "0 0 0.4em rgba(44, 44, 44, 0.4)",
+      padding: "40px",
     },
     title: {
       textAlign: "left",

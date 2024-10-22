@@ -13,19 +13,8 @@ export const CardLogin = () => {
   const isMobileScreen = useMediaQuery('(max-width: 600px)');
 
   return (
-    <Box sx={{ height: "100%", width: "100%", display: "flex", justifyContent: "center", marginTop: 4 }}>
-      <Box sx={{
-        width: {
-          xs: "90%",
-          sm: "60%",
-          md: "45%",
-          lg: "35%",
-          xl: "30%",
-        },
-        height: "30%",
-        boxShadow: "0 0 0.4em rgba(44, 44, 44, 0.4)",
-        padding: "40px",
-      }}>
+    <Box sx={{ height: "100%", display: "flex", justifyContent: "center", marginTop: 4 }}>
+      <Box sx={theme.customStyles.cardLoginBox}>
         <Grid container spacing={2.5}>
           <Grid container item xs={12} alignItems="center">
             <Grid item>
