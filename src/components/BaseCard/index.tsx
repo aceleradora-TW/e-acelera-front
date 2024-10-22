@@ -43,7 +43,8 @@ export const BaseCard: React.FC<CardProps> = ({title, description, textImage, im
                     alt={textImage}
                     sx={{
                         width: '100%',   
-                        height: 190,  
+                        height: 'auto',  
+                        maxHeight: 210,
                         objectFit: 'cover'
                     }}
                     
