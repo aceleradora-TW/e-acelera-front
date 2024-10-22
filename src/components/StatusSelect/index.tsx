@@ -8,12 +8,12 @@ import { SelectChangeEvent } from '@mui/material/Select'
 import { theme } from "@/app/config/theme"
 
 interface StatusSelectProps {
-  width?: "30%" | "70%"
-} 
+  width?: "30%" | "70%" | "100%"
+}
 
-export default function StatusSelect({width = "30%"}: StatusSelectProps) {
-  const [status, setStatus] = React.useState<string>("")
-  const [backgroundColor, setBackgroundColor] = React.useState<string>("")
+export default function StatusSelect({ width = "30%" }: StatusSelectProps) {
+  const [status, setStatus] = React.useState<string>("statusPending")
+  const [backgroundColor, setBackgroundColor] = React.useState<string>("rgb(225, 225, 225)")
 
   const handleChange = (event: SelectChangeEvent) => {
     const value = event.target.value as string
@@ -34,14 +34,15 @@ export default function StatusSelect({width = "30%"}: StatusSelectProps) {
 
     }
   }
-  
+
   return (
-    <Box sx={{ backgroundColor, width}}>
+    <Box sx={{ backgroundColor, width }}>
       <FormControl fullWidth>
-        <InputLabel shrink={true} id="statusLeveling" sx={{ color: "black"}}>
+        <InputLabel shrink={true} id="statusLeveling" sx={{ color: "black" }}>
           Status
         </InputLabel>
         <Select
+          notched={true}
           labelId="statusLeveling"
           id="statusSelect"
           value={status}
@@ -54,6 +55,7 @@ export default function StatusSelect({width = "30%"}: StatusSelectProps) {
             "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
               borderColor: "black"
             },
+            backgroundColor: "#0000000",
             color: "#000000"
           }}
         >
