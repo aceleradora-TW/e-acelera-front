@@ -11,17 +11,17 @@ const handler = NextAuth({
           clientSecret: process.env.GITHUB_SECRET || ""
         }),
         GoogleProvider({
-            clientId: process.env.GOOGLE_CLIENT_ID || "",
-            clientSecret: process.env.GOOGLE_CLIENT || ""
-          }),
+          clientId: process.env.GOOGLE_CLIENT_ID || "",
+          clientSecret: process.env.GOOGLE_CLIENT_SECRET || ""
+        }),
           FacebookProvider({
             clientId: process.env.FACEBOOK_CLIENT_ID || "",
-            clientSecret: process.env.FACEBOOK_CLIENT || ""
+            clientSecret: process.env.FACEBOOK_CLIENT_SECRET || ""
           }),
           LinkedInProvider({
             clientId: process.env.LINKEDIN_CLIENT_ID || "",
-            clientSecret: process.env.LINKEDIN_CLIENT || ""
-          })
+            clientSecret: process.env.LINKEDIN_CLIENT_SECRET || ""
+          })        
       ]
 })
 
