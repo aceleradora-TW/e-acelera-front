@@ -9,11 +9,11 @@ import { theme } from "../../app/config/theme"
 import { ClickButton } from "../ClickButton"
 
 interface CardProps{
-    title: string
-    description?: string
-    textImage?: string 
-    image?: string
-    route: string
+    title: string;
+    description?: string;
+    textImage: string; 
+    image?: string;
+    route: string;
 }
 
 const cardStyles = {
@@ -41,7 +41,13 @@ export const BaseCard: React.FC<CardProps> = ({title, description, textImage, im
                     component="img"
                     image={image}
                     alt={textImage}
-                    sx={theme.customStyles.cardMedia}
+                    sx={{
+                        width: '100%',   
+                        height: 'auto',  
+                        maxHeight: 210,
+                        objectFit: 'cover'
+                    }}
+                    
                 />
             )}
                 <CardContent sx={theme.customStyles.cardContent}> 
