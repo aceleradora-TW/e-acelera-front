@@ -22,7 +22,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="pt-br">
       <body className={inter.className}>
         <ThemeProvider theme={theme}>
           <Box sx={{ marginBottom: "80px" }}>
