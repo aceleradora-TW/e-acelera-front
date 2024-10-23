@@ -1,5 +1,5 @@
 import { theme } from "@/app/config/theme";
-import { ClickButton } from "@/components/ClickButton";
+import { LoginButton } from "@/components/LoginButton";
 import { Avatar, Box, Button, IconButton, Tooltip, Typography } from "@mui/material";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
@@ -28,7 +28,9 @@ export const WebMenu: React.FC<WebMenuProps> = ({ list }) => {
         </IconButton>
       </Tooltip>;
     } else if (!session && pathname !== "/Login") {
-      return <ClickButton title="LOGIN" click={() => handlePageRedirectLogin()} />
+      return (
+        <LoginButton  click={() => handlePageRedirectLogin()} /> 
+      )
         
 
     };

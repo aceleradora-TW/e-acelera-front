@@ -71,7 +71,7 @@ export const CardLogin = () => {
                 marginBottom: "15px",
               }}
             >
-              Entre com sua rede social para acessar nossa plataforma:
+              Entre com sua rede social para acessar nossa plataforma
             </Typography>
           </Grid>
 
@@ -97,14 +97,6 @@ export const CardLogin = () => {
               platformIcon={linkedinLogo}
               platformName="LinkedIn"
               onClick={() => signIn("linkedin", { callbackUrl: getRedirectUrl() })}
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <SocialLoginButton
-              hoverBackgroundColor="rgba(42, 81, 138, 1)"
-              platformIcon={facebookLogo}
-              platformName="Facebook"
-              onClick={() => signIn("facebook", { callbackUrl: getRedirectUrl() })}
             />
           </Grid>
         </Grid>
