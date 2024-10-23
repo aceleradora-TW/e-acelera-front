@@ -2,7 +2,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { ApiResponse } from "@/types/type";
 import { NextResponse } from "next/server";
 
-export default async function handler(
+export async function GET(
     req: NextApiRequest,
     res: NextApiResponse
 ) {
@@ -16,7 +16,7 @@ export default async function handler(
                 const apiKey: string = process.env.STACKBY_SECRET_KEY || "";
                 const baseUrl: string = process.env.STACKBY_BASE_URL || "";
 
-                const response: Response = await fetch(`${baseUrl}/theme?${uniqueParam}`, {
+                const response: Response = await fetch(`${baseUrl}/themes?${uniqueParam}`, {
                     method: "GET",
                     headers: {
                         "x-api-key": apiKey,

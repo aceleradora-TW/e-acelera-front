@@ -1,3 +1,3 @@
 export type GetThemesPayload = {
-    uniqueParam: string;
+    uniqueParam?: string;
 }

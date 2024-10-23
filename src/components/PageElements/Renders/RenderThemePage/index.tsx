@@ -1,24 +1,49 @@
-import useFetchData from "@/components/fetchData";
+import { useEffect, useState } from "react";
 import { Loading } from "@/components/Loading";
 import { PageThemesContent } from "../../Content/PageThemesContent";
 import { LayoutPage } from "../../LayoutPage";
 import { BadRequest } from "@/components/BadRequest";
 import { NoData } from "@/components/NoData";
+import { getThemes } from "@/service/themesService";
+import { ApiResponse } from "@/types/type"; // Importando o tipo ApiResponse
 
-export const RenderThemePage = (category: string) => {
-    const { data: renderData, isLoading: loading, error: error } = useFetchData('/api/stackbyApi/Themes');
-    if (loading) {
-        return <Loading />
-    }
-    if (error) {
-        return <BadRequest />
-    }
-    if (!renderData) {
-        return <NoData/>
-    }
-    return (
-        <LayoutPage>
-            <PageThemesContent data={renderData} category={category} />
-        </LayoutPage>
-    )
-}
+export const RenderThemePage = ( category:string ) => {
+  const [renderData, setRenderData] = useState<ApiResponse | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
+
+  useEffect(() => {
+    const fetchThemes = async () => {
+      try {
+        const data: ApiResponse = await getThemes();
+        setRenderData(data);
+      } catch (err) {
+        console.error(err);
+        setError(true);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchThemes();
+  }, []);
+
+  if (loading) {
+    return <Loading />;
+  }
+  if (error) {
+    return <BadRequest />;
+  }
+  if (!renderData) {
+    return <NoData />;
+  }
+
+  console.log(renderData); // Logando os dados para verificação
+  console.log(category);
+
+  return (
+    <LayoutPage>
+      <PageThemesContent data={renderData} category={category} />
+    </LayoutPage>
+  );
+};

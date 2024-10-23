@@ -22,6 +22,8 @@ export interface CommonField {
     category?:string
 }
 
+
+
 export interface ThemeField extends CommonField {
     topicsInfo: string;
     cardDescription: string;
