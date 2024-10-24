@@ -2,6 +2,7 @@ import { ButtonPreviousExercise } from "@/components/ButtonPreviousExercise";
 import { ButtonNextExercise } from "@/components/ButtonNextExercise";
 import { Grid } from "@mui/material";
 import { ApiResponse } from "@/types/type";
+import StatusSelect from "@/components/StatusSelect";
 
 interface ContainerButtonsExerciseProps {
   idExercise: string;
@@ -36,7 +37,12 @@ export const ContainerButtonsExercise: React.FC<
         />
       </Grid>
       <Grid item>
-        <ButtonNextExercise renderData={data} idExercise={idExercise} />
+        <StatusSelect width="100%"/>
+      </Grid>
+      <Grid item>
+        <ButtonNextExercise 
+          renderData={data} 
+          idExercise={idExercise} />
       </Grid>
     </Grid>
   ): <></>
