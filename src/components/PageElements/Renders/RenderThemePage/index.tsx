@@ -1,17 +1,33 @@
-import useFetchData from "@/components/fetchData";
+import { useEffect, useState } from "react";
 import { Loading } from "@/components/Loading";
 import { PageThemesContent } from "../../Content/PageThemesContent";
 import { LayoutPage } from "../../LayoutPage";
 import { BadRequest } from "@/components/BadRequest";
 import { NoData } from "@/components/NoData";
-import { ThemeTeste, ApiResponse, DataItem } from "@/types/type";
+import { getThemes } from "@/service/themesService";
+import { ApiResponse } from "@/types/type"; // Importando o tipo ApiResponse
 
-export const RenderThemePage = (category: string) => {
-  const {
-    data: renderData,
-    isLoading: loading,
-    error: error,
-  } = useFetchData("/api/stackbyApi/Themes"); //?nocache=${Date.now()}&field=ThemeTeste
+export const RenderThemePage = ( category:string ) => {
+  const [renderData, setRenderData] = useState<ApiResponse | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
+
+  useEffect(() => {
+    const fetchThemes = async () => {
+      try {
+        const data: ApiResponse = await getThemes();
+        setRenderData(data);
+      } catch (err) {
+        console.error(err);
+        setError(true);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchThemes();
+  }, []);
+
   if (loading) {
     return <Loading />;
   }
@@ -22,39 +38,8 @@ export const RenderThemePage = (category: string) => {
     return <NoData />;
   }
 
-  // const filteredData = renderData.data.filter((item: DataItem) => {
-  //   const title = item.field.title;
-  //   return title;
-  // });
-
-  // filteredData.forEach((item: DataItem) => {
-  //   console.log(item.field.title); // Mostra os títulos no console
-  // });
-
-  const filteredData = renderData.data
-    .filter((item: DataItem) => {
-      return (
-        item.field.title &&
-        "cardDescription" in item.field &&
-        "image" in item.field
-      );
-    })
-    .map((item: DataItem) => {
-      const theme = item.field as ThemeTeste;
-
-      return {
-        title: theme.title,
-        cardDescription: theme.cardDescription,
-        image: theme.image,
-        category: theme.category,
-      };
-    });
-
-  console.log(filteredData);
-
-  if (filteredData.length === 0) {
-    return <NoData />;
-  }
+  console.log(renderData); // Logando os dados para verificação
+  console.log(category);
 
   return (
     <LayoutPage>

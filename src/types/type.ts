@@ -22,13 +22,7 @@ export interface CommonField {
     category?:string
 }
 
-export interface ThemeTeste  {
-    title: string;
-    cardDescription: string;
-    image: Image[] | null;
-    category: string;
-    rowId: string;
-}
+
 
 export interface ThemeField extends CommonField {
     topicsInfo: string;
