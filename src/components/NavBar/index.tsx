@@ -7,12 +7,12 @@ import { theme } from "../../app/config/theme";
 import { MobileMenu } from "./MobileNavBar";
 import { WebMenu } from "./WebNavBar";
 
+
 interface NavBarProps {
   list: string[];
 }
 
-export const ResponsiveAppBar: React.FC<NavBarProps> = ({ list }) => {
-
+ const ResponsiveAppBar: React.FC<NavBarProps> = ({ list }) => {
   return (
     <AppBar
       position="fixed"
@@ -26,8 +26,6 @@ export const ResponsiveAppBar: React.FC<NavBarProps> = ({ list }) => {
       </Container>
       
     </AppBar>
- 
   );
 };
-export default ResponsiveAppBar;
-
+export default ResponsiveAppBar
