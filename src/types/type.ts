@@ -3,7 +3,7 @@ export interface ApiResponse {
 }
 export interface DataItem {
     id: string;
-    field: CommonField | ThemeTeste | ThemeField | TopicField | VideoField | ExercisesField;
+    field: CommonField | FilteredThemeItem | ThemeField | TopicField | VideoField | ExercisesField;
 }
 export interface CommonField {
     rowId: string;
@@ -21,9 +21,14 @@ export interface CommonField {
     description: string;
     category?:string
 }
-
-
-
+export interface FilteredThemeItem {
+        title: string;
+        cardDescription: string;
+        image: string | null;
+        category: string;
+        rowId: string;
+   
+}
 export interface ThemeField extends CommonField {
     topicsInfo: string;
     cardDescription: string;

@@ -5,7 +5,7 @@ import { LayoutPage } from "../../LayoutPage";
 import { BadRequest } from "@/components/BadRequest";
 import { NoData } from "@/components/NoData";
 import { getThemes } from "@/service/themesService";
-import { ApiResponse } from "@/types/type"; // Importando o tipo ApiResponse
+import { ApiResponse } from "@/types/type";
 
 export const RenderThemePage = ( category:string ) => {
   const [renderData, setRenderData] = useState<ApiResponse | null>(null);

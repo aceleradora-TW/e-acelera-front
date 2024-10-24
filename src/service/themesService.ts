@@ -1,36 +1,30 @@
 import api from "@/lib/api";
-import { GetThemesPayload } from "@/types/themes";
-import { ApiResponse, DataItem } from "@/types/type";
+import { ApiResponse, DataItem, FilteredThemeItem } from "@/types/type";
 
-interface FilteredThemeItem {
-    id: string;
-    field: {
-        title: string;
-        cardDescription: string;
-        image: string | null;
-        category: string;
-        rowId: string;
-    };
-}
+
 
 export const getThemes = async (): Promise<ApiResponse> => {
 
     const response = await api.get<ApiResponse>("/themes"); 
     
+ 
+    const filteredData: DataItem[] = response.data.data.map((item: any) => {
         
-    const filteredData: FilteredThemeItem[] = response.data.data.slice(0, 5).map((item: any) => ({
-        id: item.rowId,
-        field: {
+        const field: FilteredThemeItem =  {
             title: item.field.title,
             cardDescription: item.field.cardDescription,
             image: item.field.image || null,
             category: item.field.category,
             rowId: item.field.rowId 
         }
-    }));
+        return { 
+            id:item.field.rowId,
+            field
+        }
+    });
     
-
+    
     const data: ApiResponse = { data: filteredData };
-
-    return response.data; 
+    console.log(data)
+    return data;
 };
