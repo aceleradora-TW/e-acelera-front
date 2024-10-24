@@ -1,17 +1,17 @@
-import { CardActionArea, CardActions, ThemeProvider } from '@mui/material';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Typography from '@mui/material/Typography';
-import { useRouter } from 'next/navigation';
-import * as React from 'react';
-import { theme } from '../../app/config/theme';
-import { ClickButton } from '../ClickButton';
+import { CardActionArea, CardActions } from "@mui/material"
+import Card from "@mui/material/Card"
+import CardContent from "@mui/material/CardContent"
+import CardMedia from "@mui/material/CardMedia"
+import Typography from "@mui/material/Typography"
+import { useRouter } from "next/navigation"
+import * as React from "react"
+import { theme } from "../../app/config/theme"
+import { ClickButton } from "../ClickButton"
 
 interface CardProps{
     title: string;
     description?: string;
-    textImage?: string; 
+    textImage: string; 
     image?: string;
     route: string;
 }
@@ -41,11 +41,17 @@ export const BaseCard: React.FC<CardProps> = ({title, description, textImage, im
                     component="img"
                     image={image}
                     alt={textImage}
-                    sx={theme.customStyles.cardMedia}
+                    sx={{
+                        width: '100%',   
+                        height: 'auto',  
+                        maxHeight: 210,
+                        objectFit: 'cover'
+                    }}
+                    
                 />
             )}
                 <CardContent sx={theme.customStyles.cardContent}> 
-                    <Typography gutterBottom variant="h2" component="div" sx={theme.customStyles.cardTitle}>
+                    <Typography gutterBottom variant="h2" sx={theme.customStyles.cardTitle}>
                         {title}
                     </Typography>
                     <Typography  variant="body1" sx={cardStyles}>
@@ -57,5 +63,5 @@ export const BaseCard: React.FC<CardProps> = ({title, description, textImage, im
                 <ClickButton title="Entrar" click={() => handleClick(route)}  />
             </CardActions>
         </Card>
-    );
+    )
 }

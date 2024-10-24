@@ -1,16 +1,16 @@
-import * as React from 'react';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import Typography from '@mui/material/Typography';
-import { CardActionArea, CardActions } from '@mui/material';
-import StatusSelect from '../StatusSelect';
-import { useRouter } from 'next/navigation';
-import { theme } from '../../app/config/theme';
+import * as React from "react"
+import Card from "@mui/material/Card"
+import CardContent from "@mui/material/CardContent"
+import Typography from "@mui/material/Typography"
+import { CardActionArea} from "@mui/material"
+import { useRouter } from "next/navigation"
+import { theme } from "../../app/config/theme"
+import StatusSelect from "../StatusSelect"
 
 interface ButtonCardProps {
-    title: string;
-    description: string;
-    route: string;
+    title: string
+    description: string
+    route: string
 }
 
 const cardStyles = {
@@ -45,6 +45,5 @@ export const ButtonCard: React.FC<ButtonCardProps> = ({ title, description, rout
             <StatusSelect width='70%'/>
         </Typography>
     </Card>
-    
     );
 }

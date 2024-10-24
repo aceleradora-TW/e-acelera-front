@@ -59,9 +59,15 @@ export default function StatusSelect({ width = "30%" }: StatusSelectProps) {
             color: "#000000"
           }}
         >
-          <MenuItem value="statusConcluded">Concluído</MenuItem>
-          <MenuItem value="statusInProgress">Em andamento</MenuItem>
-          <MenuItem value="statusPending">Pendente</MenuItem>
+          <MenuItem sx={{border:"2px solid",  borderColor: "black", backgroundColor:"rgba(155, 255, 133)",'&:hover': {
+        backgroundColor:"rgba(155, 255, 133, 0.5)" , 
+      }, }} value="statusConcluded">Concluído</MenuItem>
+          <MenuItem sx={{borderRight:"2px solid",borderLeft:"2px solid",  borderColor: "black", backgroundColor:"rgb(255, 222, 107)",'&:hover': {
+        backgroundColor:"rgba(255, 222, 107, 0.5)" , 
+      }, }} value="statusInProgress">Em andamento</MenuItem>
+          <MenuItem sx={{border:"2px  solid",  borderColor: "black", backgroundColor:"rgb(225, 225, 225)",'&:hover': {
+        backgroundColor: "rgba(225, 225, 225, 0.5)" , 
+      }, }}value="statusPending">Pendente</MenuItem>
         </Select>
       </FormControl>
     </Box>
