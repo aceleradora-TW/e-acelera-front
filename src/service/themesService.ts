@@ -25,6 +25,5 @@ export const getThemes = async (): Promise<ApiResponse> => {
     
     
     const data: ApiResponse = { data: filteredData };
-    console.log(data)
     return data;
 };
