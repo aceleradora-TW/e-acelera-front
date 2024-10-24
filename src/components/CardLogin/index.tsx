@@ -22,21 +22,6 @@ export const CardLogin = () => {
     <Box sx={{ height: "100%", display: "flex", justifyContent: "center", marginTop: 4 }}>
       <Box sx={theme.customStyles.cardLoginBox}>
         <Grid container spacing={2.5}>
-          <Grid container item xs={12} alignItems="center">
-            <Grid item>
-              <Image
-                src={agilLogo}
-                alt="Logo da Aceleradora Ágil"
-                width={isMobileScreen ? 60 : 80}
-                height={90}
-              />
-            </Grid>
-            <Grid item>
-              <Typography variant="body1" sx={{ marginLeft: 2, fontSize: isMobileScreen ? 28 : 34 }}>
-                E-Acelera
-              </Typography>
-            </Grid>
-          </Grid>
 
           <Grid item xs={12}>
             <Typography
