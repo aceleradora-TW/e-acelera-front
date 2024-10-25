@@ -1,5 +1,5 @@
 import api from "@/lib/api";
-import { ApiResponse, DataItem, FilteredTopicItem } from "@/types/type";
+import { ApiResponse, DataItem, FilteredDetailingTopicItem } from "@/types/type";
 
 
 
@@ -10,16 +10,17 @@ export const getTopics = async (): Promise<ApiResponse> => {
  
     const filteredData: DataItem[] = response.data.data.map((item: any) => {
         
-        const field: FilteredTopicItem = {
-            textDescription: item.field.description,
-            textVideo: item.field.videoDescription,
-            title: item.field.video,
+        const field: FilteredDetailingTopicItem = {
+            title: item.field.title,
+            description: item.field.description,
             videoLink: item.field.videoLink,
-            references: item.field.videoReference,
+            video: item.field.video,
+            videoReference: item.field.videoReference,
+            videoDescription: item.field.videoDescription,                                  
             exercises: item.field.exercises,
             exercisesDescription: item.field.exercisesDescription,
             exercisesInfo: item.field.exercisesInfo,
-            referenceText: item.field.references,
+            references: item.field.references,
             rowId: item.field.rowId  
         };
         

@@ -4,7 +4,7 @@ import { LayoutPage } from "../../LayoutPage";
 import { DetailingTopicContent } from "../../Content/DetailingTopicContent";
 import { BadRequest } from "@/components/BadRequest";
 import { NoData } from "@/components/NoData";
-import { getTopics } from "@/service/topicsService";
+import { getTopics } from "@/service/detailingTopicsService";
 import { ApiResponse } from "@/types/type";
 
 export const RenderDetailingTopicPage = (id: string)=> {

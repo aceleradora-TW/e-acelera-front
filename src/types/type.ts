@@ -3,7 +3,7 @@ export interface ApiResponse {
 }
 export interface DataItem {
     id: string;
-    field: CommonField | FilteredThemeItem |FilteredDetailingThemeItem | FilteredTopicItem|  ThemeField | TopicField | VideoField | ExercisesField;
+    field: CommonField | FilteredThemeItem |FilteredDetailingThemeItem | FilteredDetailingTopicItem|  ThemeField | TopicField | VideoField | ExercisesField;
 }
 export interface CommonField {
     rowId: string;
@@ -22,11 +22,11 @@ export interface CommonField {
     category?:string
 }
 export interface FilteredThemeItem {
-        title: string;
-        cardDescription: string;
-        image: string | null;
-        category: string;
-        rowId: string;
+    title: string;
+    cardDescription: string;
+    image: string | null;
+    category: string;
+    rowId: string;
    
 }
 
@@ -38,17 +38,18 @@ export interface FilteredDetailingThemeItem {
     topics: string;
     topicsInfo: string;
 }
-export interface FilteredTopicItem {
-        textDescription:string;
-        textVideo: string;
-        title: string;
-        videoLink: string;
-        references: string;
-        exercises: string;
-        exercisesDescription: string;
-        exercisesInfo: string;
-        referenceText: string;
-        rowId: string; 
+export interface FilteredDetailingTopicItem {
+    title: string;
+    description:string;
+    video: string;
+    videoLink: string;
+    videoReference: string;
+    videoDescription: string;
+    exercises: string;
+    exercisesDescription: string;
+    exercisesInfo: string;
+    references: string;
+    rowId: string; 
 
 }
 export interface ThemeField extends CommonField {
