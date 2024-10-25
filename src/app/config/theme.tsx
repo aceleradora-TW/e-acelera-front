@@ -139,7 +139,6 @@ declare module "@mui/material/styles" {
       };
       cardContent: {
         paddingBottom: number; 
-        height: string;
       };
       cardButtonContent:{
         display: string; 
@@ -317,7 +316,6 @@ declare module "@mui/material/styles" {
       };
       cardContent?:{
         paddingBottom?: number;
-        height?: string;
       };
       cardButtonContent?:{
         display?: string; 
@@ -493,7 +491,6 @@ const theme = createTheme({
     },
     cardContent:{
       paddingBottom: 10.63,
-      height: "100%"
     },
     cardButtonContent:{
       display: "flex", 
