@@ -63,7 +63,7 @@ declare module "@mui/material/styles" {
         display: string;
         flexDirection: string;
         justifyContent: string;
-        padding: number;
+        padding: string;
         boxShadow: string;
         borderRadius: string;
       };
@@ -72,7 +72,6 @@ declare module "@mui/material/styles" {
         color: string;
         borderBottomWidth: string;
         borderBottomColor: string;
-        my: number;
         display: string;
         textTransform: string;
         fontSize: string;
@@ -80,11 +79,14 @@ declare module "@mui/material/styles" {
         fontWeight: number;
         letterSpacing: number;
         margin: string;
+        padding: string;
+        "&:hover": {
+          backgroundColor: string;
+      }
         borderRadius: string;
       };
       link: {
         color: string;
-        my: number;
         display: string;
         textTransform: string;
         fontSize: string;
@@ -92,7 +94,11 @@ declare module "@mui/material/styles" {
         fontWeight: number;
         letterSpacing: number;
         margin: string;
-        borderRadius: string;
+        padding: string;
+        "&:hover": {
+          backgroundColor: string;
+      }
+      borderRadius: string;
       };
       linkReference:{
         color: string;
@@ -248,7 +254,7 @@ declare module "@mui/material/styles" {
         display?: string;
         flexDirection?: string;
         justifyContent?: string;
-        padding?: number;
+        padding?: string;
         boxShadow?: string;
         borderRadius?: string;
         margin?: number;
@@ -258,7 +264,6 @@ declare module "@mui/material/styles" {
         color?: string;
         borderBottomWidth?: string;
         borderBottomColor?: string;
-        my?: number;
         display?: string;
         textTransform?: string;
         fontSize?: string;
@@ -266,11 +271,14 @@ declare module "@mui/material/styles" {
         fontWeight?: number;
         letterSpacing?: number;
         margin?: string;
-        borderRadius?: string;
+        padding?: string;
+        "&:hover": {
+          backgroundColor?: string;
+      }
+      borderRadius?: string;
       };
       link: {
         color?: string;
-        my?: number;
         display?: string;
         textTransform?: string;
         fontSize?: string;
@@ -278,7 +286,11 @@ declare module "@mui/material/styles" {
         fontWeight?: number;
         letterSpacing?: number;
         margin?: string;
-        borderRadius?: string;
+        padding?: string;
+        "&:hover": {
+          backgroundColor?: string;
+      },
+      borderRadius?: string;
       };
       linkReference:{
         color?: string;
@@ -434,7 +446,7 @@ const theme = createTheme({
     description:{
       display: "flex",
       justifyContent: "space-between",
-      padding: 2,
+      padding: "0px 16px 16px 16px",
       boxShadow: "0em 0em 0.4em rgb(44 44 44 / 40% );",
       borderRadius: "6px",
       margin: 0,
@@ -444,7 +456,6 @@ const theme = createTheme({
       color: themePalette.title,
       borderBottomWidth: "3px",
       borderBottomColor: themePalette.title,
-      my: 2,
       display: "block",
       textTransform: "none",
       fontSize: "18px",
@@ -452,18 +463,25 @@ const theme = createTheme({
       fontWeight: 400,
       letterSpacing: 0.4,
       margin: "0 0.5rem",
-      borderRadius: "0",
+      padding: "8px",
+      "&:hover": {
+        backgroundColor: "rgb(246, 250, 253)",
+    },
+      borderRadius: "0"
     },
     link: {
       color: themePalette.descriptionCard,
-      my: 2,
       display: "block",
       textTransform: "none",
       fontSize: "18px",
       lineHeight: 1.7,
       fontWeight: 400,
       letterSpacing: 0.4,
-      margin: "0 0.5rem",
+      margin: "0 0.8rem",
+      padding: "8px", 
+      "&:hover": {
+        backgroundColor: "rgb(246, 250, 253)",
+    },
       borderRadius: "0",
     },
     linkReference:{

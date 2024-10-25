@@ -1,40 +1,37 @@
-import { theme } from "@/app/config/theme";
+import { theme } from "@/app/config/theme"
 import {
-  AppBar,
   Box,
-  Container,
   IconButton,
   Menu,
   MenuItem,
-  Toolbar,
   Typography,
-} from "@mui/material";
-import MenuIcon from "@mui/icons-material/Menu";
-import Image from "next/image";
-import Link from "next/link";
-import * as React from "react";
+  Link
+} from "@mui/material"
+import MenuIcon from "@mui/icons-material/Menu"
+import Image from "next/image"
+import * as React from "react"
 
 interface MobileMenuProps {
-  list: string[];
+  list: string[]
 }
 export const MobileMenu: React.FC<MobileMenuProps> = ({ list }) => {
-  const [anchorNav, setAnchorNav] = React.useState<null | HTMLElement>(null);
-  const [anchorUser, setAnchorUser] = React.useState<null | HTMLElement>(null);
+  const [anchorNav, setAnchorNav] = React.useState<null | HTMLElement>(null)
+  const [anchorUser, setAnchorUser] = React.useState<null | HTMLElement>(null)
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorNav(event.currentTarget);
-  };
+    setAnchorNav(event.currentTarget)
+  }
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorUser(event.currentTarget);
-  };
+    setAnchorUser(event.currentTarget)
+  }
 
   const handleCloseNavMenu = () => {
-    setAnchorNav(null);
-  };
+    setAnchorNav(null)
+  }
 
   const handleCloseUserMenu = () => {
-    setAnchorUser(null);
-  };
+    setAnchorUser(null)
+  }
   return (
     <>
       <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
@@ -69,13 +66,13 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({ list }) => {
         >
           {list.map((item) => (
             <MenuItem key={item} onClick={handleCloseNavMenu}>
-              <Link href={item ? `/${item}`: `/`}>
-                <Typography
+              <Link href={item ? `/${item}`: `/`}
+                  underline="none"
                   textAlign="center"
                   sx={{ color: theme.palette.textColor?.light }}
                 >
                   {item}
-                </Typography>
+             
               </Link>
             </MenuItem>
           ))}
@@ -90,6 +87,7 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({ list }) => {
           style={{ display: "flex" }}
         />
       </Box>
+      
       <Typography
         noWrap
         component="a"
@@ -103,5 +101,5 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({ list }) => {
         E-Acelera
       </Typography>
     </>
-  );
-};
+  )
+}
