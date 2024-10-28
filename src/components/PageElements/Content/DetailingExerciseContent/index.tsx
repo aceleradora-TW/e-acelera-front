@@ -63,11 +63,10 @@ export const DetailingExerciseContent: React.FC<DetailingContentProps> = ({
   return (
     <>
       {filteredData.map((element: DataItem) => (
-        <ExerciseContent
-        dataTopic={dataTopic}
-          key={element.id}
-          idExercise={id}
-          field={element.field as ExercisesField}
+        <DetailingExerciseContent key={element.id}
+          dataTopic={dataTopic}
+          dataExercise={dataExercise}
+          id={id}
         />
       ))}
     </>
