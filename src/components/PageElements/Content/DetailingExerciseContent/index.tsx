@@ -1,11 +1,11 @@
 import React from "react";
 import { Grid} from "@mui/material";
 import { BreadCrumb } from "@/components/BreadCrumb";
-import { Title } from "@/components/title";
 import { ApiResponse, DataItem, ExercisesField } from "@/types/type";
 import { DescriptionFull } from "@/components/Description/DescriptionFull";
 import { AdvanceExercises } from "@/components/AdvanceExercises";
 import { ContainerButtonsExercise } from "../../Container/ContainerButtonsExercise";
+import { Heading } from "@/components/Heading";
 
 interface DetailingContentProps {
   dataTopic:ApiResponse
@@ -39,7 +39,7 @@ const ExerciseContent: React.FC<{
       }}
     >
       <Grid item>
-        <Title text={field.title} />
+        <Heading variant="h1" text={field.title} />
       </Grid>
       <Grid item >
         <AdvanceExercises idExercises={idExercise} data={dataTopic}/>

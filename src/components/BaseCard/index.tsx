@@ -51,7 +51,7 @@ export const BaseCard: React.FC<CardProps> = ({title, description, textImage, im
                 />
             )}
                 <CardContent sx={theme.customStyles.cardContent}> 
-                    <Typography gutterBottom variant="h2" sx={theme.customStyles.cardTitle}>
+                    <Typography gutterBottom variant="h3" sx={theme.customStyles.cardTitle}>
                         {title}
                     </Typography>
                     <Typography  variant="body1" sx={cardStyles}>
