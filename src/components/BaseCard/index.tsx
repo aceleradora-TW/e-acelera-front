@@ -23,9 +23,9 @@ const cardStyles = {
     }
 
     const cardActionsStyle = {
-        paddingBottom: 2, // Diminui o espaçamento inferior
+        paddingBottom: 2,
         paddingLeft: 2,
-        height: 'auto',   // Remove a altura fixa para ajustar melhor ao conteúdo
+        height: 'auto', 
         justifyContent: 'left',
     };
 
