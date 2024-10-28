@@ -11,7 +11,7 @@ import { ClickButton } from "../ClickButton"
 interface CardProps{
     title: string;
     description?: string;
-    textImage: string; 
+    textImage?: string; 
     image?: string;
     route: string;
 }
