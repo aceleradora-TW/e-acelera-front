@@ -1,7 +1,7 @@
 import React from "react"
 import { Grid } from "@mui/material"
 import { BreadCrumb } from "@/components/BreadCrumb"
-import { Title } from "@/components/title"
+import { Title } from "@/components/Title"
 import { ApiResponse, DataItem, TopicField } from "@/types/type"
 import { DescriptionReference } from "@/components/Description/DescriptionReference"
 import { ContainerCardsExercises } from "../../Container/ContainerCardsExercises"

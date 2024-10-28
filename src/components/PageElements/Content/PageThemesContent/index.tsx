@@ -1,6 +1,6 @@
 import React from "react";
 import { Grid } from "@mui/material";
-import { Title } from "@/components/title";
+import { Title } from "@/components/Title";
 import { ContainerCardTheme } from "../../Container/ContainerCardsThemes";
 import { ApiResponse } from "@/types/type";
 

@@ -1,7 +1,7 @@
 import React from "react";
 import { Grid } from "@mui/material";
 import { BreadCrumb } from "@/components/BreadCrumb";
-import { Title } from "@/components/title";
+import { Title } from "@/components/Title";
 import { ContainerCardTopics } from "../../Container/ContainerCardsTopics";
 import { ApiResponse, DataItem, ThemeField } from "@/types/type";
 import { DescriptionDivider } from "../../../Description/DescriptionDivider";
