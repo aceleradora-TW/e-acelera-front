@@ -13,7 +13,7 @@ export default function Home() {
 
   useEffect(() => {
     if (isMounted) {
-      router.push("/Nivelamento")
+      router.push("/nivelamento")
     }
   }, [isMounted, router])
 
