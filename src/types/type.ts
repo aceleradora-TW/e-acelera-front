@@ -3,7 +3,7 @@ export interface ApiResponse {
 }
 export interface DataItem {
     id: string;
-    field: CommonField | FilteredThemeItem |FilteredDetailingThemeItem | FilteredDetailingTopicItem| FilteredDetailingExerciseItem | ThemeField | TopicField | VideoField | ExercisesField;
+    field: CommonField | FilteredThemeItem |FilteredTopicsItem| FilteredDetailingThemeItem | FilteredDetailingTopicItem| FilteredDetailingExerciseItem | ThemeField | TopicField | VideoField | ExercisesField;
 }
 export interface CommonField {
     rowId: string;
@@ -28,6 +28,13 @@ export interface FilteredThemeItem {
     category: string;
     rowId: string;
    
+}
+
+export interface FilteredTopicsItem   {
+    exercises: string;
+    exercisesDescription: string;
+    exercisesInfo: string;
+    rowId: string;
 }
 
 export interface FilteredDetailingThemeItem {

@@ -6,11 +6,11 @@ import { BadRequest } from "@/components/BadRequest";
 import { NoData } from "@/components/NoData";
 import { getExercises } from "@/service/detailingExerciseService";
 import { ApiResponse } from "@/types/type";
-import { getTopics } from "@/service/detailingTopicsService";
+import {  getTopicsExercise } from "@/service/topicsService"
 
 export const RenderDetailingExercisePage = (id: string)=> {
   const [renderDataExercise, setRenderDataExercise] = useState<ApiResponse | null>(null);
-  const [renderDataTopic, setRenderDataTopic] = useState<ApiResponse | null>(null);
+  const [renderDataTopicExercise, setRenderDataTopicExercise] = useState<ApiResponse | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
  
@@ -18,9 +18,9 @@ export const RenderDetailingExercisePage = (id: string)=> {
     const fetchExercises = async () => {
       try {
         const dataExercise: ApiResponse = await getExercises();
-        const dataTopic: ApiResponse = await getTopics();
+        const dataTopic: ApiResponse = await getTopicsExercise();
         setRenderDataExercise(dataExercise);
-        setRenderDataTopic(dataTopic);
+        setRenderDataTopicExercise(dataTopic);
       } catch (err) {
         console.error(err);
         setError(true);
@@ -38,14 +38,17 @@ export const RenderDetailingExercisePage = (id: string)=> {
 if (error) {
     return <BadRequest />
 }
-if (!renderDataExercise || !renderDataTopic) {
+if (!renderDataExercise || !renderDataTopicExercise) {
     return <NoData/>
 }
-
   return (
     <LayoutPage>
-      <DetailingExerciseContent dataExercise={renderDataExercise} dataTopic={renderDataTopic} id={id} />
+      <DetailingExerciseContent dataExercise={renderDataExercise} dataTopic={renderDataTopicExercise} id={id} />
       
     </LayoutPage>
   );
+}
+
+function getTopics(): ApiResponse | PromiseLike<ApiResponse> {
+  throw new Error("Function not implemented.");
 }
