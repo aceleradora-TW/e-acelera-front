@@ -12,6 +12,7 @@ interface CardProps{
     title: string;
     description?: string;
     textImage?: string; 
+
     image?: string;
     route: string;
 }
@@ -21,11 +22,12 @@ const cardStyles = {
     WebkitLineClamp: 6,
     }
 
-const cardActionsStyle = {
-    paddingBottom: 4, 
-    paddingLeft: 2,
-    height: 20
-}
+    const cardActionsStyle = {
+        paddingBottom: 2,
+        paddingLeft: 2,
+        height: 'auto', 
+        justifyContent: 'left',
+    };
 
 export const BaseCard: React.FC<CardProps> = ({title, description, textImage, image, route}) => {
     const router = useRouter()

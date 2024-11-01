@@ -4,18 +4,9 @@ import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
 
 export default function Home() {
+
   const router = useRouter()
-  const [isMounted, setIsMounted] = useState<Boolean>(false)
-
-  useEffect(() => {
-    setIsMounted(true)
-  }, [])
-
-  useEffect(() => {
-    if (isMounted) {
-      router.push("/Nivelamento")
-    }
-  }, [isMounted, router])
+  router.push("/nivelamento")
 
   return <Box></Box>
 }
