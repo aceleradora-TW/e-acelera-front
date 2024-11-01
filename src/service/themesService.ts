@@ -5,9 +5,8 @@ import { ApiResponse, DataItem, FilteredThemeItem } from "@/types/type";
 
 export const getThemes = async (): Promise<ApiResponse> => {
 
-    const response = await api.get<ApiResponse>("/themes"); 
+    const response = await api.get<ApiResponse>("/themes");
     
- 
     const filteredData: DataItem[] = response.data.data.map((item: any) => {
         
         const field: FilteredThemeItem =  {
@@ -23,7 +22,7 @@ export const getThemes = async (): Promise<ApiResponse> => {
         }
     });
     
-    
     const data: ApiResponse = { data: filteredData };
+
     return data;
 };
