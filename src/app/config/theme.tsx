@@ -317,7 +317,7 @@ declare module "@mui/material/styles" {
       };
       cardContent?:{
         paddingBottom?: string;
-        height: string;
+        height?: string;
       };
       cardButtonContent?:{
         display?: string; 
