@@ -5,7 +5,7 @@ import ReactMarkdown from "react-markdown";
 
 const components = {
   h1: (props: React.HTMLAttributes<HTMLHeadingElement>) => (
-    <Typography variant="h2" {...props} />
+    <Typography variant="caption" {...props} />
   ),
   p: (props: React.HTMLAttributes<HTMLHeadingElement>) => (
     <Typography variant="body1" sx={{ color: theme.palette.textColor?.light }} {...props} />
