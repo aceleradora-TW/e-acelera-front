@@ -139,7 +139,7 @@ declare module "@mui/material/styles" {
       };
       cardContent: {
         paddingBottom: number; 
-        height: string;
+        height: number;
       };
       cardButtonContent:{
         display: string; 
@@ -316,7 +316,7 @@ declare module "@mui/material/styles" {
       }
       };
       cardContent?:{
-        paddingBottom?: number;
+        paddingBottom?: string;
         height?: string;
       };
       cardButtonContent?:{
@@ -414,6 +414,7 @@ const theme = createTheme({
       padding: "8px 16px",
       borderRadius: 2,
       border: 1,
+
     },
     description:{
       display: "flex",
@@ -492,9 +493,10 @@ const theme = createTheme({
       }
     },
     cardContent:{
-      paddingBottom: 10.63,
-      height: "100%"
+      paddingBottom: '25%',
+      height: '250px'
     },
+
     cardButtonContent:{
       display: "flex", 
       flexDirection: "column", 
