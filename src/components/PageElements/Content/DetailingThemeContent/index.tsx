@@ -1,10 +1,10 @@
 import React from "react";
 import { Grid } from "@mui/material";
 import { BreadCrumb } from "@/components/BreadCrumb";
-import { Title } from "@/components/Title";
 import { ContainerCardTopics } from "../../Container/ContainerCardsTopics";
 import { ApiResponse, DataItem, ThemeField } from "@/types/type";
 import { DescriptionDivider } from "../../../Description/DescriptionDivider";
+import { Heading } from "@/components/Heading";
 
 interface DetailingContentProps {
   data: ApiResponse;
@@ -14,11 +14,11 @@ const ThemeContent: React.FC<{ field: ThemeField }> = ({ field }) => (
   <>
     <Grid item xl={12} lg={9} md={6} sm={3}>
       <BreadCrumb />
-      <Title text={field.title} />
+      <Heading variant="h1" text={field.title} />
     </Grid>
     <DescriptionDivider text={field.description} />
     <Grid item xl={12} lg={9} md={6} sm={3}>
-      <Title text={"Tópicos"} />
+      <Heading variant="h2" text={"Tópicos"} />
     </Grid>
     <ContainerCardTopics
       topics={field.topics}

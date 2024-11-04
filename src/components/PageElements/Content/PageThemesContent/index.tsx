@@ -1,8 +1,8 @@
 import React from "react";
 import { Grid } from "@mui/material";
-import { Title } from "@/components/Title";
 import { ContainerCardTheme } from "../../Container/ContainerCardsThemes";
 import { ApiResponse } from "@/types/type";
+import { Heading } from "@/components/Heading";
 
 interface PageThemesContentProps {
   data: ApiResponse;
@@ -14,7 +14,7 @@ export const PageThemesContent: React.FC<PageThemesContentProps> = ({ data, cate
   return (
     <>
        <Grid item xl={12} lg={9} md={6} sm={3} textAlign={{ xs: 'left', sm: 'center' }}>
-          <Title text={`Bem vindo ao ${category}`} />
+          <Heading variant="h1" text={`Bem vindo ao ${category}`} />
         </Grid>
         <ContainerCardTheme data={data} category={category}/>
     </>

@@ -1,11 +1,11 @@
 import React from "react"
 import { Grid } from "@mui/material"
 import { BreadCrumb } from "@/components/BreadCrumb"
-import { Title } from "@/components/Title"
 import { ApiResponse, DataItem, TopicField } from "@/types/type"
 import { DescriptionReference } from "@/components/Description/DescriptionReference"
 import { ContainerCardsExercises } from "../../Container/ContainerCardsExercises"
 import { DescriptionWithVideo } from "@/components/Description/DescriptionWithVideo"
+import { Heading } from "@/components/Heading"
 
 interface DetailingContentProps {
   data: ApiResponse
@@ -16,7 +16,7 @@ const TopicContent: React.FC<{ field: TopicField }> = ({ field }) => (
   <>
     <Grid item xl={12} lg={9} md={6} sm={3}>
       <BreadCrumb />
-      <Title text={field.title} />
+      <Heading variant="h1"text={field.title} />
     </Grid>
     <DescriptionWithVideo
       textDescription={field.description}
@@ -26,7 +26,7 @@ const TopicContent: React.FC<{ field: TopicField }> = ({ field }) => (
       references={field.videoReference}
     />
     <Grid item xl={12} lg={9} md={6} sm={3}>
-      <Title text={"Exercícios"} />
+      <Heading variant="h2" text={"Exercícios"} />
     </Grid>
     <ContainerCardsExercises
       exercises={field.exercises}
@@ -37,7 +37,7 @@ const TopicContent: React.FC<{ field: TopicField }> = ({ field }) => (
     {field.references && field.references.trim() != "" && (
       <>
         <Grid item xl={12} lg={9} md={6} sm={3}>
-          <Title text={"Referências"} />
+          <Heading variant="h2" text={"Referências"} />
         </Grid>
         <DescriptionReference text={field.references} />
       </>
