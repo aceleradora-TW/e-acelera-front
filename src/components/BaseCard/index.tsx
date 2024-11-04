@@ -11,7 +11,8 @@ import { ClickButton } from "../ClickButton"
 interface CardProps{
     title: string;
     description?: string;
-    textImage: string; 
+    textImage?: string; 
+
     image?: string;
     route: string;
 }
@@ -21,11 +22,12 @@ const cardStyles = {
     WebkitLineClamp: 6,
     }
 
-const cardActionsStyle = {
-    paddingBottom: 4, 
-    paddingLeft: 2,
-    height: 20
-}
+    const cardActionsStyle = {
+        paddingBottom: 2,
+        paddingLeft: 2,
+        height: 'auto', 
+        justifyContent: 'left',
+    };
 
 export const BaseCard: React.FC<CardProps> = ({title, description, textImage, image, route}) => {
     const router = useRouter()
@@ -51,7 +53,7 @@ export const BaseCard: React.FC<CardProps> = ({title, description, textImage, im
                 />
             )}
                 <CardContent sx={theme.customStyles.cardContent}> 
-                    <Typography gutterBottom variant="h2" sx={theme.customStyles.cardTitle}>
+                    <Typography gutterBottom variant="h3" sx={theme.customStyles.cardTitle}>
                         {title}
                     </Typography>
                     <Typography  variant="body1" sx={cardStyles}>

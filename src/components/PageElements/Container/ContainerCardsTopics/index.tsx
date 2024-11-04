@@ -35,8 +35,7 @@ export const ContainerCardTopics: React.FC<ContainerCardTopicsProps> = ({ topics
           <BaseCard
             title={topic}
             description={descriptionsArray[index]}
-            route={`${currentPath}/${infoArray[index]}-${topic}`}
-          />
+            route={`${currentPath}/${infoArray[index]}-${topic}`} textImage={""}          />
         </Grid>
       ))}
     </Grid>

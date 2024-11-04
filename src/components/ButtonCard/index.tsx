@@ -31,7 +31,7 @@ export const ButtonCard: React.FC<ButtonCardProps> = ({ title, description, rout
             <Card sx={theme.customStyles.cardButtonContainer}>
                 <CardActionArea onClick={() => handleClick(route)} sx={{height: "100%"}}>
                     <CardContent sx={theme.customStyles.cardButtonContent}>
-                        <Typography gutterBottom variant="h2" sx={theme.customStyles.cardTitle}>
+                        <Typography gutterBottom variant="h3" sx={theme.customStyles.cardTitle}>
                             {title}
                         </Typography>
                         <Typography variant="body1" sx={cardStyles}>
