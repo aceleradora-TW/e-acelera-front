@@ -530,7 +530,8 @@ const theme = createTheme({
     },
     breadCrumb: {
       textDecoration: "none",
-      color: themePalette.title
+      color: themePalette.title,
+      marginTop: 1.2,
     },
     cardVideo:{
       display: "flex",
