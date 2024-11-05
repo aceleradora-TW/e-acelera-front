@@ -32,7 +32,7 @@ export const ButtonCard: React.FC<ButtonCardProps> = ({ title, description, rout
         <Card sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between',  ...theme.customStyles.cardButtonContainer }}>
         <CardActionArea onClick={() => handleClick(route)} sx={{ flexGrow: 1 }}> 
             <CardContent sx={theme.customStyles.cardButtonContent}>
-                <Typography gutterBottom variant="h2" component="div" sx={theme.customStyles.cardTitle}>
+                <Typography gutterBottom variant="h3" component="div" sx={theme.customStyles.cardTitle}>
                     {title}
                 </Typography>
                 <Typography variant="body1" sx={cardStyles}>
