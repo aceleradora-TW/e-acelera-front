@@ -30,7 +30,8 @@ export const RenderDetailingExercisePage = (id: string)=> {
     };
 
     fetchExercises();
-  }, []);
+  }, [id]);
+  
 
   if (loading) {
     return <Loading />
@@ -47,8 +48,4 @@ if (!renderDataExercise || !renderDataTopicExercise) {
       
     </LayoutPage>
   );
-}
-
-function getTopics(): ApiResponse | PromiseLike<ApiResponse> {
-  throw new Error("Function not implemented.");
 }

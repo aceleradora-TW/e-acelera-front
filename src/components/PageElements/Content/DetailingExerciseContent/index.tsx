@@ -14,7 +14,7 @@ interface DetailingContentProps {
 }
 
 const ExerciseContent: React.FC<{
-  field: ExercisesField;
+  field: any;
   idExercise: string;
   dataTopic: ApiResponse
 }> = ({ field, idExercise, dataTopic}) => (
@@ -63,10 +63,11 @@ export const DetailingExerciseContent: React.FC<DetailingContentProps> = ({
   return (
     <>
       {filteredData.map((element: DataItem) => (
-        <DetailingExerciseContent key={element.id}
+        <ExerciseContent
+         key={element.id}
           dataTopic={dataTopic}
-          dataExercise={dataExercise}
-          id={id}
+          field={element.field}
+          idExercise={id}
         />
       ))}
     </>
