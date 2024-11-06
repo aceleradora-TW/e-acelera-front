@@ -7,7 +7,6 @@ import { theme } from "../../app/config/theme";
 import { MobileMenu } from "./MobileNavBar";
 import { WebMenu } from "./WebNavBar";
 
-
 interface NavBarProps {
   list: string[];
 }

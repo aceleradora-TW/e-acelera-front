@@ -72,8 +72,8 @@ declare module "@mui/material/styles" {
         color: string;
         borderBottomWidth: string;
         borderBottomColor: string;
-        my: number;
         display: string;
+        textTransform: string;
         fontSize: string;
         lineHeight: number;
         fontWeight: number;
@@ -83,11 +83,12 @@ declare module "@mui/material/styles" {
         "&:hover": {
           backgroundColor: string;
       }
+        borderRadius: string;
       };
       link: {
         color: string;
-        my: number;
         display: string;
+        textTransform: string;
         fontSize: string;
         lineHeight: number;
         fontWeight: number;
@@ -97,6 +98,7 @@ declare module "@mui/material/styles" {
         "&:hover": {
           backgroundColor: string;
       }
+      borderRadius: string;
       };
       linkReference:{
         color: string;
@@ -139,7 +141,7 @@ declare module "@mui/material/styles" {
       };
       cardContent: {
         paddingBottom: number; 
-        height: string;
+        height: number;
       };
       cardButtonContent:{
         display: string; 
@@ -262,8 +264,8 @@ declare module "@mui/material/styles" {
         color?: string;
         borderBottomWidth?: string;
         borderBottomColor?: string;
-        my?: number;
         display?: string;
+        textTransform?: string;
         fontSize?: string;
         lineHeight?: number;
         fontWeight?: number;
@@ -273,11 +275,12 @@ declare module "@mui/material/styles" {
         "&:hover": {
           backgroundColor?: string;
       }
+      borderRadius?: string;
       };
       link: {
         color?: string;
-        my?: number;
         display?: string;
+        textTransform?: string;
         fontSize?: string;
         lineHeight?: number;
         fontWeight?: number;
@@ -286,7 +289,8 @@ declare module "@mui/material/styles" {
         padding?: string;
         "&:hover": {
           backgroundColor?: string;
-      }
+      },
+      borderRadius?: string;
       };
       linkReference:{
         color?: string;
@@ -328,7 +332,7 @@ declare module "@mui/material/styles" {
       }
       };
       cardContent?:{
-        paddingBottom?: number;
+        paddingBottom?: string;
         height?: string;
       };
       cardButtonContent?:{
@@ -438,6 +442,7 @@ const theme = createTheme({
       padding: "8px 16px",
       borderRadius: 2,
       border: 1,
+
     },
     description:{
       display: "flex",
@@ -453,19 +458,22 @@ const theme = createTheme({
       borderBottomWidth: "3px",
       borderBottomColor: themePalette.title,
       display: "block",
+      textTransform: "none",
       fontSize: "18px",
       lineHeight: 1.7,
       fontWeight: 400,
       letterSpacing: 0.4,
-      margin: "0 0.8rem",
+      margin: "0 0.5rem",
       padding: "8px",
       "&:hover": {
         backgroundColor: "rgb(246, 250, 253)",
-    }
+    },
+      borderRadius: "0"
     },
     link: {
       color: themePalette.descriptionCard,
       display: "block",
+      textTransform: "none",
       fontSize: "18px",
       lineHeight: 1.7,
       fontWeight: 400,
@@ -474,7 +482,8 @@ const theme = createTheme({
       padding: "8px", 
       "&:hover": {
         backgroundColor: "rgb(246, 250, 253)",
-    }
+    },
+      borderRadius: "0",
     },
     linkReference:{
       color: themePalette.descriptionCard
@@ -516,9 +525,10 @@ const theme = createTheme({
       }
     },
     cardContent:{
-      paddingBottom: 10.63,
-      height: "100%"
+      paddingBottom: '25%',
+      height: '250px'
     },
+
     cardButtonContent:{
       display: "flex", 
       flexDirection: "column", 
@@ -654,10 +664,33 @@ const theme = createTheme({
       fontWeight: 500,
       letterSpacing: 0.15,
       [`@media (min-width:0px)`]: {
+        fontSize: "1.5rem",
+      },
+      [`@media (min-width:600px)`]: {
+        fontSize: "1.8rem",
+      },
+      [`@media (min-width:900px)`]: {
+        fontSize: "2.2rem",
+      },
+      [`@media (min-width:1200px)`]: {
+        fontSize: "2.4rem",
+      },
+      [`@media (min-width:1536px)`]: {
+        fontSize: "2.4rem",
+      }
+    },
+    h3: {
+      lineHeight: 1.6,
+      fontWeight: 500,
+      letterSpacing: 0.15,
+      [`@media (min-width:0px)`]: {
         fontSize: "1.2rem",
       },
       [`@media (min-width:600px)`]: {
         fontSize: "1.4rem",
+      },
+      [`@media (min-width:900px)`]: {
+        fontSize: "1.5rem",
       },
       [`@media (min-width:1200px)`]: {
         fontSize: "1.6rem",

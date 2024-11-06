@@ -11,6 +11,7 @@ interface WebMenuProps {
 }
 
 export const WebMenu: React.FC<WebMenuProps> = ({ list }) => {
+  const router = useRouter()
   const pathname = usePathname()
   const { data: session } = useSession()
   const handlePageRedirect = (pagina: string) => {
