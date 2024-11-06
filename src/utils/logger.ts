@@ -21,5 +21,4 @@ const logger = createLogger({
 });
 
 export default logger;
-
 // exemplo de uso: logger.info('Hello world!');
