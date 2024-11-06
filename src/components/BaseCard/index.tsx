@@ -49,12 +49,7 @@ export const BaseCard: React.FC<CardProps> = ({
             component="img"
             image={image}
             alt={textImage}
-            sx={{
-              maxWidth: "100%",
-              height: 'auto',
-              display: 'block',
-              objectFit: "cover",
-            }}
+            sx={theme.customStyles.cardMediaImage}
           />
         )}
         <CardContent sx={theme.customStyles.cardContent}>
