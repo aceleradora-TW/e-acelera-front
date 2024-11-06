@@ -11,13 +11,12 @@ export const getTopicsExercise = async (): Promise<ApiResponse> => {
     const filteredData: DataItem[] = response.data.data.map((item: any) => {
         
         const field: FilteredTopicsItem =  {
-             exercises: item.field.exercises,
+            exercises: item.field.exercises,
             exercisesDescription: item.field.exercisesDescription,
-            exercisesInfo: item.field.exercicsesInfo,
+            exercisesInfo: item.field.exercisesInfo,
             rowId: item.field.rowId
         }
         
-
         return { 
             id:item.field.rowId,
             field
