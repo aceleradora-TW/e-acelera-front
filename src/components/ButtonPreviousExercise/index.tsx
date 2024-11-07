@@ -1,8 +1,7 @@
 import { theme } from "@/app/config/theme";
 import { Button, ButtonProps, Stack, styled } from "@mui/material";
 import { useRouter, usePathname } from 'next/navigation';
-import useFetchData from "../fetchData";
-import { ApiResponse, CommonField, DataItem, TopicField } from "@/types/type";
+import { ApiResponse, DataItem, FilteredTopicsItem, TopicField } from "@/types/type";
 import { ClickButton } from "../ClickButton";
 
 const ButtonFail = styled(Button)<ButtonProps>(() => ({
@@ -25,7 +24,7 @@ const ContainerButtonFail = () => {
     )
 }
 
-function isTopicField(field: CommonField): field is TopicField {
+function isTopicField(field: any): field is  FilteredTopicsItem | TopicField {
     return field && "exercisesInfo" in field;}
 
 interface ButtonNextProps {

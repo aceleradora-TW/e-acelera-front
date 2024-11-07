@@ -29,8 +29,9 @@ export type FilteredItem = FilteredThemeItem | FilteredTopicsItem | FilteredDeta
 export interface FilteredThemeItem {
     title: string;
     cardDescription: string;
-    image: string | null;
+    image: Image[];
     category: string;
+    alt: string;
     rowId: string;
 }
 

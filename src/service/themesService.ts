@@ -14,6 +14,7 @@ export const getThemes = async (): Promise<ApiResponse> => {
             cardDescription: item.field.cardDescription,
             image: item.field.image || null,
             category: item.field.category,
+            alt: item.field.alt,
             rowId: item.field.rowId 
         }
         return { 

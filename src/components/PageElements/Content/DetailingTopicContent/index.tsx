@@ -1,7 +1,7 @@
 import React from "react"
 import { Grid } from "@mui/material"
 import { BreadCrumb } from "@/components/BreadCrumb"
-import { ApiResponse, DataItem, TopicField } from "@/types/type"
+import { ApiResponse, DataItem, FilteredDetailingTopicItem } from "@/types/type"
 import { DescriptionReference } from "@/components/Description/DescriptionReference"
 import { ContainerCardsExercises } from "../../Container/ContainerCardsExercises"
 import { DescriptionWithVideo } from "@/components/Description/DescriptionWithVideo"
@@ -12,11 +12,15 @@ interface DetailingContentProps {
   id: string
 }
 
-const TopicContent: React.FC<{ field: TopicField }> = ({ field }) => (
+function isFilteredDetailingTopicItem(field: any): field is FilteredDetailingTopicItem {
+  return field && typeof field.category === "string" && typeof field.title === "string";
+}
+
+const TopicContent: React.FC<{ field: FilteredDetailingTopicItem }> = ({ field }) => (
   <>
     <Grid item xl={12} lg={9} md={6} sm={3}>
       <BreadCrumb />
-      <Heading variant="h1"text={field.title} />
+      <Heading variant="h1" text={field.title} />
     </Grid>
     <DescriptionWithVideo
       textDescription={field.description}
@@ -55,9 +59,14 @@ export const DetailingTopicContent: React.FC<DetailingContentProps> = ({
 
   return (
     <>
-      {filteredData.map((element: DataItem) => (
-        <TopicContent key={element.id} field={element.field as TopicField} />
-      ))}
+      {filteredData.map((element: DataItem) => {
+        if (isFilteredDetailingTopicItem(element.field)) {
+          return (
+            <TopicContent key={element.id} field={element.field} />
+          )
+        }
+        return null
+      })}
     </>
   )
 }
