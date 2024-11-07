@@ -16,7 +16,7 @@ interface DetailingContentProps {
 function isFilteredDetailingExerciseItem(
   field: any
 ): field is FilteredDetailingExerciseItem {
-  return field && typeof field.title === "string" && typeof field.description === "string";
+  return field && "title" in field && "description" in field
 }
 
 const ExerciseContent: React.FC<{

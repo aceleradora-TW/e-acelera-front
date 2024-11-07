@@ -13,7 +13,7 @@ interface DetailingContentProps {
 }
 
 function isFilteredDetailingTopicItem(field: any): field is FilteredDetailingTopicItem {
-  return field && typeof field.category === "string" && typeof field.title === "string";
+  return field && "videoLink" in field && "video" in field
 }
 
 const TopicContent: React.FC<{ field: FilteredDetailingTopicItem }> = ({ field }) => (
@@ -60,6 +60,7 @@ export const DetailingTopicContent: React.FC<DetailingContentProps> = ({
   return (
     <>
       {filteredData.map((element: DataItem) => {
+        console.log(isFilteredDetailingTopicItem(element.field))
         if (isFilteredDetailingTopicItem(element.field)) {
           return (
             <TopicContent key={element.id} field={element.field} />

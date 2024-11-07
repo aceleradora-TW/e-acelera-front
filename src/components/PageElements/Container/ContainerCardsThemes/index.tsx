@@ -10,7 +10,7 @@ interface ContainerCardThemeProps {
 }
 
 function isFilteredThemeItem(field: any): field is FilteredThemeItem {
-  return field && typeof field.category === "string" && typeof field.title === "string";
+  return field && "category" in field && "image" in field;
 }
 
 export const ContainerCardTheme: React.FC<ContainerCardThemeProps> = ({ data, category }) => {
