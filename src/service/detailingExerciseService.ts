@@ -1,5 +1,5 @@
 import api from "@/lib/api";
-import { ApiResponse, DataItem, FilteredDetailingExerciseItem } from "@/types/type";
+import { ApiResponse, DataItem, FilteredItem } from "@/types/type";
 
 
 
@@ -10,7 +10,7 @@ export const getExercises = async (): Promise<ApiResponse> => {
  
     const filteredData: DataItem[] = response.data.data.map((item: any) => {
         
-        const field: FilteredDetailingExerciseItem =  {
+        const field: FilteredItem =  {
             title: item.field.title,
             description: item.field.description,            
             rowId: item.field.rowId

@@ -6,7 +6,7 @@ import { BadRequest } from "@/components/BadRequest";
 import { NoData } from "@/components/NoData";
 import { getExercises } from "@/service/detailingExerciseService";
 import { ApiResponse } from "@/types/type";
-import {  getTopicsExercise } from "@/service/topicsService"
+import {  getTopicsExercise } from "@/service/detailingExerciseTopicsService"
 
 export const RenderDetailingExercisePage = (id: string)=> {
   const [renderDataExercise, setRenderDataExercise] = useState<ApiResponse | null>(null);
@@ -45,7 +45,6 @@ if (!renderDataExercise || !renderDataTopicExercise) {
   return (
     <LayoutPage>
       <DetailingExerciseContent dataExercise={renderDataExercise} dataTopic={renderDataTopicExercise} id={id} />
-      
     </LayoutPage>
   );
 }

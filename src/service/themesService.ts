@@ -1,5 +1,5 @@
 import api from "@/lib/api";
-import { ApiResponse, DataItem, FilteredThemeItem } from "@/types/type";
+import { ApiResponse, DataItem, FilteredItem } from "@/types/type";
 
 
 
@@ -9,7 +9,7 @@ export const getThemes = async (): Promise<ApiResponse> => {
     
     const filteredData: DataItem[] = response.data.data.map((item: any) => {
         
-        const field: FilteredThemeItem =  {
+        const field: FilteredItem =  {
             title: item.field.title,
             cardDescription: item.field.cardDescription,
             image: item.field.image || null,
