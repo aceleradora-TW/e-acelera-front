@@ -38,9 +38,6 @@ export const RenderThemePage = ( category:string ) => {
     return <NoData />;
   }
 
-  console.log(renderData); // Logando os dados para verificação
-  console.log(category);
-
   return (
     <LayoutPage>
       <PageThemesContent data={renderData} category={category} />

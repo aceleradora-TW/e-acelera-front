@@ -38,7 +38,6 @@ export const DetailingThemeContent: React.FC<DetailingContentProps> = ({ data, i
   return (
     <>
       {filteredData?.map((element: DataItem) => {
-        console.log(isFilteredDetailingThemeItem(element.field))
         if (isFilteredDetailingThemeItem(element.field)) {
           const field = element.field as FilteredDetailingThemeItem
           return (

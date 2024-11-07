@@ -1,17 +1,20 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { ApiResponse } from "@/types/type";
 import { NextResponse } from "next/server";
+import { headers } from "next/headers";
 
 export async function GET(
     req: NextApiRequest,
     res: NextApiResponse
 ) {
-    const { method, headers, } = req
+    const headersList = headers()
+    const { method } = req
 
     switch (method) {
         case 'GET': {
+            
             try {
-                const uniqueParam: string = headers["uniqueparam"] as string
+                const uniqueParam = headersList.get("uniqueparam"); 
 
                 const apiKey: string = process.env.STACKBY_SECRET_KEY || "";
                 const baseUrl: string = process.env.STACKBY_BASE_URL || "";
@@ -21,7 +24,6 @@ export async function GET(
                     headers: {
                         "x-api-key": apiKey,
                         "Content-Type": "application/json",
-                        "Cache-Control": "no-cache"
                     }
                 });
 

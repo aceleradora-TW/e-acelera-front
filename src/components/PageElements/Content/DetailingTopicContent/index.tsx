@@ -60,7 +60,6 @@ export const DetailingTopicContent: React.FC<DetailingContentProps> = ({
   return (
     <>
       {filteredData.map((element: DataItem) => {
-        console.log(isFilteredDetailingTopicItem(element.field))
         if (isFilteredDetailingTopicItem(element.field)) {
           return (
             <TopicContent key={element.id} field={element.field} />

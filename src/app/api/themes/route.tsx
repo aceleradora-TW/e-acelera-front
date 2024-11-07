@@ -24,7 +24,6 @@ export async function GET(
                     headers: {
                         "x-api-key": apiKey,
                         "Content-Type": "application/json",
-                        "Cache-Control": "no-cache"
                     }
                 });
 

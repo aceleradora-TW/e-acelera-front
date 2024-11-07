@@ -5,7 +5,11 @@ import { ApiResponse, DataItem, FilteredItem } from "@/types/type";
 
 export const getThemes = async (): Promise<ApiResponse> => {
 
-    const response = await api.get<ApiResponse>("/themes"); 
+    const response = await api.get<ApiResponse>("/themes", {
+        headers: {
+            "uniqueparam": `nocache=${Date.now()}`
+        }
+    }); 
     
  
     const filteredData: DataItem[] = response.data.data.map((item: any) => {
@@ -27,7 +31,6 @@ export const getThemes = async (): Promise<ApiResponse> => {
     
     
     const data: ApiResponse = { data: filteredData };
-    console.log(data)
     return data;
 };
 

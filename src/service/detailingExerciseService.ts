@@ -5,7 +5,11 @@ import { ApiResponse, DataItem, FilteredItem } from "@/types/type";
 
 export const getExercises = async (): Promise<ApiResponse> => {
 
-    const response = await api.get<ApiResponse>("/exercises"); 
+    const response = await api.get<ApiResponse>("/exercises", {
+        headers: {
+            "uniqueparam": `nocache=${Date.now()}`
+        }
+    }); 
     
  
     const filteredData: DataItem[] = response.data.data.map((item: any) => {
@@ -24,7 +28,6 @@ export const getExercises = async (): Promise<ApiResponse> => {
     
     
     const data: ApiResponse = { data: filteredData };
-    console.log(data)
     return data;
 };
 
