@@ -1,10 +1,10 @@
-import { theme } from "@/app/config/theme";
-import { LoginButton } from "@/components/LoginButton";
-import { Avatar, Box, Button, IconButton, Tooltip, Typography } from "@mui/material";
-import { useSession } from "next-auth/react";
-import Image from "next/image";
-import { usePathname } from "next/navigation";
-import { useRouter } from "next/navigation";
+import { theme } from "@/app/config/theme"
+import { LoginButton } from "@/components/LoginButton"
+import { Avatar, Box, IconButton, Tooltip, Typography, Link } from "@mui/material"
+import { useSession } from "next-auth/react"
+import Image from "next/image"
+import { usePathname } from "next/navigation"
+import { useRouter } from "next/navigation"
 
 interface WebMenuProps {
   list: string[]
@@ -14,9 +14,6 @@ export const WebMenu: React.FC<WebMenuProps> = ({ list }) => {
   const router = useRouter()
   const pathname = usePathname()
   const { data: session } = useSession()
-  const handlePageRedirect = (pagina: string) => {
-    pagina ? router.push(`/${pagina}`) : router.push('/')
-  };
 
   const renderComponent = () => {
     if (session) {
@@ -31,8 +28,6 @@ export const WebMenu: React.FC<WebMenuProps> = ({ list }) => {
       return (
         <LoginButton  click={() => handlePageRedirectLogin()} /> 
       )
-        
-
     };
   }
 
@@ -42,7 +37,7 @@ export const WebMenu: React.FC<WebMenuProps> = ({ list }) => {
     };
 
     const linkStyle = (item: string) => {
-      if (`/${item}` == pathname) {
+      if (`/${item.toLowerCase()}` == pathname) {
         return theme.customStyles.linkActive
       }
       return theme.customStyles.link
@@ -86,15 +81,16 @@ export const WebMenu: React.FC<WebMenuProps> = ({ list }) => {
           }}
         >
           {list.map((item) => (
-            <Button
+            <Link
               key={item}
-              onClick={() => handlePageRedirect(item)}
+              href={item ? `/${item.toLowerCase()}` : `/`}
+              underline="none"
               sx={{
                 ...linkStyle(item),
               }}
             >
               {item}
-            </Button>
+            </Link>
           ))}
         </Box>
         <Box sx={{ flexGrow: 0 }}>

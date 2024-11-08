@@ -37,6 +37,8 @@ export const BreadCrumb: React.FC = () => {
       const hyphenIndex = crumb.indexOf('-');
       return hyphenIndex !== -1 ? crumb.substring(hyphenIndex + 1) : crumb;
     });
+    const capitalizeFirstLetter = (text: string): string => { return text.charAt(0).toUpperCase() + text.slice(1);}
+
   const breadroutes: string[] = pathname.split('/').filter((crumb) => crumb);
 
   const handleBreadcrumbClick = (href: string, event: MouseEvent<HTMLAnchorElement, globalThis.MouseEvent>) => {
@@ -61,6 +63,7 @@ export const BreadCrumb: React.FC = () => {
           {breadcrumbs.map((path: string, index: number) => {
             const route: string = `/${breadroutes.slice(0, index + 1).join('/')}`;
             const isLast: boolean = index === breadcrumbs.length - 1;
+            const textFormatted = capitalizeFirstLetter(path)
             return (
               <Link 
               variant="body1"
@@ -69,7 +72,7 @@ export const BreadCrumb: React.FC = () => {
               href={route}
               aria-current={isLast ? 'page' : undefined}
               onClick={(e) => handleBreadcrumbClick(route, e)}>
-                {path !== '' ? decodeURIComponent(path): path}
+                {path !== '' ? decodeURIComponent(textFormatted): textFormatted}
               </Link>
             );
           })}
