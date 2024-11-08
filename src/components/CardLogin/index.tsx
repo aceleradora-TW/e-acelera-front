@@ -10,18 +10,38 @@ import { SocialLoginButton } from "../SocialLoginButton";
 import { signIn } from "next-auth/react";
 
 export const CardLogin = () => {
-  const isMobileScreen = useMediaQuery('(max-width: 600px)');
+  const isMobileScreen = useMediaQuery("(max-width: 600px)");
 
   const getRedirectUrl = () => {
-
-    const redirectUrl = localStorage.getItem("redirectAfterLogin")
-    return redirectUrl ? redirectUrl : "/"
-  }
+    const redirectUrl = localStorage.getItem("redirectAfterLogin");
+    return redirectUrl ? redirectUrl : "/";
+  };
 
   return (
-    <Box sx={{ height: "100%", display: "flex", justifyContent: "center", marginTop: 4 }}>
+    <Box
+      sx={{
+        height: "100%",
+        display: "flex",
+        justifyContent: "center",
+        marginTop: 4,
+      }}
+    >
       <Box sx={theme.customStyles.cardLoginBox}>
         <Grid container spacing={2.5}>
+          <Grid item xs={12}>
+            <Box sx={{display: 'flex', gap: '20px', alignItems: 'center'}}>
+            <Image
+              width={90}
+              height={70}
+              src="/assets/logo.svg"
+              alt="logo e-acelera"
+            />
+
+            <Typography sx={{fontSize: '2.125rem', color: themePalette.title}}> E-Acelera</Typography>
+            </Box>
+          </Grid>
+
+    
 
           <Grid item xs={12}>
             <Typography
@@ -37,7 +57,7 @@ export const CardLogin = () => {
                 },
               }}
             >
-              Bem-vindo!
+              Te desejamos <br /> boas vindas!
             </Typography>
           </Grid>
 
@@ -45,7 +65,7 @@ export const CardLogin = () => {
             <Typography
               variant="body1"
               sx={{
-                color: themePalette.title,
+                color: themePalette.descriptionCard,
                 fontSize: {
                   xs: "18px",
                   sm: "20px",
@@ -56,7 +76,7 @@ export const CardLogin = () => {
                 marginBottom: "15px",
               }}
             >
-              Entre com sua rede social para acessar nossa plataforma
+              Acesse nossa plataforma com sua rede social:
             </Typography>
           </Grid>
 
@@ -65,7 +85,9 @@ export const CardLogin = () => {
               hoverBackgroundColor="rgba(72, 72, 72, 1)"
               platformIcon={githubLogo}
               platformName="GitHub"
-              onClick={() => signIn("github", { callbackUrl: getRedirectUrl() })}
+              onClick={() =>
+                signIn("github", { callbackUrl: getRedirectUrl() })
+              }
             />
           </Grid>
           <Grid item xs={12}>
@@ -73,7 +95,9 @@ export const CardLogin = () => {
               hoverBackgroundColor="rgba(145, 26, 26, 1)"
               platformIcon={googleLogo}
               platformName="Google"
-              onClick={() => signIn("google", { callbackUrl: getRedirectUrl() })}
+              onClick={() =>
+                signIn("google", { callbackUrl: getRedirectUrl() })
+              }
             />
           </Grid>
           <Grid item xs={12}>
@@ -81,7 +105,9 @@ export const CardLogin = () => {
               hoverBackgroundColor="rgba(18, 76, 129, 1)"
               platformIcon={linkedinLogo}
               platformName="LinkedIn"
-              onClick={() => signIn("linkedin", { callbackUrl: getRedirectUrl() })}
+              onClick={() =>
+                signIn("linkedin", { callbackUrl: getRedirectUrl() })
+              }
             />
           </Grid>
         </Grid>
