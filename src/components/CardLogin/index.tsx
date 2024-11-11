@@ -19,12 +19,7 @@ export const CardLogin = () => {
 
   return (
     <Box
-      sx={{
-        height: "100%",
-        display: "flex",
-        justifyContent: "center",
-        marginTop: 4,
-      }}
+      sx={theme.customStyles.containerLogin}
     >
       <Box sx={theme.customStyles.cardLoginBox}>
         <Grid container spacing={2.5}>
@@ -38,9 +33,13 @@ export const CardLogin = () => {
               />
 
               <Typography
-                sx={{ fontSize: "2.125rem", color: themePalette.title }}
+              noWrap
+              component="a"
+              href="/"
+              sx={
+                theme.customStyles.logoTypeLogin
+              }
               >
-                {" "}
                 E-Acelera
               </Typography>
             </Box>

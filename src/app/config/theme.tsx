@@ -113,6 +113,15 @@ declare module "@mui/material/styles" {
         textDecoration: string;
         color: string;
       };
+      logoTypeLogin: {
+        fontSize: string;
+        mr: number;
+        fontWeight: number;
+        letterSpacing: string;
+        lineHeight: number;
+        textDecoration: string;
+        color: string;
+      };
       cardBody: {
         color: string;
         wordWrap: string;
@@ -175,6 +184,12 @@ declare module "@mui/material/styles" {
         boxShadow: string,
         padding: string,
       };
+      containerLogin:{
+        height: string,
+        display: string,
+        justifyContent: string,
+        marginTop: number,
+      },
       title: {
         textAlign: string;
         color: string;
@@ -260,7 +275,7 @@ declare module "@mui/material/styles" {
         borderRadius?: string;
         margin?: number;
       };
-      linkActive: {
+      linkActive?: {
         borderBottom?: string;
         color?: string;
         borderBottomWidth?: string;
@@ -278,7 +293,7 @@ declare module "@mui/material/styles" {
       }
       borderRadius?: string;
       };
-      link: {
+      link?: {
         color?: string;
         display?: string;
         textTransform?: string;
@@ -293,10 +308,19 @@ declare module "@mui/material/styles" {
       },
       borderRadius?: string;
       };
-      linkReference:{
+      linkReference?:{
         color?: string;
       },
-      logoType: {
+      logoType?: {
+        fontSize?: string;
+        mr?: number;
+        fontWeight?: number;
+        letterSpacing?: string;
+        lineHeight?: number;
+        textDecoration?: string;
+        color?: string;
+      };
+      logoTypeLogin?: {
         fontSize?: string;
         mr?: number;
         fontWeight?: number;
@@ -366,6 +390,12 @@ declare module "@mui/material/styles" {
         height?: string,
         boxShadow?: string,
         padding?: string,
+      };
+      containerLogin?:{
+        height?: string,
+        display?: string,
+        justifyContent?: string,
+        marginTop?: number,
       };
       title?: {
         textAlign?: string,
@@ -490,11 +520,19 @@ const theme = createTheme({
       color: themePalette.descriptionCard
     },
     logoType: {
-      fontSize: "19.2px",
+      fontSize: "1.2rem",
       mr: 2,
       fontWeight: 700,
       letterSpacing: "0.15px",
       lineHeight: 1.6,
+      textDecoration: "none",
+      color: themePalette.title,
+    },
+    logoTypeLogin: {
+      fontSize: "2.125rem",
+      fontWeight: 700,
+      letterSpacing: "0.25px",
+      lineHeight: 1.2,
       textDecoration: "none",
       color: themePalette.title,
     },
@@ -567,6 +605,12 @@ const theme = createTheme({
       height: "30%",
       boxShadow: "0 0 0.4em rgba(44, 44, 44, 0.4)",
       padding: "40px",
+    },
+    containerLogin:{
+      height: "100%",
+      display: "flex",
+      justifyContent: "center",
+      marginTop: 4,
     },
     title: {
       textAlign: "left",
