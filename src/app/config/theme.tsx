@@ -23,6 +23,7 @@ export enum themePalette {
   statusPending = "rgb(225, 225, 225)",
   mainBg = "rgb(245, 245, 245)",
   whiteBg = "rgb(255, 255, 255)",
+  hoverBg = "rgb(154 , 192, 201)",
 }
 
 declare module "@mui/material/styles" {
@@ -625,9 +626,9 @@ const theme = createTheme({
     },
     buttonHover: {
       main: themePalette.button,
+      light: themePalette.hoverBg,
       contrastText: themePalette.whiteBg,
     },
-
     textColor: {
       main: themePalette.title,
       light: themePalette.descriptionCard,

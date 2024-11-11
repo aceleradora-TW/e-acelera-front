@@ -29,19 +29,22 @@ export const CardLogin = () => {
       <Box sx={theme.customStyles.cardLoginBox}>
         <Grid container spacing={2.5}>
           <Grid item xs={12}>
-            <Box sx={{display: 'flex', gap: '20px', alignItems: 'center'}}>
-            <Image
-              width={90}
-              height={70}
-              src="/assets/logo.svg"
-              alt="logo e-acelera"
-            />
+            <Box sx={{ display: "flex", gap: "20px", alignItems: "center" }}>
+              <Image
+                width={90}
+                height={70}
+                src="/assets/logo.svg"
+                alt="logo e-acelera"
+              />
 
-            <Typography sx={{fontSize: '2.125rem', color: themePalette.title}}> E-Acelera</Typography>
+              <Typography
+                sx={{ fontSize: "2.125rem", color: themePalette.title }}
+              >
+                {" "}
+                E-Acelera
+              </Typography>
             </Box>
           </Grid>
-
-    
 
           <Grid item xs={12}>
             <Typography
@@ -82,7 +85,6 @@ export const CardLogin = () => {
 
           <Grid item xs={12}>
             <SocialLoginButton
-              hoverBackgroundColor="rgba(72, 72, 72, 1)"
               platformIcon={githubLogo}
               platformName="GitHub"
               onClick={() =>
@@ -92,7 +94,6 @@ export const CardLogin = () => {
           </Grid>
           <Grid item xs={12}>
             <SocialLoginButton
-              hoverBackgroundColor="rgba(145, 26, 26, 1)"
               platformIcon={googleLogo}
               platformName="Google"
               onClick={() =>
@@ -102,7 +103,6 @@ export const CardLogin = () => {
           </Grid>
           <Grid item xs={12}>
             <SocialLoginButton
-              hoverBackgroundColor="rgba(18, 76, 129, 1)"
               platformIcon={linkedinLogo}
               platformName="LinkedIn"
               onClick={() =>

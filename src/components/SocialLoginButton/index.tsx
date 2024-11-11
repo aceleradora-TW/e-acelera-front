@@ -5,14 +5,9 @@ import { theme } from "@/app/config/theme";
 import Image, { StaticImageData } from "next/image";
 import { Box, Typography } from "@mui/material";
 
-interface CustomButtonProps extends ButtonProps {
-  hoverBackgroundColor: string;
-}
-
-const CustomButton = styled(Button)<CustomButtonProps>(({ hoverBackgroundColor }) => ({
+const CustomButton = styled(Button)<ButtonProps>(() => ({
   "&:hover": {
-    backgroundColor: hoverBackgroundColor,
-    color: theme.palette.buttonHover?.contrastText,
+    backgroundColor: theme.palette.buttonHover?.light, 
     border: "none",
   },
   fontSize: "1rem",
@@ -30,17 +25,14 @@ interface SocialLoginButtonProps {
   platformName: string;
   onClick: () => void;
   platformIcon: StaticImageData;
-  hoverBackgroundColor: string;
 }
 
 export const SocialLoginButton: React.FC<SocialLoginButtonProps> = ({
   platformName,
   onClick,
   platformIcon,
-  hoverBackgroundColor,
 }) => (
   <CustomButton
-    hoverBackgroundColor={hoverBackgroundColor}
     onClick={onClick}
     component="a"
     aria-label={`Entrar com ${platformName}`}
