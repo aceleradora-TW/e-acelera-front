@@ -24,7 +24,7 @@ export const WebMenu: React.FC<WebMenuProps> = ({ list }) => {
           <Avatar alt="Remy Sharp" src={`${session.user?.image}`} />
         </IconButton>
       </Tooltip>;
-    } else if (!session && pathname !== "/Login") {
+    } else if (!session && pathname !== "/login") {
       return (
         <LoginButton  click={() => handlePageRedirectLogin()} /> 
       )
@@ -33,7 +33,7 @@ export const WebMenu: React.FC<WebMenuProps> = ({ list }) => {
 
     const handlePageRedirectLogin = () => {
       localStorage.setItem("redirectAfterLogin", pathname)
-      router.push(`/Login`)
+      router.push(`/login`)
     };
 
     const linkStyle = (item: string) => {
