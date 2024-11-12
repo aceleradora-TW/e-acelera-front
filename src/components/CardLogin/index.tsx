@@ -24,7 +24,7 @@ export const CardLogin = () => {
       <Box sx={theme.customStyles.cardLoginBox}>
         <Grid container spacing={2.5}>
           <Grid item xs={12}>
-            <Box sx={{ display: "flex", gap: "20px", alignItems: "center" }}>
+            <Box sx={theme.customStyles.boxLogoType}>
               <Image
                 width={90}
                 height={70}
@@ -50,14 +50,9 @@ export const CardLogin = () => {
               variant="h1"
               sx={{
                 ...theme.customStyles.title,
-                fontSize: {
-                  xs: "32px",
-                  sm: "40px",
-                  md: "40px",
-                  lg: "44px",
-                  xl: "48px",
-                },
+                ...theme.customStyles.h1Login
               }}
+
             >
               Te desejamos <br /> boas vindas!
             </Typography>
@@ -68,14 +63,7 @@ export const CardLogin = () => {
               variant="body1"
               sx={{
                 color: themePalette.descriptionCard,
-                fontSize: {
-                  xs: "18px",
-                  sm: "20px",
-                  md: "24px",
-                  lg: "24px",
-                  xl: "24px",
-                },
-                marginBottom: "15px",
+                ...theme.customStyles.body1Login
               }}
             >
               Acesse nossa plataforma com sua rede social:

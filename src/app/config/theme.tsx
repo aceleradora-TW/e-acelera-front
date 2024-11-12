@@ -188,8 +188,32 @@ declare module "@mui/material/styles" {
         height: string,
         display: string,
         justifyContent: string,
-        marginTop: number,
-      },
+        marginTop: string,
+      };
+      boxLogoType:{
+        display: string, 
+        gap: string, 
+        alignItems: string,
+      };
+      h1Login:{
+        fontSize:{
+          xs: string,
+          sm: string,
+          md: string,
+          lg: string,
+          xl: string,
+        }
+      };
+      body1Login:{
+        fontSize: {
+          xs: string,
+          sm: string,
+          md: string,
+          lg: string,
+          xl: string,
+        },
+        marginBottom: string,
+      };
       title: {
         textAlign: string;
         color: string;
@@ -395,7 +419,31 @@ declare module "@mui/material/styles" {
         height?: string,
         display?: string,
         justifyContent?: string,
-        marginTop?: number,
+        marginTop?: string,
+      };
+      boxLogoType?:{
+        display?: string, 
+        gap?: string, 
+        alignItems?: string,
+      };
+      h1Login?:{
+        fontSize?:{
+          xs?: string,
+          sm?: string,
+          md?: string,
+          lg?: string,
+          xl?: string,
+        }
+      };
+      body1Login?:{
+        fontSize?: {
+          xs?: string,
+          sm?: string,
+          md?: string,
+          lg?: string,
+          xl?: string,
+        },
+        marginBottom: string,
       };
       title?: {
         textAlign?: string,
@@ -610,7 +658,31 @@ const theme = createTheme({
       height: "100%",
       display: "flex",
       justifyContent: "center",
-      marginTop: 4,
+      marginTop: "80px",
+    },
+    boxLogoType:{
+      display: "flex", 
+      gap: "20px", 
+      alignItems: "center",
+    },
+    h1Login:{
+      fontSize:{
+        xs: "32px",
+        sm: "40px",
+        md: "40px",
+        lg: "44px",
+        xl: "48px",
+      },
+    },
+    body1Login:{
+      fontSize: {
+        xs: "18px",
+        sm: "20px",
+        md: "24px",
+        lg: "24px",
+        xl: "24px",
+      },
+      marginBottom: "15px",
     },
     title: {
       textAlign: "left",
