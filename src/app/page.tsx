@@ -7,6 +7,6 @@ export default function Home() {
 
   const router = useRouter()
   router.push("/nivelamento")
-
+  
   return <Box></Box>
 }

@@ -19,7 +19,7 @@ export const WebMenu: React.FC<WebMenuProps> = ({ list }) => {
   const pathname = usePathname()
 
   const linkStyle = (item: string) => {
-    if (`/${item}` == pathname) {
+    if (`/${item.toLowerCase()}` == pathname) {
       return theme.customStyles.linkActive
     }
     return theme.customStyles.link
@@ -70,7 +70,7 @@ export const WebMenu: React.FC<WebMenuProps> = ({ list }) => {
         {list.map((item) => (
           <Link
             key={item}
-            href={item ? `/${item}` : `/`}
+            href={item ? `/${item.toLowerCase()}` : `/`}
             underline="none"
             sx={{
               ...linkStyle(item),
