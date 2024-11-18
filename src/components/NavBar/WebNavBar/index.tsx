@@ -26,77 +26,77 @@ export const WebMenu: React.FC<WebMenuProps> = ({ list }) => {
       </Tooltip>;
     } else if (!session && pathname !== "/login") {
       return (
-        <LoginButton  click={() => handlePageRedirectLogin()} /> 
+        <LoginButton click={() => handlePageRedirectLogin()} />
       )
     };
   }
 
-    const handlePageRedirectLogin = () => {
-      localStorage.setItem("redirectAfterLogin", pathname)
-      router.push(`/login`)
-    };
-
-    const linkStyle = (item: string) => {
-      if (`/${item.toLowerCase()}` == pathname) {
-        return theme.customStyles.linkActive
-      }
-      return theme.customStyles.link
-        ;
-    };
-    return (
-      <>
-        <Box
-          sx={{
-            mr: 2,
-            display: { xs: "none", md: "flex" },
-            marginLeft: 0,
-          }}
-        >
-          <Image
-            width={43}
-            height={48}
-            src="/assets/logo.svg"
-            alt="logo e-acelera" />
-        </Box>
-        <Typography
-          noWrap
-          component="a"
-          href="/"
-          sx={{
-            display: { xs: "none", md: "flex" },
-            ...theme.customStyles.logoType
-          }}
-        >
-          E-Acelera
-        </Typography>
-        <Box
-          sx={{
-            flexGrow: 1,
-            display: {
-              xs: "none",
-              md: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            },
-          }}
-        >
-          {list.map((item) => (
-            <Link
-              key={item}
-              href={item ? `/${item.toLowerCase()}` : `/`}
-              underline="none"
-              sx={{
-                ...linkStyle(item),
-              }}
-            >
-              {item}
-            </Link>
-          ))}
-        </Box>
-        <Box sx={{ flexGrow: 0 }}>
-          {renderComponent()}
-        </Box>
-
-      </>
-    );
+  const handlePageRedirectLogin = () => {
+    localStorage.setItem("redirectAfterLogin", pathname)
+    router.push(`/login`)
   };
+
+  const linkStyle = (item: string) => {
+    if (`/${item.toLowerCase()}` == pathname) {
+      return theme.customStyles.linkActive
+    }
+    return theme.customStyles.link
+      ;
+  };
+  return (
+    <>
+      <Box
+        sx={{
+          mr: 2,
+          display: { xs: "none", md: "flex" },
+          marginLeft: 0,
+        }}
+      >
+        <Image
+          width={43}
+          height={48}
+          src="/assets/logo.svg"
+          alt="logo e-acelera" />
+      </Box>
+      <Typography
+        noWrap
+        component="a"
+        href="/"
+        sx={{
+          display: { xs: "none", md: "flex" },
+          ...theme.customStyles.logoType
+        }}
+      >
+        E-Acelera
+      </Typography>
+      <Box
+        sx={{
+          flexGrow: 1,
+          display: {
+            xs: "none",
+            md: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          },
+        }}
+      >
+        {list.map((item) => (
+          <Link
+            key={item}
+            href={item ? `/${item.toLowerCase()}` : `/`}
+            underline="none"
+            sx={{
+              ...linkStyle(item),
+            }}
+          >
+            {item}
+          </Link>
+        ))}
+      </Box>
+      <Box sx={{ flexGrow: 0 }}>
+        {renderComponent()}
+      </Box>
+
+    </>
+  );
+};
