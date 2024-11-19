@@ -218,6 +218,12 @@ declare module "@mui/material/styles" {
         borderRadius: string,
         padding: string,
       };
+      cardMediaImage: {
+        maxWidth: string,
+        height: string,
+        display: string,
+        objectFit: string,
+      };
     };
   }
 
@@ -396,6 +402,12 @@ declare module "@mui/material/styles" {
             borderRadius?: string,
             padding?: string,
           };
+          cardMediaImage: {
+            maxWidth?: string,
+            height?: string,
+            display?: string,
+            objectFit?: string,
+          };
       };
     }
   }
@@ -530,7 +542,8 @@ const theme = createTheme({
     },
     breadCrumb: {
       textDecoration: "none",
-      color: themePalette.title
+      color: themePalette.title,
+      marginTop: 1.2,
     },
     cardVideo:{
       display: "flex",
@@ -571,6 +584,12 @@ const theme = createTheme({
       color: themePalette.button,
       background: themePalette.statusInProgress,
       borderRadius: "10px",
+    },
+    cardMediaImage: {
+      maxWidth: '100%',
+      height: 'auto',
+      display: 'block',
+      objectFit: 'cover',
     }
   },
   palette: {
