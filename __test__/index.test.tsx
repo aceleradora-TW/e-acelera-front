@@ -19,12 +19,12 @@ jest.mock('next/navigation', () => ({
   useRouter: jest.fn(() => ({ push: jest.fn() }))
 }))
 
-describe('WebMenu', () => {
+describe('Testes do botçao de Login do componente WebMenu', () => {
   beforeEach(() => {
     jest.clearAllMocks()
   })
 
-  it('deve mostrar o botão de login quando não houver sessão', () => {
+  it('Deve mostrar o botão de login quando não houver sessão', () => {
     (useSession as jest.Mock).mockReturnValue({ data: null })
 
     render(<WebMenu list={['Nivelamento', 'Autoestudo']} />)
@@ -33,7 +33,7 @@ describe('WebMenu', () => {
     expect(loginButton).toBeInTheDocument()
   })
 
-  it('não deve mostrar o botão de login quando houver sessão', () => {
+  it('Não deve mostrar o botão de login quando houver sessão', () => {
     (useSession as jest.Mock).mockReturnValue({ 
       data: { 
         user: { 
