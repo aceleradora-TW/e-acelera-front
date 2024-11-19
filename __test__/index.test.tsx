@@ -19,7 +19,7 @@ jest.mock('next/navigation', () => ({
   useRouter: jest.fn(() => ({ push: jest.fn() }))
 }))
 
-describe('Testes do botçao de Login do componente WebMenu', () => {
+describe('Testes do botão de Login do componente WebMenu', () => {
   beforeEach(() => {
     jest.clearAllMocks()
   })
