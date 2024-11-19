@@ -3,7 +3,6 @@ import { Grid} from "@mui/material";
 import { BreadCrumb } from "@/components/BreadCrumb";
 import { ApiResponse, DataItem, ExercisesField } from "@/types/type";
 import { DescriptionFull } from "@/components/Description/DescriptionFull";
-import { AdvanceExercises } from "@/components/AdvanceExercises";
 import { ContainerButtonsExercise } from "../../Container/ContainerButtonsExercise";
 import { Heading } from "@/components/Heading";
 
@@ -41,11 +40,7 @@ const ExerciseContent: React.FC<{
       <Grid item>
         <Heading variant="h1" text={field.title} />
       </Grid>
-      <Grid item >
-        <AdvanceExercises idExercises={idExercise} data={dataTopic}/>
-      </Grid>
     </Grid>
-
     <DescriptionFull text={field.description} />
     <ContainerButtonsExercise idExercise={idExercise} data={dataTopic}/>
   </>
