@@ -1,44 +1,55 @@
-import * as React from "react"
-import Box from "@mui/material/Box"
-import InputLabel from "@mui/material/InputLabel"
-import MenuItem from "@mui/material/MenuItem"
-import FormControl from "@mui/material/FormControl"
-import Select from '@mui/material/Select'
-import { SelectChangeEvent } from '@mui/material/Select'
-import { theme } from "@/app/config/theme"
+import * as React from "react";
+import Box from "@mui/material/Box";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
+import { SelectChangeEvent } from "@mui/material/Select";
+import { theme } from "@/app/config/theme";
 
 interface StatusSelectProps {
-  width?: "30%" | "70%" | "100%"
+  width?: "30%" | "70%" | "100%";
 }
 
 export default function StatusSelect({ width = "30%" }: StatusSelectProps) {
-  const [status, setStatus] = React.useState<string>("statusPending")
-  const [backgroundColor, setBackgroundColor] = React.useState<string>("rgb(225, 225, 225)")
+  const [status, setStatus] = React.useState<string>("statusPending");
+  const [backgroundColor, setBackgroundColor] =
+    React.useState<string>("rgb(225, 225, 225)");
 
   const handleChange = (event: SelectChangeEvent) => {
-    const value = event.target.value as string
-    setStatus(value)
+    const value = event.target.value as string;
+    setStatus(value);
 
     switch (value) {
       case "statusConcluded":
-        setBackgroundColor(theme.palette.statusSelect?.light || "")
-        break
+        setBackgroundColor(theme.palette.statusSelect?.light || "");
+        break;
       case "statusInProgress":
-        setBackgroundColor(theme.palette.statusSelect?.dark || "")
-        break
+        setBackgroundColor(theme.palette.statusSelect?.dark || "");
+        break;
       case "statusPending":
-        setBackgroundColor(theme.palette.statusSelect?.main || "")
-        break
+        setBackgroundColor(theme.palette.statusSelect?.main || "");
+        break;
       default:
-        setBackgroundColor("")
-
+        setBackgroundColor("");
     }
-  }
+  };
 
   return (
     <Box sx={{ backgroundColor, width }}>
       <FormControl fullWidth>
-        <InputLabel shrink={true} id="statusLeveling" sx={{ color: "black" }}>
+        <InputLabel
+          shrink={true}
+          id="statusLeveling"
+          sx={{
+            color: "#000000",
+            
+            "&.Mui-focused": {
+              color: "#000000",
+            },
+            
+          }}
+        >
           Status
         </InputLabel>
         <Select
@@ -50,26 +61,35 @@ export default function StatusSelect({ width = "30%" }: StatusSelectProps) {
           onChange={handleChange}
           sx={{
             "& .MuiOutlinedInput-notchedOutline": {
-              borderColor: "black"
+              borderColor: "#000000",
             },
             "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-              borderColor: "black"
+              border: "1px solid #000000",
             },
-            backgroundColor: "#0000000",
-            color: "#000000"
+            height: "40px",
           }}
         >
-          <MenuItem sx={{border:"2px solid",  borderColor: "black", backgroundColor:"rgba(155, 255, 133)",'&:hover': {
-        backgroundColor:"rgba(155, 255, 133, 0.5)" , 
-      }, }} value="statusConcluded">Concluído</MenuItem>
-          <MenuItem sx={{borderRight:"2px solid",borderLeft:"2px solid",  borderColor: "black", backgroundColor:"rgb(255, 222, 107)",'&:hover': {
-        backgroundColor:"rgba(255, 222, 107, 0.5)" , 
-      }, }} value="statusInProgress">Em andamento</MenuItem>
-          <MenuItem sx={{border:"2px  solid",  borderColor: "black", backgroundColor:"rgb(225, 225, 225)",'&:hover': {
-        backgroundColor: "rgba(225, 225, 225, 0.5)" , 
-      }, }}value="statusPending">Pendente</MenuItem>
+          <MenuItem
+
+            value="statusConcluded"
+          >
+            Concluído
+          </MenuItem>
+
+          <MenuItem
+            value="statusInProgress"
+          >
+            Em Andamento
+          </MenuItem>
+
+          <MenuItem
+
+            value="statusPending"
+          >
+            Não Iniciado
+          </MenuItem>
         </Select>
       </FormControl>
     </Box>
-  )
+  );
 }
