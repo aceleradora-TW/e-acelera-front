@@ -2,7 +2,7 @@ import * as React from "react"
 import Card from "@mui/material/Card"
 import CardContent from "@mui/material/CardContent"
 import Typography from "@mui/material/Typography"
-import { CardActionArea} from "@mui/material"
+import { CardActionArea, Box} from "@mui/material"
 import { useRouter } from "next/navigation"
 import { theme } from "../../app/config/theme"
 import StatusSelect from "../StatusSelect"
@@ -41,9 +41,9 @@ export const ButtonCard: React.FC<ButtonCardProps> = ({ title, description, rout
             </CardContent>
         </CardActionArea>
     
-        <Typography sx={{ padding: 2 }}>
+        <Box sx={{ padding: 2 }}>
             <StatusSelect width='70%'/>
-        </Typography>
+        </Box>
     </Card>
     );
 }

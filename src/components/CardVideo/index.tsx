@@ -47,9 +47,9 @@ export const CardVideo: React.FC<CardVideoProps>=({ text, title, videoLink, refe
             {text}
           </ReactMarkdown>
         </Box>
-        <Typography sx={{ padding: 2 }}>
+        <Box sx={{ padding: 2 }}>
             <StatusSelect width='30%'/>
-        </Typography>
+        </Box>
       </Box>
       
     </Box>
