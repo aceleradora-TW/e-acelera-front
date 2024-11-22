@@ -1,9 +1,10 @@
 import { theme } from "@/app/config/theme";
 import { Button, ButtonProps, Stack, styled } from "@mui/material";
 import { useRouter, usePathname } from 'next/navigation';
-import useFetchData from "../fetchData";
 import { ApiResponse, CommonField, DataItem, TopicField } from "@/types/type";
 import { ClickButton } from "../ClickButton";
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 const ButtonFail = styled(Button)<ButtonProps>(() => ({
     "&:hover": {
@@ -17,8 +18,9 @@ const ContainerButtonFail = () => {
     return (
         <aside>
             <Stack spacing={2} direction="row">
-                <ButtonFail sx={theme.customStyles.button} variant="contained">
-                   Exercício anterior
+                <ButtonFail sx={theme.customStyles.button} variant="contained" >
+                    <ArrowBackIosIcon sx={{ fontSize: 15, marginRight: 1 }} />
+                    Exercício anterior
                 </ButtonFail>
             </Stack>
         </aside>
@@ -26,7 +28,8 @@ const ContainerButtonFail = () => {
 }
 
 function isTopicField(field: CommonField): field is TopicField {
-    return field && "exercisesInfo" in field;}
+    return field && "exercisesInfo" in field;
+}
 
 interface ButtonNextProps {
     idExercise: string;
@@ -34,7 +37,7 @@ interface ButtonNextProps {
 }
 
 export const ButtonPreviousExercise: React.FC<ButtonNextProps> = ({ idExercise, renderData }) => {
-    
+
     const router = useRouter()
     const pathname = usePathname()
 
@@ -60,9 +63,11 @@ export const ButtonPreviousExercise: React.FC<ButtonNextProps> = ({ idExercise, 
             router.push(`${PreviousExerciseId}-${PreviousExerciseName}`)
         }
 
+        const isSmallScreen: boolean = useMediaQuery(theme.breakpoints.down('md'));
+
         if (PreviousExerciseId) {
             return (
-                <ClickButton title="Exercício anterior" click={handleClick} />
+                isSmallScreen ? <ClickButton click={handleClick} backIcon={<ArrowBackIosIcon sx={{ fontSize: 15 }} />} /> : <ClickButton title="Exercício anterior" click={handleClick} backIcon={<ArrowBackIosIcon sx={{ fontSize: 15, marginRight: 1 }} />} />
             )
         }
 

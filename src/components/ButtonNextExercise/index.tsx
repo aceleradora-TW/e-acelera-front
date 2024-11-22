@@ -1,9 +1,11 @@
 import { theme } from "@/app/config/theme";
 import { Button, ButtonProps, Stack, styled } from "@mui/material";
 import { useRouter, usePathname } from 'next/navigation';
-import useFetchData from "../fetchData";
 import { ApiResponse, CommonField, DataItem, TopicField } from "@/types/type";
 import { ClickButton } from "../ClickButton";
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import useMediaQuery from '@mui/material/useMediaQuery';
+
 
 const ButtonFail = styled(Button)<ButtonProps>(() => ({
     "&:hover": {
@@ -18,6 +20,7 @@ const ContainerButtonFail = () => {
         <aside>
             <Stack spacing={2} direction="row">
                 <ButtonFail sx={theme.customStyles.button} variant="contained">
+                <ArrowForwardIosIcon sx={{ fontSize: 15, marginLeft: 1 }}/>
                     Próximo exercício
                 </ButtonFail>
             </Stack>
@@ -59,9 +62,11 @@ export const ButtonNextExercise: React.FC<ButtonNextProps> = ({ idExercise, rend
             router.push(`${nextExerciseId}-${nextExerciseName}`)
         }
 
+        const isSmallScreen: boolean = useMediaQuery(theme.breakpoints.down('md'));
+
         if (nextExerciseId) {
             return (
-                <ClickButton title="Próximo exercício" click={handleClick} />
+                isSmallScreen ? <ClickButton click={handleClick} endIcon={<ArrowForwardIosIcon sx={{ fontSize: 15 }}/>}/> : <ClickButton title="Próximo exercício" click={handleClick} endIcon={<ArrowForwardIosIcon sx={{ fontSize: 15, marginLeft: 1 }}/>}/>
             )
         }
 
