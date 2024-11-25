@@ -6,6 +6,7 @@ import Container from "@mui/material/Container";
 import { theme } from "../../app/config/theme";
 import { MobileMenu } from "./MobileNavBar";
 import { WebMenu } from "./WebNavBar";
+import { Box } from "@mui/material";
 
 interface NavBarProps {
   list: string[];
@@ -17,13 +18,19 @@ interface NavBarProps {
       position="fixed"
       sx={{ backgroundColor: theme.palette.bgColor?.light }}
     >
-      <Container maxWidth="xl">
-        <Toolbar disableGutters sx={{ display: "flex", alignItems: "center" }}>
-          <MobileMenu list={list}/>
-          <WebMenu list={list}/>
-        </Toolbar>
-      </Container>
-      
+      <Box
+      component="nav"
+      >
+        <Container maxWidth="xl">
+          <Toolbar
+            disableGutters
+            sx={{ display: "flex", alignItems: "center" }}
+          >
+            <WebMenu list={list} />
+            <MobileMenu list={list} />
+          </Toolbar>
+        </Container>
+      </Box>
     </AppBar>
   );
 };
