@@ -13,24 +13,20 @@ const handler = NextAuth({
       }
       return token;
     },
-
-    async session({ session, token }) {
-      if (token) {
-        session.user.id = token.id; // Adiciona o ID do usuário à sessão
-        session.user.provider = token.provider; // Adiciona o provedor à sessão
-        session.user.accessToken = token.accessToken; // Adiciona o access token à sessão
-      }
-      return session;
-    },
-
-    // Callback para redirecionamento após o login
+    
     async redirect({ url, baseUrl }) {
-      const redirectUrl = url || `${baseUrl}/dashboard`; // Defina o redirecionamento padrão
-      return redirectUrl;
+      // Verifica se existe um redirecionamento armazenado no localStorage
+      if (typeof window !== "undefined") {
+        const storedRedirectUrl = localStorage.getItem("redirectAfterLogin");
+        if (storedRedirectUrl) {
+          return storedRedirectUrl;
+        }
+      }
+      // Usa a URL padrão ou baseUrl
+      return url.startsWith(baseUrl) ? url : baseUrl;
     },
     
   },
 });
-
 
 export { handler as GET, handler as POST }
