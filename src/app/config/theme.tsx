@@ -18,9 +18,9 @@ export enum themePalette {
   title = "rgb(0, 44, 83)",
   descriptionCard = "rgb(44, 44, 44)",
   descriptionText = "rgb(0, 0, 0)",
-  statusInProgress = "rgb(255, 222, 107)",
-  statusConcluded = "rgb(155, 255, 133)",
-  statusPending = "rgb(225, 225, 225)",
+  statusInProgress = "rgb(172, 238, 245)",
+  statusConcluded = "rgb(158, 255, 133)",
+  statusPending = "rgb(222, 229, 216)",
   mainBg = "rgb(245, 245, 245)",
   whiteBg = "rgb(255, 255, 255)",
   hoverBg = "rgb(154 , 192, 201)",
@@ -272,6 +272,12 @@ declare module "@mui/material/styles" {
         borderRadius: string,
         padding: string,
       };
+      cardMediaImage: {
+        maxWidth: string,
+        height: string,
+        display: string,
+        objectFit: string,
+      };
     };
   }
 
@@ -503,6 +509,12 @@ declare module "@mui/material/styles" {
             borderRadius?: string,
             padding?: string,
           };
+          cardMediaImage: {
+            maxWidth?: string,
+            height?: string,
+            display?: string,
+            objectFit?: string,
+          };
       };
     }
   }
@@ -691,7 +703,8 @@ const theme = createTheme({
     },
     breadCrumb: {
       textDecoration: "none",
-      color: themePalette.title
+      color: themePalette.title,
+      marginTop: 1.2,
     },
     cardVideo:{
       display: "flex",
@@ -732,6 +745,12 @@ const theme = createTheme({
       color: themePalette.button,
       background: themePalette.statusInProgress,
       borderRadius: "10px",
+    },
+    cardMediaImage: {
+      maxWidth: '100%',
+      height: 'auto',
+      display: 'block',
+      objectFit: 'cover',
     }
   },
   palette: {
