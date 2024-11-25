@@ -3,9 +3,9 @@ import { Grid} from "@mui/material";
 import { BreadCrumb } from "@/components/BreadCrumb";
 import { ApiResponse, DataItem, ExercisesField } from "@/types/type";
 import { DescriptionFull } from "@/components/Description/DescriptionFull";
-import { AdvanceExercises } from "@/components/AdvanceExercises";
 import { ContainerButtonsExercise } from "../../Container/ContainerButtonsExercise";
 import { Heading } from "@/components/Heading";
+import StatusSelect from "@/components/StatusSelect";
 
 interface DetailingContentProps {
   dataTopic:ApiResponse
@@ -42,7 +42,7 @@ const ExerciseContent: React.FC<{
         <Heading variant="h1" text={field.title} />
       </Grid>
       <Grid item >
-        <AdvanceExercises idExercises={idExercise} data={dataTopic}/>
+        <StatusSelect width="100%"/>
       </Grid>
     </Grid>
 
