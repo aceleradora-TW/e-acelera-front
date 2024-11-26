@@ -15,18 +15,17 @@ const handler = NextAuth({
     },
     
     async redirect({ url, baseUrl }) {
-      // Verifica se existe um redirecionamento armazenado no localStorage
       if (typeof window !== "undefined") {
         const storedRedirectUrl = localStorage.getItem("redirectAfterLogin");
         if (storedRedirectUrl) {
           return storedRedirectUrl;
         }
       }
-      // Usa a URL padrão ou baseUrl
       return url.startsWith(baseUrl) ? url : baseUrl;
     },
     
   },
 });
+
 
 export { handler as GET, handler as POST }

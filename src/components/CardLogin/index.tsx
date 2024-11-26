@@ -77,6 +77,7 @@ export const CardLogin = () => {
               onClick={() =>
                 signIn("github", { callbackUrl: getRedirectUrl() })
               }
+              
             />
           </Grid>
           <Grid item xs={12}>
