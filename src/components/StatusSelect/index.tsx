@@ -1,24 +1,31 @@
-import * as React from "react";
-import Box from "@mui/material/Box";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
-import Select from "@mui/material/Select";
-import { SelectChangeEvent } from "@mui/material/Select";
-import { theme } from "@/app/config/theme";
+import * as React from "react"
+import Box from "@mui/material/Box"
+import InputLabel from "@mui/material/InputLabel"
+import MenuItem from "@mui/material/MenuItem"
+import FormControl from "@mui/material/FormControl"
+import Select from "@mui/material/Select"
+import { SelectChangeEvent } from "@mui/material/Select"
+import { theme } from "@/app/config/theme"
+import { useRouter } from 'next/navigation'
+
 
 interface StatusSelectProps {
-  width?: "30%" | "70%" | "100%";
+  width?: "30%" | "70%" | "100%"
 }
 
-export default function StatusSelect({ width = "30%" }: StatusSelectProps) {
+export default function StatusSelect({ width = "30%"}: StatusSelectProps) {
   const [status, setStatus] = React.useState<string>("statusPending");
+  const router = useRouter()
+
   const [backgroundColor, setBackgroundColor] =
     React.useState<string>("rgb(225, 225, 225)");
 
   const handleChange = (event: SelectChangeEvent) => {
     const value = event.target.value as string;
     setStatus(value);
+    
+    //adicionar validação de quando o usuário nao estiver logado redirecionar para o login
+    router.push("/login")
 
     switch (value) {
       case "statusConcluded":
