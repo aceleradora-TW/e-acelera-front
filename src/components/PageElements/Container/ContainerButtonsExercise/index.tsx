@@ -35,8 +35,11 @@ export const ContainerButtonsExercise: React.FC<
           idExercise={idExercise}
         />
       </Grid>
+
       <Grid item>
-        <ButtonNextExercise renderData={data} idExercise={idExercise} />
+        <ButtonNextExercise 
+          renderData={data} 
+          idExercise={idExercise} />
       </Grid>
     </Grid>
   ): <></>
