@@ -3,9 +3,8 @@ import { Button, ButtonProps, Stack, styled } from "@mui/material";
 import { useRouter, usePathname } from 'next/navigation';
 import { ApiResponse, CommonField, DataItem, TopicField } from "@/types/type";
 import { ClickButton } from "../ClickButton";
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import useMediaQuery from '@mui/material/useMediaQuery';
-
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
 const ButtonFail = styled(Button)<ButtonProps>(() => ({
     "&:hover": {
@@ -15,33 +14,55 @@ const ButtonFail = styled(Button)<ButtonProps>(() => ({
     }
 }));
 
-const ContainerButtonFail = () => {
+const ContainerButtonFail = ({ isVisible }: { isVisible: boolean }) => {
     return (
         <aside>
             <Stack spacing={2} direction="row">
-                <ButtonFail sx={theme.customStyles.button} variant="contained">
-                <ArrowForwardIosIcon sx={{ fontSize: 15, marginLeft: 1 }}/>
-                    Próximo exercício
+                <ButtonFail
+                    sx={{
+                        ...theme.customStyles.button,
+                        opacity: isVisible ? 1 : 0,
+                        pointerEvents: isVisible ? 'auto' : 'none',
+                        visibility: isVisible ? 'visible' : 'hidden',
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        transition: 'all 0.3s ease-in-out',
+                        [theme.breakpoints.down('md')]: {
+                            '.button-text': {
+                                display: 'none',
+                            },
+                        },
+                    }}
+                >
+                    <span className="button-text" style={{ marginRight: '8px' }}>
+                        Próximo exercício
+                    </span>
+                    <ArrowForwardIosIcon sx={{ fontSize: 15 }} />
                 </ButtonFail>
             </Stack>
         </aside>
-    )
-}
+    );
+};
+
 
 function isTopicField(field: CommonField): field is TopicField {
-    return field && "exercisesInfo" in field;}
+    return field && "exercisesInfo" in field;
+}
 
 interface ButtonNextProps {
     idExercise: string;
     renderData: ApiResponse;
 }
 
-export const ButtonNextExercise: React.FC<ButtonNextProps> = ({ idExercise, renderData  }) => {
+export const ButtonNextExercise: React.FC<ButtonNextProps> = ({ idExercise, renderData }) => {
     const router = useRouter()
     const pathname = usePathname()
 
+    const isSmallScreen: boolean = useMediaQuery(theme.breakpoints.down('md'));
+
     if (!renderData) {
-        return (<ContainerButtonFail />)
+        return (<ContainerButtonFail isVisible={false} />)
     }
     const partsPathname = pathname.split("/")
     const idExerciseBase = idExercise.split("-")[0]
@@ -62,17 +83,17 @@ export const ButtonNextExercise: React.FC<ButtonNextProps> = ({ idExercise, rend
             router.push(`${nextExerciseId}-${nextExerciseName}`)
         }
 
-        const isSmallScreen: boolean = useMediaQuery(theme.breakpoints.down('md'));
-
         if (nextExerciseId) {
             return (
-                isSmallScreen ? <ClickButton click={handleClick} endIcon={<ArrowForwardIosIcon sx={{ fontSize: 15 }}/>}/> : <ClickButton title="Próximo exercício" click={handleClick} endIcon={<ArrowForwardIosIcon sx={{ fontSize: 15, marginLeft: 1 }}/>}/>
-            )
+                isSmallScreen
+                    ? <ClickButton click={handleClick} endIcon={<ArrowForwardIosIcon sx={{ fontSize: 15 }} />} />
+                    : <ClickButton title="Próximo exercício" click={handleClick} endIcon={<ArrowForwardIosIcon sx={{ fontSize: 15, marginLeft: 1 }} />} />
+            );
         }
 
-        return null
+        return <ContainerButtonFail isVisible={false} />;
     }
 
-    return <ContainerButtonFail />
+    return <ContainerButtonFail isVisible={false} />;
 
 }

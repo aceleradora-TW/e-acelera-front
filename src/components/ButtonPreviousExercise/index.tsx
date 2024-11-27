@@ -24,8 +24,8 @@ const ContainerButtonFail = () => {
                 </ButtonFail>
             </Stack>
         </aside>
-    )
-}
+    );
+};
 
 function isTopicField(field: CommonField): field is TopicField {
     return field && "exercisesInfo" in field;
@@ -37,43 +37,44 @@ interface ButtonNextProps {
 }
 
 export const ButtonPreviousExercise: React.FC<ButtonNextProps> = ({ idExercise, renderData }) => {
+    const router = useRouter();
+    const pathname = usePathname();
 
-    const router = useRouter()
-    const pathname = usePathname()
+    const isSmallScreen: boolean = useMediaQuery(theme.breakpoints.down('md'));
 
     if (!renderData) {
-        return (<ContainerButtonFail />)
+        return <ContainerButtonFail />;
     }
-    const partsPathname = pathname.split("/")
-    const idExerciseBase = idExercise.split("-")[0]
-    const idTopicBase = partsPathname[partsPathname.length - 2]?.split("-")[0]
-    const currentTopic = renderData?.data?.find((element: DataItem) => { return element.field?.rowId === idTopicBase });
+
+    const partsPathname = pathname.split("/");
+    const idExerciseBase = idExercise.split("-")[0];
+    const idTopicBase = partsPathname[partsPathname.length - 2]?.split("-")[0];
+    const currentTopic = renderData?.data?.find((element: DataItem) => element.field?.rowId === idTopicBase);
 
     if (currentTopic && isTopicField(currentTopic.field)) {
-        const topicField = currentTopic.field
+        const topicField = currentTopic.field;
 
-        const exerciseIds = topicField.exercisesInfo?.split(",") || []
-        const exerciseNames = topicField.exercises?.split(",") || []
+        const exerciseIds = topicField.exercisesInfo?.split(",") || [];
+        const exerciseNames = topicField.exercises?.split(",") || [];
 
-        const currentExerciseIndex = exerciseIds.indexOf(idExerciseBase)
-        const PreviousExerciseName = exerciseNames[currentExerciseIndex - 1] || null
-        const PreviousExerciseId = exerciseIds[currentExerciseIndex - 1] || null
+        const currentExerciseIndex = exerciseIds.indexOf(idExerciseBase);
+        const PreviousExerciseName = exerciseNames[currentExerciseIndex - 1] || null;
+        const PreviousExerciseId = exerciseIds[currentExerciseIndex - 1] || null;
 
         const handleClick = () => {
-            router.push(`${PreviousExerciseId}-${PreviousExerciseName}`)
-        }
-
-        const isSmallScreen: boolean = useMediaQuery(theme.breakpoints.down('md'));
+            router.push(`${PreviousExerciseId}-${PreviousExerciseName}`);
+        };
 
         if (PreviousExerciseId) {
             return (
-                isSmallScreen ? <ClickButton click={handleClick} backIcon={<ArrowBackIosIcon sx={{ fontSize: 15 }} />} /> : <ClickButton title="Exercício anterior" click={handleClick} backIcon={<ArrowBackIosIcon sx={{ fontSize: 15, marginRight: 1 }} />} />
-            )
+                isSmallScreen
+                    ? <ClickButton click={handleClick} backIcon={<ArrowBackIosIcon sx={{ fontSize: 15 }} />} />
+                    : <ClickButton title="Exercício anterior" click={handleClick} backIcon={<ArrowBackIosIcon sx={{ fontSize: 15, marginRight: 1 }} />} />
+            );
         }
 
-        return null
+        return null;
     }
 
-    return <ContainerButtonFail />
-
-}
+    return <ContainerButtonFail />;
+};
