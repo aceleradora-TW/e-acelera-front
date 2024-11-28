@@ -26,8 +26,8 @@ interface NavBarProps {
             disableGutters
             sx={{ display: "flex", alignItems: "center" }}
           >
-            <WebMenu list={list} />
             <MobileMenu list={list} />
+            <WebMenu list={list} />
           </Toolbar>
         </Container>
       </Box>

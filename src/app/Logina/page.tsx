@@ -19,10 +19,11 @@ export default function Login() {
   if (status === "loading") {
     return <Loading />;
   }
-
-  return (
-    <LayoutPage>
-      <CardLogin />
-    </LayoutPage>
-  );
+  if (status === "unauthenticated") {
+    return (
+      <LayoutPage>
+        <CardLogin />
+      </LayoutPage>
+    );
+  }
 }
