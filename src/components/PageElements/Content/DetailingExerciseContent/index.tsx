@@ -5,6 +5,7 @@ import { ApiResponse, DataItem, ExercisesField } from "@/types/type";
 import { DescriptionFull } from "@/components/Description/DescriptionFull";
 import { ContainerButtonsExercise } from "../../Container/ContainerButtonsExercise";
 import { Heading } from "@/components/Heading";
+import StatusSelect from "@/components/StatusSelect";
 
 interface DetailingContentProps {
   dataTopic:ApiResponse
@@ -39,6 +40,9 @@ const ExerciseContent: React.FC<{
     >
       <Grid item>
         <Heading variant="h1" text={field.title} />
+      </Grid>
+      <Grid item >
+        <StatusSelect width="100%"/>
       </Grid>
     </Grid>
     <DescriptionFull text={field.description} />

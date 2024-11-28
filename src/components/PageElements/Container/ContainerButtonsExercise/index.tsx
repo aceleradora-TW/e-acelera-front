@@ -40,7 +40,9 @@ export const ContainerButtonsExercise: React.FC<
         <AdvanceExercises idExercises={idExercise} data={data}/>
       </Grid>
       <Grid item>
-        <ButtonNextExercise renderData={data} idExercise={idExercise} />
+        <ButtonNextExercise 
+          renderData={data} 
+          idExercise={idExercise} />
       </Grid>
     </Grid>
   ): <></>

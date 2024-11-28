@@ -18,9 +18,9 @@ export enum themePalette {
   title = "rgb(0, 44, 83)",
   descriptionCard = "rgb(44, 44, 44)",
   descriptionText = "rgb(0, 0, 0)",
-  statusInProgress = "rgb(255, 222, 107)",
-  statusConcluded = "rgb(155, 255, 133)",
-  statusPending = "rgb(225, 225, 225)",
+  statusInProgress = "rgb(172, 238, 245)",
+  statusConcluded = "rgb(158, 255, 133)",
+  statusPending = "rgb(222, 229, 216)",
   mainBg = "rgb(245, 245, 245)",
   whiteBg = "rgb(255, 255, 255)",
 }
