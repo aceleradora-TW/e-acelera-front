@@ -15,7 +15,7 @@ const boxStyle: object = {
 export const DescriptionDivider: React.FC<DescriptionDividerProps> = ({ text }) => {
 
   function textDivider(text: string): [string, string] {
-    let breakPoint = Math.floor(text.length / 2)
+    let breakPoint = Math.floor((2 * text.length) / 3)
   
     const preferedBreaks = ['.', ',', '\n', ' '] 
   
