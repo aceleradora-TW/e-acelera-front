@@ -6,9 +6,9 @@ import { useSession } from 'next-auth/react'
 jest.mock('next/image', () => ({
   __esModule: true,
   default: (props: any) => {
-    return <img {...props} alt={props.alt} />
+    return <img {...props} alt={props.alt} />;
   }
-}))
+}));
 
 jest.mock('next-auth/react', () => ({
   useSession: jest.fn()
