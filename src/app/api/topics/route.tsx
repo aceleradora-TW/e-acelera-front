@@ -1,10 +1,10 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { ApiResponse } from "@/types/type";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { headers } from "next/headers";
 
 export async function GET(
-    req: NextApiRequest,
+    req: NextRequest,
     res: NextApiResponse
 ) {
     const headersList = headers()
