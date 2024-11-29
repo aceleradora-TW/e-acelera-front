@@ -2,6 +2,7 @@ import React from "react";
 import { Box, Typography } from "@mui/material";
 import { theme } from "../../app/config/theme";
 import ReactMarkdown from "react-markdown";
+import StatusSelect from "../StatusSelect";
 
 const components = {
   h1: (props: React.HTMLAttributes<HTMLHeadingElement>) => (
@@ -46,7 +47,11 @@ export const CardVideo: React.FC<CardVideoProps>=({ text, title, videoLink, refe
             {text}
           </ReactMarkdown>
         </Box>
+        <Box sx={{ padding: 2 }}>
+            <StatusSelect width='30%'/>
+        </Box>
       </Box>
+      
     </Box>
   );
 }
