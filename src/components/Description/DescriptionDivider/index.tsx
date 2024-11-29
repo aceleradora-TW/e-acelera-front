@@ -17,12 +17,12 @@ export const DescriptionDivider: React.FC<DescriptionDividerProps> = ({ text }) 
   function textDivider(text: string): [string, string] {
     let breakPoint = Math.floor((2 * text.length) / 3)
   
-    const preferedBreaks = ['.', ',', '\n', ' '] 
+    const preferredBreaks = ['.', ',', '\n', ' '] 
   
-    for (const characters of preferedBreaks) {
+    for (const breakChar of preferredBreaks) {
       let tempPoint = breakPoint
   
-      while (tempPoint > 0 && text[tempPoint] !== characters) {
+      while (tempPoint > 0 && text[tempPoint] !== breakChar) {
         tempPoint--;
       }
   
