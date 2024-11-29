@@ -3,6 +3,7 @@ import { styled } from "@mui/material/styles"
 import Button, { ButtonProps } from "@mui/material/Button"
 import Stack from "@mui/material/Stack"
 import { theme } from "@/app/config/theme"
+import { ReactNode } from "react"
 
 
 const ColorButton = styled(Button)<ButtonProps>(() => ({    
@@ -14,13 +15,15 @@ const ColorButton = styled(Button)<ButtonProps>(() => ({
 }))
 
 type CardProps = {
-    title: string,
-    click: () => void
+    title?: string,
+    click: () => void,
+    endIcon?: ReactNode,
+    backIcon?: ReactNode
 }
 
-export const ClickButton = ({ title, click }: CardProps) =>
+export const ClickButton = ({ title, click, endIcon, backIcon }: CardProps) =>
     <aside>        
         <Stack spacing={2} direction="row" onClick={click}>
-            <ColorButton sx={theme.customStyles.button} variant="contained">{title}</ColorButton>
+            <ColorButton sx={theme.customStyles.button} variant="contained">{backIcon}{title}{endIcon}</ColorButton>
         </Stack>
     </aside>
