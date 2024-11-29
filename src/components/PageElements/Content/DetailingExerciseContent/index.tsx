@@ -45,7 +45,6 @@ const ExerciseContent: React.FC<{
         <StatusSelect width="100%"/>
       </Grid>
     </Grid>
-
     <DescriptionFull text={field.description} />
     <ContainerButtonsExercise idExercise={idExercise} data={dataTopic}/>
   </>
