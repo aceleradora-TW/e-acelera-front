@@ -268,8 +268,6 @@ declare module "@mui/material/styles" {
       };
       advanceExercises: {
         color: string,
-        background: string,
-        borderRadius: string,
         padding: string,
       };
       cardMediaImage: {
@@ -505,8 +503,6 @@ declare module "@mui/material/styles" {
           };
           advanceExercises?: {
             color?: string,
-            background?: string,
-            borderRadius?: string,
             padding?: string,
           };
           cardMediaImage: {
@@ -743,8 +739,7 @@ const theme = createTheme({
     },
     advanceExercises: {
       color: themePalette.button,
-      background: themePalette.statusInProgress,
-      borderRadius: "10px",
+      padding: "10px 20px",
     },
     cardMediaImage: {
       maxWidth: '100%',
