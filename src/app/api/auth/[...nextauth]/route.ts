@@ -1,5 +1,5 @@
 import NextAuth from "next-auth"
-import { getAuthProviders } from "./providers";
+import { getAuthProviders } from "../../../helpers/providers";
 
 const handler = NextAuth({
   providers: getAuthProviders(),
@@ -13,7 +13,7 @@ const handler = NextAuth({
       }
       return token;
     },
-    
+
     async redirect({ url, baseUrl }) {
       if (typeof window !== "undefined") {
         const storedRedirectUrl = localStorage.getItem("redirectAfterLogin");
@@ -23,7 +23,7 @@ const handler = NextAuth({
       }
       return url.startsWith(baseUrl) ? url : baseUrl;
     },
-    
+
   },
 });
 
