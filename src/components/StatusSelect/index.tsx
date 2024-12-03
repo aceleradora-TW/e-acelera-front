@@ -7,40 +7,43 @@ import Select from "@mui/material/Select"
 import { SelectChangeEvent } from "@mui/material/Select"
 import { theme } from "@/app/config/theme"
 import { useRouter } from 'next/navigation'
-
+import { useSession } from "next-auth/react"
 
 interface StatusSelectProps {
   width?: "30%" | "70%" | "100%"
 }
 
 export default function StatusSelect({ width = "30%"}: StatusSelectProps) {
-  const [status, setStatus] = React.useState<string>("statusPending");
+  const [status, setStatus] = React.useState<string>("statusPending")
   const router = useRouter()
+  const { data: session } = useSession()
 
   const [backgroundColor, setBackgroundColor] =
-    React.useState<string>("rgb(225, 225, 225)");
+    React.useState<string>("rgb(225, 225, 225)")
 
   const handleChange = (event: SelectChangeEvent) => {
-    const value = event.target.value as string;
-    setStatus(value);
+    const value = event.target.value as string
+    setStatus(value)
     
-    //adicionar validação de quando o usuário nao estiver logado redirecionar para o login
-    router.push("/login")
+    if(!session){
+      const currentUrl = encodeURIComponent(window.location.href);
+      router.push(`/login?callbackUrl=${currentUrl}`)
+    }
 
     switch (value) {
       case "statusConcluded":
-        setBackgroundColor(theme.palette.statusSelect?.light || "");
-        break;
+        setBackgroundColor(theme.palette.statusSelect?.light || "")
+        break
       case "statusInProgress":
-        setBackgroundColor(theme.palette.statusSelect?.dark || "");
-        break;
+        setBackgroundColor(theme.palette.statusSelect?.dark || "")
+        break
       case "statusPending":
-        setBackgroundColor(theme.palette.statusSelect?.main || "");
-        break;
+        setBackgroundColor(theme.palette.statusSelect?.main || "")
+        break
       default:
-        setBackgroundColor("");
+        setBackgroundColor("")
     }
-  };
+  }
 
   return (
     <Box sx={{ backgroundColor, width }}>
@@ -77,7 +80,6 @@ export default function StatusSelect({ width = "30%"}: StatusSelectProps) {
           }}
         >
           <MenuItem
-
             value="statusConcluded"
           >
             Concluído
@@ -90,7 +92,6 @@ export default function StatusSelect({ width = "30%"}: StatusSelectProps) {
           </MenuItem>
 
           <MenuItem
-
             value="statusPending"
           >
             Não Iniciado
@@ -98,5 +99,5 @@ export default function StatusSelect({ width = "30%"}: StatusSelectProps) {
         </Select>
       </FormControl>
     </Box>
-  );
+  )
 }

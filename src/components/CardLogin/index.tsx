@@ -1,9 +1,7 @@
 import { theme, themePalette } from "@/app/config/theme";
 import { Box, Grid, Typography, useMediaQuery } from "@mui/material";
 import Image from "next/image";
-import agilLogo from "../../../public/assets/logo.svg";
 import githubLogo from "../../../public/assets/github-icon.png";
-import facebookLogo from "../../../public/assets/facebook-icon.png";
 import googleLogo from "../../../public/assets/google-icon.png";
 import linkedinLogo from "../../../public/assets/linkedin-icon.png";
 import { SocialLoginButton } from "../SocialLoginButton";
