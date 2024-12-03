@@ -17,10 +17,13 @@ export const RenderDetailingExercisePage = (id: string)=> {
   useEffect(() => {
     const fetchExercises = async () => {
       try {
-        const dataExercise: ApiResponse = await getExercises();
-        const dataTopic: ApiResponse = await getTopicsExercise();
-        setRenderDataExercise(dataExercise);
-        setRenderDataTopicExercise(dataTopic);
+        const dataExercise = await getExercises();
+        const dataTopic = await getTopicsExercise();
+        
+        if(dataExercise && dataTopic){
+          setRenderDataExercise(dataExercise);
+          setRenderDataTopicExercise(dataTopic);
+        }
       } catch (err) {
         console.error(err);
         setError(true);

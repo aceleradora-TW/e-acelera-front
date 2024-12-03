@@ -15,8 +15,10 @@ export const RenderDetailingTopicPage = (id: string)=> {
   useEffect(() => {
     const fetchTopics = async () => {
       try {
-        const data: ApiResponse = await getTopics();
-        setRenderData(data);
+        const data = await getTopics();
+        if(data){
+          setRenderData(data);
+        }
       } catch (err) {
         console.error(err);
         setError(true);

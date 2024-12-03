@@ -12,12 +12,17 @@ export async function GET(
 
     switch (method) {
         case 'GET': {
+            const uniqueParam = headersList.get("uniqueparam"); 
+            if(!uniqueParam){ 
+                return NextResponse.json("Header parameter is missing", { status: 500 });
+            }
+            if(!process.env.STACKBY_SECRET_KEY || !process.env.STACKBY_BASE_URL){
+                return NextResponse.json("Invalid environment variables", { status: 500 });
+            }
+            const apiKey: string = process.env.STACKBY_SECRET_KEY;
+            const baseUrl: string = process.env.STACKBY_BASE_URL;
+
             try {
-                const uniqueParam = headersList.get("uniqueparam"); 
-
-                const apiKey: string = process.env.STACKBY_SECRET_KEY || "";
-                const baseUrl: string = process.env.STACKBY_BASE_URL || "";
-
                 const response: Response = await fetch(`${baseUrl}/themes?${uniqueParam}`, {
                     method: "GET",
                     headers: {

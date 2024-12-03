@@ -4,7 +4,7 @@ import { LayoutPage } from "../../LayoutPage";
 import { DetailingThemeContent } from "../../Content/DetailingThemeContent";
 import { BadRequest } from "@/components/BadRequest";
 import { NoData } from "@/components/NoData";
-import { getThemes } from "@/service/detailingThemeService";
+import { getDetailingThemes } from "@/service/detailingThemeService";
 import { ApiResponse } from "@/types/type";
 
 export const RenderDetailingThemePage = (id: string)=> {
@@ -15,8 +15,10 @@ export const RenderDetailingThemePage = (id: string)=> {
   useEffect(() => {
     const fetchTheme = async () => {
       try {
-        const data: ApiResponse = await getThemes();
-        setRenderData(data);
+        const data = await getDetailingThemes();
+        if(data){
+          setRenderData(data);
+        }
       } catch (err) {
         console.error(err);
         setError(true);

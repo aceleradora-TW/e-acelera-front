@@ -8,15 +8,17 @@ import { getThemes } from "@/service/themesService";
 import { ApiResponse } from "@/types/type";
 
 export const RenderThemePage = ( category:string ) => {
-  const [renderData, setRenderData] = useState<ApiResponse | null>(null);
+  const [renderData, setRenderData] = useState<ApiResponse | null>();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 
   useEffect(() => {
     const fetchThemes = async () => {
       try {
-        const data: ApiResponse = await getThemes();
-        setRenderData(data);
+        const data = await getThemes();
+        if(data){
+          setRenderData(data);
+        }
       } catch (err) {
         console.error(err);
         setError(true);
