@@ -1,5 +1,3 @@
-const logger = require('./src/utils/logger').default;
-
 const envs = [
     'GIT_ID',
     'GIT_SECRET',
@@ -17,10 +15,10 @@ let isMissing = false;
 
 envs.forEach((env) => {
     if (!process.env[env]) {
-        logger.error(`${env} não está definido.`);
+        console.error(`${env} não está definido.`);
         isMissing = true;
     } else {
-        logger.info(`${env} está definido: ${process.env[env] ? 'Sim' : 'Não'}`);
+        console.log(`${env} está definido.`);
     }
 });
 
