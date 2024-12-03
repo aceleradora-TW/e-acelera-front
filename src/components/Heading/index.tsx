@@ -1,20 +1,20 @@
-'use client'
+"use client"
 import React from "react"
 import Typography from "@mui/material/Typography"
 import { theme, ThemeConfig } from "../../app/config/theme"
-import { Box, Grid } from "@mui/material"
+import { Grid } from "@mui/material"
 
-interface TitleProps {
+interface HeadingProps {
     text: string
+      variant: "h1" | "h2" 
 }
 
-export const Title: React.FC<TitleProps> = ({ text }) => {
+export const Heading: React.FC<HeadingProps> = ({ text, variant }) => {
     return (
         <ThemeConfig>
             <Grid container>  
                 <Typography
-                    variant="h1"
-                    component="div"
+                    variant={variant}
                     sx={theme.customStyles.title}>
                     {text}
                 </Typography>

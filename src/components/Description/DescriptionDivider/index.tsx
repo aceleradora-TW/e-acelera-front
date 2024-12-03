@@ -1,11 +1,11 @@
-import React from "react";
-import { Divider, Box, Typography, useMediaQuery, Link } from "@mui/material";
-import { theme, themePalette } from "@/app/config/theme";
-import ReactMarkdown from "react-markdown";
-import { DescriptionFull } from "../DescriptionFull";
+import React from "react"
+import { Divider, Box, Typography, useMediaQuery, Link } from "@mui/material"
+import { theme, themePalette } from "@/app/config/theme"
+import ReactMarkdown from "react-markdown"
+import { DescriptionFull } from "../DescriptionFull"
 
 interface DescriptionDividerProps {
-  text: string;
+  text: string
 }
 
 const boxStyle: object = {
@@ -13,21 +13,34 @@ const boxStyle: object = {
 }
 
 export const DescriptionDivider: React.FC<DescriptionDividerProps> = ({ text }) => {
-  const descriptionSize: number = text.length;
-  const middleTextPoint: number = Math.floor(descriptionSize / 2);
 
-  let splitPoint: number = middleTextPoint;
-  while (splitPoint > 0 && text[splitPoint] !== ' ') {
-    splitPoint--;
+  function textDivider(text: string): [string, string] {
+    let breakPoint = Math.floor((2 * text.length) / 3)
+  
+    const preferredBreaks = ['.', ',', '\n', ' '] 
+  
+    for (const breakChar of preferredBreaks) {
+      let tempPoint = breakPoint
+  
+      while (tempPoint > 0 && text[tempPoint] !== breakChar) {
+        tempPoint--;
+      }
+  
+      if (tempPoint > 0) {
+        breakPoint = tempPoint + 1
+        break
+      }
+    }
+  
+    const firstPart = text.slice(0, breakPoint).trim()
+    const secondPart = text.slice(breakPoint).trim()
+  
+    return [firstPart, secondPart]
   }
-
-  if (splitPoint === 0) {
-    splitPoint = middleTextPoint;
-  }
-
+  
   const components = {
     p: (props: React.HTMLAttributes<HTMLHeadingElement>) => (
-      <Typography variant="body1" {...props} />
+      <Typography variant="body1" sx={{ whiteSpace: "pre-wrap", marginTop: 2 }} {...props} />
     ),
     a: (props: React.HTMLAttributes<HTMLAnchorElement>) => (
       <Link
@@ -35,18 +48,16 @@ export const DescriptionDivider: React.FC<DescriptionDividerProps> = ({ text }) 
         sx={{ color: themePalette.descriptionCard, textDecorationColor: themePalette.descriptionCard, display: "block" }}
         {...props} />
     )
-  };
+  }
 
   const typographyBreakLine = {
     p: (props:React.HTMLAttributes<HTMLHeadingElement> ) => (
       <Typography variant="body1" sx={{marginBottom: 3}} {...props} />
     ),
   }
-
-  const textBox1: string = text.substring(0, splitPoint);
-  const textBox2: string = text.substring(splitPoint).trim();
-
-  const isSmallScreen: boolean = useMediaQuery(theme.breakpoints.down('md'));
+ 
+  const textDividerArray: string[] = textDivider(text)
+  const isSmallScreen: boolean = useMediaQuery(theme.breakpoints.down('md'))
 
   return (
     <>
@@ -56,19 +67,19 @@ export const DescriptionDivider: React.FC<DescriptionDividerProps> = ({ text }) 
         <Box sx={{...theme.customStyles.description}}>
           <Box sx={boxStyle}>
             <ReactMarkdown components={components}>
-              {textBox1.replace(/\n\n/g, "")}
+              {textDividerArray[0]}
             </ReactMarkdown>
           </Box>
 
-          <Divider orientation="vertical" flexItem color="black" sx={{ margin: 0 }} />
+          <Divider orientation="vertical" flexItem color="black" sx={{ marginTop: 2 }} />
 
           <Box sx={boxStyle}>
             <ReactMarkdown components={components}>
-              {textBox2.replace(/\n\n/g, "")}
+              {textDividerArray[1]}
             </ReactMarkdown>
           </Box>
         </Box>
       )}
     </>
-  );
-};
+  )
+}

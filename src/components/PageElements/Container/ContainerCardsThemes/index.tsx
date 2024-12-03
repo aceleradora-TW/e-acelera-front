@@ -27,6 +27,7 @@ export const ContainerCardTheme: React.FC<ContainerCardThemeProps> = ({data, cat
                   description={field.cardDescription}
                   route={`${currentPath}/${element.id}-${field.title}`}
                   image={field.image ? field.image[0].url : ""}
+                  textImage={`${field.alt}`}
                 />
               </Grid>
             );
