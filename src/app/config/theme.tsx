@@ -23,6 +23,7 @@ export enum themePalette {
   statusPending = "rgb(222, 229, 216)",
   mainBg = "rgb(245, 245, 245)",
   whiteBg = "rgb(255, 255, 255)",
+  hoverBg = "rgb(154 , 192, 201)",
 }
 
 declare module "@mui/material/styles" {
@@ -72,8 +73,8 @@ declare module "@mui/material/styles" {
         color: string;
         borderBottomWidth: string;
         borderBottomColor: string;
-        my: number;
         display: string;
+        textTransform: string;
         fontSize: string;
         lineHeight: number;
         fontWeight: number;
@@ -83,11 +84,12 @@ declare module "@mui/material/styles" {
         "&:hover": {
           backgroundColor: string;
       }
+        borderRadius: string;
       };
       link: {
         color: string;
-        my: number;
         display: string;
+        textTransform: string;
         fontSize: string;
         lineHeight: number;
         fontWeight: number;
@@ -97,11 +99,21 @@ declare module "@mui/material/styles" {
         "&:hover": {
           backgroundColor: string;
       }
+      borderRadius: string;
       };
       linkReference:{
         color: string;
       },
       logoType: {
+        fontSize: string;
+        mr: number;
+        fontWeight: number;
+        letterSpacing: string;
+        lineHeight: number;
+        textDecoration: string;
+        color: string;
+      };
+      logoTypeLogin: {
         fontSize: string;
         mr: number;
         fontWeight: number;
@@ -159,6 +171,48 @@ declare module "@mui/material/styles" {
         WebkitBoxOrient: string;
         overflow: string;
         textOverflow: string;
+      };
+      cardLoginBox: {
+        width: {
+          xs: string,
+          sm: string,
+          md: string,
+          lg: string,
+          xl: string
+        },
+        height: string,
+        boxShadow: string,
+        padding: string,
+      };
+      containerLogin:{
+        height: string,
+        display: string,
+        justifyContent: string,
+        marginTop: string,
+      };
+      boxLogoType:{
+        display: string, 
+        gap: string, 
+        alignItems: string,
+      };
+      h1Login:{
+        fontSize:{
+          xs: string,
+          sm: string,
+          md: string,
+          lg: string,
+          xl: string,
+        }
+      };
+      body1Login:{
+        fontSize: {
+          xs: string,
+          sm: string,
+          md: string,
+          lg: string,
+          xl: string,
+        },
+        marginBottom: string,
       };
       title: {
         textAlign: string;
@@ -249,13 +303,13 @@ declare module "@mui/material/styles" {
         borderRadius?: string;
         margin?: number;
       };
-      linkActive: {
+      linkActive?: {
         borderBottom?: string;
         color?: string;
         borderBottomWidth?: string;
         borderBottomColor?: string;
-        my?: number;
         display?: string;
+        textTransform?: string;
         fontSize?: string;
         lineHeight?: number;
         fontWeight?: number;
@@ -265,11 +319,12 @@ declare module "@mui/material/styles" {
         "&:hover": {
           backgroundColor?: string;
       }
+      borderRadius?: string;
       };
-      link: {
+      link?: {
         color?: string;
-        my?: number;
         display?: string;
+        textTransform?: string;
         fontSize?: string;
         lineHeight?: number;
         fontWeight?: number;
@@ -278,12 +333,22 @@ declare module "@mui/material/styles" {
         padding?: string;
         "&:hover": {
           backgroundColor?: string;
-      }
+      },
+      borderRadius?: string;
       };
-      linkReference:{
+      linkReference?:{
         color?: string;
       },
-      logoType: {
+      logoType?: {
+        fontSize?: string;
+        mr?: number;
+        fontWeight?: number;
+        letterSpacing?: string;
+        lineHeight?: number;
+        textDecoration?: string;
+        color?: string;
+      };
+      logoTypeLogin?: {
         fontSize?: string;
         mr?: number;
         fontWeight?: number;
@@ -341,6 +406,48 @@ declare module "@mui/material/styles" {
         WebkitBoxOrient?: string;
         overflow?: string;
         textOverflow?: string;
+      };
+      cardLoginBox?: {
+        width?: {
+          xs: string,
+          sm: string,
+          md: string,
+          lg: string,
+          xl: string
+        },
+        height?: string,
+        boxShadow?: string,
+        padding?: string,
+      };
+      containerLogin?:{
+        height?: string,
+        display?: string,
+        justifyContent?: string,
+        marginTop?: string,
+      };
+      boxLogoType?:{
+        display?: string, 
+        gap?: string, 
+        alignItems?: string,
+      };
+      h1Login?:{
+        fontSize?:{
+          xs?: string,
+          sm?: string,
+          md?: string,
+          lg?: string,
+          xl?: string,
+        }
+      };
+      body1Login?:{
+        fontSize?: {
+          xs?: string,
+          sm?: string,
+          md?: string,
+          lg?: string,
+          xl?: string,
+        },
+        marginBottom: string,
       };
       title?: {
         textAlign?: string,
@@ -438,19 +545,22 @@ const theme = createTheme({
       borderBottomWidth: "3px",
       borderBottomColor: themePalette.title,
       display: "block",
+      textTransform: "none",
       fontSize: "18px",
       lineHeight: 1.7,
       fontWeight: 400,
       letterSpacing: 0.4,
-      margin: "0 0.8rem",
+      margin: "0 0.5rem",
       padding: "8px",
       "&:hover": {
         backgroundColor: "rgb(246, 250, 253)",
-    }
+    },
+      borderRadius: "0"
     },
     link: {
       color: themePalette.descriptionCard,
       display: "block",
+      textTransform: "none",
       fontSize: "18px",
       lineHeight: 1.7,
       fontWeight: 400,
@@ -459,17 +569,26 @@ const theme = createTheme({
       padding: "8px", 
       "&:hover": {
         backgroundColor: "rgb(246, 250, 253)",
-    }
+    },
+      borderRadius: "0",
     },
     linkReference:{
       color: themePalette.descriptionCard
     },
     logoType: {
-      fontSize: "19.2px",
+      fontSize: "1.2rem",
       mr: 2,
       fontWeight: 700,
       letterSpacing: "0.15px",
       lineHeight: 1.6,
+      textDecoration: "none",
+      color: themePalette.title,
+    },
+    logoTypeLogin: {
+      fontSize: "2.125rem",
+      fontWeight: 700,
+      letterSpacing: "0.25px",
+      lineHeight: 1.2,
       textDecoration: "none",
       color: themePalette.title,
     },
@@ -530,6 +649,48 @@ const theme = createTheme({
       WebkitBoxOrient: 'vertical', 
       overflow: 'hidden',
       textOverflow: 'ellipsis'
+    },
+    cardLoginBox: {
+      width: {
+        xs: "90%",
+        sm: "60%",
+        md: "45%",
+        lg: "35%",
+        xl: "30%",
+      },
+      height: "30%",
+      boxShadow: "0 0 0.4em rgba(44, 44, 44, 0.4)",
+      padding: "40px",
+    },
+    containerLogin:{
+      height: "100%",
+      display: "flex",
+      justifyContent: "center",
+      marginTop: "80px",
+    },
+    boxLogoType:{
+      display: "flex", 
+      gap: "20px", 
+      alignItems: "center",
+    },
+    h1Login:{
+      fontSize:{
+        xs: "32px",
+        sm: "40px",
+        md: "40px",
+        lg: "44px",
+        xl: "48px",
+      },
+    },
+    body1Login:{
+      fontSize: {
+        xs: "18px",
+        sm: "20px",
+        md: "24px",
+        lg: "24px",
+        xl: "24px",
+      },
+      marginBottom: "15px",
     },
     title: {
       textAlign: "left",
@@ -595,9 +756,9 @@ const theme = createTheme({
     },
     buttonHover: {
       main: themePalette.button,
+      light: themePalette.hoverBg,
       contrastText: themePalette.whiteBg,
     },
-
     textColor: {
       main: themePalette.title,
       light: themePalette.descriptionCard,
