@@ -1,4 +1,4 @@
-const logger = require('./utils/logger').default;
+const logger = require('./src/utils/logger').default;
 
 const envs = [
     'GIT_ID',
