@@ -4,10 +4,10 @@ import { CardLogin } from "@/components/CardLogin"
 import { LayoutPage } from "@/components/PageElements/LayoutPage"
 import { useSession } from "next-auth/react"
 import { useRouter, useSearchParams } from "next/navigation"
-import { useEffect } from "react"
+import { Suspense, useEffect } from "react"
 import { Loading } from "@/components/Loading"
 
-export default function Login() {
+function LoginContent() {
   const { data: session, status } = useSession()
   const router = useRouter()
   const searchParams = useSearchParams()
@@ -32,4 +32,12 @@ export default function Login() {
       </LayoutPage>
     )
   }
+}
+
+export default function Login() {
+  return (
+    <Suspense fallback={<Loading />}>
+      <LoginContent />
+    </Suspense>
+  )
 }
