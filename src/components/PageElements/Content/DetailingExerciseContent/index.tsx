@@ -1,23 +1,29 @@
 import React from "react";
-import { Grid} from "@mui/material";
+import { Grid } from "@mui/material";
 import { BreadCrumb } from "@/components/BreadCrumb";
-import { ApiResponse, DataItem, ExercisesField } from "@/types/type";
+import { ApiResponse, DataItem, FilteredDetailingExerciseItem } from "@/types/type";
 import { DescriptionFull } from "@/components/Description/DescriptionFull";
 import { ContainerButtonsExercise } from "../../Container/ContainerButtonsExercise";
 import { Heading } from "@/components/Heading";
 import StatusSelect from "@/components/StatusSelect";
 
 interface DetailingContentProps {
-  dataTopic:ApiResponse
+  dataTopic: ApiResponse;
   dataExercise: ApiResponse;
   id: string;
 }
 
+function isFilteredDetailingExerciseItem(
+  field: any
+): field is FilteredDetailingExerciseItem {
+  return field && "title" in field && "description" in field
+}
+
 const ExerciseContent: React.FC<{
-  field: ExercisesField;
+  field: FilteredDetailingExerciseItem;
   idExercise: string;
-  dataTopic: ApiResponse
-}> = ({ field, idExercise, dataTopic}) => (
+  dataTopic: ApiResponse;
+}> = ({ field, idExercise, dataTopic }) => (
   <>
     <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
       <BreadCrumb />
@@ -35,7 +41,7 @@ const ExerciseContent: React.FC<{
         flexWrap: "wrap",
         justifyContent: "space-between",
         alignItems: "center",
-        marginBottom: 2
+        marginBottom: 2,
       }}
     >
       <Grid item>
@@ -46,7 +52,7 @@ const ExerciseContent: React.FC<{
       </Grid>
     </Grid>
     <DescriptionFull text={field.description} />
-    <ContainerButtonsExercise idExercise={idExercise} data={dataTopic}/>
+    <ContainerButtonsExercise idExercise={idExercise} data={dataTopic} />
   </>
 );
 
@@ -61,14 +67,21 @@ export const DetailingExerciseContent: React.FC<DetailingContentProps> = ({
 
   return (
     <>
-      {filteredData.map((element: DataItem) => (
-        <ExerciseContent
-        dataTopic={dataTopic}
-          key={element.id}
-          idExercise={id}
-          field={element.field as ExercisesField}
-        />
-      ))}
+      {filteredData.map((element: DataItem) => {
+        if (isFilteredDetailingExerciseItem(element.field)) {
+          return (
+            <ExerciseContent
+              key={element.id}
+              dataTopic={dataTopic}
+              field={element.field}
+              idExercise={id}
+            />
+          );
+        }
+
+        return null;
+      })}
     </>
   );
 };
+

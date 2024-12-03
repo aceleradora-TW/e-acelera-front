@@ -1,11 +1,11 @@
 import { Typography, TypographyProps } from "@mui/material";
 import { styled } from "@mui/material/styles";
-import { ApiResponse, CommonField, DataItem, TopicField } from "@/types/type";
+import { ApiResponse, CommonField, DataItem, FilteredTopicsItem, TopicField } from "@/types/type";
 import { usePathname } from "next/navigation";
 import { theme } from "@/app/config/theme";
 import { useMemo } from "react";
 
-function isTopicField(field: CommonField): field is TopicField {
+function isTopicField(field: any): field is FilteredTopicsItem {
   return field && "exercisesInfo" in field;
 }
 
@@ -38,7 +38,7 @@ export const AdvanceExercises: React.FC<SequenceExercises> = ({ idExercises, dat
   if (!getCurrentTopic) return null;
 
   if (isTopicField(getCurrentTopic.field)) {
-    const topicField = getCurrentTopic.field;
+    const topicField= getCurrentTopic.field;
     const exerciseInfo = topicField.exercisesInfo?.split(",") || [];
     const idIndex = exerciseInfo.indexOf(idExerciseBase) + 1;
 

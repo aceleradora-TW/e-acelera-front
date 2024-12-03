@@ -2,7 +2,7 @@ import React from "react";
 import { Grid } from "@mui/material";
 import { BreadCrumb } from "@/components/BreadCrumb";
 import { ContainerCardTopics } from "../../Container/ContainerCardsTopics";
-import { ApiResponse, DataItem, ThemeField } from "@/types/type";
+import { ApiResponse, DataItem, FilteredDetailingThemeItem } from "@/types/type";
 import { DescriptionDivider } from "../../../Description/DescriptionDivider";
 import { Heading } from "@/components/Heading";
 
@@ -10,7 +10,12 @@ interface DetailingContentProps {
   data: ApiResponse;
   id: string;
 }
-const ThemeContent: React.FC<{ field: ThemeField }> = ({ field }) => (
+
+function isFilteredDetailingThemeItem(field: any): field is FilteredDetailingThemeItem {
+  return field && "topicsDescription" in field && "topicsInfo" in field
+}
+
+const ThemeContent: React.FC<{ field: FilteredDetailingThemeItem }> = ({ field }) => (
   <>
     <Grid item xl={12} lg={9} md={6} sm={3}>
       <BreadCrumb />
@@ -32,10 +37,15 @@ export const DetailingThemeContent: React.FC<DetailingContentProps> = ({ data, i
   
   return (
     <>
-      {filteredData
-        .map((element: DataItem) => (
-          <ThemeContent key={element.id} field={element.field as ThemeField} />
-        ))}
+      {filteredData?.map((element: DataItem) => {
+        if (isFilteredDetailingThemeItem(element.field)) {
+          const field = element.field as FilteredDetailingThemeItem
+          return (
+            <ThemeContent key={element.id} field={field} />
+          );
+        }
+        return null;
+      })}
     </>
   );
 };
