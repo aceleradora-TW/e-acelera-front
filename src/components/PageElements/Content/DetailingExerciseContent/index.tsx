@@ -16,7 +16,7 @@ interface DetailingContentProps {
 function isFilteredDetailingExerciseItem(
   field: any
 ): field is FilteredDetailingExerciseItem {
-  return field && "title" in field && "description" in field
+  return field && "title" in field && "description" in field;
 }
 
 const ExerciseContent: React.FC<{
@@ -47,8 +47,8 @@ const ExerciseContent: React.FC<{
       <Grid item>
         <Heading variant="h1" text={field.title} />
       </Grid>
-      <Grid item >
-        <StatusSelect width="100%"/>
+      <Grid item>
+        <StatusSelect width="100%" />
       </Grid>
     </Grid>
     <DescriptionFull text={field.description} />
@@ -65,23 +65,20 @@ export const DetailingExerciseContent: React.FC<DetailingContentProps> = ({
     (element: DataItem) => element.id === id.split("-")[0]
   );
 
+  const filterElements = filteredData.filter((element: DataItem) =>
+    isFilteredDetailingExerciseItem(element.field)
+  );
+
   return (
     <>
-      {filteredData.map((element: DataItem) => {
-        if (isFilteredDetailingExerciseItem(element.field)) {
-          return (
-            <ExerciseContent
-              key={element.id}
-              dataTopic={dataTopic}
-              field={element.field}
-              idExercise={id}
-            />
-          );
-        }
-
-        return null;
-      })}
+      {filterElements.map((element: DataItem) => (
+        <ExerciseContent
+          key={element.id}
+          dataTopic={dataTopic}
+          field={element.field as FilteredDetailingExerciseItem}
+          idExercise={id}
+        />
+      ))}
     </>
   );
 };
-
