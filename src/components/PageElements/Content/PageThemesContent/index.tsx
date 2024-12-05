@@ -14,7 +14,7 @@ export const PageThemesContent: React.FC<PageThemesContentProps> = ({ data, cate
   return (
     <>
        <Grid item xl={12} lg={9} md={6} sm={3} textAlign={{ xs: 'left', sm: 'center' }}>
-          <Heading variant="h1" text={`Bem vindo ao ${category}`} />
+          <Heading variant="h1" text={`Inicie sua jornada no ${category}`} />
         </Grid>
         <ContainerCardTheme data={data} category={category}/>
     </>
