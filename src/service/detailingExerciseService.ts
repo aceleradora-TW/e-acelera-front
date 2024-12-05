@@ -18,20 +18,21 @@ export const getExercises = async (): Promise<ApiResponse | null> => {
         });
 
         const filteredData: DataItem[] = response.data.data.map((item: DataItem)=> {
-            if (!isFilteredDetailingExerciseItem(item.field)) {
-                return null;
+            if (isFilteredDetailingExerciseItem(item.field)) {
+                const field: FilteredDetailingExerciseItem = {
+                    title: item.field.title,
+                    description: item.field.description,
+                    rowId: item.field.rowId
+                };
+    
+                return {
+                    id: item.field.rowId,
+                    field
+                };
             }
 
-            const field: FilteredDetailingExerciseItem = {
-                title: item.field.title,
-                description: item.field.description,
-                rowId: item.field.rowId
-            };
-
-            return {
-                id: item.field.rowId,
-                field
-            };
+            return null;
+            
         }).filter(item => item !== null);
 
         if (filteredData.length === 0) {
