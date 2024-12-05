@@ -49,24 +49,17 @@ const TopicContent: React.FC<{ field: FilteredDetailingTopicItem }> = ({ field }
   </>
 )
 
-export const DetailingTopicContent: React.FC<DetailingContentProps> = ({
-  data,
-  id,
-}) => {
+export const DetailingTopicContent: React.FC<DetailingContentProps> = ({ data, id }) => {
   const filteredData = data?.data.filter(
-    (element: DataItem) => element.id === id.split("-")[0]
-  )
+    (element: DataItem) =>
+      element.id === id.split("-")[0] && isFilteredDetailingTopicItem(element.field)
+  );
 
   return (
     <>
-      {filteredData.map((element: DataItem) => {
-        if (isFilteredDetailingTopicItem(element.field)) {
-          return (
-            <TopicContent key={element.id} field={element.field} />
-          )
-        }
-        return null
-      })}
+      {filteredData?.map((element: DataItem) => (
+        <TopicContent key={element.id} field={element.field as FilteredDetailingTopicItem} />
+      ))}
     </>
-  )
-}
+  );
+};
