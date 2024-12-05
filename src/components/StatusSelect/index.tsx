@@ -24,7 +24,7 @@ export default function StatusSelect({ width = "30%"}: StatusSelectProps) {
   const handleChange = (event: SelectChangeEvent) => {
     const value = event.target.value as string
     setStatus(value)
-    
+
     if(!session){
       const currentUrl = encodeURIComponent(window.location.href);
       router.push(`/login?callbackUrl=${currentUrl}`)

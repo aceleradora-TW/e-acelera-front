@@ -33,12 +33,6 @@ export const CardVideo: React.FC<CardVideoProps> = ({
     return `https://www.youtube.com/embed/${videoId}`;
   }
 
-  // const [status, setStatus] = React.useState('');
-
-  // const handleChange = (event: SelectChangeEvent) => {
-  //   setStatus(event.target.value as string);
-  // };
-
   return (
     <Box sx={theme.customStyles.cardVideo}>
       <Box sx={theme.customStyles.cardVideoLink}>
@@ -58,8 +52,7 @@ export const CardVideo: React.FC<CardVideoProps> = ({
           <ReactMarkdown components={components}>{text}</ReactMarkdown>
         </Box>
         <Box sx={{ paddingTop: 2 }}>
-          <StatusSelect width="30%" /> 
-          {/* onChange={handleChange} */}
+          <StatusSelect width="30%"/> 
         </Box>
       </Box>
     </Box>

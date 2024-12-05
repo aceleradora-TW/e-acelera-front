@@ -8,12 +8,7 @@ import { SocialLoginButton } from "../SocialLoginButton";
 import { signIn } from "next-auth/react";
 
 export const CardLogin = () => {
-  const isMobileScreen = useMediaQuery("(max-width: 600px)");
-
-  const getRedirectUrl = () => {
-    const redirectUrl = localStorage.getItem("redirectAfterLogin");
-    return redirectUrl ? redirectUrl : "/";
-  };
+  const isMobileScreen = useMediaQuery("(max-width: 600px)")
 
   return (
     <Box
@@ -73,7 +68,7 @@ export const CardLogin = () => {
               platformIcon={githubLogo}
               platformName="GitHub"
               onClick={() =>
-                signIn("github", { callbackUrl: getRedirectUrl() })
+                signIn("github")
               }
               
             />
@@ -83,7 +78,7 @@ export const CardLogin = () => {
               platformIcon={googleLogo}
               platformName="Google"
               onClick={() =>
-                signIn("google", { callbackUrl: getRedirectUrl() })
+                signIn("google")
               }
             />
           </Grid>
@@ -92,7 +87,7 @@ export const CardLogin = () => {
               platformIcon={linkedinLogo}
               platformName="LinkedIn"
               onClick={() =>
-                signIn("linkedin", { callbackUrl: getRedirectUrl() })
+                signIn("linkedin")
               }
             />
           </Grid>

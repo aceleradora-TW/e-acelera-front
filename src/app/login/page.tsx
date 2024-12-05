@@ -11,14 +11,11 @@ function LoginContent() {
   const { data: session, status } = useSession()
   const router = useRouter()
   const searchParams = useSearchParams()
-  const callbackUrl = searchParams.get("callbackUrl")
+  const callbackUrl = searchParams?.get("callbackUrl") || "/"
   
   useEffect(() => {
     if (status === "authenticated") {
-      if (callbackUrl) {
-        return router.push(callbackUrl)
-      }
-      return router.push("/")
+      return router.push(callbackUrl)
     }
   }, [status, router, callbackUrl])
 
