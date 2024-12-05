@@ -21,7 +21,7 @@ export const WebMenu: React.FC<WebMenuProps> = ({ list }) => {
         <IconButton
           sx={{ display: { xs: 'flex' } }}
         >
-          <Avatar alt="Remy Sharp" src={`${session.user?.image}`} />
+          {/* <Avatar alt="Remy Sharp" src={`${session.user?.image}`} /> */}
         </IconButton>
       </Tooltip>;
     } else if (!session && pathname !== "/login") {
