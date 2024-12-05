@@ -12,16 +12,18 @@ function LoginContent() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const callbackUrl = searchParams?.get("callbackUrl") || "/"
-  
+
   useEffect(() => {
     if (status === "authenticated") {
-      return router.push(callbackUrl)
+      router.push(callbackUrl)
     }
   }, [status, router, callbackUrl])
 
+  
   if (status === "loading") {
     return <Loading />
   }
+
   if (status === "unauthenticated") {
     return (
       <LayoutPage>
@@ -29,12 +31,13 @@ function LoginContent() {
       </LayoutPage>
     )
   }
+
+  return null
 }
 
 export default function Login() {
-  return (
-    <Suspense fallback={<Loading />}>
-      <LoginContent />
-    </Suspense>
-  )
+  
+  return (<Suspense fallback={<Loading />}>
+    <LoginContent />
+   </Suspense>)
 }
