@@ -1,28 +1,28 @@
-import React from "react";
-import { Grid } from "@mui/material";
-import { BreadCrumb } from "@/components/BreadCrumb";
-import { ApiResponse, DataItem, FilteredDetailingExerciseItem } from "@/types/type";
-import { DescriptionFull } from "@/components/Description/DescriptionFull";
-import { ContainerButtonsExercise } from "../../Container/ContainerButtonsExercise";
-import { Heading } from "@/components/Heading";
-import StatusSelect from "@/components/StatusSelect";
+import React from "react"
+import { Grid } from "@mui/material"
+import { BreadCrumb } from "@/components/BreadCrumb"
+import { ApiResponse, DataItem, FilteredDetailingExerciseItem } from "@/types/type"
+import { DescriptionFull } from "@/components/Description/DescriptionFull"
+import { ContainerButtonsExercise } from "../../Container/ContainerButtonsExercise"
+import { Heading } from "@/components/Heading"
+import StatusSelect from "@/components/StatusSelect"
 
 interface DetailingContentProps {
-  dataTopic: ApiResponse;
-  dataExercise: ApiResponse;
-  id: string;
+  dataTopic: ApiResponse
+  dataExercise: ApiResponse
+  id: string
 }
 
 function isFilteredDetailingExerciseItem(
   field: any
 ): field is FilteredDetailingExerciseItem {
-  return field && "title" in field && "description" in field;
+  return field && "title" in field && "description" in field
 }
 
 const ExerciseContent: React.FC<{
-  field: FilteredDetailingExerciseItem;
-  idExercise: string;
-  dataTopic: ApiResponse;
+  field: FilteredDetailingExerciseItem
+  idExercise: string
+  dataTopic: ApiResponse
 }> = ({ field, idExercise, dataTopic }) => (
   <>
     <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
@@ -54,7 +54,7 @@ const ExerciseContent: React.FC<{
     <DescriptionFull text={field.description} />
     <ContainerButtonsExercise idExercise={idExercise} data={dataTopic} />
   </>
-);
+)
 
 export const DetailingExerciseContent: React.FC<DetailingContentProps> = ({
   dataTopic,
@@ -63,11 +63,11 @@ export const DetailingExerciseContent: React.FC<DetailingContentProps> = ({
 }) => {
   const filteredData = dataExercise?.data.filter(
     (element: DataItem) => element.id === id.split("-")[0]
-  );
+  )
 
   const filterElements = filteredData.filter((element: DataItem) =>
     isFilteredDetailingExerciseItem(element.field)
-  );
+  )
 
   return (
     <>
@@ -80,5 +80,5 @@ export const DetailingExerciseContent: React.FC<DetailingContentProps> = ({
         />
       ))}
     </>
-  );
-};
+  )
+}
