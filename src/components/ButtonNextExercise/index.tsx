@@ -1,7 +1,7 @@
 import { theme } from "@/app/config/theme"
 import { Button, ButtonProps, Stack, styled } from "@mui/material"
 import { useRouter, usePathname } from 'next/navigation'
-import { ApiResponse, CommonField, FilteredTopicsItem, DataItem, TopicField } from "@/types/type"
+import { ApiResponse, CommonField, FilteredTopicsItem, DataItem, TopicField, FilteredItem } from "@/types/type"
 import { ClickButton } from "../ClickButton"
 import useMediaQuery from '@mui/material/useMediaQuery'
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
@@ -41,7 +41,7 @@ const ContainerButtonFail = ({ isVisible }: { isVisible: boolean }) => {
 }
 
 
-function isTopicField(field: any): field is  FilteredTopicsItem | TopicField {
+function isTopicField(field: FilteredItem): field is  FilteredTopicsItem {
     return field && "exercisesInfo" in field;
 }
 

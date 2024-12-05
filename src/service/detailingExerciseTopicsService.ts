@@ -1,13 +1,13 @@
 import api from "@/lib/api";
-import { ApiResponse, DataItem, FilteredItem } from "@/types/type";
+import { ApiResponse, DataItem, FieldItem, FilteredItem, FilteredTopicsItem } from "@/types/type";
 
-interface Item {
-    field: {
-        exercises: string;
-        exercisesDescription: string;
-        exercisesInfo: string;
-        rowId: string;
-    };
+function isFilteredTopicsItem(field: FieldItem | FilteredItem): field is FilteredTopicsItem {
+    return (
+        'exercises' in field &&
+        'exercisesDescription' in field &&
+        'exercisesInfo' in field &&
+        'rowId' in field
+    );
 }
 
 export const getTopicsExercise = async (): Promise<ApiResponse | null> => {
@@ -18,27 +18,32 @@ export const getTopicsExercise = async (): Promise<ApiResponse | null> => {
             }
         });
 
-
-        const filteredData: DataItem[] = response.data.data.map((item: Item) => {
-
-            const field: FilteredItem = {
-                exercises: item.field.exercises,
-                exercisesDescription: item.field.exercisesDescription,
-                exercisesInfo: item.field.exercisesInfo,
-                rowId: item.field.rowId
+        const filteredData: DataItem[] = response.data.data.map((item: DataItem) => {
+            if (isFilteredTopicsItem(item.field)) {
+                const field: FilteredTopicsItem = {
+                    exercises: item.field.exercises,
+                    exercisesDescription: item.field.exercisesDescription,
+                    exercisesInfo: item.field.exercisesInfo,
+                    rowId: item.field.rowId
+                };
+    
+                return {
+                    id: item.field.rowId,
+                    field
+                };
             }
 
-            return {
-                id: item.field.rowId,
-                field
-            }
-        });
+            return null
+            
+        }).filter(item => item !== null);
 
+        if (filteredData.length === 0) {
+            return null;
+        }
 
         const data: ApiResponse = { data: filteredData };
         return data;
     } catch (error) {
-        return null
+        return null;
     }
-
 };
