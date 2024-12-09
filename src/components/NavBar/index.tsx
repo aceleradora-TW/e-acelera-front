@@ -9,6 +9,8 @@ import { theme } from "../../app/config/theme";
 import { MobileMenu } from "./MobileNavBar";
 import { WebMenu } from "./WebNavBar";
 import { useSession, signOut } from "next-auth/react";
+import LogoutIcon from '@mui/icons-material/Logout';
+import Divider from '@mui/material/Divider';
 
 
 interface NavBarProps {
@@ -46,51 +48,6 @@ const ResponsiveAppBar: React.FC<NavBarProps> = ({ list }) => {
             <MobileMenu list={list} />
             <WebMenu list={list} />
 
-
-            
-            {session && (
-              <Box
-                sx={{
-                  marginLeft: "auto",
-                  display: "flex",
-                  alignItems: "center",
-                }}
-              >
-                <Tooltip title="Perfil">
-                  <IconButton onClick={handleOpenMenu} sx={{ p: 0 }}>
-                    <Avatar
-                      alt={session.user?.name || "Usuário"}
-                      src={session.user?.image || "/default-avatar.png"}
-                    />
-                    <ArrowDropDownIcon />
-                  </IconButton>
-                </Tooltip>
-                <Menu
-                  anchorEl={anchorEl}
-                  open={Boolean(anchorEl)}
-                  onClose={handleCloseMenu}
-                  sx={{ mt: "45px" }}
-                  anchorOrigin={{
-                    vertical: "top",
-                    horizontal: "right",
-                  }}
-                  transformOrigin={{
-                    vertical: "top",
-                    horizontal: "right",
-                  }}
-                >
-                  <MenuItem disabled>
-                    <Typography>{session.user?.name || "Usuário"}</Typography>
-                  </MenuItem>
-                  <MenuItem disabled>
-                    <Typography>{session.user?.email || "email@example.com"}</Typography>
-                  </MenuItem>
-                  <MenuItem onClick={() => signOut()}>
-                    <Typography>Sair</Typography>
-                  </MenuItem>
-                </Menu>
-              </Box>
-            )}
           </Toolbar>
         </Container>
       </Box>
