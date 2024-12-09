@@ -72,7 +72,6 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({ list }) => {
                   sx={{ color: theme.palette.textColor?.light }}
                 >
                   {item}
-             
               </Link>
             </MenuItem>
           ))}
