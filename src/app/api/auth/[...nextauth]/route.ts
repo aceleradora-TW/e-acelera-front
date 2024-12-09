@@ -13,17 +13,6 @@ const handler = NextAuth({
       }
       return token;
     },
-
-    async redirect({ url, baseUrl }) {
-      if (typeof window !== "undefined") {
-        const storedRedirectUrl = localStorage.getItem("redirectAfterLogin");
-        if (storedRedirectUrl) {
-          return storedRedirectUrl;
-        }
-      }
-      return url.startsWith(baseUrl) ? url : baseUrl;
-    },
-
   },
 });
 
