@@ -29,7 +29,7 @@ describe('Testes do botão de Login do componente WebMenu', () => {
 
     render(<WebMenu list={['Nivelamento', 'Autoestudo']} />)
     
-    const loginButton = screen.queryByText('L')
+    const loginButton = screen.queryByText('LOGIN')
     expect(loginButton).toBeInTheDocument()
   })
 
