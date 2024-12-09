@@ -27,9 +27,9 @@ export const WebMenu: React.FC<WebMenuProps> = ({ list }) => {
   };
 
   const handlePageRedirectLogin = () => {
-    localStorage.setItem("redirectAfterLogin", pathname);
-    router.push(`/login`);
-  };
+    const currentUrl = encodeURIComponent(window.location.href)
+    router.push(`/login?callbackUrl=${currentUrl}`)
+  }
 
   const linkStyle = (item: string) => {
     return `/${item.toLowerCase()}` === pathname
