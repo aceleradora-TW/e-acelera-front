@@ -10,7 +10,7 @@ import { useRouter } from "next/navigation"
 import { useSession } from "next-auth/react"
 
 interface StatusSelectProps {
-  width?: "30%" | "40%" | "70%" | "100%"
+  width?: "30%" | "70%" | "100%"
 }
 
 export default function StatusSelect({ width = "30%" }: StatusSelectProps) {
@@ -54,7 +54,7 @@ export default function StatusSelect({ width = "30%" }: StatusSelectProps) {
         width,
         minWidth: '200px',
         '@media (max-width: 600px)': {
-          width: '100%'
+          maxWidth: '264px'
         }
       }}
     >
