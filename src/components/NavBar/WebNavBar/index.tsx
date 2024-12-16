@@ -88,9 +88,22 @@ export const WebMenu: React.FC<WebMenuProps> = ({ list }) => {
           </Menu>
         </Box>
       );
-    } else if (!session && pathname !== "/login") {
-      return <LoginButton click={handlePageRedirectLogin} />;
+    } else if (!session) {
+      const isLoginPage = pathname === "/login";
+      return (
+        <Box
+          sx={{
+            visibility: isLoginPage ? "hidden" : "visible", 
+            display: "flex", 
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <LoginButton click={() => handlePageRedirectLogin()} />
+        </Box>
+      );
     }
+  
     return null;
   };
 
