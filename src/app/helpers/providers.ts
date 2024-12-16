@@ -1,7 +1,7 @@
 import GitHubProvider from "next-auth/providers/github"
 import GoogleProvider from "next-auth/providers/google"
 import FacebookProvider from "next-auth/providers/facebook"
-import LinkedInProvider from "next-auth/providers/linkedin"
+import LinkedInProvider, { LinkedInProfile } from "next-auth/providers/linkedin"
 import logger from "@/utils/logger"
 
 const {
@@ -43,5 +43,20 @@ export const getAuthProviders = () => [
   LinkedInProvider({
     clientId: LINKEDIN_CLIENT_ID!,
     clientSecret: LINKEDIN_CLIENT_SECRET!,
+    client: { token_endpoint_auth_method: "client_secret_post" },
+      issuer: "https://www.linkedin.com",
+      profile: (profile: LinkedInProfile) => ({
+        id: profile.sub,
+        name: profile.name,
+        email: profile.email,
+        image: profile.picture,
+      }),
+      wellKnown:
+        "https://www.linkedin.com/oauth/.well-known/openid-configuration",
+      authorization: {
+        params: {
+          scope: "openid profile email",
+        },
+      },
   }),
 ];
