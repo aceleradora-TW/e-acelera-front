@@ -1,11 +1,11 @@
 import { Typography, TypographyProps } from "@mui/material";
 import { styled } from "@mui/material/styles";
-import { ApiResponse, CommonField, DataItem, TopicField } from "@/types/type";
+import { ApiResponse, DataItem, FilteredItem, FilteredTopicsItem } from "@/types/type";
 import { usePathname } from "next/navigation";
 import { theme } from "@/app/config/theme";
 import { useMemo } from "react";
 
-function isTopicField(field: CommonField): field is TopicField {
+function isTopicField(field: FilteredItem): field is FilteredTopicsItem {
   return field && "exercisesInfo" in field;
 }
 
