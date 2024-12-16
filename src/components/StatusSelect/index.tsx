@@ -23,14 +23,14 @@ export default function StatusSelect({ width = "30%" }: StatusSelectProps) {
     const value = event.target.value as string
     setStatus(value)
 
-    
+
     if (!session) {
       const currentUrl = encodeURIComponent(window.location.href)
       router.push(`/login?callbackUrl=${currentUrl}`)
     }
   }
 
- 
+
   React.useEffect(() => {
     switch (status) {
       case "statusConcluded":
@@ -48,7 +48,16 @@ export default function StatusSelect({ width = "30%" }: StatusSelectProps) {
   }, [status])
 
   return (
-    <Box sx={{ backgroundColor, width }}>
+    <Box
+      sx={{
+        backgroundColor,
+        width,
+        minWidth: '200px',
+        '@media (max-width: 600px)': {
+          maxWidth: '264px'
+        }
+      }}
+    >
       <FormControl fullWidth>
         <InputLabel
           shrink={true}
@@ -79,9 +88,9 @@ export default function StatusSelect({ width = "30%" }: StatusSelectProps) {
             height: "40px",
           }}
         >
-          <MenuItem value="statusConcluded">Concluído</MenuItem>
-          <MenuItem value="statusInProgress">Em Andamento</MenuItem>
           <MenuItem value="statusPending">Não Iniciado</MenuItem>
+          <MenuItem value="statusInProgress">Em Andamento</MenuItem>
+          <MenuItem value="statusConcluded">Concluído</MenuItem>
         </Select>
       </FormControl>
     </Box>
