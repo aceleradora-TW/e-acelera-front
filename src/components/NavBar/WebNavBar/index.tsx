@@ -102,11 +102,10 @@ export const WebMenu: React.FC<WebMenuProps> = ({ list }) => {
       )
     }
 
-    const isLoginPage = pathname === "/login"
     return (
       <Box
         sx={{
-          visibility: isLoginPage ? "hidden" : "visible",
+          visibility: pathname === "/login" ? "hidden" : "visible",
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
