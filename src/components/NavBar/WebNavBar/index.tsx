@@ -1,30 +1,40 @@
-import { theme } from "@/app/config/theme";
-import { LoginButton } from "@/components/LoginButton";
-import { Avatar, Box, IconButton, Tooltip, Typography, Link, MenuItem, Menu, Divider } from "@mui/material";
-import Image from "next/image";
-import { usePathname, useRouter } from "next/navigation";
-import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
-import { useSession, signOut } from "next-auth/react";
-import { useState } from "react";
-import LogoutIcon from '@mui/icons-material/Logout';
+import { theme } from "@/app/config/theme"
+import { LoginButton } from "@/components/LoginButton"
+import {
+  Avatar,
+  Box,
+  IconButton,
+  Tooltip,
+  Typography,
+  Link,
+  MenuItem,
+  Menu,
+  Divider,
+} from "@mui/material"
+import Image from "next/image"
+import { usePathname, useRouter } from "next/navigation"
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown"
+import { useSession, signOut } from "next-auth/react"
+import { useState } from "react"
+import LogoutIcon from "@mui/icons-material/Logout"
 
 interface WebMenuProps {
-  list: string[];
+  list: string[]
 }
 
 export const WebMenu: React.FC<WebMenuProps> = ({ list }) => {
-  const router = useRouter();
-  const pathname = usePathname();
-  const { data: session } = useSession();
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const router = useRouter()
+  const pathname = usePathname()
+  const { data: session } = useSession()
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
 
   const handleOpenMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
+    setAnchorEl(event.currentTarget)
+  }
 
   const handleCloseMenu = () => {
-    setAnchorEl(null);
-  };
+    setAnchorEl(null)
+  }
 
   const handlePageRedirectLogin = () => {
     const currentUrl = encodeURIComponent(window.location.href)
@@ -34,8 +44,8 @@ export const WebMenu: React.FC<WebMenuProps> = ({ list }) => {
   const linkStyle = (item: string) => {
     return `/${item.toLowerCase()}` === pathname
       ? theme.customStyles.linkActive
-      : theme.customStyles.link;
-  };
+      : theme.customStyles.link
+  }
 
   const renderComponent = () => {
     if (session?.user) {
@@ -70,29 +80,41 @@ export const WebMenu: React.FC<WebMenuProps> = ({ list }) => {
               horizontal: "right",
             }}
           >
-            <MenuItem>
-              <Typography sx={{ color: theme.palette.textColor?.main, cursor: "none" }}>
+            <MenuItem sx={{ cursor: "default" }}>
+              <Typography sx={{ color: theme.palette.textColor?.main }}>
                 {session.user.name || "Usuário"}
               </Typography>
             </MenuItem>
-            <MenuItem>
-              <Typography sx={{ color: "#575757", cursor: "none" }}>
+            <MenuItem sx={{ cursor: "default" }}>
+              <Typography sx={{ color: "#575757" }}>
                 {session.user.email || "email@example.com"}
               </Typography>
             </MenuItem>
             <Divider />
             <MenuItem onClick={() => signOut()}>
-              <LogoutIcon sx={{ color: "#575757", fontSize: 15, marginRight: "7px" }} />
+              <LogoutIcon
+                sx={{ color: "#575757", fontSize: 15, marginRight: "7px" }}
+              />
               <Typography>Sair</Typography>
             </MenuItem>
           </Menu>
         </Box>
-      );
-    } else if (!session && pathname !== "/login") {
-      return <LoginButton click={handlePageRedirectLogin} />;
+      )
     }
-    return null;
-  };
+
+    return (
+      <Box
+        sx={{
+          visibility: pathname === "/login" ? "hidden" : "visible",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <LoginButton click={() => handlePageRedirectLogin()} />
+      </Box>
+    )
+  }
 
   return (
     <>
@@ -147,5 +169,5 @@ export const WebMenu: React.FC<WebMenuProps> = ({ list }) => {
       </Box>
       <Box sx={{ flexGrow: 0 }}>{renderComponent()}</Box>
     </>
-  );
-};
+  )
+}
