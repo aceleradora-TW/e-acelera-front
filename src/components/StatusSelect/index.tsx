@@ -14,6 +14,15 @@ interface StatusSelectProps {
 }
 
 export default function StatusSelect({ width = "30%" }: StatusSelectProps) {
+  // const response: Response = await fetch(url, {
+  //   method: "PUT",
+  //   headers: {
+  //     "Authorization": "Bearer ",
+  //     "Content-Type": "application/json",
+  //   },
+  //   body: JSON.stringify({ status: itemStatus }),
+  // });
+
   const [status, setStatus] = React.useState<string>("statusPending")
   const [backgroundColor, setBackgroundColor] = React.useState<string>("rgb(225, 225, 225)")
   const router = useRouter()
