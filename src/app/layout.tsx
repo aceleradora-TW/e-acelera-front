@@ -20,18 +20,20 @@ export const metadata: Metadata = {
     "O E-acelera é uma plataforma inovadora que faz parte do programa Aceleradora Ágil. A plataforma oferece nivelamentos e desafios para desenvolvedores aprimorarem suas habilidades em programação.",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const data = await getServerSession()
+
   return (
     <html lang="pt-br">
       <body className={inter.className}>
         <ClientSessionProvider>
         <ThemeProvider theme={theme}>
           <Box sx={{ marginBottom: "80px" }}>
-            <ResponsiveAppBar list={menuItems} />
+            <ResponsiveAppBar list={menuItems} session={data} />
           </Box>
           {children}
         </ThemeProvider>

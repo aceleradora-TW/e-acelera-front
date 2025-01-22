@@ -1,7 +1,7 @@
-import NextAuth from "next-auth"
+import NextAuth, { NextAuthOptions } from "next-auth"
 import { getAuthProviders } from "../../../helpers/providers";
 
-const handler = NextAuth({
+const handler: NextAuthOptions = NextAuth({
   providers: getAuthProviders(),
 
   callbacks: {
@@ -15,6 +15,5 @@ const handler = NextAuth({
     },
   },
 });
-
 
 export { handler as GET, handler as POST }
