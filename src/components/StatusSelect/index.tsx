@@ -8,25 +8,20 @@ import { SelectChangeEvent } from "@mui/material/Select"
 import { theme } from "@/app/config/theme"
 import { useRouter } from "next/navigation"
 import { useSession } from "next-auth/react"
+import { usePathname } from "next/navigation"
 
 interface StatusSelectProps {
   width?: "30%" | "70%" | "100%"
 }
 
 export default function StatusSelect({ width = "30%" }: StatusSelectProps) {
-  // const response: Response = await fetch(url, {
-  //   method: "PUT",
-  //   headers: {
-  //     "Authorization": "Bearer ",
-  //     "Content-Type": "application/json",
-  //   },
-  //   body: JSON.stringify({ status: itemStatus }),
-  // });
+
 
   const [status, setStatus] = React.useState<string>("statusPending")
   const [backgroundColor, setBackgroundColor] = React.useState<string>("rgb(225, 225, 225)")
   const router = useRouter()
   const { data: session } = useSession()
+  const pathname = usePathname()
 
   const handleChange = (event: SelectChangeEvent) => {
     const value = event.target.value as string
@@ -38,6 +33,22 @@ export default function StatusSelect({ width = "30%" }: StatusSelectProps) {
       router.push(`/login?callbackUrl=${currentUrl}`)
     }
   }
+console.log(pathname)
+
+function extractIdsFromUrl(pathname: string): { topicId: string; itemId: string } | null {
+  // Quebra a URL em partes separadas por "/"
+  const parts = pathname.split('/');
+  console.log(parts[4])
+  console.log(parts[5])
+  
+
+  // Retorna null se não for possível extrair os IDs
+  return null;
+}
+extractIdsFromUrl(pathname)
+  // try{ 
+  //   const response = await fetch(`${apiURL}/api/topic/${detailingTopic}/item/${detailingExercise}/status`)
+  // }
 
 
   React.useEffect(() => {
