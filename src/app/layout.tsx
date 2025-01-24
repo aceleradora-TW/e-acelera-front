@@ -12,8 +12,6 @@ const menuItems = ["Nivelamento", "Autoestudo"];
 
 const inter = Inter({ subsets: ["latin"] });
 
-export const session = async () => await getServerSession()
-
 export const metadata: Metadata = {
   title: "E-acelera - Plataforma de Estudo para Desenvolvedores",
   description:
@@ -25,7 +23,7 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const data = await getServerSession()
+  const session = await getServerSession()
 
   return (
     <html lang="pt-br">
@@ -33,7 +31,7 @@ export default async function RootLayout({
         <ClientSessionProvider>
         <ThemeProvider theme={theme}>
           <Box sx={{ marginBottom: "80px" }}>
-            <ResponsiveAppBar list={menuItems} session={data} />
+            <ResponsiveAppBar list={menuItems} session={session} />
           </Box>
           {children}
         </ThemeProvider>
