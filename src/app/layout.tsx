@@ -6,7 +6,6 @@ import { ThemeProvider } from "@mui/material/styles";
 import { theme } from "@/app/config/theme";
 import { Box } from "@mui/material";
 import { getServerSession } from "next-auth";
-import ClientSessionProvider from "@/components/ClientSessionProvider";
 
 const menuItems = ["Nivelamento", "Autoestudo"];
 
@@ -28,14 +27,12 @@ export default async function RootLayout({
   return (
     <html lang="pt-br">
       <body className={inter.className}>
-        <ClientSessionProvider>
         <ThemeProvider theme={theme}>
           <Box sx={{ marginBottom: "80px" }}>
             <ResponsiveAppBar list={menuItems} session={session} />
           </Box>
           {children}
         </ThemeProvider>
-        </ClientSessionProvider>
       </body>
     </html>
   );

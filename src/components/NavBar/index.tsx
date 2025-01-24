@@ -1,15 +1,15 @@
-"use client";
-import AppBar from "@mui/material/AppBar";
-import Toolbar from "@mui/material/Toolbar";
-import Container from "@mui/material/Container";
-import { Box } from "@mui/material";
-import { theme } from "../../app/config/theme";
-import { MobileMenu } from "./MobileNavBar";
-import { WebMenu } from "./WebNavBar";
-import { Session } from "next-auth";
+"use client"
+import AppBar from "@mui/material/AppBar"
+import Toolbar from "@mui/material/Toolbar"
+import Container from "@mui/material/Container"
+import { Box } from "@mui/material"
+import { theme } from "../../app/config/theme"
+import { MobileMenu } from "./MobileNavBar"
+import { WebMenu } from "./WebNavBar"
+import { Session } from "next-auth"
 
 interface NavBarProps {
-  list: string[];
+  list: string[]
   session: Session | null
 }
 
@@ -32,8 +32,8 @@ const ResponsiveAppBar: React.FC<NavBarProps> = ({ list, session }) => {
         </Container>
       </Box>
     </AppBar>
-  );
-};
+  )
+}
 
 
-export default ResponsiveAppBar;
+export default ResponsiveAppBar

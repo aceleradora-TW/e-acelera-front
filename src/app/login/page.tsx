@@ -2,7 +2,7 @@
 import { CardLogin } from "@/components/CardLogin"
 import { LayoutPage } from "@/components/PageElements/LayoutPage"
 
-export default async function LoginPage() {
+export default function LoginPage() {
 
   return (
     <LayoutPage>
