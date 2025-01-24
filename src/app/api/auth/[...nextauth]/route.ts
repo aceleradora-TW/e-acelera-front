@@ -1,7 +1,7 @@
-import NextAuth, { NextAuthOptions } from "next-auth"
+import NextAuth from "next-auth"
 import { getAuthProviders } from "../../../helpers/providers"
 
-const handler: NextAuthOptions = NextAuth({
+const handler = NextAuth({
   providers: getAuthProviders(),
   callbacks: {
     async jwt({ token, user, account }) {
