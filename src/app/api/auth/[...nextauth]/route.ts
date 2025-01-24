@@ -1,7 +1,7 @@
 import NextAuth, { NextAuthOptions } from "next-auth"
 import { getAuthProviders } from "../../../helpers/providers"
 
-export const authOptions: NextAuthOptions = {
+export const handler: NextAuthOptions = NextAuth({
   providers: getAuthProviders(),
   callbacks: {
     async jwt({ token, user, account }) {
@@ -13,8 +13,6 @@ export const authOptions: NextAuthOptions = {
       return token
     },
   },
-}
-
-const handler = NextAuth(authOptions)
+})
 
 export { handler as GET, handler as POST }
