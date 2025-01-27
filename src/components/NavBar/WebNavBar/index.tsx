@@ -42,7 +42,7 @@ export const WebMenu: React.FC<WebMenuProps> = ({ list }) => {
   }
 
   const linkStyle = (item: string) => {
-    return `/${item.toLowerCase()}` === pathname
+    return pathname.startsWith(`/${item.toLowerCase()}`)
       ? theme.customStyles.linkActive
       : theme.customStyles.link
   }
