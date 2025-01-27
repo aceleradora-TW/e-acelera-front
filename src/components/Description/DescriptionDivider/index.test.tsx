@@ -7,7 +7,7 @@ jest.mock("@mui/material", () => ({
   useMediaQuery: jest.fn(),
 }))
 
-describe("Teste nos componente DescriptionDivider", () => {
+describe("Teste no componente DescriptionDivider", () => {
   it("O texto deve ser quebrado em duas partes de acordo com a preferencia", () => {
     const text =
       "Neste texto teremos duas partes essa que estou escrevendo é a primeira. Agora vou escrever aqui a segunda parte do texto."
@@ -30,7 +30,7 @@ describe("Teste nos componente DescriptionDivider", () => {
       )
   })
 
-  it("A maior parte do texto deve no primeiro bloco", () => {
+  it("A maior parte do texto deve ficar no primeiro bloco", () => {
     const text = `Este é o primeiro parágrafo... Ele apresenta algumas pausas curtas, como vírgulas e pontos, para verificar se o algoritmo consegue lidar bem com a divisão. Além disso, possui várias frases que permitem uma boa análise do comportamento do código. 
       
     Agora começamos o segundo parágrafo! Este contém mais algumas estruturas típicas, como perguntas e pausas adicionais. Será que, o algoritmo consegue identificar corretamente o melhor ponto de divisão? Vamos descobrir... Aqui temos muitos, caracteres preferidos próximos. 

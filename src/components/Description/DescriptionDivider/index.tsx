@@ -12,7 +12,7 @@ const boxStyle: object = {
   width: "49%"
 }
 
-export  const DescriptionDivider: React.FC<DescriptionDividerProps> = ({ text }) => {
+export const DescriptionDivider: React.FC<DescriptionDividerProps> = ({ text }) => {
 
   function textDivider(text: string): [string, string] {
     let breakPoint = Math.floor((2 * text.length) / 3)
@@ -23,7 +23,7 @@ export  const DescriptionDivider: React.FC<DescriptionDividerProps> = ({ text })
       let tempPoint = breakPoint
   
       while (tempPoint > 0 && text[tempPoint] !== breakChar) {
-        tempPoint--;
+        tempPoint--
       }
   
       if (tempPoint > 0) {
