@@ -20,15 +20,17 @@ export default function StatusSelect({ width = "30%" }: StatusSelectProps) {
     React.useState<string>("rgb(225, 225, 225)")
   const [isLoading, setIsLoading] = React.useState<boolean>(false)
   const router = useRouter()
-  //const { data: session } = useSession()
-  const session = {
-    user: { email: "teste@gmail.com" },
-    accessToken:
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RlQGdtYWlsLmNvbSIsIm5hbWUiOiJKb2huIERvZSIsImlhdCI6MTczNzY1NDQ2OSwiZXhwIjoxNzM3NjU4MDY5fQ.AoqzN34ud6b6dbTdLAAm7D71f4o5Uu9DPX_JGcGTqPI",
-  }
+  // const { data: session } = useSession()
+  const session = React.useMemo(() => {
+    return {
+      user: { email: "teste@gmail.com" },
+      accessToken:
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RlQGdtYWlsLmNvbSIsIm5hbWUiOiJKb2huIERvZSIsImlhdCI6MTczODAwMDIzMiwiZXhwIjoxNzM4MDAzODMyfQ.Kf9-1Vc4z50hvnwF1pjd18AN8CHklivmqa_wzCf6CuI",
+    }
+  }, [])
 
   const pathname = usePathname()
-  
+
   const extractIdsFromUrl = (pathname: string): string[] | null => {
     const parts = pathname.split("/")
     const topicId = parts[3].split("-")[0]
@@ -42,44 +44,49 @@ export default function StatusSelect({ width = "30%" }: StatusSelectProps) {
     return null
   }
 
-  const fetchStatus = async () => {
-    if (!session) {
-      const currentUrl = encodeURIComponent(window.location.href);
-      router.push(`/login?callbackUrl=${currentUrl}`);
-      return;
-    }
-  
-    const ids = extractIdsFromUrl(pathname);
-    if (!ids) return;
-  
-    try {
-      const baseUrl = process.env.NEXT_PUBLIC_BACKEND_BASE_URL;
-      const response = await fetch(
-        `${baseUrl}/topic/${ids[0]}/item/${ids[1]}`,
-        {
-          method: "GET",
-          headers: {
-            Authorization: `Bearer ${session.accessToken}`,
-          },
+  const fetchStatus = React.useCallback(async () => {
+    if (session) {
+      const ids = extractIdsFromUrl(pathname)
+      if (!ids) return
+
+      try {
+        const baseUrl = process.env.NEXT_PUBLIC_BACKEND_BASE_URL
+        const response = await fetch(
+          `${baseUrl}/topic/${ids[0]}/item/${ids[1]}`,
+          {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${session.accessToken}`,
+            },
+          }
+        )
+
+        if (!response.ok) {
+          console.error(
+            `Erro na API: ${response.status} - ${response.statusText}`
+          )
+          return
         }
-      );
-  
-      if (!response.ok) {
-        console.error(`Erro na API: ${response.status} - ${response.statusText}`);
-        return;
+
+        const data = await response.json()
+        const statusData = data[0].itemStatus
+
+        const validStatuses = ["NotStarted", "InProgress", "Completed"]
+        if (validStatuses.includes(statusData)) {
+          setStatus(statusData)
+        } else {
+          console.warn(`Status inválido recebido da API: ${data.itemStatus}`)
+          setStatus("NotStarted")
+        }
+      } catch (error) {
+        console.error("Erro ao fazer a requisição GET:", error)
       }
-  
-      const data = await response.json();
-      setStatus(data.itemStatus); // Atualiza o estado com o status recebido
-    } catch (error) {
-      console.error("Erro ao fazer a requisição GET:", error);
     }
-  };
-  
+  }, [session, pathname])
+
   React.useEffect(() => {
-    fetchStatus(); // Chama a função para buscar o status ao montar o componente
-  }, []);
-  
+    fetchStatus()
+  }, [fetchStatus])
 
   const handleChange = async (event: SelectChangeEvent) => {
     const value = event.target.value as string
@@ -98,7 +105,7 @@ export default function StatusSelect({ width = "30%" }: StatusSelectProps) {
 
     try {
       const baseUrl = process.env.NEXT_PUBLIC_BACKEND_BASE_URL
-     
+
       const response = await fetch(
         `${baseUrl}/topic/${ids[0]}/item/${ids[1]}/status`,
         {
@@ -167,7 +174,7 @@ export default function StatusSelect({ width = "30%" }: StatusSelectProps) {
           notched={true}
           labelId="statusLeveling"
           id="statusSelect"
-          value={status}
+          value={status || "NotStarted"}
           label="Status"
           onChange={handleChange}
           disabled={isLoading}
