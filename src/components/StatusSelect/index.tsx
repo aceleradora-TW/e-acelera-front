@@ -43,47 +43,7 @@ export default function StatusSelect({ width = "30%" }: StatusSelectProps) {
 
     return null
   }
-
-  // const fetchStatus = React.useCallback(async () => {
-  //   if (session) {
-  //     const ids = extractIdsFromUrl(pathname)
-  //     if (!ids) return
-
-  //     try {
-  //       const baseUrl = process.env.NEXT_PUBLIC_BACKEND_BASE_URL
-  //       const response = await fetch(
-  //         `${baseUrl}/topic/${ids[0]}/item/${ids[1]}`,
-  //         {
-  //           method: "GET",
-  //           headers: {
-  //             Authorization: `Bearer ${session.accessToken}`,
-  //           },
-  //         }
-  //       )
-
-  //       if (!response.ok) {
-  //         console.error(
-  //           `Erro na API: ${response.status} - ${response.statusText}`
-  //         )
-  //         return
-  //       }
-
-  //       const data = await response.json()
-  //       const statusData = data[0].itemStatus
-
-  //       const validStatuses = ["NotStarted", "InProgress", "Completed"]
-  //       if (validStatuses.includes(statusData)) {
-  //         setStatus(statusData)
-  //       } else {
-  //         console.warn(`Status inválido recebido da API: ${data.itemStatus}`)
-  //         setStatus("NotStarted")
-  //       }
-  //     } catch (error) {
-  //       console.error("Erro ao fazer a requisição GET:", error)
-  //     }
-  //   }
-  // }, [session, pathname])
-
+  
   const fetchStatus = React.useCallback(async () => {
     if (session) {
       const ids = extractIdsFromUrl(pathname);

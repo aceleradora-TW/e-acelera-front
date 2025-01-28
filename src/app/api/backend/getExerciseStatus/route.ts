@@ -1,4 +1,5 @@
 import { headers } from 'next/headers';
+import { NextResponse } from 'next/server';
 
 export async function GET(req: Request) {
     const header = headers()
@@ -6,33 +7,37 @@ export async function GET(req: Request) {
     console.log(header.get(`topicId`))
     console.log(header.get(`item`))
 
+ const topicId = header.get(`topicId`)
+ const itemId = header.get(`item`)
+ const accessToken = header.get(`Authorization`)
 
-    // if (!topicId || !itemId) {
-    //   return res.status(400).json({ error: 'topicId and itemId are required' });
-    // }
 
-    // try {
-    //   const baseUrl = process.env.BACKEND_BASE_URL;
-    //   const response = await fetch(`${baseUrl}/topic/${topicId}/item/${itemId}`, {
-    //     method: 'GET',
-    //     headers: {
-    //       'Authorization': `Bearer ${accessToken}`,
-    //       'Content-Type': 'application/json',
-    //     },
-    //   });
+    if (!topicId || !itemId) {
+      return NextResponse.json({ error: 'topicId and itemId are required' },{status:400});
+    }
 
-    //   if (!response.ok) {
-    //     throw new Error(`Error fetching status: ${response.status} - ${response.statusText}`);
-    //   }
+    try {
+      const baseUrl = process.env.BACKEND_BASE_URL;
+      const response = await fetch(`${baseUrl}/topic/${topicId}/item/${itemId}`, {
+        method: 'GET',
+        headers: {
+          'Authorization': `Bearer ${accessToken}`,
+          'Content-Type': 'application/json',
+        },
+      });
 
-    //   const data = await response.json();
-    //   const statusData = data[0].itemStatus;
+      if (!response.ok) {
+        throw new Error(`Error fetching status: ${response.status} - ${response.statusText}`);
+      }
 
-    //   return res.status(200).json({ status: statusData });
+      const data = await response.json();
+      const statusData = data[0].itemStatus;
 
-    // } catch (error) {
-    //   console.error('Error fetching status:', error);
-    //   return res.status(500).json({ error: 'Internal server error' });
+      return NextResponse.json({ status: statusData },{status:200});
 
-    // }
+    } catch (error) {
+      console.error('Error fetching status:', error);
+      return NextResponse.json({ error: 'Internal server error' },{status:500});
+
+    }
 }
