@@ -33,6 +33,7 @@ export default function StatusSelect({ width = "30%" }: StatusSelectProps) {
 
   const extractIdsFromUrl = (pathname: string): string[] | null => {
     const parts = pathname.split("/")
+    if (parts.length === 4){
     const topicId = parts[3].split("-")[0]
     const itemId = parts[4].split("-")[0]
 
@@ -42,6 +43,8 @@ export default function StatusSelect({ width = "30%" }: StatusSelectProps) {
     }
 
     return null
+  }
+  return null
   }
 
   const fetchStatus = React.useCallback(async () => {
