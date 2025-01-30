@@ -32,25 +32,26 @@ export default function StatusSelect({ width = "30%" }: StatusSelectProps) {
   const pathname = usePathname()
 
   const extractIdsFromUrl = (pathname: string): string[] | null => {
-    const parts = pathname.split("/")
-    if (parts.length === 4){
-    const topicId = parts[3].split("-")[0]
-    const itemId = parts[4].split("-")[0]
+    const parts: string[] = pathname.split("/")
 
-    if (topicId && itemId) {
-      const ids = [topicId, itemId]
-      return ids
+    if (parts.length === 5) {
+      const topicId = parts[3].split("-")[0]
+      const itemId = parts[4].split("-")[0]
+
+      if (topicId && itemId) {
+        const ids = [topicId, itemId]
+        return ids
+      }
+
+      return null
     }
-
     return null
-  }
-  return null
   }
 
   const fetchStatus = React.useCallback(async () => {
     if (session) {
       const ids = extractIdsFromUrl(pathname)
-      if (!ids) return
+      if (!ids) return null
 
       setIsLoading(true)
 
