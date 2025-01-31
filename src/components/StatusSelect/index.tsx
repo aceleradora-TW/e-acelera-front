@@ -9,6 +9,7 @@ import { theme } from "@/app/config/theme"
 import { useRouter } from "next/navigation"
 import { useSession } from "next-auth/react"
 import { usePathname } from "next/navigation"
+import {useExerciseStatus} from "@/components/fetchExerciseStatus"
 
 interface StatusSelectProps {
   width?: "30%" | "70%" | "100%"
@@ -48,52 +49,63 @@ export default function StatusSelect({ width = "30%" }: StatusSelectProps) {
     return null
   }
 
+  const ids = extractIdsFromUrl(pathname); 
+
+  const { status: exerciseStatus, isLoading: statusLoading } = useExerciseStatus({
+    topicId: ids?.[0] || "",
+    itemId: ids?.[1] || "",
+    accessToken: session?.accessToken || "",
+  });
+
   const fetchStatus = React.useCallback(async () => {
     if (session) {
-      const ids = extractIdsFromUrl(pathname)
-      if (!ids) return null
-
-      setIsLoading(true)
-
       try {
-        const response = await fetch(`/api/backend/getExerciseStatus`, {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `${session.accessToken}`,
-            topicId: `${ids[0]}`,
-            itemId: `${ids[1]}`,
-          },
-        })
-
-        if (!response.ok) {
-          console.error(
-            `Erro na API: ${response.status} - ${response.statusText}`
-          )
-          return
+        if (exerciseStatus) {
+          setStatus(exerciseStatus); // Apenas atualiza o estado com o valor do hook
         }
-
-        const data = await response.json()
-        const statusData = data.status
-
-        const validStatuses = ["NotStarted", "InProgress", "Completed"]
-        if (validStatuses.includes(statusData)) {
-          setStatus(statusData)
-        } else {
-          console.warn(`Status inválido recebido da API: ${statusData}`)
-          setStatus("NotStarted")
-        }
-      } catch (error) {
-        console.error("Erro ao fazer a requisição GET:", error)
       } finally {
-        setIsLoading(false)
+        setIsLoading(false);
       }
+
+      // try {
+      //   const response = await fetch(`/api/backend/getExerciseStatus`, {
+      //     method: "GET",
+      //     headers: {
+      //       "Content-Type": "application/json",
+      //       Authorization: `${session.accessToken}`,
+      //       topicId: `${ids[0]}`,
+      //       itemId: `${ids[1]}`,
+      //     },
+      //   })
+
+      //   if (!response.ok) {
+      //     console.error(
+      //       `Erro na API: ${response.status} - ${response.statusText}`
+      //     )
+      //     return
+      //   }
+
+      //   const data = await response.json()
+      //   const statusData = data.status
+
+      //   const validStatuses = ["NotStarted", "InProgress", "Completed"]
+      //   if (validStatuses.includes(statusData)) {
+      //     setStatus(statusData)
+      //   } else {
+      //     console.warn(`Status inválido recebido da API: ${statusData}`)
+      //     setStatus("NotStarted")
+      //   }
+      // } catch (error) {
+      //   console.error("Erro ao fazer a requisição GET:", error)
+      // } finally {
+      //   setIsLoading(false)
+      // }
     }
-  }, [session, pathname])
+  }, [session, ids, exerciseStatus])
 
   React.useEffect(() => {
-    fetchStatus()
-  }, [fetchStatus])
+  fetchStatus();
+  }, [fetchStatus]);
 
   const handleChange = async (event: SelectChangeEvent) => {
     const value = event.target.value as string
