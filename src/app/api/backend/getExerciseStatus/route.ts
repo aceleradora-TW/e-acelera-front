@@ -17,6 +17,13 @@ export async function GET(req: Request) {
     )
   }
 
+  if (!accessToken) {
+    return NextResponse.json(
+      { error: "accessToken are required" },
+      { status: 400 }
+    )
+  }
+
   try {
     const baseUrl = process.env.BACKEND_BASE_URL
     const response = await fetch(`${baseUrl}/topic/${topicId}/item/${itemId}`, {
@@ -33,7 +40,11 @@ export async function GET(req: Request) {
       )
     }
 
-    const data = await response.json()
+    if (response.status===401){
+      throw new Error(
+        `User not authenticated:`
+      )
+    }   const data = await response.json()
     const statusData = data[0].itemStatus
 
     return NextResponse.json({ status: statusData }, { status: 200 })

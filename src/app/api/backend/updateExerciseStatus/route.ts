@@ -16,6 +16,13 @@ export async function PUT(req: Request) {
     )
   }
 
+  if (!accessToken) {
+    return NextResponse.json(
+      { error: "accessToken are required" },
+      { status: 400 }
+    )
+  }
+
   try {
     const baseUrl = process.env.BACKEND_BASE_URL
     const response = await fetch(
@@ -35,6 +42,13 @@ export async function PUT(req: Request) {
         `Error fetching status: ${response.status} - ${response.statusText}`
       )
     }
+
+    if (response.status===401){
+      throw new Error(
+        `User not authenticated:`
+      )
+    }
+
 
     const data = await response.json()
     return NextResponse.json({ data }, { status: 200 })
