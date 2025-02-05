@@ -1,8 +1,6 @@
 import { headers } from "next/headers"
 import { NextResponse } from "next/server"
 
-// me apague
-
 export async function GET(req: Request) {
   const header = headers()
 
@@ -34,17 +32,21 @@ export async function GET(req: Request) {
       },
     })
 
+    if (response.status === 401) {
+      return NextResponse.json(
+        { error: "Unauthorized: Invalid or expired token" },
+        { status: 401 }
+      )
+    }
+    
     if (!response.ok) {
-      throw new Error(
-        `Error fetching status: ${response.status} - ${response.statusText}`
+      return NextResponse.json(
+        { error: `Error fetching status: ${response.status} - ${response.statusText}` },
+        { status: response.status }
       )
     }
 
-    if (response.status===401){
-      throw new Error(
-        `User not authenticated:`
-      )
-    }   const data = await response.json()
+    const data = await response.json()
     const statusData = data[0].itemStatus
 
     return NextResponse.json({ status: statusData }, { status: 200 })

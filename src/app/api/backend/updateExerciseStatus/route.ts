@@ -37,18 +37,19 @@ export async function PUT(req: Request) {
       }
     )
 
+    if (response.status === 401) {
+      return NextResponse.json(
+        { error: "Unauthorized: Invalid or expired token" },
+        { status: 401 }
+      )
+    }
+    
     if (!response.ok) {
-      throw new Error(
-        `Error fetching status: ${response.status} - ${response.statusText}`
+      return NextResponse.json(
+        { error: `Error fetching status: ${response.status} - ${response.statusText}` },
+        { status: response.status }
       )
     }
-
-    if (response.status===401){
-      throw new Error(
-        `User not authenticated:`
-      )
-    }
-
 
     const data = await response.json()
     return NextResponse.json({ data }, { status: 200 })
