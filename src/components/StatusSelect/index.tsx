@@ -47,7 +47,7 @@ export default function StatusSelect({ width = "30%" }: StatusSelectProps) {
       const currentUrl = encodeURIComponent(window.location.href);
       router.push(`/login?callbackUrl=${currentUrl}`);
       return;
-    }
+    };
   
     const ids = extractIdsFromUrl(pathname);
     if (!ids) return;
