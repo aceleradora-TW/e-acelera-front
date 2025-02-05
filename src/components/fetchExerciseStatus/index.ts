@@ -11,7 +11,6 @@ export const useExerciseStatus = ({ topicId, itemId, accessToken }: UseExerciseS
   const [isLoading, setIsLoading] = useState<boolean>(false)
 
   const fetchStatus = useCallback(async () => {
-    if (!topicId || !itemId || !accessToken) return;
     setIsLoading(true)
     try {
       const response = await fetch(`/api/backend/getExerciseStatus`, {

@@ -25,7 +25,7 @@ export default function StatusSelect({ width = "30%" }: StatusSelectProps) {
     return {
       user: { email: "teste@gmail.com" },
       accessToken:
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RlQGdtYWlsLmNvbSIsIm5hbWUiOiJKb2huIERvZSIsImlhdCI6MTczODM0MjM1NSwiZXhwIjoxNzM4MzQ1OTU1fQ._4v0n-ldNwhwIQ8rpqbtRsrDbPEnZSFC4wtLpYpj2_g",
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RlQGdtYWlsLmNvbSIsIm5hbWUiOiJKb2huIERvZSIsImlhdCI6MTczODMzMjc0NCwiZXhwIjoxNzM4MzM2MzQ0fQ.yZWsF4eB3xu759CjPeMtR9HLnNkFKdudv2ofr3V5ffc",
     }
   }, [])
 
