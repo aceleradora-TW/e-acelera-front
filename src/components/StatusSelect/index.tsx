@@ -42,45 +42,6 @@ export default function StatusSelect({ width = "30%" }: StatusSelectProps) {
     return null
   }
 
-  const fetchStatus = async () => {
-    if (!session) {
-      const currentUrl = encodeURIComponent(window.location.href);
-      router.push(`/login?callbackUrl=${currentUrl}`);
-      return;
-    }
-  
-    const ids = extractIdsFromUrl(pathname);
-    if (!ids) return;
-  
-    try {
-      const baseUrl = process.env.NEXT_PUBLIC_BACKEND_BASE_URL;
-      const response = await fetch(
-        `${baseUrl}/topic/${ids[0]}/item/${ids[1]}`,
-        {
-          method: "GET",
-          headers: {
-            Authorization: `Bearer ${session.accessToken}`,
-          },
-        }
-      );
-  
-      if (!response.ok) {
-        console.error(`Erro na API: ${response.status} - ${response.statusText}`);
-        return;
-      }
-  
-      const data = await response.json();
-      setStatus(data.itemStatus); // Atualiza o estado com o status recebido
-    } catch (error) {
-      console.error("Erro ao fazer a requisição GET:", error);
-    }
-  };
-  
-  React.useEffect(() => {
-    fetchStatus(); // Chama a função para buscar o status ao montar o componente
-  }, []);
-  
-
   const handleChange = async (event: SelectChangeEvent) => {
     const value = event.target.value as string
     setStatus(value)
