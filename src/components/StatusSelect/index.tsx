@@ -25,7 +25,7 @@ export default function StatusSelect({ width = "30%" }: StatusSelectProps) {
     return {
       user: { email: "teste@gmail.com" },
       accessToken:
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RlQGdtYWlsLmNvbSIsIm5hbWUiOiJKb2huIERvZSIsImlhdCI6MTczODA4NjU1OCwiZXhwIjoxNzM4MDkwMTU4fQ.5eXYvy1xlquid4J964kXzXNoD93OC8ei-yREmz39rTc",
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RlQGdtYWlsLmNvbSIsIm5hbWUiOiJKb2huIERvZSIsImlhdCI6MTczODAwMDIzMiwiZXhwIjoxNzM4MDAzODMyfQ.Kf9-1Vc4z50hvnwF1pjd18AN8CHklivmqa_wzCf6CuI",
     }
   }, [])
 
@@ -44,90 +44,45 @@ export default function StatusSelect({ width = "30%" }: StatusSelectProps) {
     return null
   }
 
-  // const fetchStatus = React.useCallback(async () => {
-  //   if (session) {
-  //     const ids = extractIdsFromUrl(pathname)
-  //     if (!ids) return
-
-  //     try {
-  //       const baseUrl = process.env.NEXT_PUBLIC_BACKEND_BASE_URL
-  //       const response = await fetch(
-  //         `${baseUrl}/topic/${ids[0]}/item/${ids[1]}`,
-  //         {
-  //           method: "GET",
-  //           headers: {
-  //             Authorization: `Bearer ${session.accessToken}`,
-  //           },
-  //         }
-  //       )
-
-  //       if (!response.ok) {
-  //         console.error(
-  //           `Erro na API: ${response.status} - ${response.statusText}`
-  //         )
-  //         return
-  //       }
-
-  //       const data = await response.json()
-  //       const statusData = data[0].itemStatus
-
-  //       const validStatuses = ["NotStarted", "InProgress", "Completed"]
-  //       if (validStatuses.includes(statusData)) {
-  //         setStatus(statusData)
-  //       } else {
-  //         console.warn(`Status inválido recebido da API: ${data.itemStatus}`)
-  //         setStatus("NotStarted")
-  //       }
-  //     } catch (error) {
-  //       console.error("Erro ao fazer a requisição GET:", error)
-  //     }
-  //   }
-  // }, [session, pathname])
-
   const fetchStatus = React.useCallback(async () => {
     if (session) {
-      const ids = extractIdsFromUrl(pathname);
-      if (!ids) return;
-      
-  
-      setIsLoading(true);
-  
+      const ids = extractIdsFromUrl(pathname)
+      if (!ids) return
+
       try {
+        const baseUrl = process.env.NEXT_PUBLIC_BACKEND_BASE_URL
         const response = await fetch(
-          `/api/backend/getExerciseStatus`,
+          `${baseUrl}/topic/${ids[0]}/item/${ids[1]}`,
           {
-            method: 'GET',
+            method: "GET",
             headers: {
-              'Content-Type': 'application/json',
-              "Authorization": `${session.accessToken}`,
-              "topicId": `${ids[0]}`,
-              "item": `${ids[1]}`
+              Authorization: `Bearer ${session.accessToken}`,
             },
           }
-        );
-  
+        )
+
         if (!response.ok) {
-          console.error(`Erro na API: ${response.status} - ${response.statusText}`);
-          return;
+          console.error(
+            `Erro na API: ${response.status} - ${response.statusText}`
+          )
+          return
         }
-  
-        const data = await response.json();
-        const statusData = data.status;
-  
-        const validStatuses = ["NotStarted", "InProgress", "Completed"];
+
+        const data = await response.json()
+        const statusData = data[0].itemStatus
+
+        const validStatuses = ["NotStarted", "InProgress", "Completed"]
         if (validStatuses.includes(statusData)) {
-          setStatus(statusData);
+          setStatus(statusData)
         } else {
-          console.warn(`Status inválido recebido da API: ${statusData}`);
-          setStatus("NotStarted");
+          console.warn(`Status inválido recebido da API: ${data.itemStatus}`)
+          setStatus("NotStarted")
         }
       } catch (error) {
-        console.error("Erro ao fazer a requisição GET:", error);
-      } finally {
-        setIsLoading(false);
+        console.error("Erro ao fazer a requisição GET:", error)
       }
     }
-  }, [session, pathname]);
+  }, [session, pathname])
 
   React.useEffect(() => {
     fetchStatus()
