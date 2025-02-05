@@ -1,0 +1,7 @@
+export const LoginWarningModal = () => {
+    return (
+        <>
+        
+        </>
+    )
+}
