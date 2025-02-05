@@ -25,7 +25,7 @@ export default function StatusSelect({ width = "30%" }: StatusSelectProps) {
     return {
       user: { email: "teste@gmail.com" },
       accessToken:
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RlQGdtYWlsLmNvbSIsIm5hbWUiOiJKb2huIERvZSIsImlhdCI6MTczODE3MTQ2NSwiZXhwIjoxNzM4MTc1MDY1fQ.XEtvL6EVm-fYEDTScs3ZGYw52e6LXV7Ix8ebwXL-0qk",
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RlQGdtYWlsLmNvbSIsIm5hbWUiOiJKb2huIERvZSIsImlhdCI6MTczODA4NjU1OCwiZXhwIjoxNzM4MDkwMTU4fQ.5eXYvy1xlquid4J964kXzXNoD93OC8ei-yREmz39rTc",
     }
   }, [])
 
@@ -43,49 +43,51 @@ export default function StatusSelect({ width = "30%" }: StatusSelectProps) {
 
     return null
   }
-
+  
   const fetchStatus = React.useCallback(async () => {
     if (session) {
-      const ids = extractIdsFromUrl(pathname)
-      if (!ids) return
-
-      setIsLoading(true)
-
+      const ids = extractIdsFromUrl(pathname);
+      if (!ids) return;
+      
+  
+      setIsLoading(true);
+  
       try {
-        const response = await fetch(`/api/backend/getExerciseStatus`, {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `${session.accessToken}`,
-            topicId: `${ids[0]}`,
-            itemId: `${ids[1]}`,
-          },
-        })
-
+        const response = await fetch(
+          `/api/backend/getExerciseStatus`,
+          {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+              "Authorization": `${session.accessToken}`,
+              "topicId": `${ids[0]}`,
+              "item": `${ids[1]}`
+            },
+          }
+        );
+  
         if (!response.ok) {
-          console.error(
-            `Erro na API: ${response.status} - ${response.statusText}`
-          )
-          return
+          console.error(`Erro na API: ${response.status} - ${response.statusText}`);
+          return;
         }
-
-        const data = await response.json()
-        const statusData = data.status
-
-        const validStatuses = ["NotStarted", "InProgress", "Completed"]
+  
+        const data = await response.json();
+        const statusData = data.status;
+  
+        const validStatuses = ["NotStarted", "InProgress", "Completed"];
         if (validStatuses.includes(statusData)) {
-          setStatus(statusData)
+          setStatus(statusData);
         } else {
-          console.warn(`Status inválido recebido da API: ${statusData}`)
-          setStatus("NotStarted")
+          console.warn(`Status inválido recebido da API: ${statusData}`);
+          setStatus("NotStarted");
         }
       } catch (error) {
-        console.error("Erro ao fazer a requisição GET:", error)
+        console.error("Erro ao fazer a requisição GET:", error);
       } finally {
-        setIsLoading(false)
+        setIsLoading(false);
       }
     }
-  }, [session, pathname])
+  }, [session, pathname]);
 
   React.useEffect(() => {
     fetchStatus()
@@ -107,22 +109,24 @@ export default function StatusSelect({ width = "30%" }: StatusSelectProps) {
     setIsLoading(true)
 
     try {
-      const response = await fetch("/api/backend/updateExerciseStatus", {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `${session.accessToken}`,
-          topicId: `${ids[0]}`,
-          itemId: `${ids[1]}`,
-          itemStatus: `${value}`,
-        },
-      })
+      const baseUrl = process.env.NEXT_PUBLIC_BACKEND_BASE_URL
+
+      const response = await fetch(
+        `${baseUrl}/topic/${ids[0]}/item/${ids[1]}/status`,
+        {
+          method: "PUT",
+          headers: {
+            Authorization: `Bearer ${session.accessToken}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ itemStatus: value }),
+        }
+      )
 
       if (!response.ok) {
         console.error(
           `Erro na API: ${response.status} - ${response.statusText}`
         )
-        return
       }
     } catch (error) {
       console.error("Erro ao fazer a requisição:", error)
