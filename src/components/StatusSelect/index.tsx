@@ -8,85 +8,38 @@ import { SelectChangeEvent } from "@mui/material/Select"
 import { theme } from "@/app/config/theme"
 import { useRouter } from "next/navigation"
 import { useSession } from "next-auth/react"
-import { usePathname } from "next/navigation"
-import { useExerciseStatus } from "@/components/fetchExerciseStatus"
 
 interface StatusSelectProps {
   width?: "30%" | "70%" | "100%"
 }
 
 export default function StatusSelect({ width = "30%" }: StatusSelectProps) {
-  const [status, setStatus] = React.useState<string>("NotStarted")
-  const [backgroundColor, setBackgroundColor] =
-    React.useState<string>("rgb(225, 225, 225)")
+  const [status, setStatus] = React.useState<string>("statusPending")
+  const [backgroundColor, setBackgroundColor] = React.useState<string>("rgb(225, 225, 225)")
   const router = useRouter()
-  // const { data: session } = useSession()
-  const session = React.useMemo(() => {
-    return {
-      user: { email: "teste@gmail.com" },
-      accessToken:
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RlQGdtYWlsLmNvbSIsIm5hbWUiOiJKb2huIERvZSIsImlhdCI6MTczODM0MjM1NSwiZXhwIjoxNzM4MzQ1OTU1fQ._4v0n-ldNwhwIQ8rpqbtRsrDbPEnZSFC4wtLpYpj2_g",
-    }
-  }, [])
+  const { data: session } = useSession()
 
-  const pathname = usePathname()
-
-  const extractIdsFromUrl = (pathname: string): string[] | null => {
-    const parts: string[] = pathname.split("/")
-
-    if (parts.length === 5) {
-      const topicId = parts[3].split("-")[0]
-      const itemId = parts[4].split("-")[0]
-
-      if (topicId && itemId) {
-        const ids = [topicId, itemId]
-        return ids
-      }
-
-      return null
-    }
-    return null
-  }
-
-  const ids = extractIdsFromUrl(pathname)
-
-  const {
-    status: exerciseStatus,
-    isLoading,
-    updateStatus,
-  } = useExerciseStatus({
-    topicId: ids?.[0] || "",
-    itemId: ids?.[1] || "",
-    accessToken: session?.accessToken || "",
-  })
-
-  const handleChange = async (event: SelectChangeEvent) => {
+  const handleChange = (event: SelectChangeEvent) => {
     const value = event.target.value as string
     setStatus(value)
+
 
     if (!session) {
       const currentUrl = encodeURIComponent(window.location.href)
       router.push(`/login?callbackUrl=${currentUrl}`)
-      return
     }
-
-    if (!ids) return
-    await updateStatus(value)
   }
 
-  React.useEffect(() => {
-    setStatus(exerciseStatus)
-  }, [exerciseStatus])
 
   React.useEffect(() => {
     switch (status) {
-      case "Completed":
+      case "statusConcluded":
         setBackgroundColor(theme.palette.statusSelect?.light || "")
         break
-      case "InProgress":
+      case "statusInProgress":
         setBackgroundColor(theme.palette.statusSelect?.dark || "")
         break
-      case "NotStarted":
+      case "statusPending":
         setBackgroundColor(theme.palette.statusSelect?.main || "")
         break
       default:
@@ -99,10 +52,10 @@ export default function StatusSelect({ width = "30%" }: StatusSelectProps) {
       sx={{
         backgroundColor,
         width,
-        minWidth: "200px",
-        "@media (max-width: 600px)": {
-          maxWidth: "264px",
-        },
+        minWidth: '200px',
+        '@media (max-width: 600px)': {
+          maxWidth: '264px'
+        }
       }}
     >
       <FormControl fullWidth>
@@ -122,10 +75,9 @@ export default function StatusSelect({ width = "30%" }: StatusSelectProps) {
           notched={true}
           labelId="statusLeveling"
           id="statusSelect"
-          value={status || "NotStarted"}
+          value={status}
           label="Status"
           onChange={handleChange}
-          disabled={isLoading}
           sx={{
             "& .MuiOutlinedInput-notchedOutline": {
               borderColor: "#000000",
@@ -136,9 +88,9 @@ export default function StatusSelect({ width = "30%" }: StatusSelectProps) {
             height: "40px",
           }}
         >
-          <MenuItem value="NotStarted">Não Iniciado</MenuItem>
-          <MenuItem value="InProgress">Em Andamento</MenuItem>
-          <MenuItem value="Completed">Concluído</MenuItem>
+          <MenuItem value="statusPending">Não Iniciado</MenuItem>
+          <MenuItem value="statusInProgress">Em Andamento</MenuItem>
+          <MenuItem value="statusConcluded">Concluído</MenuItem>
         </Select>
       </FormControl>
     </Box>
