@@ -9,7 +9,7 @@ import { theme } from "@/app/config/theme"
 import { useRouter } from "next/navigation"
 import { useSession } from "next-auth/react"
 import { usePathname } from "next/navigation"
-import { useExerciseStatus } from "@/components/fetchExerciseStatus"
+import {useExerciseStatus} from "@/components/fetchExerciseStatus"
 
 interface StatusSelectProps {
   width?: "30%" | "70%" | "100%"
@@ -19,13 +19,14 @@ export default function StatusSelect({ width = "30%" }: StatusSelectProps) {
   const [status, setStatus] = React.useState<string>("NotStarted")
   const [backgroundColor, setBackgroundColor] =
     React.useState<string>("rgb(225, 225, 225)")
+  const [isLoading, setIsLoading] = React.useState<boolean>(false)
   const router = useRouter()
   // const { data: session } = useSession()
   const session = React.useMemo(() => {
     return {
       user: { email: "teste@gmail.com" },
       accessToken:
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RlQGdtYWlsLmNvbSIsIm5hbWUiOiJKb2huIERvZSIsImlhdCI6MTczODMzMjc0NCwiZXhwIjoxNzM4MzM2MzQ0fQ.yZWsF4eB3xu759CjPeMtR9HLnNkFKdudv2ofr3V5ffc",
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RlQGdtYWlsLmNvbSIsIm5hbWUiOiJKb2huIERvZSIsImlhdCI6MTczODE3MTQ2NSwiZXhwIjoxNzM4MTc1MDY1fQ.XEtvL6EVm-fYEDTScs3ZGYw52e6LXV7Ix8ebwXL-0qk",
     }
   }, [])
 
@@ -48,17 +49,63 @@ export default function StatusSelect({ width = "30%" }: StatusSelectProps) {
     return null
   }
 
-  const ids = extractIdsFromUrl(pathname)
+  const ids = extractIdsFromUrl(pathname); 
 
-  const {
-    status: exerciseStatus,
-    isLoading,
-    updateStatus,
-  } = useExerciseStatus({
+  const { status: exerciseStatus, isLoading: statusLoading } = useExerciseStatus({
     topicId: ids?.[0] || "",
     itemId: ids?.[1] || "",
     accessToken: session?.accessToken || "",
-  })
+  });
+
+  const fetchStatus = React.useCallback(async () => {
+    if (session) {
+      try {
+        if (exerciseStatus) {
+          setStatus(exerciseStatus); // Apenas atualiza o estado com o valor do hook
+        }
+      } finally {
+        setIsLoading(false);
+      }
+
+      // try {
+      //   const response = await fetch(`/api/backend/getExerciseStatus`, {
+      //     method: "GET",
+      //     headers: {
+      //       "Content-Type": "application/json",
+      //       Authorization: `${session.accessToken}`,
+      //       topicId: `${ids[0]}`,
+      //       itemId: `${ids[1]}`,
+      //     },
+      //   })
+
+      //   if (!response.ok) {
+      //     console.error(
+      //       `Erro na API: ${response.status} - ${response.statusText}`
+      //     )
+      //     return
+      //   }
+
+      //   const data = await response.json()
+      //   const statusData = data.status
+
+      //   const validStatuses = ["NotStarted", "InProgress", "Completed"]
+      //   if (validStatuses.includes(statusData)) {
+      //     setStatus(statusData)
+      //   } else {
+      //     console.warn(`Status inválido recebido da API: ${statusData}`)
+      //     setStatus("NotStarted")
+      //   }
+      // } catch (error) {
+      //   console.error("Erro ao fazer a requisição GET:", error)
+      // } finally {
+      //   setIsLoading(false)
+      // }
+    }
+  }, [session, ids, exerciseStatus])
+
+  React.useEffect(() => {
+  fetchStatus();
+  }, [fetchStatus]);
 
   const handleChange = async (event: SelectChangeEvent) => {
     const value = event.target.value as string
@@ -70,13 +117,35 @@ export default function StatusSelect({ width = "30%" }: StatusSelectProps) {
       return
     }
 
+    const ids = extractIdsFromUrl(pathname)
     if (!ids) return
-    await updateStatus(value)
-  }
 
-  React.useEffect(() => {
-    setStatus(exerciseStatus)
-  }, [exerciseStatus])
+    setIsLoading(true)
+
+    try {
+      const response = await fetch("/api/backend/updateExerciseStatus", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `${session.accessToken}`,
+          topicId: `${ids[0]}`,
+          itemId: `${ids[1]}`,
+          itemStatus: `${value}`,
+        },
+      })
+
+      if (!response.ok) {
+        console.error(
+          `Erro na API: ${response.status} - ${response.statusText}`
+        )
+        return
+      }
+    } catch (error) {
+      console.error("Erro ao fazer a requisição:", error)
+    } finally {
+      setIsLoading(false)
+    }
+  }
 
   React.useEffect(() => {
     switch (status) {
