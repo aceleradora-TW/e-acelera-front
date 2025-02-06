@@ -20,14 +20,14 @@ export default function StatusSelect({ width = "30%" }: StatusSelectProps) {
   const [backgroundColor, setBackgroundColor] =
     React.useState<string>("rgb(225, 225, 225)")
   const router = useRouter()
-  // const { data: session } = useSession()
-  const session = React.useMemo(() => {
-    return {
-      user: { email: "teste@gmail.com" },
-      accessToken:
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RlQGdtYWlsLmNvbSIsIm5hbWUiOiJKb2huIERvZSIsImlhdCI6MTczODM0MjM1NSwiZXhwIjoxNzM4MzQ1OTU1fQ._4v0n-ldNwhwIQ8rpqbtRsrDbPEnZSFC4wtLpYpj2_g",
-    }
-  }, [])
+  const { data: session } = useSession()
+  // const session = React.useMemo(() => {
+  //   return {
+  //     user: { email: "teste@gmail.com" },
+  //     accessToken:
+  //       "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RlQGdtYWlsLmNvbSIsIm5hbWUiOiJKb2huIERvZSIsImlhdCI6MTczODM0MjM1NSwiZXhwIjoxNzM4MzQ1OTU1fQ._4v0n-ldNwhwIQ8rpqbtRsrDbPEnZSFC4wtLpYpj2_g",
+  //   }
+  // }, [])
 
   const pathname = usePathname()
 
@@ -38,18 +38,15 @@ export default function StatusSelect({ width = "30%" }: StatusSelectProps) {
       const topicId = parts[3].split("-")[0]
       const itemId = parts[4].split("-")[0]
 
-      if (topicId && itemId) {
-        const ids = [topicId, itemId]
-        return ids
-      }
+    return (topicId && itemId) ? [topicId, itemId] : null
 
-      return null
     }
+
     return null
   }
 
   const ids = extractIdsFromUrl(pathname)
-
+console.log(ids)
   const {
     status: exerciseStatus,
     isLoading,
@@ -78,7 +75,7 @@ export default function StatusSelect({ width = "30%" }: StatusSelectProps) {
     setStatus(exerciseStatus)
   }, [exerciseStatus])
 
-  React.useEffect(() => {
+  React.useMemo(() => {
     switch (status) {
       case "Completed":
         setBackgroundColor(theme.palette.statusSelect?.light || "")
