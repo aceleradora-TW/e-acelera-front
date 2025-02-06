@@ -8,6 +8,8 @@ import { SelectChangeEvent } from "@mui/material/Select"
 import { theme } from "@/app/config/theme"
 import { useRouter } from "next/navigation"
 import { useSession } from "next-auth/react"
+import { LoginWarningModal } from "../Modals/LoginWarningModal"
+
 
 interface StatusSelectProps {
   width?: "30%" | "70%" | "100%"
@@ -16,17 +18,14 @@ interface StatusSelectProps {
 export default function StatusSelect({ width = "30%" }: StatusSelectProps) {
   const [status, setStatus] = React.useState<string>("statusPending")
   const [backgroundColor, setBackgroundColor] = React.useState<string>("rgb(225, 225, 225)")
-  const router = useRouter()
+  const [isModalOpen, setIsModalOpen] = React.useState<boolean>(false)
   const { data: session } = useSession()
 
   const handleChange = (event: SelectChangeEvent) => {
     const value = event.target.value as string
     setStatus(value)
-
-
-    if (!session) {
-      const currentUrl = encodeURIComponent(window.location.href)
-      router.push(`/login?callbackUrl=${currentUrl}`)
+     if (!session) {
+      setIsModalOpen(true)
     }
   }
 
@@ -93,6 +92,7 @@ export default function StatusSelect({ width = "30%" }: StatusSelectProps) {
           <MenuItem value="statusConcluded">Concluído</MenuItem>
         </Select>
       </FormControl>
+      <LoginWarningModal open={isModalOpen} handleClose={() => setIsModalOpen(false)}/>
     </Box>
   )
 }
