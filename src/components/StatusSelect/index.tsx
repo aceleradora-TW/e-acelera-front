@@ -21,13 +21,6 @@ export default function StatusSelect({ width = "30%" }: StatusSelectProps) {
     React.useState<string>("rgb(225, 225, 225)")
   const router = useRouter()
   const { data: session } = useSession()
-  // const session = React.useMemo(() => {
-  //   return {
-  //     user: { email: "teste@gmail.com" },
-  //     accessToken:
-  //       "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RlQGdtYWlsLmNvbSIsIm5hbWUiOiJKb2huIERvZSIsImlhdCI6MTczODM0MjM1NSwiZXhwIjoxNzM4MzQ1OTU1fQ._4v0n-ldNwhwIQ8rpqbtRsrDbPEnZSFC4wtLpYpj2_g",
-  //   }
-  // }, [])
 
   const pathname = usePathname()
 
@@ -46,7 +39,6 @@ export default function StatusSelect({ width = "30%" }: StatusSelectProps) {
   }
 
   const ids = extractIdsFromUrl(pathname)
-console.log(ids)
   const {
     status: exerciseStatus,
     isLoading,
@@ -54,7 +46,6 @@ console.log(ids)
   } = useExerciseStatus({
     topicId: ids?.[0] || "",
     itemId: ids?.[1] || "",
-    accessToken: session?.accessToken || "",
   })
 
   const handleChange = async (event: SelectChangeEvent) => {

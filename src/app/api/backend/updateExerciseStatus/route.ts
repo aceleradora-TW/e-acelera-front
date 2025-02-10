@@ -1,13 +1,13 @@
 import { headers } from "next/headers"
-import { NextResponse } from "next/server"
+import { NextRequest, NextResponse } from "next/server"
 
-export async function PUT(req: Request) {
+export async function PUT(req: NextRequest) {
   const header = headers()
 
   const topicId = header.get(`topicId`)
   const itemId = header.get(`itemId`)
   const itemStatus = header.get(`itemStatus`)
-  const accessToken = header.get(`Authorization`)
+  const accessToken = req.cookies.get("next-auth.session-token")?.value || req.cookies.get("__Secure-next-auth.session-token")?.value;
 
   if (!topicId || !itemId) {
     return NextResponse.json(

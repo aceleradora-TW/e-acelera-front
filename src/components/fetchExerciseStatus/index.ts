@@ -3,22 +3,20 @@ import { useState, useEffect, useCallback } from "react"
 interface UseExerciseStatusProps {
   topicId: string
   itemId: string
-  accessToken: string
 }
 
-export const useExerciseStatus = ({ topicId, itemId, accessToken }: UseExerciseStatusProps) => {
+export const useExerciseStatus = ({ topicId, itemId }: UseExerciseStatusProps) => {
   const [status, setStatus] = useState<string>("NotStarted")
   const [isLoading, setIsLoading] = useState<boolean>(false)
 
   const fetchStatus = useCallback(async () => {
-    if (!topicId || !itemId || !accessToken) return;
+    if (!topicId || !itemId ) return;
     setIsLoading(true)
     try {
       const response = await fetch(`/api/backend/getExerciseStatus`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `${accessToken}`,
           topicId,
           itemId,
         },
@@ -35,7 +33,7 @@ export const useExerciseStatus = ({ topicId, itemId, accessToken }: UseExerciseS
     } finally {
       setIsLoading(false)
     }
-  }, [topicId, itemId, accessToken])
+  }, [topicId, itemId])
 
   const updateStatus = async (newStatus: string) => {
     setIsLoading(true)
@@ -46,7 +44,6 @@ export const useExerciseStatus = ({ topicId, itemId, accessToken }: UseExerciseS
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `${accessToken}`,
           topicId,
           itemId,
           itemStatus: newStatus,
