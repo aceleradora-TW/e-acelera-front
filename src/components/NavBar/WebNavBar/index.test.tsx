@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom'
 import { render, screen } from '@testing-library/react'
-import { WebMenu } from '@/components/NavBar/WebNavBar' 
+import { WebMenu } from '@/components/NavBar/WebNavBar'
 import { useSession } from 'next-auth/react'
 
 jest.mock('next/image', () => ({
@@ -27,9 +27,9 @@ describe('Testes do botão de Login do componente WebMenu', () => {
   it('Deve mostrar o botão de login quando não houver sessão', () => {
     (useSession as jest.Mock).mockReturnValue({ data: null })
 
-    render(<WebMenu list={['Nivelamento', 'Autoestudo']} />)
+    render(<WebMenu list={['Nivelamento', 'Autoestudo']} session={null} />)
     
-    const loginButton = screen.queryByText('LOGIN')
+    const loginButton = screen.getByRole('button', { name: /login/i })
     expect(loginButton).toBeInTheDocument()
   })
 
@@ -39,13 +39,17 @@ describe('Testes do botão de Login do componente WebMenu', () => {
         user: { 
           image: 'url-da-imagem', 
           name: 'Usuário Teste' 
-        } 
+        },
+        expires: '2025-01-01T00:00:00Z'
       } 
     })
 
-    render(<WebMenu list={['Nivelamento', 'Autoestudo']} />)
+    render(<WebMenu list={['Nivelamento', 'Autoestudo']} session={{ 
+      user: { image: 'url-da-imagem', name: 'Usuário Teste' }, 
+      expires: '2025-01-01T00:00:00Z'
+    }} />)
     
-    const loginButton = screen.queryByText('LOGIN')
+    const loginButton = screen.queryByRole('button', { name: /login/i })
     expect(loginButton).not.toBeInTheDocument()
   })
 })
