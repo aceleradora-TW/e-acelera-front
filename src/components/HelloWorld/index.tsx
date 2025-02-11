@@ -5,5 +5,5 @@ export const HelloWorld: React.FC = () => {
 
 
   
-  return <h1>Olá Mundo!</h1>;
+  return <h1>Olá Mundo, Meus Amigos!</h1>;
 };
