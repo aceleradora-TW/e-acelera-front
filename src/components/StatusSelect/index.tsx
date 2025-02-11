@@ -18,13 +18,39 @@ export default function StatusSelect({ width = "30%" }: StatusSelectProps) {
   const [backgroundColor, setBackgroundColor] = React.useState<string>("rgb(225, 225, 225)")
   const [isModalOpen, setIsModalOpen] = React.useState<boolean>(false)
   const { data: session } = useSession()
+  const statusSelectRef = React.useRef<HTMLDivElement>()
 
+  React.useEffect(() => {
+    if (typeof window !== "undefined") {
+      const statusValue = localStorage.getItem("statusValue") || "statusPending"
+      const isActive = localStorage.getItem("activeStatusSelect") === "true"
+  
+      if (isActive && statusSelectRef.current) {
+        const validStatuses = ["statusPending", "statusInProgress", "statusConcluded"]
+        setStatus(validStatuses.includes(statusValue) ? statusValue : "statusPending")
+  
+        statusSelectRef.current.classList.remove("ativo")
+        localStorage.removeItem("activeStatusSelect")
+        localStorage.removeItem("statusValue")
+      }
+    }
+  }, [])
+  
   const handleChange = (event: SelectChangeEvent) => {
     const value = event.target.value as string
     setStatus(value)
-     if (!session) {
+     if (!session && statusSelectRef.current) { 
+      statusSelectRef.current.classList.add("ativo")
       setIsModalOpen(true)
     }
+  }
+
+  const heandleCloseModal = () => {
+    if(statusSelectRef.current){
+      statusSelectRef.current.classList.remove("ativo")
+    }
+    setIsModalOpen(false)
+    setStatus("statusPending")
   }
 
   React.useEffect(() => {
@@ -68,6 +94,7 @@ export default function StatusSelect({ width = "30%" }: StatusSelectProps) {
           Status
         </InputLabel>
         <Select
+          ref= {statusSelectRef}
           notched={true}
           labelId="statusLeveling"
           id="statusSelect"
@@ -89,7 +116,7 @@ export default function StatusSelect({ width = "30%" }: StatusSelectProps) {
           <MenuItem value="statusConcluded">Concluído</MenuItem>
         </Select>
       </FormControl>
-      <LoginWarningModal open={isModalOpen} handleClose={() => setIsModalOpen(false)}/>
+      <LoginWarningModal status={status} open={isModalOpen} handleClose={heandleCloseModal}/>
     </Box>
   )
 }

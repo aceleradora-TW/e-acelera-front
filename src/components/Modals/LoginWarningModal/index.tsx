@@ -8,14 +8,20 @@ import { ExclamationComponent } from "@/components/ExclamationComponent"
 import { useRouter } from "next/navigation"
 
 interface LoginWarningModalProps {
+  status: string,
   open: boolean,
   handleClose:() => void
 }
 
-export const LoginWarningModal: React.FC<LoginWarningModalProps> = ({open, handleClose }) => {
+export const LoginWarningModal: React.FC<LoginWarningModalProps> = ({status, open, handleClose }) => {
   const router = useRouter()
-
+  const statusSave = (status: string) => {
+    localStorage.setItem("statusValue", status)
+    localStorage.setItem("activeStatusSelect", "true")
+  }
+ 
   const handlePageRedirectLogin = () => {
+    statusSave(status)
     const currentUrl = encodeURIComponent(window.location.href)
     router.push(`/login?callbackUrl=${currentUrl}`)
   }
