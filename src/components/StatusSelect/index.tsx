@@ -6,7 +6,6 @@ import FormControl from "@mui/material/FormControl"
 import Select from "@mui/material/Select"
 import { SelectChangeEvent } from "@mui/material/Select"
 import { theme } from "@/app/config/theme"
-import { useRouter } from "next/navigation"
 import { useSession } from "next-auth/react"
 import { usePathname } from "next/navigation"
 import { useExerciseStatus } from "@/components/fetchExerciseStatus"
@@ -107,6 +106,7 @@ export default function StatusSelect({ width = "30%" }: StatusSelectProps) {
           Status
         </InputLabel>
         <Select
+          ref= {statusSelectRef}
           notched={true}
           labelId="statusLeveling"
           id="statusSelect"
@@ -129,6 +129,7 @@ export default function StatusSelect({ width = "30%" }: StatusSelectProps) {
           <MenuItem value="Completed">Concluído</MenuItem>
         </Select>
       </FormControl>
+      <LoginWarningModal status={status} open={isModalOpen} handleClose={heandleCloseModal}/>
     </Box>
   )
 }

@@ -276,6 +276,27 @@ declare module "@mui/material/styles" {
         display: string,
         objectFit: string,
       };
+      styleModal: {
+        position: string,
+        top: string,
+        left: string,
+        transform: string,
+        width: number,
+        bgcolor: string,
+        border: string,
+        borderRadius: string,
+        boxShadow: number,
+        p: number,
+        textAlign: string
+      };
+      styleExclamation: {
+        height: string,
+        width: string,
+        borderRadius: string,
+        display: string,
+        justifyContent: string,
+        alignItems: string
+      };
     };
   }
 
@@ -409,50 +430,50 @@ declare module "@mui/material/styles" {
       };
       cardLoginBox?: {
         width?: {
-          xs: string,
-          sm: string,
-          md: string,
-          lg: string,
-          xl: string
+          xs: string;
+          sm: string;
+          md: string;
+          lg: string;
+          xl: string;
         },
-        height?: string,
-        boxShadow?: string,
-        padding?: string,
+        height?: string;
+        boxShadow?: string;
+        padding?: string;
       };
       containerLogin?:{
-        height?: string,
-        display?: string,
-        justifyContent?: string,
-        marginTop?: string,
+        height?: string;
+        display?: string;
+        justifyContent?: string;
+        marginTop?: string;
       };
       boxLogoType?:{
-        display?: string, 
-        gap?: string, 
-        alignItems?: string,
+        display?: string; 
+        gap?: string; 
+        alignItems?: string;
       };
       h1Login?:{
         fontSize?:{
-          xs?: string,
-          sm?: string,
-          md?: string,
-          lg?: string,
-          xl?: string,
+          xs?: string;
+          sm?: string;
+          md?: string;
+          lg?: string;
+          xl?: string;
         }
       };
       body1Login?:{
         fontSize?: {
-          xs?: string,
-          sm?: string,
-          md?: string,
-          lg?: string,
-          xl?: string,
+          xs?: string;
+          sm?: string;
+          md?: string;
+          lg?: string;
+          xl?: string;
         },
-        marginBottom: string,
+        marginBottom: string;
       };
       title?: {
-        textAlign?: string,
-        color?: string,
-        margin?: string
+        textAlign?: string;
+        color?: string;
+        margin?: string;
       };
       breadCrumb?: {
         textDecoration?: string;
@@ -478,42 +499,63 @@ declare module "@mui/material/styles" {
         borderRadius?: string;
       };
       cardVideoLink?:{
-        display?: string, 
-        flexDirection?: string, 
-        justifyContent?: string 
+        display?: string; 
+        flexDirection?: string; 
+        justifyContent?: string;
       };
       cardVideoNumber?:{
-        display?: string, 
-        flexDirection?: string, 
-        justifyContent?: string, 
-        marginTop?: number
-        };
-        cardVideoSelect?:{
-          display?: string, 
-          flexDirection?: string, 
-          justifyContent?: string, 
-          marginTop?: number
-          };
-          cardVideoDescription?: {
-            display?: string, 
-            flexDirection?: string, 
-            justifyContent?: string, 
-            marginTop?: number, 
-            marginRight?: number
-          };
-          advanceExercises?: {
-            color?: string,
-            padding?: string,
-          };
-          cardMediaImage: {
-            maxWidth?: string,
-            height?: string,
-            display?: string,
-            objectFit?: string,
-          };
+        display?: string; 
+        flexDirection?: string; 
+        justifyContent?: string; 
+        marginTop?: number;
       };
-    }
+      cardVideoSelect?:{
+        display?: string; 
+        flexDirection?: string; 
+        justifyContent?: string; 
+        marginTop?: number;
+      };
+      cardVideoDescription?: {
+        display?: string; 
+        flexDirection?: string; 
+        justifyContent?: string; 
+        marginTop?: number; 
+        marginRight?: number;
+      };
+      advanceExercises?: {
+        color?: string;
+        padding?: string;
+      };
+      cardMediaImage?: {
+        maxWidth?: string;
+        height?: string;
+        display?: string;
+        objectFit?: string;
+      };
+      styleModal?: {
+        position?: string;
+        top?: string;
+        left?: string;
+        transform?: string;
+        width?: number;
+        bgcolor?: string;
+        border?: string;
+        borderRadius?: string;
+        boxShadow?: number;
+        p?: number;
+        textAlign?: string;
+      };
+      styleExclamation?: {
+        height?: string;
+        width?: string;
+        borderRadius?: string;
+        display?: string;
+        justifyContent?: string;
+        alignItems?: string;
+      };
+    };
   }
+}
 
 const theme = createTheme({
   customStyles: {
@@ -746,6 +788,27 @@ const theme = createTheme({
       height: 'auto',
       display: 'block',
       objectFit: 'cover',
+    },
+    styleModal: {
+      position: "absolute",
+      top: "50%",
+      left: "50%",
+      transform: "translate(-50%, -50%)",
+      width: 400,
+      bgcolor: "background.paper",
+      border: "1px solid #002C53",
+      borderRadius: "5px",
+      boxShadow: 24,
+      p: 4,
+      textAlign: "center"
+    },
+    styleExclamation: {
+      height: "80px",
+      width: "80px",
+      borderRadius: "50%",
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center"
     }
   },
   palette: {
