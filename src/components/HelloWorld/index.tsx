@@ -1,14 +1,6 @@
 import React from "react";
 
 export const HelloWorld: React.FC = () => {
-  const name = "Stephany3";
-  const age = 25;
-  
-  const person = {
-    name, 
-    age,   
-  };
-  
-  
-  return <h1>`${person.name}`</h1>;
+
+  return <h1>Olá Mundo!</h1>;
 }
