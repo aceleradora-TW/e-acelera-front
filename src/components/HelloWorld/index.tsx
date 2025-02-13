@@ -1,7 +1,7 @@
 import React from "react";
 
 export const HelloWorld: React.FC = () => {
-  const name = "Stephany";
+  const name = "Stephany3";
   const age = 25;
   
   const person = {
