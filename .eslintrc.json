@@ -1,4 +1,5 @@
 {
+  
   "extends": "next/core-web-vitals", 
   "rules": {
     "no-unused-vars": "error", 
@@ -6,8 +7,15 @@
     "no-var": "error",
     "object-shorthand": ["error", "always"],
     "sort-imports": ["error", { "ignoreDeclarationSort": true }], 
+    "prefer-const": "error",
+    "arrow-body-style": ["error", "as-needed"],
+    "curly": ["error", "all"],
+    "@next/next/no-img-element": "warn",
+    "@typescript-eslint/explicit-function-return-type": "error",
+    "@typescript-eslint/no-explicit-any": "warn",
     "react-hooks/rules-of-hooks": "error", 
     "react/self-closing-comp": "error",
-    "@next/next/no-img-element": "warn"
-  }
+    "react/jsx-boolean-value": ["error", "never"],
+    "react/jsx-sort-props": ["error", { "callbacksLast": true, "shorthandFirst": true }]
+    }
 }
