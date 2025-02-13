@@ -2,8 +2,7 @@
   "extends": "next/core-web-vitals", 
   "rules": {
     "no-unused-vars": "error", 
-    "no-console": "warn",
-    "eqeqeq": ["error", "always"],
+    "no-console": "error",
     "no-var": "error",
     "object-shorthand": ["error", "always"],
     "sort-imports": ["error", { "ignoreDeclarationSort": true }], 

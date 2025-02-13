@@ -1,7 +1,14 @@
 import React from "react";
 
 export const HelloWorld: React.FC = () => {
-  console.log("Qualquer coisa")
+  const name = "Stephany";
+  const age = 25;
   
-  return <h1>Olá Mundo, Meus Amigos!</h1>;
+  const person = {
+    name, 
+    age,   
+  };
+  
+  
+  return <h1>`${person.name}`</h1>;
 }
