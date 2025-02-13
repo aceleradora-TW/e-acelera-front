@@ -1,9 +1,7 @@
 import React from "react";
 
 export const HelloWorld: React.FC = () => {
-  const test = "Hello World My Friends"
-
-
+  console.log("Qualquer coisa")
   
   return <h1>Olá Mundo, Meus Amigos!</h1>;
-};
+}

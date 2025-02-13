@@ -1,3 +1,14 @@
 {
-  "extends": "next/core-web-vitals"
+  "extends": "next/core-web-vitals", 
+  "rules": {
+    "no-unused-vars": "error", 
+    "no-console": "warn",
+    "eqeqeq": ["error", "always"],
+    "no-var": "error",
+    "object-shorthand": ["error", "always"],
+    "sort-imports": ["error", { "ignoreDeclarationSort": true }], 
+    "react-hooks/rules-of-hooks": "error", 
+    "react/self-closing-comp": "error",
+    "@next/next/no-img-element": "warn"
+  }
 }
