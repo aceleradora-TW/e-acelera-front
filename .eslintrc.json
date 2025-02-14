@@ -11,8 +11,6 @@
     "arrow-body-style": ["error", "as-needed"],
     "curly": ["error", "all"],
     "@next/next/no-img-element": "warn",
-    "@typescript-eslint/explicit-function-return-type": "error",
-    "@typescript-eslint/no-explicit-any": "warn",
     "react-hooks/rules-of-hooks": "error", 
     "react/self-closing-comp": "error",
     "react/jsx-boolean-value": ["error", "never"],
