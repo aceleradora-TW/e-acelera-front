@@ -6,7 +6,7 @@ interface UseExerciseStatusProps {
 }
 
 export const useExerciseStatus = ({ topicId, itemId }: UseExerciseStatusProps) => {
-  const [status, setStatus] = useState<string>("NotStarted")
+  const [status, setStatus] = useState<string | null >(null)
   const [isLoading, setIsLoading] = useState<boolean>(false)
 
   const fetchStatus = useCallback(async () => {
@@ -27,7 +27,7 @@ export const useExerciseStatus = ({ topicId, itemId }: UseExerciseStatusProps) =
       const data = await response.json()
       const validStatuses = ["NotStarted", "InProgress", "Completed"]
 
-      setStatus(validStatuses.includes(data.status) ? data.status : "NotStarted")
+      setStatus(validStatuses.includes(data.status) ? data.status : null)
     } catch (error) {
       console.error("Erro ao buscar status:", error)
     } finally {
