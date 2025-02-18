@@ -7,9 +7,9 @@ import Select from "@mui/material/Select"
 import { SelectChangeEvent } from "@mui/material/Select"
 import { theme } from "@/app/config/theme"
 import { useSession } from "next-auth/react"
-import { LoginWarningModal } from "../Modals/LoginWarningModal"
 import { usePathname } from "next/navigation"
 import { useExerciseStatus } from "@/components/fetchExerciseStatus"
+import { LoginWarningModal } from "../Modals/LoginWarningModal"
 
 interface StatusSelectProps {
   width?: "30%" | "70%" | "100%"
@@ -19,10 +19,27 @@ export default function StatusSelect({ width = "30%" }: StatusSelectProps) {
   const [status, setStatus] = React.useState<string>("NotStarted")
   const [backgroundColor, setBackgroundColor] =
     React.useState<string>("rgb(225, 225, 225)")
-  const router = useRouter()
+  const [isModalOpen, setIsModalOpen] = React.useState<boolean>(false)
   const { data: session } = useSession()
-
+  const statusSelectRef = React.useRef<HTMLDivElement>(null)
   const pathname = usePathname()
+
+  React.useEffect(() => {
+    if (typeof window === "undefined") return
+
+    const statusValue = localStorage.getItem("statusValue") || "NotStarted"
+    const isActive = localStorage.getItem("activeStatusSelect") === "true"
+    const validStatuses = ["NotStarted", "InProgress", "Completed"]
+
+    if (statusSelectRef.current) {
+      if (session && isActive) {
+        setStatus(validStatuses.includes(statusValue) ? statusValue : "NotStarted")
+      }
+      statusSelectRef.current.classList.remove("ativo")
+      localStorage.removeItem("activeStatusSelect")
+      localStorage.removeItem("statusValue")
+    }
+  }, [session])
 
   const extractIdsFromUrl = (pathname: string): string[] | null => {
     const parts: string[] = pathname.split("/")
@@ -31,10 +48,8 @@ export default function StatusSelect({ width = "30%" }: StatusSelectProps) {
       const topicId = parts[3].split("-")[0]
       const itemId = parts[4].split("-")[0]
 
-    return (topicId && itemId) ? [topicId, itemId] : null
-
+      return (topicId && itemId) ? [topicId, itemId] : null
     }
-
     return null
   }
 
@@ -52,18 +67,27 @@ export default function StatusSelect({ width = "30%" }: StatusSelectProps) {
     const value = event.target.value as string
     setStatus(value)
 
-    if (!session) {
-      const currentUrl = encodeURIComponent(window.location.href)
-      router.push(`/login?callbackUrl=${currentUrl}`)
-      return
+    if (!session && statusSelectRef.current) { 
+      statusSelectRef.current.classList.add("ativo")
+      setIsModalOpen(true)
     }
 
     if (!ids) return
     await updateStatus(value)
+  } 
+
+  const heandleCloseModals = () => {
+    if(statusSelectRef.current) {
+      statusSelectRef.current.classList.remove("ativo")
+    }
+    setIsModalOpen(false)
+    setStatus("NotStarted")
   }
 
   React.useEffect(() => {
-    setStatus(exerciseStatus)
+    if (exerciseStatus) {
+      setStatus(exerciseStatus)
+    }
   }, [exerciseStatus])
 
   React.useMemo(() => {
@@ -130,7 +154,7 @@ export default function StatusSelect({ width = "30%" }: StatusSelectProps) {
           <MenuItem value="Completed">Concluído</MenuItem>
         </Select>
       </FormControl>
-      <LoginWarningModal status={status} open={isModalOpen} handleClose={heandleCloseModal}/>
+      <LoginWarningModal status={status} open={isModalOpen} handleClose={heandleCloseModals}/>
     </Box>
   )
 }

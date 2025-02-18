@@ -6,7 +6,7 @@ interface UseExerciseStatusProps {
 }
 
 export const useExerciseStatus = ({ topicId, itemId }: UseExerciseStatusProps) => {
-  const [status, setStatus] = useState<string>("NotStarted")
+  const [status, setStatus] = useState<string | null >(null)
   const [isLoading, setIsLoading] = useState<boolean>(false)
 
   const fetchStatus = useCallback(async () => {
