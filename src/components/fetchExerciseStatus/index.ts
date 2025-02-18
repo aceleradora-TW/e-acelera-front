@@ -53,6 +53,7 @@ export const useExerciseStatus = ({ topicId, itemId }: UseExerciseStatusProps) =
       if (!response.ok) throw new Error(`Erro ${response.status}`)
     } catch (error) {
       console.error("Erro ao atualizar status:", error)
+      return false
     } finally {
       setIsLoading(false)
     }
