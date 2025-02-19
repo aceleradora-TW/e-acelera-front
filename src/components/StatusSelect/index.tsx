@@ -8,38 +8,73 @@ import { SelectChangeEvent } from "@mui/material/Select"
 import { theme } from "@/app/config/theme"
 import { useRouter } from "next/navigation"
 import { useSession } from "next-auth/react"
+import { usePathname } from "next/navigation"
+import { useExerciseStatus } from "@/components/fetchExerciseStatus"
 
 interface StatusSelectProps {
   width?: "30%" | "70%" | "100%"
 }
 
 export default function StatusSelect({ width = "30%" }: StatusSelectProps) {
-  const [status, setStatus] = React.useState<string>("statusPending")
-  const [backgroundColor, setBackgroundColor] = React.useState<string>("rgb(225, 225, 225)")
+  const [status, setStatus] = React.useState<string>("NotStarted")
+  const [backgroundColor, setBackgroundColor] =
+    React.useState<string>("rgb(225, 225, 225)")
   const router = useRouter()
   const { data: session } = useSession()
 
-  const handleChange = (event: SelectChangeEvent) => {
+  const pathname = usePathname()
+
+  const extractIdsFromUrl = (pathname: string): string[] | null => {
+    const parts: string[] = pathname.split("/")
+
+    if (parts.length === 5) {
+      const topicId = parts[3].split("-")[0]
+      const itemId = parts[4].split("-")[0]
+
+    return (topicId && itemId) ? [topicId, itemId] : null
+
+    }
+
+    return null
+  }
+
+  const ids = extractIdsFromUrl(pathname)
+  const {
+    status: exerciseStatus,
+    isLoading,
+    updateStatus,
+  } = useExerciseStatus({
+    topicId: ids?.[0] || "",
+    itemId: ids?.[1] || "",
+  })
+
+  const handleChange = async (event: SelectChangeEvent) => {
     const value = event.target.value as string
     setStatus(value)
-
 
     if (!session) {
       const currentUrl = encodeURIComponent(window.location.href)
       router.push(`/login?callbackUrl=${currentUrl}`)
+      return
     }
+
+    if (!ids) return
+    await updateStatus(value)
   }
 
-
   React.useEffect(() => {
+    setStatus(exerciseStatus)
+  }, [exerciseStatus])
+
+  React.useMemo(() => {
     switch (status) {
-      case "statusConcluded":
+      case "Completed":
         setBackgroundColor(theme.palette.statusSelect?.light || "")
         break
-      case "statusInProgress":
+      case "InProgress":
         setBackgroundColor(theme.palette.statusSelect?.dark || "")
         break
-      case "statusPending":
+      case "NotStarted":
         setBackgroundColor(theme.palette.statusSelect?.main || "")
         break
       default:
@@ -52,15 +87,15 @@ export default function StatusSelect({ width = "30%" }: StatusSelectProps) {
       sx={{
         backgroundColor,
         width,
-        minWidth: '200px',
-        '@media (max-width: 600px)': {
-          maxWidth: '264px'
-        }
+        minWidth: "200px",
+        "@media (max-width: 600px)": {
+          maxWidth: "264px",
+        },
       }}
     >
       <FormControl fullWidth>
         <InputLabel
-          shrink={true}
+          shrink
           id="statusLeveling"
           sx={{
             color: "#000000",
@@ -72,12 +107,13 @@ export default function StatusSelect({ width = "30%" }: StatusSelectProps) {
           Status
         </InputLabel>
         <Select
-          notched={true}
+          notched
           labelId="statusLeveling"
           id="statusSelect"
-          value={status}
+          value={status || "NotStarted"}
           label="Status"
           onChange={handleChange}
+          disabled={isLoading}
           sx={{
             "& .MuiOutlinedInput-notchedOutline": {
               borderColor: "#000000",
@@ -88,9 +124,9 @@ export default function StatusSelect({ width = "30%" }: StatusSelectProps) {
             height: "40px",
           }}
         >
-          <MenuItem value="statusPending">Não Iniciado</MenuItem>
-          <MenuItem value="statusInProgress">Em Andamento</MenuItem>
-          <MenuItem value="statusConcluded">Concluído</MenuItem>
+          <MenuItem value="NotStarted">Não Iniciado</MenuItem>
+          <MenuItem value="InProgress">Em Andamento</MenuItem>
+          <MenuItem value="Completed">Concluído</MenuItem>
         </Select>
       </FormControl>
     </Box>
