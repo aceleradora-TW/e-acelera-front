@@ -24,9 +24,44 @@ export default function StatusSelect({ width = "30%" }: StatusSelectProps) {
 
   const pathname = usePathname()
 
+  const getIdsTopcisFromUrl = (pathname: string): string[] | null => {
+    const parts: string[] = pathname.split("/")
+    
+    if (parts.length === 4) {
+      const topicId = parts[3].split("-")[0]
+
+    return (topicId) ? [topicId] : null
+
+    }
+
+    return null
+  }
+  const topicIds = getIdsTopcisFromUrl(pathname)
+ console.log(topicIds)
+  const requisicao = async (topicIds: string[] | null) => {
+    if(!topicIds){
+      return null
+    }
+    try{
+    const response = await fetch(`/api/backend/getTopicExercisesStatus`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "topicId":topicIds[0], 
+      },
+    });
+  
+    const data = await response.json();
+    console.log(data)
+    return data;
+  }catch{
+    console.error("deu erroo")
+  }
+  };
+  requisicao(topicIds)
   const extractIdsFromUrl = (pathname: string): string[] | null => {
     const parts: string[] = pathname.split("/")
-
+    
     if (parts.length === 5) {
       const topicId = parts[3].split("-")[0]
       const itemId = parts[4].split("-")[0]
@@ -62,8 +97,10 @@ export default function StatusSelect({ width = "30%" }: StatusSelectProps) {
     await updateStatus(value)
   }
 
-  React.useEffect(() => {
+  React.useEffect(() => { 
+    if(exerciseStatus && ids){
     setStatus(exerciseStatus)
+   }
   }, [exerciseStatus])
 
   React.useMemo(() => {

@@ -4,12 +4,11 @@ import { NextRequest, NextResponse } from "next/server"
 export async function GET(req: NextRequest) {
   const header = headers()
   const topicId = header.get(`topicId`)
-  const itemId = header.get(`itemId`)
   const accessToken = req.cookies.get("next-auth.session-token")?.value || req.cookies.get("__Secure-next-auth.session-token")?.value;
 
-  if (!topicId || !itemId) {
+  if (!topicId) {
     return NextResponse.json(
-      { error: "topicId and itemId are required" },
+      { error: "topicId are required" },
       { status: 400 }
     )
   }
@@ -23,7 +22,7 @@ export async function GET(req: NextRequest) {
 
   try {
     const baseUrl = process.env.BACKEND_BASE_URL
-    const response = await fetch(`${baseUrl}/topic/${topicId}/item/${itemId}`, {
+    const response = await fetch(`${baseUrl}/topic/${topicId}/item`, {
       method: "GET",
       headers: {
         Authorization: `Bearer ${accessToken}`,
@@ -46,7 +45,7 @@ export async function GET(req: NextRequest) {
     }
 
     const data = await response.json()
-    const statusData = data[0].itemStatus
+    const statusData = data[0]
 
     return NextResponse.json({ status: statusData }, { status: 200 })
   } catch (error) {
