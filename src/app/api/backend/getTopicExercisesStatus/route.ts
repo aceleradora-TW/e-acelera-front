@@ -6,6 +6,7 @@ export async function GET(req: NextRequest) {
   const topicId = header.get(`topicId`)
   const accessToken = req.cookies.get("next-auth.session-token")?.value || req.cookies.get("__Secure-next-auth.session-token")?.value;
 
+
   if (!topicId) {
     return NextResponse.json(
       { error: "topicId are required" },
@@ -29,7 +30,7 @@ export async function GET(req: NextRequest) {
         "Content-Type": "application/json",
       },
     })
-
+    
     if (response.status === 401) {
       return NextResponse.json(
         { error: "Unauthorized: Invalid or expired token" },
@@ -45,7 +46,7 @@ export async function GET(req: NextRequest) {
     }
 
     const data = await response.json()
-    const statusData = data[0]
+    const statusData = data
 
     return NextResponse.json({ status: statusData }, { status: 200 })
   } catch (error) {

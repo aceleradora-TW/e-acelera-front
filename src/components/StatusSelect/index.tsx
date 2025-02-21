@@ -37,12 +37,17 @@ export default function StatusSelect({ width = "30%" }: StatusSelectProps) {
     return null
   }
   const topicIds = getIdsTopcisFromUrl(pathname)
- console.log(topicIds)
+
+  const topicIdsRef = React.useRef<string[] | null>(null);
+ 
   const requisicao = async (topicIds: string[] | null) => {
-    if(!topicIds){
-      return null
+
+    if (!topicIds || JSON.stringify(topicIds) === JSON.stringify(topicIdsRef.current)) {
+      return null;
     }
+
     try{
+    topicIdsRef.current = topicIds;
     const response = await fetch(`/api/backend/getTopicExercisesStatus`, {
       method: "GET",
       headers: {
@@ -58,7 +63,11 @@ export default function StatusSelect({ width = "30%" }: StatusSelectProps) {
     console.error("deu erroo")
   }
   };
-  requisicao(topicIds)
+
+  React.useEffect(() => {
+    requisicao(topicIds);
+  }, [topicIds]);
+ 
   const extractIdsFromUrl = (pathname: string): string[] | null => {
     const parts: string[] = pathname.split("/")
     
