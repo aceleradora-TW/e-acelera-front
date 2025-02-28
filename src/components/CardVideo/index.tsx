@@ -21,12 +21,14 @@ interface CardVideoProps {
   title: string;
   videoLink: string;
   references?: string;
+  videoId?: string;
 }
 export const CardVideo: React.FC<CardVideoProps> = ({
   text,
   title,
   videoLink,
   references,
+  videoId,
 }) => {
   function getYouTubeEmbedUrl(url: string): string {
     const videoId = url.split("v=")[1]?.split("&")[0];
@@ -52,7 +54,7 @@ export const CardVideo: React.FC<CardVideoProps> = ({
           <ReactMarkdown components={components}>{text}</ReactMarkdown>
         </Box>
         <Box sx={{ paddingTop: 2 }}>
-          <StatusSelect width="30%"/> 
+          <StatusSelect id={videoId} width="30%"/> 
         </Box>
       </Box>
     </Box>

@@ -13,7 +13,7 @@ import { useExerciseStatus } from "@/components/fetchExerciseStatus"
 
 interface StatusSelectProps {
   width?: "30%" | "70%" | "100%",
-  id: string
+  id?: string
 }
 
 export default function StatusSelect({ width = "30%", id }: StatusSelectProps) {
@@ -58,7 +58,12 @@ export default function StatusSelect({ width = "30%", id }: StatusSelectProps) {
     });
   
     const data = await response.json();
-    console.log(data)
+    const arrayData = data.status
+    arrayData.forEach((element: any) => {
+      if(element.itemId === id){
+        setStatus(element.itemStatus)
+      }
+    });
     return data;
   }catch{
     console.error("deu erroo")

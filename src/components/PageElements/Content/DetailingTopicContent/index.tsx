@@ -24,6 +24,7 @@ const TopicContent: React.FC<{ field: TopicField }> = ({ field }) => (
       title={field.video}
       videoLink={field.videoLink}
       references={field.videoReference}
+      videoId={field.videoInfo}
     />
     <Grid item xl={12} lg={9} md={6} sm={3}>
       <Heading variant="h2" text={"Exercícios"} />
