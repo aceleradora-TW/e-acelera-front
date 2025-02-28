@@ -12,10 +12,11 @@ import { usePathname } from "next/navigation"
 import { useExerciseStatus } from "@/components/fetchExerciseStatus"
 
 interface StatusSelectProps {
-  width?: "30%" | "70%" | "100%"
+  width?: "30%" | "70%" | "100%",
+  id: string
 }
 
-export default function StatusSelect({ width = "30%" }: StatusSelectProps) {
+export default function StatusSelect({ width = "30%", id }: StatusSelectProps) {
   const [status, setStatus] = React.useState<string>("NotStarted")
   const [backgroundColor, setBackgroundColor] =
     React.useState<string>("rgb(225, 225, 225)")
@@ -130,6 +131,7 @@ export default function StatusSelect({ width = "30%" }: StatusSelectProps) {
 
   return (
     <Box
+      id={id}
       sx={{
         backgroundColor,
         width,
