@@ -1,138 +1,95 @@
-import * as React from "react"
-import Box from "@mui/material/Box"
-import InputLabel from "@mui/material/InputLabel"
-import MenuItem from "@mui/material/MenuItem"
-import FormControl from "@mui/material/FormControl"
-import Select from "@mui/material/Select"
-import { SelectChangeEvent } from "@mui/material/Select"
-import { theme } from "@/app/config/theme"
-import { useRouter } from "next/navigation"
-import { useSession } from "next-auth/react"
-import { usePathname } from "next/navigation"
-import { useExerciseStatus } from "@/components/fetchExerciseStatus"
+import * as React from "react";
+import Box from "@mui/material/Box";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
+import { SelectChangeEvent } from "@mui/material/Select";
+import { theme } from "@/app/config/theme";
+import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
+import { usePathname } from "next/navigation";
+import { useStatus } from "@/components/fetchStatus";
 
 interface StatusSelectProps {
-  width?: "30%" | "70%" | "100%",
-  id?: string
+  width?: "30%" | "70%" | "100%";
+  id?: string;
 }
 
 export default function StatusSelect({ width = "30%", id }: StatusSelectProps) {
-  const [status, setStatus] = React.useState<string>("NotStarted")
+  const [status, setStatus] = React.useState<string>("NotStarted");
   const [backgroundColor, setBackgroundColor] =
-    React.useState<string>("rgb(225, 225, 225)")
-  const router = useRouter()
-  const { data: session } = useSession()
+    React.useState<string>("rgb(225, 225, 225)");
+  const router = useRouter();
+  const { data: session } = useSession();
 
-  const pathname = usePathname()
+  const pathname = usePathname();
 
-  const getIdsTopcisFromUrl = (pathname: string): string[] | null => {
-    const parts: string[] = pathname.split("/")
-    
-    if (parts.length === 4) {
-      const topicId = parts[3].split("-")[0]
+  const extractIdsFromUrl = (pathname: string): string[] | null => {
+    const parts: string[] = pathname.split("/");
 
-    return (topicId) ? [topicId] : null
-
+    if(parts.length === 4 ){
+      const topicId = parts[3].split("-")[0];
+      return topicId ? [topicId]: null
     }
 
-    return null
-  }
-  const topicIds = getIdsTopcisFromUrl(pathname)
+    if (parts.length === 5) {
+      const topicId = parts[3].split("-")[0];
+      const itemId = parts[4].split("-")[0] || "";
 
-  const topicIdsRef = React.useRef<string[] | null>(null);
- 
-  const requisicao = async (topicIds: string[] | null) => {
-
-    if (!topicIds || JSON.stringify(topicIds) === JSON.stringify(topicIdsRef.current)) {
-      return null;
+      return topicId && itemId ? [topicId, itemId] : null;
     }
 
-    try{
-    topicIdsRef.current = topicIds;
-    const response = await fetch(`/api/backend/getTopicExercisesStatus`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        "topicId":topicIds[0], 
-      },
-    });
-  
-    const data = await response.json();
-    const arrayData = data.status
-    arrayData.forEach((element: any) => {
-      if(element.itemId === id){
-        setStatus(element.itemStatus)
-      }
-    });
-    return data;
-  }catch{
-    console.error("deu erroo")
-  }
+    return null;
   };
 
-  React.useEffect(() => {
-    requisicao(topicIds);
-  }, [topicIds]);
- 
-  const extractIdsFromUrl = (pathname: string): string[] | null => {
-    const parts: string[] = pathname.split("/")
-    
-    if (parts.length === 5) {
-      const topicId = parts[3].split("-")[0]
-      const itemId = parts[4].split("-")[0]
+  const ids = extractIdsFromUrl(pathname);
 
-    return (topicId && itemId) ? [topicId, itemId] : null
-
-    }
-
-    return null
-  }
-
-  const ids = extractIdsFromUrl(pathname)
   const {
     status: exerciseStatus,
     isLoading,
     updateStatus,
-  } = useExerciseStatus({
+  } = useStatus({
     topicId: ids?.[0] || "",
     itemId: ids?.[1] || "",
-  })
+    pageId: id,
+  });
 
   const handleChange = async (event: SelectChangeEvent) => {
-    const value = event.target.value as string
-    setStatus(value)
+    const value = event.target.value as string;
+    setStatus(value);
 
     if (!session) {
-      const currentUrl = encodeURIComponent(window.location.href)
-      router.push(`/login?callbackUrl=${currentUrl}`)
-      return
+      const currentUrl = encodeURIComponent(window.location.href);
+      router.push(`/login?callbackUrl=${currentUrl}`);
+      return;
     }
 
-    if (!ids) return
-    await updateStatus(value)
-  }
+    if (!ids) return;
+    await updateStatus(value);
+  };
 
-  React.useEffect(() => { 
-    if(exerciseStatus && ids){
-    setStatus(exerciseStatus)
-   }
-  }, [exerciseStatus])
+  React.useEffect(() => {
+    if (exerciseStatus && ids) {
+      setStatus(exerciseStatus);
+    }
+  }, [exerciseStatus]);
 
   React.useMemo(() => {
     switch (status) {
       case "Completed":
-        setBackgroundColor(theme.palette.statusSelect?.light || "")
-        break
+        setBackgroundColor(theme.palette.statusSelect?.light || "");
+        break;
       case "InProgress":
-        setBackgroundColor(theme.palette.statusSelect?.dark || "")
-        break
+        setBackgroundColor(theme.palette.statusSelect?.dark || "");
+        break;
       case "NotStarted":
-        setBackgroundColor(theme.palette.statusSelect?.main || "")
-        break
+        setBackgroundColor(theme.palette.statusSelect?.main || "");
+        break;
       default:
-        setBackgroundColor("rgb(225, 225, 225)")
+        setBackgroundColor("rgb(225, 225, 225)");
     }
-  }, [status])
+  }, [status]);
 
   return (
     <Box
@@ -183,5 +140,5 @@ export default function StatusSelect({ width = "30%", id }: StatusSelectProps) {
         </Select>
       </FormControl>
     </Box>
-  )
+  );
 }
