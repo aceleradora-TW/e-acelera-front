@@ -89,11 +89,13 @@ export const useStatus = ({
       if (!response.ok) throw new Error(`Erro ${response.status}`)
 
       const data = await response.json();
-
-      const matchedItem = data.status.find((element: any) => element.itemId === pageId);
-      if (matchedItem) {
-        setStatus(matchedItem.itemStatus);
-      }
+    
+      data.status.map((element: any) =>{
+          if (element.itemId === pageId){
+            setStatus(element.itemStatus)
+          }
+      });
+         
     } catch (error) {
       console.error("Erro ao buscar status dos exercícios do tópico:", error);
     }
@@ -106,3 +108,5 @@ export const useStatus = ({
 
   return { status, isLoading, updateStatus };
 };
+
+
