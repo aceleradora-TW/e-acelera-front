@@ -7,7 +7,7 @@ export async function PUT(req: NextRequest) {
   const topicId = header.get(`topicId`)
   const itemId = header.get(`itemId`)
   const itemStatus = header.get(`itemStatus`)
-  const accessToken = req.cookies.get("next-auth.session-token")?.value || req.cookies.get("__Secure-next-auth.session-token")?.value;
+  const accessToken = req.cookies.get("next-auth.session-token")?.value || req.cookies.get("__Secure-next-auth.session-token")?.value
 
   if (!topicId || !itemId) {
     return NextResponse.json(

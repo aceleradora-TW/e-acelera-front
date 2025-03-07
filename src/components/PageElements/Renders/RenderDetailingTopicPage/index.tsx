@@ -16,7 +16,7 @@ if (error) {
 if (!renderData) {
     return <NoData/>
 }
-
+console.log(id, renderData)
   return (
     <LayoutPage>
       <DetailingTopicContent data={renderData} id={id} />

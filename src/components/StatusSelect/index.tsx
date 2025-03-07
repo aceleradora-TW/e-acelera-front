@@ -9,7 +9,7 @@ import { theme } from "@/app/config/theme";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import { usePathname } from "next/navigation";
-import { useStatus } from "@/components/fetchStatus";
+import { useStatus } from "@/components/fetchStatus/fetchStatusExercise";
 
 interface StatusSelectProps {
   width?: "30%" | "70%" | "100%";
@@ -51,8 +51,7 @@ export default function StatusSelect({ width = "30%", id }: StatusSelectProps) {
     updateStatus,
   } = useStatus({
     topicId: ids?.[0] || "",
-    itemId: ids?.[1] || "",
-    pageId: id,
+    itemId: ids?.[1] || ""
   });
 
   const handleChange = async (event: SelectChangeEvent) => {
