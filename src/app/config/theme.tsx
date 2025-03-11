@@ -15,13 +15,13 @@ type ThemeProp = {
 
 export enum themePalette {
   button = "rgb(11, 73, 122)",
-  title = "rgb(0, 44, 83)",
-  descriptionCard = "rgb(44, 44, 44)",
+  primaryTextColor = "rgb(0, 44, 83)",
+  defaultTextColor = "rgb(44, 44, 44)",
   statusInProgress = "rgb(172, 238, 245)",
-  statusConcluded = "rgb(158, 255, 133)",
-  statusPending = "rgb(222, 229, 216)",
-  whiteBg = "rgb(255, 255, 255)",
-  hoverBg = "rgb(154, 192, 201)",
+  statusCompleted = "rgb(158, 255, 133)",
+  statusNotStarted = "rgb(222, 229, 216)",
+  baseBgColor = "rgb(255, 255, 255)",
+  loginHover = "rgb(154, 192, 201)",
   dropdownContentColor = "rgb(87, 87, 87)"
 }
 
@@ -517,7 +517,7 @@ declare module "@mui/material/styles" {
 const theme = createTheme({
   customStyles: {
     button: {
-      backgroundColor: themePalette.whiteBg,
+      backgroundColor: themePalette.baseBgColor,
       borderColor: themePalette.button,
       color: themePalette.button,
       fontSize: "16px",
@@ -539,9 +539,9 @@ const theme = createTheme({
     },
     linkActive: {
       borderBottom: "solid",
-      color: themePalette.title,
+      color: themePalette.primaryTextColor,
       borderBottomWidth: "3px",
-      borderBottomColor: themePalette.title,
+      borderBottomColor: themePalette.primaryTextColor,
       display: "block",
       textTransform: "none",
       fontSize: "18px",
@@ -556,7 +556,7 @@ const theme = createTheme({
       borderRadius: "0"
     },
     link: {
-      color: themePalette.descriptionCard,
+      color: themePalette.defaultTextColor,
       display: "block",
       textTransform: "none",
       fontSize: "18px",
@@ -571,7 +571,7 @@ const theme = createTheme({
       borderRadius: "0"
     },
     linkReference: {
-      color: themePalette.descriptionCard
+      color: themePalette.defaultTextColor
     },
     logoType: {
       fontSize: "1.2rem",
@@ -580,7 +580,7 @@ const theme = createTheme({
       letterSpacing: "0.15px",
       lineHeight: 1.6,
       textDecoration: "none",
-      color: themePalette.title
+      color: themePalette.primaryTextColor
     },
     logoTypeLogin: {
       fontSize: "2.125rem",
@@ -588,10 +588,10 @@ const theme = createTheme({
       letterSpacing: "0.25px",
       lineHeight: 1.2,
       textDecoration: "none",
-      color: themePalette.title
+      color: themePalette.primaryTextColor
     },
     cardBody: {
-      color: themePalette.descriptionCard,
+      color: themePalette.defaultTextColor,
       wordWrap: 'break-word',
       display: '-webkit-box',
       WebkitBoxOrient: 'vertical',
@@ -603,13 +603,13 @@ const theme = createTheme({
       display: "flex",
       flexDirection: "column",
       justifyContent: "space-between",
-      backgroundColor: themePalette.whiteBg,
+      backgroundColor: themePalette.baseBgColor,
       maxWidth: "100%",
       height: "100%",
       borderWidth: 2
     },
     cardButtonContainer: {
-      backgroundColor: themePalette.whiteBg,
+      backgroundColor: themePalette.baseBgColor,
       maxWidth: 316,
       borderWidth: 2,
       height: "100%",
@@ -640,7 +640,7 @@ const theme = createTheme({
       marginBottom: 5.5
     },
     cardTitle: {
-      color: themePalette.title,
+      color: themePalette.primaryTextColor,
       wordWrap: "break-word",
       display: '-webkit-box',
       WebkitLineClamp: 3,
@@ -692,12 +692,12 @@ const theme = createTheme({
     },
     title: {
       textAlign: "left",
-      color: themePalette.title,
+      color: themePalette.primaryTextColor,
       margin: "20px 0"
     },
     breadCrumb: {
       textDecoration: "none",
-      color: themePalette.title,
+      color: themePalette.primaryTextColor,
       marginTop: 1.2
     },
     cardVideo: {
@@ -748,21 +748,21 @@ const theme = createTheme({
   },
   palette: {
     statusSelect: {
-      main: themePalette.statusPending,
-      light: themePalette.statusConcluded,
+      main: themePalette.statusNotStarted,
+      light: themePalette.statusCompleted,
       dark: themePalette.statusInProgress
     },
     buttonHover: {
       main: themePalette.button,
-      light: themePalette.hoverBg,
-      contrastText: themePalette.whiteBg
+      light: themePalette.loginHover,
+      contrastText: themePalette.baseBgColor
     },
     textColor: {
-      main: themePalette.title,
-      light: themePalette.descriptionCard
+      main: themePalette.primaryTextColor,
+      light: themePalette.defaultTextColor
     },
     bgColor: {
-      main: themePalette.whiteBg,
+      main: themePalette.baseBgColor,
       light: themePalette.dropdownContentColor
     }
   },
