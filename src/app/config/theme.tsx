@@ -1,17 +1,17 @@
-'use client';
+'use client'
 import {
   CssBaseline,
   PaletteColor,
   PaletteColorOptions,
   ThemeProvider,
   createTheme,
-} from "@mui/material";
+} from "@mui/material"
 
-import React from "react";
+import React from "react"
 
 type ThemeProp = {
-  children: JSX.Element;
-};
+  children: JSX.Element
+}
 
 export enum themePalette {
   button = "rgb(11, 73, 122)",
@@ -28,492 +28,492 @@ export enum themePalette {
 
 declare module "@mui/material/styles" {
   interface PaletteOptions {
-    button?: PaletteColorOptions;
-    buttonHover?: PaletteColorOptions;
-    statusSelect?: PaletteColorOptions;
-    textColor?: PaletteColorOptions;
-    bgColor?: PaletteColorOptions;
-    customClass?: PaletteColorOptions;
+    button?: PaletteColorOptions
+    buttonHover?: PaletteColorOptions
+    statusSelect?: PaletteColorOptions
+    textColor?: PaletteColorOptions
+    bgColor?: PaletteColorOptions
+    customClass?: PaletteColorOptions
   }
 
   interface Palette {
-    button?: PaletteColor;
-    buttonHover?: PaletteColor;
-    statusSelect?: PaletteColor;
-    textColor?: PaletteColor;
-    bgColor?: PaletteColor;
-    customClass?: PaletteColor;
+    button?: PaletteColor
+    buttonHover?: PaletteColor
+    statusSelect?: PaletteColor
+    textColor?: PaletteColor
+    bgColor?: PaletteColor
+    customClass?: PaletteColor
   }
 
   interface Theme {
     customStyles: {
       button: {
-        backgroundColor: string;
-        borderColor: string;
-        color: string;
-        fontSize: string;
-        lineHeight: number;
-        fontWeight: number;
-        letterSpacing: number;
-        textTransform: string;
-        padding: string;
-        borderRadius: number;
-        border: number;
-      };
+        backgroundColor: string
+        borderColor: string
+        color: string
+        fontSize: string
+        lineHeight: number
+        fontWeight: number
+        letterSpacing: number
+        textTransform: string
+        padding: string
+        borderRadius: number
+        border: number
+      },
       description: {
-        display: string;
-        flexDirection: string;
-        justifyContent: string;
-        padding: string;
-        boxShadow: string;
-        borderRadius: string;
-      };
+        display: string
+        flexDirection: string
+        justifyContent: string
+        padding: string
+        boxShadow: string
+        borderRadius: string
+      },
       linkActive: {
-        borderBottom: string;
-        color: string;
-        borderBottomWidth: string;
-        borderBottomColor: string;
-        display: string;
-        textTransform: string;
-        fontSize: string;
-        lineHeight: number;
-        fontWeight: number;
-        letterSpacing: number;
-        margin: string;
-        padding: string;
+        borderBottom: string
+        color: string
+        borderBottomWidth: string
+        borderBottomColor: string
+        display: string
+        textTransform: string
+        fontSize: string
+        lineHeight: number
+        fontWeight: number
+        letterSpacing: number
+        margin: string
+        padding: string
         "&:hover": {
-          backgroundColor: string;
-      }
-        borderRadius: string;
-      };
+          backgroundColor: string
+        }
+        borderRadius: string
+      },
       link: {
-        color: string;
-        display: string;
-        textTransform: string;
-        fontSize: string;
-        lineHeight: number;
-        fontWeight: number;
-        letterSpacing: number;
-        margin: string;
-        padding: string;
+        color: string
+        display: string
+        textTransform: string
+        fontSize: string
+        lineHeight: number
+        fontWeight: number
+        letterSpacing: number
+        margin: string
+        padding: string
         "&:hover": {
-          backgroundColor: string;
-      }
-      borderRadius: string;
-      };
-      linkReference:{
-        color: string;
+          backgroundColor: string
+        }
+        borderRadius: string
+      },
+      linkReference: {
+        color: string
       },
       logoType: {
-        fontSize: string;
-        mr: number;
-        fontWeight: number;
-        letterSpacing: string;
-        lineHeight: number;
-        textDecoration: string;
-        color: string;
-      };
+        fontSize: string
+        mr: number
+        fontWeight: number
+        letterSpacing: string
+        lineHeight: number
+        textDecoration: string
+        color: string
+      },
       logoTypeLogin: {
-        fontSize: string;
-        mr: number;
-        fontWeight: number;
-        letterSpacing: string;
-        lineHeight: number;
-        textDecoration: string;
-        color: string;
-      };
+        fontSize: string
+        mr: number
+        fontWeight: number
+        letterSpacing: string
+        lineHeight: number
+        textDecoration: string
+        color: string
+      },
       cardBody: {
-        color: string;
-        wordWrap: string;
-        display: string;
-        WebkitBoxOrient: string;
-        WebkitLineClamp: number;
-        overflow: string;
-        textOverflow: string;
-      };
+        color: string
+        wordWrap: string
+        display: string
+        WebkitBoxOrient: string
+        WebkitLineClamp: number
+        overflow: string
+        textOverflow: string
+      },
       cardContainer: {
-        display: string,
-        flexDirection: string,
-        justifyContent: string,
-        backgroundColor: string;
-        maxWidth: string;
-        height: string;
-        borderWidth: number; 
-      };
+        display: string
+        flexDirection: string
+        justifyContent: string
+        backgroundColor: string
+        maxWidth: string
+        height: string
+        borderWidth: number
+      },
       cardButtonContainer: {
-        backgroundColor: string;
-        maxWidth: number;
-        borderWidth: number;
-        height: string;
+        backgroundColor: string
+        maxWidth: number
+        borderWidth: number
+        height: string
         "&:hover": {
-          transform: string;
-      }
-      };
+          transform: string
+        }
+      },
       cardContent: {
-        paddingBottom: number; 
-        height: number;
-      };
-      cardButtonContent:{
-        display: string; 
-        flexDirection: string; 
-        alignItems: string;
-        height: string;
-      };
+        paddingBottom: number
+        height: number
+      },
+      cardButtonContent: {
+        display: string
+        flexDirection: string
+        alignItems: string
+        height: string
+      },
       cardMedia: {
-        height: number;
-        marginBottom: number;
-      };
+        height: number
+        marginBottom: number
+      },
       cardTitle: {
-        wordWrap: string;
-        color: string;
-        display: string;
-        WebkitLineClamp: number;
-        WebkitBoxOrient: string;
-        overflow: string;
-        textOverflow: string;
-      };
+        wordWrap: string
+        color: string
+        display: string
+        WebkitLineClamp: number
+        WebkitBoxOrient: string
+        overflow: string
+        textOverflow: string
+      },
       cardLoginBox: {
         width: {
-          xs: string,
-          sm: string,
-          md: string,
-          lg: string,
+          xs: string
+          sm: string
+          md: string
+          lg: string
           xl: string
-        },
-        height: string,
-        boxShadow: string,
-        padding: string,
-      };
-      containerLogin:{
-        height: string,
-        display: string,
-        justifyContent: string,
-        marginTop: string,
-      };
-      boxLogoType:{
-        display: string, 
-        gap: string, 
-        alignItems: string,
-      };
-      h1Login:{
-        fontSize:{
-          xs: string,
-          sm: string,
-          md: string,
-          lg: string,
-          xl: string,
         }
-      };
-      body1Login:{
+        height: string
+        boxShadow: string
+        padding: string
+      },
+      containerLogin: {
+        height: string
+        display: string
+        justifyContent: string
+        marginTop: string
+      },
+      boxLogoType: {
+        display: string
+        gap: string
+        alignItems: string
+      },
+      h1Login: {
         fontSize: {
-          xs: string,
-          sm: string,
-          md: string,
-          lg: string,
-          xl: string,
-        },
-        marginBottom: string,
-      };
+          xs: string
+          sm: string
+          md: string
+          lg: string
+          xl: string
+        }
+      },
+      body1Login: {
+        fontSize: {
+          xs: string
+          sm: string
+          md: string
+          lg: string
+          xl: string
+        }
+        marginBottom: string
+      },
       title: {
-        textAlign: string;
-        color: string;
-        margin: string;
-      };
+        textAlign: string
+        color: string
+        margin: string
+      },
       breadCrumb: {
-        textDecoration: string;
-        color: string;
-        marginTop: number;
-      };
-      centralizeContent: {
-        display: string;
-        justifyContent: string;
-        alignItems: string;
-        maxWidth: string;
-        margin: string;
-      }
-      cardVideo: {
-        display: string;
-        flexDirection: string;
-        justifyContent: string;
-        padding: number;
-        boxShadow: string;
-        maxWidth: string;
-        height: string;
-        boxSizing: string;
-        borderRadius: string,
-      };
-      cardVideoLink:{
-        display: string, 
-        flexDirection: string, 
-        justifyContent: string 
-      };
-      cardVideoNumber:{
-        display: string, 
-        flexDirection: string, 
-        justifyContent: string, 
+        textDecoration: string
+        color: string
         marginTop: number
-        };
-      cardVideoSelect:{
-          display: string, 
-          flexDirection: string, 
-          justifyContent: string, 
-          marginTop: number
-      };
+      },
+      centralizeContent: {
+        display: string
+        justifyContent: string
+        alignItems: string
+        maxWidth: string
+        margin: string
+      },
+      cardVideo: {
+        display: string
+        flexDirection: string
+        justifyContent: string
+        padding: number
+        boxShadow: string
+        maxWidth: string
+        height: string
+        boxSizing: string
+        borderRadius: string
+      },
+      cardVideoLink: {
+        display: string
+        flexDirection: string
+        justifyContent: string
+      },
+      cardVideoNumber: {
+        display: string
+        flexDirection: string
+        justifyContent: string
+        marginTop: number
+      },
+      cardVideoSelect: {
+        display: string
+        flexDirection: string
+        justifyContent: string
+        marginTop: number
+      },
       cardVideoDescription: {
-        display: string, 
-        flexDirection: string, 
-        justifyContent: string, 
-        marginTop: number, 
+        display: string
+        flexDirection: string
+        justifyContent: string
+        marginTop: number
         marginRight: number
-      };
+      },
       advanceExercises: {
-        color: string,
-        padding: string,
-      };
+        color: string
+        padding: string
+      },
       cardMediaImage: {
-        maxWidth: string,
-        height: string,
-        display: string,
-        objectFit: string,
-      };
-    };
+        maxWidth: string
+        height: string
+        display: string
+        objectFit: string
+      }
+    }
   }
 
   interface ThemeOptions {
     customStyles?: {
       button?: {
-        backgroundColor?: string;
-        borderColor?: string;
-        color?: string;
-        fontSize?: string;
-        lineHeight?: number;
-        fontWeight?: number;
-        letterSpacing?: number;
-        textTransform?: string;
-        padding?: string;
-        borderRadius?: number;
-        border?: number;
-      };
-      description?:{
-        display?: string;
-        flexDirection?: string;
-        justifyContent?: string;
-        padding?: string;
-        boxShadow?: string;
-        borderRadius?: string;
-        margin?: number;
-      };
-      linkActive?: {
-        borderBottom?: string;
-        color?: string;
-        borderBottomWidth?: string;
-        borderBottomColor?: string;
-        display?: string;
-        textTransform?: string;
-        fontSize?: string;
-        lineHeight?: number;
-        fontWeight?: number;
-        letterSpacing?: number;
-        margin?: string;
-        padding?: string;
-        "&:hover": {
-          backgroundColor?: string;
-      }
-      borderRadius?: string;
-      };
-      link?: {
-        color?: string;
-        display?: string;
-        textTransform?: string;
-        fontSize?: string;
-        lineHeight?: number;
-        fontWeight?: number;
-        letterSpacing?: number;
-        margin?: string;
-        padding?: string;
-        "&:hover": {
-          backgroundColor?: string;
+        backgroundColor?: string
+        borderColor?: string
+        color?: string
+        fontSize?: string
+        lineHeight?: number
+        fontWeight?: number
+        letterSpacing?: number
+        textTransform?: string
+        padding?: string
+        borderRadius?: number
+        border?: number
       },
-      borderRadius?: string;
-      };
-      linkReference?:{
-        color?: string;
+      description?: {
+        display?: string
+        flexDirection?: string
+        justifyContent?: string
+        padding?: string
+        boxShadow?: string
+        borderRadius?: string
+        margin?: number
+      },
+      linkActive?: {
+        borderBottom?: string
+        color?: string
+        borderBottomWidth?: string
+        borderBottomColor?: string
+        display?: string
+        textTransform?: string
+        fontSize?: string
+        lineHeight?: number
+        fontWeight?: number
+        letterSpacing?: number
+        margin?: string
+        padding?: string
+        "&:hover": {
+          backgroundColor?: string
+        }
+        borderRadius?: string
+      },
+      link?: {
+        color?: string
+        display?: string
+        textTransform?: string
+        fontSize?: string
+        lineHeight?: number
+        fontWeight?: number
+        letterSpacing?: number
+        margin?: string
+        padding?: string
+        "&:hover": {
+          backgroundColor?: string
+        }
+        borderRadius?: string
+      },
+      linkReference?: {
+        color?: string
       },
       logoType?: {
-        fontSize?: string;
-        mr?: number;
-        fontWeight?: number;
-        letterSpacing?: string;
-        lineHeight?: number;
-        textDecoration?: string;
-        color?: string;
-      };
+        fontSize?: string
+        mr?: number
+        fontWeight?: number
+        letterSpacing?: string
+        lineHeight?: number
+        textDecoration?: string
+        color?: string
+      },
       logoTypeLogin?: {
-        fontSize?: string;
-        mr?: number;
-        fontWeight?: number;
-        letterSpacing?: string;
-        lineHeight?: number;
-        textDecoration?: string;
-        color?: string;
-      };
+        fontSize?: string
+        mr?: number
+        fontWeight?: number
+        letterSpacing?: string
+        lineHeight?: number
+        textDecoration?: string
+        color?: string
+      },
       cardBody?: {
-        color?: string;
-        wordWrap?: string;
-        display?: string;
-        WebkitBoxOrient?: string;
-        WebkitLineClamp?: number;
-        overflow?: string;
-        textOverflow?: string;
-      };
+        color?: string
+        wordWrap?: string
+        display?: string
+        WebkitBoxOrient?: string
+        WebkitLineClamp?: number
+        overflow?: string
+        textOverflow?: string
+      },
       cardContainer?: {
-        display?: string,
-        flexDirection?: string,
-        justifyContent?: string,
-        backgroundColor?: string;
-        maxWidth?: string;
-        height?: string;
-        borderWidth?: number; 
-      };
+        display?: string
+        flexDirection?: string
+        justifyContent?: string
+        backgroundColor?: string
+        maxWidth?: string
+        height?: string
+        borderWidth?: number
+      },
       cardButtonContainer?: {
-        backgroundColor?: string;
-        maxWidth?: number;
-        borderWidth?: number; 
-        height?: string;
+        backgroundColor?: string
+        maxWidth?: number
+        borderWidth?: number
+        height?: string
         "&:hover": {
-          transform?: string;
-      }
-      };
-      cardContent?:{
-        paddingBottom?: string;
-        height?: string;
-      };
-      cardButtonContent?:{
-        display?: string; 
-        flexDirection?: string; 
-        alignItems?: string;
-        height?: string;
-      };
+          transform?: string
+        }
+      },
+      cardContent?: {
+        paddingBottom?: string
+        height?: string
+      },
+      cardButtonContent?: {
+        display?: string
+        flexDirection?: string
+        alignItems?: string
+        height?: string
+      },
       cardMedia?: {
-        height?: number;
-        marginBottom?: number;
-      };
+        height?: number
+        marginBottom?: number
+      },
       cardTitle?: {
-        wordWrap?: string;
-        color?: string;
-        display?: string;
-        WebkitLineClamp?: number;
-        WebkitBoxOrient?: string;
-        overflow?: string;
-        textOverflow?: string;
-      };
+        wordWrap?: string
+        color?: string
+        display?: string
+        WebkitLineClamp?: number
+        WebkitBoxOrient?: string
+        overflow?: string
+        textOverflow?: string
+      },
       cardLoginBox?: {
         width?: {
-          xs: string,
-          sm: string,
-          md: string,
-          lg: string,
+          xs: string
+          sm: string
+          md: string
+          lg: string
           xl: string
-        },
-        height?: string,
-        boxShadow?: string,
-        padding?: string,
-      };
-      containerLogin?:{
-        height?: string,
-        display?: string,
-        justifyContent?: string,
-        marginTop?: string,
-      };
-      boxLogoType?:{
-        display?: string, 
-        gap?: string, 
-        alignItems?: string,
-      };
-      h1Login?:{
-        fontSize?:{
-          xs?: string,
-          sm?: string,
-          md?: string,
-          lg?: string,
-          xl?: string,
         }
-      };
-      body1Login?:{
+        height?: string
+        boxShadow?: string
+        padding?: string
+      },
+      containerLogin?: {
+        height?: string
+        display?: string
+        justifyContent?: string
+        marginTop?: string
+      },
+      boxLogoType?: {
+        display?: string
+        gap?: string
+        alignItems?: string
+      },
+      h1Login?: {
         fontSize?: {
-          xs?: string,
-          sm?: string,
-          md?: string,
-          lg?: string,
-          xl?: string,
-        },
-        marginBottom: string,
-      };
+          xs?: string
+          sm?: string
+          md?: string
+          lg?: string
+          xl?: string
+        }
+      },
+      body1Login?: {
+        fontSize?: {
+          xs?: string
+          sm?: string
+          md?: string
+          lg?: string
+          xl?: string
+        }
+        marginBottom: string
+      },
       title?: {
-        textAlign?: string,
-        color?: string,
+        textAlign?: string
+        color?: string
         margin?: string
-      };
+      },
       breadCrumb?: {
-        textDecoration?: string;
-        color?: string;
-        marginTop?: number;
-      };
-      centralizeContent?: {
-        display?: string;
-        justifyContent?: string;
-        alignItems?: string;
-        maxWidth?: string;
-        margin?: string;
-      }
-      cardVideo?: {
-        display?: string;
-        flexDirection?: string;
-        justifyContent?: string;
-        padding?: number;
-        boxShadow?: string;
-        maxWidth?: string;
-        height?: string;
-        boxSizing?: string;
-        borderRadius?: string;
-      };
-      cardVideoLink?:{
-        display?: string, 
-        flexDirection?: string, 
-        justifyContent?: string 
-      };
-      cardVideoNumber?:{
-        display?: string, 
-        flexDirection?: string, 
-        justifyContent?: string, 
+        textDecoration?: string
+        color?: string
         marginTop?: number
-        };
-        cardVideoSelect?:{
-          display?: string, 
-          flexDirection?: string, 
-          justifyContent?: string, 
-          marginTop?: number
-          };
-          cardVideoDescription?: {
-            display?: string, 
-            flexDirection?: string, 
-            justifyContent?: string, 
-            marginTop?: number, 
-            marginRight?: number
-          };
-          advanceExercises?: {
-            color?: string,
-            padding?: string,
-          };
-          cardMediaImage: {
-            maxWidth?: string,
-            height?: string,
-            display?: string,
-            objectFit?: string,
-          };
-      };
+      },
+      centralizeContent?: {
+        display?: string
+        justifyContent?: string
+        alignItems?: string
+        maxWidth?: string
+        margin?: string
+      },
+      cardVideo?: {
+        display?: string
+        flexDirection?: string
+        justifyContent?: string
+        padding?: number
+        boxShadow?: string
+        maxWidth?: string
+        height?: string
+        boxSizing?: string
+        borderRadius?: string
+      },
+      cardVideoLink?: {
+        display?: string
+        flexDirection?: string
+        justifyContent?: string
+      },
+      cardVideoNumber?: {
+        display?: string
+        flexDirection?: string
+        justifyContent?: string
+        marginTop?: number
+      },
+      cardVideoSelect?: {
+        display?: string
+        flexDirection?: string
+        justifyContent?: string
+        marginTop?: number
+      },
+      cardVideoDescription?: {
+        display?: string
+        flexDirection?: string
+        justifyContent?: string
+        marginTop?: number
+        marginRight?: number
+      },
+      advanceExercises?: {
+        color?: string
+        padding?: string
+      },
+      cardMediaImage: {
+        maxWidth?: string
+        height?: string
+        display?: string
+        objectFit?: string
+      }
     }
   }
+}
 
 const theme = createTheme({
   customStyles: {
@@ -528,16 +528,15 @@ const theme = createTheme({
       textTransform: "uppercase",
       padding: "8px 16px",
       borderRadius: 2,
-      border: 1,
-
+      border: 1
     },
-    description:{
+    description: {
       display: "flex",
       justifyContent: "space-between",
       padding: "0px 16px 16px 16px",
-      boxShadow: "0em 0em 0.4em rgb(44 44 44 / 40% );",
+      boxShadow: "0em 0em 0.4em rgb(44 44 44 / 40% )",
       borderRadius: "6px",
-      margin: 0,
+      margin: 0
     },
     linkActive: {
       borderBottom: "solid",
@@ -553,8 +552,8 @@ const theme = createTheme({
       margin: "0 0.5rem",
       padding: "8px",
       "&:hover": {
-        backgroundColor: "rgb(246, 250, 253)",
-    },
+        backgroundColor: "rgb(246, 250, 253)"
+      },
       borderRadius: "0"
     },
     link: {
@@ -566,13 +565,13 @@ const theme = createTheme({
       fontWeight: 400,
       letterSpacing: 0.4,
       margin: "0 0.8rem",
-      padding: "8px", 
+      padding: "8px",
       "&:hover": {
-        backgroundColor: "rgb(246, 250, 253)",
+        backgroundColor: "rgb(246, 250, 253)"
+      },
+      borderRadius: "0"
     },
-      borderRadius: "0",
-    },
-    linkReference:{
+    linkReference: {
       color: themePalette.descriptionCard
     },
     logoType: {
@@ -582,7 +581,7 @@ const theme = createTheme({
       letterSpacing: "0.15px",
       lineHeight: 1.6,
       textDecoration: "none",
-      color: themePalette.title,
+      color: themePalette.title
     },
     logoTypeLogin: {
       fontSize: "2.125rem",
@@ -590,7 +589,7 @@ const theme = createTheme({
       letterSpacing: "0.25px",
       lineHeight: 1.2,
       textDecoration: "none",
-      color: themePalette.title,
+      color: themePalette.title
     },
     cardBody: {
       color: themePalette.descriptionCard,
@@ -599,37 +598,37 @@ const theme = createTheme({
       WebkitBoxOrient: 'vertical',
       WebkitLineClamp: 1,
       overflow: 'hidden',
-      textOverflow: 'ellipsis',
+      textOverflow: 'ellipsis'
     },
     cardContainer: {
       display: "flex",
       flexDirection: "column",
       justifyContent: "space-between",
-      backgroundColor:themePalette.whiteBg,
+      backgroundColor: themePalette.whiteBg,
       maxWidth: "100%",
       height: "100%",
       borderWidth: 2
     },
     cardButtonContainer: {
       backgroundColor: themePalette.whiteBg,
-      maxWidth: 316, 
-      borderWidth: 2, 
-      height: "100%", 
+      maxWidth: 316,
+      borderWidth: 2,
+      height: "100%",
       "&:hover": {
-       transform: "scale(1.1)"
+        transform: "scale(1.1)"
       }
     },
-    cardContent:{
+    cardContent: {
       paddingBottom: '25%',
       height: '250px'
     },
 
-    cardButtonContent:{
-      display: "flex", 
-      flexDirection: "column", 
+    cardButtonContent: {
+      display: "flex",
+      flexDirection: "column",
       alignItems: "flex-start",
       height: "100%"
-    }, 
+    },
     centralizeContent: {
       display: 'flex',
       justifyContent: 'center',
@@ -639,14 +638,14 @@ const theme = createTheme({
     },
     cardMedia: {
       height: 152,
-      marginBottom:5.5
+      marginBottom: 5.5
     },
-    cardTitle:{
+    cardTitle: {
       color: themePalette.title,
       wordWrap: "break-word",
       display: '-webkit-box',
       WebkitLineClamp: 3,
-      WebkitBoxOrient: 'vertical', 
+      WebkitBoxOrient: 'vertical',
       overflow: 'hidden',
       textOverflow: 'ellipsis'
     },
@@ -656,41 +655,41 @@ const theme = createTheme({
         sm: "60%",
         md: "45%",
         lg: "35%",
-        xl: "30%",
+        xl: "30%"
       },
       height: "30%",
       boxShadow: "0 0 0.4em rgba(44, 44, 44, 0.4)",
-      padding: "40px",
+      padding: "40px"
     },
-    containerLogin:{
+    containerLogin: {
       height: "100%",
       display: "flex",
       justifyContent: "center",
-      marginTop: "80px",
+      marginTop: "80px"
     },
-    boxLogoType:{
-      display: "flex", 
-      gap: "20px", 
-      alignItems: "center",
+    boxLogoType: {
+      display: "flex",
+      gap: "20px",
+      alignItems: "center"
     },
-    h1Login:{
-      fontSize:{
+    h1Login: {
+      fontSize: {
         xs: "32px",
         sm: "40px",
         md: "40px",
         lg: "44px",
-        xl: "48px",
-      },
+        xl: "48px"
+      }
     },
-    body1Login:{
+    body1Login: {
       fontSize: {
         xs: "18px",
         sm: "20px",
         md: "24px",
         lg: "24px",
-        xl: "24px",
+        xl: "24px"
       },
-      marginBottom: "15px",
+      marginBottom: "15px"
     },
     title: {
       textAlign: "left",
@@ -700,74 +699,74 @@ const theme = createTheme({
     breadCrumb: {
       textDecoration: "none",
       color: themePalette.title,
-      marginTop: 1.2,
+      marginTop: 1.2
     },
-    cardVideo:{
+    cardVideo: {
       display: "flex",
-        flexDirection: "column",
-        justifyContent: "space-between",
-        padding: 2,
-        boxShadow: "0em 0em 0.4em rgb(44 44 44 / 40%)",
-        maxWidth: "100%",
-        height: "100%",
-        boxSizing: "border-box",
-        borderRadius: "6px",
+      flexDirection: "column",
+      justifyContent: "space-between",
+      padding: 2,
+      boxShadow: "0em 0em 0.4em rgb(44 44 44 / 40%)",
+      maxWidth: "100%",
+      height: "100%",
+      boxSizing: "border-box",
+      borderRadius: "6px"
     },
-    cardVideoLink:{
-      display: "flex", 
-      flexDirection: "column", 
-      justifyContent: "center" 
+    cardVideoLink: {
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "center"
     },
-    cardVideoNumber:{
-    display: "flex", 
-    flexDirection: "column", 
-    justifyContent: "center", 
-    marginTop: 4 
+    cardVideoNumber: {
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "center",
+      marginTop: 4
     },
-    cardVideoSelect:{
-      display: "flex", 
-      flexDirection: "column", 
-      justifyContent: "center", 
-      marginTop: 7 
+    cardVideoSelect: {
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "center",
+      marginTop: 7
     },
     cardVideoDescription: {
-      display: "flex", 
-      flexDirection: "column", 
-      justifyContent: "center", 
-      marginTop: 5, 
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "center",
+      marginTop: 5,
       marginRight: 1.3
     },
     advanceExercises: {
       color: themePalette.button,
-      padding: "10px 20px",
+      padding: "10px 20px"
     },
     cardMediaImage: {
       maxWidth: '100%',
       height: 'auto',
       display: 'block',
-      objectFit: 'cover',
+      objectFit: 'cover'
     }
   },
   palette: {
     statusSelect: {
       main: themePalette.statusPending,
       light: themePalette.statusConcluded,
-      dark: themePalette.statusInProgress,
+      dark: themePalette.statusInProgress
     },
     buttonHover: {
       main: themePalette.button,
       light: themePalette.hoverBg,
-      contrastText: themePalette.whiteBg,
+      contrastText: themePalette.whiteBg
     },
     textColor: {
       main: themePalette.title,
       light: themePalette.descriptionCard,
-      dark: themePalette.descriptionText,
+      dark: themePalette.descriptionText
     },
     bgColor: {
       main: themePalette.mainBg,
-      light: themePalette.whiteBg,
-    },
+      light: themePalette.whiteBg
+    }
   },
   typography: {
     h1: {
@@ -775,19 +774,19 @@ const theme = createTheme({
       letterSpacing: 0.15,
       lineHeight: "normal",
       [`@media (min-width:0px)`]: {
-        fontSize: "1.5rem",
+        fontSize: "1.5rem"
       },
       [`@media (min-width:600px)`]: {
-        fontSize: "2rem",
+        fontSize: "2rem"
       },
       [`@media (min-width:900px)`]: {
-        fontSize: "2.5rem",
+        fontSize: "2.5rem"
       },
       [`@media (min-width:1200px)`]: {
-        fontSize: "3rem",
+        fontSize: "3rem"
       },
       [`@media (min-width:1536px)`]: {
-        fontSize: "3.5rem",
+        fontSize: "3.5rem"
       }
     },
     h2: {
@@ -795,19 +794,19 @@ const theme = createTheme({
       fontWeight: 500,
       letterSpacing: 0.15,
       [`@media (min-width:0px)`]: {
-        fontSize: "1.5rem",
+        fontSize: "1.5rem"
       },
       [`@media (min-width:600px)`]: {
-        fontSize: "1.8rem",
+        fontSize: "1.8rem"
       },
       [`@media (min-width:900px)`]: {
-        fontSize: "2.2rem",
+        fontSize: "2.2rem"
       },
       [`@media (min-width:1200px)`]: {
-        fontSize: "2.4rem",
+        fontSize: "2.4rem"
       },
       [`@media (min-width:1536px)`]: {
-        fontSize: "2.4rem",
+        fontSize: "2.4rem"
       }
     },
     h3: {
@@ -815,35 +814,35 @@ const theme = createTheme({
       fontWeight: 500,
       letterSpacing: 0.15,
       [`@media (min-width:0px)`]: {
-        fontSize: "1.2rem",
+        fontSize: "1.2rem"
       },
       [`@media (min-width:600px)`]: {
-        fontSize: "1.4rem",
+        fontSize: "1.4rem"
       },
       [`@media (min-width:900px)`]: {
-        fontSize: "1.5rem",
+        fontSize: "1.5rem"
       },
       [`@media (min-width:1200px)`]: {
-        fontSize: "1.6rem",
+        fontSize: "1.6rem"
       },
       [`@media (min-width:1536px)`]: {
-        fontSize: "1.6rem",
+        fontSize: "1.6rem"
       }
     },
     body1: {
       fontSize: "1rem",
       lineHeight: 1.5,
       fontWeight: 400,
-      letterSpacing: 0.15,  
+      letterSpacing: 0.15
     },
     caption: {
       fontSize: "1.4rem",
       lineHeight: 1.6,
       fontWeight: 500,
-      letterSpacing: 0.15,
-    },
-  },
-});
+      letterSpacing: 0.15
+    }
+  }
+})
 
 export const ThemeConfig: React.FC<ThemeProp> = ({ children }) => {
   return (
@@ -851,7 +850,7 @@ export const ThemeConfig: React.FC<ThemeProp> = ({ children }) => {
       <CssBaseline />
       {children}
     </ThemeProvider>
-  );
-};
+  )
+}
 
-export { theme };
+export { theme }
