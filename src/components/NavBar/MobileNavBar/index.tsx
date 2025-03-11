@@ -41,7 +41,7 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({ list }) => {
           aria-controls="menu-appbar"
           aria-haspopup="true"
           onClick={handleOpenNavMenu}
-          sx={{ color: theme.palette.textColor?.dark }}
+          sx={{ color: theme.palette.bgColor?.light }}
         >
           <MenuIcon />
         </IconButton>

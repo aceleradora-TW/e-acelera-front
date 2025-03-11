@@ -17,13 +17,12 @@ export enum themePalette {
   button = "rgb(11, 73, 122)",
   title = "rgb(0, 44, 83)",
   descriptionCard = "rgb(44, 44, 44)",
-  descriptionText = "rgb(0, 0, 0)",
   statusInProgress = "rgb(172, 238, 245)",
   statusConcluded = "rgb(158, 255, 133)",
   statusPending = "rgb(222, 229, 216)",
-  mainBg = "rgb(245, 245, 245)",
   whiteBg = "rgb(255, 255, 255)",
-  hoverBg = "rgb(154 , 192, 201)",
+  hoverBg = "rgb(154, 192, 201)",
+  dropdownContentColor = "rgb(87, 87, 87)"
 }
 
 declare module "@mui/material/styles" {
@@ -760,12 +759,11 @@ const theme = createTheme({
     },
     textColor: {
       main: themePalette.title,
-      light: themePalette.descriptionCard,
-      dark: themePalette.descriptionText
+      light: themePalette.descriptionCard
     },
     bgColor: {
-      main: themePalette.mainBg,
-      light: themePalette.whiteBg
+      main: themePalette.whiteBg,
+      light: themePalette.dropdownContentColor
     }
   },
   typography: {

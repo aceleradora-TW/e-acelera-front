@@ -18,7 +18,7 @@ const ResponsiveAppBar: React.FC<NavBarProps> = ({ list, session }) => {
   return (
     <AppBar
       position="fixed"
-      sx={{ backgroundColor: theme.palette.bgColor?.light }}
+      sx={{ backgroundColor: theme.palette.bgColor?.main }}
     >
       <Box component="nav">
         <Container maxWidth="xl">
