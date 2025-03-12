@@ -520,7 +520,7 @@ const theme = createTheme({
       backgroundColor: themePalette.baseBgColor,
       borderColor: themePalette.button,
       color: themePalette.button,
-      fontSize: "16px",
+      fontSize: "1rem",
       lineHeight: 1.6,
       fontWeight: 500,
       letterSpacing: 0.4,
