@@ -1,6 +1,6 @@
 import React from "react"
 import { Divider, Box, Typography, useMediaQuery, Link } from "@mui/material"
-import { theme, themePalette } from "@/app/config/theme"
+import { theme } from "@/app/config/theme"
 import ReactMarkdown from "react-markdown"
 import { DescriptionFull } from "../DescriptionFull"
 
@@ -45,7 +45,7 @@ export const DescriptionDivider: React.FC<DescriptionDividerProps> = ({ text }) 
     a: (props: React.HTMLAttributes<HTMLAnchorElement>) => (
       <Link
         variant="caption" target="_blank" rel="noreferrer"
-        sx={{ color: themePalette.descriptionCard, textDecorationColor: themePalette.descriptionCard, display: "block" }}
+        sx={{ color: theme.palette.textColor?.light, textDecorationColor: theme.palette.textColor?.light, display: "block" }}
         {...props} />
     )
   }

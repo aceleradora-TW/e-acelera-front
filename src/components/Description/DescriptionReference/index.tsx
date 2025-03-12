@@ -1,6 +1,6 @@
 import React from "react";
 import { Box, Grid, Link, Typography } from "@mui/material";
-import { theme, themePalette } from "@/app/config/theme";
+import { theme } from "@/app/config/theme";
 import ReactMarkdown from "react-markdown";
 
 interface DescriptionReferenceProps {
@@ -17,8 +17,8 @@ export const DescriptionReference: React.FC<DescriptionReferenceProps> = ({
         target="_blank"
         rel="noreferrer"
         sx={{
-          color: themePalette.descriptionCard,
-          textDecorationColor: themePalette.descriptionCard,
+          color: theme.palette.textColor?.light,
+          textDecorationColor: theme.palette.textColor?.light,
           display: "block",
         }}
         {...props}

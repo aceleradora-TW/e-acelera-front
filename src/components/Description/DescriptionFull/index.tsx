@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Box, Link, Typography, Snackbar, Alert, Grid, List } from "@mui/material";
-import { theme, themePalette } from "@/app/config/theme";
+import { theme } from "@/app/config/theme";
 import ReactMarkdown from "react-markdown";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { materialDark } from "react-syntax-highlighter/dist/cjs/styles/prism";
@@ -35,8 +35,8 @@ export const DescriptionFull: React.FC<DescriptionFullProps> = ({
         target="_blank"
         rel="noreferrer"
         sx={{
-          color: themePalette.descriptionCard,
-          textDecorationColor: themePalette.descriptionCard,
+          color: theme.palette.textColor?.light,
+          textDecorationColor: theme.palette.textColor?.light,
           display: "inline-block",
         }}
         {...props}
