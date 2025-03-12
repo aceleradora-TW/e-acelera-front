@@ -3,6 +3,7 @@ import { Box, SelectChangeEvent, Typography } from "@mui/material";
 import { theme } from "../../app/config/theme";
 import ReactMarkdown from "react-markdown";
 import StatusSelect from "../StatusSelect";
+import { ApiTopic } from "@/types/typesTopic";
 
 const components = {
   h1: (props: React.HTMLAttributes<HTMLHeadingElement>) => (
@@ -22,6 +23,7 @@ interface CardVideoProps {
   videoLink: string;
   references?: string;
   videoId?: string;
+  dataStatus: ApiTopic;
 }
 export const CardVideo: React.FC<CardVideoProps> = ({
   text,
@@ -29,12 +31,12 @@ export const CardVideo: React.FC<CardVideoProps> = ({
   videoLink,
   references,
   videoId,
+  dataStatus,
 }) => {
   function getYouTubeEmbedUrl(url: string): string {
     const videoId = url.split("v=")[1]?.split("&")[0];
     return `https://www.youtube.com/embed/${videoId}`;
   }
-
   return (
     <Box sx={theme.customStyles.cardVideo}>
       <Box sx={theme.customStyles.cardVideoLink}>
@@ -54,7 +56,7 @@ export const CardVideo: React.FC<CardVideoProps> = ({
           <ReactMarkdown components={components}>{text}</ReactMarkdown>
         </Box>
         <Box sx={{ paddingTop: 2 }}>
-          <StatusSelect id={videoId} width="30%"/> 
+          <StatusSelect id={videoId} width="30%" dataStatus={dataStatus}/> 
         </Box>
       </Box>
     </Box>

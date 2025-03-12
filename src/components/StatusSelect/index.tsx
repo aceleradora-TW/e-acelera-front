@@ -10,13 +10,16 @@ import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import { usePathname } from "next/navigation";
 import { useStatus } from "@/components/fetchStatus/fetchStatusExercise";
+import { ApiTopic } from "@/types/typesTopic";
 
 interface StatusSelectProps {
   width?: "30%" | "70%" | "100%";
   id?: string;
+  dataStatus: ApiTopic;
 }
 
-export default function StatusSelect({ width = "30%", id }: StatusSelectProps) {
+export default function StatusSelect({ width = "30%", id, dataStatus }: StatusSelectProps) {
+  console.log(dataStatus)
   const [status, setStatus] = React.useState<string>("NotStarted");
   const [backgroundColor, setBackgroundColor] =
     React.useState<string>("rgb(225, 225, 225)");

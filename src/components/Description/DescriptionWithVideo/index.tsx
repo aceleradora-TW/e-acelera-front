@@ -7,6 +7,7 @@ import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { materialDark } from "react-syntax-highlighter/dist/cjs/styles/prism";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import { DescriptionFull } from "../DescriptionFull"
+import { ApiTopic } from "@/types/typesTopic";
 
 interface DescriptionWithVideoProps {
   textDescription: string;
@@ -14,7 +15,8 @@ interface DescriptionWithVideoProps {
   title: string;
   videoLink: string;
   references: string;
-  videoId: string
+  videoId: string;
+  dataStatus: ApiTopic
 }
 
 const isValidURL = (url: string): boolean => {
@@ -33,6 +35,7 @@ export const DescriptionWithVideo: React.FC<DescriptionWithVideoProps> = ({
   videoLink,
   references,
   videoId,
+  dataStatus,
 }) => {
 
 const isLinkValid = isValidURL(videoLink);
@@ -53,6 +56,7 @@ const isLinkValid = isValidURL(videoLink);
               videoLink={videoLink}
               references={references}
               videoId={videoId}
+              dataStatus={dataStatus}
             />
           </Grid>
         </Grid>
