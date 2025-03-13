@@ -1,7 +1,7 @@
 import React from "react"
 import { Grid } from "@mui/material"
 import { BreadCrumb } from "@/components/BreadCrumb"
-import { ApiResponse, DataItem, TopicField } from "@/types/type"
+import { ApiResponse, DataItem, FilteredDetailingTopicItem } from "@/types/type"
 import { DescriptionReference } from "@/components/Description/DescriptionReference"
 import { ContainerCardsExercises } from "../../Container/ContainerCardsExercises"
 import { DescriptionWithVideo } from "@/components/Description/DescriptionWithVideo"
@@ -12,11 +12,15 @@ interface DetailingContentProps {
   id: string
 }
 
-const TopicContent: React.FC<{ field: TopicField }> = ({ field }) => (
+function isFilteredDetailingTopicItem(field: any): field is FilteredDetailingTopicItem {
+  return field && "videoLink" in field && "video" in field
+}
+
+const TopicContent: React.FC<{ field: FilteredDetailingTopicItem }> = ({ field }) => (
   <>
     <Grid item xl={12} lg={9} md={6} sm={3}>
       <BreadCrumb />
-      <Heading variant="h1"text={field.title} />
+      <Heading variant="h1" text={field.title} />
     </Grid>
     <DescriptionWithVideo
       textDescription={field.description}
@@ -45,19 +49,17 @@ const TopicContent: React.FC<{ field: TopicField }> = ({ field }) => (
   </>
 )
 
-export const DetailingTopicContent: React.FC<DetailingContentProps> = ({
-  data,
-  id,
-}) => {
+export const DetailingTopicContent: React.FC<DetailingContentProps> = ({ data, id }) => {
   const filteredData = data?.data.filter(
-    (element: DataItem) => element.id === id.split("-")[0]
-  )
+    (element: DataItem) =>
+      element.id === id.split("-")[0] && isFilteredDetailingTopicItem(element.field)
+  );
 
   return (
     <>
-      {filteredData.map((element: DataItem) => (
-        <TopicContent key={element.id} field={element.field as TopicField} />
+      {filteredData?.map((element: DataItem) => (
+        <TopicContent key={element.id} field={element.field as FilteredDetailingTopicItem} />
       ))}
     </>
-  )
-}
+  );
+};

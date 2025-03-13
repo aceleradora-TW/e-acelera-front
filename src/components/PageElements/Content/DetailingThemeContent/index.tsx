@@ -1,16 +1,21 @@
-import React from "react";
-import { Grid } from "@mui/material";
-import { BreadCrumb } from "@/components/BreadCrumb";
-import { ContainerCardTopics } from "../../Container/ContainerCardsTopics";
-import { ApiResponse, DataItem, ThemeField } from "@/types/type";
-import { DescriptionDivider } from "../../../Description/DescriptionDivider";
-import { Heading } from "@/components/Heading";
+import React from "react"
+import { Grid } from "@mui/material"
+import { BreadCrumb } from "@/components/BreadCrumb"
+import { ContainerCardTopics } from "../../Container/ContainerCardsTopics"
+import { ApiResponse, DataItem, FilteredDetailingThemeItem } from "@/types/type"
+import { DescriptionDivider } from "../../../Description/DescriptionDivider"
+import { Heading } from "@/components/Heading"
 
 interface DetailingContentProps {
-  data: ApiResponse;
-  id: string;
+  data: ApiResponse
+  id: string
 }
-const ThemeContent: React.FC<{ field: ThemeField }> = ({ field }) => (
+
+function isFilteredDetailingThemeItem(field: any): field is FilteredDetailingThemeItem {
+  return field && "topicsDescription" in field && "topicsInfo" in field
+}
+
+const ThemeContent: React.FC<{ field: FilteredDetailingThemeItem }> = ({ field }) => (
   <>
     <Grid item xl={12} lg={9} md={6} sm={3}>
       <BreadCrumb />
@@ -27,15 +32,17 @@ const ThemeContent: React.FC<{ field: ThemeField }> = ({ field }) => (
     />
   </>
 )
+
 export const DetailingThemeContent: React.FC<DetailingContentProps> = ({ data, id }) => {
-  const filteredData = data?.data.filter((element: DataItem) => element.id === id.split("-")[0]);
-  
+  const filteredData = data?.data
+    .filter((element: DataItem) => element.id === id.split("-")[0])
+    .filter((element: DataItem) => isFilteredDetailingThemeItem(element.field))
+
   return (
     <>
-      {filteredData
-        .map((element: DataItem) => (
-          <ThemeContent key={element.id} field={element.field as ThemeField} />
-        ))}
+      {filteredData?.map((element: DataItem) => (
+        <ThemeContent key={element.id} field={element.field as FilteredDetailingThemeItem} />
+      ))}
     </>
-  );
-};
+  )
+}
