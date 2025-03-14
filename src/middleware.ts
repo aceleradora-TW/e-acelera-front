@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server"
 import type { NextRequest } from "next/server"
+import { BACKEND_BASE_URL } from "./utils/constants"
 
 export async function middleware(request: NextRequest) {
   const sessionToken =
@@ -13,8 +14,8 @@ export async function middleware(request: NextRequest) {
 
   if (request.nextUrl.pathname.startsWith("/login") && sessionToken) {
     try {
-      const baseUrl = process.env.BACKEND_BASE_URL
-      const response = await fetch(`${baseUrl}/login`, {
+      // const baseUrl = process.env.BACKEND_BASE_URL
+      const response = await fetch(`${BACKEND_BASE_URL}/login`, {
         method: "POST",
         headers: {
           "Authorization": `Bearer ${sessionToken.value}`,
