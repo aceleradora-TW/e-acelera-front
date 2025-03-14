@@ -1,32 +1,25 @@
-import React, { useState } from "react";
-import { Box, Typography, Grid, Link, Alert, Snackbar } from "@mui/material";
-import { theme, themePalette } from "@/app/config/theme";
-import { CardVideo } from "@/components/CardVideo";
-import ReactMarkdown from "react-markdown";
-import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { materialDark } from "react-syntax-highlighter/dist/cjs/styles/prism";
-import ContentCopyIcon from "@mui/icons-material/ContentCopy";
+import React from "react"
+import { Grid } from "@mui/material"
+import { CardVideo } from "@/components/CardVideo"
 import { DescriptionFull } from "../DescriptionFull"
-import { ApiTopic } from "@/types/typesTopic";
 
 interface DescriptionWithVideoProps {
-  textDescription: string;
-  textVideo: string;
-  title: string;
-  videoLink: string;
-  references: string;
-  videoId: string;
-  dataStatus: ApiTopic
+  textDescription: string
+  textVideo: string
+  title: string
+  videoLink: string
+  references: string
+  videoId: string
 }
 
 const isValidURL = (url: string): boolean => {
   try {
-    new URL(url);
-    return true;
+    new URL(url)
+    return true
   } catch (_) {
-    return false;
+    return false
   }
-};
+}
 
 export const DescriptionWithVideo: React.FC<DescriptionWithVideoProps> = ({
   textDescription,
@@ -35,10 +28,9 @@ export const DescriptionWithVideo: React.FC<DescriptionWithVideoProps> = ({
   videoLink,
   references,
   videoId,
-  dataStatus,
 }) => {
 
-const isLinkValid = isValidURL(videoLink);
+const isLinkValid = isValidURL(videoLink)
 
   return (
     <>
@@ -56,11 +48,10 @@ const isLinkValid = isValidURL(videoLink);
               videoLink={videoLink}
               references={references}
               videoId={videoId}
-              dataStatus={dataStatus}
             />
           </Grid>
         </Grid>
       )}
     </>
-  );
-};
+  )
+}

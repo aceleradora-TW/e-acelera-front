@@ -6,7 +6,6 @@ export async function GET(req: NextRequest) {
   const topicId = header.get(`topicId`)
   const accessToken = req.cookies.get("next-auth.session-token")?.value || req.cookies.get("__Secure-next-auth.session-token")?.value;
 
-
   if (!topicId) {
     return NextResponse.json(
       { error: "topicId are required" },

@@ -1,52 +1,55 @@
-import * as React from "react";
-import Box from "@mui/material/Box";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
-import Select from "@mui/material/Select";
-import { SelectChangeEvent } from "@mui/material/Select";
-import { theme } from "@/app/config/theme";
-import { useRouter } from "next/navigation";
-import { useSession } from "next-auth/react";
-import { usePathname } from "next/navigation";
-import { useStatus } from "@/components/fetchStatus/fetchStatusExercise";
-import { ApiTopic } from "@/types/typesTopic";
+import * as React from "react"
+import Box from "@mui/material/Box"
+import InputLabel from "@mui/material/InputLabel"
+import MenuItem from "@mui/material/MenuItem"
+import FormControl from "@mui/material/FormControl"
+import Select from "@mui/material/Select"
+import { SelectChangeEvent } from "@mui/material/Select"
+import { theme } from "@/app/config/theme"
+import { useRouter } from "next/navigation"
+import { useSession } from "next-auth/react"
+import { usePathname } from "next/navigation"
+import { useStatus } from "@/components/fetchStatus/fetchStatusExercise"
+import { DetailingTopicContext } from "@/context"
 
 interface StatusSelectProps {
-  width?: "30%" | "70%" | "100%";
-  id?: string;
-  dataStatus: ApiTopic;
+  width?: "30%" | "70%" | "100%"
+  id?: string
 }
 
-export default function StatusSelect({ width = "30%", id, dataStatus }: StatusSelectProps) {
-  console.log(dataStatus)
-  const [status, setStatus] = React.useState<string>("NotStarted");
+export default function StatusSelect({ width = "30%", id }: StatusSelectProps) {
+  const [status, setStatus] = React.useState<string>("NotStarted")
   const [backgroundColor, setBackgroundColor] =
-    React.useState<string>("rgb(225, 225, 225)");
-  const router = useRouter();
-  const { data: session } = useSession();
+    React.useState<string>("rgb(225, 225, 225)")
+  const router = useRouter()
+  const { data: session } = useSession()
+  const { topicStatus } = React.useContext(DetailingTopicContext)
+  const pathname = usePathname()
 
-  const pathname = usePathname();
-
-  const extractIdsFromUrl = (pathname: string): string[] | null => {
-    const parts: string[] = pathname.split("/");
-
-    if(parts.length === 4 ){
-      const topicId = parts[3].split("-")[0];
-      return topicId ? [topicId]: null
+  const currentStatusTopic = topicStatus?.status?.find(
+    (status) => status.itemId === id
+  )
+  React.useEffect(()=>{
+    if(currentStatusTopic) {
+      setStatus(currentStatusTopic?.itemStatus)
     }
+  }, [currentStatusTopic])
+ 
+  
+  const extractIdsFromUrl = (pathname: string): string[] | null => {
+    const parts: string[] = pathname.split("/")
 
     if (parts.length === 5) {
-      const topicId = parts[3].split("-")[0];
-      const itemId = parts[4].split("-")[0] || "";
+      const topicId = parts[3].split("-")[0]
+      const itemId = parts[4].split("-")[0] || ""
 
-      return topicId && itemId ? [topicId, itemId] : null;
+      return topicId && itemId ? [topicId, itemId] : null
     }
 
-    return null;
-  };
+    return null
+  }
 
-  const ids = extractIdsFromUrl(pathname);
+  const ids = extractIdsFromUrl(pathname)
 
   const {
     status: exerciseStatus,
@@ -54,44 +57,44 @@ export default function StatusSelect({ width = "30%", id, dataStatus }: StatusSe
     updateStatus,
   } = useStatus({
     topicId: ids?.[0] || "",
-    itemId: ids?.[1] || ""
-  });
+    itemId: ids?.[1] || "",
+  })
 
   const handleChange = async (event: SelectChangeEvent) => {
-    const value = event.target.value as string;
-    setStatus(value);
+    const value = event.target.value as string
+    setStatus(value)
 
     if (!session) {
-      const currentUrl = encodeURIComponent(window.location.href);
-      router.push(`/login?callbackUrl=${currentUrl}`);
-      return;
+      const currentUrl = encodeURIComponent(window.location.href)
+      router.push(`/login?callbackUrl=${currentUrl}`)
+      return
     }
 
-    if (!ids) return;
-    await updateStatus(value);
-  };
+    if (!ids) return
+    await updateStatus(value)
+  }
 
   React.useEffect(() => {
     if (exerciseStatus && ids) {
-      setStatus(exerciseStatus);
+      setStatus(exerciseStatus)
     }
-  }, [exerciseStatus]);
+  }, [exerciseStatus])
 
   React.useMemo(() => {
     switch (status) {
       case "Completed":
-        setBackgroundColor(theme.palette.statusSelect?.light || "");
-        break;
+        setBackgroundColor(theme.palette.statusSelect?.light || "")
+        break
       case "InProgress":
-        setBackgroundColor(theme.palette.statusSelect?.dark || "");
-        break;
+        setBackgroundColor(theme.palette.statusSelect?.dark || "")
+        break
       case "NotStarted":
-        setBackgroundColor(theme.palette.statusSelect?.main || "");
-        break;
+        setBackgroundColor(theme.palette.statusSelect?.main || "")
+        break
       default:
-        setBackgroundColor("rgb(225, 225, 225)");
+        setBackgroundColor("rgb(225, 225, 225)")
     }
-  }, [status]);
+  }, [status])
 
   return (
     <Box
@@ -142,5 +145,5 @@ export default function StatusSelect({ width = "30%", id, dataStatus }: StatusSe
         </Select>
       </FormControl>
     </Box>
-  );
+  )
 }
