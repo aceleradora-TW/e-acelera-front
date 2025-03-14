@@ -14,7 +14,6 @@ export async function middleware(request: NextRequest) {
 
   if (request.nextUrl.pathname.startsWith("/login") && sessionToken) {
     try {
-      // const baseUrl = process.env.BACKEND_BASE_URL
       const response = await fetch(`${BACKEND_BASE_URL}/login`, {
         method: "POST",
         headers: {
