@@ -1,4 +1,4 @@
-import React  from "react"
+import React from "react"
 import { Grid } from "@mui/material"
 import { CardVideo } from "@/components/CardVideo"
 import { DescriptionFull } from "../DescriptionFull"
@@ -9,6 +9,7 @@ interface DescriptionWithVideoProps {
   title: string
   videoLink: string
   references: string
+  videoId: string
 }
 
 const isValidURL = (url: string): boolean => {
@@ -26,6 +27,7 @@ export const DescriptionWithVideo: React.FC<DescriptionWithVideoProps> = ({
   title,
   videoLink,
   references,
+  videoId,
 }) => {
 
 const isLinkValid = isValidURL(videoLink)
@@ -45,6 +47,7 @@ const isLinkValid = isValidURL(videoLink)
               title={title}
               videoLink={videoLink}
               references={references}
+              videoId={videoId}
             />
           </Grid>
         </Grid>

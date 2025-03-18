@@ -9,41 +9,53 @@ import { theme } from "@/app/config/themes"
 import { useRouter } from "next/navigation"
 import { useSession } from "next-auth/react"
 import { usePathname } from "next/navigation"
-import { useExerciseStatus } from "@/components/fetchExerciseStatus"
+import { useStatus } from "@/components/fetchStatus/fetchStatusExercise"
+import { DetailingTopicContext } from "@/context"
 
 interface StatusSelectProps {
   width?: "30%" | "70%" | "100%"
+  id?: string
 }
 
-export default function StatusSelect({ width = "30%" }: StatusSelectProps) {
+export default function StatusSelect({ width = "30%", id }: StatusSelectProps) {
   const [status, setStatus] = React.useState<string>("NotStarted")
   const [backgroundColor, setBackgroundColor] =
     React.useState<string>("rgb(225, 225, 225)")
   const router = useRouter()
   const { data: session } = useSession()
-
+  const { topicStatus } = React.useContext(DetailingTopicContext)
   const pathname = usePathname()
 
+  const currentStatusTopic = topicStatus?.status?.find(
+    (status) => status.itemId === id
+  )
+  React.useEffect(()=>{
+    if(currentStatusTopic) {
+      setStatus(currentStatusTopic?.itemStatus)
+    }
+  }, [currentStatusTopic])
+ 
+  
   const extractIdsFromUrl = (pathname: string): string[] | null => {
     const parts: string[] = pathname.split("/")
 
     if (parts.length === 5) {
       const topicId = parts[3].split("-")[0]
-      const itemId = parts[4].split("-")[0]
+      const itemId = parts[4].split("-")[0] || ""
 
-      return (topicId && itemId) ? [topicId, itemId] : null
-
+        return topicId && itemId ? [topicId, itemId] : null
     }
 
     return null
   }
 
   const ids = extractIdsFromUrl(pathname)
+
   const {
     status: exerciseStatus,
     isLoading,
     updateStatus,
-  } = useExerciseStatus({
+  } = useStatus({
     topicId: ids?.[0] || "",
     itemId: ids?.[1] || "",
   })
@@ -63,7 +75,9 @@ export default function StatusSelect({ width = "30%" }: StatusSelectProps) {
   }
 
   React.useEffect(() => {
-    setStatus(exerciseStatus)
+    if (exerciseStatus && ids) {
+      setStatus(exerciseStatus)
+    }
   }, [exerciseStatus])
 
   React.useMemo(() => {
@@ -84,6 +98,7 @@ export default function StatusSelect({ width = "30%" }: StatusSelectProps) {
 
   return (
     <Box
+      id={id}
       sx={{
         backgroundColor,
         width,
