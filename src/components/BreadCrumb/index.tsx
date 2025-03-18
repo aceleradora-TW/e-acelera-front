@@ -4,7 +4,7 @@ import Link from "@mui/material/Link";
 import { usePathname } from 'next/navigation';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import { MouseEvent, useEffect, useState } from 'react';
-import { ThemeConfig, theme } from '@/app/config/themes';
+import { theme } from '@/app/config/themes';
 
 export const BreadCrumb: React.FC = () => {
   const pathname: string = usePathname();
@@ -49,7 +49,6 @@ export const BreadCrumb: React.FC = () => {
 
   return (
     isValidPage && (
-    <ThemeConfig>
       <Box >
       <Stack spacing={2} sx={theme.customStyles.breadCrumb}>
         <Breadcrumbs separator={<NavigateNextIcon fontSize="small" sx={{ color: theme.palette.textColor?.main}} />}
@@ -79,7 +78,6 @@ export const BreadCrumb: React.FC = () => {
         </Breadcrumbs>
       </Stack>
       </Box>
-    </ThemeConfig>
   )
   )
 }
