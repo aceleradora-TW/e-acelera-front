@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Box, Link, Typography, Snackbar, Alert, Grid, List } from "@mui/material";
-import { theme } from "@/app/config/theme";
+import { theme } from "@/app/config/themes";
 import ReactMarkdown from "react-markdown";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { materialDark } from "react-syntax-highlighter/dist/cjs/styles/prism";
@@ -24,9 +24,9 @@ export const DescriptionFull: React.FC<DescriptionFullProps> = ({
 
   const components = {
     p: (props: React.HTMLAttributes<HTMLParagraphElement>) => (
-      <Typography variant="body1" sx={{marginTop: 2 }} {...props} />
+      <Typography variant="body1" sx={{ marginTop: 2 }} {...props} />
     ),
-    ul: (props: React.HTMLAttributes<HTMLUListElement>) => (  
+    ul: (props: React.HTMLAttributes<HTMLUListElement>) => (
       <ul  {...props}></ul>
     ),
     a: (props: React.HTMLAttributes<HTMLAnchorElement>) => (
@@ -50,7 +50,7 @@ export const DescriptionFull: React.FC<DescriptionFullProps> = ({
           component="div"
           sx={{
             position: "relative",
-            cursor: "pointer"  
+            cursor: "pointer"
           }}
           onClick={() => handleCopy(codeString)}
         >
@@ -73,7 +73,7 @@ export const DescriptionFull: React.FC<DescriptionFullProps> = ({
               top: "24px",
               right: "16px",
               cursor: "pointer",
-              
+
             }}
             onClick={(e) => {
               e.stopPropagation();
@@ -102,18 +102,18 @@ export const DescriptionFull: React.FC<DescriptionFullProps> = ({
   };
 
   return (
-    <Grid container alignItems="stretch" sx={{...theme.customStyles.description, height: "100%"}}>
+    <Grid container alignItems="stretch" sx={{ ...theme.customStyles.description, height: "100%" }}>
       <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
-      <ReactMarkdown components={components}>{text}</ReactMarkdown>
-      <Snackbar
-        open={copySuccess}
-        anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
-        autoHideDuration={2000}
-      >
-        <Alert severity="success" sx={{ width: "100%" }}>
-          Código copiado para a área de transferência!
-        </Alert>
-      </Snackbar>
+        <ReactMarkdown components={components}>{text}</ReactMarkdown>
+        <Snackbar
+          open={copySuccess}
+          anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+          autoHideDuration={2000}
+        >
+          <Alert severity="success" sx={{ width: "100%" }}>
+            Código copiado para a área de transferência!
+          </Alert>
+        </Snackbar>
       </Grid>
     </Grid>
   );

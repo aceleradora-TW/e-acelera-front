@@ -4,7 +4,7 @@ import CardContent from "@mui/material/CardContent"
 import Typography from "@mui/material/Typography"
 import { CardActionArea, Box} from "@mui/material"
 import { useRouter } from "next/navigation"
-import { theme } from "../../app/config/theme"
+import { theme } from "@/app/config/themes"
 import StatusSelect from "../StatusSelect"
 
 interface ButtonCardProps {

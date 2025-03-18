@@ -1,4 +1,4 @@
-import { theme } from "@/app/config/theme";
+import { theme } from "@/app/config/themes";
 import { Box, Grid, Typography, useMediaQuery } from "@mui/material";
 import Image from "next/image";
 import githubLogo from "../../../public/assets/github-icon.png";
@@ -26,12 +26,12 @@ export const CardLogin = () => {
               />
 
               <Typography
-              noWrap
-              component="a"
-              href="/"
-              sx={
-                theme.customStyles.logoTypeLogin
-              }
+                noWrap
+                component="a"
+                href="/"
+                sx={
+                  theme.customStyles.logoTypeLogin
+                }
               >
                 E-Acelera
               </Typography>
@@ -70,7 +70,7 @@ export const CardLogin = () => {
               onClick={() =>
                 signIn("github")
               }
-              
+
             />
           </Grid>
           <Grid item xs={12}>

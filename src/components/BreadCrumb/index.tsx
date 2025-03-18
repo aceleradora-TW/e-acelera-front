@@ -4,7 +4,7 @@ import Link from "@mui/material/Link";
 import { usePathname } from 'next/navigation';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import { MouseEvent, useEffect, useState } from 'react';
-import { ThemeConfig, theme } from '../../app/config/theme';
+import { ThemeConfig, theme } from '@/app/config/themes';
 
 export const BreadCrumb: React.FC = () => {
   const pathname: string = usePathname();

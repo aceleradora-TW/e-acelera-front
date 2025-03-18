@@ -1,4 +1,4 @@
-import { theme } from "@/app/config/theme"
+import { theme } from "@/app/config/themes"
 import { LoginButton } from "@/components/LoginButton"
 import {
   Avatar,
@@ -96,7 +96,7 @@ export const WebMenu: React.FC<WebMenuProps> = ({ list, session }) => {
               <LogoutIcon
                 sx={{ color: theme.palette.bgColor?.light, fontSize: 15, marginRight: "7px" }}
               />
-              <Typography sx={{ color: theme.palette.textColor?.light}}>Sair</Typography>
+              <Typography sx={{ color: theme.palette.textColor?.light }}>Sair</Typography>
             </MenuItem>
           </Menu>
         </Box>

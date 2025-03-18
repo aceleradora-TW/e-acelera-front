@@ -3,10 +3,11 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import ResponsiveAppBar from "@/components/NavBar";
 import { ThemeProvider } from "@mui/material/styles";
-import { theme } from "@/app/config/theme";
+
 import { Box } from "@mui/material";
 import { getServerSession } from "next-auth";
 import ClientSessionProvider from "@/components/ClientSessionProvider";
+import { theme } from "./config/themes";
 
 const menuItems = ["Nivelamento", "Autoestudo"];
 

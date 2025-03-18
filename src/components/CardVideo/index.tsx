@@ -1,6 +1,6 @@
 import React from "react";
-import { Box, SelectChangeEvent, Typography } from "@mui/material";
-import { theme } from "../../app/config/theme";
+import { Box, Typography } from "@mui/material";
+import { theme } from "@/app/config/themes";
 import ReactMarkdown from "react-markdown";
 import StatusSelect from "../StatusSelect";
 
