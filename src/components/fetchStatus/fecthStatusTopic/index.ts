@@ -1,5 +1,5 @@
 import { ApiTopic } from "@/types/typeTopic"
-import { useState, useEffect } from "react"
+import { useEffect, useState } from "react"
 
 export const useFetchTopicStatus = (topicId?: string) => {
   const [dataStatus, setDataStatus] = useState<ApiTopic>()
