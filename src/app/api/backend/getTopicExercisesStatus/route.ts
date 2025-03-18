@@ -1,17 +1,14 @@
 import { headers } from "next/headers"
 import { NextRequest, NextResponse } from "next/server"
 
-export async function PUT(req: NextRequest) {
+export async function GET(req: NextRequest) {
   const header = headers()
-
   const topicId = header.get(`topicId`)
-  const itemId = header.get(`itemId`)
-  const itemStatus = header.get(`itemStatus`)
-  const accessToken = req.cookies.get("next-auth.session-token")?.value || req.cookies.get("__Secure-next-auth.session-token")?.value
+  const accessToken = req.cookies.get("next-auth.session-token")?.value || req.cookies.get("__Secure-next-auth.session-token")?.value;
 
-  if (!topicId || !itemId) {
+  if (!topicId) {
     return NextResponse.json(
-      { error: "topicId and itemId are required" },
+      { error: "topicId are required" },
       { status: 400 }
     )
   }
@@ -25,18 +22,14 @@ export async function PUT(req: NextRequest) {
 
   try {
     const baseUrl = process.env.BACKEND_BASE_URL
-    const response = await fetch(
-      `${baseUrl}/topic/${topicId}/item/${itemId}/status`,
-      {
-        method: "PUT",
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ itemStatus }),
-      }
-    )
-
+    const response = await fetch(`${baseUrl}/topic/${topicId}/item`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        "Content-Type": "application/json",
+      },
+    })
+    
     if (response.status === 401) {
       return NextResponse.json(
         { error: "Unauthorized: Invalid or expired token" },
@@ -52,8 +45,9 @@ export async function PUT(req: NextRequest) {
     }
 
     const data = await response.json()
-    return NextResponse.json({ data }, { status: 200 })
+    const statusData = data
 
+    return NextResponse.json({ status: statusData }, { status: 200 })
   } catch (error) {
     console.error("Error fetching status:", error)
     return NextResponse.json(
