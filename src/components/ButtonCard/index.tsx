@@ -11,6 +11,7 @@ interface ButtonCardProps {
     title: string
     description: string
     route: string
+    id: string;
 }
 
 const cardStyles = {
@@ -23,7 +24,7 @@ const cardActionsStyle = {
     paddingLeft: 2
 }
 
-export const ButtonCard: React.FC<ButtonCardProps> = ({ title, description, route }) => {
+export const ButtonCard: React.FC<ButtonCardProps> = ({ title, description, route, id }) => {
     const router = useRouter()
     const handleClick = (route: string) => {
         router.push(`/${route}`)
@@ -42,7 +43,7 @@ export const ButtonCard: React.FC<ButtonCardProps> = ({ title, description, rout
         </CardActionArea>
     
         <Box sx={{ padding: 2 }}>
-            <StatusSelect width='70%'/>
+            <StatusSelect id={id} width='70%'/>
         </Box>
     </Card>
     );

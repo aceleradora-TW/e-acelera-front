@@ -1,17 +1,21 @@
-import { useState, useEffect, useCallback } from "react"
+import { useState, useEffect, useCallback} from "react"
 
-interface UseExerciseStatusProps {
+interface UseStatusProps {
   topicId: string
   itemId: string
 }
 
-export const useExerciseStatus = ({ topicId, itemId }: UseExerciseStatusProps) => {
-  const [status, setStatus] = useState<string | null >(null)
+export const useStatus = ({
+  topicId,
+  itemId,
+}: UseStatusProps) => {
+  const [status, setStatus] = useState<string>("NotStarted")
   const [isLoading, setIsLoading] = useState<boolean>(false)
 
   const fetchStatus = useCallback(async () => {
-    if (!topicId || !itemId ) return;
+    if (!topicId || !itemId) return
     setIsLoading(true)
+
     try {
       const response = await fetch(`/api/backend/getExerciseStatus`, {
         method: "GET",
@@ -28,6 +32,7 @@ export const useExerciseStatus = ({ topicId, itemId }: UseExerciseStatusProps) =
       const validStatuses = ["NotStarted", "InProgress", "Completed"]
 
       setStatus(validStatuses.includes(data.status) ? data.status : "NotStarted")
+
     } catch (error) {
       console.error("Erro ao buscar status:", error)
     } finally {
@@ -38,15 +43,14 @@ export const useExerciseStatus = ({ topicId, itemId }: UseExerciseStatusProps) =
   const updateStatus = async (newStatus: string) => {
     setIsLoading(true)
     setStatus(newStatus)
-    
     try {
       const response = await fetch("/api/backend/updateExerciseStatus", {
         method: "PUT",
         headers: {
-          "Content-Type": "application/json",
           topicId,
           itemId,
           itemStatus: newStatus,
+          "Content-Type": "application/json",
         },
       })
 
@@ -57,10 +61,12 @@ export const useExerciseStatus = ({ topicId, itemId }: UseExerciseStatusProps) =
       setIsLoading(false)
     }
   }
-
+  
   useEffect(() => {
     fetchStatus()
   }, [fetchStatus])
 
   return { status, isLoading, updateStatus }
 }
+
+
