@@ -104,7 +104,6 @@ export const customStyles: Theme = {
     }
   },
   cardContent: {
-    paddingBottom: "25%",
     height: "250px"
   },
   cardButtonContent: {
