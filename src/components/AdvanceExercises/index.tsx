@@ -2,7 +2,7 @@ import { Typography, TypographyProps } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { ApiResponse, CommonField, DataItem, TopicField } from "@/types/type";
 import { usePathname } from "next/navigation";
-import { theme } from "@/app/config/theme";
+import { theme } from "@/app/config/themes";
 import { useMemo } from "react";
 
 function isTopicField(field: CommonField): field is TopicField {

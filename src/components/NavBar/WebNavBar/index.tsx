@@ -1,4 +1,4 @@
-import { theme } from "@/app/config/theme"
+import { theme } from "@/app/config/themes"
 import { LoginButton } from "@/components/LoginButton"
 import {
   Avatar,
@@ -59,7 +59,7 @@ export const WebMenu: React.FC<WebMenuProps> = ({ list, session }) => {
           }}
         >
           <Tooltip title="Perfil">
-            <IconButton onClick={handleOpenMenu} sx={{ p: 0 }}>
+            <IconButton onClick={handleOpenMenu} sx={{ p: 0, color: theme.palette.bgColor?.light }}>
               <Avatar
                 alt={session.user.name || "Usuário"}
                 src={session.user.image || "/default-avatar.png"}
@@ -87,16 +87,16 @@ export const WebMenu: React.FC<WebMenuProps> = ({ list, session }) => {
               </Typography>
             </MenuItem>
             <MenuItem sx={{ cursor: "default" }}>
-              <Typography sx={{ color: "#575757" }}>
+              <Typography sx={{ color: theme.palette.bgColor?.light }}>
                 {session.user.email || "email@example.com"}
               </Typography>
             </MenuItem>
             <Divider />
             <MenuItem onClick={() => signOut()}>
               <LogoutIcon
-                sx={{ color: "#575757", fontSize: 15, marginRight: "7px" }}
+                sx={{ color: theme.palette.bgColor?.light, fontSize: 15, marginRight: "7px" }}
               />
-              <Typography>Sair</Typography>
+              <Typography sx={{ color: theme.palette.textColor?.light }}>Sair</Typography>
             </MenuItem>
           </Menu>
         </Box>
