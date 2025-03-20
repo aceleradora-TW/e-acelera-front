@@ -11,8 +11,8 @@ export const useFetchTopicStatus = (topicId?: string) => {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          topicId,
-        },
+          topicId
+        }
       })
 
       if (!response.ok) throw new Error(`Erro ${response.status}`)
@@ -25,8 +25,8 @@ export const useFetchTopicStatus = (topicId?: string) => {
   }, [topicId])
 
   useEffect(() => {
-    fetchStatus()
-  }, [fetchStatus])
+    if(topicId) fetchStatus()
+  }, [topicId, fetchStatus])
 
   return { dataStatus }
 }
