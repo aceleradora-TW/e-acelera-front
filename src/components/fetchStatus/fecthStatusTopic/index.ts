@@ -1,17 +1,18 @@
 import { ApiTopic } from "@/types/typeTopic"
-import { useEffect, useState } from "react"
+import { useCallback, useEffect, useState  } from "react"
 
 export const useFetchTopicStatus = (topicId?: string) => {
   const [dataStatus, setDataStatus] = useState<ApiTopic>()
-  const fetchStatus = async () => {
+  const fetchStatus = useCallback(async () => {
     if (!topicId) return
+    
     try {
       const response = await fetch("/api/backend/getTopicExercisesStatus", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          topicId,
-        },
+          topicId
+        }
       })
 
       if (!response.ok) throw new Error(`Erro ${response.status}`)
@@ -21,11 +22,11 @@ export const useFetchTopicStatus = (topicId?: string) => {
     } catch (error) {
       console.error("Erro ao buscar status dos exercícios do tópico: ", error)
     }
-  }
+  }, [topicId])
 
   useEffect(() => {
     fetchStatus()
-  })
+  }, [fetchStatus])
 
   return { dataStatus }
 }
