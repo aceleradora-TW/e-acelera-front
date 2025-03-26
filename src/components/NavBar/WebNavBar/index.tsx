@@ -3,18 +3,18 @@ import { LoginButton } from "@/components/LoginButton"
 import {
   Avatar,
   Box,
+  Divider,
   IconButton,
+  Link,
+  Menu,
+  MenuItem,
   Tooltip,
   Typography,
-  Link,
-  MenuItem,
-  Menu,
-  Divider,
 } from "@mui/material"
 import Image from "next/image"
 import { usePathname, useRouter } from "next/navigation"
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown"
-import { useSession, signOut } from "next-auth/react"
+import { signOut } from "next-auth/react"
 import { useState } from "react"
 import LogoutIcon from "@mui/icons-material/Logout"
 import { Session } from "next-auth"
@@ -42,11 +42,7 @@ export const WebMenu: React.FC<WebMenuProps> = ({ list, session }) => {
     router.push(`/login?callbackUrl=${currentUrl}`)
   }
 
-  const linkStyle = (item: string) => {
-    return pathname.startsWith(`/${item.toLowerCase()}`)
-      ? theme.customStyles.linkActive
-      : theme.customStyles.link
-  }
+  const linkStyle = (item: string) => pathname.startsWith(`/${item.toLowerCase()}`) ? theme.customStyles.linkActive : theme.customStyles.link
 
   const renderComponent = () => {
     if (session?.user) {
