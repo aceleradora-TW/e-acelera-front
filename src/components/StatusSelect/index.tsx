@@ -5,7 +5,7 @@ import MenuItem from "@mui/material/MenuItem"
 import FormControl from "@mui/material/FormControl"
 import Select from "@mui/material/Select"
 import { SelectChangeEvent } from "@mui/material/Select"
-import { theme } from "@/app/config/theme"
+import { theme } from "@/app/config/themes"
 import { useRouter } from "next/navigation"
 import { useSession } from "next-auth/react"
 import { usePathname } from "next/navigation"
@@ -43,7 +43,7 @@ export default function StatusSelect({ width = "30%", id }: StatusSelectProps) {
       const topicId = parts[3].split("-")[0]
       const itemId = parts[4].split("-")[0] || ""
 
-      return topicId && itemId ? [topicId, itemId] : null
+        return topicId && itemId ? [topicId, itemId] : null
     }
 
     return null

@@ -1,4 +1,4 @@
-import { theme } from "@/app/config/theme"
+import { theme } from "@/app/config/themes"
 import {
   Box,
   IconButton,
@@ -41,7 +41,7 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({ list }) => {
           aria-controls="menu-appbar"
           aria-haspopup="true"
           onClick={handleOpenNavMenu}
-          sx={{ color: theme.palette.textColor?.dark }}
+          sx={{ color: theme.palette.bgColor?.light }}
         >
           <MenuIcon />
         </IconButton>
@@ -66,12 +66,12 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({ list }) => {
         >
           {list.map((item) => (
             <MenuItem key={item} onClick={handleCloseNavMenu}>
-              <Link href={item ? `/${item.toLowerCase()}`: `/`}
-                  underline="none"
-                  textAlign="center"
-                  sx={{ color: theme.palette.textColor?.light }}
-                >
-                  {item}
+              <Link href={item ? `/${item.toLowerCase()}` : `/`}
+                underline="none"
+                textAlign="center"
+                sx={{ color: theme.palette.textColor?.light }}
+              >
+                {item}
               </Link>
             </MenuItem>
           ))}
@@ -86,7 +86,7 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({ list }) => {
           style={{ display: "flex" }}
         />
       </Box>
-      
+
       <Typography
         noWrap
         component="a"
