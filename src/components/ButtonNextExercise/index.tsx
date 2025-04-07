@@ -1,4 +1,4 @@
-import { theme } from "@/app/config/theme"
+import { theme } from "@/app/config/themes"
 import { Button, ButtonProps, Stack, styled } from "@mui/material"
 import { useRouter, usePathname } from 'next/navigation'
 import { ApiResponse, CommonField, DataItem, TopicField } from "@/types/type"
