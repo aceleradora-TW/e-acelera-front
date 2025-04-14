@@ -5,7 +5,7 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { useRouter } from "next/navigation";
 import * as React from "react";
-import { theme } from "../../app/config/theme";
+import { theme } from "@/app/config/themes";
 import { ClickButton } from "../ClickButton";
 
 interface CardProps {
