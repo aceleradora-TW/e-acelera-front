@@ -1,4 +1,4 @@
-import { theme } from "@/app/config/theme"
+import { theme } from "@/app/config/themes"
 import { Box, Typography } from "@mui/material"
 import { Sansita } from "next/font/google"
 
