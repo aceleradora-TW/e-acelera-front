@@ -1,13 +1,13 @@
 import * as React from "react";
 import { styled } from "@mui/material/styles";
 import Button, { ButtonProps } from "@mui/material/Button";
-import { theme } from "@/app/config/theme";
+import { theme } from "@/app/config/themes";
 import Image, { StaticImageData } from "next/image";
 import { Box, Typography } from "@mui/material";
 
 const CustomButton = styled(Button)<ButtonProps>(() => ({
   "&:hover": {
-    backgroundColor: theme.palette.buttonHover?.light, 
+    backgroundColor: theme.palette.buttonHover?.light,
     border: "none",
   },
   fontSize: "1rem",
