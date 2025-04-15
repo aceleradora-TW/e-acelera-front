@@ -9,8 +9,7 @@ interface HeadingProps {
       variant: "h1" | "h2" 
 }
 
-export const Heading: React.FC<HeadingProps> = ({ text, variant }) => {
-    return (
+export const Heading: React.FC<HeadingProps> = ({ text, variant }) => (
         <>
             <Grid container>  
                 <Typography
@@ -22,4 +21,3 @@ export const Heading: React.FC<HeadingProps> = ({ text, variant }) => {
         </>
 
     )
-}

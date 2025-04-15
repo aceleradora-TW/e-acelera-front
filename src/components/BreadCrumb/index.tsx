@@ -1,5 +1,5 @@
 'use client';
-import { Stack, Breadcrumbs, Box } from '@mui/material';
+import { Box, Breadcrumbs, Stack } from '@mui/material';
 import Link from "@mui/material/Link";
 import { usePathname } from 'next/navigation';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
@@ -37,7 +37,7 @@ export const BreadCrumb: React.FC = () => {
       const hyphenIndex = crumb.indexOf('-');
       return hyphenIndex !== -1 ? crumb.substring(hyphenIndex + 1) : crumb;
     });
-    const capitalizeFirstLetter = (text: string): string => { return text.charAt(0).toUpperCase() + text.slice(1);}
+    const capitalizeFirstLetter = (text: string): string => text.charAt(0).toUpperCase() + text.slice(1)
 
   const breadroutes: string[] = pathname.split('/').filter((crumb) => crumb);
 

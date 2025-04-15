@@ -12,8 +12,7 @@ interface DetailingContentProps {
   id: string
 }
 
-const TopicContent: React.FC<{ field: TopicField }> = ({ field }) => {
-  return (
+const TopicContent: React.FC<{ field: TopicField }> = ({ field }) => (
     <>
       <Grid item xl={12} lg={9} md={6} sm={3}>
         <BreadCrumb />
@@ -45,7 +44,6 @@ const TopicContent: React.FC<{ field: TopicField }> = ({ field }) => {
       )}
     </>
   )
-}
 
 export const DetailingTopicContent: React.FC<DetailingContentProps> = ({
   data,

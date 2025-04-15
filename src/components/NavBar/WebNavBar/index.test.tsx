@@ -5,10 +5,8 @@ import { useSession } from 'next-auth/react'
 
 jest.mock('next/image', () => ({
   __esModule: true,
-  default: (props: any) => {
-    return <img {...props} alt={props.alt} />;
-  }
-}));
+  default: (props: any) => <img {...props} alt={props.alt} />
+}))
 
 jest.mock('next-auth/react', () => ({
   useSession: jest.fn()
@@ -36,10 +34,7 @@ describe('Testes do botão de Login do componente WebMenu', () => {
   it('Não deve mostrar o botão de login quando houver sessão', () => {
     (useSession as jest.Mock).mockReturnValue({ 
       data: { 
-        user: { 
-          image: 'url-da-imagem', 
-          name: 'Usuário Teste' 
-        },
+        user: { image: 'url-da-imagem', name: 'Usuário Teste' },
         expires: '2025-01-01T00:00:00Z'
       } 
     })

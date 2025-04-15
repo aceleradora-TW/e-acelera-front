@@ -5,7 +5,7 @@ import ResponsiveAppBar from "@/components/NavBar"
 import { Box } from "@mui/material"
 import { getServerSession } from "next-auth"
 import ClientSessionProvider from "@/components/ClientSessionProvider"
-import { ThemeConfig, theme } from "./config/themes"
+import { ThemeConfig } from "./config/themes"
 
 const menuItems = ["Nivelamento", "Autoestudo"]
 

@@ -33,7 +33,7 @@ export async function PUT(req: NextRequest) {
           Authorization: `Bearer ${accessToken}`,
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ itemStatus: itemStatus }),
+        body: JSON.stringify({ itemStatus }),
       }
     )
 

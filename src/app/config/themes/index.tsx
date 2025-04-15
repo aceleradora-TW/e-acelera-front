@@ -35,18 +35,16 @@ declare module '@mui/material/styles' {
 }
 
 const theme = createTheme({
-  palette: palette,
-  typography: typography,
-  customStyles: customStyles
+  palette,
+  typography,
+  customStyles
 })
 
-export const ThemeConfig: React.FC<ThemeProp> = ({ children }) => {
-  return (
+export const ThemeConfig: React.FC<ThemeProp> = ({ children }) => (
     <ThemeProvider theme={theme}>
       <CssBaseline />
       {children}
     </ThemeProvider>
   )
-}
 
 export { theme }

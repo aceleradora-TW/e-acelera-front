@@ -2,7 +2,7 @@ import * as React from "react"
 import Card from "@mui/material/Card"
 import CardContent from "@mui/material/CardContent"
 import Typography from "@mui/material/Typography"
-import { CardActionArea, Box} from "@mui/material"
+import { Box, CardActionArea} from "@mui/material"
 import { useRouter } from "next/navigation"
 import { theme } from "@/app/config/themes"
 import StatusSelect from "../StatusSelect"
@@ -17,11 +17,6 @@ interface ButtonCardProps {
 const cardStyles = {
     ...theme.customStyles.cardBody,
     WebkitLineClamp: 4
-}
-
-const cardActionsStyle = {
-    paddingBottom: 2, 
-    paddingLeft: 2
 }
 
 export const ButtonCard: React.FC<ButtonCardProps> = ({ title, description, route, id }) => {
