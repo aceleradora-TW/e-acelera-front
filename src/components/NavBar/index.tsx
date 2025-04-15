@@ -13,9 +13,7 @@ interface NavBarProps {
   session: Session | null
 }
 
-const ResponsiveAppBar: React.FC<NavBarProps> = ({ list, session }) => {
-
-  return (
+const ResponsiveAppBar: React.FC<NavBarProps> = ({ list, session }) => (
     <AppBar
       position="fixed"
       sx={{ backgroundColor: theme.palette.bgColor?.main}}
@@ -33,7 +31,6 @@ const ResponsiveAppBar: React.FC<NavBarProps> = ({ list, session }) => {
       </Box>
     </AppBar>
   )
-}
 
 
 export default ResponsiveAppBar

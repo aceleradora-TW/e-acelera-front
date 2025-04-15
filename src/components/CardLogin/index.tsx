@@ -7,10 +7,7 @@ import linkedinLogo from "../../../public/assets/linkedin-icon.png";
 import { SocialLoginButton } from "../SocialLoginButton";
 import { signIn } from "next-auth/react";
 
-export const CardLogin = () => {
-  const isMobileScreen = useMediaQuery("(max-width: 600px)")
-
-  return (
+export const CardLogin = () => (
     <Box
       sx={theme.customStyles.containerLogin}
     >
@@ -95,4 +92,3 @@ export const CardLogin = () => {
       </Box>
     </Box>
   );
-};

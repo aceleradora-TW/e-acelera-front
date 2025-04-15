@@ -102,7 +102,7 @@ export default function StatusSelect({ width = "30%", id }: StatusSelectProps) {
     if (exerciseStatus && ids) {
       setStatus(exerciseStatus)
     }
-  }, [exerciseStatus])
+  }, [exerciseStatus, ids])
 
   React.useMemo(() => {
     switch (status) {
@@ -134,7 +134,7 @@ export default function StatusSelect({ width = "30%", id }: StatusSelectProps) {
     >
       <FormControl fullWidth>
         <InputLabel
-          shrink={true}
+          shrink
           id="statusLeveling"
           sx={{
             color: "#000000",
@@ -147,7 +147,7 @@ export default function StatusSelect({ width = "30%", id }: StatusSelectProps) {
         </InputLabel>
         <Select
           ref= {statusSelectRef}
-          notched={true}
+          notched
           labelId="statusLeveling"
           id="statusSelect"
           value={status || "NotStarted"}

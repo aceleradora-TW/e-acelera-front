@@ -1,6 +1,6 @@
 import { theme } from "@/app/config/themes"
 import { Button, ButtonProps, Stack, styled } from "@mui/material"
-import { useRouter, usePathname } from "next/navigation"
+import { usePathname, useRouter } from "next/navigation"
 import { ApiResponse, CommonField, DataItem, TopicField } from "@/types/type"
 import { ClickButton } from "../ClickButton"
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos"
@@ -14,8 +14,7 @@ const ButtonFail = styled(Button)<ButtonProps>(() => ({
   }
 }))
 
-const ContainerButtonFail = ({ isVisible }: { isVisible: boolean }) => {
-  return (
+const ContainerButtonFail = ({ isVisible }: { isVisible: boolean }) => (
     <aside>
       <Stack spacing={2} direction="row">
         <ButtonFail
@@ -39,7 +38,6 @@ const ContainerButtonFail = ({ isVisible }: { isVisible: boolean }) => {
       </Stack>
     </aside>
   )
-}
 
 function isTopicField(field: CommonField): field is TopicField {
   return field && "exercisesInfo" in field;

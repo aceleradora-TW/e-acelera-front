@@ -1,5 +1,5 @@
 import React from "react"
-import { Divider, Box, Typography, useMediaQuery, Link } from "@mui/material"
+import { Box, Divider, Link, Typography, useMediaQuery } from "@mui/material"
 import { theme } from "@/app/config/themes"
 import ReactMarkdown from "react-markdown"
 import { DescriptionFull } from "../DescriptionFull"
@@ -50,12 +50,6 @@ export const DescriptionDivider: React.FC<DescriptionDividerProps> = ({ text }) 
     )
   }
 
-  const typographyBreakLine = {
-    p: (props: React.HTMLAttributes<HTMLHeadingElement>) => (
-      <Typography variant="body1" sx={{ marginBottom: 3 }} {...props} />
-    ),
-  }
-
   const textDividerArray: string[] = textDivider(text)
   const isSmallScreen: boolean = useMediaQuery(theme.breakpoints.down('md'))
 
@@ -71,7 +65,7 @@ export const DescriptionDivider: React.FC<DescriptionDividerProps> = ({ text }) 
             </ReactMarkdown>
           </Box>
 
-          <Divider orientation="vertical" flexItem color="black" sx={{ marginTop: 2 }} />
+          <Divider color="black" flexItem orientation="vertical" sx={{ marginTop: 2 }} />
 
           <Box sx={boxStyle}>
             <ReactMarkdown components={components}>

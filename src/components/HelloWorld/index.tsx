@@ -1,5 +1,3 @@
 import React from "react";
 
-export const HelloWorld: React.FC = () => {
-  return <h1>Olá Mundo!</h1>;
-};
+export const HelloWorld: React.FC = () : JSX.Element => <h1>Olá Mundo!</h1>
