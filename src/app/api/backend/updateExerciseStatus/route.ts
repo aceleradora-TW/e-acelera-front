@@ -30,6 +30,7 @@ export async function PUT(req: NextRequest) {
       {
         method: "PUT",
         headers: {
+          Origin: process.env.NEXTAUTH_URL!,
           Authorization: `Bearer ${accessToken}`,
           "Content-Type": "application/json",
         },

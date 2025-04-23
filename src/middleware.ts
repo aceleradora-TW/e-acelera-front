@@ -17,6 +17,7 @@ export async function middleware(request: NextRequest) {
       const response = await fetch(`${BACKEND_BASE_URL}/login`, {
         method: "POST",
         headers: {
+          Origin: process.env.NEXTAUTH_URL!,
           "Authorization": `Bearer ${sessionToken.value}`,
           "Content-Type": "application/json",
         },
