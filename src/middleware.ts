@@ -27,6 +27,20 @@ export async function middleware(request: NextRequest) {
         return NextResponse.json({ error: "Failed to register user" }, { status: response.status })
       }
 
+      if (response.status === 401) {
+        return NextResponse.json(
+          { error: "Unauthorized: Invalid or expired token" },
+          { status: 401 }
+        )
+      }
+          
+      if (response.status === 403) {
+        return NextResponse.json(
+          { error: "Forbidden: You don’t have permission to access this resource" },
+          { status: 403 }
+        )
+      }
+
       return NextResponse.redirect(new URL(parsedUrl, request.url))
     } catch (error) {
       console.error("Internal server error: ", error)
