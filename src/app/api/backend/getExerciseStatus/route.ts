@@ -39,13 +39,6 @@ export async function GET(req: NextRequest) {
       )
     }
 
-    if (response.status === 403) {
-      return NextResponse.json(
-        { error: "Forbidden: You don’t have permission to access this resource" },
-        { status: 403 }
-      )
-    }
-    
     if (!response.ok) {
       return NextResponse.json(
         { error: `Error fetching status: ${response.status} - ${response.statusText}` },
