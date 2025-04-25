@@ -26,6 +26,7 @@ export async function GET(req: NextRequest) {
     const response = await fetch(`${baseUrl}/topic/${topicId}/item/${itemId}`, {
       method: "GET",
       headers: {
+        Origin: process.env.NEXTAUTH_URL!,
         Authorization: `Bearer ${accessToken}`,
         "Content-Type": "application/json",
       },
@@ -37,7 +38,7 @@ export async function GET(req: NextRequest) {
         { status: 401 }
       )
     }
-    
+
     if (!response.ok) {
       return NextResponse.json(
         { error: `Error fetching status: ${response.status} - ${response.statusText}` },

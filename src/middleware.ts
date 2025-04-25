@@ -17,11 +17,19 @@ export async function middleware(request: NextRequest) {
       const response = await fetch(`${BACKEND_BASE_URL}/login`, {
         method: "POST",
         headers: {
+          Origin: process.env.NEXTAUTH_URL!,
           "Authorization": `Bearer ${sessionToken.value}`,
           "Content-Type": "application/json",
         },
       })
 
+      if (response.status === 401) {
+        return NextResponse.json(
+          { error: "Unauthorized: Invalid or expired token" },
+          { status: 401 }
+        )
+      } 
+      
       if (!response.ok) {
         return NextResponse.json({ error: "Failed to register user" }, { status: response.status })
       }
