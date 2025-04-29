@@ -1,4 +1,0 @@
-[headers]
-  for = "/*"
-  [headers.values]
-    origin = "https://aceleradora-agil.com.br"
