@@ -1,0 +1,4 @@
+[headers]
+  for = "/*"
+  [headers.values]
+    origin = "https://staging--e-acelera-homologacao.netlify.app"
