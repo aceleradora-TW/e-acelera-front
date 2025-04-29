@@ -1,5 +1,0 @@
-[context.staging]
-  command = "npm run build && cp ./custom-headers/_stagingHeaders ./dist/_headers"
-
-[context.production]
-  command = "npm run build && cp ./custom-headers/_productionHeaders ./dist/_headers"
