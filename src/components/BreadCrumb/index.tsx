@@ -1,10 +1,10 @@
 'use client';
-import { Stack, Breadcrumbs, Box } from '@mui/material';
+import { Box, Breadcrumbs, Stack } from '@mui/material';
 import Link from "@mui/material/Link";
 import { usePathname } from 'next/navigation';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import { MouseEvent, useEffect, useState } from 'react';
-import { ThemeConfig, theme } from '../../app/config/theme';
+import { theme } from '@/app/config/themes';
 
 export const BreadCrumb: React.FC = () => {
   const pathname: string = usePathname();
@@ -37,7 +37,7 @@ export const BreadCrumb: React.FC = () => {
       const hyphenIndex = crumb.indexOf('-');
       return hyphenIndex !== -1 ? crumb.substring(hyphenIndex + 1) : crumb;
     });
-    const capitalizeFirstLetter = (text: string): string => { return text.charAt(0).toUpperCase() + text.slice(1);}
+    const capitalizeFirstLetter = (text: string): string => text.charAt(0).toUpperCase() + text.slice(1)
 
   const breadroutes: string[] = pathname.split('/').filter((crumb) => crumb);
 
@@ -49,7 +49,6 @@ export const BreadCrumb: React.FC = () => {
 
   return (
     isValidPage && (
-    <ThemeConfig>
       <Box >
       <Stack spacing={2} sx={theme.customStyles.breadCrumb}>
         <Breadcrumbs separator={<NavigateNextIcon fontSize="small" sx={{ color: theme.palette.textColor?.main}} />}
@@ -79,7 +78,6 @@ export const BreadCrumb: React.FC = () => {
         </Breadcrumbs>
       </Stack>
       </Box>
-    </ThemeConfig>
   )
   )
 }

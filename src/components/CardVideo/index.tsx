@@ -1,8 +1,8 @@
-import React from "react";
-import { Box, SelectChangeEvent, Typography } from "@mui/material";
-import { theme } from "../../app/config/theme";
-import ReactMarkdown from "react-markdown";
-import StatusSelect from "../StatusSelect";
+import React from "react"
+import { Box, Typography } from "@mui/material"
+import { theme } from "@/app/config/themes"
+import ReactMarkdown from "react-markdown"
+import StatusSelect from "../StatusSelect"
 
 const components = {
   h1: (props: React.HTMLAttributes<HTMLHeadingElement>) => (
@@ -15,24 +15,25 @@ const components = {
       {...props}
     />
   ),
-};
+}
 interface CardVideoProps {
-  text: string;
-  title: string;
-  videoLink: string;
-  references?: string;
+  text: string
+  title: string
+  videoLink: string
+  references?: string
+  videoId?: string
 }
 export const CardVideo: React.FC<CardVideoProps> = ({
   text,
   title,
   videoLink,
   references,
+  videoId,
 }) => {
   function getYouTubeEmbedUrl(url: string): string {
-    const videoId = url.split("v=")[1]?.split("&")[0];
-    return `https://www.youtube.com/embed/${videoId}`;
+    const videoId = url.split("v=")[1]?.split("&")[0]
+    return `https://www.youtube.com/embed/${videoId}`
   }
-
   return (
     <Box sx={theme.customStyles.cardVideo}>
       <Box sx={theme.customStyles.cardVideoLink}>
@@ -52,9 +53,9 @@ export const CardVideo: React.FC<CardVideoProps> = ({
           <ReactMarkdown components={components}>{text}</ReactMarkdown>
         </Box>
         <Box sx={{ paddingTop: 2 }}>
-          <StatusSelect width="30%"/> 
+          <StatusSelect id={videoId} width="30%" /> 
         </Box>
       </Box>
     </Box>
-  );
-};
+  )
+}

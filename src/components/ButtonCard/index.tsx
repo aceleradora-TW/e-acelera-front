@@ -2,15 +2,16 @@ import * as React from "react"
 import Card from "@mui/material/Card"
 import CardContent from "@mui/material/CardContent"
 import Typography from "@mui/material/Typography"
-import { CardActionArea, Box} from "@mui/material"
+import { Box, CardActionArea} from "@mui/material"
 import { useRouter } from "next/navigation"
-import { theme } from "../../app/config/theme"
+import { theme } from "@/app/config/themes"
 import StatusSelect from "../StatusSelect"
 
 interface ButtonCardProps {
     title: string
     description: string
     route: string
+    id: string;
 }
 
 const cardStyles = {
@@ -18,12 +19,7 @@ const cardStyles = {
     WebkitLineClamp: 4
 }
 
-const cardActionsStyle = {
-    paddingBottom: 2, 
-    paddingLeft: 2
-}
-
-export const ButtonCard: React.FC<ButtonCardProps> = ({ title, description, route }) => {
+export const ButtonCard: React.FC<ButtonCardProps> = ({ title, description, route, id }) => {
     const router = useRouter()
     const handleClick = (route: string) => {
         router.push(`/${route}`)
@@ -42,7 +38,7 @@ export const ButtonCard: React.FC<ButtonCardProps> = ({ title, description, rout
         </CardActionArea>
     
         <Box sx={{ padding: 2 }}>
-            <StatusSelect width='70%'/>
+            <StatusSelect id={id} width='70%'/>
         </Box>
     </Card>
     );
