@@ -228,5 +228,26 @@ export const customStyles: Theme = {
     height: "auto",
     display: "block",
     objectFit: "cover"
+  },
+  styleExclamation: {
+    height: "80px",
+    width: "80px",
+    borderRadius: "50%",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  styleModal: {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    width: 400,
+    bgcolor: "background.paper",
+    border: "1px solid #002C53",
+    borderRadius: "5px",
+    boxShadow: 24,
+    p: 4,
+    textAlign: "center"
   }
 }
