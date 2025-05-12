@@ -23,26 +23,26 @@ export default function StatusSelect({ width = "30%", id }: StatusSelectProps) {
     React.useState<string>("rgb(225, 225, 225)")
   const [isModalOpen, setIsModalOpen] = React.useState<boolean>(false)
   const { data: session } = useSession()
+  const statusSelectRef = React.useRef<HTMLDivElement>(null)  
   const { topicStatus } = React.useContext(DetailingTopicContext)
-  const statusSelectRef = React.useRef<HTMLDivElement>()
+  const pathname = usePathname()
 
   React.useEffect(() => {
-    if (typeof window !== "undefined") {
-      const statusValue = localStorage.getItem("statusValue") || "statusPending"
-      const isActive = localStorage.getItem("activeStatusSelect") === "true"
-  
-      if (isActive && statusSelectRef.current) {
-        const validStatuses = ["statusPending", "statusInProgress", "statusConcluded"]
-        setStatus(validStatuses.includes(statusValue) ? statusValue : "statusPending")
-  
-        statusSelectRef.current.classList.remove("ativo")
-        localStorage.removeItem("activeStatusSelect")
-        localStorage.removeItem("statusValue")
+    if (typeof window === "undefined") return
+
+    const statusValue = localStorage.getItem("statusValue") || "NotStarted"
+    const isActive = localStorage.getItem("activeStatusSelect") === "true"
+    const validStatuses = ["NotStarted", "InProgress", "Completed"]
+
+    if (statusSelectRef.current) {
+      if (session && isActive) {
+        setStatus(validStatuses.includes(statusValue) ? statusValue : "NotStarted")
       }
+      statusSelectRef.current.classList.remove("ativo")
+      localStorage.removeItem("activeStatusSelect")
+      localStorage.removeItem("statusValue")
     }
-  }, [])
-  
-  const pathname = usePathname()
+  }, [session])
 
   const currentStatusTopic = topicStatus?.status?.find(
     (status) => status.itemId === id
@@ -61,9 +61,8 @@ export default function StatusSelect({ width = "30%", id }: StatusSelectProps) {
       const topicId = parts[3].split("-")[0]
       const itemId = parts[4].split("-")[0] || ""
 
-        return topicId && itemId ? [topicId, itemId] : null
+      return (topicId && itemId) ? [topicId, itemId] : null
     }
-
     return null
   }
 
@@ -81,16 +80,18 @@ export default function StatusSelect({ width = "30%", id }: StatusSelectProps) {
   const handleChange = async (event: SelectChangeEvent) => {
     const value = event.target.value as string
     setStatus(value)
-    if (!ids) return   
-      if (!session && statusSelectRef.current) { 
-        statusSelectRef.current.classList.add("ativo")
-        setIsModalOpen(true)
-      }
-      await updateStatus(value)
-  }
 
-  const heandleCloseModal = () => {
-    if(statusSelectRef.current){
+    if (!session && statusSelectRef.current) { 
+      statusSelectRef.current.classList.add("ativo")
+      setIsModalOpen(true)
+    }
+
+    if (!ids) return
+    await updateStatus(value)
+  } 
+
+  const heandleCloseModals = () => {
+    if(statusSelectRef.current) {
       statusSelectRef.current.classList.remove("ativo")
     }
 
@@ -170,7 +171,7 @@ export default function StatusSelect({ width = "30%", id }: StatusSelectProps) {
           <MenuItem value="Completed">Concluído</MenuItem>
         </Select>
       </FormControl>
-      <LoginWarningModal status={status} open={isModalOpen} handleClose={heandleCloseModal}/>
+      <LoginWarningModal status={status} open={isModalOpen} handleClose={heandleCloseModals}/>
     </Box>
   )
 }
