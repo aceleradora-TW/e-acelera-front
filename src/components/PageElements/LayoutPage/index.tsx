@@ -1,4 +1,4 @@
-import { theme } from "@/app/config/theme";
+import { theme } from "@/app/config/themes";
 import { Box, Grid, useMediaQuery } from "@mui/material";
 import React from "react";
 
@@ -25,9 +25,10 @@ export const LayoutPage: React.FC<LayoutPageProps> = ({ children }) => {
       padding = 6
       break;
     }
-    default: { 
+    default: {
       padding = 8
-      break; }
+      break;
+    }
   }
 
 

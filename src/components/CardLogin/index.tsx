@@ -1,4 +1,4 @@
-import { theme, themePalette } from "@/app/config/theme";
+import { theme } from "@/app/config/themes";
 import { Box, Grid, Typography, useMediaQuery } from "@mui/material";
 import Image from "next/image";
 import githubLogo from "../../../public/assets/github-icon.png";
@@ -7,10 +7,7 @@ import linkedinLogo from "../../../public/assets/linkedin-icon.png";
 import { SocialLoginButton } from "../SocialLoginButton";
 import { signIn } from "next-auth/react";
 
-export const CardLogin = () => {
-  const isMobileScreen = useMediaQuery("(max-width: 600px)")
-
-  return (
+export const CardLogin = () => (
     <Box
       sx={theme.customStyles.containerLogin}
     >
@@ -26,12 +23,12 @@ export const CardLogin = () => {
               />
 
               <Typography
-              noWrap
-              component="a"
-              href="/"
-              sx={
-                theme.customStyles.logoTypeLogin
-              }
+                noWrap
+                component="a"
+                href="/"
+                sx={
+                  theme.customStyles.logoTypeLogin
+                }
               >
                 E-Acelera
               </Typography>
@@ -55,7 +52,7 @@ export const CardLogin = () => {
             <Typography
               variant="body1"
               sx={{
-                color: themePalette.descriptionCard,
+                color: theme.palette.textColor?.light,
                 ...theme.customStyles.body1Login
               }}
             >
@@ -70,7 +67,7 @@ export const CardLogin = () => {
               onClick={() =>
                 signIn("github")
               }
-              
+
             />
           </Grid>
           <Grid item xs={12}>
@@ -95,4 +92,3 @@ export const CardLogin = () => {
       </Box>
     </Box>
   );
-};

@@ -1,12 +1,13 @@
 import { ApiResponse } from "@/types/type";
+import { STACKBY_BASE_URL, STACKBY_SECRET_KEY } from "@/utils/constants";
 import { NextResponse } from "next/server";
 
 export async function GET(req: Request, { params }: { params: { endpoint: string } }) {
     try {
-        const apiKey: string = process.env.STACKBY_SECRET_KEY || "";
+        const apiKey: string = STACKBY_SECRET_KEY || "";
         const uniqueParam: string = `nocache=${Date.now()}`;
         const endpoint: string = params.endpoint;
-        const url: string = `https://stackby.com/api/betav1/rowlist/stqB2IjOCulBJkhrZB/${endpoint}?${uniqueParam}`;
+        const url: string = `${STACKBY_BASE_URL}/${endpoint}?${uniqueParam}`;
 
         const response: Response = await fetch(url, {
             method: "GET",
