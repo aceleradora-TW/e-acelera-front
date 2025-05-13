@@ -60,4 +60,6 @@ export interface Theme {
     }
     marginBottom: string
   }
+  styleExclamation: ExtendedCSSProperties
+  styleModal : ExtendedCSSProperties
 }
