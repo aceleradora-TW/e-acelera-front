@@ -3,6 +3,7 @@ import { Box, Typography } from "@mui/material"
 import { theme } from "@/app/config/themes"
 import ReactMarkdown from "react-markdown"
 import StatusSelect from "../StatusSelect"
+import { ElementType } from "@/types/typeTopic"
 
 const components = {
   h1: (props: React.HTMLAttributes<HTMLHeadingElement>) => (
@@ -53,7 +54,7 @@ export const CardVideo: React.FC<CardVideoProps> = ({
           <ReactMarkdown components={components}>{text}</ReactMarkdown>
         </Box>
         <Box sx={{ paddingTop: 2 }}>
-          <StatusSelect id={videoId} width="30%" /> 
+          <StatusSelect elementType={ElementType.Video} id={videoId} width="30%" />
         </Box>
       </Box>
     </Box>
