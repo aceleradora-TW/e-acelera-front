@@ -11,19 +11,21 @@ import { usePathname } from "next/navigation"
 import { useStatus } from "@/components/fetchStatus/fetchStatusExercise"
 import { DetailingTopicContext } from "@/context"
 import { LoginWarningModal } from "../Modals/LoginWarningModal"
+import { ElementType } from "@/types/typeTopic"
 
 interface StatusSelectProps {
   width?: "30%" | "70%" | "100%"
   id?: string
+  elementType: ElementType
 }
 
-export default function StatusSelect({ width = "30%", id }: StatusSelectProps) {
+export default function StatusSelect({ width = "30%", id, elementType }: StatusSelectProps) {
   const [status, setStatus] = React.useState<string>("NotStarted")
   const [backgroundColor, setBackgroundColor] =
     React.useState<string>("rgb(225, 225, 225)")
   const [isModalOpen, setIsModalOpen] = React.useState<boolean>(false)
   const { data: session } = useSession()
-  const statusSelectRef = React.useRef<HTMLDivElement>(null)  
+  const statusSelectRef = React.useRef<HTMLDivElement>(null)
   const { topicStatus } = React.useContext(DetailingTopicContext)
   const pathname = usePathname()
 
@@ -47,22 +49,23 @@ export default function StatusSelect({ width = "30%", id }: StatusSelectProps) {
   const currentStatusTopic = topicStatus?.status?.find(
     (status) => status.itemId === id
   )
-  React.useEffect(()=>{
-    if(currentStatusTopic) {
+  React.useEffect(() => {
+    if (currentStatusTopic) {
       setStatus(currentStatusTopic?.itemStatus)
     }
   }, [currentStatusTopic])
- 
-  
+
+
   const extractIdsFromUrl = (pathname: string): string[] | null => {
     const parts: string[] = pathname.split("/")
 
-    if (parts.length === 5) {
-      const topicId = parts[3].split("-")[0]
-      const itemId = parts[4].split("-")[0] || ""
+    if (parts.length === 4) {
+      const topicId = parts[2].split("-")[0]
+      const itemId = parts[3].split("-")[0] || ""
 
       return (topicId && itemId) ? [topicId, itemId] : null
     }
+
     return null
   }
 
@@ -73,29 +76,29 @@ export default function StatusSelect({ width = "30%", id }: StatusSelectProps) {
     isLoading,
     updateStatus,
   } = useStatus({
-    topicId: ids?.[0] || "",
-    itemId: ids?.[1] || "",
+    topicId: ids?.[1] || "",
+    itemId: id || "",
   })
 
   const handleChange = async (event: SelectChangeEvent) => {
     const value = event.target.value as string
     setStatus(value)
 
-    if (!session && statusSelectRef.current) { 
+    if (!session && statusSelectRef.current) {
       statusSelectRef.current.classList.add("ativo")
       setIsModalOpen(true)
     }
 
     if (!ids) return
-    await updateStatus(value)
-  } 
 
-  const heandleCloseModals = () => {
-    if(statusSelectRef.current) {
+    await updateStatus(value, elementType)
+  }
+
+  const handleCloseModals = () => {
+    if (statusSelectRef.current) {
       statusSelectRef.current.classList.remove("ativo")
     }
 
-   
     setIsModalOpen(false)
     setStatus("NotStarted")
   }
@@ -148,7 +151,7 @@ export default function StatusSelect({ width = "30%", id }: StatusSelectProps) {
           Status
         </InputLabel>
         <Select
-          ref= {statusSelectRef}
+          ref={statusSelectRef}
           notched
           labelId="statusLeveling"
           id="statusSelect"
@@ -171,7 +174,7 @@ export default function StatusSelect({ width = "30%", id }: StatusSelectProps) {
           <MenuItem value="Completed">Concluído</MenuItem>
         </Select>
       </FormControl>
-      <LoginWarningModal status={status} open={isModalOpen} handleClose={heandleCloseModals}/>
+      <LoginWarningModal status={status} open={isModalOpen} handleClose={handleCloseModals} />
     </Box>
   )
 }
