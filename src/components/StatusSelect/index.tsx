@@ -29,23 +29,6 @@ export default function StatusSelect({ width = "30%", id, elementType }: StatusS
   const { topicStatus } = React.useContext(DetailingTopicContext)
   const pathname = usePathname()
 
-  React.useEffect(() => {
-    if (typeof window === "undefined") return
-
-    const statusValue = localStorage.getItem("statusValue") || "NotStarted"
-    const isActive = localStorage.getItem("activeStatusSelect") === "true"
-    const validStatuses = ["NotStarted", "InProgress", "Completed"]
-
-    if (statusSelectRef.current) {
-      if (session && isActive) {
-        setStatus(validStatuses.includes(statusValue) ? statusValue : "NotStarted")
-      }
-      statusSelectRef.current.classList.remove("ativo")
-      localStorage.removeItem("activeStatusSelect")
-      localStorage.removeItem("statusValue")
-    }
-  }, [session])
-
   const currentStatusTopic = topicStatus?.status?.find(
     (status) => status.itemId === id
   )
@@ -55,11 +38,10 @@ export default function StatusSelect({ width = "30%", id, elementType }: StatusS
     }
   }, [currentStatusTopic])
 
-
   const extractIdsFromUrl = (pathname: string): string[] | null => {
     const parts: string[] = pathname.split("/")
 
-    if (parts.length === 4) {
+    if (parts) {
       const topicId = parts[2].split("-")[0]
       const itemId = parts[3].split("-")[0] || ""
 
