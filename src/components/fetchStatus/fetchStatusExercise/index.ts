@@ -1,3 +1,4 @@
+import { ElementType } from "@/types/typeTopic"
 import { useCallback, useEffect, useState } from "react"
 
 interface UseStatusProps {
@@ -39,7 +40,7 @@ export const useStatus = ({
     }
   }, [topicId, itemId])
 
-  const updateStatus = async (newStatus: string) => {
+  const updateStatus = async (newStatus: string,  elementType: ElementType) => {
     setIsLoading(true)
     setStatus(newStatus)
     try {
@@ -49,6 +50,7 @@ export const useStatus = ({
           topicId,
           itemId,
           itemStatus: newStatus,
+          elementType,
           "Content-Type": "application/json",
         },
       })
