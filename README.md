@@ -71,4 +71,3 @@ Este projeto implementa uma tela home básica utilizando Material-UI para estili
 
 ## Contribuição
 **Contribuições são bem-vindas! Sinta-se à vontade para abrir issues e pull requests.**
-

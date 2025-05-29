@@ -41,6 +41,7 @@ export const ContainerCardsExercises: React.FC<ContainerCardsExercisesProps> = (
           spacing={3}
         >
           <ButtonCard
+            id={`${infoArray[index]}`}
             title={exercise}
             description={descriptionsArray[index]}
             route={`${currentPath}/${infoArray[index]}-${exercise}`} />

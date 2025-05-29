@@ -1,0 +1,17 @@
+{
+    "extends": "next/core-web-vitals", 
+    "rules": {
+      "no-unused-vars": "warn", 
+      "no-console": ["warn", { "allow": ["error"] }],
+      "no-var": "error",
+      "object-shorthand": ["error", "always"],
+      "sort-imports": ["error", { "ignoreDeclarationSort": true }], 
+      "prefer-const": "error",
+      "arrow-body-style": ["error", "as-needed"],
+      "curly": ["error", "multi-line"],
+      "@next/next/no-img-element": "warn",
+      "react-hooks/rules-of-hooks": "error", 
+      "react/self-closing-comp": "error",
+      "react/jsx-boolean-value": ["error", "never"]
+    }
+}

@@ -1,12 +1,5 @@
-"use client"
-import { Box } from "@mui/material"
-import { useRouter } from "next/navigation"
-import { useEffect, useState } from "react"
+import { redirect } from "next/navigation"
 
 export default function Home() {
-
-  const router = useRouter()
-  router.push("/nivelamento")
-  
-  return <Box></Box>
+  redirect("/nivelamento")
 }

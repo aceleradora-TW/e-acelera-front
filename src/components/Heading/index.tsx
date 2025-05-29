@@ -1,7 +1,7 @@
 "use client"
 import React from "react"
 import Typography from "@mui/material/Typography"
-import { theme, ThemeConfig } from "../../app/config/theme"
+import { theme } from "@/app/config/themes"
 import { Grid } from "@mui/material"
 
 interface HeadingProps {
@@ -9,9 +9,8 @@ interface HeadingProps {
       variant: "h1" | "h2" 
 }
 
-export const Heading: React.FC<HeadingProps> = ({ text, variant }) => {
-    return (
-        <ThemeConfig>
+export const Heading: React.FC<HeadingProps> = ({ text, variant }) => (
+        <>
             <Grid container>  
                 <Typography
                     variant={variant}
@@ -19,7 +18,6 @@ export const Heading: React.FC<HeadingProps> = ({ text, variant }) => {
                     {text}
                 </Typography>
             </Grid>
-        </ThemeConfig>
+        </>
 
     )
-}

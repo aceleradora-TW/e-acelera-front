@@ -5,41 +5,101 @@ import MenuItem from "@mui/material/MenuItem"
 import FormControl from "@mui/material/FormControl"
 import Select from "@mui/material/Select"
 import { SelectChangeEvent } from "@mui/material/Select"
-import { theme } from "@/app/config/theme"
-import { useRouter } from "next/navigation"
+import { theme } from "@/app/config/themes"
 import { useSession } from "next-auth/react"
+import { usePathname } from "next/navigation"
+import { useStatus } from "@/components/fetchStatus/fetchStatusExercise"
+import { DetailingTopicContext } from "@/context"
+import { LoginWarningModal } from "../Modals/LoginWarningModal"
+import { ElementType } from "@/types/typeTopic"
 
 interface StatusSelectProps {
   width?: "30%" | "70%" | "100%"
+  id?: string
+  elementType: ElementType
 }
 
-export default function StatusSelect({ width = "30%" }: StatusSelectProps) {
-  const [status, setStatus] = React.useState<string>("statusPending")
-  const [backgroundColor, setBackgroundColor] = React.useState<string>("rgb(225, 225, 225)")
-  const router = useRouter()
+export default function StatusSelect({ width = "30%", id, elementType }: StatusSelectProps) {
+  const [status, setStatus] = React.useState<string>("NotStarted")
+  const [backgroundColor, setBackgroundColor] =
+    React.useState<string>("rgb(225, 225, 225)")
+  const [isModalOpen, setIsModalOpen] = React.useState<boolean>(false)
   const { data: session } = useSession()
+  const statusSelectRef = React.useRef<HTMLDivElement>(null)
+  const { topicStatus } = React.useContext(DetailingTopicContext)
+  const pathname = usePathname()
 
-  const handleChange = (event: SelectChangeEvent) => {
+  const currentStatusTopic = topicStatus?.status?.find(
+    (status) => status.itemId === id
+  )
+  React.useEffect(() => {
+    if (currentStatusTopic) {
+      setStatus(currentStatusTopic?.itemStatus)
+    }
+  }, [currentStatusTopic])
+
+  const extractIdsFromUrl = (pathname: string): string[] | null => {
+    const parts: string[] = pathname.split("/")
+
+    if (parts) {
+      const topicId = parts[2].split("-")[0]
+      const itemId = parts[3].split("-")[0] || ""
+
+      return (topicId && itemId) ? [topicId, itemId] : null
+    }
+
+    return null
+  }
+
+  const ids = extractIdsFromUrl(pathname)
+
+  const {
+    status: exerciseStatus,
+    isLoading,
+    updateStatus,
+  } = useStatus({
+    topicId: ids?.[1] || "",
+    itemId: id || "",
+  })
+
+  const handleChange = async (event: SelectChangeEvent) => {
     const value = event.target.value as string
     setStatus(value)
 
-
-    if (!session) {
-      const currentUrl = encodeURIComponent(window.location.href)
-      router.push(`/login?callbackUrl=${currentUrl}`)
+    if (!session && statusSelectRef.current) {
+      statusSelectRef.current.classList.add("ativo")
+      setIsModalOpen(true)
     }
+
+    if (!ids) return
+
+    await updateStatus(value, elementType)
   }
 
+  const handleCloseModals = () => {
+    if (statusSelectRef.current) {
+      statusSelectRef.current.classList.remove("ativo")
+    }
+
+    setIsModalOpen(false)
+    setStatus("NotStarted")
+  }
 
   React.useEffect(() => {
+    if (exerciseStatus && ids) {
+      setStatus(exerciseStatus)
+    }
+  }, [exerciseStatus, ids])
+
+  React.useMemo(() => {
     switch (status) {
-      case "statusConcluded":
+      case "Completed":
         setBackgroundColor(theme.palette.statusSelect?.light || "")
         break
-      case "statusInProgress":
+      case "InProgress":
         setBackgroundColor(theme.palette.statusSelect?.dark || "")
         break
-      case "statusPending":
+      case "NotStarted":
         setBackgroundColor(theme.palette.statusSelect?.main || "")
         break
       default:
@@ -49,18 +109,19 @@ export default function StatusSelect({ width = "30%" }: StatusSelectProps) {
 
   return (
     <Box
+      id={id}
       sx={{
         backgroundColor,
         width,
-        minWidth: '200px',
-        '@media (max-width: 600px)': {
-          maxWidth: '264px'
-        }
+        minWidth: "200px",
+        "@media (max-width: 600px)": {
+          maxWidth: "264px",
+        },
       }}
     >
       <FormControl fullWidth>
         <InputLabel
-          shrink={true}
+          shrink
           id="statusLeveling"
           sx={{
             color: "#000000",
@@ -72,12 +133,14 @@ export default function StatusSelect({ width = "30%" }: StatusSelectProps) {
           Status
         </InputLabel>
         <Select
-          notched={true}
+          ref={statusSelectRef}
+          notched
           labelId="statusLeveling"
           id="statusSelect"
-          value={status}
+          value={status || "NotStarted"}
           label="Status"
           onChange={handleChange}
+          disabled={isLoading}
           sx={{
             "& .MuiOutlinedInput-notchedOutline": {
               borderColor: "#000000",
@@ -88,11 +151,12 @@ export default function StatusSelect({ width = "30%" }: StatusSelectProps) {
             height: "40px",
           }}
         >
-          <MenuItem value="statusPending">Não Iniciado</MenuItem>
-          <MenuItem value="statusInProgress">Em Andamento</MenuItem>
-          <MenuItem value="statusConcluded">Concluído</MenuItem>
+          <MenuItem value="NotStarted">Não Iniciado</MenuItem>
+          <MenuItem value="InProgress">Em Andamento</MenuItem>
+          <MenuItem value="Completed">Concluído</MenuItem>
         </Select>
       </FormControl>
+      <LoginWarningModal status={status} open={isModalOpen} handleClose={handleCloseModals} />
     </Box>
   )
 }

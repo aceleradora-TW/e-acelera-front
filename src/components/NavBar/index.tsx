@@ -1,42 +1,22 @@
-"use client";
-import React, { useState } from "react";
-import AppBar from "@mui/material/AppBar";
-import Toolbar from "@mui/material/Toolbar";
-import Container from "@mui/material/Container";
-import { Box, Avatar, Menu, MenuItem, Typography, IconButton, Tooltip } from "@mui/material";
-import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
-import { theme } from "../../app/config/theme";
-import { MobileMenu } from "./MobileNavBar";
-import { WebMenu } from "./WebNavBar";
-import { useSession, signOut } from "next-auth/react";
-import LogoutIcon from '@mui/icons-material/Logout';
-import Divider from '@mui/material/Divider';
-
+"use client"
+import AppBar from "@mui/material/AppBar"
+import Toolbar from "@mui/material/Toolbar"
+import Container from "@mui/material/Container"
+import { Box } from "@mui/material"
+import { theme } from "@/app/config/themes"
+import { MobileMenu } from "./MobileNavBar"
+import { WebMenu } from "./WebNavBar"
+import { Session } from "next-auth"
 
 interface NavBarProps {
-  list: string[];
+  list: string[]
+  session: Session | null
 }
 
-
-const ResponsiveAppBar: React.FC<NavBarProps> = ({ list }) => {
-  const { data: session } = useSession(); 
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-
-
-  const handleOpenMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-
-  const handleCloseMenu = () => {
-    setAnchorEl(null);
-  };
-
-
-  return (
+const ResponsiveAppBar: React.FC<NavBarProps> = ({ list, session }) => (
     <AppBar
       position="fixed"
-      sx={{ backgroundColor: theme.palette.bgColor?.light }}
+      sx={{ backgroundColor: theme.palette.bgColor?.main}}
     >
       <Box component="nav">
         <Container maxWidth="xl">
@@ -44,16 +24,13 @@ const ResponsiveAppBar: React.FC<NavBarProps> = ({ list }) => {
             disableGutters
             sx={{ display: "flex", alignItems: "center" }}
           >
-            
             <MobileMenu list={list} />
-            <WebMenu list={list} />
-
+            <WebMenu list={list} session={session} />
           </Toolbar>
         </Container>
       </Box>
     </AppBar>
-  );
-};
+  )
 
 
-export default ResponsiveAppBar;
+export default ResponsiveAppBar

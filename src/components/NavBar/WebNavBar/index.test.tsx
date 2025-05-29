@@ -1,14 +1,12 @@
 import '@testing-library/jest-dom'
 import { render, screen } from '@testing-library/react'
-import { WebMenu } from '@/components/NavBar/WebNavBar' 
+import { WebMenu } from '@/components/NavBar/WebNavBar'
 import { useSession } from 'next-auth/react'
 
 jest.mock('next/image', () => ({
   __esModule: true,
-  default: (props: any) => {
-    return <img {...props} alt={props.alt} />;
-  }
-}));
+  default: (props: any) => <img {...props} alt={props.alt} />
+}))
 
 jest.mock('next-auth/react', () => ({
   useSession: jest.fn()
@@ -27,25 +25,26 @@ describe('Testes do botão de Login do componente WebMenu', () => {
   it('Deve mostrar o botão de login quando não houver sessão', () => {
     (useSession as jest.Mock).mockReturnValue({ data: null })
 
-    render(<WebMenu list={['Nivelamento', 'Autoestudo']} />)
+    render(<WebMenu list={['Nivelamento', 'Autoestudo']} session={null} />)
     
-    const loginButton = screen.queryByText('LOGIN')
+    const loginButton = screen.getByRole('button', { name: /login/i })
     expect(loginButton).toBeInTheDocument()
   })
 
   it('Não deve mostrar o botão de login quando houver sessão', () => {
     (useSession as jest.Mock).mockReturnValue({ 
       data: { 
-        user: { 
-          image: 'url-da-imagem', 
-          name: 'Usuário Teste' 
-        } 
+        user: { image: 'url-da-imagem', name: 'Usuário Teste' },
+        expires: '2025-01-01T00:00:00Z'
       } 
     })
 
-    render(<WebMenu list={['Nivelamento', 'Autoestudo']} />)
+    render(<WebMenu list={['Nivelamento', 'Autoestudo']} session={{ 
+      user: { image: 'url-da-imagem', name: 'Usuário Teste' }, 
+      expires: '2025-01-01T00:00:00Z'
+    }} />)
     
-    const loginButton = screen.queryByText('LOGIN')
+    const loginButton = screen.queryByRole('button', { name: /login/i })
     expect(loginButton).not.toBeInTheDocument()
   })
 })
