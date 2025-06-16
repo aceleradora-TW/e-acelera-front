@@ -52,7 +52,6 @@ export default function StatusSelect({ width = "30%", id, elementType }: StatusS
   }
 
   const ids = extractIdsFromUrl(pathname)
-  console.log(ids);
 
 
   const {

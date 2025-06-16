@@ -45,7 +45,6 @@ export const useStatus = ({
   const updateStatus = async (newStatus: string,  elementType: ElementType) => {
     setIsLoading(true)
     setStatus(newStatus)
-    console.log(themeId);
     
     try {
       const response = await fetch("/api/backend/updateExerciseStatus", {

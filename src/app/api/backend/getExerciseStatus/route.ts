@@ -46,7 +46,7 @@ export async function GET(req: NextRequest) {
     }
 
     const data = await response.json()
-    const statusData = data[0].itemStatus
+    const statusData = data.itemStatus
 
     return NextResponse.json({ status: statusData }, { status: 200 })
   } catch (error) {
