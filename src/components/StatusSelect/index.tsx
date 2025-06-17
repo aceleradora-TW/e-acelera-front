@@ -42,22 +42,25 @@ export default function StatusSelect({ width = "30%", id, elementType }: StatusS
     const parts: string[] = pathname.split("/")
 
     if (parts) {
-      const topicId = parts[2].split("-")[0]
-      const itemId = parts[3].split("-")[0] || ""
+      const themeId = parts[2].split("-")[0] || ""
+      const topicId = parts[3].split("-")[0] || ""
 
-      return (topicId && itemId) ? [topicId, itemId] : null
+      return (themeId && topicId) ? [themeId, topicId] : null
     }
 
     return null
   }
 
   const ids = extractIdsFromUrl(pathname)
+  console.log(ids);
+
 
   const {
     status: exerciseStatus,
     isLoading,
     updateStatus,
   } = useStatus({
+    themeId: ids?.[0] || "",
     topicId: ids?.[1] || "",
     itemId: id || "",
   })
