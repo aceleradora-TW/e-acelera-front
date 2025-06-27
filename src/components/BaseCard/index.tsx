@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import * as React from "react";
 import { theme } from "@/app/config/themes";
 import { ClickButton } from "../ClickButton";
+import ProgressBar from "../PageElements/Progress/ProgressBar";
 
 interface CardProps {
   title: string;
@@ -15,6 +16,11 @@ interface CardProps {
 
   image?: string;
   route: string;
+  children?: React.ReactNode;
+  cardType?: "theme" | "topic"
+
+
+
 }
 
 const cardStyles = {
@@ -35,6 +41,9 @@ export const BaseCard: React.FC<CardProps> = ({
   textImage,
   image,
   route,
+  children,
+  cardType = "theme",
+
 }) => {
   const router = useRouter();
   const handleClick = (route: string) => {
@@ -66,8 +75,19 @@ export const BaseCard: React.FC<CardProps> = ({
         </CardContent>
       </CardActionArea>
       <CardActions sx={cardActionsStyle}>
+        {children && (
+          <div style={{ width: "100%", marginBottom: 8 }}>{children}</div>
+        )}
         <ClickButton title="Entrar" click={() => handleClick(route)} />
+        {cardType === "topic" &&
+          <div style={{ marginTop: 12 }}>
+            <ProgressBar percentage={50} />
+            <p style={{ fontSize: "0.8rem", textAlign: "center" }}>
+              {50}%
+            </p>
+          </div>}
       </CardActions>
+
     </Card>
   );
 };
