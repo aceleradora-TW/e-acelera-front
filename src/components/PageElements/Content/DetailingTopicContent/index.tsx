@@ -6,6 +6,7 @@ import { DescriptionReference } from "@/components/Description/DescriptionRefere
 import { ContainerCardsExercises } from "../../Container/ContainerCardsExercises"
 import { DescriptionWithVideo } from "@/components/Description/DescriptionWithVideo"
 import { Heading } from "@/components/Heading"
+import ProgressBar from "@/components/PageElements/Progress/ProgressBar";
 
 interface DetailingContentProps {
   data: ApiResponse
@@ -17,6 +18,10 @@ const TopicContent: React.FC<{ field: TopicField }> = ({ field }) => (
       <Grid item xl={12} lg={9} md={6} sm={3}>
         <BreadCrumb />
         <Heading variant="h1" text={field.title} />
+        <ProgressBar percentage={60} />
+                  <p style={{ fontSize: "0.8rem", textAlign: "right", marginTop: "4px" }}>
+                    {60}% concluído
+                  </p>
       </Grid>
       <DescriptionWithVideo
         textDescription={field.description}

@@ -2,19 +2,20 @@ import { Grid, useMediaQuery } from "@mui/material";
 import React from "react";
 import { BaseCard } from "@/components/BaseCard";
 import { usePathname } from 'next/navigation';
+import ProgressBar from "@/components/PageElements/Progress/ProgressBar";
 interface ContainerCardTopicsProps {
   topics: string;
   topicsDescription: string;
   topicsInfo: string;
 }
 
-export const ContainerCardTopics: React.FC<ContainerCardTopicsProps> = ({ topics, topicsDescription, topicsInfo}) => {
+export const ContainerCardTopics: React.FC<ContainerCardTopicsProps> = ({ topics, topicsDescription, topicsInfo }) => {
   const between = useMediaQuery('(min-width: 800px) and (max-width: 899px)');
   const between2 = useMediaQuery('(min-width: 445px) and (max-width: 599px)');
   const pathname = usePathname()
   const currentPath = pathname.slice(1)
 
-  const splitValues = (value: string):string[] => value.split(",");
+  const splitValues = (value: string): string[] => value.split(",");
   const topicsArray = splitValues(topics);
   const descriptionsArray = splitValues(topicsDescription);
   const infoArray = splitValues(topicsInfo);
@@ -34,8 +35,9 @@ export const ContainerCardTopics: React.FC<ContainerCardTopicsProps> = ({ topics
         >
           <BaseCard
             title={topic}
+            cardType="topic"
             description={descriptionsArray[index]}
-            route={`${currentPath}/${infoArray[index]}-${topic}`} textImage={""}          />
+            route={`${currentPath}/${infoArray[index]}-${topic}`} textImage={""} />
         </Grid>
       ))}
     </Grid>

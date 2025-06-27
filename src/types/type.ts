@@ -44,6 +44,7 @@ export interface TopicField extends CommonField {
     videoLink: string;
     videoReference: string;
     videoInfo: string
+    completion?: number;
 };
 
 export interface VideoField extends CommonField {
