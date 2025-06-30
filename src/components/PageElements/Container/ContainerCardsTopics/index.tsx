@@ -5,7 +5,7 @@ import { usePathname } from 'next/navigation';
 interface ContainerCardTopicsProps {
   topics: string;
   topicsDescription: string;
-  topicsInfo: string;
+  topicsInfo: string; 
 }
 
 export const ContainerCardTopics: React.FC<ContainerCardTopicsProps> = ({ topics, topicsDescription, topicsInfo}) => {
@@ -35,7 +35,8 @@ export const ContainerCardTopics: React.FC<ContainerCardTopicsProps> = ({ topics
           <BaseCard
             title={topic}
             description={descriptionsArray[index]}
-            route={`${currentPath}/${infoArray[index]}-${topic}`} textImage={""}          />
+            route={`${currentPath}/${infoArray[index]}-${topic}`} textImage={""}  
+            cardType="topic"        />
         </Grid>
       ))}
     </Grid>

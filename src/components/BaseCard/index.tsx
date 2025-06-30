@@ -1,4 +1,4 @@
-import { CardActionArea, CardActions } from "@mui/material";
+import { CardActionArea, CardActions, CircularProgress } from "@mui/material";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
@@ -7,6 +7,8 @@ import { useRouter } from "next/navigation";
 import * as React from "react";
 import { theme } from "@/app/config/themes";
 import { ClickButton } from "../ClickButton";
+import CircularProgressBar from "../PageElements/Progress/CircularProgressBar";
+
 
 interface CardProps {
   title: string;
@@ -15,6 +17,9 @@ interface CardProps {
 
   image?: string;
   route: string;
+  children?: React.ReactNode;
+  cardType?: "theme" | "topic"
+
 }
 
 const cardStyles = {
@@ -35,6 +40,7 @@ export const BaseCard: React.FC<CardProps> = ({
   textImage,
   image,
   route,
+  cardType,
 }) => {
   const router = useRouter();
   const handleClick = (route: string) => {
@@ -67,6 +73,10 @@ export const BaseCard: React.FC<CardProps> = ({
       </CardActionArea>
       <CardActions sx={cardActionsStyle}>
         <ClickButton title="Entrar" click={() => handleClick(route)} />
+        {cardType === "topic" &&
+          <div style={{ marginTop: 12, marginLeft:"auto" }}>
+            <CircularProgressBar value={50} />
+          </div>}
       </CardActions>
     </Card>
   );
