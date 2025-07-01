@@ -79,15 +79,7 @@ export const BaseCard: React.FC<CardProps> = ({
           <div style={{ width: "100%", marginBottom: 8 }}>{children}</div>
         )}
         <ClickButton title="Entrar" click={() => handleClick(route)} />
-        {cardType === "topic" &&
-          <div style={{ marginTop: 12 }}>
-            <ProgressBar percentage={50} />
-            <p style={{ fontSize: "0.8rem", textAlign: "center" }}>
-              {50}%
-            </p>
-          </div>}
       </CardActions>
-
     </Card>
   );
 };

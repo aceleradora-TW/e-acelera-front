@@ -6,6 +6,7 @@ import { BadRequest } from "@/components/BadRequest"
 import { NoData } from "@/components/NoData"
 import { useFetchTopicStatus } from "@/components/fetchStatus/fecthStatusTopic"
 import { DetailingTopicContext } from "@/context"
+import { useFetchTopicProgress } from "@/components/fetchProgress/fetchTopicProgress"
 
 export const RenderDetailingTopicPage = (id: string) => {
   const extractId = (): string => {
@@ -22,6 +23,10 @@ export const RenderDetailingTopicPage = (id: string) => {
   } = useFetchData("/api/stackbyApi/Topics")
 
   const { dataStatus } = useFetchTopicStatus(topicId)
+
+  const { topicProgress } = useFetchTopicProgress(topicId)
+
+  console.log("[TOPIC PROGRESS]", topicProgress)
 
   if (loading) {
     return <Loading />

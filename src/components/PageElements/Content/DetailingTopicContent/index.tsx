@@ -1,4 +1,4 @@
-import React from "react" 
+import React from "react"
 import { Grid } from "@mui/material"
 import { BreadCrumb } from "@/components/BreadCrumb"
 import { ApiResponse, DataItem, TopicField } from "@/types/type"
@@ -7,6 +7,7 @@ import { ContainerCardsExercises } from "../../Container/ContainerCardsExercises
 import { DescriptionWithVideo } from "@/components/Description/DescriptionWithVideo"
 import { Heading } from "@/components/Heading"
 import ProgressBar from "@/components/PageElements/Progress/ProgressBar";
+import { DetailingTopicContext } from "@/context"
 
 interface DetailingContentProps {
   data: ApiResponse
@@ -60,7 +61,7 @@ export const DetailingTopicContent: React.FC<DetailingContentProps> = ({
   return (
     <>
       {filteredData.map((element: DataItem) => (
-        <TopicContent key={element.id} field={element.field as TopicField}  />
+        <TopicContent key={element.id} field={element.field as TopicField} />
       ))}
     </>
   )
