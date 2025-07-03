@@ -4,9 +4,11 @@ import { useCallback, useEffect, useState } from "react"
 interface UseStatusProps {
   topicId: string
   itemId: string
+  themeId: string
 }
 
 export const useStatus = ({
+  themeId,
   topicId,
   itemId,
 }: UseStatusProps) => {
@@ -43,6 +45,7 @@ export const useStatus = ({
   const updateStatus = async (newStatus: string,  elementType: ElementType) => {
     setIsLoading(true)
     setStatus(newStatus)
+    
     try {
       const response = await fetch("/api/backend/updateExerciseStatus", {
         method: "PUT",
@@ -51,6 +54,7 @@ export const useStatus = ({
           itemId,
           itemStatus: newStatus,
           elementType,
+          themeId,
           "Content-Type": "application/json",
         },
       })
