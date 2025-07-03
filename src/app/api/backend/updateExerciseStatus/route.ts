@@ -28,7 +28,7 @@ export async function PUT(req: NextRequest) {
   try {
     const baseUrl = process.env.BACKEND_BASE_URL
     const response = await fetch(
-      `${baseUrl}/topic/${topicId}/item/${itemId}/status`,
+      `${baseUrl}/status/${topicId}/item/${itemId}`,
       {
         method: "PUT",
         headers: {
