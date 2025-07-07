@@ -8,10 +8,12 @@ import { DescriptionWithVideo } from "@/components/Description/DescriptionWithVi
 import { Heading } from "@/components/Heading"
 import ProgressBar from "@/components/PageElements/Progress/ProgressBar";
 import { DetailingTopicContext } from "@/context"
+import { useFetchTopicProgress } from "@/components/fetchProgress/fetchTopicProgress"
 
 interface DetailingContentProps {
   data: ApiResponse
   id: string
+  topicProgress: Number
 }
 
 const TopicContent: React.FC<{ field: TopicField }> = ({ field }) => (
@@ -19,9 +21,9 @@ const TopicContent: React.FC<{ field: TopicField }> = ({ field }) => (
       <Grid item xl={12} lg={9} md={6} sm={3}>
         <BreadCrumb />
         <Heading variant="h1" text={field.title} />
-        <ProgressBar percentage={60} />
+        <ProgressBar percentage={onprogress?.status?.progress || 0} />
                   <p style={{ fontSize: "0.8rem", textAlign: "right", marginTop: "4px" }}>
-                    {60}% concluído
+                    {onprogress?.status?.progress || 0}% concluído
                   </p>
       </Grid>
       <DescriptionWithVideo

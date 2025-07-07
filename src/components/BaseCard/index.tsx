@@ -18,9 +18,6 @@ interface CardProps {
   route: string;
   children?: React.ReactNode;
   cardType?: "theme" | "topic"
-
-
-
 }
 
 const cardStyles = {

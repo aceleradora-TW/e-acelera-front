@@ -62,4 +62,8 @@ export interface Image {
     url: string;
 }
 
+export enum IdType {
+  TOPIC_ID = "topicId",
+  THEME_ID = "themeId",
+};
 

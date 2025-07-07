@@ -41,7 +41,7 @@ export const RenderDetailingTopicPage = (id: string) => {
   return (
     <DetailingTopicContext.Provider value={{ topicStatus: dataStatus }}>
       <LayoutPage>
-        <DetailingTopicContent data={renderData} id={id} />
+        <DetailingTopicContent data={renderData} id={id} topicProgress={topicProgress?.progress!}/>
       </LayoutPage>
     </DetailingTopicContext.Provider>
   )

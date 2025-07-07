@@ -11,3 +11,6 @@ export enum ElementType {
     Video = "Video",
     Exercise = "Exercise"
 }
+export interface TopicProgress {
+    progress: number
+}

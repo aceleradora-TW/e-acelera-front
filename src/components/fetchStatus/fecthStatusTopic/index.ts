@@ -1,4 +1,4 @@
-import { ApiTopic } from "@/types/typeTopic"
+import { ApiTopic} from "@/types/typeTopic"
 import { useCallback, useEffect, useState  } from "react"
 
 export const useFetchTopicStatus = (topicId?: string) => {

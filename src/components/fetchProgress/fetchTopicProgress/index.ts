@@ -1,8 +1,9 @@
-import { ApiTopic } from "@/types/typeTopic"
-import { useCallback, useEffect, useState  } from "react"
+import { IdType } from "@/types/type"
+import { TopicProgress } from "@/types/typeTopic"
+import { useCallback, useEffect, useState } from "react"
 
-export const useFetchTopicProgress = (topicId: string, _totalItens?: number) => {
-  const [topicProgress, setTopicProgress] = useState<ApiTopic>()
+export const useFetchTopicProgress = (topicId: string) => {
+  const [topicProgress, setTopicProgress] = useState<TopicProgress>({progress:0})
 
   const fetchStatus = useCallback(async () => {
     try {
@@ -10,7 +11,8 @@ export const useFetchTopicProgress = (topicId: string, _totalItens?: number) => 
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          topicId
+          topicId,
+          idType: IdType.TOPIC_ID
         }
       })
 
