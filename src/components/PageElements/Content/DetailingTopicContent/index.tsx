@@ -6,26 +6,42 @@ import { DescriptionReference } from "@/components/Description/DescriptionRefere
 import { ContainerCardsExercises } from "../../Container/ContainerCardsExercises"
 import { DescriptionWithVideo } from "@/components/Description/DescriptionWithVideo"
 import { Heading } from "@/components/Heading"
-import ProgressBar from "@/components/PageElements/Progress/ProgressBar";
-import { DetailingTopicContext } from "@/context"
+import ProgressBar from "@/components/PageElements/Progress/ProgressBar"
 import { useFetchTopicProgress } from "@/components/fetchProgress/fetchTopicProgress"
 
 interface DetailingContentProps {
   data: ApiResponse
   id: string
-  topicProgress: Number
+  topicProgress: number
 }
 
-const TopicContent: React.FC<{ field: TopicField }> = ({ field }) => (
+interface TopicContentProps {
+  field: TopicField
+  topicProgress: number
+}
+
+const TopicContent: React.FC<TopicContentProps> = ({ field, topicProgress }) => {
+  const totalItems =
+    (field.videoInfo ? 1 : 0) +
+    (field.exercisesInfo?.split(",").filter(Boolean).length || 0)
+    
+  return (
     <>
       <Grid item xl={12} lg={9} md={6} sm={3}>
         <BreadCrumb />
         <Heading variant="h1" text={field.title} />
-        <ProgressBar percentage={onprogress?.status?.progress || 0} />
-                  <p style={{ fontSize: "0.8rem", textAlign: "right", marginTop: "4px" }}>
-                    {onprogress?.status?.progress || 0}% concluído
-                  </p>
+        <ProgressBar percentage={topicProgress} />
+        <p
+          style={{
+            fontSize: "0.8rem",
+            textAlign: "right",
+            marginTop: "4px",
+          }}
+        >
+          {topicProgress }% concluído
+        </p>
       </Grid>
+
       <DescriptionWithVideo
         textDescription={field.description}
         textVideo={field.videoDescription}
@@ -52,18 +68,25 @@ const TopicContent: React.FC<{ field: TopicField }> = ({ field }) => (
       )}
     </>
   )
+}
 
 export const DetailingTopicContent: React.FC<DetailingContentProps> = ({
   data,
   id,
+  topicProgress
 }) => {
   const filteredData = data?.data.filter(
     (element: DataItem) => element.id === id.split("-")[0]
   )
+
   return (
     <>
       {filteredData.map((element: DataItem) => (
-        <TopicContent key={element.id} field={element.field as TopicField} />
+        <TopicContent
+          key={element.id}
+          field={element.field as TopicField}
+          topicProgress={topicProgress}
+        />
       ))}
     </>
   )

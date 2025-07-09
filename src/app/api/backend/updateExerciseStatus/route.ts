@@ -28,7 +28,7 @@ export async function PUT(req: NextRequest) {
   try {
     const baseUrl = process.env.BACKEND_BASE_URL
     const response = await fetch(
-      `${baseUrl}/topic/${topicId}/item/${itemId}/status`,
+      `${baseUrl}/status/${topicId}/item/${itemId}`,
       {
         method: "PUT",
         headers: {
@@ -45,7 +45,7 @@ export async function PUT(req: NextRequest) {
         { status: 401 }
       )
     }
-    
+
     if (!response.ok) {
       return NextResponse.json(
         { error: `Error fetching status: ${response.status} - ${response.statusText}` },

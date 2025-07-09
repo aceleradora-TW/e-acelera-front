@@ -23,10 +23,10 @@ export const RenderDetailingTopicPage = (id: string) => {
   } = useFetchData("/api/stackbyApi/Topics")
 
   const { dataStatus } = useFetchTopicStatus(topicId)
+  const {topicProgress} = useFetchTopicProgress(topicId)
+  console.log(topicProgress.status)
 
-  const { topicProgress } = useFetchTopicProgress(topicId)
-
-  console.log("[TOPIC PROGRESS]", topicProgress)
+  // console.log("[TOPIC PROGRESS]", topicProgress) Comentei
 
   if (loading) {
     return <Loading />
@@ -41,7 +41,7 @@ export const RenderDetailingTopicPage = (id: string) => {
   return (
     <DetailingTopicContext.Provider value={{ topicStatus: dataStatus }}>
       <LayoutPage>
-        <DetailingTopicContent data={renderData} id={id} topicProgress={topicProgress?.progress!}/>
+       <DetailingTopicContent data={renderData} id={id} topicProgress={topicProgress.status.progress ?? 0}/>
       </LayoutPage>
     </DetailingTopicContext.Provider>
   )
