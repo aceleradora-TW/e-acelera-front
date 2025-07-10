@@ -74,7 +74,7 @@ export const BaseCard: React.FC<CardProps> = ({
       <CardActions sx={cardActionsStyle}>
         <ClickButton title="Entrar" click={() => handleClick(route)} />
         {cardType === "topic" &&
-          <div style={{ marginTop: 12, marginLeft:"auto" }}>
+          <div style={{ marginTop: 12, marginLeft:"auto", padding: 8 }}>
             <CircularProgressBar value={50} />
           </div>}
       </CardActions>

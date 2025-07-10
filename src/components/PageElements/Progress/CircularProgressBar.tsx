@@ -8,15 +8,25 @@ interface CircularProgressWithLabelProps {
   value: number;
 }
 
-const CircularProgressBar: React.FC<CircularProgressWithLabelProps> = ({ value }) => {
-  return (
+const CircularProgressBar: React.FC<CircularProgressWithLabelProps> = ({ value }) => (
     <Box position="relative" display="inline-flex">
+       <CircularProgress
+        variant="determinate"       
+        value={100}
+        size={45}
+        thickness={3}
+        sx={{ color: "#aceef5",
+          position: "absolute"
+         }}
+      />
+
       <CircularProgress
-        variant="determinate"
+        variant="determinate"       
         value={value}
         size={45}
-        thickness={5}
-        sx={{ color: "#002c53" }}
+        thickness={3}
+        sx={{ color: "#002c53"
+         }}
       />
       <Typography
         variant="caption"
@@ -34,6 +44,5 @@ const CircularProgressBar: React.FC<CircularProgressWithLabelProps> = ({ value }
       </Typography>
     </Box>
   );
-};
 
 export default CircularProgressBar;
