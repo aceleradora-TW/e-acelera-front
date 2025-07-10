@@ -1,13 +1,14 @@
-import React from "react"
+import React, { useEffect } from "react"
 import { Grid } from "@mui/material"
 import { BreadCrumb } from "@/components/BreadCrumb"
-import { ApiResponse, DataItem, TopicField } from "@/types/type"
+import { ApiResponse, DataItem, IdType, TopicField } from "@/types/type"
 import { DescriptionReference } from "@/components/Description/DescriptionReference"
 import { ContainerCardsExercises } from "../../Container/ContainerCardsExercises"
 import { DescriptionWithVideo } from "@/components/Description/DescriptionWithVideo"
 import { Heading } from "@/components/Heading"
 import ProgressBar from "@/components/PageElements/Progress/ProgressBar"
-import { useFetchTopicProgress } from "@/components/fetchProgress/fetchTopicProgress"
+import { useGlobalContext } from "@/hooks/useGlobalContext"
+import { useFetchTopicStatus } from "@/components/fetchStatus/fecthStatusTopic"
 
 interface DetailingContentProps {
   data: ApiResponse
@@ -24,7 +25,7 @@ const TopicContent: React.FC<TopicContentProps> = ({ field, topicProgress }) => 
   const totalItems =
     (field.videoInfo ? 1 : 0) +
     (field.exercisesInfo?.split(",").filter(Boolean).length || 0)
-    
+
   return (
     <>
       <Grid item xl={12} lg={9} md={6} sm={3}>
@@ -38,7 +39,7 @@ const TopicContent: React.FC<TopicContentProps> = ({ field, topicProgress }) => 
             marginTop: "4px",
           }}
         >
-          {topicProgress }% concluído
+          {topicProgress}% concluído
         </p>
       </Grid>
 
@@ -75,9 +76,16 @@ export const DetailingTopicContent: React.FC<DetailingContentProps> = ({
   id,
   topicProgress
 }) => {
+  const { dataStatus } = useFetchTopicStatus(id)
+  const { handleTopicStatus } = useGlobalContext();
+
   const filteredData = data?.data.filter(
     (element: DataItem) => element.id === id.split("-")[0]
   )
+
+  useEffect(() => {
+      handleTopicStatus(dataStatus)
+  }, [dataStatus, handleTopicStatus])
 
   return (
     <>

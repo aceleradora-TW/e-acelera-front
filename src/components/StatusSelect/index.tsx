@@ -12,6 +12,9 @@ import { useStatus } from "@/components/fetchStatus/fetchStatusExercise"
 import { DetailingTopicContext } from "@/context"
 import { LoginWarningModal } from "../Modals/LoginWarningModal"
 import { ElementType } from "@/types/typeTopic"
+import { useGlobalContext } from "@/hooks/useGlobalContext"
+// import { IdType } from "@/types/type"
+// import { useFetchProgress } from "../fetchProgress"
 
 interface StatusSelectProps {
   width?: "30%" | "70%" | "100%"
@@ -26,7 +29,7 @@ export default function StatusSelect({ width = "30%", id, elementType }: StatusS
   const [isModalOpen, setIsModalOpen] = React.useState<boolean>(false)
   const { data: session } = useSession()
   const statusSelectRef = React.useRef<HTMLDivElement>(null)
-  const { topicStatus } = React.useContext(DetailingTopicContext)
+  const { topicStatus, triggerProgressUpdate } = useGlobalContext();
   const pathname = usePathname()
 
   const currentStatusTopic = topicStatus?.status?.find(
@@ -64,6 +67,9 @@ export default function StatusSelect({ width = "30%", id, elementType }: StatusS
     itemId: id || "",
   })
 
+  // const { progress } = useFetchProgress(ids?.[1] || "", IdType.TOPIC_ID)
+  // const { topicProgress, handleTopicProgress } = useGlobalContext();
+
   const handleChange = async (event: SelectChangeEvent) => {
     const value = event.target.value as string
     setStatus(value)
@@ -75,7 +81,12 @@ export default function StatusSelect({ width = "30%", id, elementType }: StatusS
 
     if (!ids) return
 
-    await updateStatus(value, elementType)
+    try {
+      await updateStatus(value, elementType)
+      triggerProgressUpdate()
+    } catch (error) {
+      console.error("Erro ao atualizar status:", error)
+    }
   }
 
   const handleCloseModals = () => {

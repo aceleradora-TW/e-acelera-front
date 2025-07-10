@@ -6,27 +6,20 @@ import { BadRequest } from "@/components/BadRequest"
 import { NoData } from "@/components/NoData"
 import { useFetchTopicStatus } from "@/components/fetchStatus/fecthStatusTopic"
 import { DetailingTopicContext } from "@/context"
-import { useFetchTopicProgress } from "@/components/fetchProgress/fetchTopicProgress"
+import { useFetchProgress } from "@/components/fetchProgress"
+import { useGlobalContext } from "@/hooks/useGlobalContext"
+import { GlobalContextProvider } from "@/context/global.context"
+import { IdType } from "@/types/type"
 
-export const RenderDetailingTopicPage = (id: string) => {
-  const extractId = (): string => {
-    const parts: string[] = id.split("-")
-    return parts[0]
-  }
-
-  const topicId = extractId()
+const PageContent = ({ topicId }: { topicId: string }) => {
+  const { progressTrigger } = useGlobalContext()
+  const {progress} = useFetchProgress(topicId, IdType.TOPIC_ID, progressTrigger)
 
   const {
     data: renderData,
     isLoading: loading,
     error: error,
   } = useFetchData("/api/stackbyApi/Topics")
-
-  const { dataStatus } = useFetchTopicStatus(topicId)
-  const {topicProgress} = useFetchTopicProgress(topicId)
-  console.log(topicProgress.status)
-
-  // console.log("[TOPIC PROGRESS]", topicProgress) Comentei
 
   if (loading) {
     return <Loading />
@@ -39,10 +32,23 @@ export const RenderDetailingTopicPage = (id: string) => {
   }
 
   return (
-    <DetailingTopicContext.Provider value={{ topicStatus: dataStatus }}>
-      <LayoutPage>
-       <DetailingTopicContent data={renderData} id={id} topicProgress={topicProgress.status.progress ?? 0}/>
-      </LayoutPage>
-    </DetailingTopicContext.Provider>
+    <LayoutPage>
+      <DetailingTopicContent data={renderData} id={topicId} topicProgress={progress?.progress ?? 0} />
+    </LayoutPage>
+  )
+}
+
+export const RenderDetailingTopicPage = (id: string) => {
+  const extractId = (): string => {
+    const parts: string[] = id.split("-")
+    return parts[0]
+  }
+
+  const topicId = extractId()
+
+  return (
+    <GlobalContextProvider>
+      <PageContent topicId={topicId} />
+    </GlobalContextProvider>
   )
 }

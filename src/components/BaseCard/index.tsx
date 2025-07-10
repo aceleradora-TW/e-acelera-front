@@ -1,4 +1,4 @@
-import { CardActionArea, CardActions } from "@mui/material";
+import { Box, CardActionArea, CardActions, CircularProgress } from "@mui/material";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
@@ -7,17 +7,19 @@ import { useRouter } from "next/navigation";
 import * as React from "react";
 import { theme } from "@/app/config/themes";
 import { ClickButton } from "../ClickButton";
-import ProgressBar from "../PageElements/Progress/ProgressBar";
+import ProgressBar from "@/components/PageElements/Progress/ProgressBar";
+import { IdType } from "@/types/type";
+import { useFetchProgress } from "@/components/fetchProgress";
 
 interface CardProps {
+  id: string;
   title: string;
   description?: string;
   textImage?: string;
-
   image?: string;
   route: string;
   children?: React.ReactNode;
-  cardType?: "theme" | "topic"
+  cardType?: "theme" | "topic";
 }
 
 const cardStyles = {
@@ -29,10 +31,11 @@ const cardActionsStyle = {
   paddingBottom: 2,
   paddingLeft: 2,
   height: "auto",
-  justifyContent: "left",
+  justifyContent: "space-between",
 };
 
 export const BaseCard: React.FC<CardProps> = ({
+  id,
   title,
   description,
   textImage,
@@ -40,12 +43,20 @@ export const BaseCard: React.FC<CardProps> = ({
   route,
   children,
   cardType = "theme",
-
 }) => {
   const router = useRouter();
   const handleClick = (route: string) => {
     router.push(`/${route}`);
   };
+  const [themeProgress, setThemeProgress] = React.useState<number>(0);
+  const { progress } = useFetchProgress(id, IdType.THEME_ID);
+
+  // React.useEffect(() => {
+    // if(cardType === "theme") {
+      // eslint-disable-next-line react-hooks/rules-of-hooks
+      // setThemeProgress(progress?.progress ?? 0);
+    // }
+  // }, [id, cardType])
 
   return (
     <Card sx={theme.customStyles.cardContainer}>
@@ -76,6 +87,29 @@ export const BaseCard: React.FC<CardProps> = ({
           <div style={{ width: "100%", marginBottom: 8 }}>{children}</div>
         )}
         <ClickButton title="Entrar" click={() => handleClick(route)} />
+        {cardType === "theme" && (
+          <Box sx={{ position: 'relative', display: 'inline-flex' }}>
+            <CircularProgress variant="determinate" value={progress?.progress ?? 0} />
+            <Box
+              sx={{
+                  top: 0,
+                  left: 0,
+                  bottom: 0,
+                  right: 0,
+                  position: 'absolute',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}
+              >
+              <Typography
+                variant="caption"
+                component="div"
+                sx={{fontSize: "1rem", color: 'text.secondary' }}
+              >{`${Math.round(progress?.progress ?? 0)}%`}</Typography>
+            </Box>
+          </Box>
+        )}
       </CardActions>
     </Card>
   );
