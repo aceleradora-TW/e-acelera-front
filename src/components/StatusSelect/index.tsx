@@ -9,12 +9,9 @@ import { theme } from "@/app/config/themes"
 import { useSession } from "next-auth/react"
 import { usePathname } from "next/navigation"
 import { useStatus } from "@/components/fetchStatus/fetchStatusExercise"
-import { DetailingTopicContext } from "@/context"
 import { LoginWarningModal } from "../Modals/LoginWarningModal"
 import { ElementType } from "@/types/typeTopic"
 import { useGlobalContext } from "@/hooks/useGlobalContext"
-// import { IdType } from "@/types/type"
-// import { useFetchProgress } from "../fetchProgress"
 
 interface StatusSelectProps {
   width?: "30%" | "70%" | "100%"

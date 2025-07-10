@@ -48,15 +48,7 @@ export const BaseCard: React.FC<CardProps> = ({
   const handleClick = (route: string) => {
     router.push(`/${route}`);
   };
-  const [themeProgress, setThemeProgress] = React.useState<number>(0);
   const { progress } = useFetchProgress(id, IdType.THEME_ID);
-
-  // React.useEffect(() => {
-    // if(cardType === "theme") {
-      // eslint-disable-next-line react-hooks/rules-of-hooks
-      // setThemeProgress(progress?.progress ?? 0);
-    // }
-  // }, [id, cardType])
 
   return (
     <Card sx={theme.customStyles.cardContainer}>
