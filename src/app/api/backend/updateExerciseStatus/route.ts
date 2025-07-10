@@ -45,7 +45,7 @@ export async function PUT(req: NextRequest) {
         { status: 401 }
       )
     }
-    
+
     if (!response.ok) {
       return NextResponse.json(
         { error: `Error fetching status: ${response.status} - ${response.statusText}` },

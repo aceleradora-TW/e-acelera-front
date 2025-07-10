@@ -11,3 +11,8 @@ export enum ElementType {
     Video = "Video",
     Exercise = "Exercise"
 }
+export type TopicProgress = {
+    status: {
+        progress: number
+    }
+}
