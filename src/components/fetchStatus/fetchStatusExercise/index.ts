@@ -11,6 +11,7 @@ interface UseStatusProps {
 export const useStatus = ({ themeId, topicId, itemId }: UseStatusProps) => {
   const [status, setStatus] = useState<string>("NotStarted");
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [hasError, setHasError] = useState<boolean>(false);
   const { showStatusErrorModal } = useContext(DetailingTopicContext);
 
   const fetchStatus = useCallback(async () => {
@@ -30,21 +31,18 @@ export const useStatus = ({ themeId, topicId, itemId }: UseStatusProps) => {
 
       const data = await response.json();
       const validStatuses = ["NotStarted", "InProgress", "Completed"];
-
-      setStatus(
-        validStatuses.includes(data.status) ? data.status : "NotStarted"
-      );
+      setStatus(validStatuses.includes(data.status) ? data.status : "NotStarted");
+      setHasError(false);
     } catch (error) {
       console.error("Erro ao buscar status:", error);
+      setHasError(true);
     } finally {
       setIsLoading(false);
     }
   }, [topicId, itemId]);
 
-  const updateStatus = async (newStatus: string, elementType: ElementType) => {
+  const updateStatus = async (newStatus: string, elementType: ElementType): Promise<boolean> => {
     setIsLoading(true);
-    setStatus(newStatus);
-
     try {
       const response = await fetch("/api/backend/updateExerciseStatus", {
         method: "PUT",
@@ -59,9 +57,17 @@ export const useStatus = ({ themeId, topicId, itemId }: UseStatusProps) => {
       });
 
       if (!response.ok) throw new Error(`Erro ${response.status}`);
+
+      setStatus(newStatus); 
+      setHasError(false);
+      return true;
+
     } catch (error) {
+      setHasError(true);
       showStatusErrorModal();
       console.error("Erro ao atualizar status:", error);
+      return false;
+
     } finally {
       setIsLoading(false);
     }
@@ -71,5 +77,5 @@ export const useStatus = ({ themeId, topicId, itemId }: UseStatusProps) => {
     fetchStatus();
   }, [fetchStatus]);
 
-  return { status, isLoading, updateStatus };
+  return { status, isLoading, updateStatus, hasError };
 };
