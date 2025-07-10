@@ -34,6 +34,7 @@ export const ContainerCardTopics: React.FC<ContainerCardTopicsProps> = ({ topics
           spacing={3}
         >
           <BaseCard
+            id={infoArray[index]}
             title={topic}
             cardType="topic"
             description={descriptionsArray[index]}

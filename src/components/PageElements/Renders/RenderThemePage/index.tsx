@@ -4,6 +4,7 @@ import { PageThemesContent } from "../../Content/PageThemesContent";
 import { LayoutPage } from "../../LayoutPage";
 import { BadRequest } from "@/components/BadRequest";
 import { NoData } from "@/components/NoData";
+import { GlobalContextProvider } from "@/context/global.context";
 
 export const RenderThemePage = (category: string) => {
     const { data: renderData, isLoading: loading, error: error } = useFetchData('/api/stackbyApi/Themes');
@@ -17,8 +18,10 @@ export const RenderThemePage = (category: string) => {
         return <NoData/>
     }
     return (
-        <LayoutPage>
-            <PageThemesContent data={renderData} category={category} />
-        </LayoutPage>
+        <GlobalContextProvider>
+            <LayoutPage>
+                <PageThemesContent data={renderData} category={category} />
+            </LayoutPage>
+        </GlobalContextProvider>
     )
 }
