@@ -1,19 +1,20 @@
 import React from "react";
 import Box from "@mui/material/Box";
-import CircularProgress from "@mui/material/CircularProgress";
+import CircularProgress, { CircularProgressProps } from "@mui/material/CircularProgress";
 import Typography from "@mui/material/Typography";
 
-
 interface CircularProgressWithLabelProps {
-  value: number;
+  percentage: number;
 }
 
-const CircularProgressBar: React.FC<CircularProgressWithLabelProps> = ({ value }) => (
+const CircularProgressBar: React.FC<CircularProgressWithLabelProps> = (({ percentage }: CircularProgressWithLabelProps) => {
+
+  return (
     <Box position="relative" display="inline-flex">
        <CircularProgress
-        variant="determinate"       
+        variant="determinate"
         value={100}
-        size={45}
+        size={50}
         thickness={3}
         sx={{ color: "#aceef5",
           position: "absolute"
@@ -21,9 +22,9 @@ const CircularProgressBar: React.FC<CircularProgressWithLabelProps> = ({ value }
       />
 
       <CircularProgress
-        variant="determinate"       
-        value={value}
-        size={45}
+        variant="determinate"
+        value={percentage}
+        size={50}
         thickness={3}
         sx={{ color: "#002c53"
          }}
@@ -37,12 +38,12 @@ const CircularProgressBar: React.FC<CircularProgressWithLabelProps> = ({ value }
           top: "50%",
           left: "50%",
           transform: "translate(-50%, -50%)",
-          fontSize: "1rem",
+          fontSize: ".85rem",
         }}
       >
-        {`${Math.round(value)}%`}
+        {`${Math.round(percentage)}%`}
       </Typography>
     </Box>
   );
-
+})
 export default CircularProgressBar;

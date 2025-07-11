@@ -19,6 +19,7 @@ interface CardProps {
   route: string;
   children?: React.ReactNode;
   cardType?: "theme" | "topic"
+  progress?: number;
 
 }
 
@@ -41,6 +42,7 @@ export const BaseCard: React.FC<CardProps> = ({
   image,
   route,
   cardType,
+  progress = 0,
 }) => {
   const router = useRouter();
   const handleClick = (route: string) => {
@@ -73,10 +75,12 @@ export const BaseCard: React.FC<CardProps> = ({
       </CardActionArea>
       <CardActions sx={cardActionsStyle}>
         <ClickButton title="Entrar" click={() => handleClick(route)} />
-        {cardType === "topic" &&
-          <div style={{ marginTop: 12, marginLeft:"auto", padding: 8 }}>
-            <CircularProgressBar value={50} />
-          </div>}
+        {
+          cardType === "topic" &&
+            <div style={{ marginTop: 12, marginLeft:"auto", padding: 8 }}>
+              <CircularProgressBar percentage={100} />
+            </div>
+        }
       </CardActions>
     </Card>
   );
