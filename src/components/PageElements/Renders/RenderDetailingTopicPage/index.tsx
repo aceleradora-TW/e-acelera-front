@@ -8,6 +8,7 @@ import { NoData } from "@/components/NoData"
 import { useFetchTopicStatus } from "@/components/fetchStatus/fecthStatusTopic"
 import { DetailingTopicContext } from "@/context"
 import { ErrorUpdateStatusModal } from "@/components/Modals/ErrorUpdateStatusModal/ErrorUpdateStatusModal"
+import { useFetchTopicProgress } from "@/components/fetchProgress/fetchTopicProgress"
 
 export const RenderDetailingTopicPage = (id: string) => {
   const [isModalOpen, setIsModalOpen] = React.useState<boolean>(false);
@@ -30,7 +31,8 @@ export const RenderDetailingTopicPage = (id: string) => {
   } = useFetchData("/api/stackbyApi/Topics")
 
   const { dataStatus } = useFetchTopicStatus(topicId)
-
+  const {topicProgress} = useFetchTopicProgress(topicId)
+ 
   if (loading) {
     return <Loading />
   }
@@ -48,7 +50,7 @@ export const RenderDetailingTopicPage = (id: string) => {
           open={isModalOpen}
           handleClose={() => setIsModalOpen(false)}
         />
-        <DetailingTopicContent data={renderData} id={id} />
+       <DetailingTopicContent data={renderData} id={id} topicProgress={topicProgress.status.progress ?? 0}/>
       </LayoutPage>
     </DetailingTopicContext.Provider>
   );
