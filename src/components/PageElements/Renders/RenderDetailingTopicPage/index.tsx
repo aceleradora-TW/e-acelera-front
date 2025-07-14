@@ -7,7 +7,7 @@ import { BadRequest } from "@/components/BadRequest"
 import { NoData } from "@/components/NoData"
 import { useFetchTopicStatus } from "@/components/fetchStatus/fecthStatusTopic"
 import { DetailingTopicContext } from "@/context"
-import { ErrorUpdateStatusModal } from "@/components/Modals/LoginWarningModal/errorUpdateStatusModal"
+import { ErrorUpdateStatusModal } from "@/components/Modals/ErrorUpdateStatusModal/ErrorUpdateStatusModal"
 
 export const RenderDetailingTopicPage = (id: string) => {
   const [isModalOpen, setIsModalOpen] = React.useState<boolean>(false);
