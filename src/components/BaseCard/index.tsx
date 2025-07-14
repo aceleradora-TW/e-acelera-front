@@ -1,4 +1,4 @@
-import { CardActionArea, CardActions } from "@mui/material";
+import { CardActionArea, CardActions, CircularProgress } from "@mui/material";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 import * as React from "react";
 import { theme } from "@/app/config/themes";
 import { ClickButton } from "../ClickButton";
-import ProgressBar from "../PageElements/Progress/ProgressBar";
+import CircularProgressBar from "../PageElements/Progress/CircularProgressBar";
 
 interface CardProps {
   title: string;
@@ -18,6 +18,7 @@ interface CardProps {
   route: string;
   children?: React.ReactNode;
   cardType?: "theme" | "topic"
+  progress?: number;
 }
 
 const cardStyles = {
@@ -38,8 +39,9 @@ export const BaseCard: React.FC<CardProps> = ({
   textImage,
   image,
   route,
+  cardType,
+  progress = 0,
   children,
-  cardType = "theme",
 
 }) => {
   const router = useRouter();
@@ -76,6 +78,12 @@ export const BaseCard: React.FC<CardProps> = ({
           <div style={{ width: "100%", marginBottom: 8 }}>{children}</div>
         )}
         <ClickButton title="Entrar" click={() => handleClick(route)} />
+        {
+          cardType === "topic" &&
+            <div style={{ marginTop: 12, marginLeft:"auto", padding: 8 }}>
+              <CircularProgressBar percentage={100} />
+            </div>
+        }
       </CardActions>
     </Card>
   );

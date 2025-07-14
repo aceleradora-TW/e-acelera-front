@@ -24,10 +24,7 @@ export const RenderDetailingTopicPage = (id: string) => {
 
   const { dataStatus } = useFetchTopicStatus(topicId)
   const {topicProgress} = useFetchTopicProgress(topicId)
-  console.log(topicProgress.status)
-
-  // console.log("[TOPIC PROGRESS]", topicProgress) Comentei
-
+ 
   if (loading) {
     return <Loading />
   }

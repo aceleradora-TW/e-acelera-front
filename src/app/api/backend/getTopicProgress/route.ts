@@ -23,7 +23,6 @@ export async function GET(req: NextRequest) {
 
   try {
     const baseUrl = process.env.BACKEND_BASE_URL
-    console.log(baseUrl);
 
     const response = await fetch(`${baseUrl}/progress/${topicId}/${idType}`, {
       method: "GET",

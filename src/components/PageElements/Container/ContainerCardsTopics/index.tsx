@@ -6,14 +6,20 @@ import ProgressBar from "@/components/PageElements/Progress/ProgressBar";
 interface ContainerCardTopicsProps {
   topics: string;
   topicsDescription: string;
-  topicsInfo: string;
+  topicsInfo: string; 
+  progress: Record<string, number>; 
 }
 
-export const ContainerCardTopics: React.FC<ContainerCardTopicsProps> = ({ topics, topicsDescription, topicsInfo }) => {
+export const ContainerCardTopics: React.FC<ContainerCardTopicsProps> = ({
+  topics,
+  topicsDescription,
+  topicsInfo,
+  progress
+}) => {
   const between = useMediaQuery('(min-width: 800px) and (max-width: 899px)');
   const between2 = useMediaQuery('(min-width: 445px) and (max-width: 599px)');
-  const pathname = usePathname()
-  const currentPath = pathname.slice(1)
+  const pathname = usePathname();
+  const currentPath = pathname.slice(1);
 
   const splitValues = (value: string): string[] => value.split(",");
   const topicsArray = splitValues(topics);
@@ -37,7 +43,11 @@ export const ContainerCardTopics: React.FC<ContainerCardTopicsProps> = ({ topics
             title={topic}
             cardType="topic"
             description={descriptionsArray[index]}
-            route={`${currentPath}/${infoArray[index]}-${topic}`} textImage={""} />
+            route={`${currentPath}/${infoArray[index]}-${topic}`}
+            textImage={""}
+            cardType="topic"
+            progress={progress?.[infoArray[index]] ?? 0}
+          />
         </Grid>
       ))}
     </Grid>
