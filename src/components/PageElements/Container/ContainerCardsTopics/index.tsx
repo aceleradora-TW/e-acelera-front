@@ -2,6 +2,7 @@ import { Grid, useMediaQuery } from "@mui/material";
 import React from "react";
 import { BaseCard } from "@/components/BaseCard";
 import { usePathname } from 'next/navigation';
+import ProgressBar from "@/components/PageElements/Progress/ProgressBar";
 interface ContainerCardTopicsProps {
   topics: string;
   topicsDescription: string;
@@ -40,6 +41,7 @@ export const ContainerCardTopics: React.FC<ContainerCardTopicsProps> = ({
         >
           <BaseCard
             title={topic}
+            cardType="topic"
             description={descriptionsArray[index]}
             route={`${currentPath}/${infoArray[index]}-${topic}`}
             textImage={""}

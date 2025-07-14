@@ -44,6 +44,7 @@ export interface TopicField extends CommonField {
     videoLink: string;
     videoReference: string;
     videoInfo: string
+    completion?: number;
 };
 
 export interface VideoField extends CommonField {
@@ -61,4 +62,8 @@ export interface Image {
     url: string;
 }
 
+export enum IdType {
+  TOPIC_ID = "topicId",
+  THEME_ID = "themeId",
+};
 

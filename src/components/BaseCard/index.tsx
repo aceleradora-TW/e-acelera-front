@@ -9,7 +9,6 @@ import { theme } from "@/app/config/themes";
 import { ClickButton } from "../ClickButton";
 import CircularProgressBar from "../PageElements/Progress/CircularProgressBar";
 
-
 interface CardProps {
   title: string;
   description?: string;
@@ -20,7 +19,6 @@ interface CardProps {
   children?: React.ReactNode;
   cardType?: "theme" | "topic"
   progress?: number;
-
 }
 
 const cardStyles = {
@@ -43,6 +41,8 @@ export const BaseCard: React.FC<CardProps> = ({
   route,
   cardType,
   progress = 0,
+  children,
+
 }) => {
   const router = useRouter();
   const handleClick = (route: string) => {
@@ -74,6 +74,9 @@ export const BaseCard: React.FC<CardProps> = ({
         </CardContent>
       </CardActionArea>
       <CardActions sx={cardActionsStyle}>
+        {children && (
+          <div style={{ width: "100%", marginBottom: 8 }}>{children}</div>
+        )}
         <ClickButton title="Entrar" click={() => handleClick(route)} />
         {
           cardType === "topic" &&
