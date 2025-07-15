@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 interface ContainerCardThemeProps {
   data: ApiResponse;
   category: string;
-  progress?: Record<string, number>; 
+  progress?: Record<string, number>;
 }
 
 export const ContainerCardTheme: React.FC<ContainerCardThemeProps> = ({
@@ -32,7 +32,7 @@ export const ContainerCardTheme: React.FC<ContainerCardThemeProps> = ({
                 image={field.image ? field.image[0].url : ""}
                 textImage={`${field.alt}`}
                 cardType="topic"
-                progress={progress?.[element.id] ?? 0} 
+                progress={progress?.[element.id] ?? 0}
               />
             </Grid>
           );
