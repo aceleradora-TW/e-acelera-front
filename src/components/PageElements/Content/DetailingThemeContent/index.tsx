@@ -17,7 +17,7 @@ const ThemeContent: React.FC<{ field: ThemeField }> = ({ field }) => (
       <BreadCrumb />
       <Heading variant="h1" text={field.title} />
         <Box>
-           <ProgressBar percentage={50}> </ProgressBar>
+           <ProgressBar percentage={50} />
           <p
             style={{
               fontSize: "0.8rem",
