@@ -1,10 +1,11 @@
 import React from "react";
-import { Grid } from "@mui/material";
+import { Box, Grid } from "@mui/material";
 import { BreadCrumb } from "@/components/BreadCrumb";
 import { ContainerCardTopics } from "../../Container/ContainerCardsTopics";
 import { ApiResponse, DataItem, ThemeField } from "@/types/type";
 import { DescriptionDivider } from "../../../Description/DescriptionDivider";
 import { Heading } from "@/components/Heading";
+import ProgressBar from "../../Progress/ProgressBar";
 
 interface DetailingContentProps {
   data: ApiResponse;
@@ -15,6 +16,18 @@ const ThemeContent: React.FC<{ field: ThemeField }> = ({ field }) => (
     <Grid item xl={12} lg={9} md={6} sm={3}>
       <BreadCrumb />
       <Heading variant="h1" text={field.title} />
+        <Box>
+           <ProgressBar percentage={50} />
+          <p
+            style={{
+              fontSize: "0.8rem",
+              textAlign: "right",
+              marginTop: "4px",
+            }}
+          >
+            {50}% concluído
+          </p>
+        </Box>
     </Grid>
     <DescriptionDivider text={field.description} />
     <Grid item xl={12} lg={9} md={6} sm={3}>
