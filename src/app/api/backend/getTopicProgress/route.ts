@@ -4,7 +4,7 @@ import { NextRequest, NextResponse } from "next/server"
 export async function GET(req: NextRequest) {
   const header = headers()
   const topicId = header.get(`topicId`)
-  const itemId = header.get(`itemId`)
+  const idType = header.get(`idType`)
   const accessToken = req.cookies.get("next-auth.session-token")?.value || req.cookies.get("__Secure-next-auth.session-token")?.value;
 
   if (!topicId) {
@@ -23,7 +23,8 @@ export async function GET(req: NextRequest) {
 
   try {
     const baseUrl = process.env.BACKEND_BASE_URL
-    const response = await fetch(`${baseUrl}/status/${topicId}/item/${itemId}`, {
+
+    const response = await fetch(`${baseUrl}/progress/${topicId}/${idType}`, {
       method: "GET",
       headers: {
         Authorization: `Bearer ${accessToken}`,
@@ -40,7 +41,7 @@ export async function GET(req: NextRequest) {
 
     if (!response.ok) {
       return NextResponse.json(
-        { error: `Error fetching status: ${response.status} - ${response.statusText}` },
+        { error: `Error fetching prog: ${response.status} - ${response.statusText}` },
         { status: response.status }
       )
     }
