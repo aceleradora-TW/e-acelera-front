@@ -21,6 +21,7 @@ const ThemeContent: React.FC<{ field: ThemeField }> = ({ field }) => (
       <Heading variant="h2" text={"Tópicos"} />
     </Grid>
     <ContainerCardTopics
+    progress={{"rw-teste":0}}
       topics={field.topics}
       topicsDescription={field.topicsDescription}
       topicsInfo={field.topicsInfo}

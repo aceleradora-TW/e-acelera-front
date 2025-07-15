@@ -45,7 +45,6 @@ export const ContainerCardTopics: React.FC<ContainerCardTopicsProps> = ({
             description={descriptionsArray[index]}
             route={`${currentPath}/${infoArray[index]}-${topic}`}
             textImage={""}
-            cardType="topic"
             progress={progress?.[infoArray[index]] ?? 0}
           />
         </Grid>
