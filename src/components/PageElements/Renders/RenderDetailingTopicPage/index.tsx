@@ -7,40 +7,34 @@ import { BadRequest } from "@/components/BadRequest";
 import { NoData } from "@/components/NoData";
 import { useFetchTopicStatus } from "@/components/fetchStatus/fecthStatusTopic";
 import { DetailingTopicContext } from "@/context";
-import { useFetchTopicProgress } from "@/components/fetchProgress/fetchTopicProgress";
 import { ErrorUpdateStatusModal } from "@/components/Modals/ErrorUpdateStatusModal/ErrorUpdateStatusModal";
+import { useFetchProgress } from "@/components/fetchProgress";
+import { useGlobalContext } from "@/hooks/useGlobalContext";
+import { GlobalContextProvider } from "@/context/global.context";
+import { IdType } from "@/types/type";
 
-export const RenderDetailingTopicPage = (id: string) => {
+const PageContent = ({ topicId }: { topicId: string }) => {
   const [isModalOpen, setIsModalOpen] = React.useState<boolean>(false);
 
-  const showStatusErrorModal = () => {
-    setIsModalOpen(true);
-  };
+  const showStatusErrorModal = () => setIsModalOpen(true);
 
-  const extractId = (): string => {
-    const parts: string[] = id.split("-");
-    return parts[0];
-  };
-
-  const topicId = extractId();
+  const { progressTrigger } = useGlobalContext();
+  const { progress } = useFetchProgress(
+    topicId,
+    IdType.TOPIC_ID,
+    progressTrigger
+  );
+  const { dataStatus } = useFetchTopicStatus(topicId);
 
   const {
     data: renderData,
     isLoading: loading,
-    error: error,
+    error,
   } = useFetchData("/api/stackbyApi/Topics");
 
-  const { dataStatus } = useFetchTopicStatus(topicId);
-  const { topicProgress } = useFetchTopicProgress(topicId);
-  if (loading) {
-    return <Loading />;
-  }
-  if (error) {
-    return <BadRequest />;
-  }
-  if (!renderData) {
-    return <NoData />;
-  }
+  if (loading) return <Loading />;
+  if (error) return <BadRequest />;
+  if (!renderData) return <NoData />;
 
   return (
     <DetailingTopicContext.Provider
@@ -57,10 +51,25 @@ export const RenderDetailingTopicPage = (id: string) => {
         />
         <DetailingTopicContent
           data={renderData}
-          id={id}
-          topicProgress={topicProgress.status.progress ?? 0}
+          id={topicId}
+          topicProgress={progress?.progress ?? 0}
         />
       </LayoutPage>
     </DetailingTopicContext.Provider>
+  );
+};
+
+export const RenderDetailingTopicPage = (id: string) => {
+  const extractId = (): string => {
+    const parts = id.split("-");
+    return parts[0];
+  };
+
+  const topicId = extractId();
+
+  return (
+    <GlobalContextProvider>
+      <PageContent topicId={topicId} />
+    </GlobalContextProvider>
   );
 };

@@ -3,13 +3,13 @@ import { NextRequest, NextResponse } from "next/server"
 
 export async function GET(req: NextRequest) {
   const header = headers()
-  const topicId = header.get(`topicId`)
+  const id = header.get(`id`)
   const idType = header.get(`idType`)
   const accessToken = req.cookies.get("next-auth.session-token")?.value || req.cookies.get("__Secure-next-auth.session-token")?.value;
 
-  if (!topicId) {
+  if (!id) {
     return NextResponse.json(
-      { error: "topicId are required" },
+      { error: "Id are required" },
       { status: 400 }
     )
   }
@@ -24,7 +24,7 @@ export async function GET(req: NextRequest) {
   try {
     const baseUrl = process.env.BACKEND_BASE_URL
 
-    const response = await fetch(`${baseUrl}/progress/${topicId}/${idType}`, {
+    const response = await fetch(`${baseUrl}/progress/${id}/${idType}`, {
       method: "GET",
       headers: {
         Authorization: `Bearer ${accessToken}`,
@@ -49,7 +49,7 @@ export async function GET(req: NextRequest) {
     const data = await response.json()
     const statusData = data
 
-    return NextResponse.json({ status: statusData }, { status: 200 })
+    return NextResponse.json(statusData, { status: 200 })
   } catch (error) {
     console.error("Error fetching status:", error)
     return NextResponse.json(

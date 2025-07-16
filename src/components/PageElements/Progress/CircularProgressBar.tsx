@@ -7,9 +7,7 @@ interface CircularProgressWithLabelProps {
   percentage: number;
 }
 
-const CircularProgressBar: React.FC<CircularProgressWithLabelProps> = (({ percentage }: CircularProgressWithLabelProps) => {
-
-  return (
+const CircularProgressBar: React.FC<CircularProgressWithLabelProps> = (({ percentage }: CircularProgressWithLabelProps) => (
     <Box position="relative" display="inline-flex">
        <CircularProgress
         variant="determinate"
@@ -44,6 +42,5 @@ const CircularProgressBar: React.FC<CircularProgressWithLabelProps> = (({ percen
         {`${Math.round(percentage)}%`}
       </Typography>
     </Box>
-  );
-})
+  ))
 export default CircularProgressBar;
