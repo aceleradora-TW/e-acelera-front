@@ -1,4 +1,4 @@
-import { CardActionArea, CardActions, CircularProgress } from "@mui/material";
+import { Box, CardActionArea, CardActions, CircularProgress } from "@mui/material";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
@@ -7,18 +7,19 @@ import { useRouter } from "next/navigation";
 import * as React from "react";
 import { theme } from "@/app/config/themes";
 import { ClickButton } from "../ClickButton";
-import CircularProgressBar from "../PageElements/Progress/CircularProgressBar";
+import CircularProgressBar from "@/components/PageElements/Progress/CircularProgressBar";
+import { IdType } from "@/types/type";
+import { useFetchProgress } from "@/components/fetchProgress";
 
 interface CardProps {
+  id: string;
   title: string;
   description?: string;
   textImage?: string;
-
   image?: string;
   route: string;
   children?: React.ReactNode;
   cardType?: "theme" | "topic"
-  progress?: number;
 }
 
 const cardStyles = {
@@ -30,24 +31,25 @@ const cardActionsStyle = {
   paddingBottom: 2,
   paddingLeft: 2,
   height: "auto",
-  justifyContent: "left",
+  justifyContent: "space-between",
 };
 
 export const BaseCard: React.FC<CardProps> = ({
+  id,
   title,
   description,
   textImage,
   image,
   route,
   cardType,
-  progress = 0,
   children,
-
 }) => {
   const router = useRouter();
   const handleClick = (route: string) => {
     router.push(`/${route}`);
   };
+
+  const { progress: fetchedProgress } = useFetchProgress(id, cardType === "topic" ? IdType.TOPIC_ID : IdType.THEME_ID);
 
   return (
     <Card sx={theme.customStyles.cardContainer}>
@@ -78,10 +80,15 @@ export const BaseCard: React.FC<CardProps> = ({
           <div style={{ width: "100%", marginBottom: 8 }}>{children}</div>
         )}
         <ClickButton title="Entrar" click={() => handleClick(route)} />
+        {cardType === "theme" && (
+          <div style={{ marginTop: 12, marginLeft: "auto", padding: 8 }}>
+            <CircularProgressBar percentage={fetchedProgress?.progress ?? 0} />
+          </div>
+        )}
         {
           cardType === "topic" &&
             <div style={{ marginTop: 12, marginLeft:"auto", padding: 8 }}>
-              <CircularProgressBar percentage={100} />
+              <CircularProgressBar percentage={fetchedProgress?.progress ?? 0} />
             </div>
         }
       </CardActions>

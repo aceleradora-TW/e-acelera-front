@@ -1,17 +1,17 @@
-import * as React from "react";
-import Box from "@mui/material/Box";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
-import Select from "@mui/material/Select";
-import { SelectChangeEvent } from "@mui/material/Select";
-import { theme } from "@/app/config/themes";
-import { useSession } from "next-auth/react";
-import { usePathname } from "next/navigation";
-import { useStatus } from "@/components/fetchStatus/fetchStatusExercise";
-import { DetailingTopicContext } from "@/context";
-import { LoginWarningModal } from "../Modals/LoginWarningModal";
-import { ElementType } from "@/types/typeTopic";
+import * as React from "react"
+import Box from "@mui/material/Box"
+import InputLabel from "@mui/material/InputLabel"
+import MenuItem from "@mui/material/MenuItem"
+import FormControl from "@mui/material/FormControl"
+import Select from "@mui/material/Select"
+import { SelectChangeEvent } from "@mui/material/Select"
+import { theme } from "@/app/config/themes"
+import { useSession } from "next-auth/react"
+import { usePathname } from "next/navigation"
+import { useStatus } from "@/components/fetchStatus/fetchStatusExercise"
+import { LoginWarningModal } from "../Modals/LoginWarningModal"
+import { ElementType } from "@/types/typeTopic"
+import { useGlobalContext } from "@/hooks/useGlobalContext"
 
 interface StatusSelectProps {
   width?: "30%" | "70%" | "100%";
@@ -29,7 +29,7 @@ export default function StatusSelect({
   const [isModalOpen, setIsModalOpen] = React.useState<boolean>(false);
   const { data: session } = useSession();
   const statusSelectRef = React.useRef<HTMLDivElement>(null);
-  const { topicStatus } = React.useContext(DetailingTopicContext);
+  const { topicStatus, triggerProgressUpdate } = useGlobalContext();;
   const pathname = usePathname();
 
   const currentStatusTopic = topicStatus?.status?.find((s) => s.itemId === id);
@@ -73,8 +73,13 @@ export default function StatusSelect({
     const success = await updateStatus(value, elementType);
     if (!success) return;
 
-    setStatus(value); 
-  };
+    try {
+      await updateStatus(value, elementType)
+      triggerProgressUpdate()
+    } catch (error) {
+      console.error("Erro ao atualizar status:", error)
+    }
+  }
 
   const handleCloseModals = () => {
     if (statusSelectRef.current) {

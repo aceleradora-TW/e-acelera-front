@@ -42,7 +42,7 @@ const ThemeContent: React.FC<{ field: ThemeField }> = ({ field }) => (
 )
 export const DetailingThemeContent: React.FC<DetailingContentProps> = ({ data, id }) => {
   const filteredData = data?.data.filter((element: DataItem) => element.id === id.split("-")[0]);
-  
+
   return (
     <>
       {filteredData
