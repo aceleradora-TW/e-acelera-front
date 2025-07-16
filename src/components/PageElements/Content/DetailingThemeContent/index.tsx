@@ -24,13 +24,12 @@ const ThemeContent: React.FC<{ field: ThemeField }> = ({ field }) => (
       topics={field.topics}
       topicsDescription={field.topicsDescription}
       topicsInfo={field.topicsInfo}
-      progress={}
     />
   </>
 )
 export const DetailingThemeContent: React.FC<DetailingContentProps> = ({ data, id }) => {
   const filteredData = data?.data.filter((element: DataItem) => element.id === id.split("-")[0]);
-  
+
   return (
     <>
       {filteredData

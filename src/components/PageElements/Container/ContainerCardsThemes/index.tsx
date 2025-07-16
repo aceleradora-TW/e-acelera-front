@@ -1,4 +1,4 @@
-import { Grid, useMediaQuery } from "@mui/material";
+import { Grid } from "@mui/material";
 import React from "react";
 import { BaseCard } from "@/components/BaseCard";
 import { ApiResponse, DataItem, ThemeField } from "@/types/type";
@@ -6,13 +6,11 @@ import { usePathname } from "next/navigation";
 interface ContainerCardThemeProps {
   data: ApiResponse;
   category: string;
-  progress?: Record<string, number>; 
 }
 
 export const ContainerCardTheme: React.FC<ContainerCardThemeProps> = ({
   data,
-  category,
-  progress,
+  category
 }) => {
   const pathname = usePathname();
   const currentPath = pathname.slice(1);
@@ -26,14 +24,13 @@ export const ContainerCardTheme: React.FC<ContainerCardThemeProps> = ({
           return (
             <Grid item xl={3} lg={4} md={4} sm={6} xs={12} key={index}>
               <BaseCard
-                  id={element.id}
+                id={element.id}
                 title={field.title}
                 description={field.cardDescription}
                 route={`${currentPath}/${element.id}-${field.title}`}
                 image={field.image ? field.image[0].url : ""}
                 textImage={`${field.alt}`}
                 cardType="theme"
-                progress={progress?.[element.id] ?? 0} 
               />
             </Grid>
           );

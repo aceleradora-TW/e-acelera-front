@@ -5,15 +5,13 @@ import { usePathname } from 'next/navigation';
 interface ContainerCardTopicsProps {
   topics: string;
   topicsDescription: string;
-  topicsInfo: string; 
-  progress: Record<string, number>;
+  topicsInfo: string;
 }
 
 export const ContainerCardTopics: React.FC<ContainerCardTopicsProps> = ({
   topics,
   topicsDescription,
   topicsInfo,
-  progress
 }) => {
   const between = useMediaQuery('(min-width: 800px) and (max-width: 899px)');
   const between2 = useMediaQuery('(min-width: 445px) and (max-width: 599px)');
@@ -45,7 +43,6 @@ export const ContainerCardTopics: React.FC<ContainerCardTopicsProps> = ({
             description={descriptionsArray[index]}
             route={`${currentPath}/${infoArray[index]}-${topic}`}
             textImage={""}
-            progress={progress?.[infoArray[index]] ?? 0}
           />
         </Grid>
       ))}

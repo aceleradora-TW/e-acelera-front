@@ -20,7 +20,6 @@ interface CardProps {
   route: string;
   children?: React.ReactNode;
   cardType?: "theme" | "topic"
-  progress?: number;
 }
 
 const cardStyles = {
@@ -44,7 +43,6 @@ export const BaseCard: React.FC<CardProps> = ({
   route,
   cardType,
   children,
-  progress,
 }) => {
   const router = useRouter();
   const handleClick = (route: string) => {
@@ -52,7 +50,6 @@ export const BaseCard: React.FC<CardProps> = ({
   };
 
   const { progress: fetchedProgress } = useFetchProgress(id, cardType === "topic" ? IdType.TOPIC_ID : IdType.THEME_ID);
-  const displayProgress = progress !== undefined ? progress : (fetchedProgress?.progress ?? 0);
 
   return (
     <Card sx={theme.customStyles.cardContainer}>
@@ -85,13 +82,13 @@ export const BaseCard: React.FC<CardProps> = ({
         <ClickButton title="Entrar" click={() => handleClick(route)} />
         {cardType === "theme" && (
           <div style={{ marginTop: 12, marginLeft: "auto", padding: 8 }}>
-            <CircularProgressBar percentage={displayProgress} />
+            <CircularProgressBar percentage={fetchedProgress?.progress ?? 0} />
           </div>
         )}
         {
           cardType === "topic" &&
             <div style={{ marginTop: 12, marginLeft:"auto", padding: 8 }}>
-              <CircularProgressBar percentage={displayProgress} />
+              <CircularProgressBar percentage={fetchedProgress?.progress ?? 0} />
             </div>
         }
       </CardActions>
