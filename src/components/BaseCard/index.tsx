@@ -1,4 +1,9 @@
-import { Box, CardActionArea, CardActions, CircularProgress } from "@mui/material";
+import {
+  Box,
+  CardActionArea,
+  CardActions,
+  CircularProgress,
+} from "@mui/material";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
@@ -19,7 +24,7 @@ interface CardProps {
   image?: string;
   route: string;
   children?: React.ReactNode;
-  cardType?: "theme" | "topic"
+  cardType?: "theme" | "topic";
 }
 
 const cardStyles = {
@@ -49,7 +54,10 @@ export const BaseCard: React.FC<CardProps> = ({
     router.push(`/${route}`);
   };
 
-  const { progress: fetchedProgress } = useFetchProgress(id, cardType === "topic" ? IdType.TOPIC_ID : IdType.THEME_ID);
+  const { progress: fetchedProgress } = useFetchProgress(
+    id,
+    cardType === "topic" ? IdType.TOPIC_ID : IdType.THEME_ID
+  );
 
   return (
     <Card sx={theme.customStyles.cardContainer}>
@@ -85,12 +93,11 @@ export const BaseCard: React.FC<CardProps> = ({
             <CircularProgressBar percentage={fetchedProgress?.progress ?? 0} />
           </div>
         )}
-        {
-          cardType === "topic" &&
-            <div style={{ marginTop: 12, marginLeft:"auto", padding: 8 }}>
-              <CircularProgressBar percentage={fetchedProgress?.progress ?? 0} />
-            </div>
-        }
+        {cardType === "topic" && (
+          <div style={{ marginTop: 12, marginLeft: "auto", padding: 8 }}>
+            <CircularProgressBar percentage={fetchedProgress?.progress ?? 0} />
+          </div>
+        )}
       </CardActions>
     </Card>
   );

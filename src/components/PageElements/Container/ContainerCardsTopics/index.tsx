@@ -1,7 +1,7 @@
 import { Grid, useMediaQuery } from "@mui/material";
 import React from "react";
 import { BaseCard } from "@/components/BaseCard";
-import { usePathname } from 'next/navigation';
+import { usePathname } from "next/navigation";
 interface ContainerCardTopicsProps {
   topics: string;
   topicsDescription: string;
@@ -13,8 +13,8 @@ export const ContainerCardTopics: React.FC<ContainerCardTopicsProps> = ({
   topicsDescription,
   topicsInfo,
 }) => {
-  const between = useMediaQuery('(min-width: 800px) and (max-width: 899px)');
-  const between2 = useMediaQuery('(min-width: 445px) and (max-width: 599px)');
+  const between = useMediaQuery("(min-width: 800px) and (max-width: 899px)");
+  const between2 = useMediaQuery("(min-width: 445px) and (max-width: 599px)");
   const pathname = usePathname();
   const currentPath = pathname.slice(1);
 

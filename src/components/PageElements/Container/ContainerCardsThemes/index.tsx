@@ -10,7 +10,7 @@ interface ContainerCardThemeProps {
 
 export const ContainerCardTheme: React.FC<ContainerCardThemeProps> = ({
   data,
-  category
+  category,
 }) => {
   const pathname = usePathname();
   const currentPath = pathname.slice(1);
