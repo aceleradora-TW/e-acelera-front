@@ -10,7 +10,7 @@ export async function GET(
     const uniqueParam: string = `nocache=${Date.now()}`;
     const endpoint: string = params.endpoint;
 
-    const url: string = `${BACKEND_BASE_URL}/stackBy/${endpoint}?${uniqueParam}`;
+    const url: string = `${BACKEND_BASE_URL}/stackby/${endpoint}?${uniqueParam}`;
 
     const response: Response = await fetch(url, {
       method: "GET",
