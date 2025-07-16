@@ -14,45 +14,40 @@ import { ElementType } from "@/types/typeTopic"
 import { useGlobalContext } from "@/hooks/useGlobalContext"
 
 interface StatusSelectProps {
-  width?: "30%" | "70%" | "100%"
-  id?: string
-  elementType: ElementType
+  width?: "30%" | "70%" | "100%";
+  id?: string;
+  elementType: ElementType;
 }
 
-export default function StatusSelect({ width = "30%", id, elementType }: StatusSelectProps) {
-  const [status, setStatus] = React.useState<string>("NotStarted")
-  const [backgroundColor, setBackgroundColor] =
-    React.useState<string>("rgb(225, 225, 225)")
-  const [isModalOpen, setIsModalOpen] = React.useState<boolean>(false)
-  const { data: session } = useSession()
-  const statusSelectRef = React.useRef<HTMLDivElement>(null)
-  const { topicStatus, triggerProgressUpdate } = useGlobalContext();
-  const pathname = usePathname()
+export default function StatusSelect({
+  width = "30%",
+  id,
+  elementType,
+}: StatusSelectProps) {
+  const [status, setStatus] = React.useState<string>("NotStarted");
+  const [backgroundColor, setBackgroundColor] = React.useState<string>("rgb(225, 225, 225)");
+  const [isModalOpen, setIsModalOpen] = React.useState<boolean>(false);
+  const { data: session } = useSession();
+  const statusSelectRef = React.useRef<HTMLDivElement>(null);
+  const { topicStatus, triggerProgressUpdate } = useGlobalContext();;
+  const pathname = usePathname();
 
-  const currentStatusTopic = topicStatus?.status?.find(
-    (status) => status.itemId === id
-  )
+  const currentStatusTopic = topicStatus?.status?.find((s) => s.itemId === id);
+
   React.useEffect(() => {
     if (currentStatusTopic) {
-      setStatus(currentStatusTopic?.itemStatus)
+      setStatus(currentStatusTopic?.itemStatus);
     }
-  }, [currentStatusTopic])
+  }, [currentStatusTopic]);
 
   const extractIdsFromUrl = (pathname: string): string[] | null => {
-    const parts: string[] = pathname.split("/")
+    const parts = pathname.split("/");
+    const themeId = parts[2]?.split("-")[0] || "";
+    const topicId = parts[3]?.split("-")[0] || "";
+    return themeId && topicId ? [themeId, topicId] : null;
+  };
 
-    if (parts) {
-      const themeId = parts[2].split("-")[0] || ""
-      const topicId = parts[3].split("-")[0] || ""
-
-      return (themeId && topicId) ? [themeId, topicId] : null
-    }
-
-    return null
-  }
-
-  const ids = extractIdsFromUrl(pathname)
-
+  const ids = extractIdsFromUrl(pathname);
 
   const {
     status: exerciseStatus,
@@ -62,21 +57,21 @@ export default function StatusSelect({ width = "30%", id, elementType }: StatusS
     themeId: ids?.[0] || "",
     topicId: ids?.[1] || "",
     itemId: id || "",
-  })
-
-  // const { progress } = useFetchProgress(ids?.[1] || "", IdType.TOPIC_ID)
-  // const { topicProgress, handleTopicProgress } = useGlobalContext();
+  });
 
   const handleChange = async (event: SelectChangeEvent) => {
-    const value = event.target.value as string
-    setStatus(value)
+    const value = event.target.value as string;
 
     if (!session && statusSelectRef.current) {
-      statusSelectRef.current.classList.add("ativo")
-      setIsModalOpen(true)
+      statusSelectRef.current.classList.add("ativo");
+      setIsModalOpen(true);
+      return;
     }
 
-    if (!ids) return
+    if (!ids) return;
+
+    const success = await updateStatus(value, elementType);
+    if (!success) return;
 
     try {
       await updateStatus(value, elementType)
@@ -88,38 +83,38 @@ export default function StatusSelect({ width = "30%", id, elementType }: StatusS
 
   const handleCloseModals = () => {
     if (statusSelectRef.current) {
-      statusSelectRef.current.classList.remove("ativo")
+      statusSelectRef.current.classList.remove("ativo");
     }
-
-    setIsModalOpen(false)
-    setStatus("NotStarted")
-  }
+    setIsModalOpen(false);
+    setStatus("NotStarted");
+  };
 
   React.useEffect(() => {
     if (exerciseStatus && ids) {
-      setStatus(exerciseStatus)
+      setStatus(exerciseStatus);
     }
-  }, [exerciseStatus, ids])
+  }, [exerciseStatus, ids]);
 
   React.useMemo(() => {
     switch (status) {
       case "Completed":
-        setBackgroundColor(theme.palette.statusSelect?.light || "")
-        break
+        setBackgroundColor(theme.palette.statusSelect?.light || "");
+        break;
       case "InProgress":
-        setBackgroundColor(theme.palette.statusSelect?.dark || "")
-        break
+        setBackgroundColor(theme.palette.statusSelect?.dark || "");
+        break;
       case "NotStarted":
-        setBackgroundColor(theme.palette.statusSelect?.main || "")
-        break
+        setBackgroundColor(theme.palette.statusSelect?.main || "");
+        break;
       default:
-        setBackgroundColor("rgb(225, 225, 225)")
+        setBackgroundColor("rgb(225, 225, 225)");
     }
-  }, [status])
+  }, [status]);
 
   return (
     <Box
       id={id}
+      ref={statusSelectRef}
       sx={{
         backgroundColor,
         width,
@@ -143,7 +138,6 @@ export default function StatusSelect({ width = "30%", id, elementType }: StatusS
           Status
         </InputLabel>
         <Select
-          ref={statusSelectRef}
           notched
           labelId="statusLeveling"
           id="statusSelect"
@@ -166,7 +160,12 @@ export default function StatusSelect({ width = "30%", id, elementType }: StatusS
           <MenuItem value="Completed">Concluído</MenuItem>
         </Select>
       </FormControl>
-      <LoginWarningModal status={status} open={isModalOpen} handleClose={handleCloseModals} />
+
+      <LoginWarningModal
+        status={status}
+        open={isModalOpen}
+        handleClose={handleCloseModals}
+      />
     </Box>
-  )
+  );
 }

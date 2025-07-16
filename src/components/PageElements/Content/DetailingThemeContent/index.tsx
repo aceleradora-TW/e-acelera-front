@@ -24,6 +24,7 @@ const ThemeContent: React.FC<{ field: ThemeField }> = ({ field }) => (
       topics={field.topics}
       topicsDescription={field.topicsDescription}
       topicsInfo={field.topicsInfo}
+      progress={}
     />
   </>
 )

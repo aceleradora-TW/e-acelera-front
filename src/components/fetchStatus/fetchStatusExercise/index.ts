@@ -1,23 +1,22 @@
-import { ElementType } from "@/types/typeTopic"
-import { useCallback, useEffect, useState } from "react"
+import { DetailingTopicContext } from "@/context";
+import { ElementType } from "@/types/typeTopic";
+import { useCallback, useContext, useEffect, useState } from "react";
 
 interface UseStatusProps {
-  topicId: string
-  itemId: string
-  themeId: string
+  topicId: string;
+  itemId: string;
+  themeId: string;
 }
 
-export const useStatus = ({
-  themeId,
-  topicId,
-  itemId,
-}: UseStatusProps) => {
-  const [status, setStatus] = useState<string>("NotStarted")
-  const [isLoading, setIsLoading] = useState<boolean>(false)
+export const useStatus = ({ themeId, topicId, itemId }: UseStatusProps) => {
+  const [status, setStatus] = useState<string>("NotStarted");
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [hasError, setHasError] = useState<boolean>(false);
+  const { showStatusErrorModal } = useContext(DetailingTopicContext);
 
   const fetchStatus = useCallback(async () => {
-    if (!topicId || !itemId ) return
-    setIsLoading(true)
+    if (!topicId || !itemId) return;
+    setIsLoading(true);
     try {
       const response = await fetch(`/api/backend/getExerciseStatus`, {
         method: "GET",
@@ -26,26 +25,24 @@ export const useStatus = ({
           topicId,
           itemId,
         },
-      })
+      });
 
-      if (!response.ok) throw new Error(`Erro ${response.status}`)
+      if (!response.ok) throw new Error(`Erro ${response.status}`);
 
-      const data = await response.json()
-      const validStatuses = ["NotStarted", "InProgress", "Completed"]
-
-      setStatus(validStatuses.includes(data.status) ? data.status : "NotStarted")
-
+      const data = await response.json();
+      const validStatuses = ["NotStarted", "InProgress", "Completed"];
+      setStatus(validStatuses.includes(data.status) ? data.status : "NotStarted");
+      setHasError(false);
     } catch (error) {
-      console.error("Erro ao buscar status:", error)
+      console.error("Erro ao buscar status:", error);
+      setHasError(true);
     } finally {
-      setIsLoading(false)
+      setIsLoading(false);
     }
-  }, [topicId, itemId])
+  }, [topicId, itemId]);
 
-  const updateStatus = async (newStatus: string,  elementType: ElementType) => {
-    setIsLoading(true)
-    setStatus(newStatus)
-    
+  const updateStatus = async (newStatus: string, elementType: ElementType): Promise<boolean> => {
+    setIsLoading(true);
     try {
       const response = await fetch("/api/backend/updateExerciseStatus", {
         method: "PUT",
@@ -57,21 +54,28 @@ export const useStatus = ({
           themeId,
           "Content-Type": "application/json",
         },
-      })
+      });
 
-      if (!response.ok) throw new Error(`Erro ${response.status}`)
+      if (!response.ok) throw new Error(`Erro ${response.status}`);
+
+      setStatus(newStatus); 
+      setHasError(false);
+      return true;
+
     } catch (error) {
-      console.error("Erro ao atualizar status:", error)
+      setHasError(true);
+      showStatusErrorModal();
+      console.error("Erro ao atualizar status:", error);
+      return false;
+
     } finally {
-      setIsLoading(false)
+      setIsLoading(false);
     }
-  }
-  
+  };
+
   useEffect(() => {
-    fetchStatus()
-  }, [fetchStatus])
+    fetchStatus();
+  }, [fetchStatus]);
 
-  return { status, isLoading, updateStatus }
-}
-
-
+  return { status, isLoading, updateStatus, hasError };
+};

@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 import * as React from "react";
 import { theme } from "@/app/config/themes";
 import { ClickButton } from "../ClickButton";
-import ProgressBar from "@/components/PageElements/Progress/ProgressBar";
+import CircularProgressBar from "@/components/PageElements/Progress/CircularProgressBar";
 import { IdType } from "@/types/type";
 import { useFetchProgress } from "@/components/fetchProgress";
 
@@ -19,7 +19,8 @@ interface CardProps {
   image?: string;
   route: string;
   children?: React.ReactNode;
-  cardType?: "theme" | "topic";
+  cardType?: "theme" | "topic"
+  progress?: number;
 }
 
 const cardStyles = {
@@ -41,14 +42,17 @@ export const BaseCard: React.FC<CardProps> = ({
   textImage,
   image,
   route,
+  cardType,
   children,
-  cardType = "theme",
+  progress,
 }) => {
   const router = useRouter();
   const handleClick = (route: string) => {
     router.push(`/${route}`);
   };
-  const { progress } = useFetchProgress(id, IdType.THEME_ID);
+
+  const { progress: fetchedProgress } = useFetchProgress(id, cardType === "topic" ? IdType.TOPIC_ID : IdType.THEME_ID);
+  const displayProgress = progress !== undefined ? progress : (fetchedProgress?.progress ?? 0);
 
   return (
     <Card sx={theme.customStyles.cardContainer}>
@@ -80,28 +84,16 @@ export const BaseCard: React.FC<CardProps> = ({
         )}
         <ClickButton title="Entrar" click={() => handleClick(route)} />
         {cardType === "theme" && (
-          <Box sx={{ position: 'relative', display: 'inline-flex' }}>
-            <CircularProgress variant="determinate" value={progress?.progress ?? 0} />
-            <Box
-              sx={{
-                  top: 0,
-                  left: 0,
-                  bottom: 0,
-                  right: 0,
-                  position: 'absolute',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                }}
-              >
-              <Typography
-                variant="caption"
-                component="div"
-                sx={{fontSize: "1rem", color: 'text.secondary' }}
-              >{`${Math.round(progress?.progress ?? 0)}%`}</Typography>
-            </Box>
-          </Box>
+          <div style={{ marginTop: 12, marginLeft: "auto", padding: 8 }}>
+            <CircularProgressBar percentage={displayProgress} />
+          </div>
         )}
+        {
+          cardType === "topic" &&
+            <div style={{ marginTop: 12, marginLeft:"auto", padding: 8 }}>
+              <CircularProgressBar percentage={displayProgress} />
+            </div>
+        }
       </CardActions>
     </Card>
   );
