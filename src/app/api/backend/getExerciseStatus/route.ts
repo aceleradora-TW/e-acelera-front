@@ -23,7 +23,7 @@ export async function GET(req: NextRequest) {
 
   try {
     const baseUrl = process.env.BACKEND_BASE_URL
-    const response = await fetch(`${baseUrl}/topic/${topicId}/item/${itemId}`, {
+    const response = await fetch(`${baseUrl}/status/${topicId}/item/${itemId}`, {
       method: "GET",
       headers: {
         Authorization: `Bearer ${accessToken}`,
@@ -46,7 +46,7 @@ export async function GET(req: NextRequest) {
     }
 
     const data = await response.json()
-    const statusData = data[0].itemStatus
+    const statusData = data.itemStatus
 
     return NextResponse.json({ status: statusData }, { status: 200 })
   } catch (error) {
