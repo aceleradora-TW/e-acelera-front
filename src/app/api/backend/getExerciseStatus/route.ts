@@ -23,7 +23,7 @@ export async function GET(req: NextRequest) {
 
   try {
     const baseUrl = process.env.BACKEND_BASE_URL
-    const response = await fetch(`${baseUrl}/topic/${topicId}/item/${itemId}`, {
+    const response = await fetch(`${baseUrl}/status/${topicId}/item/${itemId}`, {
       method: "GET",
       headers: {
         Authorization: `Bearer ${accessToken}`,
