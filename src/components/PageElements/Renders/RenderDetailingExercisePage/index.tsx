@@ -4,6 +4,7 @@ import { LayoutPage } from "../../LayoutPage";
 import { BadRequest } from "@/components/BadRequest";
 import { DetailingExerciseContent } from "../../Content/DetailingExerciseContent";
 import { NoData } from "@/components/NoData";
+import { GlobalContextProvider } from "@/context/global.context";
 
 export const RenderDetailingExercisePage = (id: string) => {
   const { data: renderDataExercise, isLoading: isExerciseLoading, error: exerciseError } = useFetchData('/api/stackbyApi/Exercises');
@@ -22,8 +23,10 @@ export const RenderDetailingExercisePage = (id: string) => {
   }
 
   return (
+    <GlobalContextProvider>
     <LayoutPage>
       <DetailingExerciseContent dataExercise={renderDataExercise} dataTopic={renderDataTopic} id={id} />
     </LayoutPage>
+    </GlobalContextProvider>
   );
 }

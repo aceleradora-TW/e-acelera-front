@@ -37,6 +37,7 @@ const PageContent = ({ topicId }: { topicId: string }) => {
   if (!renderData) return <NoData />;
 
   return (
+    <GlobalContextProvider>
     <DetailingTopicContext.Provider
       value={{
         topicStatus: dataStatus,
@@ -56,6 +57,7 @@ const PageContent = ({ topicId }: { topicId: string }) => {
         />
       </LayoutPage>
     </DetailingTopicContext.Provider>
+    </GlobalContextProvider>
   );
 };
 
