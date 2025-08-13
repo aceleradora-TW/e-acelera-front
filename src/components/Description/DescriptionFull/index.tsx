@@ -10,6 +10,13 @@ interface DescriptionFullProps {
   text: string;
 }
 
+const arrSpecialChars = [
+ {char: "&lt;" , replace:"<"},
+ {char: "&gt;" , replace:">"},
+ {char: "&amp;" , replace:"&"},
+ {char: "%40;" , replace:"@"},
+]
+
 export const DescriptionFull: React.FC<DescriptionFullProps> = ({
   text,
 }) => {
@@ -44,7 +51,13 @@ export const DescriptionFull: React.FC<DescriptionFullProps> = ({
     ),
     code: ({ node, inline, className, children, ...props }: any) => {
       const match = /language-(\w+)/.exec(className || "");
-      const codeString = String(children).replace(/\n$/, "");
+      let codeString = String(children).replace(/\n$/, "");
+      arrSpecialChars.forEach((item) => {
+        codeString = codeString.replace(new RegExp(item.char, 'g'), item.replace);
+      });
+
+      codeString = String(codeString).replace(/\n$/, "");
+
       return !inline && match ? (
         <Box
           component="div"
