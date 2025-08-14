@@ -5,6 +5,7 @@ import ReactMarkdown from "react-markdown";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { materialDark } from "react-syntax-highlighter/dist/cjs/styles/prism";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
+import { ARRAY_SPECIAL_CHARS } from "@/utils/constants";
 
 interface DescriptionFullProps {
   text: string;
@@ -44,7 +45,13 @@ export const DescriptionFull: React.FC<DescriptionFullProps> = ({
     ),
     code: ({ node, inline, className, children, ...props }: any) => {
       const match = /language-(\w+)/.exec(className || "");
-      const codeString = String(children).replace(/\n$/, "");
+      let codeString = String(children).replace(/\n$/, "");
+      ARRAY_SPECIAL_CHARS.forEach((item) => {
+        codeString = codeString.replace(new RegExp(item.char, 'g'), item.replace);
+      });
+
+      codeString = String(codeString).replace(/\n$/, "");
+
       return !inline && match ? (
         <Box
           component="div"
