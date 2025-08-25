@@ -1,9 +1,9 @@
 import { theme } from "@/app/config/themes";
 import { Box, Grid, Typography, useMediaQuery } from "@mui/material";
 import Image from "next/image";
-import githubLogo from "../../../public/assets/github-icon.png";
-import googleLogo from "../../../public/assets/google-icon.png";
-import linkedinLogo from "../../../public/assets/linkedin-icon.png";
+import githubLogo from "../../../public/assets/github-icon.svg";
+import googleLogo from "../../../public/assets/google-icon.svg";
+import linkedinLogo from "../../../public/assets/linkedin-icon.svg";
 import { SocialLoginButton } from "../SocialLoginButton";
 import { signIn } from "next-auth/react";
 
