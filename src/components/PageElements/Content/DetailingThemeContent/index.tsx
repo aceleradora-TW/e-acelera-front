@@ -47,7 +47,7 @@ export const DetailingThemeContent: React.FC<DetailingContentProps> = ({ data, i
 
   return (
     <>
-        <ThemeContent key={filteredData.id} field={filteredData.field as ThemeField} />
+      <ThemeContent key={filteredData.id} field={filteredData.field as ThemeField} />
     </>
   );
 };

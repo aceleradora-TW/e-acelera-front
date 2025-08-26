@@ -3,10 +3,10 @@ import { ApiResponse } from '@/types/type';
 
 const cache = new Map<string, ApiResponse>();
 
-const fetchData = async (url: string, options?: any): Promise<ApiResponse | undefined> => {
+const fetchData = async (url: string, options?: Record<string, any>): Promise<ApiResponse | undefined> => {
   try {
     const cachedData = cache.get(url)
- 
+
   if (cachedData) return cachedData
 
   const response = await fetch(url, options);
@@ -20,10 +20,10 @@ const fetchData = async (url: string, options?: any): Promise<ApiResponse | unde
     console.log("Erro " + error)
     return undefined
   }
-  
+
 };
 
-const useFetchData = (url: string, options?: any) => {
+const useFetchData = (url: string, options?: Record<string, any>) => {
   const [data, setData] = useState<ApiResponse>();
   const [error, setError] = useState<Error | undefined>();
   const [isLoading, setIsLoading] = useState(true);

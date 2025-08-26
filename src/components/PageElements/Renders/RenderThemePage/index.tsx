@@ -5,14 +5,15 @@ import { LayoutPage } from "../../LayoutPage";
 import { BadRequest } from "@/components/BadRequest";
 import { NoData } from "@/components/NoData";
 import { GlobalContextProvider } from "@/context/global.context";
-import { headers } from "next/headers";
 
 export const RenderThemePage = (category: string) => {
     console.log("RenderThemePage category:", category);
-    const { data: renderData, isLoading: loading, error: error } = useFetchData('/api/backend/getFilterTheme',{
-        headers: {
-            "themeType": category
-        }
+    const { data: renderData, isLoading: loading, error: error } = useFetchData(`/api/stackbyApi/Themes`, {
+            headers: {
+                filterName: "equal",
+                field: "category",
+                filterValue: category,
+            },
     });
     if (loading) {
         return <Loading />
