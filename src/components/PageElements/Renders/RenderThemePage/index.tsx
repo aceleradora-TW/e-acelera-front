@@ -7,7 +7,14 @@ import { NoData } from "@/components/NoData";
 import { GlobalContextProvider } from "@/context/global.context";
 
 export const RenderThemePage = (category: string) => {
-    const { data: renderData, isLoading: loading, error: error } = useFetchData('/api/stackbyApi/Themes');
+    console.log("RenderThemePage category:", category);
+    const { data: renderData, isLoading: loading, error: error } = useFetchData(`/api/stackbyApi/Themes`, {
+            headers: {
+                filterName: "equal",
+                field: "category",
+                filterValue: category,
+            },
+    });
     if (loading) {
         return <Loading />
     }

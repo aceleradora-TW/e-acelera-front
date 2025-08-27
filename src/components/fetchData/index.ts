@@ -1,15 +1,15 @@
-import { useState, useEffect, useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { ApiResponse } from '@/types/type';
 
 const cache = new Map<string, ApiResponse>();
 
-const fetchData = async (url: string): Promise<ApiResponse | undefined> => {
+const fetchData = async (url: string, options?: Record<string, any>): Promise<ApiResponse | undefined> => {
   try {
     const cachedData = cache.get(url)
- 
+
   if (cachedData) return cachedData
 
-  const response = await fetch(url);
+  const response = await fetch(url, options);
   if (!response.ok) {
     throw new Error('Erro ao buscar dados da API');
   }
@@ -20,10 +20,10 @@ const fetchData = async (url: string): Promise<ApiResponse | undefined> => {
     console.log("Erro " + error)
     return undefined
   }
-  
+
 };
 
-const useFetchData = (url: string) => {
+const useFetchData = (url: string, options?: Record<string, any>) => {
   const [data, setData] = useState<ApiResponse>();
   const [error, setError] = useState<Error | undefined>();
   const [isLoading, setIsLoading] = useState(true);
@@ -33,7 +33,7 @@ const useFetchData = (url: string) => {
     const fetchDataFromApi = async () => {
       setIsLoading(true);
       try {
-        const result = await fetchData(url);
+        const result = await fetchData(url, options);
         if (isSubscribed) {
           setData(result)
           setError(undefined)
@@ -55,7 +55,7 @@ const useFetchData = (url: string) => {
     };
   }, [url]);
 
-  return { data: data, error, isLoading };
+  return { data, error, isLoading };
 };
 
 export default useFetchData;
