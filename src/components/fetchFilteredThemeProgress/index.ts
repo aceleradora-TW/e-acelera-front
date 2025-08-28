@@ -31,7 +31,6 @@ export const useFetchFilteredThemeProgress = (
       if (!response.ok) throw new Error(`Erro ${response.status}`);
 
       const data = await response.json();
-      console.log("API retorno:", data);
       setProgress(data.status);
       setTheme(data.theme);
     } catch (error) {

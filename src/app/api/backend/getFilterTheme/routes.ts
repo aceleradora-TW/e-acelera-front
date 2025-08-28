@@ -4,7 +4,6 @@ import { headers } from "next/headers";
 export async function GET(req: NextRequest) {
   const header = headers();
   const themeType = header.get("themeType");
-  console.log("Received themeType:", themeType);
   const accessToken =
     req.cookies.get("next-auth.session-token")?.value ||
     req.cookies.get("__Secure-next-auth.session-token")?.value;
@@ -31,7 +30,6 @@ export async function GET(req: NextRequest) {
         "Content-Type": "application/json",
       },
     });
-    console.log("Backend response status:", response);
     if (response.status === 401) {
       return NextResponse.json(
         { error: "Unauthorized: Invalid or expired token" },
@@ -40,7 +38,6 @@ export async function GET(req: NextRequest) {
     }
 
     if (!response.ok) {
-      console.log("Opa")
       return NextResponse.json(
         { error: `Error fetching themes: ${response.status} - ${response.statusText}` },
         { status: response.status }

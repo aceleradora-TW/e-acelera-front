@@ -17,7 +17,6 @@ const fetchData = async (url: string, options?: Record<string, any>): Promise<Ap
   cache.set(url, data);
   return data ;
   } catch (error) {
-    console.log("Erro " + error)
     return undefined
   }
 
