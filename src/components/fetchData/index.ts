@@ -3,13 +3,13 @@ import { ApiResponse } from '@/types/type';
 
 const cache = new Map<string, ApiResponse>();
 
-const fetchData = async (url: string, options?: Record<string, any>): Promise<ApiResponse | undefined> => {
+const fetchData = async (url: string): Promise<ApiResponse | undefined> => {
   try {
     const cachedData = cache.get(url)
-
+ 
   if (cachedData) return cachedData
 
-  const response = await fetch(url, options);
+  const response = await fetch(url);
   if (!response.ok) {
     throw new Error('Erro ao buscar dados da API');
   }
@@ -19,10 +19,10 @@ const fetchData = async (url: string, options?: Record<string, any>): Promise<Ap
   } catch (error) {
     return undefined
   }
-
+  
 };
 
-const useFetchData = (url: string, options?: Record<string, any>) => {
+const useFetchData = (url: string) => {
   const [data, setData] = useState<ApiResponse>();
   const [error, setError] = useState<Error | undefined>();
   const [isLoading, setIsLoading] = useState(true);
@@ -32,7 +32,7 @@ const useFetchData = (url: string, options?: Record<string, any>) => {
     const fetchDataFromApi = async () => {
       setIsLoading(true);
       try {
-        const result = await fetchData(url, options);
+        const result = await fetchData(url);
         if (isSubscribed) {
           setData(result)
           setError(undefined)
