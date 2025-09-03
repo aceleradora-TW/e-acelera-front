@@ -6,20 +6,24 @@ import { ApiResponse, DataItem, IdType, ThemeField } from "@/types/type";
 import { DescriptionDivider } from "../../../Description/DescriptionDivider";
 import { Heading } from "@/components/Heading";
 import ProgressBar from "../../Progress/ProgressBar";
-import useFetchBulkProgress from "@/hooks/useFetchBulkProgress"; 
+import { useFetchProgress } from "@/components/fetchProgress";
+
 
 
 interface DetailingContentProps {
   data: ApiResponse;
   id: string;
 }
-const ThemeContent: React.FC<{ field: ThemeField }> = ({ field }) => (
+const ThemeContent: React.FC<{ field: ThemeField }> = ({ field }) => {
+  const { progress: fetchedProgress } = useFetchProgress(field.rowId,IdType.THEME_ID);
+
+  return (
   <>
     <Grid item xl={12} lg={9} md={6} sm={3}>
       <BreadCrumb />
       <Heading variant="h1" text={field.title} />
         <Box>
-          {/*  Remove individual progress fetch */}
+          <ProgressBar percentage={fetchedProgress?.progress ?? 0} />
           <p
             style={{
               fontSize: "0.8rem",
@@ -27,7 +31,7 @@ const ThemeContent: React.FC<{ field: ThemeField }> = ({ field }) => (
               marginTop: "4px",
             }}
           >
-            {/* Remove individual progress display */}
+            {fetchedProgress?.progress ?? 0}% concluído
           </p>
         </Box>
     </Grid>
@@ -41,7 +45,8 @@ const ThemeContent: React.FC<{ field: ThemeField }> = ({ field }) => (
       topicsInfo={field.topicsInfo}
     />
   </>
-)
+)};
+
 export const DetailingThemeContent: React.FC<DetailingContentProps> = ({ data, id }) => {
   const filteredData = data?.data.filter((element: DataItem) => element.id === id.split("-")[0])[0];
 
