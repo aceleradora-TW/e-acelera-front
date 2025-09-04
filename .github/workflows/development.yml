@@ -103,8 +103,7 @@ jobs:
             echo "Não foi possível encontrar a branch 'staging-v1'."
           fi
 
-          git merge origin/main --no-edit
-
+          git pull --rebase origin main
       - name: Push changes to staging-v1
         env:
           TOKEN: ${{ secrets.GITHUB_TOKEN }}
