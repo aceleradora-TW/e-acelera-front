@@ -82,8 +82,7 @@ jobs:
   deploy:
     needs: build
     if: |
-      (github.event_name == 'workflow_dispatch' && github.event.inputs.deploy == 'true') ||
-      (github.event_name == 'push' && github.ref == 'refs/heads/main')
+      (github.event_name == 'workflow_dispatch' && github.event.inputs.deploy == 'true')
     runs-on: ubuntu-latest
 
     steps:
@@ -92,22 +91,22 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Merge main into staging-v1
+      - name: Merge main into staging
         run: |
           git config --global user.name "eacelera-github-actions[bot]"
           git config --global user.email "eacelera-github-actions[bot]@users.noreply.github.com"
 
           git fetch origin
 
-          if git ls-remote --exit-code --heads origin staging-v1; then
-            git checkout -b staging-v1 origin/staging-v1
+          if git ls-remote --exit-code --heads origin staging; then
+            git checkout -b staging origin/staging
           else
-            echo "Não foi possível encontrar a branch 'staging-v1'."
+            echo "Não foi possível encontrar a branch 'staging'."
           fi
 
           git reset --hard origin/main
-      - name: Push changes to staging-v1
+      - name: Push changes to staging
         env:
           TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          git push origin staging-v1 --force
+          git push origin staging --force
