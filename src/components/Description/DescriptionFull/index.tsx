@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { Alert, Box, Grid, Link, Snackbar, Typography } from "@mui/material";
 import { theme } from "@/app/config/themes";
 import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+import rehypeRaw from "rehype-raw";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { materialDark } from "react-syntax-highlighter/dist/cjs/styles/prism";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
@@ -11,9 +13,7 @@ interface DescriptionFullProps {
   text: string;
 }
 
-export const DescriptionFull: React.FC<DescriptionFullProps> = ({
-  text,
-}) => {
+export const DescriptionFull: React.FC<DescriptionFullProps> = ({ text }) => {
   const [copySuccess, setCopySuccess] = useState(false);
 
   const handleCopy = (code: string) => {
@@ -27,9 +27,7 @@ export const DescriptionFull: React.FC<DescriptionFullProps> = ({
     p: (props: React.HTMLAttributes<HTMLParagraphElement>) => (
       <Typography variant="body1" sx={{ marginTop: 2 }} {...props} />
     ),
-    ul: (props: React.HTMLAttributes<HTMLUListElement>) => (
-      <ul  {...props} />
-    ),
+    ul: (props: React.HTMLAttributes<HTMLUListElement>) => <ul {...props} />,
     a: (props: React.HTMLAttributes<HTMLAnchorElement>) => (
       <Link
         variant="body1"
@@ -47,7 +45,10 @@ export const DescriptionFull: React.FC<DescriptionFullProps> = ({
       const match = /language-(\w+)/.exec(className || "");
       let codeString = String(children).replace(/\n$/, "");
       ARRAY_SPECIAL_CHARS.forEach((item) => {
-        codeString = codeString.replace(new RegExp(item.char, 'g'), item.replace);
+        codeString = codeString.replace(
+          new RegExp(item.char, "g"),
+          item.replace
+        );
       });
 
       codeString = String(codeString).replace(/\n$/, "");
@@ -57,7 +58,7 @@ export const DescriptionFull: React.FC<DescriptionFullProps> = ({
           component="div"
           sx={{
             position: "relative",
-            cursor: "pointer"
+            cursor: "pointer",
           }}
           onClick={() => handleCopy(codeString)}
         >
@@ -80,7 +81,6 @@ export const DescriptionFull: React.FC<DescriptionFullProps> = ({
               top: "24px",
               right: "16px",
               cursor: "pointer",
-
             }}
             onClick={(e) => {
               e.stopPropagation();
@@ -109,9 +109,19 @@ export const DescriptionFull: React.FC<DescriptionFullProps> = ({
   };
 
   return (
-    <Grid container alignItems="stretch" sx={{ ...theme.customStyles.description, height: "100%" }}>
+    <Grid
+      container
+      alignItems="stretch"
+      sx={{ ...theme.customStyles.description, height: "100%" }}
+    >
       <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
-        <ReactMarkdown components={components}>{text}</ReactMarkdown>
+        <ReactMarkdown
+          remarkPlugins={[remarkGfm]}
+          rehypePlugins={[rehypeRaw]}
+          components={components}
+        >
+          {text}
+        </ReactMarkdown>
         <Snackbar
           open={copySuccess}
           anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
