@@ -249,5 +249,12 @@ export const customStyles: Theme = {
     boxShadow: 24,
     p: 4,
     textAlign: "center"
-  }
+  },
+  Footer: {
+    background: themePalette.primaryTextColor,
+    color: themePalette.baseBgColor,
+    mt: 4,
+    height: "30%",
+    boxShadow: "0 0 0.6em rgba(44 44 44 / 75%)",
+  },
 }
