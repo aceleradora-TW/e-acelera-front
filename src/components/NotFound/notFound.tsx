@@ -1,4 +1,4 @@
-import { Grid, Link, Typography } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 import svgNotFound from "../../../public/assets/404notFoundCachorrinho.svg";
 import { LayoutPage } from "../PageElements/LayoutPage";
 import Image from "next/image";

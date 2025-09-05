@@ -29,7 +29,7 @@ export default function StatusSelect({
   const [isModalOpen, setIsModalOpen] = React.useState<boolean>(false);
   const { data: session } = useSession();
   const statusSelectRef = React.useRef<HTMLDivElement>(null);
-  const { topicStatus, triggerProgressUpdate } = useGlobalContext();;
+  const { topicStatus, triggerProgressUpdate } = useGlobalContext();
   const pathname = usePathname();
 
   const currentStatusTopic = topicStatus?.status?.find((s) => s.itemId === id);
