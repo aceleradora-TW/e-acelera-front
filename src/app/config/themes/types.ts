@@ -60,6 +60,13 @@ export interface Theme {
     }
     marginBottom: string
   }
+  Footer: {
+    background: string
+    color: string
+    mt: number
+    height: string
+    boxShadow: string
+  }
   styleExclamation: ExtendedCSSProperties
   styleModal : ExtendedCSSProperties
 }
