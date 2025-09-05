@@ -15,3 +15,9 @@ export enum ElementType {
 export type TopicProgress = {
     progress: number
 }
+
+export interface Theme {
+  id: string;
+  title: string;
+  description: string;
+}

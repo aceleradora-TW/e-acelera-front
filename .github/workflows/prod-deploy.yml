@@ -1,0 +1,46 @@
+name: Production Deploy
+
+on:
+  workflow_dispatch:
+
+concurrency:
+  group: prod
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: production
+      url: https://aceleradora-agil.com.br/
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Sync production branch with staging
+        run: |
+          git config user.name "eacelera-production-bot[bot]"
+          git config user.email "eacelera-production-bot[bot]@users.noreply.github.com"
+
+          git fetch origin
+
+          if git ls-remote --exit-code --heads origin production; then
+            git checkout -B production origin/production
+          else
+            git checkout -B production
+          fi
+
+          git reset --hard origin/staging
+          git push origin production --force
+        env:
+          TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Deploy to Production
+        run: |
+          echo "Deploying commit $(git rev-parse HEAD) to production..."
+          echo "Netlify will handle the build & deployment."
+          echo "Check Netlify dashboard for deployment status at: https://app.netlify.com/projects/e-acelera-homologacao/deploys"
+

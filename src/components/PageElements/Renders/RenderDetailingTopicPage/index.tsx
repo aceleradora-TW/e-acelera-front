@@ -31,7 +31,7 @@ const PageContent = ({ topicId }: { topicId: string }) => {
     isLoading: loading,
     error,
   } = useFetchData("/api/stackbyApi/Topics");
-
+  
   if (loading) return <Loading />;
   if (error) return <BadRequest />;
   if (!renderData) return <NoData />;
