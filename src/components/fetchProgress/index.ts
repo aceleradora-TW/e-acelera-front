@@ -1,6 +1,7 @@
 import { IdType } from "@/types/type"
 import { TopicProgress } from "@/types/typeTopic"
-import { useCallback, useEffect, useState } from "react"
+import { useCallback, useEffect, useState } from "react";
+import { getSession } from "next-auth/react"
 
 type ThemeProgress = {
   progress: number;
@@ -14,9 +15,19 @@ type ThemeProgress = {
 
 export const useFetchProgress = (id: string, idType: IdType, trigger?: number) => {
   const [progress, setProgress] = useState<ThemeProgress | TopicProgress | undefined>(undefined);
-
-  const fetchProgress = useCallback(async () =>{
+  const [userLogin, setUserLogin] = useState<boolean>(false);
+  const fetchProgress = useCallback(async () => {
+    
       try {
+
+        const session = await getSession();
+
+        if (!session) {
+          setUserLogin(false);
+        } else {
+          setUserLogin(true);
+        }
+
         const url = `/api/backend/getProgress`;
 
         const response = await fetch(url, {
@@ -37,9 +48,13 @@ export const useFetchProgress = (id: string, idType: IdType, trigger?: number) =
       }
     }, [id, idType]);
 
-  useEffect(() => {
-    fetchProgress();
-  }, [fetchProgress, trigger]);
+  useEffect(() => {      
+    
+    if (userLogin) {
+      fetchProgress();
+    }
+    
+  }, [fetchProgress, trigger, userLogin]);
 
   return { progress };
 };
