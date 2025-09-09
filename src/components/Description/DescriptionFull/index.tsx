@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Alert, Box, Grid, Link, Snackbar, Typography } from "@mui/material";
+import { Alert, Box, Grid, Link, Snackbar, Table, TableBody, TableCell, TableHead, TableRow, Typography } from "@mui/material";
 import { theme } from "@/app/config/themes";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
@@ -8,6 +8,7 @@ import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { materialDark } from "react-syntax-highlighter/dist/cjs/styles/prism";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import { ARRAY_SPECIAL_CHARS } from "@/utils/constants";
+import { MarkdownRenderer } from "@/components/MarkdownRenderer";
 
 interface DescriptionFullProps {
   text: string;
@@ -23,7 +24,35 @@ export const DescriptionFull: React.FC<DescriptionFullProps> = ({ text }) => {
     });
   };
 
+  /** \.. contants.ts =>
+   * COMPONENTS =>
+    * DESCRIPTION_FULL_COMPONENTS -> componentes do description full
+    * DESCRIPTION_DIVIDER_COMPONENTS -> componentes do description divider
+    * DESCRIPTION_REFERENCE_COMPONENTS -> componentes do description reference
+    * DESCRIPTION_WITH_VIDEO_COMPONENTS -> componentes do description with video
+  */
   const components = {
+    //colocar as coisas de tabela material ui
+    //repetir os componentes nas outras description , nas descriçoes de tudo
+    //colocar onde achamos que deve ter
+    table: (props: React.HTMLAttributes<HTMLTableElement>) => (
+      <Table {...props} />
+    ),
+    thead: (props: React.HTMLAttributes<HTMLTableSectionElement>) => (
+      <TableHead {...props} />
+    ),
+    tbody: (props: React.HTMLAttributes<HTMLTableSectionElement>) => (
+      <TableBody {...props} />
+    ),
+    tr: (props: React.HTMLAttributes<HTMLTableRowElement>) => (
+      <TableRow {...props} />
+    ),
+    th: (props: React.ThHTMLAttributes<HTMLTableCellElement>) => (
+      <TableCell {...props} align="left" />
+    ),
+    td: (props: React.TdHTMLAttributes<HTMLTableCellElement>) => (
+      <TableCell {...props} align="center" />
+    ),
     p: (props: React.HTMLAttributes<HTMLParagraphElement>) => (
       <Typography variant="body1" sx={{ marginTop: 2 }} {...props} />
     ),
@@ -115,13 +144,11 @@ export const DescriptionFull: React.FC<DescriptionFullProps> = ({ text }) => {
       sx={{ ...theme.customStyles.description, height: "100%" }}
     >
       <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
-        <ReactMarkdown
-          remarkPlugins={[remarkGfm]}
-          rehypePlugins={[rehypeRaw]}
+        <MarkdownRenderer
           components={components}
         >
           {text}
-        </ReactMarkdown>
+        </MarkdownRenderer>
         <Snackbar
           open={copySuccess}
           anchorOrigin={{ vertical: "bottom", horizontal: "center" }}

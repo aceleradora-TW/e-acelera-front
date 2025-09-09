@@ -2,6 +2,8 @@ import React from "react";
 import { Grid, Link } from "@mui/material";
 import { theme } from "@/app/config/themes";
 import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+import rehypeRaw from "rehype-raw";
 
 interface DescriptionReferenceProps {
   text: string;
@@ -27,9 +29,8 @@ export const DescriptionReference: React.FC<DescriptionReferenceProps> = ({
   };
   return (
     <Grid container alignItems="stretch" sx={{ ...theme.customStyles.description }}>
-      <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
-        <ReactMarkdown components={components}>{text}</ReactMarkdown>
-      </Grid>
+
+      <Grid item xl={12} lg={12} md={12} sm={12} xs={12} />
     </Grid>
   );
 };

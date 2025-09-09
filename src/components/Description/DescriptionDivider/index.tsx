@@ -1,8 +1,8 @@
 import React from "react"
 import { Box, Divider, Link, Typography, useMediaQuery } from "@mui/material"
 import { theme } from "@/app/config/themes"
-import ReactMarkdown from "react-markdown"
 import { DescriptionFull } from "../DescriptionFull"
+import { MarkdownRenderer } from "@/components/MarkdownRenderer";
 
 interface DescriptionDividerProps {
   text: string
@@ -60,17 +60,17 @@ export const DescriptionDivider: React.FC<DescriptionDividerProps> = ({ text }) 
       ) : (
         <Box sx={{ ...theme.customStyles.description }}>
           <Box sx={boxStyle}>
-            <ReactMarkdown components={components}>
+            <MarkdownRenderer components={components}>
               {textDividerArray[0]}
-            </ReactMarkdown>
+            </MarkdownRenderer>
           </Box>
 
           <Divider color="black" flexItem orientation="vertical" sx={{ marginTop: 2 }} />
 
           <Box sx={boxStyle}>
-            <ReactMarkdown components={components}>
+            <MarkdownRenderer components={components}>
               {textDividerArray[1]}
-            </ReactMarkdown>
+            </MarkdownRenderer>
           </Box>
         </Box>
       )}
