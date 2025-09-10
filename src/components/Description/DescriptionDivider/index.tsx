@@ -3,14 +3,15 @@ import { Box, Divider, Link, Typography, useMediaQuery } from "@mui/material"
 import { theme } from "@/app/config/themes"
 import { DescriptionFull } from "../DescriptionFull"
 import { MarkdownRenderer } from "@/components/MarkdownRenderer";
-
+import components from "./components";
 interface DescriptionDividerProps {
   text: string
 }
 
 const boxStyle: object = {
-  width: "49%"
+  width: "49%" 
 }
+
 
 export const DescriptionDivider: React.FC<DescriptionDividerProps> = ({ text }) => {
 
@@ -38,17 +39,6 @@ export const DescriptionDivider: React.FC<DescriptionDividerProps> = ({ text }) 
     return [firstPart, secondPart]
   }
 
-  const components = {
-    p: (props: React.HTMLAttributes<HTMLHeadingElement>) => (
-      <Typography variant="body1" sx={{ whiteSpace: "pre-wrap", marginTop: 2 }} {...props} />
-    ),
-    a: (props: React.HTMLAttributes<HTMLAnchorElement>) => (
-      <Link
-        variant="caption" target="_blank" rel="noreferrer"
-        sx={{ color: theme.palette.textColor?.light, textDecorationColor: theme.palette.textColor?.light, display: "block" }}
-        {...props} />
-    )
-  }
 
   const textDividerArray: string[] = textDivider(text)
   const isSmallScreen: boolean = useMediaQuery(theme.breakpoints.down('md'))

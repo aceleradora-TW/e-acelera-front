@@ -1,14 +1,12 @@
 import React, { useState } from "react";
 import { Alert, Box, Grid, Link, Snackbar, Table, TableBody, TableCell, TableHead, TableRow, Typography } from "@mui/material";
 import { theme } from "@/app/config/themes";
-import ReactMarkdown from "react-markdown";
-import remarkGfm from "remark-gfm";
-import rehypeRaw from "rehype-raw";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { materialDark } from "react-syntax-highlighter/dist/cjs/styles/prism";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import { ARRAY_SPECIAL_CHARS } from "@/utils/constants";
 import { MarkdownRenderer } from "@/components/MarkdownRenderer";
+import components from "./components";
 
 interface DescriptionFullProps {
   text: string;
@@ -24,119 +22,7 @@ export const DescriptionFull: React.FC<DescriptionFullProps> = ({ text }) => {
     });
   };
 
-  /** \.. contants.ts =>
-   * COMPONENTS =>
-    * DESCRIPTION_FULL_COMPONENTS -> componentes do description full
-    * DESCRIPTION_DIVIDER_COMPONENTS -> componentes do description divider
-    * DESCRIPTION_REFERENCE_COMPONENTS -> componentes do description reference
-    * DESCRIPTION_WITH_VIDEO_COMPONENTS -> componentes do description with video
-  */
-  const components = {
-    //colocar as coisas de tabela material ui
-    //repetir os componentes nas outras description , nas descriçoes de tudo
-    //colocar onde achamos que deve ter
-    table: (props: React.HTMLAttributes<HTMLTableElement>) => (
-      <Table {...props} />
-    ),
-    thead: (props: React.HTMLAttributes<HTMLTableSectionElement>) => (
-      <TableHead {...props} />
-    ),
-    tbody: (props: React.HTMLAttributes<HTMLTableSectionElement>) => (
-      <TableBody {...props} />
-    ),
-    tr: (props: React.HTMLAttributes<HTMLTableRowElement>) => (
-      <TableRow {...props} />
-    ),
-    th: (props: React.ThHTMLAttributes<HTMLTableCellElement>) => (
-      <TableCell {...props} align="left" />
-    ),
-    td: (props: React.TdHTMLAttributes<HTMLTableCellElement>) => (
-      <TableCell {...props} align="center" />
-    ),
-    p: (props: React.HTMLAttributes<HTMLParagraphElement>) => (
-      <Typography variant="body1" sx={{ marginTop: 2 }} {...props} />
-    ),
-    ul: (props: React.HTMLAttributes<HTMLUListElement>) => <ul {...props} />,
-    a: (props: React.HTMLAttributes<HTMLAnchorElement>) => (
-      <Link
-        variant="body1"
-        target="_blank"
-        rel="noreferrer"
-        sx={{
-          color: theme.palette.textColor?.light,
-          textDecorationColor: theme.palette.textColor?.light,
-          display: "inline-block",
-        }}
-        {...props}
-      />
-    ),
-    code: ({ node, inline, className, children, ...props }: any) => {
-      const match = /language-(\w+)/.exec(className || "");
-      let codeString = String(children).replace(/\n$/, "");
-      ARRAY_SPECIAL_CHARS.forEach((item) => {
-        codeString = codeString.replace(
-          new RegExp(item.char, "g"),
-          item.replace
-        );
-      });
-
-      codeString = String(codeString).replace(/\n$/, "");
-
-      return !inline && match ? (
-        <Box
-          component="div"
-          sx={{
-            position: "relative",
-            cursor: "pointer",
-          }}
-          onClick={() => handleCopy(codeString)}
-        >
-          <SyntaxHighlighter
-            style={materialDark}
-            language={match[1]}
-            PreTag="div"
-            {...props}
-            showLineNumbers
-            customStyle={{
-              margin: 0,
-              borderRadius: "4px",
-            }}
-          >
-            {codeString}
-          </SyntaxHighlighter>
-          <Box
-            sx={{
-              position: "absolute",
-              top: "24px",
-              right: "16px",
-              cursor: "pointer",
-            }}
-            onClick={(e) => {
-              e.stopPropagation();
-              handleCopy(codeString);
-            }}
-          >
-            <ContentCopyIcon sx={{ color: "white" }} />
-          </Box>
-        </Box>
-      ) : (
-        <Typography
-          component="span"
-          sx={{
-            fontFamily: "monospace",
-            backgroundColor: "#f5f5f5",
-            padding: "2px 4px",
-            borderRadius: "4px",
-            wordBreak: "break-word",
-            whiteSpace: "pre-wrap",
-          }}
-        >
-          {children}
-        </Typography>
-      );
-    },
-  };
-
+  
   return (
     <Grid
       container
