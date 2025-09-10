@@ -1,10 +1,7 @@
 import React, { useState } from "react";
-import { Alert, Box, Grid, Link, Snackbar, Table, TableBody, TableCell, TableHead, TableRow, Typography } from "@mui/material";
+import { Alert, Grid, Snackbar} from "@mui/material";
 import { theme } from "@/app/config/themes";
-import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { materialDark } from "react-syntax-highlighter/dist/cjs/styles/prism";
-import ContentCopyIcon from "@mui/icons-material/ContentCopy";
-import { ARRAY_SPECIAL_CHARS } from "@/utils/constants";
+
 import { MarkdownRenderer } from "@/components/MarkdownRenderer";
 import components from "./components";
 
@@ -12,18 +9,7 @@ interface DescriptionFullProps {
   text: string;
 }
 
-export const DescriptionFull: React.FC<DescriptionFullProps> = ({ text }) => {
-  const [copySuccess, setCopySuccess] = useState(false);
-
-  const handleCopy = (code: string) => {
-    navigator.clipboard.writeText(code).then(() => {
-      setCopySuccess(true);
-      setTimeout(() => setCopySuccess(false), 2000);
-    });
-  };
-
-  
-  return (
+export const DescriptionFull: React.FC<DescriptionFullProps> = ({ text }) => (
     <Grid
       container
       alignItems="stretch"
@@ -35,16 +21,7 @@ export const DescriptionFull: React.FC<DescriptionFullProps> = ({ text }) => {
         >
           {text}
         </MarkdownRenderer>
-        <Snackbar
-          open={copySuccess}
-          anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
-          autoHideDuration={2000}
-        >
-          <Alert severity="success" sx={{ width: "100%" }}>
-            Código copiado para a área de transferência!
-          </Alert>
-        </Snackbar>
+
       </Grid>
     </Grid>
   );
-};
