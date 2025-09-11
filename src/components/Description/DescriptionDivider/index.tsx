@@ -1,7 +1,7 @@
-import React from "react"
-import { Box, Divider, Link, Typography, useMediaQuery } from "@mui/material"
-import { theme } from "@/app/config/themes"
-import { DescriptionFull } from "../DescriptionFull"
+import React from "react";
+import { Box, Divider, useMediaQuery } from "@mui/material";
+import { theme } from "@/app/config/themes";
+import { DescriptionFull } from "../DescriptionFull";
 import { MarkdownRenderer } from "@/components/MarkdownRenderer";
 import components from "./components";
 interface DescriptionDividerProps {

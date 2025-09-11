@@ -1,18 +1,11 @@
-import { MarkdownRenderer } from "@/components/MarkdownRenderer";
-import { Alert, Box, Grid, Link, Snackbar, Table, TableBody, TableCell, TableHead, TableRow, Typography } from "@mui/material";
-import { ARRAY_SPECIAL_CHARS } from "@/utils/constants";
-import ContentCopyIcon from "@mui/icons-material/ContentCopy";
-import { materialDark } from "react-syntax-highlighter/dist/cjs/styles/prism";
-import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { Link, Table, TableBody, TableCell, TableHead, TableRow, Typography } from "@mui/material";
 import { theme } from "@/app/config/themes";
 import CodeBlock from "@/components/CodeBlock";
-
-//criando componentes customizados para  parte de code 
 
   const components = {
 
     table: (props: React.HTMLAttributes<HTMLTableElement>) => (
-      <Table {...props} />
+      <Table sx={{ maxWidth: 500}} {...props} />
     ),
     thead: (props: React.HTMLAttributes<HTMLTableSectionElement>) => (
       <TableHead {...props} />
@@ -47,7 +40,6 @@ import CodeBlock from "@/components/CodeBlock";
       />
     ),
     code: (props : any) => <CodeBlock {...props} />
-
-    };
+  };
 
 export default components;

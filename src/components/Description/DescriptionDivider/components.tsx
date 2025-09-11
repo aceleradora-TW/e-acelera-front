@@ -1,5 +1,5 @@
 import React from "react"
-import { Box, Divider, Link, Typography, useMediaQuery } from "@mui/material"
+import { Link, Typography } from "@mui/material"
 import { theme } from "@/app/config/themes"
 
 
