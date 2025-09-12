@@ -1,8 +1,8 @@
 import { Link, Table, TableBody, TableCell, TableHead, TableRow, Typography } from "@mui/material";
 import { theme } from "@/app/config/themes";
-import CodeBlock from "@/components/CodeBlock";
+import {CodeBlock} from "@/components/UI/code-block";
 
-  const components = {
+  export const components = {
 
     table: (props: React.HTMLAttributes<HTMLTableElement>) => (
       <Table sx={{ maxWidth: 500}} {...props} />
@@ -41,5 +41,3 @@ import CodeBlock from "@/components/CodeBlock";
     ),
     code: (props : any) => <CodeBlock {...props} />
   };
-
-export default components;
