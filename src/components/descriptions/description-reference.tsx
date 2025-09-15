@@ -1,7 +1,7 @@
 import React from "react";
 import { Grid, Link } from "@mui/material";
 import { theme } from "@/app/config/themes";
-import { MarkdownRenderer } from "@/components/MarkdownRenderer";
+import { MarkdownRenderer } from "@/components/UI/markdown-renderer";
 
 interface DescriptionReferenceProps {
   text: string;

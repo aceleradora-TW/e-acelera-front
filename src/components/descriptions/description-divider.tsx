@@ -2,7 +2,7 @@ import React from "react";
 import { Box, Divider, useMediaQuery } from "@mui/material";
 import { theme } from "@/app/config/themes";
 import { DescriptionFull } from "./description-full";
-import { MarkdownRenderer } from "@/components/MarkdownRenderer";
+import { MarkdownRenderer } from "@/components/UI/markdown-renderer";
 import components from "./defs/description-divider.defs";
 interface DescriptionDividerProps {
   text: string
