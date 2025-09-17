@@ -8,6 +8,8 @@ import { Heading } from "@/components/Heading";
 import ProgressBar from "../../Progress/ProgressBar";
 import { useFetchProgress } from "@/components/fetchProgress";
 
+
+
 interface DetailingContentProps {
   data: ApiResponse;
   id: string;
@@ -21,7 +23,7 @@ const ThemeContent: React.FC<{ field: ThemeField }> = ({ field }) => {
       <BreadCrumb />
       <Heading variant="h1" text={field.title} />
         <Box>
-            <ProgressBar percentage={fetchedProgress?.progress ?? 0} />
+          <ProgressBar percentage={fetchedProgress?.progress ?? 0} />
           <p
             style={{
               fontSize: "0.8rem",
@@ -43,14 +45,14 @@ const ThemeContent: React.FC<{ field: ThemeField }> = ({ field }) => {
       topicsInfo={field.topicsInfo}
     />
   </>
-)
-}
+)};
+
 export const DetailingThemeContent: React.FC<DetailingContentProps> = ({ data, id }) => {
   const filteredData = data?.data.filter((element: DataItem) => element.id === id.split("-")[0])[0];
 
   return (
     <>
-        <ThemeContent key={filteredData.id} field={filteredData.field as ThemeField} />
+      <ThemeContent key={filteredData.id} field={filteredData.field as ThemeField} />
     </>
   );
 };
