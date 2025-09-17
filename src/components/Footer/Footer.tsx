@@ -30,7 +30,7 @@ export const Footer: React.FC<FooterProps> = ({ linkedinUrl, projectUrl }) => (
               </Typography>
 
               <Typography variant="body2">
-                  O e-Acelera é uma plataforma de tecnologia que impulsiona o aprendizado de desenvolvedores por meio de conteúdos práticos e colaborativos, preparando profissionais para os desafios do mercado.
+                  O e-Acelera é uma plataforma do Projeto Aceleradora, que impulsiona o aprendizado de desenvolvedores por meio de conteúdos práticos e colaborativos, preparando profissionais para os desafios do mercado.
               </Typography>
           </Grid>
 
