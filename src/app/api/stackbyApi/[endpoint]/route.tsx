@@ -11,12 +11,13 @@ export async function GET(
     const header = headers();
     const uniqueParam: string = `nocache=${Date.now()}`;
     const endpoint: string = params.endpoint;
-    const filterName = header.get("filterName") ?? "";
-    const field = header.get("field") ?? "";
-    const filterValue = header.get("filterValue") ?? "";
-    const hasFilters = !!filterName && !!field && !!filterValue;
+    const operator = header.get("operator") ?? "";
+    const column = header.get("column") ?? "";
+    const value = header.get("value") ?? "";
 
-    const url: string = `${BACKEND_BASE_URL}/stackby/${endpoint}?${uniqueParam}&${hasFilters ? `filterName=${filterName}&field=${field}&filterValue=${filterValue}` : ""}`;
+    const hasFilter = (!!operator && !!value) || (!!operator && !!column && !!value);
+
+    const url: string = `${BACKEND_BASE_URL}/stackby/${endpoint}?${uniqueParam}${hasFilter ? `&operator=${operator}&column=${column}&value=${value}` : ""}`;
     const response: Response = await fetch(url, {
       method: "GET",
       headers: {

@@ -20,7 +20,7 @@ export const ContainerCardsExercises: React.FC<ContainerCardsExercisesProps> = (
   const descriptionsArray = splitValues(exercisesDescription);
   const infoArray = splitValues(exercisesInfo);
 
-  const isInvalidData = exercises.trim() == "Untitle"|| !exercises.trim() || !exercisesDescription.trim() || !exercisesInfo.trim(); 
+  const isInvalidData = exercises.trim() == "Untitle"|| !exercises.trim() || !exercisesDescription.trim() || !exercisesInfo.trim();
 
   if(isInvalidData) {
     return <DescriptionFull text="## Nenhum exercício encontrado"/>
