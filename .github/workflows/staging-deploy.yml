@@ -1,0 +1,41 @@
+name: Staging Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+concurrency:
+  group: staging-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Sync staging branch with main
+        run: |
+          git config user.name "eacelera-staging-bot[bot]"
+          git config user.email "eacelera-staging-bot[bot]@users.noreply.github.com"
+
+          git fetch origin
+          git checkout -B staging
+
+          git reset --hard origin/main
+          git push origin staging --force
+        env:
+          TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Deploy to Staging
+        run: |
+          echo "Starting staging deploy..."
+          echo "Commit being deployed: $(git rev-parse HEAD)"
+          echo "Netlify will handle the build & deployment."
+          echo "Check Netlify dashboard for deployment status at: https://app.netlify.com/projects/e-acelera-homologacao/deploys"
+

@@ -60,7 +60,9 @@ export const WebMenu: React.FC<WebMenuProps> = ({ list, session }) => {
                 alt={session.user.name || "Usuário"}
                 src={session.user.image || "/default-avatar.png"}
               />
-              <ArrowDropDownIcon />
+              <ArrowDropDownIcon 
+                sx={{transform: anchorEl ? "rotate(180deg)" : "rotate(0deg)",transition: "0.3s",}}
+              />
             </IconButton>
           </Tooltip>
           <Menu
