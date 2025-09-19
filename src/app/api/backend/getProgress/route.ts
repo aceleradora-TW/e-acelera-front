@@ -20,13 +20,6 @@ export async function GET(req: NextRequest) {
     )
   }
 
-  // if (!accessToken) {
-  //   return NextResponse.json(
-  //     { error: "accessToken are required" },
-  //     { status: 400 }
-  //   )
-  // }
-
   try {
     const baseUrl = process.env.BACKEND_BASE_URL
 
