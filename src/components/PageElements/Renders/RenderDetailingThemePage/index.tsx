@@ -4,11 +4,15 @@ import { LayoutPage } from "../../LayoutPage";
 import { DetailingThemeContent } from "../../Content/DetailingThemeContent";
 import { BadRequest } from "@/components/BadRequest";
 import { NoData } from "@/components/NoData";
-import ProgressBar from "@/components/PageElements/Progress/ProgressBar";
 import React from "react";
 
 export const RenderDetailingThemePage = (id: string)=> {
-    const { data: renderData, isLoading: loading, error: error} = useFetchData('/api/stackbyApi/Themes');
+    const { data: renderData, isLoading: loading, error: error} = useFetchData('/api/stackbyApi/Themes', {
+            headers: {
+                operator: "rowIds",
+                value: id.split("-")[0],
+            },
+    });
     if (loading) {
       return <Loading />
   }
@@ -20,7 +24,7 @@ export const RenderDetailingThemePage = (id: string)=> {
   }
   return (
     <LayoutPage>
-      <DetailingThemeContent data={renderData}  id={id} />
+      <DetailingThemeContent data={renderData} />
     </LayoutPage>
   );
 

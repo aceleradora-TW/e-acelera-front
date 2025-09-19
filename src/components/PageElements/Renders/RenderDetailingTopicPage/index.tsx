@@ -26,12 +26,13 @@ const PageContent = ({ topicId }: { topicId: string }) => {
   );
   const { dataStatus } = useFetchTopicStatus(topicId);
 
-  const {
-    data: renderData,
-    isLoading: loading,
-    error,
-  } = useFetchData("/api/stackbyApi/Topics");
-  
+  const { data: renderData, isLoading: loading, error: error} = useFetchData('/api/stackbyApi/Topics', {
+    headers: {
+        operator: "rowIds",
+        value: topicId,
+    },
+  });
+
   if (loading) return <Loading />;
   if (error) return <BadRequest />;
   if (!renderData) return <NoData />;
