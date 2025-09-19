@@ -1,9 +1,10 @@
 import React from "react";
 import { Box, Grid } from "@mui/material";
 import { BreadCrumb } from "@/components/BreadCrumb";
-import { ContainerCardTopics } from "../../Container/ContainerCardsTopics";
+//import { ContainerCardTopics } from "../../Container/ContainerCardsTopics";
+import { ContainerCardTopics } from "@/components/PageElements/Container/ContainerCardsTopics";
 import { ApiResponse, DataItem, IdType, ThemeField } from "@/types/type";
-import { DescriptionDivider } from "../../../Description/DescriptionDivider";
+import { DescriptionDivider } from "@/components/descriptions/description-divider";
 import { Heading } from "@/components/Heading";
 import ProgressBar from "../../Progress/ProgressBar";
 import { useFetchProgress } from "@/components/fetchProgress";

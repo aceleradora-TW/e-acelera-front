@@ -2,7 +2,7 @@ import React from "react";
 import { Grid } from "@mui/material";
 import { BreadCrumb } from "@/components/BreadCrumb";
 import { ApiResponse, DataItem, ExercisesField } from "@/types/type";
-import { DescriptionFull } from "@/components/Description/DescriptionFull";
+import { DescriptionFull } from "@/components/descriptions/description-full";
 import { ContainerButtonsExercise } from "../../Container/ContainerButtonsExercise";
 import { Heading } from "@/components/Heading";
 import StatusSelect from "@/components/StatusSelect";

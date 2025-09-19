@@ -1,16 +1,17 @@
-import React from "react"
-import { Box, Divider, Link, Typography, useMediaQuery } from "@mui/material"
-import { theme } from "@/app/config/themes"
-import ReactMarkdown from "react-markdown"
-import { DescriptionFull } from "../DescriptionFull"
-
+import React from "react";
+import { Box, Divider, useMediaQuery } from "@mui/material";
+import { theme } from "@/app/config/themes";
+import { DescriptionFull } from "./description-full";
+import { MarkdownRenderer } from "@/components/UI/markdown-renderer";
+import components from "./defs/description-divider.defs";
 interface DescriptionDividerProps {
   text: string
 }
 
 const boxStyle: object = {
-  width: "49%"
+  width: "49%" 
 }
+
 
 export const DescriptionDivider: React.FC<DescriptionDividerProps> = ({ text }) => {
 
@@ -38,17 +39,6 @@ export const DescriptionDivider: React.FC<DescriptionDividerProps> = ({ text }) 
     return [firstPart, secondPart]
   }
 
-  const components = {
-    p: (props: React.HTMLAttributes<HTMLHeadingElement>) => (
-      <Typography variant="body1" sx={{ whiteSpace: "pre-wrap", marginTop: 2 }} {...props} />
-    ),
-    a: (props: React.HTMLAttributes<HTMLAnchorElement>) => (
-      <Link
-        variant="caption" target="_blank" rel="noreferrer"
-        sx={{ color: theme.palette.textColor?.light, textDecorationColor: theme.palette.textColor?.light, display: "block" }}
-        {...props} />
-    )
-  }
 
   const textDividerArray: string[] = textDivider(text)
   const isSmallScreen: boolean = useMediaQuery(theme.breakpoints.down('md'))
@@ -60,17 +50,17 @@ export const DescriptionDivider: React.FC<DescriptionDividerProps> = ({ text }) 
       ) : (
         <Box sx={{ ...theme.customStyles.description }}>
           <Box sx={boxStyle}>
-            <ReactMarkdown components={components}>
+            <MarkdownRenderer components={components}>
               {textDividerArray[0]}
-            </ReactMarkdown>
+            </MarkdownRenderer>
           </Box>
 
           <Divider color="black" flexItem orientation="vertical" sx={{ marginTop: 2 }} />
 
           <Box sx={boxStyle}>
-            <ReactMarkdown components={components}>
+            <MarkdownRenderer components={components}>
               {textDividerArray[1]}
-            </ReactMarkdown>
+            </MarkdownRenderer>
           </Box>
         </Box>
       )}
