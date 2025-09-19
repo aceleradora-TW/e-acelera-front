@@ -9,9 +9,9 @@ import { GlobalContextProvider } from "@/context/global.context";
 export const RenderThemePage = (category: string) => {
     const { data: renderData, isLoading: loading, error: error } = useFetchData(`/api/stackbyApi/Themes`, {
             headers: {
-                filterName: "equal",
-                field: "category",
-                filterValue: category,
+                operator: "equal",
+                column: "category",
+                value: category,
             },
     });
     if (loading) {
