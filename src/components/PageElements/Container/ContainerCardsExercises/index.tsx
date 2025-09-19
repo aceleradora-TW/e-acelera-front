@@ -2,7 +2,7 @@ import { Grid,  useMediaQuery } from "@mui/material";
 import React from "react";
 import { usePathname } from 'next/navigation';
 import { ButtonCard } from "@/components/ButtonCard";
-import { DescriptionFull } from "@/components/Description/DescriptionFull";
+import { DescriptionFull } from "@/components/descriptions/description-full";
 interface ContainerCardsExercisesProps {
   exercises: string;
   exercisesDescription: string;

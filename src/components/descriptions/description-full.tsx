@@ -1,7 +1,7 @@
 import { Grid} from "@mui/material";
 import { theme } from "@/app/config/themes";
-import { MarkdownRenderer } from "@/components/MarkdownRenderer";
-import components from "./components";
+import { MarkdownRenderer } from "@/components/UI/markdown-renderer";
+import {components} from "./defs/description-full.defs";
 
 interface DescriptionFullProps {
   text: string;
