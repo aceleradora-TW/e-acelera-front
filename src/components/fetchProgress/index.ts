@@ -1,6 +1,7 @@
 import { IdType } from "@/types/type"
 import { TopicProgress } from "@/types/typeTopic"
-import { useCallback, useEffect, useState } from "react"
+import { useCallback, useEffect, useState } from "react";
+
 
 type ThemeProgress = {
   progress: number;
@@ -14,11 +15,10 @@ type ThemeProgress = {
 
 export const useFetchProgress = (id: string, idType: IdType, trigger?: number) => {
   const [progress, setProgress] = useState<ThemeProgress | TopicProgress | undefined>(undefined);
-
-  const fetchProgress = useCallback(async () =>{
+  const fetchProgress = useCallback(async () => {
+    
       try {
         const url = `/api/backend/getProgress`;
-
         const response = await fetch(url, {
           method: "GET",
           headers: {
@@ -37,9 +37,8 @@ export const useFetchProgress = (id: string, idType: IdType, trigger?: number) =
       }
     }, [id, idType]);
 
-  useEffect(() => {
-    fetchProgress();
+  useEffect(() => {      
+      fetchProgress();
   }, [fetchProgress, trigger]);
-
   return { progress };
 };

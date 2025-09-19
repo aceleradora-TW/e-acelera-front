@@ -1,22 +1,21 @@
 import { headers } from "next/headers"
 import { NextRequest, NextResponse } from "next/server"
 
+
 export async function GET(req: NextRequest) {
   const header = headers()
   const id = header.get(`id`)
   const idType = header.get(`idType`)
   const accessToken = req.cookies.get("next-auth.session-token")?.value || req.cookies.get("__Secure-next-auth.session-token")?.value;
 
+
+  if (!accessToken) {
+      return NextResponse.json(null, { status: 200 });
+    }
+
   if (!id) {
     return NextResponse.json(
       { error: "Id are required" },
-      { status: 400 }
-    )
-  }
-
-  if (!accessToken) {
-    return NextResponse.json(
-      { error: "accessToken are required" },
       { status: 400 }
     )
   }
