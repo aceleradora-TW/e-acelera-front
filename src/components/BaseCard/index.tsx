@@ -1,6 +1,7 @@
 import {
   CardActionArea,
   CardActions,
+  useTheme,
 } from "@mui/material";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
@@ -8,7 +9,6 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { useRouter } from "next/navigation";
 import * as React from "react";
-import { theme } from "@/app/config/themes";
 import { ClickButton } from "../ClickButton";
 import CircularProgressBar from "@/components/PageElements/Progress/CircularProgressBar";
 import { IdType } from "@/types/type";
@@ -24,11 +24,6 @@ interface CardProps {
   children?: React.ReactNode;
   cardType?: "theme" | "topic";
 }
-
-const cardStyles = {
-  ...theme.customStyles.cardBody,
-  WebkitLineClamp: 6,
-};
 
 const cardActionsStyle = {
   paddingBottom: 2,
@@ -50,6 +45,13 @@ export const BaseCard: React.FC<CardProps> = ({
   const router = useRouter();
   const handleClick = (route: string) => {
     router.push(`/${route}`);
+  };
+
+  const theme = useTheme();
+
+  const cardStyles = {
+    ...theme.customStyles.cardBody,
+    WebkitLineClamp: 6,
   };
 
   const { progress: fetchedProgress } = useFetchProgress(

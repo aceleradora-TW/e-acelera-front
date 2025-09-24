@@ -2,9 +2,8 @@ import * as React from "react"
 import Card from "@mui/material/Card"
 import CardContent from "@mui/material/CardContent"
 import Typography from "@mui/material/Typography"
-import { Box, CardActionArea } from "@mui/material"
+import { Box, CardActionArea, useTheme } from "@mui/material"
 import { useRouter } from "next/navigation"
-import { theme } from "@/app/config/themes"
 import StatusSelect from "../StatusSelect"
 import { ElementType } from "@/types/typeTopic"
 
@@ -15,16 +14,19 @@ interface ButtonCardProps {
     id: string;
 }
 
-const cardStyles = {
-    ...theme.customStyles.cardBody,
-    WebkitLineClamp: 4
-}
 
 export const ButtonCard: React.FC<ButtonCardProps> = ({ title, description, route, id }) => {
     const router = useRouter()
+    const theme = useTheme();
     const handleClick = (route: string) => {
         router.push(`/${route}`)
     }
+    
+    const cardStyles = {
+        ...theme.customStyles.cardBody,
+        WebkitLineClamp: 4
+    }
+
     return (
         <Card sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', ...theme.customStyles.cardButtonContainer }}>
             <CardActionArea onClick={() => handleClick(route)} sx={{ flexGrow: 1 }}>

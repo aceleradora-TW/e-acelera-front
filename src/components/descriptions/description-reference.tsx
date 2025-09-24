@@ -1,6 +1,5 @@
 import React from "react";
-import { Grid, Link } from "@mui/material";
-import { theme } from "@/app/config/themes";
+import { Grid, Link, useTheme } from "@mui/material";
 import { MarkdownRenderer } from "@/components/UI/markdown-renderer";
 
 interface DescriptionReferenceProps {
@@ -10,6 +9,7 @@ interface DescriptionReferenceProps {
 export const DescriptionReference: React.FC<DescriptionReferenceProps> = ({
   text,
 }) => {
+  const theme = useTheme();
   const components = {
     a: (props: React.HTMLAttributes<HTMLAnchorElement>) => (
       <Link

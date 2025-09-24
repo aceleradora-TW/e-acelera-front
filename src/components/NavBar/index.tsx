@@ -2,8 +2,8 @@
 import AppBar from "@mui/material/AppBar"
 import Toolbar from "@mui/material/Toolbar"
 import Container from "@mui/material/Container"
-import { Box } from "@mui/material"
-import { theme } from "@/app/config/themes"
+import { Box, useTheme } from "@mui/material"
+
 import { MobileMenu } from "./MobileNavBar"
 import { WebMenu } from "./WebNavBar"
 import { Session } from "next-auth"
@@ -13,7 +13,9 @@ interface NavBarProps {
   session: Session | null
 }
 
-const ResponsiveAppBar: React.FC<NavBarProps> = ({ list, session }) => (
+const ResponsiveAppBar: React.FC<NavBarProps> = ({ list, session }) => {
+  const theme = useTheme();
+  return (
     <AppBar
       position="fixed"
       sx={{ backgroundColor: theme.palette.bgColor?.main}}
@@ -31,6 +33,7 @@ const ResponsiveAppBar: React.FC<NavBarProps> = ({ list, session }) => (
       </Box>
     </AppBar>
   )
+}
 
 
 export default ResponsiveAppBar

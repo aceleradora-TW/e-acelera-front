@@ -2,10 +2,10 @@ import * as React from "react"
 import Box from "@mui/material/Box"
 import Typography from "@mui/material/Typography"
 import Modal from "@mui/material/Modal"
-import { theme } from "@/app/config/themes"
 import { ClickButton } from "@/components/ClickButton"
 import { ExclamationComponent } from "@/components/ExclamationComponent"
 import { useRouter } from "next/navigation"
+import { useTheme } from "@mui/material"
 
 interface LoginWarningModalProps {
   status: string,
@@ -25,6 +25,8 @@ export const LoginWarningModal: React.FC<LoginWarningModalProps> = ({status, ope
     const currentUrl = encodeURIComponent(window.location.href)
     router.push(`/login?callbackUrl=${currentUrl}`)
   }
+
+  const theme = useTheme();
 
   return (
       <Modal

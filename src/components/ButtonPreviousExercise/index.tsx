@@ -1,12 +1,11 @@
-import { theme } from "@/app/config/themes"
-import { Button, ButtonProps, Stack, styled } from "@mui/material"
+import { Button, ButtonProps, Stack, styled, useTheme } from "@mui/material"
 import { usePathname, useRouter } from "next/navigation"
 import { ApiResponse, CommonField, DataItem, TopicField } from "@/types/type"
 import { ClickButton } from "../ClickButton"
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos"
 import useMediaQuery from "@mui/material/useMediaQuery"
 
-const ButtonFail = styled(Button)<ButtonProps>(() => ({
+const ButtonFail = styled(Button)<ButtonProps>(({ theme }) => ({
   "&:hover": {
     backgroundColor: "gray",
     color: theme.palette.buttonHover?.contrastText,
@@ -14,7 +13,9 @@ const ButtonFail = styled(Button)<ButtonProps>(() => ({
   }
 }))
 
-const ContainerButtonFail = ({ isVisible }: { isVisible: boolean }) => (
+const ContainerButtonFail = ({ isVisible }: { isVisible: boolean }) => {
+  const theme = useTheme();
+  return (
     <aside>
       <Stack spacing={2} direction="row">
         <ButtonFail
@@ -36,8 +37,7 @@ const ContainerButtonFail = ({ isVisible }: { isVisible: boolean }) => (
           <ArrowBackIosIcon sx={{ fontSize: 15, marginRight: 1 }} />
         </ButtonFail>
       </Stack>
-    </aside>
-  )
+    </aside>)}
 
 function isTopicField(field: CommonField): field is TopicField {
   return field && "exercisesInfo" in field;
@@ -54,7 +54,7 @@ export const ButtonPreviousExercise: React.FC<ButtonNextProps> = ({
 }) => {
   const router = useRouter()
   const pathname = usePathname()
-
+  const theme = useTheme();
   const isSmallScreen: boolean = useMediaQuery(theme.breakpoints.down("md"))
 
   if (!renderData) {

@@ -1,12 +1,11 @@
-import { theme } from "@/app/config/themes"
-import { Button, ButtonProps, Stack, styled } from "@mui/material"
+import { Button, ButtonProps, Stack, styled, useTheme } from "@mui/material"
 import { usePathname, useRouter } from 'next/navigation'
 import { ApiResponse, CommonField, DataItem, TopicField } from "@/types/type"
 import { ClickButton } from "../ClickButton"
 import useMediaQuery from '@mui/material/useMediaQuery'
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
 
-const ButtonFail = styled(Button)<ButtonProps>(() => ({
+const ButtonFail = styled(Button)<ButtonProps>(({ theme }) => ({
     "&:hover": {
         backgroundColor: "gray",
         color: theme.palette.buttonHover?.contrastText,
@@ -14,7 +13,9 @@ const ButtonFail = styled(Button)<ButtonProps>(() => ({
     }
 }))
 
-const ContainerButtonFail = ({ isVisible }: { isVisible: boolean }) => (
+const ContainerButtonFail = ({ isVisible }: { isVisible: boolean }) => {
+    const theme = useTheme();
+    return (
         <aside>
             <Stack spacing={2} direction="row">
                 <ButtonFail
@@ -36,7 +37,7 @@ const ContainerButtonFail = ({ isVisible }: { isVisible: boolean }) => (
                 </ButtonFail>
             </Stack>
         </aside>
-    )
+    )}
 
 
 function isTopicField(field: CommonField): field is TopicField {
@@ -51,7 +52,7 @@ interface ButtonNextProps {
 export const ButtonNextExercise: React.FC<ButtonNextProps> = ({ idExercise, renderData }) => {
     const router = useRouter()
     const pathname = usePathname()
-
+    const theme = useTheme()
     const isSmallScreen: boolean = useMediaQuery(theme.breakpoints.down('md'))
 
     if (!renderData) {

@@ -1,22 +1,26 @@
 "use client"
 import React from "react";
-import { theme } from "@/app/config/themes";
-import { Box, Container, Grid, Link, Typography } from "@mui/material";
+
+import { Box, Container, Grid, Link, Typography, useTheme } from "@mui/material";
 import { Language, LinkedIn} from "@mui/icons-material";
 import Image from "next/image";
+import { AccessibilityMenu } from "../AccessibilityMenu ";
 
 interface FooterProps {
   linkedinUrl: string;
   projectUrl: string;
 }
 
-export const Footer: React.FC<FooterProps> = ({ linkedinUrl, projectUrl }) => (
-    <Box
+export const Footer: React.FC<FooterProps> = ({ linkedinUrl, projectUrl }) => {
+  const theme = useTheme();
+  return (  
+  <Box
     component="footer"
     sx={{
         ...theme.customStyles.Footer,
       }}
     >
+      <AccessibilityMenu />
       <Container maxWidth="xl"  sx={{ pt: 4, pb: 1}}>
         <Grid container spacing={{xs: 4, md: 8}}>
           <Grid item
@@ -141,4 +145,4 @@ export const Footer: React.FC<FooterProps> = ({ linkedinUrl, projectUrl }) => (
         </Box>
       </Container>
     </Box>
-  );
+  )};

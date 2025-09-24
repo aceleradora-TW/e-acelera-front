@@ -2,16 +2,20 @@ import * as React from "react"
 import Box from "@mui/material/Box"
 import Typography from "@mui/material/Typography"
 import Modal from "@mui/material/Modal"
-import { theme } from "@/app/config/themes"
 import { ClickButton } from "@/components/ClickButton"
 import { ExclamationComponent } from "@/components/ExclamationComponent"
+import { useTheme } from "@mui/material"
 
 interface ErrorUpdateStatusModalProps {
   open: boolean,
   handleClose: () => void
 }
 
-export const ErrorUpdateStatusModal: React.FC<ErrorUpdateStatusModalProps> = ({ open, handleClose }) => (
+export const ErrorUpdateStatusModal: React.FC<ErrorUpdateStatusModalProps> = ({ open, handleClose }) => {
+
+  const theme = useTheme();
+
+  return (
     <Modal
       open={open}
       onClose={handleClose}
@@ -34,4 +38,4 @@ export const ErrorUpdateStatusModal: React.FC<ErrorUpdateStatusModalProps> = ({ 
         </Box>
       </Box>
     </Modal>
-  )
+  )}

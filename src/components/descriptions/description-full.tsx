@@ -1,5 +1,4 @@
-import { Grid} from "@mui/material";
-import { theme } from "@/app/config/themes";
+import { Grid, useTheme} from "@mui/material";
 import { MarkdownRenderer } from "@/components/UI/markdown-renderer";
 import {components} from "./defs/description-full.defs";
 
@@ -7,8 +6,9 @@ interface DescriptionFullProps {
   text: string;
 }
 
-export const DescriptionFull: React.FC<DescriptionFullProps> = ({ text }) => (
-    <Grid
+export const DescriptionFull: React.FC<DescriptionFullProps> = ({ text }) => {
+  const theme = useTheme();
+    return (<Grid
       container
       alignItems="stretch"
       sx={{ ...theme.customStyles.description, height: "100%" }}
@@ -22,4 +22,4 @@ export const DescriptionFull: React.FC<DescriptionFullProps> = ({ text }) => (
 
       </Grid>
     </Grid>
-  );
+  )};

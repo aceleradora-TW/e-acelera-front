@@ -1,4 +1,3 @@
-import { theme } from "@/app/config/themes"
 import { LoginButton } from "@/components/LoginButton"
 import {
   Avatar,
@@ -10,6 +9,7 @@ import {
   MenuItem,
   Tooltip,
   Typography,
+  useTheme,
 } from "@mui/material"
 import Image from "next/image"
 import { usePathname, useRouter } from "next/navigation"
@@ -25,6 +25,7 @@ interface WebMenuProps {
 }
 
 export const WebMenu: React.FC<WebMenuProps> = ({ list, session }) => {
+  const theme = useTheme();
   const router = useRouter()
   const pathname = usePathname()
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
@@ -42,7 +43,7 @@ export const WebMenu: React.FC<WebMenuProps> = ({ list, session }) => {
     router.push(`/login?callbackUrl=${currentUrl}`)
   }
 
-  const linkStyle = (item: string) => pathname.startsWith(`/${item.toLowerCase()}`) ? theme.customStyles.linkActive : theme.customStyles.link
+  const linkStyle = (item: string) => pathname.startsWith(`/${item.toLowerCase()}`) ? theme.customStyles?.linkActive : theme.customStyles?.link
 
   const renderComponent = () => {
     if (session?.user) {
@@ -80,12 +81,12 @@ export const WebMenu: React.FC<WebMenuProps> = ({ list, session }) => {
             }}
           >
             <MenuItem sx={{ cursor: "default" }}>
-              <Typography sx={{ color: theme.palette.textColor?.main }}>
+              <Typography variant="subtitle1" sx={{ color: theme.palette.textColor?.main }}>
                 {session.user.name || "Usuário"}
               </Typography>
             </MenuItem>
             <MenuItem sx={{ cursor: "default" }}>
-              <Typography sx={{ color: theme.palette.bgColor?.light }}>
+              <Typography variant="body2" sx={{ color: theme.palette.bgColor?.light }}>
                 {session.user.email || "email@example.com"}
               </Typography>
             </MenuItem>
@@ -94,7 +95,7 @@ export const WebMenu: React.FC<WebMenuProps> = ({ list, session }) => {
               <LogoutIcon
                 sx={{ color: theme.palette.bgColor?.light, fontSize: 15, marginRight: "7px" }}
               />
-              <Typography sx={{ color: theme.palette.textColor?.light }}>Sair</Typography>
+              <Typography variant="body2" sx={{ color: theme.palette.textColor?.light }}>Sair</Typography>
             </MenuItem>
           </Menu>
         </Box>
@@ -132,12 +133,15 @@ export const WebMenu: React.FC<WebMenuProps> = ({ list, session }) => {
         />
       </Box>
       <Typography
+        variant="h6"
         noWrap
         component="a"
         href="/"
         sx={{
           display: { xs: "none", md: "flex" },
-          ...theme.customStyles.logoType,
+          fontWeight: 700,
+          color: 'inherit',
+          textDecoration: 'none',
         }}
       >
         E-Acelera
@@ -159,10 +163,13 @@ export const WebMenu: React.FC<WebMenuProps> = ({ list, session }) => {
             href={item ? `/${item.toLowerCase()}` : `/`}
             underline="none"
             sx={{
-              ...linkStyle(item),
+              padding: '6px 8px',
+              margin: '0 8px',
+              color: 'white',
+              ...(linkStyle(item) || {}),
             }}
           >
-            {item}
+            <Typography variant="button">{item}</Typography>
           </Link>
         ))}
       </Box>

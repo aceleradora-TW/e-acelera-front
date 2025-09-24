@@ -1,20 +1,21 @@
-import { Typography, TypographyProps } from "@mui/material";
+import { Typography, TypographyProps, useTheme } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { ApiResponse, CommonField, DataItem, TopicField } from "@/types/type";
 import { usePathname } from "next/navigation";
-import { theme } from "@/app/config/themes";
 import { useMemo } from "react";
 
 function isTopicField(field: CommonField): field is TopicField {
   return field && "exercisesInfo" in field;
 }
 
+
+
 interface SequenceExercises {
   idExercises: string;
   data: ApiResponse;
 }
 
-const EvolutionComponent = styled(Typography)<TypographyProps>(() => ({
+const EvolutionComponent = styled(Typography)<TypographyProps>(({ theme }) => ({
   padding: "0.437rem 2rem",
   [theme.breakpoints.up("sm")]: {
     padding: "0.875rem 4rem",
@@ -22,6 +23,7 @@ const EvolutionComponent = styled(Typography)<TypographyProps>(() => ({
 }));
 
 export const AdvanceExercises: React.FC<SequenceExercises> = ({ idExercises, data }) => {
+  const theme = useTheme();
   const pathname = usePathname();
 
   const validPathname = typeof pathname === 'string' ? pathname : '';

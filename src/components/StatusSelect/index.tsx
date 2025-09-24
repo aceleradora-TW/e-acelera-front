@@ -5,13 +5,13 @@ import MenuItem from "@mui/material/MenuItem"
 import FormControl from "@mui/material/FormControl"
 import Select from "@mui/material/Select"
 import { SelectChangeEvent } from "@mui/material/Select"
-import { theme } from "@/app/config/themes"
 import { useSession } from "next-auth/react"
 import { usePathname } from "next/navigation"
 import { useStatus } from "@/components/fetchStatus/fetchStatusExercise"
 import { LoginWarningModal } from "../Modals/LoginWarningModal"
 import { ElementType } from "@/types/typeTopic"
 import { useGlobalContext } from "@/hooks/useGlobalContext"
+import { useTheme } from "@mui/material"
 
 interface StatusSelectProps {
   width?: "30%" | "70%" | "100%";
@@ -31,7 +31,7 @@ export default function StatusSelect({
   const statusSelectRef = React.useRef<HTMLDivElement>(null);
   const { topicStatus, triggerProgressUpdate } = useGlobalContext();
   const pathname = usePathname();
-
+  const theme = useTheme();
   const currentStatusTopic = topicStatus?.status?.find((s) => s.itemId === id);
 
   React.useEffect(() => {

@@ -1,5 +1,5 @@
-import { theme } from "@/app/config/themes";
-import { Box, Grid, useMediaQuery } from "@mui/material";
+
+import { Box, Grid, useMediaQuery, useTheme } from "@mui/material";
 import React from "react";
 
 interface LayoutPageProps {
@@ -7,6 +7,7 @@ interface LayoutPageProps {
 }
 
 export const LayoutPage: React.FC<LayoutPageProps> = ({ children }) => {
+  const theme = useTheme();
   let padding = 0
   const xs = useMediaQuery('(min-width: 0px) and (max-width: 599px)');
   const sm = useMediaQuery('(min-width: 600px) and (max-width: 899px)');

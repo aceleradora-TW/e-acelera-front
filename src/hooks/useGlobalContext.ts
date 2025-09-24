@@ -6,5 +6,6 @@ export const useGlobalContext = () => {
   if(!context) {
     throw new Error("useGlobalContext hook must be used within a GlobalContextProvider");
   }
+
   return context;
 }

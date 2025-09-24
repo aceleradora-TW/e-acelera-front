@@ -1,11 +1,11 @@
-import { theme } from "@/app/config/themes"
 import {
   Box,
   IconButton,
   Link,
   Menu,
   MenuItem,
-  Typography
+  Typography,
+  useTheme
 } from "@mui/material"
 import MenuIcon from "@mui/icons-material/Menu"
 import Image from "next/image"
@@ -17,6 +17,7 @@ interface MobileMenuProps {
 export const MobileMenu: React.FC<MobileMenuProps> = ({ list }) => {
   const [anchorNav, setAnchorNav] = React.useState<null | HTMLElement>(null)
   const [anchorUser, setAnchorUser] = React.useState<null | HTMLElement>(null)
+  const theme = useTheme();
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorNav(event.currentTarget)

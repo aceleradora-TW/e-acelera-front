@@ -1,4 +1,4 @@
-import { type ReactNode, createContext, useContext, useState } from "react";
+import { type ReactNode, createContext, useState } from "react";
 import { ApiTopic } from "@/types/typeTopic";
 
 type GlobalContextDefs = {
