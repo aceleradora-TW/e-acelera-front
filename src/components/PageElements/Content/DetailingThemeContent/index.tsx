@@ -1,9 +1,10 @@
 import React from "react";
 import { Box, Grid } from "@mui/material";
 import { BreadCrumb } from "@/components/BreadCrumb";
-import { ContainerCardTopics } from "../../Container/ContainerCardsTopics";
+//import { ContainerCardTopics } from "../../Container/ContainerCardsTopics";
+import { ContainerCardTopics } from "@/components/PageElements/Container/ContainerCardsTopics";
 import { ApiResponse, DataItem, IdType, ThemeField } from "@/types/type";
-import { DescriptionDivider } from "../../../Description/DescriptionDivider";
+import { DescriptionDivider } from "@/components/descriptions/description-divider";
 import { Heading } from "@/components/Heading";
 import ProgressBar from "../../Progress/ProgressBar";
 import { useFetchProgress } from "@/components/fetchProgress";
@@ -12,10 +13,9 @@ import { useFetchProgress } from "@/components/fetchProgress";
 
 interface DetailingContentProps {
   data: ApiResponse;
-  id: string;
 }
 const ThemeContent: React.FC<{ field: ThemeField }> = ({ field }) => {
-  const { progress: fetchedProgress } = useFetchProgress(field.rowId,IdType.THEME_ID);
+  const { progress: fetchedProgress } = useFetchProgress(field.rowId, IdType.THEME_ID);
 
   return (
   <>
@@ -47,12 +47,11 @@ const ThemeContent: React.FC<{ field: ThemeField }> = ({ field }) => {
   </>
 )};
 
-export const DetailingThemeContent: React.FC<DetailingContentProps> = ({ data, id }) => {
-  const filteredData = data?.data.filter((element: DataItem) => element.id === id.split("-")[0])[0];
-
+export const DetailingThemeContent: React.FC<DetailingContentProps> = ({ data }) => {
+  const [ themeData ] = data?.data;
   return (
     <>
-      <ThemeContent key={filteredData.id} field={filteredData.field as ThemeField} />
+      <ThemeContent key={themeData.id} field={themeData.field as ThemeField} />
     </>
   );
 };

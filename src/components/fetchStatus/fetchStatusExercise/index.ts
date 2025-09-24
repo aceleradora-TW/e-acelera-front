@@ -58,7 +58,7 @@ export const useStatus = ({ themeId, topicId, itemId }: UseStatusProps) => {
 
       if (!response.ok) throw new Error(`Erro ${response.status}`);
 
-      setStatus(newStatus); 
+      setStatus(newStatus);
       setHasError(false);
       return true;
 

@@ -1,6 +1,6 @@
-import { DescriptionDivider } from "@/components/Description/DescriptionDivider"
+import { DescriptionDivider } from "@/components/descriptions/description-divider"
 import { render, screen } from "@testing-library/react"
-import { DescriptionFull } from "../DescriptionFull"
+import { DescriptionFull } from "./description-full"
 
 jest.mock("@mui/material", () => ({
   ...jest.requireActual("@mui/material"),

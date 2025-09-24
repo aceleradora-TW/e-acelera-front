@@ -2,9 +2,9 @@ import React, { useEffect } from "react"
 import { Grid } from "@mui/material"
 import { BreadCrumb } from "@/components/BreadCrumb"
 import { ApiResponse, DataItem, IdType, TopicField } from "@/types/type"
-import { DescriptionReference } from "@/components/Description/DescriptionReference"
+import { DescriptionReference } from "@/components/descriptions/description-reference"
 import { ContainerCardsExercises } from "../../Container/ContainerCardsExercises"
-import { DescriptionWithVideo } from "@/components/Description/DescriptionWithVideo"
+import { DescriptionWithVideo } from "@/components/descriptions/description-with-video"
 import { Heading } from "@/components/Heading"
 import ProgressBar from "@/components/PageElements/Progress/ProgressBar"
 import { useGlobalContext } from "@/hooks/useGlobalContext"
@@ -21,12 +21,7 @@ interface TopicContentProps {
   topicProgress: number
 }
 
-const TopicContent: React.FC<TopicContentProps> = ({ field, topicProgress }) => {
-  const totalItems =
-    (field.videoInfo ? 1 : 0) +
-    (field.exercisesInfo?.split(",").filter(Boolean).length || 0)
-
-  return (
+const TopicContent: React.FC<TopicContentProps> = ({ field, topicProgress }) => (
     <>
       <Grid item xl={12} lg={9} md={6} sm={3}>
         <BreadCrumb />
@@ -69,7 +64,6 @@ const TopicContent: React.FC<TopicContentProps> = ({ field, topicProgress }) => 
       )}
     </>
   )
-}
 
 export const DetailingTopicContent: React.FC<DetailingContentProps> = ({
   data,
@@ -79,23 +73,16 @@ export const DetailingTopicContent: React.FC<DetailingContentProps> = ({
   const { dataStatus } = useFetchTopicStatus(id)
   const { handleTopicStatus } = useGlobalContext();
 
-  const filteredData = data?.data.filter(
-    (element: DataItem) => element.id === id.split("-")[0]
-  )
+  const [ topicData ] = data?.data;
 
   useEffect(() => {
       handleTopicStatus(dataStatus)
   }, [dataStatus, handleTopicStatus])
 
   return (
-    <>
-      {filteredData.map((element: DataItem) => (
-        <TopicContent
-          key={element.id}
-          field={element.field as TopicField}
-          topicProgress={topicProgress}
-        />
-      ))}
-    </>
+    <TopicContent
+      field={topicData.field as TopicField}
+      topicProgress={topicProgress}
+    />
   )
 }
