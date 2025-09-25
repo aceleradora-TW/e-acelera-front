@@ -12,6 +12,9 @@ const config = {
   transformIgnorePatterns: [
     "node_modules/(?!(react-markdown|unified|remark-parse|remark-rehype|rehype-parse|rehype-stringify)/)"
   ],
+  moduleNameMapper: {
+    "^@/(.*)$": "<rootDir>/src/$1"
+  },
 };
 
 export default createJestConfig(config);

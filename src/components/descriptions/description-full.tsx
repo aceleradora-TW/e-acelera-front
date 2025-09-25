@@ -1,4 +1,5 @@
-import { Grid, useTheme} from "@mui/material";
+import { Grid } from "@mui/material";
+import { useTheme } from "@mui/material/styles";
 import { MarkdownRenderer } from "@/components/UI/markdown-renderer";
 import {components} from "./defs/description-full.defs";
 

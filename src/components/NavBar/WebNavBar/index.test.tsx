@@ -1,5 +1,6 @@
 import '@testing-library/jest-dom'
-import { render, screen } from '@testing-library/react'
+import '@/test/setup/theme-mock'
+import { cleanup, render, screen } from '@testing-library/react'
 import { WebMenu } from '@/components/NavBar/WebNavBar'
 import { useSession } from 'next-auth/react'
 
@@ -18,33 +19,46 @@ jest.mock('next/navigation', () => ({
 }))
 
 describe('Testes do botão de Login do componente WebMenu', () => {
-  beforeEach(() => {
-    jest.clearAllMocks()
-  })
+  const mockRouter = { push: jest.fn() };
+  
+  beforeAll(() => {
+    jest.clearAllMocks();
+    (useSession as jest.Mock).mockReset();
+  });
 
-  it('Deve mostrar o botão de login quando não houver sessão', () => {
-    (useSession as jest.Mock).mockReturnValue({ data: null })
+  afterEach(() => {
+    cleanup();
+    jest.clearAllMocks();
+    (useSession as jest.Mock).mockReset();
+    mockRouter.push.mockReset();
+  });
 
-    render(<WebMenu list={['Nivelamento', 'Autoestudo']} session={null} />)
+  afterAll(() => {
+    jest.restoreAllMocks();
+    jest.resetModules();
+  });
+
+  it('Deve mostrar o botão de login quando não houver sessão', async () => {
+    (useSession as jest.Mock).mockReturnValue({ data: null });
+
+    render(<WebMenu list={['Nivelamento', 'Autoestudo']} session={null} />);
     
-    const loginButton = screen.getByRole('button', { name: /login/i })
-    expect(loginButton).toBeInTheDocument()
-  })
+    const loginButton = await screen.findByRole('button', { name: /login/i });
+    expect(loginButton).toBeInTheDocument();
+  });
 
-  it('Não deve mostrar o botão de login quando houver sessão', () => {
-    (useSession as jest.Mock).mockReturnValue({ 
-      data: { 
-        user: { image: 'url-da-imagem', name: 'Usuário Teste' },
-        expires: '2025-01-01T00:00:00Z'
-      } 
-    })
-
-    render(<WebMenu list={['Nivelamento', 'Autoestudo']} session={{ 
-      user: { image: 'url-da-imagem', name: 'Usuário Teste' }, 
+  it('Não deve mostrar o botão de login quando houver sessão', async () => {
+    const sessionData = {
+      user: { image: 'url-da-imagem', name: 'Usuário Teste' },
       expires: '2025-01-01T00:00:00Z'
-    }} />)
+    };
+
+    (useSession as jest.Mock).mockReturnValue({ data: sessionData });
+
+    render(<WebMenu list={['Nivelamento', 'Autoestudo']} session={sessionData} />);
     
-    const loginButton = screen.queryByRole('button', { name: /login/i })
-    expect(loginButton).not.toBeInTheDocument()
-  })
-})
+    await expect(async () => {
+      await screen.findByRole('button', { name: /login/i }, { timeout: 1000 })
+    }).rejects.toThrow();
+  });
+});

@@ -1,9 +1,10 @@
 import React from "react";
 import { Box, Divider, useMediaQuery } from "@mui/material";
-import { theme } from "@/app/config/themes";
 import { DescriptionFull } from "./description-full";
 import { MarkdownRenderer } from "@/components/UI/markdown-renderer";
 import components from "./defs/description-divider.defs";
+import { useTheme } from "@mui/material/styles";
+
 interface DescriptionDividerProps {
   text: string
 }
@@ -12,8 +13,8 @@ const boxStyle: object = {
   width: "49%" 
 }
 
-
 export const DescriptionDivider: React.FC<DescriptionDividerProps> = ({ text }) => {
+  const theme = useTheme();
 
   function textDivider(text: string): [string, string] {
     let breakPoint = Math.floor((2 * text.length) / 3)
@@ -38,7 +39,6 @@ export const DescriptionDivider: React.FC<DescriptionDividerProps> = ({ text }) 
 
     return [firstPart, secondPart]
   }
-
 
   const textDividerArray: string[] = textDivider(text)
   const isSmallScreen: boolean = useMediaQuery(theme.breakpoints.down('md'))
