@@ -14,6 +14,12 @@ export const RenderThemePage = (category: string) => {
                 value: category,
             },
     });
+
+    // // gitHubApi
+    // const {data: gitHubData }= useFetchData(`/api/backend/poc-github-api`);
+    // console.log(gitHubData);
+    //
+
     if (loading) {
         return <Loading />
     }
@@ -31,3 +37,4 @@ export const RenderThemePage = (category: string) => {
         </GlobalContextProvider>
     )
 }
+
