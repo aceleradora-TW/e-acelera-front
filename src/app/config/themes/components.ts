@@ -249,5 +249,24 @@ export const customStyles: Theme = {
     boxShadow: 24,
     p: 4,
     textAlign: "center"
-  }
+  },
+  formControl: {
+    width: "100%",
+    "& .MuiInputLabel-root": {
+      color: "#000000",
+    },
+    "& .MuiInputLabel-root.Mui-focused": {
+      color: "#000000",
+    },
+    "& .MuiOutlinedInput-notchedOutline": {
+      borderColor: "#000000",
+      borderRadius: "5px",
+    },
+    "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline": {
+      border: `1px solid #000000`,
+    },
+    "& .MuiOutlinedInput-root": {
+      height: "40px",
+    },
+ },
 }

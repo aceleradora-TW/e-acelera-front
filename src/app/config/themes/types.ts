@@ -28,6 +28,7 @@ export interface Theme {
   cardVideoSelect: ExtendedCSSProperties
   cardVideoDescription: ExtendedCSSProperties
   advanceExercises: ExtendedCSSProperties
+  formControl: ExtendedCSSProperties
   cardMediaImage: ExtendedCSSProperties
   cardLoginBox: {
     width: {

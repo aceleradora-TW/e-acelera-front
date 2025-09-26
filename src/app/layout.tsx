@@ -6,6 +6,7 @@ import { Box } from "@mui/material"
 import { getServerSession } from "next-auth"
 import ClientSessionProvider from "@/components/ClientSessionProvider"
 import { ThemeConfig } from "./config/themes"
+import { HighContrastProvider } from '@/components/contrastButton';
 
 const menuItems = ["Nivelamento", "Autoestudo"]
 
@@ -29,10 +30,12 @@ export default async function RootLayout({
       <body className={inter.className}>
         <ThemeConfig>
           <ClientSessionProvider>
-              <Box sx={{ marginBottom: "80px" }}>
-                <ResponsiveAppBar list={menuItems} session={session} />
-              </Box>
-              {children}
+              <HighContrastProvider>
+                <Box sx={{ marginBottom: "80px" }}>
+                  <ResponsiveAppBar list={menuItems} session={session} />
+                </Box>
+                {children}
+              </HighContrastProvider>
           </ClientSessionProvider>
         </ThemeConfig>
       </body>

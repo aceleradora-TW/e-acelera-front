@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Alert, Box, Grid, Link, Snackbar, Typography } from "@mui/material";
+import { Alert, Box, Grid, Link, Snackbar, Typography, useTheme } from "@mui/material";
 import { theme } from "@/app/config/themes";
 import ReactMarkdown from "react-markdown";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
@@ -15,6 +15,7 @@ export const DescriptionFull: React.FC<DescriptionFullProps> = ({
   text,
 }) => {
   const [copySuccess, setCopySuccess] = useState(false);
+  const muiTheme = useTheme();
 
   const handleCopy = (code: string) => {
     navigator.clipboard.writeText(code).then(() => {
@@ -95,7 +96,8 @@ export const DescriptionFull: React.FC<DescriptionFullProps> = ({
           component="span"
           sx={{
             fontFamily: "monospace",
-            backgroundColor: "#f5f5f5",
+            backgroundColor: muiTheme.palette.mode === 'dark' ? '#555555' : '#f5f5f5',
+            color: muiTheme.palette.mode === 'dark' ? '#FFFFFF' : 'inherit',
             padding: "2px 4px",
             borderRadius: "4px",
             wordBreak: "break-word",

@@ -1,3 +1,4 @@
+'use client';
 import { theme } from "@/app/config/themes"
 import { LoginButton } from "@/components/LoginButton"
 import {
@@ -18,6 +19,7 @@ import { signOut } from "next-auth/react"
 import { useState } from "react"
 import LogoutIcon from "@mui/icons-material/Logout"
 import { Session } from "next-auth"
+import ContrastButton from "@/components/contrastButton";
 
 interface WebMenuProps {
   list: string[]
@@ -52,8 +54,10 @@ export const WebMenu: React.FC<WebMenuProps> = ({ list, session }) => {
             marginLeft: "auto",
             display: "flex",
             alignItems: "center",
+            gap: 2,
           }}
         >
+          <ContrastButton />
           <Tooltip title="Perfil">
             <IconButton onClick={handleOpenMenu} sx={{ p: 0, color: theme.palette.bgColor?.light }}>
               <Avatar
@@ -108,8 +112,10 @@ export const WebMenu: React.FC<WebMenuProps> = ({ list, session }) => {
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
+          gap: 2,
         }}
       >
+        <ContrastButton />
         <LoginButton click={() => handlePageRedirectLogin()} />
       </Box>
     )
