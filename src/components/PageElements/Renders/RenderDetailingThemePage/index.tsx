@@ -24,7 +24,7 @@ export const RenderDetailingThemePage = (id: string)=> {
   }
   return (
     <LayoutPage>
-      <DetailingThemeContent data={renderData} />
+      <DetailingThemeContent data={renderData} id={id} />
     </LayoutPage>
   );
 
