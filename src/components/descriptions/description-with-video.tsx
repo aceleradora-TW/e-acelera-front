@@ -1,7 +1,7 @@
 import React from "react"
 import { Grid } from "@mui/material"
 import { CardVideo } from "@/components/CardVideo"
-import { DescriptionFull } from "../DescriptionFull"
+import { DescriptionFull } from "./description-full"
 
 interface DescriptionWithVideoProps {
   textDescription: string
