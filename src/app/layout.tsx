@@ -1,3 +1,5 @@
+
+
 import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import "./globals.css"
@@ -7,6 +9,8 @@ import { getServerSession } from "next-auth"
 import ClientSessionProvider from "@/components/ClientSessionProvider"
 import { ThemeConfig } from "./config/themes"
 import { Footer } from "@/components/Footer/Footer"
+import { AcessibilidadeProvider } from "@/context/accessibility.context"
+import Mascara from "@/components/mascara-de-acessibilidade"
 
 const menuItems = ["Nivelamento", "Autoestudo"]
 
@@ -29,7 +33,9 @@ export default async function RootLayout({
     <html lang="pt-br">
       <body className={inter.className}>
         <ThemeConfig>
+          
           <ClientSessionProvider>
+            <AcessibilidadeProvider>
               <Box
                 sx={{
                 minHeight: "100vh",
@@ -47,7 +53,11 @@ export default async function RootLayout({
                   linkedinUrl={"https://www.linkedin.com/school/aceleradora-%C3%A1gil/?originalSubdomain=br"} 
                   projectUrl={"https://www.thoughtworks.com/pt-br/about-us/diversity-and-inclusion/aceleradora"} />
               </Box>
+              <Mascara />
+              </AcessibilidadeProvider>
           </ClientSessionProvider>
+          
+         
         </ThemeConfig>
       </body>
     </html>
