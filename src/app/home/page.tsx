@@ -15,12 +15,14 @@ export default function Home() {
         display: "flex",
         alignItems: "center",
         justifyContent: {
-          sm: "start", lg: "center"},
+          sm: "start",
+          lg: "center",
+        },
         gap: 4,
         height: "100%",
         minHeight: 542,
         flexWrap: { xs: "wrap", lg: "nowrap" },
-        padding: 4
+        padding: 4,
       }}
     >
       <Box
@@ -53,7 +55,7 @@ export default function Home() {
               sx={{
                 width: "100%",
                 display: "flex",
-                justifyContent:"space-between",
+                justifyContent: "space-between",
                 flexWrap: "wrap",
                 gap: 2,
               }}
@@ -76,11 +78,12 @@ export default function Home() {
               <Link
                 target="_blank"
                 rel="noopener noreferrer"
-                href={"https://aceleradora-inclusiva.netlify.app/"}>
+                href={"https://aceleradora-inclusiva.netlify.app/"}
+              >
                 Aceleradora Inclusiva
               </Link>
               , iniciativa parceira. Quer entender melhor como tudo funciona?
-              Explore o {" "}
+              Explore o{" "}
               <Link
                 target="_blank"
                 rel="noopener noreferrer"
@@ -88,9 +91,8 @@ export default function Home() {
                   "https://www.thoughtworks.com/content/dam/thoughtworks/documents/e-book/tw_ebook_aceleradora_portuguese.pdf"
                 }
               >
-                e-book da Aceleradora Ágil
-              </Link>{" "}
-              e Inclusiva.
+                e-book da Aceleradora Ágil e Inclusiva.
+              </Link>
             </Typography>
           </Box>
           <Box>
