@@ -60,8 +60,7 @@ export const HomeBanner = () => {
       >
         <Box
           sx={{
-            marginRight: { xs: "0", md: "-120px" },
-            marginTop: { xs: "-100px", md: "0" },
+            margin: { xs: "-100px 0 0 0", md: "0 -120px 0 0" },
             paddingRight: "0",
           }}
         >
