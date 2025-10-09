@@ -67,6 +67,7 @@ export interface Theme {
     height: string
     boxShadow: string
   }
+  impactSection: ExtendedCSSProperties
   styleExclamation: ExtendedCSSProperties
   styleModal : ExtendedCSSProperties
 }
