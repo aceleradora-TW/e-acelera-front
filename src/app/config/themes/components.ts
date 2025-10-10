@@ -261,8 +261,7 @@ export const customStyles: Theme = {
     background: themePalette.button, 
     color: themePalette.baseBgColor,
     textAlign: 'center',
-  }
-}
+  },
   banner: {
     container: {
       display: "flex",
@@ -282,4 +281,5 @@ export const customStyles: Theme = {
       backgroundSize: "cover",
     },
   },
-};
+}
+
