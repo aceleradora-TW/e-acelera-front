@@ -257,4 +257,14 @@ export const customStyles: Theme = {
     height: "30%",
     boxShadow: "0 0 0.6em rgba(44 44 44 / 75%)",
   },
+  impactSection: {
+    background: themePalette.button, 
+    color: themePalette.baseBgColor,
+    textAlign: 'center',
+  },
+  sponsorsSection: {
+    background: themePalette.button, 
+    color: themePalette.baseBgColor,
+    textAlign: 'center',
+  },
 }

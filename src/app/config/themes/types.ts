@@ -69,4 +69,6 @@ export interface Theme {
   }
   styleExclamation: ExtendedCSSProperties
   styleModal : ExtendedCSSProperties
+  impactSection: ExtendedCSSProperties
+  sponsorsSection: ExtendedCSSProperties
 }
