@@ -61,14 +61,15 @@ export interface Theme {
     marginBottom: string;
   };
   Footer: {
-    background: string;
-    color: string;
-    mt: number;
-    height: string;
-    boxShadow: string;
-  };
-  styleExclamation: ExtendedCSSProperties;
-  styleModal: ExtendedCSSProperties;
+    background: string
+    color: string
+    mt: number
+    height: string
+    boxShadow: string
+  }
+  impactSection: ExtendedCSSProperties
+  styleExclamation: ExtendedCSSProperties
+  styleModal : ExtendedCSSProperties,
   banner: {
     container: ExtendedCSSProperties;
     contentBox: ExtendedCSSProperties;
