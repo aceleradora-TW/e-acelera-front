@@ -258,9 +258,9 @@ export const customStyles: Theme = {
     boxShadow: "0 0 0.6em rgba(44 44 44 / 75%)",
   },
   impactSection: {
-    background: themePalette.button, 
+    background: themePalette.button,
     color: themePalette.baseBgColor,
-    textAlign: 'center',
+    textAlign: "center",
   },
   banner: {
     container: {
@@ -281,5 +281,9 @@ export const customStyles: Theme = {
       backgroundSize: "cover",
     },
   },
-}
-
+  sponsorsSection: {
+    background: themePalette.button,
+    color: themePalette.baseBgColor,
+    textAlign: "center",
+  },
+};
