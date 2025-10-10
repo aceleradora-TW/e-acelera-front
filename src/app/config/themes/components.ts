@@ -13,7 +13,7 @@ export const customStyles: Theme = {
     textTransform: "uppercase",
     padding: "8px 16px",
     borderRadius: 2,
-    border: 1
+    border: 1,
   },
   description: {
     display: "flex",
@@ -21,7 +21,7 @@ export const customStyles: Theme = {
     padding: "0px 16px 16px 16px",
     boxShadow: "0em 0em 0.4em rgb(44 44 44 / 40% )",
     borderRadius: "6px",
-    margin: 0
+    margin: 0,
   },
   linkActive: {
     borderBottom: "solid",
@@ -37,9 +37,9 @@ export const customStyles: Theme = {
     margin: "0 0.5rem",
     padding: "8px",
     "&:hover": {
-      backgroundColor: "rgb(246, 250, 253)"
+      backgroundColor: "rgb(246, 250, 253)",
     },
-    borderRadius: "0"
+    borderRadius: "0",
   },
   link: {
     color: themePalette.defaultTextColor,
@@ -52,12 +52,12 @@ export const customStyles: Theme = {
     margin: "0 0.8rem",
     padding: "8px",
     "&:hover": {
-      backgroundColor: "rgb(246, 250, 253)"
+      backgroundColor: "rgb(246, 250, 253)",
     },
-    borderRadius: "0"
+    borderRadius: "0",
   },
   linkReference: {
-    color: themePalette.defaultTextColor
+    color: themePalette.defaultTextColor,
   },
   logoType: {
     fontSize: "1.2rem",
@@ -66,7 +66,7 @@ export const customStyles: Theme = {
     letterSpacing: "0.15px",
     lineHeight: 1.6,
     textDecoration: "none",
-    color: themePalette.primaryTextColor
+    color: themePalette.primaryTextColor,
   },
   logoTypeLogin: {
     fontSize: "2.125rem",
@@ -74,7 +74,7 @@ export const customStyles: Theme = {
     letterSpacing: "0.25px",
     lineHeight: 1.2,
     textDecoration: "none",
-    color: themePalette.primaryTextColor
+    color: themePalette.primaryTextColor,
   },
   cardBody: {
     color: themePalette.defaultTextColor,
@@ -83,7 +83,7 @@ export const customStyles: Theme = {
     WebkitBoxOrient: "vertical",
     WebkitLineClamp: 1,
     overflow: "hidden",
-    textOverflow: "ellipsis"
+    textOverflow: "ellipsis",
   },
   cardContainer: {
     display: "flex",
@@ -92,7 +92,7 @@ export const customStyles: Theme = {
     backgroundColor: themePalette.baseBgColor,
     maxWidth: "100%",
     height: "100%",
-    borderWidth: 2
+    borderWidth: 2,
   },
   cardButtonContainer: {
     backgroundColor: themePalette.baseBgColor,
@@ -100,28 +100,28 @@ export const customStyles: Theme = {
     borderWidth: 2,
     height: "100%",
     "&:hover": {
-      transform: "scale(1.1)"
-    }
+      transform: "scale(1.1)",
+    },
   },
   cardContent: {
-    height: "250px"
+    height: "250px",
   },
   cardButtonContent: {
     display: "flex",
     flexDirection: "column",
     alignItems: "flex-start",
-    height: "100%"
+    height: "100%",
   },
   centralizeContent: {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
     maxWidth: "1630px",
-    margin: "0 auto"
+    margin: "0 auto",
   },
   cardMedia: {
     height: 152,
-    marginBottom: 5.5
+    marginBottom: 5.5,
   },
   cardTitle: {
     color: themePalette.primaryTextColor,
@@ -130,7 +130,7 @@ export const customStyles: Theme = {
     WebkitLineClamp: 3,
     WebkitBoxOrient: "vertical",
     overflow: "hidden",
-    textOverflow: "ellipsis"
+    textOverflow: "ellipsis",
   },
   cardLoginBox: {
     width: {
@@ -138,22 +138,22 @@ export const customStyles: Theme = {
       sm: "60%",
       md: "45%",
       lg: "35%",
-      xl: "30%"
+      xl: "30%",
     },
     height: "30%",
     boxShadow: "0 0 0.4em rgba(44, 44, 44, 0.4)",
-    padding: "40px"
+    padding: "40px",
   },
   containerLogin: {
     height: "100%",
     display: "flex",
     justifyContent: "center",
-    marginTop: "80px"
+    marginTop: "80px",
   },
   boxLogoType: {
     display: "flex",
     gap: "20px",
-    alignItems: "center"
+    alignItems: "center",
   },
   h1Login: {
     fontSize: {
@@ -161,8 +161,8 @@ export const customStyles: Theme = {
       sm: "40px",
       md: "40px",
       lg: "44px",
-      xl: "48px"
-    }
+      xl: "48px",
+    },
   },
   body1Login: {
     fontSize: {
@@ -172,17 +172,17 @@ export const customStyles: Theme = {
       lg: "24px",
       xl: "24px",
     },
-    marginBottom: "15px"
+    marginBottom: "15px",
   },
   title: {
     textAlign: "left",
     color: themePalette.primaryTextColor,
-    margin: "20px 0"
+    margin: "20px 0",
   },
   breadCrumb: {
     textDecoration: "none",
     color: themePalette.primaryTextColor,
-    marginTop: 1.2
+    marginTop: 1.2,
   },
   cardVideo: {
     display: "flex",
@@ -193,41 +193,41 @@ export const customStyles: Theme = {
     maxWidth: "100%",
     height: "100%",
     boxSizing: "border-box",
-    borderRadius: "6px"
+    borderRadius: "6px",
   },
   cardVideoLink: {
     display: "flex",
     flexDirection: "column",
-    justifyContent: "center"
+    justifyContent: "center",
   },
   cardVideoNumber: {
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
-    marginTop: 4
+    marginTop: 4,
   },
   cardVideoSelect: {
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
-    marginTop: 7
+    marginTop: 7,
   },
   cardVideoDescription: {
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
     marginTop: 5,
-    marginRight: 1.3
+    marginRight: 1.3,
   },
   advanceExercises: {
     color: themePalette.button,
-    padding: "10px 20px"
+    padding: "10px 20px",
   },
   cardMediaImage: {
     maxWidth: "100%",
     height: "auto",
     display: "block",
-    objectFit: "cover"
+    objectFit: "cover",
   },
   styleExclamation: {
     height: "80px",
@@ -235,7 +235,7 @@ export const customStyles: Theme = {
     borderRadius: "50%",
     display: "flex",
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
   },
   styleModal: {
     position: "absolute",
@@ -248,7 +248,7 @@ export const customStyles: Theme = {
     borderRadius: "5px",
     boxShadow: 24,
     p: 4,
-    textAlign: "center"
+    textAlign: "center",
   },
   Footer: {
     background: themePalette.primaryTextColor,
@@ -257,4 +257,23 @@ export const customStyles: Theme = {
     height: "30%",
     boxShadow: "0 0 0.6em rgba(44 44 44 / 75%)",
   },
-}
+  banner: {
+    container: {
+      display: "flex",
+    },
+    contentBox: {
+      position: "relative",
+      zIndex: 2,
+      color: themePalette.baseBgColor,
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "center",
+    },
+    imageBox: {
+      flexGrow: 1,
+      position: "relative",
+      zIndex: 1,
+      backgroundSize: "cover",
+    },
+  },
+};
