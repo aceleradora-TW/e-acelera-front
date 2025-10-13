@@ -25,7 +25,6 @@ export const SponsorsSection = () => {
                     variant="h2"
                     sx= {{
                         textAlign: { xs: 'left', md: 'center' }, 
-                        pt: 4,
                         mb: { xs: 1, md: 2 },
                     }}
                 >
