@@ -24,6 +24,7 @@ export default function Home() {
         flexWrap: { xs: "wrap", lg: "nowrap" },
         padding: 4,
       }}
+      
     >
       <Box
         sx={{
@@ -41,14 +42,14 @@ export default function Home() {
           }}
         >
           <Typography variant="h2">Sobre a Aceleradora Ágil</Typography>
-          <Typography variant="body1">
+          <Typography >
             A Aceleradora Ágil nasceu para transformar realidades. Criada pela
             ThoughtWorks em parceria com a PUCRS, Globo e TecnoPUC, ela conecta
             pessoas que muitas vezes não se viam na tecnologia a um espaço onde
             aprender, criar e crescer é possível.
           </Typography>
           <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
-            <Typography variant="body1">
+            <Typography >
               O projeto oferece dois caminhos:
             </Typography>
             <Box
@@ -72,7 +73,7 @@ export default function Home() {
                 textBold="programa de estágio"
               />
             </Box>
-            <Typography variant="body1">
+            <Typography >
               Acreditamos em uma tecnologia feita por muitas mãos. Esse é o
               propósito que também move a{" "}
               <Link
