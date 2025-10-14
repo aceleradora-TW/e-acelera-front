@@ -71,8 +71,8 @@ export const SponsorsSection = () => {
                     sx={{
                     border: "2px solid white",
                     borderRadius: {xs: "4px", md:"4px 0 0 4px"},
-                    height: "115px",
-                    overflow: "hidden",
+                    height: {xs: "auto", md:"115px"},
+                    overflow: "visible",
                     borderRight:{md:"none"},
                     }}
                 >
