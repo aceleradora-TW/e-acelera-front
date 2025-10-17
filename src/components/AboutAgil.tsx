@@ -1,8 +1,8 @@
-import { Box, Link, Typography } from "@mui/material";
+import { Box, Button, Link, Typography } from "@mui/material";
 import SessionFormacao from "./AboutSobre/SessionFormacao";
 import CardAboutAgil from "./AboutSobre";
 import { theme } from "@/app/config/themes";
-import ButtonHome from "./UI/buttonHome";
+
 
 export default function AboutAgil() {
 
@@ -79,7 +79,10 @@ export default function AboutAgil() {
             </Typography>
           </Box>
           <Box>
-            <ButtonHome text=" Saiba mais sobre o e-acelera" />
+            
+            {/* <Link> */}
+              <Button variant="home">Saiba mais sobre o e-acelera</Button>
+            {/* </Link> */}
           </Box>
         </Box>
       </Box>
