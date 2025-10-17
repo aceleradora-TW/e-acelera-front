@@ -74,5 +74,6 @@ export interface Theme {
     container: ExtendedCSSProperties;
     contentBox: ExtendedCSSProperties;
     imageBox: ExtendedCSSProperties;
-  };
+  }
+  testimonials: ExtendedCSSProperties;
 }
