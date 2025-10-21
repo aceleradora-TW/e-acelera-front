@@ -290,7 +290,7 @@ export const TestimonialsSection = () => {
       </Typography>
 
       <Box sx={{ display: "flex", alignItems: "center", gap: "12px" }}>
-        <Avatar alt={item.name} src={item.img} sx={{ width: 56, height: 56 }} />
+        <Avatar alt={item.name} src={item.img} sx={{ width: 70, height: 70 }} />
         <Box>
           <Typography variant="body1" fontWeight="bold">
             {item.name}
@@ -334,10 +334,18 @@ export const TestimonialsSection = () => {
           Aceleradora Ágil.
         </Typography>
 
-       <Box sx={{ position: "relative", px: {xs: 1, md: 0} }}>
-        <Slider {...sliderSettings}>
+       <Box sx={{ position: "relative", px: { xs: 1, md: 0 },
+            "& .slick-slide > div": {
+              px: 1,
+            },
+            "& .slick-list": {
+              mx: "-8px",
+            },
+          }}
+        >
+        <Slider {...sliderSettings} >
           {testimonials.map((item, index) => (
-            <Box key={index} sx={{ px: 1 }}>
+            <Box key={index}>
               <TestimonialCard item={item} />
             </Box>
           ))}
