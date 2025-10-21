@@ -1,5 +1,7 @@
+'use client';
 import { theme } from "@/app/config/themes"
 import { LoginButton } from "@/components/LoginButton"
+import { AccessibilityProvider } from "@/context/accessibility.context" 
 import {
   Avatar,
   Box,
@@ -54,6 +56,7 @@ export const WebMenu: React.FC<WebMenuProps> = ({ list, session }) => {
             alignItems: "center",
           }}
         >
+        
           <Tooltip title="Perfil">
             <IconButton onClick={handleOpenMenu} sx={{ p: 0, color: theme.palette.bgColor?.light }}>
               <Avatar
@@ -116,6 +119,7 @@ export const WebMenu: React.FC<WebMenuProps> = ({ list, session }) => {
   }
 
   return (
+    <AccessibilityProvider>
     <>
       <Box
         sx={{
@@ -168,5 +172,6 @@ export const WebMenu: React.FC<WebMenuProps> = ({ list, session }) => {
       </Box>
       <Box sx={{ flexGrow: 0 }}>{renderComponent()}</Box>
     </>
+    </AccessibilityProvider>
   )
 }

@@ -1,5 +1,8 @@
 'use client'
-import { createContext, useContext, useState } from 'react';
+import { theme } from '@/app/config/themes';
+import { highContrastTheme } from '@/app/config/themes/highContrast';
+import { CssBaseline, ThemeProvider } from '@mui/material';
+import { createContext, useContext, useEffect, useState } from 'react';
 
 interface AccessibilityContextType {
   isMenuOpen: boolean;
@@ -21,7 +24,20 @@ export const AccessibilityProvider = ({ children }: { children: React.ReactNode 
   const [readingMaskEnabled, setReadingMaskEnabled] = useState(false);
   const [textSize, setTextSize] = useState(16); 
   
-  const toggleContrast = () => setContrastEnabled(prev => !prev);
+  useEffect(() => {
+    const storedContrast = localStorage.getItem('contrastEnabled');
+    if (storedContrast === 'true') {
+      setContrastEnabled(true);
+    }
+  }, []);
+
+   const toggleContrast = () => {
+    setContrastEnabled(prev => {
+      const newValue = !prev
+      localStorage.setItem('contrastEnabled', String(newValue))
+      return newValue
+    })
+  }
   const toggleReadingMask = () => setReadingMaskEnabled(prev => !prev);
   const toggleMenu = () => setIsMenuOpen(prev => !prev);
  
@@ -49,7 +65,10 @@ export const AccessibilityProvider = ({ children }: { children: React.ReactNode 
       increaseTextSize,
       }}
     >
-      {children}
+       <ThemeProvider theme={contrastEnabled ? highContrastTheme : theme}>
+        <CssBaseline />
+        {children}
+      </ThemeProvider>
     </AccessibilityContext.Provider>
   );
 };
