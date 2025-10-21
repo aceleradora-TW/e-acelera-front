@@ -15,20 +15,23 @@ export const MuiButton: Components<Theme>["MuiButton"] = {
       padding: "8px 16px",
       borderRadius: 2,
       border: "1px solid",
-
     },
   },
-  
+
   variants: [
     {
       props: { variant: "home" },
       style: {
-        padding: "8px",
+        padding: "5px 10px",
         boxShadow: "0px 2px 8px rgba(0,0,0,0.25)",
-
         borderRadius: 4,
         maxWidth: 300,
-        fontWeight: 600,
+        fontWeight: 500,
+        "&:hover": {
+          color: "#FFFFFF",
+          backgroundColor: themePalette.button,
+          borderColor: themePalette.button,
+        },
       },
     },
   ],

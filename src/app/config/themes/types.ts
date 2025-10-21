@@ -1,6 +1,6 @@
 type ExtendedCSSProperties = {
-  [key: string]: React.CSSProperties | string | number
-}
+  [key: string]: React.CSSProperties | string | number;
+};
 
 export interface Theme {
   button: ExtendedCSSProperties;
@@ -108,6 +108,44 @@ export interface Theme {
     color: string;
     boxShadow: number;
     overflowWrap: string;
+  };
+
+  cardAboutAgil: {
+    width: { xs: number; md: number };
+    minHeight: number;
+    border: number;
+    paddingY: number;
+    paddingX: number;
+    borderImage: string;
+  };
+
+  sessionListContainer: {
+    width: string;
+    height: number;
+    display: string;
+    justifyContent: string;
+    alignItems: string;
+    flexDirection: string;
+    flexWrap: string;
+    gap: number;
+  };
+
+  sessionFormacaoContainer: {
+    width: { xs: number; sm: number };
+    minHeight: number;
+    height: string;
+    display: string;
+    flexDirection: string;
+    justifyContent: string;
+    alignItems: string;
+  };
+
+  cardAboutAgilContainer: {
+    width: string;
+    display: string;
+    justifyContent: string;
+    flexWrap: string;
+    gap: number;
   };
 
   styleExclamation: ExtendedCSSProperties;

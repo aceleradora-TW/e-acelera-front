@@ -24,12 +24,16 @@ declare module '@mui/material/styles' {
     customStyles?: typeof customStyles
   }
   interface Palette {
-    button?: PaletteColor 
-    buttonHover?: PaletteColor
-    statusSelect?: PaletteColor
-    textColor?: PaletteColor
-    bgColor?: PaletteColor
-    customClass?: PaletteColor
+    button?: PaletteColor;
+    buttonHover?: PaletteColor;
+    statusSelect?: PaletteColor;
+    textColor?: PaletteColor;
+    bgColor?: PaletteColor;
+    customClass?: PaletteColor;
+    borderColor?: {
+      start: string;
+      end: string;
+    };
   }
   interface PaletteOptions {
     button?: PaletteColorOptions
@@ -38,6 +42,10 @@ declare module '@mui/material/styles' {
     textColor?: PaletteColorOptions
     bgColor?: PaletteColorOptions
     customClass?: PaletteColorOptions
+    borderColor?: {
+      start: string
+      end: string
+    }
   }
 }
 
