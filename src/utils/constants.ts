@@ -1,4 +1,5 @@
-export const BACKEND_BASE_URL= process.env.BACKEND_BASE_URL
+export const BACKEND_BASE_URL = process.env.BACKEND_BASE_URL || "http://localhost:5002";
+//export const BACKEND_BASE_URL= process.env.BACKEND_BASE_URL
 export const STACKBY_SECRET_KEY= process.env.STACKBY_SECRET_KEY
 export const STACKBY_BASE_URL= process.env.STACKBY_BASE_URL
 export const ARRAY_SPECIAL_CHARS = [
