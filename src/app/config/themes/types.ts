@@ -77,3 +77,4 @@ export interface Theme {
   }
   testimonials: ExtendedCSSProperties;
 }
+
