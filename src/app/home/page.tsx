@@ -1,9 +1,11 @@
 "use client"
-import { HomeBanner } from "@/components/HomeBanner"
+
+import FaqQuestion from "@/components/FaqQuestion"
+
 
 export default function Home() {
 
   return(
-      <HomeBanner />
+      <FaqQuestion />
   )
 }
