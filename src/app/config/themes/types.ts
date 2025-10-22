@@ -75,4 +75,5 @@ export interface Theme {
     contentBox: ExtendedCSSProperties;
     imageBox: ExtendedCSSProperties;
   };
+  studyplatformsection: ExtendedCSSProperties
 }
