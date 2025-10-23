@@ -29,6 +29,23 @@ export interface Theme {
   cardVideoDescription: ExtendedCSSProperties
   advanceExercises: ExtendedCSSProperties
   cardMediaImage: ExtendedCSSProperties
+  buttonActive: ExtendedCSSProperties
+  
+  accessibilityMenu: {
+    containerFab: ExtendedCSSProperties
+    fabButton: ExtendedCSSProperties
+    menuPaper: ExtendedCSSProperties
+    menuHeader: ExtendedCSSProperties
+    closeButton: ExtendedCSSProperties
+    buttonGrid: ExtendedCSSProperties
+    textLevelContainer: ExtendedCSSProperties
+    textLevelIndicator: (themePalette: any, currentSize: number, indicatorSize: number) => ExtendedCSSProperties
+    footerContainer: ExtendedCSSProperties
+    footerLine: ExtendedCSSProperties
+    footerBox: ExtendedCSSProperties
+    labelFab: ExtendedCSSProperties
+  }
+  
   cardLoginBox: {
     width: {
       xs: string

@@ -1,6 +1,7 @@
 import { themePalette } from "./palette";
+import { Theme } from "./types";
 
-export const customStyles = {
+export const customStyles:Theme = {
   button: {
     backgroundColor: themePalette.baseBgColor,
     borderColor: themePalette.button,
