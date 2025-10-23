@@ -30,26 +30,39 @@ export default async function RootLayout({
       <body className={inter.className}>
         <ThemeConfig>
           <ClientSessionProvider>
-              <Box
-                sx={{
+            <Box
+              sx={{
                 minHeight: "100vh",
                 display: "flex",
                 flexDirection: "column",
               }}
-              >
-                <Box sx={{ marginBottom: "80px" }}>
-                  <ResponsiveAppBar list={menuItems} session={session} />
-                </Box>
-                <Box component="main" sx={{ flex: 1 }}>
-                  {children}
-                </Box>
-                <Footer 
-                  linkedinUrl={"https://www.linkedin.com/school/aceleradora-%C3%A1gil/?originalSubdomain=br"} 
-                  projectUrl={"https://www.thoughtworks.com/pt-br/about-us/diversity-and-inclusion/aceleradora"} />
+            >
+              <Box sx={{ marginBottom: "80px" }}>
+                <ResponsiveAppBar list={menuItems} session={session} />
               </Box>
+              <Box
+                component="main"
+                sx={{
+                  maxWidth: "1536px",
+                  margin: "0 auto",
+                  padding: { xs: "0 16px", sm: "0 24px" },
+                  flex: 1,
+                }}
+              >
+                {children}
+              </Box>
+              <Footer
+                linkedinUrl={
+                  "https://www.linkedin.com/school/aceleradora-%C3%A1gil/?originalSubdomain=br"
+                }
+                projectUrl={
+                  "https://www.thoughtworks.com/pt-br/about-us/diversity-and-inclusion/aceleradora"
+                }
+              />
+            </Box>
           </ClientSessionProvider>
         </ThemeConfig>
       </body>
     </html>
-  )
+  );
 }
