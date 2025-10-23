@@ -85,6 +85,11 @@ return(
                         }}>Começar minha trilha</Button>
                     </Box>
                 </Grid>
+                <Grid item xs={12} md={6}>
+                        <Typography variant="h4" fontWeight="bold">
+                        Durante essa trilha, você vai passar por tecnologias como:
+                        </Typography>
+                </Grid>
             </Grid>
         </Container>
 
