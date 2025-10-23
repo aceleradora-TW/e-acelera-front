@@ -4,21 +4,21 @@ import { Box, Container, Grid, Typography, useTheme } from "@mui/material";
 
 export const ImpactSection = ()=> {
   const theme = useTheme();
-  
+
   return(
     <Box
-    component="section"
+      component="section"
     sx= {{
         ...theme.customStyles.impactSection,
         pb: 4,
-    }}
+      }}
     >
       <Container maxWidth= "md"
-      sx={{
-        px: {
-          xs: 3,
-          md: 0,
-        },
+        sx={{
+          px: {
+            xs: 3,
+            md: 0,
+          },
       }}>
 
         <Typography
@@ -58,13 +58,13 @@ export const ImpactSection = ()=> {
           backgroundOrigin: "border-box",
           backgroundClip: "padding-box, border-box",
         }}
-        >
+      >
 
         <Grid container spacing={{ xs: 2, md: 4 }} justifyContent="space-between" textAlign="left">
-          <Grid item xs={12} md={4}>    
+          <Grid item xs={12} md={4}>
             <Typography variant="h3"
             sx= {{
-            lineHeight: 1.2,
+                lineHeight: 1.2,
             mb: {md:"10px"},
           }}>
               +15 projetos reais desenvolvidos
@@ -72,7 +72,7 @@ export const ImpactSection = ()=> {
 
             <Typography variant="body1"
               sx={{
-                fontSize: { 
+                fontSize: {
                   xs: '14px',         
                   md: 'body1.fontSize',
                 }
@@ -84,13 +84,21 @@ export const ImpactSection = ()=> {
           <Grid item xs={12} md={4}>
             <Typography variant="h3"
             sx= {{
-            lineHeight: 1.2,
-            mb: {md:"10px"},
-          }}>
+                lineHeight: 1.2,
+                mb: {md:"10px"},
+             }}>
               +XX participantes formados
             </Typography>
 
-            <Typography variant="body1">
+            <Typography
+              variant="body1"
+              sx={{
+                fontSize: {
+                  xs: "14px",
+                  md: "body1.fontSize",
+                },
+              }}
+            >
               Pessoas que hoje trabalham com tecnologia e seguem criando impacto.
             </Typography>
           </Grid>
@@ -99,13 +107,22 @@ export const ImpactSection = ()=> {
             <Typography variant="h3"
             sx= {{
                 lineHeight: 1.2,
-                mb: {md:"10px"}, 
+                mb: { md: "10px" },
+                pr: { md: "10px" },
               }}
             >
               +10 anos de atuação
             </Typography>
-            
-            <Typography variant="body1">
+
+            <Typography
+              variant="body1"
+              sx={{
+                fontSize: {
+                  xs: "14px",
+                  md: "body1.fontSize",
+                },
+              }}
+            >
               Uma jornada contínua de inclusão, formação e transformação social.
             </Typography>
           </Grid>
