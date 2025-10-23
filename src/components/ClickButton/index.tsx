@@ -1,29 +1,29 @@
 import * as React from "react"
-import { styled } from "@mui/material/styles"
 import Button, { ButtonProps } from "@mui/material/Button"
 import Stack from "@mui/material/Stack"
 import { theme } from "@/app/config/themes"
 import { ReactNode } from "react"
-
-
-const ColorButton = styled(Button)<ButtonProps>(() => ({
-    "&:hover": {
-        backgroundColor: theme.palette.buttonHover?.main,
-        color: theme.palette.buttonHover?.contrastText,
-        border: "none"
-    }
-}))
+import {customStyles} from "@/app/config/themes/components"
+import { SxProps, Theme } from "@mui/material"
 
 type CardProps = {
     title?: string,
     click: () => void,
     endIcon?: ReactNode,
-    backIcon?: ReactNode
+    backIcon?: ReactNode,
+    sx?: ButtonProps['sx'],
+    isActive?: boolean;
 }
 
-export const ClickButton = ({ title, click, endIcon, backIcon }: CardProps) =>
+export const ClickButton = ({ title, click, endIcon, backIcon, sx, isActive }: CardProps) =>
     <aside>
         <Stack spacing={2} direction="row" onClick={click}>
-            <ColorButton sx={theme.customStyles.button} variant="contained">{backIcon}{title}{endIcon}</ColorButton>
+            <Button  variant="contained" sx={({...theme.customStyles.button, ...sx, ...(isActive && customStyles.buttonActive),}) as SxProps<Theme>}>
+          <>
+            {backIcon}
+            {title}
+            {endIcon}
+          </>
+            </Button>
         </Stack>
     </aside>
