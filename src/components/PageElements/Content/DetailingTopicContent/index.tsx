@@ -81,7 +81,7 @@ export const DetailingTopicContent: React.FC<DetailingContentProps> = ({
 
   return (
     <TopicContent
-      field={topicData.field as TopicField}
+      field={topicData?.field as TopicField}
       topicProgress={topicProgress}
     />
   )

@@ -3,7 +3,7 @@ import { Alert, Box, Snackbar, Typography } from "@mui/material";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import { useState } from "react";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import materialDark from "react-syntax-highlighter/dist/cjs/styles/prism";
+
 
 export const CodeBlock = ({ node, inline, className, children, ...props }: any ) =>{
           const match = /language-(\w+)/.exec(className || "");
@@ -35,7 +35,7 @@ export const CodeBlock = ({ node, inline, className, children, ...props }: any )
           onClick={() => handleCopy(codeString)}
         >
           <SyntaxHighlighter
-            style={materialDark}
+            style="dark"
             language={match[1]}
             PreTag="div"
             {...props}

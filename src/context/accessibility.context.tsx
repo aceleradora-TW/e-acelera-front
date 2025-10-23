@@ -47,6 +47,7 @@ export const AccessibilityProvider = ({ children }: { children: React.ReactNode 
 
   const clearSettings = () => {
     setContrastEnabled(false);
+    localStorage.removeItem('contrastEnabled');
     setReadingMaskEnabled(false);
     setTextSize(16);
   };
@@ -65,7 +66,9 @@ export const AccessibilityProvider = ({ children }: { children: React.ReactNode 
       increaseTextSize,
       }}
     >
-       <ThemeProvider theme={contrastEnabled ? highContrastTheme : theme}>
+       <ThemeProvider 
+        theme={contrastEnabled ? highContrastTheme : theme}
+        key={contrastEnabled ? 'dark' : 'normal'}>
         <CssBaseline />
         {children}
       </ThemeProvider>
