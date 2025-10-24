@@ -1,5 +1,5 @@
 'use client'
-import { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
 
 interface AccessibilityContextType {
   isMenuOpen: boolean;
@@ -22,17 +22,32 @@ export const AccessibilityProvider = ({ children }: { children: React.ReactNode 
   const [textSize, setTextSize] = useState(16); 
   
   const toggleContrast = () => setContrastEnabled(prev => !prev);
-  const toggleReadingMask = () => setReadingMaskEnabled(prev => !prev);
+  const toggleReadingMask = () => {
+    setReadingMaskEnabled((prev) => {
+      const newValue = !prev;
+      localStorage.setItem('readingMaskEnabled', String(newValue));
+      return newValue;
+    });
+  };
   const toggleMenu = () => setIsMenuOpen(prev => !prev);
  
   const increaseTextSize = () => {
     setTextSize (prev => (prev >= 24 ? 16 : prev + 2));
   };
 
+  useEffect(() => {
+     const storedMask = localStorage.getItem('readingMaskEnabled');
+  if (storedMask === 'true') {
+    setReadingMaskEnabled(true);
+  }
+}, []);
+
+
   const clearSettings = () => {
     setContrastEnabled(false);
     setReadingMaskEnabled(false);
     setTextSize(16);
+    localStorage.clear();
   };
   
   return (
@@ -51,6 +66,7 @@ export const AccessibilityProvider = ({ children }: { children: React.ReactNode 
     >
       {children}
     </AccessibilityContext.Provider>
+    
   );
 };
 
