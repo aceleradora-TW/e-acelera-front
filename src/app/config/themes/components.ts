@@ -442,9 +442,13 @@ export const customStyles: Theme = {
       backgroundSize: "cover",
     },
   },
+  testimonials: {
+    background: themePalette.button,
+    color: themePalette.baseBgColor,
+  },
   sponsorsSection: {
     background: themePalette.button,
     color: themePalette.baseBgColor,
     textAlign: "center",
-  },
+  }
 };

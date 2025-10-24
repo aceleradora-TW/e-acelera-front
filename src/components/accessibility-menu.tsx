@@ -1,5 +1,5 @@
 'use client'
-import { Box, Fab, Paper, Typography, Grid } from '@mui/material';
+import { Box, Fab, Grid, Paper, Typography } from '@mui/material';
 import AccessibilityNewIcon from '@mui/icons-material/AccessibilityNew';
 import { useAccessibility } from '../context/accessibility.context';
 import ContrastIcon from '@mui/icons-material/Contrast';
