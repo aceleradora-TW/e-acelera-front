@@ -87,7 +87,7 @@ return(
                         <Typography
                             variant="body1">
                         Composta por desafios práticos e conteúdos acessíveis. Também é etapa obrigatória para quem entra no Programa Aceleradora, garantindo uma base comum para seguir com segurança.
-                        </Typography>
+                        </Typography>   
                     </Box>
                     <Box>
                         <Typography
@@ -108,7 +108,9 @@ return(
                         }}>
                         Tudo isso para preparar você para os próximos passos — seja continuar estudando, entrar no programa ou aplicar o que aprendeu em projetos reais.
                     </Typography>
-                    <Box>
+                </Grid>
+                <Grid item xs={12} md={6} order={{ xs: 3, md: 2 }}>
+                    <Box sx={{ mt: { xs: 1, md: 0 } }}>
                         <Button variant="outlined" sx={{
                             ...theme.customStyles.button,
                             borderRadius: 1,
@@ -128,13 +130,13 @@ return(
                         <Typography variant="h4" fontWeight="bold" sx={{ 
                                 textAlign: { xs: 'left', md: 'center' },
                                 mb: 4, 
-                                pt: { xs: 0, md: 6 } 
+                                pt: { xs: 4, md: 6 } 
                             }}>
                         Durante essa trilha, você vai passar por tecnologias como:
                         </Typography>
                         <Grid container spacing={2} justifyContent="space-evenly" alignItems="flex-end">
                             <Grid item xs={12}>
-                                <Grid container spacing={2} justifyContent="space-around" sx={{px: 8 }}>
+                                <Grid container spacing={2} justifyContent="space-around" sx={{ px:{md: 8} }}>
                                     <Grid item xs={3}>
                                         <TechIcon src={icons.HTML.src} alt={icons.HTML.alt} size="60px" />
                                     </Grid>
@@ -150,7 +152,7 @@ return(
                                 </Grid>
                             </Grid>
                             <Grid item xs={12}>
-                                <Grid container spacing={2} justifyContent="space-around" alignItems="flex-end" sx={{ py: 2, px: 10 }}>
+                                <Grid container spacing={2} justifyContent="space-around" alignItems="flex-end" sx={{ pt: 2, px: {md: 10} }}>
                                     <Grid item xs={6}>
                                         <TechIcon src={icons.NODE.src} alt={icons.NODE.alt} size="120px" />
                                     </Grid>
@@ -160,17 +162,17 @@ return(
                                 </Grid>
                             </Grid>
                             <Grid item xs={12}>
-                                <Grid container justifyContent="center" alignItems="center">
-                                    <Grid item xs={12} md={4}>
+                                <Grid container justifyContent="center" alignItems="center" sx={{ px:{md: 7} }}>
+                                    <Grid item xs={4} md={4}>
                                         <TechIcon src={icons.POSTGRESQL.src} alt={icons.POSTGRESQL.alt} size="100px" />
                                     </Grid>
-                                    <Grid item xs={12} md={4}>
+                                    <Grid item xs={4} md={4}>
                                         <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'space-around', gap: 2}}>
-                                            <TechIcon src={icons.NEXTJS.src} alt={icons.NEXTJS.alt} size="120px" />
-                                            <TechIcon src={icons.JEST.src} alt={icons.JEST.alt} size="110px" />
+                                            <TechIcon src={icons.NEXTJS.src} alt={icons.NEXTJS.alt} size="110px" />
+                                            <TechIcon src={icons.JEST.src} alt={icons.JEST.alt} size="100px" />
                                         </Box>
                                     </Grid>
-                                    <Grid item xs={12} md={4}>
+                                    <Grid item xs={4} md={4}>
                                         <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'space-around', gap: 2}}>
                                             <TechIcon src={icons.GITHUB.src} alt={icons.GITHUB.alt} size="70px" />
                                             <TechIcon src={icons.GIT.src} alt={icons.GIT.alt} size="70px" />
