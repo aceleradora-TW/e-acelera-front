@@ -18,7 +18,7 @@
     "@mui/material": "^5.15.18",
     "@mui/styled-engine-sc": "^6.0.0-alpha.18",
     "e-acelera-front": "file:",
-    "next": "14.2.3",
+    "next": "^14.2.33",
     "next-auth": "^4.24.8",
     "react": "^18",
     "react-copy-to-clipboard": "^5.1.0",
