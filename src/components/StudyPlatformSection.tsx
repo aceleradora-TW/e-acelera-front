@@ -1,6 +1,7 @@
 import React from "react";
 import Image from 'next/image';
 import { Box, Button, Container, Grid, Typography, useTheme } from "@mui/material";
+import { themePalette } from "@/app/config/themes/palette";
 
 const icons = {
     HTML: {src: "/assets/html-icon.svg", alt: "HTML"},
@@ -52,7 +53,7 @@ return(
     }}
     >
 
-        <Container maxWidth="lg">
+        <Container maxWidth="xl">
             <Grid container>
                 <Grid item xs={12} md={6}>
                     <Typography
@@ -72,13 +73,38 @@ return(
                         }}>
                         O e-Acelera é a plataforma de estudos da Aceleradora Ágil — gratuita, aberta e feita para quem quer aprender tecnologia com autonomia. Qualquer pessoa pode acessar e começar a estudar programação, mesmo sem experiência prévia.
                     </Typography>
-                    <Box>
+                    <Box
+                        sx = {{
+                            border: "6px solid red",
+                            borderRadius: "4px",
+                            px: "14px",
+                            py: "4px",
+                            width: "fit-content",
+                            
+                        }}>
                         <Typography
                             variant="body1">
                             A plataforma oferece duas trilhas complementares:
                         </Typography>
                     </Box>
-                    <Box>
+                    <Box sx={{
+                        position: "relative",
+                        borderRadius: "4px",
+                        backgroundColor: themePalette.primaryTextColor,
+                        p: 2,
+                        m:2,
+                        color: themePalette.baseBgColor,
+                      
+                        "&::after":{
+                            content: '""',
+                            position: "absolute",
+                            left:"-10px",
+                            top: "70px",
+                            width: "20px",
+                            height: "5px",
+                            background: "linear-gradient(#EB658C, #F5AF55)",
+                        }
+                    }}>
                         <Typography
                             variant="body1"
                             fontWeight="bold">
@@ -89,7 +115,32 @@ return(
                         Composta por desafios práticos e conteúdos acessíveis. Também é etapa obrigatória para quem entra no Programa Aceleradora, garantindo uma base comum para seguir com segurança.
                         </Typography>   
                     </Box>
-                    <Box>
+                    <Box
+                    sx={{
+                        position: "relative",
+                        borderRadius: "4px",
+                        backgroundColor: themePalette.primaryTextColor,
+                        p: 2,
+                        m:2,
+                        color: themePalette.baseBgColor,
+                        "&::before":{
+                            content: '""',
+                            position: "absolute",
+                            left:"-10px",
+                            top: "-160px",
+                            bottom: "38px",
+                            width: "6px",
+                            background: "linear-gradient(#EB658C, #F5AF55)",
+                            },
+                        "&::after":{
+                            content: '""',
+                            position: "absolute",
+                            left:"-10px",
+                            top: "42px",
+                            width: "20px",
+                            height: "5px",
+                            background: "linear-gradient(#EB658C, #F5AF55)", }    
+                    }}>
                         <Typography
                             variant="body1"
                             fontWeight="bold">
@@ -114,12 +165,11 @@ return(
                         <Button variant="outlined" sx={{
                             ...theme.customStyles.button,
                             borderRadius: 1,
-                            fontWeight: "600",
                             boxShadow: 4,
                             padding: "6px 16px",
                             mt: 3,
                             '&:hover': {
-                                backgroundColor: theme.palette.primary.contrastText,
+                                backgroundColor: themePalette.primaryTextColor,
                                 color: theme.palette.bgColor?.main,
                                 boxShadow: 8,
                             },
@@ -130,13 +180,13 @@ return(
                         <Typography variant="h4" fontWeight="bold" sx={{ 
                                 textAlign: { xs: 'left', md: 'center' },
                                 mb: 4, 
-                                pt: { xs: 4, md: 6 } 
+                                pt: { xs: 4, md: 10 } 
                             }}>
                         Durante essa trilha, você vai passar por tecnologias como:
                         </Typography>
                         <Grid container spacing={2} justifyContent="space-evenly" alignItems="flex-end">
                             <Grid item xs={12}>
-                                <Grid container spacing={2} justifyContent="space-around" sx={{ px:{md: 8} }}>
+                                <Grid container spacing={2} justifyContent="space-around" sx={{ px:{md: 8, lg: 14} }}>
                                     <Grid item xs={3}>
                                         <TechIcon src={icons.HTML.src} alt={icons.HTML.alt} size="60px" />
                                     </Grid>
@@ -152,7 +202,7 @@ return(
                                 </Grid>
                             </Grid>
                             <Grid item xs={12}>
-                                <Grid container spacing={2} justifyContent="space-around" alignItems="flex-end" sx={{ pt: 2, px: {md: 10} }}>
+                                <Grid container spacing={2} justifyContent="space-around" alignItems="flex-end" sx={{ pt: 2, px: {md: 10, lg: 16} }}>
                                     <Grid item xs={6}>
                                         <TechIcon src={icons.NODE.src} alt={icons.NODE.alt} size="120px" />
                                     </Grid>
@@ -162,9 +212,9 @@ return(
                                 </Grid>
                             </Grid>
                             <Grid item xs={12}>
-                                <Grid container justifyContent="center" alignItems="center" sx={{ px:{md: 7} }}>
+                                <Grid container justifyContent="center" alignItems="center" sx={{ px:{md: 8, lg: 14} }}>
                                     <Grid item xs={4} md={4}>
-                                        <TechIcon src={icons.POSTGRESQL.src} alt={icons.POSTGRESQL.alt} size="100px" />
+                                        <TechIcon src={icons.POSTGRESQL.src} alt={icons.POSTGRESQL.alt} size="110px" />
                                     </Grid>
                                     <Grid item xs={4} md={4}>
                                         <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'space-around', gap: 2}}>
