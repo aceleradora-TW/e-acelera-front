@@ -18,6 +18,7 @@
     "@mui/material": "^5.15.18",
     "@mui/styled-engine-sc": "^6.0.0-alpha.18",
     "e-acelera-front": "file:",
+    "flagsmith": "^9.3.2",
     "next": "14.2.3",
     "next-auth": "^4.24.8",
     "react": "^18",
