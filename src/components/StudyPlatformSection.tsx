@@ -75,7 +75,13 @@ return(
                     </Typography>
                     <Box
                         sx = {{
-                            border: "6px solid red",
+                            border: "4px solid transparent",
+                            backgroundImage: `
+                                linear-gradient(${themePalette.baseBgColor}, ${themePalette.baseBgColor}),
+                                linear-gradient(to right, #EB658C, #F5AF55)
+                            `,
+                            backgroundOrigin: "border-box",
+                            backgroundClip: "padding-box, border-box",
                             borderRadius: "4px",
                             px: "14px",
                             py: "4px",
@@ -101,7 +107,7 @@ return(
                             left:"-10px",
                             top: "70px",
                             width: "20px",
-                            height: "5px",
+                            height: "4px",
                             background: "linear-gradient(#EB658C, #F5AF55)",
                         }
                     }}>
@@ -129,7 +135,7 @@ return(
                             left:"-10px",
                             top: "-160px",
                             bottom: "38px",
-                            width: "6px",
+                            width: "4px",
                             background: "linear-gradient(#EB658C, #F5AF55)",
                             },
                         "&::after":{
@@ -138,7 +144,7 @@ return(
                             left:"-10px",
                             top: "42px",
                             width: "20px",
-                            height: "5px",
+                            height: "4px",
                             background: "linear-gradient(#EB658C, #F5AF55)", }    
                     }}>
                         <Typography
