@@ -17,7 +17,6 @@ export async function GET(
 
     const hasFilter = (!!operator && !!value) || (!!operator && !!column && !!value);
 
-    //const url: string = `${BACKEND_BASE_URL}/themes?${uniqueParam}`;
     const url: string = `${BACKEND_BASE_URL}/stackby/${endpoint}?${uniqueParam}${hasFilter ? `&operator=${operator}&column=${column}&value=${value}` : ""}`;
 
 

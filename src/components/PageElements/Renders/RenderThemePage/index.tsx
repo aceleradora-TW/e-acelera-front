@@ -1,16 +1,11 @@
 "use client";
-import useFetchData from "@/components/fetchData";
 import { Loading } from "@/components/Loading";
-import { PageThemesContent } from "../../Content/PageThemesContent";
-import { LayoutPage } from "../../LayoutPage";
 import { BadRequest } from "@/components/BadRequest";
 import { NoData } from "@/components/NoData";
 import { GlobalContextProvider } from "@/context/global.context";
-import { getThemes } from "../../../../services/themeService";// GEOVANA
-import { Theme, DataItem, ThemeField, ApiResponse } from "../../../../types/type";//Geovana
-import { useEffect, useState } from "react"; //Geovana 
 import { useThemeApi } from '@/hooks/useThemeApi';
-
+import { PageThemesContent } from "../../Content/PageThemesContent";
+import { LayoutPage } from "../../LayoutPage";
 
 export const RenderThemePage = ({ category }: { category: string }) => {
   const { data: themes, loading, error } = useThemeApi(category);
@@ -19,8 +14,15 @@ export const RenderThemePage = ({ category }: { category: string }) => {
   if (error) return <BadRequest />;
   if (!themes || !themes.data || themes.data.length === 0) return <NoData />;
 
-  return <PageThemesContent data={themes} category={category} />;
+  return (
+    <GlobalContextProvider>
+      <LayoutPage>
+        <PageThemesContent data={themes} category={category} />
+      </LayoutPage>
+    </GlobalContextProvider>
+  );
 };
+
 
 
 
