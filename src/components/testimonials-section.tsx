@@ -4,15 +4,11 @@ import {
   Avatar,
   Box,
   Container,
-  IconButton,
   Typography,
-  useMediaQuery,
   useTheme,
 } from "@mui/material";
-import Slider from "react-slick";
-import { ArrowBackIosNew, ArrowForwardIos } from "@mui/icons-material";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+import { TestimonialsSlider } from "./TestimonialsSlider";
+import { TESTIMONIALS } from "@/utils/constants";
 
 type Testimonial = {
   text: string;
@@ -23,80 +19,6 @@ type Testimonial = {
 
 export const TestimonialsSection = () => {
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
-  const isTablet = useMediaQuery(theme.breakpoints.between("sm", "md"));
-
-  const testimonials = [
-    {
-      text: "blablab dshadsah dhasudhsua hhcabcjnv dm shsbhada jadnkahdia ajdj hdwgwydgyw",
-      img: "/assets/avatar1.svg",
-      name: "Carlos Schallenberger",
-      class: "Turma 25",
-    },
-    {
-      text: "blablablabakbjhcbddddddd fffff ff dfds hvsncneajkcs hdbcv jsna  cc svn sfjv nwkd jcabcjnv dm shsbhada jadnkahdia ajdj hdwgwydgyw blablablabakbjhcbddddddd fffff ff dfds hvsncneajkcs hdbcv jsna  cc svn sfjv nwkd jcabcjnv dm shsbhada jadnkahdia ajdj hdwgwydgyw",
-      img: "/assets/avatar1.svg",
-      name: "Carlos Schallenberger",
-      class: "Turma 25",
-    },
-    {
-      text: "blablablabakbjhcbdhvsncneajkcs hdbcv jsna  cc svn sfjv nwkd jcabcjnv dm shsbhada jadnkahdia ajdj hdwgwydgyw",
-      img: "/assets/avatar1.svg",
-      name: "Carlos Schallenberger",
-      class: "Turma 25",
-    },
-    {
-      text: "blablablabakbjhcbdhvsncneajkcs hdbcv jsna  cc svn sfjv nwkd jcabcjnv dm shsbhada jadnkahdia ajdj hdwgwydgyw",
-      img: "/assets/avatar1.svg",
-      name: "Carlos Schallenberger",
-      class: "Turma 25",
-    },
-  ];
-
-  type ArrowProps = {
-  onClick?: React.MouseEventHandler<HTMLButtonElement>;
-  direction: "left" | "right";
-};
-
-  const Arrow: React.FC<ArrowProps> = ({ onClick, direction }) => (
-    <IconButton
-      onClick={onClick}
-      sx={{
-        position: "absolute",
-        top: "50%",
-        transform: "translateY(-50%)",
-        [direction === "left" ? "left" : "right"]: "-30px",
-        zIndex: 2,
-        color: "#fff",
-      }}
-    >
-      {direction === "left" ? <ArrowBackIosNew /> : <ArrowForwardIos />}
-    </IconButton>
-  );
-
-  const sliderSettings = {
-  dots: false,
-  infinite: true,
-  speed: 500,
-  slidesToShow: isMobile ? 1 : isTablet ? 2 : 4,
-  slidesToScroll: 1,
-  nextArrow: <Arrow direction="right" />,
-  prevArrow: <Arrow direction="left" />,
-  responsive: [
-    {
-      breakpoint: 1200,
-      settings: { slidesToShow: 4 }
-    },
-    {
-      breakpoint: 900,
-      settings: { slidesToShow: 2 }
-    },
-    {
-      breakpoint: 600,
-      settings: { slidesToShow: 1 }
-    }
-  ]
-};
 
   const TestimonialCard: React.FC<{ item: Testimonial }> = ({ item }) => (
     <Box
@@ -110,13 +32,7 @@ export const TestimonialsSection = () => {
         backgroundColor: theme.palette.textColor?.main,
         padding: "12px",
         borderRadius: "4px",
-        border: "3px solid transparent",
-        backgroundImage: `
-          linear-gradient(${theme.palette.textColor?.main}, ${theme.palette.textColor?.main}),
-          linear-gradient(to right, #EB658C, #F5AF55)
-        `,
-        backgroundOrigin: "border-box",
-        backgroundClip: "padding-box, border-box",
+        border: "3px solid white",
         overflowWrap: "break-word",
         wordBreak: "break-word",
         hyphens: "auto",
@@ -187,23 +103,13 @@ export const TestimonialsSection = () => {
           Aceleradora Ágil.
         </Typography>
 
-       <Box sx={{ position: "relative", px: { xs: 1, md: 0 },
-            "& .slick-slide > div": {
-              px: 1,
-            },
-            "& .slick-list": {
-              mx: "-8px",
-            },
-          }}
-        >
-        <Slider {...sliderSettings} >
-          {testimonials.map((item, index) => (
+          <TestimonialsSlider>
+          {TESTIMONIALS.map((item, index) => (
             <Box key={index}>
               <TestimonialCard item={item} />
             </Box>
           ))}
-        </Slider>
-      </Box>
+          </TestimonialsSlider>
       </Container>
     </Box>
   );
