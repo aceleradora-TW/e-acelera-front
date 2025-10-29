@@ -1,13 +1,13 @@
 "use client"
 import { HomeBanner } from "@/components/HomeBanner"
-import { StudyPlatformSection } from "@/components/study-platform-section"
+import { StudySection } from "@/components/study-section"
 
 export default function Home() {
 
   return(
     <>
       <HomeBanner />
-      <StudyPlatformSection />
+      <StudySection />
     </>
       
   )

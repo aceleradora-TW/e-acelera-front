@@ -41,15 +41,15 @@ const TechIcon = ({ src, alt, size = '100px' }: TechIconProps) => (
     </Box>
 );
 
-export const StudyPlatformSection = () => {
+export const StudySection = () => {
 const theme = useTheme();
 
 return(
     <Box
     component="section"
-    id="secao-programas"
+    id="study-section"
     sx= {{
-        ...theme.customStyles.studyplatformsection,
+        ...theme.customStyles.studysection,
         pb: 4,
     }}
     >

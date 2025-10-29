@@ -281,7 +281,7 @@ export const customStyles: Theme = {
       backgroundSize: "cover",
     },
   },
-  studyplatformsection: { 
+  studysection: { 
     background: themePalette.baseBgColor,
     color: themePalette.primaryTextColor,
   },
