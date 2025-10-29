@@ -415,7 +415,13 @@ export const customStyles = {
       transition: 'background-color 0.3s ease',
       border: textSize < size ? `1px solid ${themePalette.baseBgColor}` : `1px solid ${themePalette.baseBgColor}`,
     }),
-    
+
+     closeButtonSx: (isHigh: boolean) => ({
+      ...(customStyles.accessibilityMenu.closeButton as any),
+      ...(isHigh? { backgroundColor: '#fff', color: '#000',
+            '&:hover': {backgroundColor: themePalette.button, color: '#fff',},}: {}),
+    }),
+
     formControl: {
       width: "100%",
       "& .MuiInputLabel-root": {

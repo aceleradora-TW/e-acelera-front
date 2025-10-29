@@ -12,17 +12,8 @@ export const DescriptionFull: React.FC<DescriptionFullProps> = ({ text }) => {
   const muiTheme = useTheme();
   const contrastEnabled = false;
 
-  const backgroundColor = contrastEnabled
-    ? "#000000" 
-    : muiTheme.palette.mode === "dark"
-    ? "#555555"
-    : "#f5f5f5";
-
-  const textColor = contrastEnabled
-    ? "#FFFFFF" 
-    : muiTheme.palette.mode === "dark"
-    ? "#FFFFFF"
-    : "inherit";
+  const backgroundColor = contrastEnabled? "#000000" : muiTheme.palette.mode === "dark" ? "#555555" : "#f5f5f5";
+  const textColor = contrastEnabled? "#f5f5f5" : muiTheme.palette.mode === "dark" ? "#f5f5f5" : "inherit";
 
   return (
     <Grid
