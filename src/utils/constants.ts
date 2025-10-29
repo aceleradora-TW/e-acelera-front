@@ -8,3 +8,30 @@ export const ARRAY_SPECIAL_CHARS = [
   { char: "&gt;", replace: ">" },
   { char: "%40;", replace: "@" },
 ];
+
+export const TESTIMONIALS = [
+    {
+      text: "Lorem Ipsum has been the industry's standard dummy text ever since the 1500",
+      img: "/assets/avatar1.svg",
+      name: "Carlos Schallenberger",
+      class: "Turma 25",
+    },
+    {
+      text: "Lorem Ipsum is simply dummy text of the printings",
+      img: "/assets/avatar1.svg",
+      name: "Carlos Schallenberger",
+      class: "Turma 25",
+    },
+    {
+      text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been.",
+      img: "/assets/avatar1.svg",
+      name: "Carlos Schallenberger",
+      class: "Turma 25",
+    },
+    {
+      text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,",
+      img: "/assets/avatar1.svg",
+      name: "Carlos Schallenberger",
+      class: "Turma 25",
+    },
+  ];
