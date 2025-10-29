@@ -37,7 +37,16 @@ declare module '@mui/material/styles' {
 const theme = createTheme({
   palette,
   typography,
-  customStyles
+  customStyles,
+  components: {
+    MuiCssBaseline: {
+      styleOverrides: {
+        html: {
+          scrollBehavior: 'smooth'
+        }
+      }
+    }
+  }
 })
 
 export const ThemeConfig: React.FC<ThemeProp> = ({ children }) => (

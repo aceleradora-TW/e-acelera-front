@@ -47,6 +47,7 @@ const theme = useTheme();
 return(
     <Box
     component="section"
+    id="secao-programas"
     sx= {{
         ...theme.customStyles.studyplatformsection,
         pb: 4,
@@ -99,18 +100,10 @@ return(
                         backgroundColor: themePalette.primaryTextColor,
                         p: 2,
                         m:2,
+                        zIndex:150,
                         color: themePalette.baseBgColor,
-                      
-                        "&::after":{
-                            content: '""',
-                            position: "absolute",
-                            left:"-10px",
-                            top: "70px",
-                            width: "20px",
-                            height: "4px",
-                            background: "linear-gradient(#EB658C, #F5AF55)",
-                        }
-                    }}>
+                       }}>
+                            
                         <Typography
                             variant="body1"
                             fontWeight="bold">
@@ -129,23 +122,6 @@ return(
                         p: 2,
                         m:2,
                         color: themePalette.baseBgColor,
-                        "&::before":{
-                            content: '""',
-                            position: "absolute",
-                            left:"-10px",
-                            top: "-160px",
-                            bottom: "38px",
-                            width: "4px",
-                            background: "linear-gradient(#EB658C, #F5AF55)",
-                            },
-                        "&::after":{
-                            content: '""',
-                            position: "absolute",
-                            left:"-10px",
-                            top: "42px",
-                            width: "20px",
-                            height: "4px",
-                            background: "linear-gradient(#EB658C, #F5AF55)", }    
                     }}>
                         <Typography
                             variant="body1"
@@ -183,7 +159,7 @@ return(
                     </Box>
                 </Grid>
                 <Grid item xs={12} md={6}>
-                        <Typography variant="h4" fontWeight="bold" sx={{ 
+                        <Typography variant="h4" sx={{ 
                                 textAlign: { xs: 'left', md: 'center' },
                                 mb: 4, 
                                 pt: { xs: 4, md: 10 } 
