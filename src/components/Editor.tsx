@@ -21,14 +21,19 @@ export default function Editor() {
   const [status, setStatus] = useState("");
   const [inputValue, setInputValue] = useState("");
 
-   const exercise = {
+  const exercise = {
     title: "soma",
     description: `Maria quer somar quantas laranjas ela e João compraram`,
     input: "3,2",
     expectedOutput: "5\n",
+    tests: [
+      { input: "3,2", expectedOutput: "5\n" },
+      { input: "10,5", expectedOutput: "15\n" },
+      { input: "7,8", expectedOutput: "15\n" },
+    ],
     initialCode: `function evenOrOdd(jogada1, jogada2) {
      return //sua resposta ;\n}`,
-   };
+  };
 
   useEffect(() => {
     if (!editorRef.current) return;
@@ -49,74 +54,88 @@ export default function Editor() {
     return () => view.destroy();
   }, [exercise.initialCode]);
 
-
   const handleRunCode = async () => {
     try {
-
       const cleanCode = code.replace("export ", "");
 
-      // const [a, b] = (inputValue || exercise.input)
-      //   .trim()
-      //   .split(/\s+/)
-      //   .map(Number);
+      let allPassed = true;
+      const testResults = [];
 
-      // const finalCode = `${cleanCode}\nconsole.log(evenOrOdd(${a}, ${b}));`;
+      for (const test of exercise.tests) {
+        const finalCode = `
+        ${cleanCode}
+        console.log(evenOrOdd(${test.input}));
+      `;
 
+        const response = await fetch(
+          "https://judge0-ce.p.rapidapi.com/submissions?base64_encoded=false&wait=true",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "x-rapidapi-host": "judge0-ce.p.rapidapi.com",
+              "x-rapidapi-key":
+                "18cb6a49b5mshdd029114f6adb98p140cfejsnc32f1d3c40de",
+            },
+            body: JSON.stringify({
+              language_id: 63, // Node.js
+              source_code: finalCode,
+            }),
+          }
+        );
 
-      const finalCode = `${cleanCode}\nconsole.log(evenOrOdd(${inputValue ? inputValue : exercise.input }));`;
+        const result = await response.json();
 
-      const response = await fetch(
-        "https://judge0-ce.p.rapidapi.com/submissions?base64_encoded=false&wait=true",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "x-rapidapi-host": "judge0-ce.p.rapidapi.com",
-            "x-rapidapi-key":
-              "18cb6a49b5mshdd029114f6adb98p140cfejsnc32f1d3c40de",
-          },
-          body: JSON.stringify({
-            language_id: 63, //  Node.js (JavaScript)
-            source_code: finalCode,
-            stdin: exercise.input,
-          }),
-        }
-      );
+        const saida =
+          result.stdout?.trim() ||
+          result.stderr?.trim() ||
+          result.compile_output?.trim() ||
+          "Sem saída";
 
-      const result = await response.json();
+        const esperado = test.expectedOutput.trim();
 
-      const saida =
-        result.stdout?.trim() ||
-        result.stderr?.trim() ||
-        result.compile_output?.trim() ||
-        "Sem saída";
+        const passou = saida === esperado;
 
-      const esperado = exercise.expectedOutput.trim();
+        testResults.push({
+          input: test.input,
+          saida,
+          esperado,
+          passou,
+        });
 
-      setOutput(saida);
-
-      if (saida === esperado) {
-        setStatus("Seu código passou!");
-      } else {
-        setStatus(`Resposta incorreta! Saída: ${saida}`);
+        if (!passou) allPassed = false;
       }
 
-      console.log("Saída:", result);
+      // Atualiza visualmente o resultado final
+      setOutput(
+        testResults
+          .map(
+            (t, i) =>
+              `Teste ${i + 1}:\nEntrada: ${t.input}\nEsperado: ${
+                t.esperado
+              }\nObtido: ${t.saida}\nResultado: ${
+                t.passou ? "✅ Passou" : "❌ Falhou"
+              }\n`
+          )
+          .join("\n")
+      );
+
+      setStatus(
+        allPassed
+          ? "🎉 Todos os testes passaram!"
+          : "❌ Alguns testes falharam."
+      );
     } catch (err) {
       console.error("Erro ao executar código:", err);
       setOutput("Erro ao executar código. Verifique a conexão com Judge0.");
     }
   };
 
-
-
   return (
     <Grid container spacing={2} padding={4}>
       <Grid item xs={12}>
         <Typography variant="h2">Exercicio {exercise.title} </Typography>
-        <Typography>
-         {exercise.description}
-        </Typography>
+        <Typography>{exercise.description}</Typography>
         <CardHeader title="Editor de Código" />
       </Grid>
       <Grid item xs={12} md={7}>
