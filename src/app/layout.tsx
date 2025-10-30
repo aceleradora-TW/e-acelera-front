@@ -7,6 +7,8 @@ import { getServerSession } from "next-auth"
 import ClientSessionProvider from "@/components/ClientSessionProvider"
 import { ThemeConfig } from "./config/themes"
 import { Footer } from "@/components/Footer/Footer"
+import { AccessibilityProvider } from "@/context/accessibility.context"
+import AccessibilityMenu from "@/components/accessibility-menu"
 
 const menuItems = ["Nivelamento", "Autoestudo"]
 
@@ -28,40 +30,30 @@ export default async function RootLayout({
   return (
     <html lang="pt-br">
       <body className={inter.className}>
-        <ThemeConfig>
-          <ClientSessionProvider>
-            <Box
-              sx={{
-                minHeight: "100vh",
-                display: "flex",
-                flexDirection: "column",
-              }}
-            >
-              <Box sx={{ marginBottom: "80px" }}>
-                <ResponsiveAppBar list={menuItems} session={session} />
-              </Box>
-              <Box
-                component="main"
-                sx={{
-                  maxWidth: "1536px",
-                  margin: "0 auto",
-                  padding: { xs: "0 16px", sm: "0 24px" },
-                  flex: 1,
+        <AccessibilityProvider>
+          <ThemeConfig>
+            <ClientSessionProvider>
+              <AccessibilityMenu />
+                <Box
+                  sx={{
+                  minHeight: "100vh",
+                  display: "flex",
+                  flexDirection: "column",
                 }}
-              >
-                {children}
-              </Box>
-              <Footer
-                linkedinUrl={
-                  "https://www.linkedin.com/school/aceleradora-%C3%A1gil/?originalSubdomain=br"
-                }
-                projectUrl={
-                  "https://www.thoughtworks.com/pt-br/about-us/diversity-and-inclusion/aceleradora"
-                }
-              />
-            </Box>
-          </ClientSessionProvider>
-        </ThemeConfig>
+                >
+                  <Box sx={{ marginBottom: "80px" }}>
+                    <ResponsiveAppBar list={menuItems} session={session} />
+                  </Box>
+                  <Box component="main" sx={{ flex: 1 }}>
+                    {children}
+                  </Box>
+                  <Footer 
+                    linkedinUrl={"https://www.linkedin.com/school/aceleradora-%C3%A1gil/?originalSubdomain=br"} 
+                    projectUrl={"https://www.thoughtworks.com/pt-br/about-us/diversity-and-inclusion/aceleradora"} />
+                </Box>
+            </ClientSessionProvider>
+          </ThemeConfig>
+        </AccessibilityProvider>
       </body>
     </html>
   );
