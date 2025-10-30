@@ -1,4 +1,4 @@
-import {Grid, Typography, useTheme} from "@mui/material";
+import { Grid, Typography, useTheme } from "@mui/material";
 import AccordionFaq from "./AccordionFaq";
 
 export default function FaqQuestion() {
@@ -34,7 +34,7 @@ export default function FaqQuestion() {
   ];
   
   return (
-    <Grid container spacing={{ xs:2, md:4,}}>
+    <Grid sx={{padding: 4}} container spacing={{ xs:2, md:4}}>
       <Grid item xs={12} md={4}
         sx={{
           display: "flex",
