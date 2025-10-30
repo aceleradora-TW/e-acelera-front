@@ -9,8 +9,8 @@ interface AccessibilityContextType {
   toggleContrast: () => void;
   readingMaskEnabled: boolean;
   toggleReadingMask: () => void;
-  textSize: number;
-  increaseTextSize: () => void;
+  themeFontFamily?: string;
+  changeFontFamily: (fontFamily?: string) => void;
 }
 
 const AccessibilityContext = createContext<AccessibilityContextType | undefined>(undefined);
@@ -19,20 +19,20 @@ export const AccessibilityProvider = ({ children }: { children: React.ReactNode 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [contrastEnabled, setContrastEnabled] = useState(false);
   const [readingMaskEnabled, setReadingMaskEnabled] = useState(false);
-  const [textSize, setTextSize] = useState(16); 
+  const [themeFontFamily, setThemeFontFamily] = useState<string | undefined>(undefined); 
   
   const toggleContrast = () => setContrastEnabled(prev => !prev);
   const toggleReadingMask = () => setReadingMaskEnabled(prev => !prev);
   const toggleMenu = () => setIsMenuOpen(prev => !prev);
  
-  const increaseTextSize = () => {
-    setTextSize (prev => (prev >= 24 ? 16 : prev + 2));
+  const changeFontFamily = (fontFamily?:string) => {
+    setThemeFontFamily(prev => (prev ? undefined : fontFamily));
   };
 
   const clearSettings = () => {
     setContrastEnabled(false);
     setReadingMaskEnabled(false);
-    setTextSize(16);
+    setThemeFontFamily(undefined);
   };
   
   return (
@@ -45,8 +45,8 @@ export const AccessibilityProvider = ({ children }: { children: React.ReactNode 
       toggleContrast,
       readingMaskEnabled,
       toggleReadingMask,
-      textSize,
-      increaseTextSize,
+      themeFontFamily,
+      changeFontFamily,
       }}
     >
       {children}

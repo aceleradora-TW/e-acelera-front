@@ -4,6 +4,7 @@ import React from "react"
 import { palette } from "./palette"
 import { customStyles } from "./components"
 import { typography } from "./typography"
+import { useAccessibility } from "@/context/accessibility.context"
 
 type ThemeProp = {
   children: JSX.Element
@@ -34,17 +35,25 @@ declare module '@mui/material/styles' {
   }
 }
 
-const theme = createTheme({
+const themeBuilder = (fontFamily?: string) => createTheme({
   palette,
-  typography,
+  typography:{
+    ...typography,
+    fontFamily,
+  },
   customStyles
 })
 
-export const ThemeConfig: React.FC<ThemeProp> = ({ children }) => (
+const defaultTheme = themeBuilder()
+
+export const ThemeConfig: React.FC<ThemeProp> = ({ children }) => {
+  const {themeFontFamily} = useAccessibility()
+  const theme = themeBuilder(themeFontFamily)
+    return(
     <ThemeProvider theme={theme}>
       <CssBaseline />
       {children}
     </ThemeProvider>
-  )
+  )}
 
-export { theme }
+export {defaultTheme as theme}

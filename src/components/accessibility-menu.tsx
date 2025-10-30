@@ -19,10 +19,10 @@ const AccessibilityMenu = () => {
     clearSettings,
     contrastEnabled,
     readingMaskEnabled,
-    textSize,
+    themeFontFamily,
     toggleContrast,
     toggleReadingMask,
-    increaseTextSize,
+    changeFontFamily,
   } = useAccessibility();
   
   return (
@@ -63,18 +63,10 @@ const AccessibilityMenu = () => {
               </Grid>
               <Grid item xs={6}>
                 <ClickButton 
-                click={increaseTextSize}
+                click={()=>changeFontFamily("OpenDyslexic")}
                 title={`Texto maior`} 
                 backIcon={<FormatSizeIcon sx={{ fontSize: 36 }} />}
-                endIcon={<Box sx={customStyles.accessibilityMenu.textLevelContainer}>
-                {[ 18, 20, 22, 24].map((size, index) => (
-                  <Box
-                    key={index}
-                    sx={customStyles.accessibilityMenu.textLevelIndicator(themePalette, textSize, size)}
-                  />
-                ))}
-              </Box>}
-                isActive={textSize > 16}
+                isActive={Boolean(themeFontFamily)}
                 sx={customStyles.accessibilityMenu.buttonGrid} />
               </Grid>
             </Grid>
