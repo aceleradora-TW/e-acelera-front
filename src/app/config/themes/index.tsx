@@ -25,12 +25,17 @@ declare module '@mui/material/styles' {
     customClass?: PaletteColor
   }
   interface PaletteOptions {
-    button?: PaletteColorOptions
-    buttonHover?: PaletteColorOptions
-    statusSelect?: PaletteColorOptions
-    textColor?: PaletteColorOptions
-    bgColor?: PaletteColorOptions
-    customClass?: PaletteColorOptions
+    button?: PaletteColorOptions;
+    buttonHover?: PaletteColorOptions;
+    statusSelect?: PaletteColorOptions;
+    textColor?: PaletteColorOptions;
+    bgColor?: PaletteColorOptions;
+    customClass?: PaletteColorOptions;
+    accent?: {
+      blue: string;
+      pink: string;
+      orange: string;
+    }
   }
 }
 

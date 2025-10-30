@@ -77,6 +77,40 @@ export interface Theme {
     };
     marginBottom: string;
   };
+
+  accessibilityReadMask: (mouseY: number, maskHeight: number) => {
+    background: {
+      position: string;
+      top: number;
+      left: number;
+      width: string;
+      height: string;
+      background: string;
+      pointerEvents: string;
+      zIndex: number;
+    }, 
+    topLine: {
+      position: string;
+      top: string;
+      left: number;
+      width: string;
+      height: string;
+      backgroundColor: string;
+      zIndex: number;
+      pointerEvents: string;
+    },
+    bottonLine: {
+      position: string;
+      top: string;
+      left: number;
+      width: string;
+      height: string;
+      backgroundColor: string;
+      zIndex: number;
+      pointerEvents: string;
+    }
+  }
+
   Footer: {
     background: string;
     color: string;

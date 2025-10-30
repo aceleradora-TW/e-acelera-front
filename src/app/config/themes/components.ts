@@ -271,82 +271,88 @@ export const customStyles: Theme = {
   },
   accessibilityMenu: {
     containerFab: {
-      position: 'fixed',
+      position: "fixed",
       bottom: 16,
       right: 16,
       zIndex: 1300,
-      '&:hover .label': {
+      "&:hover .label": {
         opacity: 1,
-        transform: 'translateX(-15%)',
+        transform: "translateX(-15%)",
       },
     },
     labelFab: {
-      position: 'absolute',
+      position: "absolute",
       bottom: 16,
-      top: '15%',
+      top: "15%",
       right: 16,
       backgroundImage: `linear-gradient(270deg, ${themePalette.button}, ${themePalette.accentBlue})`,
       color: themePalette.baseBgColor,
-      padding: '6px 12px',
-      borderRadius: '100px 0px 0px 100px',
+      padding: "6px 12px",
+      borderRadius: "100px 0px 0px 100px",
       height: 45,
       width: 210,
-      whiteSpace: 'nowrap',
+      whiteSpace: "nowrap",
       opacity: 0,
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'left',
-      transform: 'translateX(0)',
-      transition: 'all 0.3s ease',
-      boxShadow: `0px 4px 12px ${themePalette.defaultTextColor.replace('rgb', 'rgba').replace(')', ', 0.3)')}`,
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "left",
+      transform: "translateX(0)",
+      transition: "all 0.3s ease",
+      boxShadow: `0px 4px 12px ${themePalette.defaultTextColor
+        .replace("rgb", "rgba")
+        .replace(")", ", 0.3)")}`,
     },
     fabButton: {
-      border: '4px transparent solid',
-      backgroundOrigin: 'border-box',
-      backgroundClip: 'border-box',
+      border: "4px transparent solid",
+      backgroundOrigin: "border-box",
+      backgroundClip: "border-box",
       boxShadow: `
         inset 0 0 0 4px white,
-        0px 4px 12px ${themePalette.defaultTextColor.replace('rgb', 'rgba').replace(')', ', 0.3)')}
+        0px 4px 12px ${themePalette.defaultTextColor
+          .replace("rgb", "rgba")
+          .replace(")", ", 0.3)")}
       `,
       backgroundImage: `linear-gradient(190deg, ${themePalette.button}, ${themePalette.accentBlue})`,
       width: 70,
       height: 70,
       padding: 0,
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      '&:hover': {
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      "&:hover": {
         backgroundImage: `linear-gradient(190deg, ${themePalette.button}, ${themePalette.button})`,
       },
-      '&:active': {
+      "&:active": {
         boxShadow: `
           inset 0 0 0 4px white,
-          0px 4px 12px ${themePalette.defaultTextColor.replace('rgb', 'rgba').replace(')', ', 0.3)')}
+          0px 4px 12px ${themePalette.defaultTextColor
+            .replace("rgb", "rgba")
+            .replace(")", ", 0.3)")}
         `,
       },
     },
     menuPaper: {
-      position: 'fixed',
+      position: "fixed",
       bottom: 90,
       width: 300,
       minHeight: 200,
-      display: 'flex',
+      display: "flex",
       right: 16,
       padding: 0,
       borderRadius: 2,
       zIndex: 1300,
-      overflow: 'hidden',
-      flexDirection: 'column',
+      overflow: "hidden",
+      flexDirection: "column",
       backgroundColor: themePalette.baseBgColor,
     },
 
     menuHeader: {
       backgroundImage: `linear-gradient(120deg, ${themePalette.accentBlue}, ${themePalette.button})`,
       color: themePalette.baseBgColor,
-      padding: '8px 10px',
-      display: 'flex',
-      justifyContent: 'space-between',
-      alignItems: 'center',
+      padding: "8px 10px",
+      display: "flex",
+      justifyContent: "space-between",
+      alignItems: "center",
       borderRadius: 0,
     },
 
@@ -357,67 +363,75 @@ export const customStyles: Theme = {
       minWidth: 20,
       minHeight: 20,
       padding: 1,
-      borderRadius: '50%',
+      borderRadius: "50%",
       backgroundColor: themePalette.button,
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-      border: '1px solid white',
-      '&:hover': {
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      border: "1px solid white",
+      "&:hover": {
         backgroundColor: themePalette.baseBgColor,
         color: themePalette.button,
-        border: '1px transparent solid',
+        border: "1px transparent solid",
       },
     },
 
     buttonGrid: {
-      flexDirection: 'column',
-      alignItems: 'center',
-      justifyContent: 'center',
-      textAlign: 'center',
-      width: '100%',
+      flexDirection: "column",
+      alignItems: "center",
+      justifyContent: "center",
+      textAlign: "center",
+      width: "100%",
       height: 90,
       padding: 4,
       lineHeight: 1,
     },
 
     footerContainer: {
-      marginTop: 'auto',
-      display: 'flex',
-      flexDirection: 'column',
+      marginTop: "auto",
+      display: "flex",
+      flexDirection: "column",
     },
 
     footerLine: {
       backgroundImage: `linear-gradient(120deg, ${themePalette.accentPink}, ${themePalette.accentOrange})`,
       height: 4,
-      width: '100%',
+      width: "100%",
     },
 
     footerBox: {
       backgroundColor: themePalette.accentBlue,
-      display: 'flex',
-      justifyContent: 'center',
-      padding: '10px',
+      display: "flex",
+      justifyContent: "center",
+      padding: "10px",
       height: 70,
     },
-  
+
     textLevelContainer: {
-      display: 'center', 
-      justifycontent: 'center', 
-      gap: 0.5, 
+      display: "center",
+      justifycontent: "center",
+      gap: 0.5,
       marginTop: 1,
     },
 
-    textLevelIndicator: (themePalette: any, textSize: number, size: number) => ({
-      width: 22, 
+    textLevelIndicator: (
+      themePalette: any,
+      textSize: number,
+      size: number
+    ) => ({
+      width: 22,
       height: 4,
       borderRadius: 0.6,
-      backgroundColor: textSize >= size ? themePalette.baseBgColor : themePalette.button,
-      transition: 'background-color 0.3s ease',
-      border: textSize < size ? `1px solid ${themePalette.baseBgColor}` : `1px solid ${themePalette.baseBgColor}`,
+      backgroundColor:
+        textSize >= size ? themePalette.baseBgColor : themePalette.button,
+      transition: "background-color 0.3s ease",
+      border:
+        textSize < size
+          ? `1px solid ${themePalette.baseBgColor}`
+          : `1px solid ${themePalette.baseBgColor}`,
     }),
   },
-  
+
   impactSection: {
     background: themePalette.button,
     color: themePalette.baseBgColor,
@@ -450,5 +464,44 @@ export const customStyles: Theme = {
     background: themePalette.button,
     color: themePalette.baseBgColor,
     textAlign: "center",
-  }
+  },
+
+  accessibilityReadMask: (mouseY: number, maskHeight: number) => ({
+    background: {
+      position: "fixed",
+      top: 0,
+      left: 0,
+      width: "100vw",
+      height: "100vh",
+      background: `linear-gradient(
+                to bottom,
+                rgba(0,0,0,0.5) ${mouseY - maskHeight / 2}px,
+                transparent ${mouseY - maskHeight / 2}px,
+                transparent ${mouseY + maskHeight / 2}px,
+                rgba(0,0,0,0.5) ${mouseY + maskHeight / 2}px
+              )`,
+      pointerEvents: "none",
+      zIndex: 9999,
+    },
+    topLine: {
+      position: "fixed",
+      top: `${mouseY - maskHeight / 2}px`,
+      left: 0,
+      width: "100vw",
+      height: "3px",
+      backgroundColor: themePalette.accentBlue,
+      zIndex: 9999,
+      pointerEvents: "none",
+    },
+    bottonLine: {
+      position: "fixed",
+      top: `${mouseY + maskHeight / 2}px`,
+      left: 0,
+      width: "100vw",
+      height: "3px",
+      backgroundColor: themePalette.accentBlue,
+      zIndex: 9999,
+      pointerEvents: "none",
+    },
+  }),
 };
