@@ -1,4 +1,4 @@
-import { Grid, Typography, useTheme } from "@mui/material";
+import { Box, Grid, Typography, useTheme } from "@mui/material";
 import AccordionFaq from "./AccordionFaq";
 
 export default function FaqQuestion() {
@@ -34,27 +34,29 @@ export default function FaqQuestion() {
   ];
   
   return (
-    <Grid sx={{padding: 4}} container spacing={{ xs:2, md:4}}>
-      <Grid item xs={12} md={4}
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-        }}
-      >
-        <Typography variant="h3" gutterBottom color={theme.palette.textColor?.main}>
-          Tire suas dúvidas - FAQ
-        </Typography>
-        <Typography variant="body2">
-          Começar algo novo pode gerar muitas perguntas, e tudo bem! Aqui estão
-          as dúvidas mais comuns da nossa comunidade, respondidas de forma
-          simples e direta.
-        </Typography>
+    <Box width={"100%"} sx={{display: "flex", justifyContent: "center"}}>
+      <Grid sx={{ maxWidth: "1292px", paddingY: 4}} container spacing={{ xs:2, md:4}}>
+        <Grid item xs={12} md={4}
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+          }}
+        >
+          <Typography variant="h3" gutterBottom color={theme.palette.textColor?.main}>
+            Tire suas dúvidas - FAQ
+          </Typography>
+          <Typography variant="body2">
+            Começar algo novo pode gerar muitas perguntas, e tudo bem! Aqui estão
+            as dúvidas mais comuns da nossa comunidade, respondidas de forma
+            simples e direta.
+          </Typography>
+        </Grid>
+        <Grid item xs={12} md={8}>
+          {faqData.map((item, i) => (
+              <AccordionFaq question={item.question} answer={item.answer} key={i} />
+            ))}
+        </Grid>
       </Grid>
-      <Grid item xs={12} md={8}>
-        {faqData.map((item, i) => (
-            <AccordionFaq question={item.question} answer={item.answer} key={i} />
-          ))}
-      </Grid>
-    </Grid>
+    </Box>
   );
 }
