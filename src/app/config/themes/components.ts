@@ -1,6 +1,7 @@
 import { themePalette } from "./palette";
+import { Theme } from "./types";
 
-export const customStyles = {
+export const customStyles: Theme = {
   button: {
     backgroundColor: themePalette.baseBgColor,
     borderColor: themePalette.button,
@@ -454,6 +455,10 @@ export const customStyles = {
       zIndex: 1,
       backgroundSize: "cover",
     },
+  },
+  testimonials: {
+    background: themePalette.button,
+    color: themePalette.baseBgColor,
   },
   sponsorsSection: {
     background: themePalette.button,
