@@ -57,5 +57,5 @@ export default async function RootLayout({
         </AccessibilityProvider>
       </body>
     </html>
-  )
+  );
 }
