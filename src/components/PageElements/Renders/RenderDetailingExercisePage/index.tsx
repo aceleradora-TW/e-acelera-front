@@ -26,7 +26,7 @@ export const RenderDetailingExercisePage = (id: string) => {
     <GlobalContextProvider>
     <LayoutPage>
       <DetailingExerciseContent dataExercise={renderDataExercise} dataTopic={renderDataTopic} id={id} />
-    </LayoutPage>
+      </LayoutPage>
     </GlobalContextProvider>
   );
 }

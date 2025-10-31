@@ -7,6 +7,7 @@ import { ContainerButtonsExercise } from "../../Container/ContainerButtonsExerci
 import { Heading } from "@/components/Heading";
 import StatusSelect from "@/components/StatusSelect";
 import { ElementType } from "@/types/typeTopic";
+import Editor from "@/components/Editor";
 
 interface DetailingContentProps {
   dataTopic: ApiResponse
@@ -70,6 +71,7 @@ export const DetailingExerciseContent: React.FC<DetailingContentProps> = ({
           field={element.field as ExercisesField}
         />
       ))}
+      <Editor />
     </>
   );
 };

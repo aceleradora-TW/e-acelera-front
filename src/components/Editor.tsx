@@ -84,6 +84,9 @@ export default function Editor() {
           }
         );
 
+        console.log(response);
+        
+
         const result = await response.json();
 
         const saida =
@@ -133,11 +136,11 @@ export default function Editor() {
 
   return (
     <Grid container spacing={2} padding={4}>
-      <Grid item xs={12}>
+      {/* <Grid item xs={12}>
         <Typography variant="h2">Exercicio {exercise.title} </Typography>
         <Typography>{exercise.description}</Typography>
         <CardHeader title="Editor de Código" />
-      </Grid>
+      </Grid> */}
       <Grid item xs={12} md={7}>
         <Typography variant="body2">Código:</Typography>
         <div
