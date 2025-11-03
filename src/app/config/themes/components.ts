@@ -1,6 +1,7 @@
 import { themePalette } from "./palette";
+import { Theme } from "./types";
 
-export const customStyles = {
+export const customStyles: Theme = {
   button: {
     backgroundColor: themePalette.baseBgColor,
     borderColor: themePalette.button,
@@ -19,6 +20,7 @@ export const customStyles = {
       border: "1px solid transparent",
     },
   },
+
   buttonActive: {
     backgroundColor: themePalette.button,
     color: themePalette.baseBgColor,
@@ -33,7 +35,7 @@ export const customStyles = {
     borderRadius: "6px",
     margin: 0,
   },
-  
+
   linkActive: {
     borderBottom: "solid",
     color: themePalette.primaryTextColor,
@@ -48,9 +50,9 @@ export const customStyles = {
     margin: "0 0.5rem",
     padding: "8px",
     "&:hover": {
-      backgroundColor: "rgb(246, 250, 253)"
+      backgroundColor: "rgb(246, 250, 253)",
     },
-    borderRadius: "0"
+    borderRadius: "0",
   },
   link: {
     color: themePalette.defaultTextColor,
@@ -63,12 +65,12 @@ export const customStyles = {
     margin: "0 0.8rem",
     padding: "8px",
     "&:hover": {
-      backgroundColor: "rgb(246, 250, 253)"
+      backgroundColor: "rgb(246, 250, 253)",
     },
-    borderRadius: "0"
+    borderRadius: "0",
   },
   linkReference: {
-    color: themePalette.defaultTextColor
+    color: themePalette.defaultTextColor,
   },
   logoType: {
     fontSize: "1.2rem",
@@ -77,7 +79,7 @@ export const customStyles = {
     letterSpacing: "0.15px",
     lineHeight: 1.6,
     textDecoration: "none",
-    color: themePalette.primaryTextColor
+    color: themePalette.primaryTextColor,
   },
   logoTypeLogin: {
     fontSize: "2.125rem",
@@ -85,7 +87,7 @@ export const customStyles = {
     letterSpacing: "0.25px",
     lineHeight: 1.2,
     textDecoration: "none",
-    color: themePalette.primaryTextColor
+    color: themePalette.primaryTextColor,
   },
   cardBody: {
     color: themePalette.defaultTextColor,
@@ -94,7 +96,7 @@ export const customStyles = {
     WebkitBoxOrient: "vertical",
     WebkitLineClamp: 1,
     overflow: "hidden",
-    textOverflow: "ellipsis"
+    textOverflow: "ellipsis",
   },
   cardContainer: {
     display: "flex",
@@ -103,7 +105,7 @@ export const customStyles = {
     backgroundColor: themePalette.baseBgColor,
     maxWidth: "100%",
     height: "100%",
-    borderWidth: 2
+    borderWidth: 2,
   },
   cardButtonContainer: {
     backgroundColor: themePalette.baseBgColor,
@@ -111,28 +113,28 @@ export const customStyles = {
     borderWidth: 2,
     height: "100%",
     "&:hover": {
-      transform: "scale(1.1)"
-    }
+      transform: "scale(1.1)",
+    },
   },
   cardContent: {
-    height: "250px"
+    height: "250px",
   },
   cardButtonContent: {
     display: "flex",
     flexDirection: "column",
     alignItems: "flex-start",
-    height: "100%"
+    height: "100%",
   },
   centralizeContent: {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
     maxWidth: "1630px",
-    margin: "0 auto"
+    margin: "0 auto",
   },
   cardMedia: {
     height: 152,
-    marginBottom: 5.5
+    marginBottom: 5.5,
   },
   cardTitle: {
     color: themePalette.primaryTextColor,
@@ -141,7 +143,7 @@ export const customStyles = {
     WebkitLineClamp: 3,
     WebkitBoxOrient: "vertical",
     overflow: "hidden",
-    textOverflow: "ellipsis"
+    textOverflow: "ellipsis",
   },
   cardLoginBox: {
     width: {
@@ -149,22 +151,22 @@ export const customStyles = {
       sm: "60%",
       md: "45%",
       lg: "35%",
-      xl: "30%"
+      xl: "30%",
     },
     height: "30%",
     boxShadow: "0 0 0.4em rgba(44, 44, 44, 0.4)",
-    padding: "40px"
+    padding: "40px",
   },
   containerLogin: {
     height: "100%",
     display: "flex",
     justifyContent: "center",
-    marginTop: "80px"
+    marginTop: "80px",
   },
   boxLogoType: {
     display: "flex",
     gap: "20px",
-    alignItems: "center"
+    alignItems: "center",
   },
   h1Login: {
     fontSize: {
@@ -172,8 +174,8 @@ export const customStyles = {
       sm: "40px",
       md: "40px",
       lg: "44px",
-      xl: "48px"
-    }
+      xl: "48px",
+    },
   },
   body1Login: {
     fontSize: {
@@ -183,17 +185,17 @@ export const customStyles = {
       lg: "24px",
       xl: "24px",
     },
-    marginBottom: "15px"
+    marginBottom: "15px",
   },
   title: {
     textAlign: "left",
     color: themePalette.primaryTextColor,
-    margin: "20px 0"
+    margin: "20px 0",
   },
   breadCrumb: {
     textDecoration: "none",
     color: themePalette.primaryTextColor,
-    marginTop: 1.2
+    marginTop: 1.2,
   },
   cardVideo: {
     display: "flex",
@@ -204,41 +206,41 @@ export const customStyles = {
     maxWidth: "100%",
     height: "100%",
     boxSizing: "border-box",
-    borderRadius: "6px"
+    borderRadius: "6px",
   },
   cardVideoLink: {
     display: "flex",
     flexDirection: "column",
-    justifyContent: "center"
+    justifyContent: "center",
   },
   cardVideoNumber: {
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
-    marginTop: 4
+    marginTop: 4,
   },
   cardVideoSelect: {
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
-    marginTop: 7
+    marginTop: 7,
   },
   cardVideoDescription: {
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
     marginTop: 5,
-    marginRight: 1.3
+    marginRight: 1.3,
   },
   advanceExercises: {
     color: themePalette.button,
-    padding: "10px 20px"
+    padding: "10px 20px",
   },
   cardMediaImage: {
     maxWidth: "100%",
     height: "auto",
     display: "block",
-    objectFit: "cover"
+    objectFit: "cover",
   },
   styleExclamation: {
     height: "80px",
@@ -246,7 +248,7 @@ export const customStyles = {
     borderRadius: "50%",
     display: "flex",
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
   },
   styleModal: {
     position: "absolute",
@@ -259,7 +261,7 @@ export const customStyles = {
     borderRadius: "5px",
     boxShadow: 24,
     p: 4,
-    textAlign: "center"
+    textAlign: "center",
   },
   Footer: {
     background: themePalette.primaryTextColor,
@@ -270,82 +272,88 @@ export const customStyles = {
   },
   accessibilityMenu: {
     containerFab: {
-      position: 'fixed',
+      position: "fixed",
       bottom: 16,
       right: 16,
       zIndex: 1300,
-      '&:hover .label': {
+      "&:hover .label": {
         opacity: 1,
-        transform: 'translateX(-15%)',
+        transform: "translateX(-15%)",
       },
     },
     labelFab: {
-      position: 'absolute',
+      position: "absolute",
       bottom: 16,
-      top: '15%',
+      top: "15%",
       right: 16,
       backgroundImage: `linear-gradient(270deg, ${themePalette.button}, ${themePalette.accentBlue})`,
       color: themePalette.baseBgColor,
-      padding: '6px 12px',
-      borderRadius: '100px 0px 0px 100px',
+      padding: "6px 12px",
+      borderRadius: "100px 0px 0px 100px",
       height: 45,
       width: 210,
-      whiteSpace: 'nowrap',
+      whiteSpace: "nowrap",
       opacity: 0,
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'left',
-      transform: 'translateX(0)',
-      transition: 'all 0.3s ease',
-      boxShadow: `0px 4px 12px ${themePalette.defaultTextColor.replace('rgb', 'rgba').replace(')', ', 0.3)')}`,
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "left",
+      transform: "translateX(0)",
+      transition: "all 0.3s ease",
+      boxShadow: `0px 4px 12px ${themePalette.defaultTextColor
+        .replace("rgb", "rgba")
+        .replace(")", ", 0.3)")}`,
     },
     fabButton: {
-      border: '4px transparent solid',
-      backgroundOrigin: 'border-box',
-      backgroundClip: 'border-box',
+      border: "4px transparent solid",
+      backgroundOrigin: "border-box",
+      backgroundClip: "border-box",
       boxShadow: `
         inset 0 0 0 4px white,
-        0px 4px 12px ${themePalette.defaultTextColor.replace('rgb', 'rgba').replace(')', ', 0.3)')}
+        0px 4px 12px ${themePalette.defaultTextColor
+          .replace("rgb", "rgba")
+          .replace(")", ", 0.3)")}
       `,
       backgroundImage: `linear-gradient(190deg, ${themePalette.button}, ${themePalette.accentBlue})`,
       width: 70,
       height: 70,
       padding: 0,
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      '&:hover': {
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      "&:hover": {
         backgroundImage: `linear-gradient(190deg, ${themePalette.button}, ${themePalette.button})`,
       },
-      '&:active': {
+      "&:active": {
         boxShadow: `
           inset 0 0 0 4px white,
-          0px 4px 12px ${themePalette.defaultTextColor.replace('rgb', 'rgba').replace(')', ', 0.3)')}
+          0px 4px 12px ${themePalette.defaultTextColor
+            .replace("rgb", "rgba")
+            .replace(")", ", 0.3)")}
         `,
       },
     },
     menuPaper: {
-      position: 'fixed',
+      position: "fixed",
       bottom: 90,
       width: 300,
       minHeight: 200,
-      display: 'flex',
+      display: "flex",
       right: 16,
       padding: 0,
       borderRadius: 2,
       zIndex: 1300,
-      overflow: 'hidden',
-      flexDirection: 'column',
+      overflow: "hidden",
+      flexDirection: "column",
       backgroundColor: themePalette.baseBgColor,
     },
 
     menuHeader: {
       backgroundImage: `linear-gradient(120deg, ${themePalette.accentBlue}, ${themePalette.button})`,
       color: themePalette.baseBgColor,
-      padding: '8px 10px',
-      display: 'flex',
-      justifyContent: 'space-between',
-      alignItems: 'center',
+      padding: "8px 10px",
+      display: "flex",
+      justifyContent: "space-between",
+      alignItems: "center",
       borderRadius: 0,
     },
 
@@ -356,70 +364,72 @@ export const customStyles = {
       minWidth: 20,
       minHeight: 20,
       padding: 1,
-      borderRadius: '50%',
+      borderRadius: "50%",
       backgroundColor: themePalette.button,
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-      border: '1px solid white',
-      '&:hover': {
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      border: "1px solid white",
+      "&:hover": {
         backgroundColor: themePalette.baseBgColor,
         color: themePalette.button,
-        border: '1px transparent solid',
+        border: "1px transparent solid",
       },
     },
 
     buttonGrid: {
-      flexDirection: 'column',
-      alignItems: 'center',
-      justifyContent: 'center',
-      textAlign: 'center',
-      width: '100%',
+      flexDirection: "column",
+      alignItems: "center",
+      justifyContent: "center",
+      textAlign: "center",
+      width: "100%",
       height: 90,
       padding: 4,
       lineHeight: 1,
     },
 
     footerContainer: {
-      marginTop: 'auto',
-      display: 'flex',
-      flexDirection: 'column',
+      marginTop: "auto",
+      display: "flex",
+      flexDirection: "column",
     },
 
     footerLine: {
       backgroundImage: `linear-gradient(120deg, ${themePalette.accentPink}, ${themePalette.accentOrange})`,
       height: 4,
-      width: '100%',
+      width: "100%",
     },
 
     footerBox: {
       backgroundColor: themePalette.accentBlue,
-      display: 'flex',
-      justifyContent: 'center',
-      padding: '10px',
+      display: "flex",
+      justifyContent: "center",
+      padding: "10px",
       height: 70,
     },
-  
+
     textLevelContainer: {
-      display: 'center', 
-      justifycontent: 'center', 
-      gap: 0.5, 
+      display: "center",
+      justifycontent: "center",
+      gap: 0.5,
       marginTop: 1,
     },
 
-    textLevelIndicator: (themePalette: any, textSize: number, size: number) => ({
-      width: 22, 
-      height: 4 ,
+    textLevelIndicator: (
+      themePalette: any,
+      textSize: number,
+      size: number
+    ) => ({
+      width: 22,
+      height: 4,
       borderRadius: 0.6,
-      backgroundColor: textSize >= size ? themePalette.baseBgColor : themePalette.button ,
-      transition: 'background-color 0.3s ease',
-      border: textSize < size ? `1px solid ${themePalette.baseBgColor}` : `1px solid ${themePalette.baseBgColor}`,
-    }),
-
-     closeButtonSx: (isHigh: boolean) => ({
-      ...(customStyles.accessibilityMenu.closeButton as any),
-      ...(isHigh? { backgroundColor: '#fff', color: '#000',
-            '&:hover': {backgroundColor: themePalette.button, color: '#fff',},}: {}),
+      backgroundColor:
+        textSize >= size ? themePalette.baseBgColor : themePalette.button,
+      transition: "background-color 0.3s ease",
+      border:
+        textSize < size
+          ? `1px solid ${themePalette.baseBgColor}`
+          : `1px solid ${themePalette.baseBgColor}`,
     }),
 
     formControl: {
@@ -440,6 +450,79 @@ export const customStyles = {
       "& .MuiOutlinedInput-root": {
         height: "40px",
       },
-   },
+    },
   },
-}
+
+  impactSection: {
+    background: themePalette.button,
+    color: themePalette.baseBgColor,
+    textAlign: "center",
+  },
+  banner: {
+    container: {
+      display: "flex",
+    },
+    contentBox: {
+      position: "relative",
+      zIndex: 2,
+      color: themePalette.baseBgColor,
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "center",
+    },
+    imageBox: {
+      flexGrow: 1,
+      position: "relative",
+      zIndex: 1,
+      backgroundSize: "cover",
+    },
+  },
+  testimonials: {
+    background: themePalette.button,
+    color: themePalette.baseBgColor,
+  },
+  sponsorsSection: {
+    background: themePalette.button,
+    color: themePalette.baseBgColor,
+    textAlign: "center",
+  },
+
+  accessibilityReadMask: (mouseY: number, maskHeight: number) => ({
+    background: {
+      position: "fixed",
+      top: 0,
+      left: 0,
+      width: "100vw",
+      height: "100vh",
+      background: `linear-gradient(
+                to bottom,
+                rgba(0,0,0,0.5) ${mouseY - maskHeight / 2}px,
+                transparent ${mouseY - maskHeight / 2}px,
+                transparent ${mouseY + maskHeight / 2}px,
+                rgba(0,0,0,0.5) ${mouseY + maskHeight / 2}px
+              )`,
+      pointerEvents: "none",
+      zIndex: 9999,
+    },
+    topLine: {
+      position: "fixed",
+      top: `${mouseY - maskHeight / 2}px`,
+      left: 0,
+      width: "100vw",
+      height: "3px",
+      backgroundColor: themePalette.accentBlue,
+      zIndex: 9999,
+      pointerEvents: "none",
+    },
+    bottonLine: {
+      position: "fixed",
+      top: `${mouseY + maskHeight / 2}px`,
+      left: 0,
+      width: "100vw",
+      height: "3px",
+      backgroundColor: themePalette.accentBlue,
+      zIndex: 9999,
+      pointerEvents: "none",
+    },
+  }),
+};

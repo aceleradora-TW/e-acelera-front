@@ -9,8 +9,8 @@ import { ThemeConfig } from "./config/themes"
 import { Footer } from "@/components/Footer/Footer"
 import { AccessibilityProvider } from "@/context/accessibility.context"
 import AccessibilityMenu from "@/components/accessibility-menu"
-const menuItems = ["Nivelamento", "Autoestudo"]
 
+const menuItems = ["Nivelamento", "Autoestudo"]
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
@@ -33,28 +33,27 @@ export default async function RootLayout({
           <ThemeConfig>
             <ClientSessionProvider>
               <AccessibilityMenu />
-                <Box
-                  sx={{
+              <Box
+                sx={{
                   minHeight: "100vh",
                   display: "flex",
                   flexDirection: "column",
                 }}
-                ><AccessibilityProvider>
-                  <Box sx={{ marginBottom: "80px" }}>
-                    <ResponsiveAppBar list={menuItems} session={session} />
-                  </Box>
-                  <Box component="main" sx={{ flex: 1 }}>
-                    {children}
-                  </Box>
-                  <Footer 
-                    linkedinUrl={"https://www.linkedin.com/school/aceleradora-%C3%A1gil/?originalSubdomain=br"} 
-                    projectUrl={"https://www.thoughtworks.com/pt-br/about-us/diversity-and-inclusion/aceleradora"} />
-                  </AccessibilityProvider>
+              >
+                <Box sx={{ marginBottom: "80px" }}>
+                  <ResponsiveAppBar list={menuItems} session={session} />
                 </Box>
+                <Box component="main" sx={{ flex: 1 }}>
+                  {children}
+                </Box>
+                <Footer
+                  linkedinUrl={"https://www.linkedin.com/school/aceleradora-%C3%A1gil/?originalSubdomain=br"}
+                  projectUrl={"https://www.thoughtworks.com/pt-br/about-us/diversity-and-inclusion/aceleradora"} />
+              </Box>
             </ClientSessionProvider>
           </ThemeConfig>
         </AccessibilityProvider>
       </body>
     </html>
-  )
+  );
 }

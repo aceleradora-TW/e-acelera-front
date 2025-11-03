@@ -1,7 +1,4 @@
 'use client'
-import { theme } from '@/app/config/themes';
-import { highContrastTheme } from '@/app/config/themes/highContrast';
-import { CssBaseline, ThemeProvider } from '@mui/material';
 import { createContext, useContext, useEffect, useState } from 'react';
 
 interface AccessibilityContextType {
@@ -22,8 +19,8 @@ export const AccessibilityProvider = ({ children }: { children: React.ReactNode 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [contrastEnabled, setContrastEnabled] = useState(false);
   const [readingMaskEnabled, setReadingMaskEnabled] = useState(false);
-  const [textSize, setTextSize] = useState(16); 
-  
+  const [textSize, setTextSize] = useState(16);
+
   useEffect(() => {
     const storedContrast = localStorage.getItem('contrastEnabled');
     if (storedContrast === 'true') {
@@ -31,47 +28,57 @@ export const AccessibilityProvider = ({ children }: { children: React.ReactNode 
     }
   }, []);
 
-   const toggleContrast = () => {
+  const toggleContrast = () => {
     setContrastEnabled(prev => {
       const newValue = !prev
       localStorage.setItem('contrastEnabled', String(newValue))
       return newValue
     })
-  }
-  const toggleReadingMask = () => setReadingMaskEnabled(prev => !prev);
-  const toggleMenu = () => setIsMenuOpen(prev => !prev);
- 
-  const increaseTextSize = () => {
-    setTextSize (prev => (prev >= 24 ? 16 : prev + 2));
   };
+
+  const toggleReadingMask = () => {
+    setReadingMaskEnabled((prev) => {
+      const newValue = !prev;
+      localStorage.setItem('readingMaskEnabled', String(newValue));
+      return newValue;
+    });
+  };
+  const toggleMenu = () => setIsMenuOpen(prev => !prev);
+
+  const increaseTextSize = () => {
+    setTextSize(prev => (prev >= 24 ? 16 : prev + 2));
+  };
+
+  useEffect(() => {
+    const storedMask = localStorage.getItem('readingMaskEnabled');
+    if (storedMask === 'true') {
+      setReadingMaskEnabled(true);
+    }
+  }, []);
+
 
   const clearSettings = () => {
     setContrastEnabled(false);
     localStorage.removeItem('contrastEnabled');
     setReadingMaskEnabled(false);
     setTextSize(16);
+    localStorage.clear();
   };
-  
+
   return (
     <AccessibilityContext.Provider
       value={{
-      isMenuOpen,
-      toggleMenu,
-      clearSettings,
-      contrastEnabled,
-      toggleContrast,
-      readingMaskEnabled,
-      toggleReadingMask,
-      textSize,
-      increaseTextSize,
+        isMenuOpen,
+        toggleMenu,
+        clearSettings,
+        contrastEnabled,
+        toggleContrast,
+        readingMaskEnabled,
+        toggleReadingMask,
+        textSize,
+        increaseTextSize,
       }}
-    >
-       <ThemeProvider 
-        theme={contrastEnabled ? highContrastTheme : theme}
-        key={contrastEnabled ? 'dark' : 'normal'}>
-        <CssBaseline />
-        {children}
-      </ThemeProvider>
+    >{children}
     </AccessibilityContext.Provider>
   );
 };
