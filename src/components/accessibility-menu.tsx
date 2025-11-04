@@ -1,5 +1,5 @@
 'use client'
-import { Box, Fab, Grid, Paper, Typography } from '@mui/material';
+import { Box, Fab, Grid, Paper, Typography, useTheme } from '@mui/material';
 import AccessibilityNewIcon from '@mui/icons-material/AccessibilityNew';
 import { useAccessibility } from '../context/accessibility.context';
 import ContrastIcon from '@mui/icons-material/Contrast';
@@ -27,21 +27,18 @@ const AccessibilityMenu = () => {
     increaseTextSize,
   } = useAccessibility();
 
-  const isHigh = Boolean(contrastEnabled);
-  const menuBg = isHigh ? '#121212' : customStyles.accessibilityMenu.menuPaper.backgroundColor;
-  const headerBg = isHigh ? '#222' : (customStyles.accessibilityMenu.menuHeader as any).backgroundImage;
-  const footerBoxBg = isHigh ? '#222' : customStyles.accessibilityMenu.footerBox.backgroundColor;
+  const theme = useTheme();
 
   return (
     <>
-      <Box sx={customStyles.accessibilityMenu.containerFab}>
-        <Box className="label" sx={customStyles.accessibilityMenu.labelFab}>
+      <Box sx={theme.customStyles.accessibilityMenu.containerFab}>
+        <Box className="label" sx={theme.customStyles.accessibilityMenu.labelFab}>
           <Typography variant="body1"> Menu de acessibilidade </Typography>
         </Box>
         <Fab
           color="primary"
           onClick={toggleMenu}
-          sx={customStyles.accessibilityMenu.fabButton}
+          sx={theme.customStyles.accessibilityMenu.fabButton}
         >
           <AccessibilityNewIcon
             sx={{ color: themePalette.baseBgColor, fontSize: 32 }}
@@ -50,8 +47,8 @@ const AccessibilityMenu = () => {
       </Box>
 
       {isMenuOpen && (
-        <Paper elevation={4} sx={customStyles.accessibilityMenu.menuPaper}>
-          <Box sx={customStyles.accessibilityMenu.menuHeader}>
+        <Paper elevation={4} sx={theme.customStyles.accessibilityMenu.menuPaper}>
+          <Box sx={theme.customStyles.accessibilityMenu.menuHeader}>
             <Box
               sx={{
                 width: 20,
@@ -65,7 +62,7 @@ const AccessibilityMenu = () => {
             <ClickButton
               click={toggleMenu}
               backIcon={<CloseIcon sx={{ fontSize: 16 }} />}
-              sx={customStyles.accessibilityMenu.closeButton}
+              sx={theme.customStyles.accessibilityMenu.closeButton}
             />
           </Box>
           <Box sx={{ padding: 2, overflowY: "auto" }}>
@@ -73,10 +70,10 @@ const AccessibilityMenu = () => {
               <Grid item xs={6}>
                 <ClickButton
                   click={toggleContrast}
-                  title="Alto contraste"
+                  title="Modo Escuro"
                   backIcon={<ContrastIcon sx={{ fontSize: 36 }} />}
                   isActive={contrastEnabled}
-                  sx={customStyles.accessibilityMenu.buttonGrid}
+                  sx={theme.customStyles.accessibilityMenu.buttonGrid}
                 />
               </Grid>
               <Grid item xs={6}>
@@ -85,7 +82,7 @@ const AccessibilityMenu = () => {
                   title="Máscara leitura"
                   backIcon={<SmartScreenIcon sx={{ fontSize: 36 }} />}
                   isActive={readingMaskEnabled}
-                  sx={customStyles.accessibilityMenu.buttonGrid}
+                  sx={theme.customStyles.accessibilityMenu.buttonGrid}
                 />
               </Grid>
               <Grid item xs={6}>
@@ -94,11 +91,11 @@ const AccessibilityMenu = () => {
                   title={`Texto maior`}
                   backIcon={<FormatSizeIcon sx={{ fontSize: 36 }} />}
                   endIcon={
-                    <Box sx={customStyles.accessibilityMenu.textLevelContainer}>
+                    <Box sx={theme.customStyles.accessibilityMenu.textLevelContainer}>
                       {[18, 20, 22, 24].map((size, index) => (
                         <Box
                           key={index}
-                          sx={customStyles.accessibilityMenu.textLevelIndicator(
+                          sx={theme.customStyles.accessibilityMenu.textLevelIndicator(
                             themePalette,
                             textSize,
                             size
@@ -108,14 +105,14 @@ const AccessibilityMenu = () => {
                     </Box>
                   }
                   isActive={textSize > 16}
-                  sx={customStyles.accessibilityMenu.buttonGrid}
+                  sx={theme.customStyles.accessibilityMenu.buttonGrid}
                 />
               </Grid>
             </Grid>
           </Box>
-          <Box sx={customStyles.accessibilityMenu.footerContainer}>
-            <Box sx={customStyles.accessibilityMenu.footerLine} />
-            <Box sx={customStyles.accessibilityMenu.footerBox}>
+          <Box sx={theme.customStyles.accessibilityMenu.footerContainer}>
+            <Box sx={theme.customStyles.accessibilityMenu.footerLine} />
+            <Box sx={theme.customStyles.accessibilityMenu.footerBox}>
               <ClickButton
                 click={clearSettings}
                 title="Limpar Configurações"
