@@ -19,9 +19,23 @@ export const AccessibilityProvider = ({ children }: { children: React.ReactNode 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [contrastEnabled, setContrastEnabled] = useState(false);
   const [readingMaskEnabled, setReadingMaskEnabled] = useState(false);
-  const [textSize, setTextSize] = useState(16); 
-  
-  const toggleContrast = () => setContrastEnabled(prev => !prev);
+  const [textSize, setTextSize] = useState(16);
+
+  useEffect(() => {
+    const storedContrast = localStorage.getItem('contrastEnabled');
+    if (storedContrast === 'true') {
+      setContrastEnabled(true);
+    }
+  }, []);
+
+  const toggleContrast = () => {
+    setContrastEnabled(prev => {
+      const newValue = !prev
+      localStorage.setItem('contrastEnabled', String(newValue))
+      return newValue
+    })
+  };
+
   const toggleReadingMask = () => {
     setReadingMaskEnabled((prev) => {
       const newValue = !prev;
@@ -30,43 +44,42 @@ export const AccessibilityProvider = ({ children }: { children: React.ReactNode 
     });
   };
   const toggleMenu = () => setIsMenuOpen(prev => !prev);
- 
+
   const increaseTextSize = () => {
-    setTextSize (prev => (prev >= 24 ? 16 : prev + 2));
+    setTextSize(prev => (prev >= 24 ? 16 : prev + 2));
   };
 
   useEffect(() => {
-     const storedMask = localStorage.getItem('readingMaskEnabled');
-  if (storedMask === 'true') {
-    setReadingMaskEnabled(true);
-  }
-}, []);
+    const storedMask = localStorage.getItem('readingMaskEnabled');
+    if (storedMask === 'true') {
+      setReadingMaskEnabled(true);
+    }
+  }, []);
 
 
   const clearSettings = () => {
     setContrastEnabled(false);
+    localStorage.removeItem('contrastEnabled');
     setReadingMaskEnabled(false);
     setTextSize(16);
     localStorage.clear();
   };
-  
+
   return (
     <AccessibilityContext.Provider
       value={{
-      isMenuOpen,
-      toggleMenu,
-      clearSettings,
-      contrastEnabled,
-      toggleContrast,
-      readingMaskEnabled,
-      toggleReadingMask,
-      textSize,
-      increaseTextSize,
+        isMenuOpen,
+        toggleMenu,
+        clearSettings,
+        contrastEnabled,
+        toggleContrast,
+        readingMaskEnabled,
+        toggleReadingMask,
+        textSize,
+        increaseTextSize,
       }}
-    >
-      {children}
+    >{children}
     </AccessibilityContext.Provider>
-    
   );
 };
 

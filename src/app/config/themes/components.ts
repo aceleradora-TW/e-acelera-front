@@ -20,6 +20,7 @@ export const customStyles: Theme = {
       border: "1px solid transparent",
     },
   },
+
   buttonActive: {
     backgroundColor: themePalette.button,
     color: themePalette.baseBgColor,
@@ -430,6 +431,26 @@ export const customStyles: Theme = {
           ? `1px solid ${themePalette.baseBgColor}`
           : `1px solid ${themePalette.baseBgColor}`,
     }),
+
+    formControl: {
+      width: "100%",
+      "& .MuiInputLabel-root": {
+        color: "#000000",
+      },
+      "& .MuiInputLabel-root.Mui-focused": {
+        color: "#000000",
+      },
+      "& .MuiOutlinedInput-notchedOutline": {
+        borderColor: "#000000",
+        borderRadius: "5px",
+      },
+      "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline": {
+        border: `1px solid #000000`,
+      },
+      "& .MuiOutlinedInput-root": {
+        height: "40px",
+      },
+    },
   },
 
   impactSection: {

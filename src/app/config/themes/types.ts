@@ -3,49 +3,52 @@ type ExtendedCSSProperties = {
 };
 
 export interface Theme {
-  button: ExtendedCSSProperties
-  description: ExtendedCSSProperties
-  linkActive: ExtendedCSSProperties
-  link: ExtendedCSSProperties
-  linkReference: ExtendedCSSProperties
-  logoType: ExtendedCSSProperties
-  logoTypeLogin: ExtendedCSSProperties
-  cardBody: ExtendedCSSProperties
-  cardContainer: ExtendedCSSProperties
-  cardButtonContainer: ExtendedCSSProperties
-  cardContent: ExtendedCSSProperties
-  cardButtonContent: ExtendedCSSProperties
-  cardMedia: ExtendedCSSProperties
-  cardTitle: ExtendedCSSProperties
-  containerLogin: ExtendedCSSProperties
-  boxLogoType: ExtendedCSSProperties
-  title: ExtendedCSSProperties
-  breadCrumb: ExtendedCSSProperties
-  centralizeContent: ExtendedCSSProperties
-  cardVideo: ExtendedCSSProperties
-  cardVideoLink: ExtendedCSSProperties
-  cardVideoNumber: ExtendedCSSProperties
-  cardVideoSelect: ExtendedCSSProperties
-  cardVideoDescription: ExtendedCSSProperties
-  advanceExercises: ExtendedCSSProperties
-  cardMediaImage: ExtendedCSSProperties
-  buttonActive: ExtendedCSSProperties
-  
+  button: ExtendedCSSProperties;
+  description: ExtendedCSSProperties;
+  linkActive: ExtendedCSSProperties;
+  link: ExtendedCSSProperties;
+  linkReference: ExtendedCSSProperties;
+  logoType: ExtendedCSSProperties;
+  logoTypeLogin: ExtendedCSSProperties;
+  cardBody: ExtendedCSSProperties;
+  cardContainer: ExtendedCSSProperties;
+  cardButtonContainer: ExtendedCSSProperties;
+  cardContent: ExtendedCSSProperties;
+  cardButtonContent: ExtendedCSSProperties;
+  cardMedia: ExtendedCSSProperties;
+  cardTitle: ExtendedCSSProperties;
+  containerLogin: ExtendedCSSProperties;
+  boxLogoType: ExtendedCSSProperties;
+  title: ExtendedCSSProperties;
+  breadCrumb: ExtendedCSSProperties;
+  centralizeContent: ExtendedCSSProperties;
+  cardVideo: ExtendedCSSProperties;
+  cardVideoLink: ExtendedCSSProperties;
+  cardVideoNumber: ExtendedCSSProperties;
+  cardVideoSelect: ExtendedCSSProperties;
+  cardVideoDescription: ExtendedCSSProperties;
+  advanceExercises: ExtendedCSSProperties;
+  cardMediaImage: ExtendedCSSProperties;
+  buttonActive: ExtendedCSSProperties;
   accessibilityMenu: {
-    containerFab: ExtendedCSSProperties
-    fabButton: ExtendedCSSProperties
-    menuPaper: ExtendedCSSProperties
-    menuHeader: ExtendedCSSProperties
-    closeButton: ExtendedCSSProperties
-    buttonGrid: ExtendedCSSProperties
-    textLevelContainer: ExtendedCSSProperties
-    textLevelIndicator: (themePalette: any, currentSize: number, indicatorSize: number) => ExtendedCSSProperties
-    footerContainer: ExtendedCSSProperties
-    footerLine: ExtendedCSSProperties
-    footerBox: ExtendedCSSProperties
-    labelFab: ExtendedCSSProperties
-  }
-  
+    containerFab: ExtendedCSSProperties;
+    fabButton: ExtendedCSSProperties;
+    menuPaper: ExtendedCSSProperties;
+    menuHeader: ExtendedCSSProperties;
+    closeButton: ExtendedCSSProperties;
+    buttonGrid: ExtendedCSSProperties;
+    textLevelContainer: ExtendedCSSProperties;
+    formControl: ExtendedCSSProperties;
+    textLevelIndicator: (
+      themePalette: any,
+      currentSize: number,
+      indicatorSize: number
+    ) => ExtendedCSSProperties;
+    footerContainer: ExtendedCSSProperties;
+    footerLine: ExtendedCSSProperties;
+    footerBox: ExtendedCSSProperties;
+    labelFab: ExtendedCSSProperties;
+  };
   cardLoginBox: {
     width: {
       xs: string;
@@ -78,7 +81,10 @@ export interface Theme {
     marginBottom: string;
   };
 
-  accessibilityReadMask: (mouseY: number, maskHeight: number) => {
+  accessibilityReadMask: (
+    mouseY: number,
+    maskHeight: number
+  ) => {
     background: {
       position: string;
       top: number;
@@ -88,7 +94,7 @@ export interface Theme {
       background: string;
       pointerEvents: string;
       zIndex: number;
-    }, 
+    };
     topLine: {
       position: string;
       top: string;
@@ -98,7 +104,7 @@ export interface Theme {
       backgroundColor: string;
       zIndex: number;
       pointerEvents: string;
-    },
+    };
     bottonLine: {
       position: string;
       top: string;
@@ -108,8 +114,8 @@ export interface Theme {
       backgroundColor: string;
       zIndex: number;
       pointerEvents: string;
-    }
-  }
+    };
+  };
 
   Footer: {
     background: string;
@@ -125,8 +131,7 @@ export interface Theme {
     container: ExtendedCSSProperties;
     contentBox: ExtendedCSSProperties;
     imageBox: ExtendedCSSProperties;
-  }
+  };
   testimonials: ExtendedCSSProperties;
   sponsorsSection: ExtendedCSSProperties;
-};
-
+}
