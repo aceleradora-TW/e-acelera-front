@@ -1,28 +1,79 @@
 import React from "react";
 import Image from 'next/image';
-import { Box, Button, Container, Grid, Typography, useTheme } from "@mui/material";
+import { Box, Button, Card, CardContent, Container, Grid, Typography, useTheme } from "@mui/material";
 import { themePalette } from "@/app/config/themes/palette";
 
 const icons = {
-    HTML: {src: "/assets/html-icon.svg", alt: "HTML"},
-    CSS: {src: "/assets/css-icon.svg", alt: "CSS"},
-    TS: { src: "/assets/ts-icon.svg", alt: "TypeScript" },
-    REACT: {src: "/assets/react-icon.svg", alt: "React"},
-    NODE: {src: "/assets/node-icon.svg", alt: "Node"},
-    EXPRESS: { src: "/assets/express-icon.svg", alt: "Express" },
-    POSTGRESQL: { src: "/assets/postgres-icon.svg", alt: "PostgreSQL" },
-    NEXTJS: { src: "/assets/next-icon.svg", alt: "Next.js" },
-    JEST: { src: "/assets/jest-icon.svg", alt: "Jest" },
-    GITHUB: { src: "/assets/github-icon.svg", alt: "GitHub" },
-    GIT: { src: "/assets/git-icon.svg", alt: "Git" },
+    HTML: {src: "/assets/html-icon.svg", name: 'HTML', alt: "HTML"},
+    CSS: {src: "/assets/css-icon.svg", name: 'CSS', alt: "CSS"},
+    TS: { src: "/assets/ts-icon.svg", name: 'TypeScript', alt: "TypeScript" },
+    REACT: {src: "/assets/react-icon.svg", name: 'React', alt: "React"},
+    NODE: {src: "/assets/node-icon.svg", name: 'Node JS', alt: "Node"},
+    EXPRESS: { src: "/assets/express-icon.svg", name: 'Express', alt: "Express" },
+    POSTGRESQL: { src: "/assets/postgres-icon.svg", name: 'PostgreSQL', alt: "PostgreSQL" },
+    NEXTJS: { src: "/assets/next-icon.svg", name: 'Next JS', alt: "Next.js" },
+    JEST: { src: "/assets/jest-icon.svg", name: 'Jest', alt: "Jest" },
+    GITHUB: { src: "/assets/github-icon.svg", name: 'GitHub', alt: "GitHub" },
+    GIT: { src: "/assets/git-icon.svg", name: 'Git', alt: "Git" },
 }
+
 interface TechIconProps {
   src: string;
+  name: string;
   alt: string;
   size?: string;
 }
 
-const TechIcon = ({ src, alt, size = '100px' }: TechIconProps) => (
+const TechIcon = ({ src, alt, size = "100px" }: TechIconProps) => (
+  <Box
+    sx={{
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      width: "100%",
+      height: "100%",
+    }}
+  >
+    <Image src={src} alt={alt} width={0} height={0} style={{ width: size, height: "auto" }} />
+  </Box>
+);
+
+const TechGrid = () => (
+    <Grid container spacing={2} justifyContent="center">
+      {Object.values(icons).map((tech) => (
+        <Grid item xs={4} sm={4} md={4} lg={4} key={tech.name}>
+          <Card
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              justifyContent: 'center',
+              p: 2,
+              borderRadius: 2,
+              height: '100%',
+              weight: '100%',
+            }}
+          >
+            <Image
+              src={tech.src}
+              alt={tech.name}
+              width={50}
+              height={50}
+              style={{ marginBottom: 8 }}
+            />
+            <Typography variant="body2" fontWeight="bold">
+              {tech.name}
+            </Typography>
+          </Card>
+        </Grid>
+      ))}
+    </Grid>
+  );
+
+
+
+
+/*const TechIcon = ({ src, alt, size = '100px' }: TechIconProps) => (
     <Box sx={{ 
             display: 'flex',
             justifyContent: 'center',
@@ -39,7 +90,7 @@ const TechIcon = ({ src, alt, size = '100px' }: TechIconProps) => (
             style={{ width: size, height: 'auto' }}
         />
     </Box>
-);
+);*/
 
 export const StudySection = () => {
 const theme = useTheme();
@@ -74,23 +125,9 @@ return(
                         }}>
                         O e-Acelera é a plataforma de estudos da Aceleradora Ágil — gratuita, aberta e feita para quem quer aprender tecnologia com autonomia. Qualquer pessoa pode acessar e começar a estudar programação, mesmo sem experiência prévia.
                     </Typography>
-                    <Box
-                        sx = {{
-                            border: "4px solid transparent",
-                            backgroundImage: `
-                                linear-gradient(${themePalette.baseBgColor}, ${themePalette.baseBgColor}),
-                                linear-gradient(to right, #EB658C, #F5AF55)
-                            `,
-                            backgroundOrigin: "border-box",
-                            backgroundClip: "padding-box, border-box",
-                            borderRadius: "4px",
-                            px: "14px",
-                            py: "4px",
-                            width: "fit-content",
-                            
-                        }}>
+                    <Box>
                         <Typography
-                            variant="body1">
+                            variant="h5">
                             A plataforma oferece duas trilhas complementares:
                         </Typography>
                     </Box>
@@ -99,14 +136,13 @@ return(
                         borderRadius: "4px",
                         backgroundColor: themePalette.primaryTextColor,
                         p: 2,
-                        m:2,
+                        my:2,
                         zIndex:150,
                         color: themePalette.baseBgColor,
                        }}>
                             
                         <Typography
-                            variant="body1"
-                            fontWeight="bold">
+                            variant="h5">
                         Trilha de nivelamento:
                         </Typography>
                         <Typography
@@ -120,12 +156,11 @@ return(
                         borderRadius: "4px",
                         backgroundColor: themePalette.primaryTextColor,
                         p: 2,
-                        m:2,
+                        my:2,
                         color: themePalette.baseBgColor,
                     }}>
                         <Typography
-                            variant="body1"
-                            fontWeight="bold">
+                            variant="h5">
                         Trilha de autoestudo:
                         </Typography>
                         <Typography
@@ -166,53 +201,7 @@ return(
                             }}>
                         Durante essa trilha, você vai passar por tecnologias como:
                         </Typography>
-                        <Grid container spacing={2} justifyContent="space-evenly" alignItems="flex-end">
-                            <Grid item xs={12}>
-                                <Grid container spacing={2} justifyContent="space-around" sx={{ px:{md: 8, lg: 14} }}>
-                                    <Grid item xs={3}>
-                                        <TechIcon src={icons.HTML.src} alt={icons.HTML.alt} size="60px" />
-                                    </Grid>
-                                    <Grid item xs={3}>
-                                        <TechIcon src={icons.CSS.src} alt={icons.CSS.alt} size="60px" />
-                                    </Grid>
-                                    <Grid item xs={3}>
-                                        <TechIcon src={icons.TS.src} alt={icons.TS.alt} size="70px" />
-                                    </Grid>
-                                    <Grid item xs={3}>
-                                        <TechIcon src={icons.REACT.src} alt={icons.REACT.alt} size="80px" />
-                                    </Grid>
-                                </Grid>
-                            </Grid>
-                            <Grid item xs={12}>
-                                <Grid container spacing={2} justifyContent="space-around" alignItems="flex-end" sx={{ pt: 2, px: {md: 10, lg: 16} }}>
-                                    <Grid item xs={6}>
-                                        <TechIcon src={icons.NODE.src} alt={icons.NODE.alt} size="120px" />
-                                    </Grid>
-                                    <Grid item xs={6}>
-                                        <TechIcon src={icons.EXPRESS.src} alt={icons.EXPRESS.alt} size="140px" />
-                                    </Grid>
-                                </Grid>
-                            </Grid>
-                            <Grid item xs={12}>
-                                <Grid container justifyContent="center" alignItems="center" sx={{ px:{md: 8, lg: 14} }}>
-                                    <Grid item xs={4} md={4}>
-                                        <TechIcon src={icons.POSTGRESQL.src} alt={icons.POSTGRESQL.alt} size="110px" />
-                                    </Grid>
-                                    <Grid item xs={4} md={4}>
-                                        <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'space-around', gap: 2}}>
-                                            <TechIcon src={icons.NEXTJS.src} alt={icons.NEXTJS.alt} size="110px" />
-                                            <TechIcon src={icons.JEST.src} alt={icons.JEST.alt} size="100px" />
-                                        </Box>
-                                    </Grid>
-                                    <Grid item xs={4} md={4}>
-                                        <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'space-around', gap: 2}}>
-                                            <TechIcon src={icons.GITHUB.src} alt={icons.GITHUB.alt} size="70px" />
-                                            <TechIcon src={icons.GIT.src} alt={icons.GIT.alt} size="70px" />
-                                        </Box>
-                                    </Grid>
-                                </Grid>
-                            </Grid>
-                        </Grid>
+                        <TechGrid />
                 </Grid>
             </Grid>
         </Container>
