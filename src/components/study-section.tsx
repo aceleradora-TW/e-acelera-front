@@ -4,19 +4,18 @@ import { Box, Button, Card, CardContent, Container, Grid, Typography, useTheme }
 import { themePalette } from "@/app/config/themes/palette";
 
 const icons = {
-    HTML: {src: "/assets/html-icon.svg", name: 'HTML', alt: "HTML"},
-    CSS: {src: "/assets/css-icon.svg", name: 'CSS', alt: "CSS"},
-    TS: { src: "/assets/ts-icon.svg", name: 'TypeScript', alt: "TypeScript" },
-    REACT: {src: "/assets/react-icon.svg", name: 'React', alt: "React"},
-    NODE: {src: "/assets/node-icon.svg", name: 'Node JS', alt: "Node"},
-    EXPRESS: { src: "/assets/express-icon.svg", name: 'Express', alt: "Express" },
-    POSTGRESQL: { src: "/assets/postgres-icon.svg", name: 'PostgreSQL', alt: "PostgreSQL" },
-    NEXTJS: { src: "/assets/next-icon.svg", name: 'Next JS', alt: "Next.js" },
-    JEST: { src: "/assets/jest-icon.svg", name: 'Jest', alt: "Jest" },
-    GITHUB: { src: "/assets/github-icon.svg", name: 'GitHub', alt: "GitHub" },
-    GIT: { src: "/assets/git-icon.svg", name: 'Git', alt: "Git" },
+    HTML: {src: "/assets/html-icon.svg", name: 'HTML', alt: "Ícone da linguagem de marcação HTML"},
+    CSS: {src: "/assets/css-icon.svg", name: 'CSS', alt: "Ícone da linguagem de estilos CSS"},
+    TS: { src: "/assets/ts-icon.svg", name: 'TypeScript', alt: "Ícone da linguagem TypeScript" },
+    REACT: {src: "/assets/react-icon.svg", name: 'React', alt: "Ícone da biblioteca JavaScript React"},
+    NODE: {src: "/assets/node-icon.svg", name: 'Node JS', alt: "Ícone do ambiente de execução Node JS"},
+    EXPRESS: { src: "/assets/express-icon.svg", name: 'Express', alt: "Ícone do framework web Express" },
+    POSTGRESQL: { src: "/assets/postgres-icon.svg", name: 'PostgreSQL', alt: "Ícone do banco de dados PostgreSQL" },
+    NEXTJS: { src: "/assets/next-icon.svg", name: 'Next JS', alt: "Ícone do framework web Next JS" },
+    JEST: { src: "/assets/jest-icon.svg", name: 'Jest', alt: "Ícone do framework de testes Jest" },
+    GIT: { src: "/assets/git-icon.svg", name: 'Git', alt: "Ícone do sistema de controle de versão Git" },
+    GITHUB: { src: "/assets/github-icon.svg", name: 'GitHub', alt: "Ícone da plataforma de hospedagem de código GitHub" },
 }
-
 interface TechIconProps {
   src: string;
   name: string;
@@ -39,29 +38,35 @@ const TechIcon = ({ src, alt, size = "100px" }: TechIconProps) => (
 );
 
 const TechGrid = () => (
-    <Grid container spacing={2} justifyContent="center">
+    <Grid container spacing={1} sx={{ maxWidth: '480px', mx: { sm: 2, md: 'auto' }, py: 1, px: {xs: 1,  md: 2}, borderRadius: 2,
+                                                border: '1px solid rgb(223, 233, 236)',
+                                                boxShadow: 1
+                                                 }}>
       {Object.values(icons).map((tech) => (
-        <Grid item xs={4} sm={4} md={4} lg={4} key={tech.name}>
+        <Grid item xs={6} md={4} key={tech.name} sx={{ minWidth: '100px', 
+                                                
+        }}>
           <Card
             sx={{
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',
               justifyContent: 'center',
-              p: 2,
+              p: 1,
               borderRadius: 2,
-              height: '100%',
-              weight: '100%',
+              height: '100px',
+              weight: '100px',
+              boxShadow: 'none',
             }}
           >
             <Image
               src={tech.src}
-              alt={tech.name}
+              alt={tech.alt}
               width={50}
               height={50}
-              style={{ marginBottom: 8 }}
+              style={{ marginBottom: 10 }}
             />
-            <Typography variant="body2" fontWeight="bold">
+            <Typography variant="body2" fontWeight="bold" sx={{ textTransform: 'uppercase' }}>
               {tech.name}
             </Typography>
           </Card>
@@ -70,27 +75,6 @@ const TechGrid = () => (
     </Grid>
   );
 
-
-
-
-/*const TechIcon = ({ src, alt, size = '100px' }: TechIconProps) => (
-    <Box sx={{ 
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            width: '100%',
-            height: '100%',
-        }}
-    >
-        <Image
-            src={src}
-            alt={alt} 
-            width={0} 
-            height={0}
-            style={{ width: size, height: 'auto' }}
-        />
-    </Box>
-);*/
 
 export const StudySection = () => {
 const theme = useTheme();
@@ -197,7 +181,7 @@ return(
                         <Typography variant="h4" sx={{ 
                                 textAlign: { xs: 'left', md: 'center' },
                                 mb: 4, 
-                                pt: { xs: 4, md: 10 } 
+                                pt: { xs: 4, md: 8 } 
                             }}>
                         Durante essa trilha, você vai passar por tecnologias como:
                         </Typography>
@@ -205,7 +189,6 @@ return(
                 </Grid>
             </Grid>
         </Container>
-
     </Box>
 )
 }
