@@ -1,5 +1,5 @@
 'use client'
-import { Box, Fab, Paper, Typography, Grid } from '@mui/material';
+import { Box, Fab, Grid, Paper, Typography } from '@mui/material';
 import AccessibilityNewIcon from '@mui/icons-material/AccessibilityNew';
 import { useAccessibility } from '../context/accessibility.context';
 import ContrastIcon from '@mui/icons-material/Contrast';
@@ -24,7 +24,7 @@ const AccessibilityMenu = () => {
     toggleReadingMask,
     changeFontFamily,
   } = useAccessibility();
-  
+
   return (
     <>
       <Box sx={customStyles.accessibilityMenu.containerFab}>
@@ -44,40 +44,40 @@ const AccessibilityMenu = () => {
             <ClickButton click={toggleMenu} backIcon={<CloseIcon sx={{ fontSize: 16 }} />} sx={customStyles.accessibilityMenu.closeButton} />
           </Box>
           <Box sx={{ padding: 2, overflowY: 'auto' }}>
-            <Grid container spacing={2}>
-              <Grid item xs={6}>
-                <ClickButton 
-                  click={toggleContrast}
-                  title="Alto contraste" 
-                  backIcon={<ContrastIcon sx={{ fontSize: 36 }} />} 
-                  isActive={contrastEnabled} 
+            <Grid container spacing={2}  direction="column" alignItems="stretch">
+              <Grid item xs={12}>
+                <ClickButton
+                  click={toggleReadingMask}
+                  title="Máscara leitura"
+                  backIcon={<SmartScreenIcon sx={{ fontSize: 36 }} />}
+                  isActive={readingMaskEnabled}
                   sx={customStyles.accessibilityMenu.buttonGrid} />
               </Grid>
-              <Grid item xs={6}>
-                <ClickButton 
-                click={toggleReadingMask}
-                title="Máscara leitura" 
-                backIcon={<SmartScreenIcon sx={{ fontSize: 36 }} />}
-                isActive={readingMaskEnabled} 
-                sx={customStyles.accessibilityMenu.buttonGrid} />
+              <Grid item xs={12}>
+                <ClickButton
+                  click={toggleContrast}
+                  title="Modo dark"
+                  backIcon={<ContrastIcon sx={{ fontSize: 36 }} />}
+                  isActive={contrastEnabled}
+                  sx={customStyles.accessibilityMenu.buttonGrid} />
               </Grid>
-              <Grid item xs={6}>
-                <ClickButton 
-                click={()=>changeFontFamily("OpenDyslexic")}
-                title={`Texto maior`} 
-                backIcon={<FormatSizeIcon sx={{ fontSize: 36 }} />}
-                isActive={Boolean(themeFontFamily)}
-                sx={customStyles.accessibilityMenu.buttonGrid} />
+              <Grid item xs={12}>
+                <ClickButton
+                  click={() => changeFontFamily("OpenDyslexic")}
+                  title={`Mudar fonte`}
+                  backIcon={<FormatSizeIcon sx={{ fontSize: 36 }} />}
+                  isActive={Boolean(themeFontFamily)}
+                  sx={customStyles.accessibilityMenu.buttonGrid} />
               </Grid>
             </Grid>
           </Box>
           <Box sx={customStyles.accessibilityMenu.footerContainer}>
             <Box sx={customStyles.accessibilityMenu.footerLine} />
             <Box sx={customStyles.accessibilityMenu.footerBox} >
-              <ClickButton 
-              click={clearSettings} 
-              title="Limpar Configurações" 
-              backIcon={<RestartAltIcon sx={{ fontSize: 24 }} />} />
+              <ClickButton
+                click={clearSettings}
+                title="Limpar Configurações"
+                backIcon={<RestartAltIcon sx={{ fontSize: 24 }} />} />
             </Box>
           </Box>
         </Paper>

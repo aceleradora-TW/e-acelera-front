@@ -1,5 +1,4 @@
 import type { Metadata } from "next"
-import { Inter } from "next/font/google"
 import "./globals.css"
 import ResponsiveAppBar from "@/components/NavBar"
 import { Box } from "@mui/material"
@@ -11,8 +10,6 @@ import { AccessibilityProvider } from "@/context/accessibility.context"
 import AccessibilityMenu from "@/components/accessibility-menu"
 
 const menuItems = ["Nivelamento", "Autoestudo"]
-
-const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
   title: "E-acelera - Plataforma de Estudo para Desenvolvedores",
@@ -29,7 +26,7 @@ export default async function RootLayout({
 
   return (
     <html lang="pt-br">
-      <body className={inter.className}>
+      <body>
         <AccessibilityProvider>
           <ThemeConfig>
             <ClientSessionProvider>

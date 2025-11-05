@@ -277,7 +277,9 @@ export const customStyles: Theme = {
       zIndex: 1300,
       '&:hover .label': {
         opacity: 1,
-        transform: 'translateX(-15%)',
+        transform: 'translateX(-10%)',
+        pointerEvents: 'auto',
+      
       },
     },
     labelFab: {
@@ -287,16 +289,16 @@ export const customStyles: Theme = {
       right: 16,
       backgroundImage: `linear-gradient(270deg, ${themePalette.button}, ${themePalette.accentBlue})`,
       color: themePalette.baseBgColor,
-      padding: '6px 12px',
+      padding: '6px 36px 6px 12px',
       borderRadius: '100px 0px 0px 100px',
       height: 45,
-      width: 210,
-      whiteSpace: 'nowrap',
       opacity: 0,
+      whiteSpace: 'nowrap',
+      pointerEvents: 'none',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'left',
-      transform: 'translateX(0)',
+      transform: 'translateX(200px)',
       transition: 'all 0.3s ease',
       boxShadow: `0px 4px 12px ${themePalette.defaultTextColor.replace('rgb', 'rgba').replace(')', ', 0.3)')}`,
     },
@@ -371,15 +373,12 @@ export const customStyles: Theme = {
     },
 
     buttonGrid: {
-      flexDirection: 'column',
-      alignItems: 'center',
-      justifyContent: 'center',
-      textAlign: 'center',
-      width: '100%',
-      height: 90,
-      padding: 4,
-      lineHeight: 1,
-    },
+    flexDirection: 'column',
+    alignItems: 'center',
+    textAlign: 'center',
+    minHeight: 90,
+    width: '100%',
+  },
 
     footerContainer: {
       marginTop: 'auto',
@@ -398,7 +397,7 @@ export const customStyles: Theme = {
       display: 'flex',
       justifyContent: 'center',
       padding: '10px',
-      height: 70,
+      
     },
   
     textLevelContainer: {
