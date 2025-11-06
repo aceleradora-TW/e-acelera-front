@@ -38,12 +38,12 @@ const TechIcon = ({ src, alt, size = "100px" }: TechIconProps) => (
 );
 
 const TechGrid = () => (
-    <Grid container spacing={1} sx={{ maxWidth: '480px', mx: { sm: 2, md: 'auto' }, py: 1, px: {xs: 1,  md: 2}, borderRadius: 2,
+    <Grid container spacing={1} sx={{ maxWidth: { md:'400px', lg: '480px' }, mx: { sm: 2, md: 'auto' }, py: 1, px: {xs: 1,  md: 2}, borderRadius: 2,
                                                 border: '1px solid rgb(223, 233, 236)',
                                                 boxShadow: 1
                                                  }}>
       {Object.values(icons).map((tech) => (
-        <Grid item xs={6} md={4} key={tech.name} sx={{ minWidth: '100px', 
+        <Grid item xs={6} sm={4} md={4} key={tech.name} sx={{ minWidth: '100px', 
                                                 
         }}>
           <Card
@@ -126,7 +126,7 @@ return(
                        }}>
                             
                         <Typography
-                            variant="h5">
+                            variant="h5" fontWeight="bold">
                         Trilha de nivelamento:
                         </Typography>
                         <Typography
@@ -144,7 +144,7 @@ return(
                         color: themePalette.baseBgColor,
                     }}>
                         <Typography
-                            variant="h5">
+                            variant="h5" fontWeight="bold">
                         Trilha de autoestudo:
                         </Typography>
                         <Typography
@@ -168,7 +168,7 @@ return(
                             borderRadius: 1,
                             boxShadow: 4,
                             padding: "6px 16px",
-                            mt: 3,
+                            mt: {xs: 3, xl: 0},
                             '&:hover': {
                                 backgroundColor: themePalette.primaryTextColor,
                                 color: theme.palette.bgColor?.main,
@@ -177,11 +177,12 @@ return(
                         }}>Começar minha trilha</Button>
                     </Box>
                 </Grid>
-                <Grid item xs={12} md={6}>
+                <Grid item xs={12} sm={11} md={6}>
                         <Typography variant="h4" sx={{ 
-                                textAlign: { xs: 'left', md: 'center' },
+                                textAlign: { xs: 'left', md: 'left', lg: 'center' },
                                 mb: 4, 
-                                pt: { xs: 4, md: 8 } 
+                                pt: { xs: 4, md: 8 },
+                                ml: {md: '50px', lg: '0px'}
                             }}>
                         Durante essa trilha, você vai passar por tecnologias como:
                         </Typography>

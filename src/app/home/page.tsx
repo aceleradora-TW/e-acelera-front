@@ -1,5 +1,6 @@
 "use client"
 import { HomeBanner } from "@/components/HomeBanner"
+import { ImpactSection } from "@/components/impactSection"
 import { StudySection } from "@/components/study-section"
 
 export default function Home() {
@@ -8,6 +9,7 @@ export default function Home() {
     <>
       <HomeBanner />
       <StudySection />
+      <ImpactSection />
     </>
       
   )
