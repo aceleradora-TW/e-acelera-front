@@ -1,25 +1,9 @@
 import React from "react";
 import Image from 'next/image';
-import { Box, Button, Card, CardContent, Container, Grid, Typography, useTheme } from "@mui/material";
+import { Box, Button, Card, Container, Grid, Typography, useTheme } from "@mui/material";
 import { themePalette } from "@/app/config/themes/palette";
-
-const icons = {
-    HTML: {src: "/assets/html-icon.svg", name: 'HTML', alt: "Ícone da linguagem de marcação HTML"},
-    CSS: {src: "/assets/css-icon.svg", name: 'CSS', alt: "Ícone da linguagem de estilos CSS"},
-    TS: { src: "/assets/ts-icon.svg", name: 'TypeScript', alt: "Ícone da linguagem TypeScript" },
-    REACT: {src: "/assets/react-icon.svg", name: 'React', alt: "Ícone da biblioteca JavaScript React"},
-    NODE: {src: "/assets/node-icon.svg", name: 'Node JS', alt: "Ícone do ambiente de execução Node JS"},
-    EXPRESS: { src: "/assets/express-icon.svg", name: 'Express', alt: "Ícone do framework web Express" },
-    POSTGRESQL: { src: "/assets/postgres-icon.svg", name: 'PostgreSQL', alt: "Ícone do banco de dados PostgreSQL" },
-    NEXTJS: { src: "/assets/next-icon.svg", name: 'Next JS', alt: "Ícone do framework web Next JS" },
-    JEST: { src: "/assets/jest-icon.svg", name: 'Jest', alt: "Ícone do framework de testes Jest" },
-    GIT: { src: "/assets/git-icon.svg", name: 'Git', alt: "Ícone do sistema de controle de versão Git" },
-    GITHUB: { src: "/assets/github-icon.svg", name: 'GitHub', alt: "Ícone da plataforma de hospedagem de código GitHub" },
-}
-interface TechIconProps {
-  src: string;
-  name: string;
-  alt: string;
+import { IconData, technologyIcons } from "@/utils/constants";
+interface TechIconProps extends Omit<IconData, 'name'> {
   size?: string;
 }
 
@@ -31,19 +15,24 @@ const TechIcon = ({ src, alt, size = "100px" }: TechIconProps) => (
       alignItems: "center",
       width: "100%",
       height: "100%",
+      mb: 1.2,
     }}
   >
-    <Image src={src} alt={alt} width={0} height={0} style={{ width: size, height: "auto" }} />
+    <Image src={src} alt={alt} width={parseInt(size)} height={parseInt(size)} style={{ objectFit: "contain"}} />
   </Box>
 );
 
 const TechGrid = () => (
-    <Grid container spacing={1} sx={{ maxWidth: { md:'400px', lg: '480px' }, mx: { sm: 2, md: 'auto' }, py: 1, px: {xs: 1,  md: 2}, borderRadius: 2,
-                                                border: '1px solid rgb(223, 233, 236)',
-                                                boxShadow: 1
-                                                 }}>
-      {Object.values(icons).map((tech) => (
-        <Grid item xs={6} sm={4} md={4} key={tech.name} sx={{ minWidth: '100px', 
+    <Grid container alignItems="center" sx={{ 
+      maxWidth: { md:'400px', lg: '480px' },
+      mx: { sm: 2, md: 'auto' },
+      py: 2,
+      borderRadius: 2,
+      border: '1px solid rgb(223, 233, 236)',
+      boxShadow: 1
+    }}>
+      {Object.values(technologyIcons).map((tech) => (
+        <Grid item xs={6} sm={4} md={4} key={tech.name} sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', 
                                                 
         }}>
           <Card
@@ -52,20 +41,16 @@ const TechGrid = () => (
               flexDirection: 'column',
               alignItems: 'center',
               justifyContent: 'center',
-              p: 1,
+              textAlign: 'center',
+              p: 2,
+              mb: 1,
               borderRadius: 2,
               height: '100px',
-              weight: '100px',
+              width: '100px',
               boxShadow: 'none',
             }}
           >
-            <Image
-              src={tech.src}
-              alt={tech.alt}
-              width={50}
-              height={50}
-              style={{ marginBottom: 10 }}
-            />
+            <TechIcon src={tech.src} alt={tech.alt} size="50px" />
             <Typography variant="body2" fontWeight="bold" sx={{ textTransform: 'uppercase' }}>
               {tech.name}
             </Typography>
@@ -74,7 +59,6 @@ const TechGrid = () => (
       ))}
     </Grid>
   );
-
 
 export const StudySection = () => {
 const theme = useTheme();
@@ -85,10 +69,9 @@ return(
     id="study-section"
     sx= {{
         ...theme.customStyles.studysection,
-        pb: 4,
     }}
     >
-
+      
         <Container maxWidth="xl">
             <Grid container>
                 <Grid item xs={12} md={6}>
@@ -163,7 +146,7 @@ return(
                 </Grid>
                 <Grid item xs={12} md={6} order={{ xs: 3, md: 2 }}>
                     <Box sx={{ mt: { xs: 1, md: 0 } }}>
-                        <Button variant="outlined" sx={{
+                        <Button aria-label="Começar minha trilha na plataforma e-Acelera" variant="outlined" sx={{
                             ...theme.customStyles.button,
                             borderRadius: 1,
                             boxShadow: 4,
@@ -181,8 +164,8 @@ return(
                         <Typography variant="h4" sx={{ 
                                 textAlign: { xs: 'left', md: 'left', lg: 'center' },
                                 mb: 4, 
-                                pt: { xs: 4, md: 8 },
-                                ml: {md: '50px', lg: '0px'}
+                                ml: {md: '50px', lg: '0px'},
+                                pt: { xs: 4, md: 8 }
                             }}>
                         Durante essa trilha, você vai passar por tecnologias como:
                         </Typography>

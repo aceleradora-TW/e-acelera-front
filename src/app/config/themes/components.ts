@@ -284,6 +284,7 @@ export const customStyles: Theme = {
   studysection: { 
     background: themePalette.baseBgColor,
     color: themePalette.primaryTextColor,
+    paddingBottom: 4,
   },
 }
 
