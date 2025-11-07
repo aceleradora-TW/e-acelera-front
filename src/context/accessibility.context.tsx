@@ -1,5 +1,5 @@
-'use client'
-import { createContext, useContext, useState } from 'react';
+"use client";
+import { createContext, useContext, useState } from "react";
 
 interface AccessibilityContextType {
   isMenuOpen: boolean;
@@ -13,20 +13,28 @@ interface AccessibilityContextType {
   changeFontFamily: (fontFamily?: string) => void;
 }
 
-const AccessibilityContext = createContext<AccessibilityContextType | undefined>(undefined);
+const AccessibilityContext = createContext<
+  AccessibilityContextType | undefined
+>(undefined);
 
-export const AccessibilityProvider = ({ children }: { children: React.ReactNode }) => {
+export const AccessibilityProvider = ({
+  children,
+}: {
+  children: React.ReactNode;
+}) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [contrastEnabled, setContrastEnabled] = useState(false);
   const [readingMaskEnabled, setReadingMaskEnabled] = useState(false);
-  const [themeFontFamily, setThemeFontFamily] = useState<string | undefined>(undefined); 
-  
-  const toggleContrast = () => setContrastEnabled(prev => !prev);
-  const toggleReadingMask = () => setReadingMaskEnabled(prev => !prev);
-  const toggleMenu = () => setIsMenuOpen(prev => !prev);
- 
-  const changeFontFamily = (fontFamily?:string) => {
-    setThemeFontFamily(prev => (prev ? undefined : fontFamily));
+  const [themeFontFamily, setThemeFontFamily] = useState<string | undefined>(
+    undefined
+  );
+
+  const toggleContrast = () => setContrastEnabled((prev) => !prev);
+  const toggleReadingMask = () => setReadingMaskEnabled((prev) => !prev);
+  const toggleMenu = () => setIsMenuOpen((prev) => !prev);
+
+  const changeFontFamily = (fontFamily?: string) => {
+    setThemeFontFamily((prev) => (prev ? undefined : fontFamily));
   };
 
   const clearSettings = () => {
@@ -34,19 +42,19 @@ export const AccessibilityProvider = ({ children }: { children: React.ReactNode 
     setReadingMaskEnabled(false);
     setThemeFontFamily(undefined);
   };
-  
+
   return (
     <AccessibilityContext.Provider
       value={{
-      isMenuOpen,
-      toggleMenu,
-      clearSettings,
-      contrastEnabled,
-      toggleContrast,
-      readingMaskEnabled,
-      toggleReadingMask,
-      themeFontFamily,
-      changeFontFamily,
+        isMenuOpen,
+        toggleMenu,
+        clearSettings,
+        contrastEnabled,
+        toggleContrast,
+        readingMaskEnabled,
+        toggleReadingMask,
+        themeFontFamily,
+        changeFontFamily,
       }}
     >
       {children}
@@ -56,6 +64,9 @@ export const AccessibilityProvider = ({ children }: { children: React.ReactNode 
 
 export const useAccessibility = () => {
   const context = useContext(AccessibilityContext);
-  if (!context) throw new Error('useAccessibility must be used within AccessibilityProvider');
+  if (!context)
+    {throw new Error(
+      "useAccessibility must be used within AccessibilityProvider"
+    );}
   return context;
 };
