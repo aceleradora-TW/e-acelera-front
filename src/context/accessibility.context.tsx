@@ -1,5 +1,5 @@
 "use client";
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 
 interface AccessibilityContextType {
   isMenuOpen: boolean;
@@ -34,13 +34,25 @@ export const AccessibilityProvider = ({
   const toggleMenu = () => setIsMenuOpen((prev) => !prev);
 
   const changeFontFamily = (fontFamily?: string) => {
-    setThemeFontFamily((prev) => (prev ? undefined : fontFamily));
+    setThemeFontFamily((prev) => { 
+      const newFont = (prev ? undefined : fontFamily);
+      localStorage.setItem('themeFontFamily', String(newFont));
+      return newFont;
+    }); 
   };
+
+    useEffect(() => {
+     const storedFont = localStorage.getItem('themeFontFamily');
+  if (storedFont === 'OpenDyslexic') {
+    setThemeFontFamily('OpenDyslexic');
+  }
+}, []);
 
   const clearSettings = () => {
     setContrastEnabled(false);
     setReadingMaskEnabled(false);
     setThemeFontFamily(undefined);
+    localStorage.clear();
   };
 
   return (
