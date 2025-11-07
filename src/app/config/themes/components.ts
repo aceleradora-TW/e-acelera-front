@@ -279,7 +279,6 @@ export const customStyles: Theme = {
         opacity: 1,
         transform: 'translateX(-10%)',
         pointerEvents: 'auto',
-      
       },
     },
     labelFab: {
@@ -397,18 +396,16 @@ export const customStyles: Theme = {
       display: 'flex',
       justifyContent: 'center',
       padding: '10px',
-      
     },
-  
     textLevelContainer: {
-      display: 'center', 
-      justifycontent: 'center', 
-      gap: 0.5, 
+      display: 'center',
+      justifycontent: 'center',
+      gap: 0.5,
       marginTop: 1,
     },
 
     textLevelIndicator: (themePalette: any, textSize: number, size: number) => ({
-      width: 22, 
+      width: 22,
       height: 4,
       borderRadius: 0.6,
       backgroundColor: textSize >= size ? themePalette.baseBgColor : themePalette.button,
@@ -416,7 +413,6 @@ export const customStyles: Theme = {
       border: textSize < size ? `1px solid ${themePalette.baseBgColor}` : `1px solid ${themePalette.baseBgColor}`,
     }),
   },
-  
   impactSection: {
     background: themePalette.button,
     color: themePalette.baseBgColor,

@@ -26,7 +26,6 @@ interface CardProps {
 const cardStyles = (themeFontFamily?: string) => ({
     ...theme.customStyles.cardBody,
     WebkitLineClamp: themeFontFamily ? 4 : 6,
-    fontFamily: themeFontFamily ? "OpenDyslexic" : null,
   });
 
 const cardActionsStyle = {
