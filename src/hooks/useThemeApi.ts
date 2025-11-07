@@ -7,7 +7,8 @@ import { v4 as uuidv4 } from 'uuid';
 import { useSession } from 'next-auth/react'; 
 
 export const useThemeApi = (category: string) => {
-  const { isLoading } = useFlags(['usa_adminjs']);
+  const  { isLoading }  = useFlags(['usa_adminjs']);
+  console.log(`[useThemeApi] isLoading: ${JSON.stringify(isLoading)}`);
   const flagsmith = useFlagsmith();
   const { data: session } = useSession(); 
 
@@ -16,10 +17,6 @@ export const useThemeApi = (category: string) => {
   const [error, setError] = useState(false);
 
   useEffect(() => {
-    if (isLoading) {
-      setLoading(true);
-      return;
-    }
 
     let identifier: string;
     if (session?.user?.email) {
@@ -73,6 +70,6 @@ export const useThemeApi = (category: string) => {
         .finally(() => setLoading(false));
     });
 
-  }, [category, isLoading, flagsmith, session]); 
+  }, [category, isLoading, flagsmith, session]);
   return { data, loading, error };
 };
