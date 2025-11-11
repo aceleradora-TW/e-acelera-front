@@ -330,7 +330,7 @@ export const customStyles: Theme = {
     menuPaper: {
       position: 'fixed',
       bottom: 90,
-      width: 300,
+      width: 280,
       minHeight: 200,
       display: 'flex',
       right: 16,
@@ -345,7 +345,7 @@ export const customStyles: Theme = {
     menuHeader: {
       backgroundImage: `linear-gradient(120deg, ${themePalette.accentBlue}, ${themePalette.button})`,
       color: themePalette.baseBgColor,
-      padding: '8px 10px',
+      padding: '12px 12px',
       display: 'flex',
       justifyContent: 'space-between',
       alignItems: 'center',
@@ -396,7 +396,7 @@ export const customStyles: Theme = {
       backgroundColor: themePalette.accentBlue,
       display: 'flex',
       justifyContent: 'center',
-      padding: '10px',
+      padding: '12px 12px',
     },
     textLevelContainer: {
       display: 'center',
