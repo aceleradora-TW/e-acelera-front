@@ -4,13 +4,13 @@ import AccessibilityNewIcon from '@mui/icons-material/AccessibilityNew';
 import { useAccessibility } from '../context/accessibility.context';
 import ContrastIcon from '@mui/icons-material/Contrast';
 import { ClickButton } from './ClickButton';
-import RestartAltIcon from '@mui/icons-material/RestartAlt';
 import FormatSizeIcon from '@mui/icons-material/FormatSize';
 import SmartScreenIcon from '@mui/icons-material/SmartScreen';
 import React from 'react';
 import { themePalette } from '@/app/config/themes/palette';
 import CloseIcon from '@mui/icons-material/Close';
 import { customStyles } from '@/app/config/themes/components';
+import { useMediaQuery, useTheme } from '@mui/material';
 
 const AccessibilityMenu = () => {
   const {
@@ -25,12 +25,17 @@ const AccessibilityMenu = () => {
     changeFontFamily,
   } = useAccessibility();
 
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+
   return (
     <>
       <Box sx={customStyles.accessibilityMenu.containerFab}>
+        {!isMobile && (
         <Box className="label" sx={customStyles.accessibilityMenu.labelFab}>
           <Typography variant='body1'> Menu de acessibilidade </Typography>
         </Box>
+        )}
         <Fab color="primary" onClick={toggleMenu} sx={customStyles.accessibilityMenu.fabButton}>
           <AccessibilityNewIcon sx={{ color: themePalette.baseBgColor, fontSize: 32 }} />
         </Fab>
@@ -42,7 +47,7 @@ const AccessibilityMenu = () => {
             <Typography variant='h6'> Menu de Acessibilidade </Typography>
             <ClickButton click={toggleMenu} backIcon={<CloseIcon sx={{ fontSize: 16 }} />} sx={customStyles.accessibilityMenu.closeButton} />
           </Box>
-          <Box sx={{ padding: 2, overflowY: 'auto' }}>
+          <Box sx={{ padding: '12px', overflowY: 'auto' }}>
             <Grid container spacing={2} direction="column" alignItems="stretch">
               <Grid item xs={12}>
                 <ClickButton
@@ -63,7 +68,7 @@ const AccessibilityMenu = () => {
               <Grid item xs={12}>
                 <ClickButton
                   click={() => changeFontFamily("OpenDyslexic")}
-                  title={`Mudar fonte`}
+                  title={`Fonte Acessível`}
                   backIcon={<FormatSizeIcon sx={{ fontSize: 36 }} />}
                   isActive={Boolean(themeFontFamily)}
                   sx={customStyles.accessibilityMenu.buttonGrid} />

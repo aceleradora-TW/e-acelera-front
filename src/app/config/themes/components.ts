@@ -1,3 +1,4 @@
+import { Padding } from "@mui/icons-material";
 import { themePalette } from "./palette";
 import { Theme } from "./types";
 
@@ -298,7 +299,7 @@ export const customStyles: Theme = {
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'left',
-      transform: 'translateX(200px)',
+      transform: 'translateX(10px)',
       transition: 'all 0.3s ease',
       boxShadow: `0px 4px 12px ${themePalette.defaultTextColor.replace('rgb', 'rgba').replace(')', ', 0.3)')}`,
     },
@@ -378,6 +379,7 @@ export const customStyles: Theme = {
     textAlign: 'center',
     minHeight: 90,
     width: '100%',
+    padding: "8px 4px",
   },
 
     footerContainer: {
