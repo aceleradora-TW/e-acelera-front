@@ -1,4 +1,4 @@
-import {Grid, Typography, useTheme} from "@mui/material";
+import {Grid, Link, Typography, useTheme} from "@mui/material";
 import AccordionFaq from "./AccordionFaq";
 
 export default function FaqQuestion() {
@@ -13,13 +13,45 @@ export default function FaqQuestion() {
     {
       question:
         "Quem pode participar do Programa Aceleradora Ágil? E como funciona?",
-      answer:
-        "O programa é voltado para pessoas que querem entrar no mercado de tecnologia e já têm uma base inicial em programação. As turmas são semestrais, com 11 participantes por ciclo, e o formato é remoto, com estágio remunerado e certificado ao final. Para participar, você precisa:",
+      answer:(
+        <>
+          O programa é voltado para pessoas que querem entrar no mercado de tecnologia e já têm uma base inicial em programação. As turmas são semestrais, com 11 participantes por ciclo, e o formato é remoto, com estágio remunerado e certificado ao final.<br /><br />Para participar, você precisa:<br />- Estar matriculado em curso superior ou técnico<br />- Ter disponibilidade nos turnos: 09h às 12h e 13h às 16h<br />- Ter conhecimento em lógica de programação, HTML e CSS<br />- Possuir acesso à internet e computador próprio<br />- Residir em qualquer parte do Brasil<br /><br />O processo seletivo inclui um desafio técnico, seguido de entrevista em grupo e individual<br />As inscrições acontecem em ciclos. Fique de olho nas redes sociais da Aceleradora ou aqui no site para saber quando a próxima turma estiver aberta.
+        </>
+      )
+    },
+    {
+      question: "Quem pode fazer as trilhas da plataforma e-acelera? E como acessar?",
+      answer: (
+        <>
+          Qualquer pessoa interessada em aprender programação pode acessar a plataforma, ela é aberta, gratuita e feita para quem quer estudar no seu ritmo. As trilhas incluem conteúdos introdutórios, exercícios práticos e tecnologias usadas no mercado.
+          <br />Acesse diretamente a página da{" "}
+          <Link
+            href="https://aceleradora-agil.com.br/nivelamento"
+            target="_blank"
+            rel="noopener"
+          >
+          trilha de nivelamento
+          </Link>{" "}
+          no e-Acelera para começar seus estudos.
+        </>
+      ),
     },
     {
       question: "O que é a Aceleradora Inclusiva?",
-      answer:
-        "A Aceleradora Inclusiva é uma iniciativa parceira que compartilha do mesmo propósito: formar pessoas diversas de forma inclusiva para atuarem na área de tecnologia. Ela também oferece formação prática, mentoria e apoio para quem quer transformar sua trajetória.",
+      answer: (
+        <>
+          A Aceleradora Inclusiva é uma iniciativa parceira que compartilha do mesmo propósito: formar pessoas diversas de forma inclusiva para atuarem na área de tecnologia. Ela também oferece formação prática, mentoria e apoio para quem quer transformar sua trajetória.
+         <br />Acesse o site da{" "}
+          <Link
+            href="https://aceleradorainclusiva.com.br/"
+            target="_blank"
+            rel="noopener"
+          >
+            Aceleradora Inclusiva
+          </Link>{" "}
+          para saber mais sobre o programa.
+        </>
+      ),  
     },
     {
       question: "O Programa Aceleradora Ágil garante vaga no mercado?",
