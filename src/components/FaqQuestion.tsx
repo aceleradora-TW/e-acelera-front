@@ -15,7 +15,7 @@ export default function FaqQuestion() {
         "Quem pode participar do Programa Aceleradora Ágil? E como funciona?",
       answer:(
         <>
-          O programa é voltado para pessoas que querem entrar no mercado de tecnologia e já têm uma base inicial em programação. As turmas são semestrais, com 11 participantes por ciclo, e o formato é remoto, com estágio remunerado e certificado ao final.<br /><br />Para participar, você precisa:<br />- Estar matriculado em curso superior ou técnico<br />- Ter disponibilidade nos turnos: 09h às 12h e 13h às 16h<br />- Ter conhecimento em lógica de programação, HTML e CSS<br />- Possuir acesso à internet e computador próprio<br />- Residir em qualquer parte do Brasil<br /><br />O processo seletivo inclui um desafio técnico, seguido de entrevista em grupo e individual<br />As inscrições acontecem em ciclos. Fique de olho nas redes sociais da Aceleradora ou aqui no site para saber quando a próxima turma estiver aberta.
+          O programa é voltado para pessoas que querem entrar no mercado de tecnologia e já têm uma base inicial em programação. As turmas são semestrais, com 11 participantes por ciclo, e o formato é remoto, com estágio remunerado e certificado ao final.<br /><br />Para participar, você precisa:<br />- Estar matriculado em curso superior ou técnico<br />- Ter disponibilidade nos turnos: 09h às 12h e 13h às 16h<br />- Ter conhecimento em lógica de programação, HTML e CSS<br />- Possuir acesso à internet e computador próprio<br />- Residir em qualquer parte do Brasil<br /><br />O processo seletivo inclui um desafio técnico, seguido de entrevista em grupo e individual.<br />As inscrições acontecem em ciclos. Fique de olho nas redes sociais da Aceleradora ou aqui no site para saber quando a próxima turma vai estar aberta.
         </>
       )
     },
@@ -30,7 +30,7 @@ export default function FaqQuestion() {
             target="_blank"
             rel="noopener"
           >
-          trilha de nivelamento
+          Trilha de Nivelamento
           </Link>{" "}
           no e-Acelera para começar seus estudos.
         </>
