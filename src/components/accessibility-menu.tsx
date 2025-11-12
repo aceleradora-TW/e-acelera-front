@@ -79,7 +79,7 @@ const AccessibilityMenu = () => {
             <Box sx={customStyles.accessibilityMenu.footerLine} />
             <Box sx={customStyles.accessibilityMenu.footerBox} >
               <ClickButton
-                sx={{padding: themeFontFamily ? '8px 4px' : '8px', }}
+                sx={{padding: themeFontFamily ? '8px 4px' : '8px 16px',}}
                 click={clearSettings}
                 title= {"Limpar Configurações"}
                 backIcon={
