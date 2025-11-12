@@ -7,12 +7,12 @@ import {
   FormControlLabel,
   IconButton,
   Link,
-  ListItemIcon, 
+  ListItemIcon,
   Menu,
   MenuItem,
   Tooltip,
   Typography,
-  Switch, 
+  Switch,
 } from "@mui/material"
 import Image from "next/image"
 import { usePathname, useRouter } from "next/navigation"
@@ -20,94 +20,53 @@ import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown"
 import { signOut } from "next-auth/react"
 import LogoutIcon from "@mui/icons-material/Logout"
 import { Session } from "next-auth"
-import SettingsIcon from '@mui/icons-material/Settings'; 
+import SettingsIcon from '@mui/icons-material/Settings';
 import { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
-import { useFlags, useFlagsmith } from 'flagsmith/react';
 import { v4 as uuidv4 } from 'uuid';
-
+import { useFlagsmith, useFlags } from "flagsmith/react"
 
 
 interface WebMenuProps {
   list: string[]
   session: Session | null
 }
+interface updateFlagParams {
+  identity: string;
+  trait: string;
+  value: boolean;
+}
 
 export const WebMenu: React.FC<WebMenuProps> = ({ list, session }) => {
-  const { isLoading } = useFlags(['usa_adminjs']);
+  // const { flag_adminjs } = useFlags(['flag_adminjs'])
   const flagsmith = useFlagsmith();
+  const flags = useFlags(['flag_adminjs'], ["adminjs_enabled"]);
   const router = useRouter()
   const pathname = usePathname()
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
-  const [useNewApi, setUseNewApi] = useState(false); 
-  const [isSaving, setIsSaving] = useState(false);
-  
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const [isChecked, setIsChecked] = useState<boolean>(false)
+
   useEffect(() => {
-    if (!isLoading) { 
-      let identifier: string;
-
-      if (session?.user?.email) {
-        identifier = session.user.email;
-      } else {
-        let anonymousId = localStorage.getItem('anonymous_user_id');
-        if (!anonymousId) {
-          anonymousId = uuidv4();
-          localStorage.setItem('anonymous_user_id', anonymousId);
-        }
-        identifier = anonymousId;
-      }
-
-      flagsmith.identify(identifier).then(() => {
-        const useAdminJsValue = flagsmith.getTrait('usa_adminjs');
-
-        if (useAdminJsValue === undefined) {
-          setUseNewApi(false);
-        } else {
-          setUseNewApi(!Boolean(useAdminJsValue));
-        }
-      });
+    const storedPreference = localStorage.getItem('adminjs_enabled');
+    if (storedPreference !== null && session?.user?.email) {
+      const parsedPreference = JSON.parse(storedPreference);
+      handleApiToggle({ target: { checked: parsedPreference } } as React.ChangeEvent<HTMLInputElement>);
     }
-  }, [isLoading, session, flagsmith]);
+  }, [session]);
+
 
   const handleApiToggle = async (event: React.ChangeEvent<HTMLInputElement>) => {
-    setIsSaving(true);
-    const wantsNewApi = event.target.checked;
-    const useAdminJsValue = !wantsNewApi;
-
-    const identifier = session?.user?.email || localStorage.getItem('anonymous_user_id');
-
-    if (!identifier) {
-      alert("Erro: Não foi possível identificar sua sessão.");
-      setIsSaving(false);
-      return;
-    }
-
-    const backendUrl = process.env.NEXT_PUBLIC_BACKEND_BASE_URL;
-    if (!backendUrl) {
-      alert("Erro de configuração da aplicação.");
-      setIsSaving(false);
-      return;
-    }
-
     try {
-      await fetch(`${backendUrl}/user-preferences`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          key: 'usa_adminjs',
-          value: useAdminJsValue,
-          userId: identifier,
-        }),
-      });
-
-      flagsmith.setTrait('usa_adminjs', useAdminJsValue);
-      setUseNewApi(wantsNewApi);
-      window.location.reload();
-
+      setIsChecked(event.target.checked)
+      await flagsmith.setTrait('adminjs_enabled', event.target.checked);
+      localStorage.setItem('adminjs_enabled', JSON.stringify(event.target.checked));
     } catch (error) {
-      console.error("Erro ao salvar preferência:", error);
-      alert("Ocorreu um erro ao salvar sua preferência.");
-      setIsSaving(false);
+      // console.error("Erro ao salvar preferência:", error);
+      // alert("Ocorreu um erro ao salvar sua preferência.");
+      setIsChecked(false)
+      flagsmith.setTrait('adminjs_enabled', false);
+      localStorage.setItem('adminjs_enabled', JSON.stringify(false));
+
     }
   };
 
@@ -127,7 +86,7 @@ export const WebMenu: React.FC<WebMenuProps> = ({ list, session }) => {
   const linkStyle = (item: string) => pathname.startsWith(`/${item.toLowerCase()}`) ? theme.customStyles.linkActive : theme.customStyles.link
 
   const renderComponent = () => {
-if (session?.user) {
+    if (session?.user) {
       return (
         <Box
           sx={{
@@ -142,8 +101,8 @@ if (session?.user) {
                 alt={session.user.name || "Usuário"}
                 src={session.user.image || "/default-avatar.png"}
               />
-              <ArrowDropDownIcon 
-                sx={{transform: anchorEl ? "rotate(180deg)" : "rotate(0deg)",transition: "0.3s",}}
+              <ArrowDropDownIcon
+                sx={{ transform: anchorEl ? "rotate(180deg)" : "rotate(0deg)", transition: "0.3s", }}
               />
             </IconButton>
           </Tooltip>
@@ -164,6 +123,24 @@ if (session?.user) {
               <Typography sx={{ color: theme.palette.bgColor?.light }}>
                 {session.user.email || "email@example.com"}
               </Typography>
+            </MenuItem>
+            <MenuItem sx={{ cursor: "default" }}>
+              <FormControlLabel
+                control={
+                  <Switch
+                    checked={isChecked}
+                    onChange={handleApiToggle}
+                    disabled={false}
+                    size="small"
+                  />
+                }
+                label={
+                  <Typography sx={{ color: theme.palette.textColor?.light, fontSize: '0.9rem' }}>
+                    Nova API
+                  </Typography>
+                }
+                labelPlacement="start"
+              />
             </MenuItem>
             <Divider />
             <MenuItem onClick={() => signOut()}>
@@ -201,7 +178,7 @@ if (session?.user) {
           alt="logo e-acelera"
         />
       </Box>
-      
+
       <Typography
         noWrap
         component="a"
@@ -210,7 +187,7 @@ if (session?.user) {
       >
         E-Acelera
       </Typography>
-      
+
       <Box
         sx={{
           flexGrow: 1,
@@ -230,26 +207,8 @@ if (session?.user) {
           </Link>
         ))}
       </Box>
-
-      <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, marginRight: 2 }}>
-        <FormControlLabel
-          control={
-            <Switch
-              checked={useNewApi}
-              onChange={handleApiToggle}
-              disabled={isSaving || isLoading}
-              size="small"
-            />
-          }
-          label={
-            <Typography sx={{ color: theme.palette.textColor?.light, fontSize: '0.9rem' }}>
-              Nova API
-            </Typography>
-          }
-          labelPlacement="start"
-        />
-      </Box>  
       <Box sx={{ flexGrow: 0 }}>{renderComponent()}</Box>
     </>
   )
 }
+

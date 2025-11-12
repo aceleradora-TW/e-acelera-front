@@ -29,16 +29,15 @@ export default async function RootLayout({
   children: React.ReactNode
 }>) {
 
-  const [session, serverState] = await Promise.all([
-    getServerSession(),
-    flagsmith.init({
+  const session = await getServerSession();
+  const serverState = await flagsmith.init({
       environmentID: FLAGSMITH_ENVIRONMENT_ID,
+      identity: session?.user?.email || undefined,
       defaultFlags: {
         flag_adminjs: { enabled: true, value: null },
       },
     }).then(() => flagsmith.getState()) 
-  ]);
-
+    
   // return (
   //   <html lang="pt-br">
   //     <head>
@@ -59,7 +58,7 @@ export default async function RootLayout({
     <html lang="pt-br">
       <body className={inter.className}>
         <FeatureFlagProvider serverState={serverState}>
-          <ClientSessionProvider session={session}>
+          <ClientSessionProvider>
             <ThemeConfig>
               <Box sx={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}>
                 <Box sx={{ marginBottom: "80px" }}>

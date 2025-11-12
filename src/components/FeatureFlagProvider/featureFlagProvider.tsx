@@ -13,6 +13,7 @@ export const FeatureFlagProvider = ({
   children: ReactNode;
 }) => {
   const flagsmithInstance = useRef(createFlagsmithInstance());
+  console.log("[FeatureFlagProvider] Inicializando Flagsmith com o estado do servidor:", serverState);
   
   return (
     <FlagsmithProvider flagsmith={flagsmithInstance.current} serverState={serverState}>

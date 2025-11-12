@@ -9,3 +9,4 @@ export const ARRAY_SPECIAL_CHARS = [
   { char: "&gt;", replace: ">" },
   { char: "%40;", replace: "@" },
 ];
+export const FLAGSMITH_ENVIRONMENT_ID = process.env.NEXT_PUBLIC_FLAGSMITH_ENVIRONMENT_ID

@@ -108,7 +108,7 @@ export const RenderThemePage = ({ category }: { category: string }) => {
 //   // useEffect(() => {
 //   //   getThemes()
 //   //     .then((data: Theme[]) => {
-//   //    
+//   //
 //         const filtered = flag ? renderData : (renderData as unknown as Theme[]).filter((t) => t.category === category);
 //         const mappedData: DataItem[] = flag ? filtered : (filtered as unknown as Theme[]).map((t) => ({
 //           id: String(t.id),
