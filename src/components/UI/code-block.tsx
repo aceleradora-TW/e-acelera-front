@@ -78,7 +78,7 @@ export const CodeBlock = ({ node, inline, className, children, ...props }: any) 
       component="span"
       sx={{
         fontFamily: "monospace",
-        backgroundColor: contrastEnabled ? "#222" : "#f5f5f5",
+        backgroundColor: contrastEnabled ? "#222" : "#E0E0E0",
         padding: "2px 4px",
         borderRadius: "4px",
         wordBreak: "break-word",
