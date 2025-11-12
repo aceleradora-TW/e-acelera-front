@@ -107,7 +107,7 @@ export default function StatusSelect({
         setBackgroundColor(theme.palette.statusSelect?.main || "");
         break;
       default:
-        setBackgroundColor("rgb(225, 225, 225)");
+        setBackgroundColor("#e1e1e1");
     }
   }, [status]);
 
@@ -124,16 +124,10 @@ export default function StatusSelect({
         },
       }}
     >
-      <FormControl fullWidth>
+      <FormControl fullWidth sx={{...((theme as any).customStyles?.formControl || {})}}>
         <InputLabel
           shrink
           id="statusLeveling"
-          sx={{
-            color: "#000000",
-            "&.Mui-focused": {
-              color: "#000000",
-            },
-          }}
         >
           Status
         </InputLabel>
@@ -146,12 +140,6 @@ export default function StatusSelect({
           onChange={handleChange}
           disabled={isLoading}
           sx={{
-            "& .MuiOutlinedInput-notchedOutline": {
-              borderColor: "#000000",
-            },
-            "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-              border: "1px solid #000000",
-            },
             height: "40px",
           }}
         >
