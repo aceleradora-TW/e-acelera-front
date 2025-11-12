@@ -7,7 +7,6 @@ import {
   FormControlLabel,
   IconButton,
   Link,
-  ListItemIcon,
   Menu,
   MenuItem,
   Tooltip,
@@ -20,53 +19,55 @@ import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown"
 import { signOut } from "next-auth/react"
 import LogoutIcon from "@mui/icons-material/Logout"
 import { Session } from "next-auth"
-import SettingsIcon from '@mui/icons-material/Settings';
 import { useState, useEffect } from "react";
-import { useSession } from "next-auth/react";
-import { v4 as uuidv4 } from 'uuid';
 import { useFlagsmith, useFlags } from "flagsmith/react"
 
-
+// TODO: Login estava funcionando e com o feature flag parou de funcionar
+// TODO: Atualização do trait no FlagSmith não reflete atualização local
+// TODO: Não estamos conseguindo limitar os usuários que visualizam a flag através de configuração de grupo no FlagSmith
 interface WebMenuProps {
   list: string[]
   session: Session | null
 }
-interface updateFlagParams {
-  identity: string;
-  trait: string;
-  value: boolean;
-}
 
 export const WebMenu: React.FC<WebMenuProps> = ({ list, session }) => {
-  // const { flag_adminjs } = useFlags(['flag_adminjs'])
   const flagsmith = useFlagsmith();
-  const flags = useFlags(['flag_adminjs'], ["adminjs_enabled"]);
+  const { flag_adminjs } = useFlags(['flag_adminjs']);
   const router = useRouter()
   const pathname = usePathname()
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const [isChecked, setIsChecked] = useState<boolean>(false)
+  const [isChecked, setIsChecked] = useState<boolean>(false);
 
+  // Verifica se o usuário é de teste através do trait
+  const isTestUser = flagsmith.getTrait('is_test_user') === true;
+
+  // Carrega o valor inicial da preferência do usuário ou da feature flag
   useEffect(() => {
-    const storedPreference = localStorage.getItem('adminjs_enabled');
-    if (storedPreference !== null && session?.user?.email) {
-      const parsedPreference = JSON.parse(storedPreference);
-      handleApiToggle({ target: { checked: parsedPreference } } as React.ChangeEvent<HTMLInputElement>);
+    if (session?.user?.email && isTestUser) {
+      // Para usuários de teste, verifica primeiro a preferência salva, depois a feature flag
+      const adminJsPreference = flagsmith.getTrait('adminjs_preference');
+      if (adminJsPreference !== undefined && adminJsPreference !== null) {
+        setIsChecked(adminJsPreference === true);
+      } else {
+        // Se não há preferência salva, usa o valor da feature flag
+        setIsChecked(flag_adminjs?.enabled ?? false);
+      }
     }
-  }, [session]);
-
+  }, [session, flag_adminjs, isTestUser, flagsmith]);
 
   const handleApiToggle = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (!isTestUser) return;
+    
     try {
-      setIsChecked(event.target.checked)
-      await flagsmith.setTrait('adminjs_enabled', event.target.checked);
-      localStorage.setItem('adminjs_enabled', JSON.stringify(event.target.checked));
+      const newValue = event.target.checked;
+      setIsChecked(newValue);
+      
+      // Salva a preferência do usuário como trait no FlagSmith
+      await flagsmith.setTrait('adminjs_preference', newValue);
     } catch (error) {
-      // console.error("Erro ao salvar preferência:", error);
-      // alert("Ocorreu um erro ao salvar sua preferência.");
-      setIsChecked(false)
-      flagsmith.setTrait('adminjs_enabled', false);
-      localStorage.setItem('adminjs_enabled', JSON.stringify(false));
-
+      console.error("Erro ao salvar preferência no FlagSmith:", error);
+      // Reverte o estado em caso de erro
+      setIsChecked(!event.target.checked);
     }
   };
 
@@ -124,24 +125,27 @@ export const WebMenu: React.FC<WebMenuProps> = ({ list, session }) => {
                 {session.user.email || "email@example.com"}
               </Typography>
             </MenuItem>
-            <MenuItem sx={{ cursor: "default" }}>
-              <FormControlLabel
-                control={
-                  <Switch
-                    checked={isChecked}
-                    onChange={handleApiToggle}
-                    disabled={false}
-                    size="small"
-                  />
-                }
-                label={
-                  <Typography sx={{ color: theme.palette.textColor?.light, fontSize: '0.9rem' }}>
-                    Nova API
-                  </Typography>
-                }
-                labelPlacement="start"
-              />
-            </MenuItem>
+            {/* Mostra o Switch apenas para usuários de teste */}
+            {isTestUser && (
+              <MenuItem sx={{ cursor: "default" }}>
+                <FormControlLabel
+                  control={
+                    <Switch
+                      checked={isChecked}
+                      onChange={handleApiToggle}
+                      disabled={false}
+                      size="small"
+                    />
+                  }
+                  label={
+                    <Typography sx={{ color: theme.palette.textColor?.light, fontSize: '0.9rem' }}>
+                      Usar AdminJS
+                    </Typography>
+                  }
+                  labelPlacement="start"
+                />
+              </MenuItem>
+            )}
             <Divider />
             <MenuItem onClick={() => signOut()}>
               <LogoutIcon

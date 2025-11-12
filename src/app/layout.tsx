@@ -30,29 +30,17 @@ export default async function RootLayout({
 }>) {
 
   const session = await getServerSession();
+  
+  // Inicializa o FlagSmith no servidor com a identidade do usuário
+  // O trait 'is_test_user' deve ser configurado no painel do FlagSmith para identificar usuários de teste
+  // A feature flag 'flag_adminjs' controla se a funcionalidade AdminJS está disponível globalmente
   const serverState = await flagsmith.init({
-      environmentID: FLAGSMITH_ENVIRONMENT_ID,
-      identity: session?.user?.email || undefined,
-      defaultFlags: {
-        flag_adminjs: { enabled: true, value: null },
-      },
-    }).then(() => flagsmith.getState()) 
-    
-  // return (
-  //   <html lang="pt-br">
-  //     <head>
-  //       <meta name="viewport" content="initial-scale=1, width=device-width" />
-  //     </head>
-  //     <body>
-  //       {}
-  //       <FeatureFlagProvider serverState={serverState}>
-  //         {children}
-  //       </FeatureFlagProvider>
-  //     </body>
-  //   </html>
-  // );
-
-//const session = await getServerSession()
+    environmentID: FLAGSMITH_ENVIRONMENT_ID,
+    identity: session?.user?.email || undefined,
+    defaultFlags: {
+      flag_adminjs: { enabled: true, value: null },
+    },
+  }).then(() => flagsmith.getState())
 
   return (
     <html lang="pt-br">
@@ -78,8 +66,5 @@ export default async function RootLayout({
       </body>
     </html>
   );
-}
-  
-
-  
+}  
 
