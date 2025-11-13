@@ -3,6 +3,8 @@ import { typography } from "./typography";
 import { themePalette } from "./palette";
 
 export const highContrastTheme = createTheme({
+  typography, 
+
   palette: {
     mode: "dark",
     background: {
@@ -112,23 +114,18 @@ export const highContrastTheme = createTheme({
     MuiTypography: {
       styleOverrides: {
         h1: {
-          ...typography.h1,
           color: "#E0E0E0 !important",
         },
         h2: {
-          ...typography.h2,
           color: "#E0E0E0 !important",
         },
         h3: {
-          ...typography.h3,
           color: "#E0E0E0 !important",
         },
         body1: {
-          ...typography.body1,
           color: "#E0E0E0 !important",
         },
         caption: {
-          ...typography.caption,
           color: "#E0E0E0 !important",
         },
       },
@@ -630,6 +627,20 @@ export const highContrastTheme = createTheme({
       color: themePalette.baseBgColor,
       textAlign: "center",
     },
+    studysection: {
+    paddingBottom: 4,
+    },
+    studyIcons: {
+
+    },
+    studyTrailBox: {
+      backgroundColor: "#222222",
+      color: "#E0E0E0",
+      p: 2,
+      my:2,
+      borderRadius: "4px",
+      position: "relative",
+    },
 
     accessibilityReadMask: (mouseY: number, maskHeight: number) => ({
       background: {
@@ -639,12 +650,12 @@ export const highContrastTheme = createTheme({
         width: "100vw",
         height: "100vh",
         background: `linear-gradient(
-                    to bottom,
-                    rgba(0,0,0,0.5) ${mouseY - maskHeight / 2}px,
-                    transparent ${mouseY - maskHeight / 2}px,
-                    transparent ${mouseY + maskHeight / 2}px,
-                    rgba(0,0,0,0.5) ${mouseY + maskHeight / 2}px
-                  )`,
+                      to bottom,
+                      rgba(0,0,0,0.5) ${mouseY - maskHeight / 2}px,
+                      transparent ${mouseY - maskHeight / 2}px,
+                      transparent ${mouseY + maskHeight / 2}px,
+                      rgba(0,0,0,0.5) ${mouseY + maskHeight / 2}px
+                    )`,
         pointerEvents: "none",
         zIndex: 9999,
       },

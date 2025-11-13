@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { Box, Button, Card, Container, Grid, Typography, useTheme } from "@mui/material";
 import { themePalette } from "@/app/config/themes/palette";
 import { IconData, technologyIcons } from "@/utils/constants";
+import { theme } from "@/app/config/themes";
 interface TechIconProps extends Omit<IconData, 'name'> {
   size?: string;
 }
@@ -10,12 +11,7 @@ interface TechIconProps extends Omit<IconData, 'name'> {
 const TechIcon = ({ src, alt, size = "100px" }: TechIconProps) => (
   <Box
     sx={{
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
-      width: "100%",
-      height: "100%",
-      mb: 1.2,
+      ...theme.customStyles.studyIcons,
     }}
   >
     <Image src={src} alt={alt} width={parseInt(size)} height={parseInt(size)} style={{ objectFit: "contain"}} />
@@ -48,6 +44,7 @@ const TechGrid = () => (
               height: '100px',
               width: '100px',
               boxShadow: 'none',
+              background: "transparent",
             }}
           >
             <TechIcon src={tech.src} alt={tech.alt} size="50px" />
@@ -98,14 +95,9 @@ return(
                             A plataforma oferece duas trilhas complementares:
                         </Typography>
                     </Box>
-                    <Box sx={{
-                        position: "relative",
-                        borderRadius: "4px",
-                        backgroundColor: themePalette.primaryTextColor,
-                        p: 2,
-                        my:2,
-                        zIndex:150,
-                        color: themePalette.baseBgColor,
+                    <Box sx={{              
+                        ...theme.customStyles.studyTrailBox,
+
                        }}>
                             
                         <Typography
@@ -119,12 +111,7 @@ return(
                     </Box>
                     <Box
                     sx={{
-                        position: "relative",
-                        borderRadius: "4px",
-                        backgroundColor: themePalette.primaryTextColor,
-                        p: 2,
-                        my:2,
-                        color: themePalette.baseBgColor,
+                        ...theme.customStyles.studyTrailBox,
                     }}>
                         <Typography
                             variant="h5" fontWeight="bold">

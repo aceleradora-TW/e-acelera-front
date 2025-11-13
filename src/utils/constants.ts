@@ -26,7 +26,7 @@ export const technologyIcons: Record<string, IconData> = {
     NEXTJS: { src: "/assets/next-icon.svg", name: 'Next JS', alt: "Ícone do framework web Next JS" },
     JEST: { src: "/assets/jest-icon.svg", name: 'Jest', alt: "Ícone do framework de testes Jest" },
     GIT: { src: "/assets/git-icon.svg", name: 'Git', alt: "Ícone do sistema de controle de versão Git" },
-    GITHUB: { src: "/assets/github-icon.svg", name: 'GitHub', alt: "Ícone da plataforma de hospedagem de código GitHub" },
+    GITHUB: { src: "/assets/github-icon2.svg", name: 'GitHub', alt: "Ícone da plataforma de hospedagem de código GitHub" },
 };
 
 export const TESTIMONIALS = [

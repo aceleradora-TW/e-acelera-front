@@ -483,7 +483,26 @@ export const customStyles: Theme = {
     color: themePalette.primaryTextColor,
     paddingBottom: 4,
   },
-  
+  studyTrailBox: {
+    backgroundColor: themePalette.primaryTextColor,
+    color: themePalette.baseBgColor,
+    position: "relative",
+    borderRadius: "4px",
+    p: 2,
+    my:2,
+    zIndex:150,
+  },
+
+  studyIcons: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    width: "100%",
+    height: "100%",
+    mb: 1.2,
+    background: "transparent",
+  },
+
   testimonials: {
     background: themePalette.button,
     color: themePalette.baseBgColor,

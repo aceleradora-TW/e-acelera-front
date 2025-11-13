@@ -131,7 +131,9 @@ export interface Theme {
     contentBox: ExtendedCSSProperties;
     imageBox: ExtendedCSSProperties;
   };
-  studysection: ExtendedCSSProperties;
+  studysection:ExtendedCSSProperties;
+  studyTrailBox: ExtendedCSSProperties;
   testimonials: ExtendedCSSProperties;
   sponsorsSection: ExtendedCSSProperties;
+  studyIcons: ExtendedCSSProperties;
 }
