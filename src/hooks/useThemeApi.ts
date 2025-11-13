@@ -1,62 +1,60 @@
 'use client';
 import { useState, useEffect } from 'react';
-import { useFlags, useFlagsmith } from 'flagsmith/react';
-import { useSession } from 'next-auth/react';
+import { useFlags } from 'flagsmith/react';
 
 export const useThemeApi = (category: string) => {
-  const flagsmith = useFlagsmith();
-  const { data: session } = useSession();
   const { flag_adminjs } = useFlags(['flag_adminjs']);
-  
-  // Verifica se o usuário é de teste
-  const isTestUser = flagsmith.getTrait('is_test_user') === true;
-  
-  // Para usuários de teste: verifica a preferência salva (trait adminjs_preference)
-  // Para usuários normais: usa o valor padrão da feature flag
-  const adminJsPreference = flagsmith.getTrait('adminjs_preference');
-  const shouldUseAdminJs = isTestUser 
-    ? (adminJsPreference === true) // Usuário de teste: usa a preferência salva
-    : (flag_adminjs?.enabled ?? false); // Usuário normal: usa a feature flag padrão
 
   const [data, setData] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 
   useEffect(() => {
+    if (flag_adminjs === undefined) {
+      setLoading(true);
+      return;
+    }
+
     setLoading(true);
+    setError(false);
 
     let url: string;
-    const fetchOptions: RequestInit = {
+    const fetchOptions: RequestInit = { 
       method: 'GET',
       headers: {},
     };
 
-    if (shouldUseAdminJs) {
-      url = `/api/themes`;
+    if (flag_adminjs.enabled) {
+      console.log("Flagsmith: 'flag_adminjs' HABILITADA. Chamando a rota de API /api/themes.");
+      url = `/api/themes`;     
+       
     } else {
-      url = `/api/stackbyApi/Themes`;
+      console.log("Flagsmith: 'flag_adminjs' DESABILITADA. Chamando a rota de API /api/stackbyApi/Themes.");
+      url = `/api/stackbyApi/Themes`; 
       fetchOptions.headers = {
         'operator': 'equal',
         'column': 'category',
         'value': category,
       };
     }
-    
-    fetch(url, fetchOptions)
-      .then(async res => {
+
+    fetch(url, fetchOptions) 
+      .then(res => {
         if (!res.ok) {
-          const err = await res.json();
-          throw new Error(err.error || `Request failed: ${res.status}`);
+          return res.json().then(err => {
+            throw new Error(err.error || `A requisição para ${url} falhou: ${res.status}`);
+          });
         }
-        const data = await res.json();
-        setData(data)
+        return res.json();
       })
+      .then(setData)
       .catch(err => {
         console.error("Erro no hook useThemeApi:", err);
         setError(true);
       })
       .finally(() => setLoading(false));
-  }, [category, session?.user?.email, shouldUseAdminJs]);
-  
+
+  }, [category, flag_adminjs]);
+
   return { data, loading, error };
 };

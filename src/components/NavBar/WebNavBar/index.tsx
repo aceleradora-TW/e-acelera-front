@@ -146,6 +146,7 @@ export const WebMenu: React.FC<WebMenuProps> = ({ list, session }) => {
                 />
               </MenuItem>
             )}
+
             <Divider />
             <MenuItem onClick={() => signOut()}>
               <LogoutIcon
