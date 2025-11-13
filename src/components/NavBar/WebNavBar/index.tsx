@@ -32,36 +32,34 @@ interface WebMenuProps {
 
 export const WebMenu: React.FC<WebMenuProps> = ({ list, session }) => {
   const flagsmith = useFlagsmith();
-  const { flag_adminjs } = useFlags(['flag_adminjs']);
+  const { flag_adminjs, is_test_user, adminjs_preference } = useFlags(['flag_adminjs'], ['is_test_user', 'adminjs_preference']);
   const router = useRouter()
   const pathname = usePathname()
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [isChecked, setIsChecked] = useState<boolean>(false);
 
   // Verifica se o usuário é de teste através do trait
-  const isTestUser = flagsmith.getTrait('is_test_user') === true;
+  // const isTestUser = flagsmith.getTrait('is_test_user') === true;
 
   // Carrega o valor inicial da preferência do usuário ou da feature flag
   useEffect(() => {
-    if (session?.user?.email && isTestUser) {
+    if (session?.user?.email && is_test_user && adminjs_preference) {
       // Para usuários de teste, verifica primeiro a preferência salva, depois a feature flag
-      const adminJsPreference = flagsmith.getTrait('adminjs_preference');
-      if (adminJsPreference !== undefined && adminJsPreference !== null) {
-        setIsChecked(adminJsPreference === true);
-      } else {
-        // Se não há preferência salva, usa o valor da feature flag
-        setIsChecked(flag_adminjs?.enabled ?? false);
-      }
+      // const adminJsPreference = flagsmith.getTrait('adminjs_preference');
+      setIsChecked(true);
+    } else {
+      // Se não há preferência salva, usa o valor da feature flag
+      setIsChecked(flag_adminjs?.enabled ?? false);
     }
-  }, [session, flag_adminjs, isTestUser, flagsmith]);
+  }, [session, flag_adminjs, is_test_user, adminjs_preference, flagsmith.getState()]);
 
   const handleApiToggle = async (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (!isTestUser) return;
-    
+    if (!is_test_user) return;
+
     try {
       const newValue = event.target.checked;
       setIsChecked(newValue);
-      
+
       // Salva a preferência do usuário como trait no FlagSmith
       await flagsmith.setTrait('adminjs_preference', newValue);
     } catch (error) {
@@ -126,7 +124,7 @@ export const WebMenu: React.FC<WebMenuProps> = ({ list, session }) => {
               </Typography>
             </MenuItem>
             {/* Mostra o Switch apenas para usuários de teste */}
-            {isTestUser && (
+            {is_test_user && (
               <MenuItem sx={{ cursor: "default" }}>
                 <FormControlLabel
                   control={

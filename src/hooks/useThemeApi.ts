@@ -1,16 +1,20 @@
 'use client';
 import { useState, useEffect } from 'react';
 import { useFlags } from 'flagsmith/react';
+// import flagsmith from 'flagsmith/isomorphic';
+import { useSession } from 'next-auth/react';
 
 export const useThemeApi = (category: string) => {
-  const { flag_adminjs } = useFlags(['flag_adminjs']);
+  const { flag_adminjs, is_test_user, adminjs_preference } = useFlags(['flag_adminjs'], ['is_test_user', 'adminjs_preference']);
+  const {data: sessionData} = useSession();
+  // const flagsmithState = flagsmith.getState();
 
   const [data, setData] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 
   useEffect(() => {
-    if (flag_adminjs === undefined) {
+    if (!flag_adminjs) {
       setLoading(true);
       return;
     }
@@ -19,18 +23,16 @@ export const useThemeApi = (category: string) => {
     setError(false);
 
     let url: string;
-    const fetchOptions: RequestInit = { 
+    const fetchOptions: RequestInit = {
       method: 'GET',
       headers: {},
     };
-
-    if (flag_adminjs.enabled) {
+    if (flag_adminjs.enabled || (is_test_user && adminjs_preference)) {
       console.log("Flagsmith: 'flag_adminjs' HABILITADA. Chamando a rota de API /api/themes.");
-      url = `/api/themes`;     
-       
+      url = `/api/themes`;
     } else {
       console.log("Flagsmith: 'flag_adminjs' DESABILITADA. Chamando a rota de API /api/stackbyApi/Themes.");
-      url = `/api/stackbyApi/Themes`; 
+      url = `/api/stackbyApi/Themes`;
       fetchOptions.headers = {
         'operator': 'equal',
         'column': 'category',
@@ -38,14 +40,14 @@ export const useThemeApi = (category: string) => {
       };
     }
 
-    fetch(url, fetchOptions) 
-      .then(res => {
+    fetch(url, fetchOptions)
+      .then(async res => {
         if (!res.ok) {
           return res.json().then(err => {
             throw new Error(err.error || `A requisição para ${url} falhou: ${res.status}`);
           });
         }
-        return res.json();
+        return await res.json();
       })
       .then(setData)
       .catch(err => {
@@ -54,7 +56,7 @@ export const useThemeApi = (category: string) => {
       })
       .finally(() => setLoading(false));
 
-  }, [category, flag_adminjs]);
+  }, [sessionData?.user.email, category, flag_adminjs.enabled, is_test_user, adminjs_preference]);
 
   return { data, loading, error };
 };

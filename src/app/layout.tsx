@@ -30,17 +30,20 @@ export default async function RootLayout({
 }>) {
 
   const session = await getServerSession();
-  
+
   // Inicializa o FlagSmith no servidor com a identidade do usuário
   // O trait 'is_test_user' deve ser configurado no painel do FlagSmith para identificar usuários de teste
   // A feature flag 'flag_adminjs' controla se a funcionalidade AdminJS está disponível globalmente
-  const serverState = await flagsmith.init({
+  await flagsmith.init({
     environmentID: FLAGSMITH_ENVIRONMENT_ID,
     identity: session?.user?.email || undefined,
-    defaultFlags: {
-      flag_adminjs: { enabled: true, value: null },
-    },
-  }).then(() => flagsmith.getState())
+    // defaultFlags: {
+    //   flag_adminjs: { enabled: true, value: null },
+    // },
+    cacheFlags: false,
+  })
+
+  const serverState = flagsmith.getState();
 
   return (
     <html lang="pt-br">
@@ -55,16 +58,16 @@ export default async function RootLayout({
                 <Box component="main" sx={{ flex: 1 }}>
                   {children}
                 </Box>
-                <Footer 
-                  linkedinUrl={"https://www.linkedin.com/school/aceleradora-%C3%A1gil/?originalSubdomain=br"} 
+                <Footer
+                  linkedinUrl={"https://www.linkedin.com/school/aceleradora-%C3%A1gil/?originalSubdomain=br"}
                   projectUrl={"https://www.thoughtworks.com/pt-br/about-us/diversity-and-inclusion/aceleradora"}
                 />
               </Box>
-              </ThemeConfig>
+            </ThemeConfig>
           </ClientSessionProvider>
         </FeatureFlagProvider>
       </body>
     </html>
   );
-}  
+}
 
