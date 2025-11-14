@@ -628,18 +628,40 @@ export const highContrastTheme = createTheme({
       textAlign: "center",
     },
     studysection: {
-    paddingBottom: 4,
-    },
-    studyIcons: {
-
-    },
-    studyTrailBox: {
-      backgroundColor: "#222222",
-      color: "#E0E0E0",
-      p: 2,
-      my:2,
-      borderRadius: "4px",
-      position: "relative",
+      container: {
+        paddingBottom: 4,
+      },
+      box: {
+        backgroundColor: "#222222",
+        color: "#E0E0E0",
+        p: 2,
+        my:2,
+        borderRadius: "4px",
+        position: "relative",
+      },
+      icons: {
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        mb: 1.2,
+      },
+      card: {
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        textAlign: 'center',
+        p: 2,
+        mb: 1,
+        borderRadius: 2,
+        height: '100px',
+        width: '100px',
+        boxShadow: 'none',
+        background: "transparent",
+      },
+      button: {
+        padding: "6px 16px",
+      }
     },
 
     accessibilityReadMask: (mouseY: number, maskHeight: number) => ({

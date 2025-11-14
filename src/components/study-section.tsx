@@ -1,24 +1,28 @@
 import React from "react";
 import Image from 'next/image';
 import { Box, Button, Card, Container, Grid, Typography, useTheme } from "@mui/material";
-import { themePalette } from "@/app/config/themes/palette";
 import { IconData, technologyIcons } from "@/utils/constants";
-import { theme } from "@/app/config/themes";
+import { SxProps }from "@mui/system";
+
 interface TechIconProps extends Omit<IconData, 'name'> {
   size?: string;
+  iconStyles?: SxProps;
 }
 
-const TechIcon = ({ src, alt, size = "100px" }: TechIconProps) => (
+interface TechGridProps {
+  cardStyles: SxProps;
+  iconStyles: SxProps;
+}
+
+const TechIcon = ({ src, alt, size = "100px", iconStyles }: TechIconProps) => (
   <Box
-    sx={{
-      ...theme.customStyles.studyIcons,
-    }}
+    sx={iconStyles}
   >
     <Image src={src} alt={alt} width={parseInt(size)} height={parseInt(size)} style={{ objectFit: "contain"}} />
   </Box>
 );
 
-const TechGrid = () => (
+const TechGrid = ({ cardStyles, iconStyles }: TechGridProps) => (
     <Grid container alignItems="center" sx={{ 
       maxWidth: { md:'400px', lg: '480px' },
       mx: { sm: 2, md: 'auto' },
@@ -32,22 +36,9 @@ const TechGrid = () => (
                                                 
         }}>
           <Card
-            sx={{
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              justifyContent: 'center',
-              textAlign: 'center',
-              p: 2,
-              mb: 1,
-              borderRadius: 2,
-              height: '100px',
-              width: '100px',
-              boxShadow: 'none',
-              background: "transparent",
-            }}
+           sx={cardStyles}
           >
-            <TechIcon src={tech.src} alt={tech.alt} size="50px" />
+            <TechIcon src={tech.src} alt={tech.alt} size="50px" iconStyles={iconStyles} />
             <Typography variant="body2" fontWeight="bold" sx={{ textTransform: 'uppercase' }}>
               {tech.name}
             </Typography>
@@ -59,14 +50,13 @@ const TechGrid = () => (
 
 export const StudySection = () => {
 const theme = useTheme();
+const studysectionStyles = (theme as any).customStyles.studysection;
 
 return(
     <Box
     component="section"
     id="study-section"
-    sx= {{
-        ...theme.customStyles.studysection,
-    }}
+    sx={studysectionStyles.container}
     >
       
         <Container maxWidth="xl">
@@ -95,10 +85,7 @@ return(
                             A plataforma oferece duas trilhas complementares:
                         </Typography>
                     </Box>
-                    <Box sx={{              
-                        ...theme.customStyles.studyTrailBox,
-
-                       }}>
+                    <Box sx={studysectionStyles.box}>
                             
                         <Typography
                             variant="h5" fontWeight="bold">
@@ -109,10 +96,7 @@ return(
                         Composta por desafios práticos e conteúdos acessíveis. Também é etapa obrigatória para quem entra no Programa Aceleradora, garantindo uma base comum para seguir com segurança.
                         </Typography>   
                     </Box>
-                    <Box
-                    sx={{
-                        ...theme.customStyles.studyTrailBox,
-                    }}>
+                    <Box sx={studysectionStyles.box}>
                         <Typography
                             variant="h5" fontWeight="bold">
                         Trilha de autoestudo:
@@ -133,17 +117,11 @@ return(
                 </Grid>
                 <Grid item xs={12} md={6} order={{ xs: 3, md: 2 }}>
                     <Box sx={{ mt: { xs: 1, md: 0 } }}>
-                        <Button aria-label="Começar minha trilha na plataforma e-Acelera" variant="outlined" sx={{
-                            ...theme.customStyles.button,
-                            borderRadius: 1,
-                            boxShadow: 4,
-                            padding: "6px 16px",
-                            mt: {xs: 3, xl: 0},
-                            '&:hover': {
-                                backgroundColor: themePalette.primaryTextColor,
-                                color: theme.palette.bgColor?.main,
-                                boxShadow: 8,
-                            },
+                        <Button aria-label="Começar minha trilha na plataforma e-Acelera" variant="outlined" 
+                          sx={{
+                            ...(theme as any).customStyles.button,
+                            ...studysectionStyles.button,
+                            mt: { xs: 3, xl: 0 },
                         }}>Começar minha trilha</Button>
                     </Box>
                 </Grid>
@@ -156,7 +134,10 @@ return(
                             }}>
                         Durante essa trilha, você vai passar por tecnologias como:
                         </Typography>
-                        <TechGrid />
+                        <TechGrid 
+                          cardStyles={studysectionStyles.card} 
+                          iconStyles={studysectionStyles.icons}
+                        />
                 </Grid>
             </Grid>
         </Container>
