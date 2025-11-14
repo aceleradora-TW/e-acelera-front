@@ -56,7 +56,7 @@ export const useThemeApi = (category: string) => {
       })
       .finally(() => setLoading(false));
 
-  }, [sessionData?.user.email, category, flag_adminjs.enabled, is_test_user, adminjs_preference]);
+  }, [sessionData?.user.email, category, flag_adminjs.enabled, flag_adminjs, is_test_user, adminjs_preference]);
 
   return { data, loading, error };
 };
