@@ -40,7 +40,7 @@ export default async function RootLayout({
                   flexDirection: "column",
                 }}
               >
-                <Box sx={{ marginBottom: "80px" }}>
+                <Box sx={{ marginBottom: "60px" }}>
                   <ResponsiveAppBar list={menuItems} session={session} />
                 </Box>
                 <Box component="main" sx={{ flex: 1 }}>

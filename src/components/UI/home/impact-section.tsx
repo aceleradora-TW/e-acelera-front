@@ -1,6 +1,7 @@
 "use client"
 import React from "react";
 import { Box, Container, Grid, Typography, useTheme } from "@mui/material";
+import { SectionContent } from "../section-content";
 
 export const ImpactSection = () => {
   const theme = useTheme();
@@ -13,19 +14,12 @@ export const ImpactSection = () => {
         pb: 4,
       }}
     >
-      <Container maxWidth="md"
-        sx={{
-          px: {
-            xs: 3,
-            md: 0,
-          },
-        }}>
-
+      <SectionContent>
         <Typography
           variant="h2"
           sx={{
             textAlign: { xs: 'left', md: 'center' },
-            pt: 4,
+            pt: { xs: 4, md: 2 },
             mb: { xs: 1, md: 2 },
           }}
         >
@@ -40,12 +34,12 @@ export const ImpactSection = () => {
         >
           A Aceleradora Ágil é mais que uma iniciativa, é um movimento que muda trajetórias. Ao longo dos anos, já impulsionou pessoas, ideias e projetos que seguem gerando impacto real na tecnologia e na sociedade.
         </Typography>
-      </Container>
+      </SectionContent>
 
       <Box
         sx={{
           position: "relative",
-          margin: { xs: "16px", md: "16px auto 16px auto" },
+          margin: { xs: "16px 5%", md: "16px auto" },
           maxWidth: "928px",
           backgroundColor: theme.palette.textColor?.main,
           padding: { xs: "24px", md: "24px 48px" },

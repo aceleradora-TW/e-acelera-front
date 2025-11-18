@@ -2,6 +2,7 @@
 import React from "react";
 import { Box, Container, Grid, Typography, useTheme } from "@mui/material";
 import Image from "next/image";
+import { SectionContent } from "../section-content";
 
 export const SponsorsSection = () => {
     const theme = useTheme();
@@ -14,13 +15,7 @@ export const SponsorsSection = () => {
                 pb: 4,
             }}
             >
-            <Container maxWidth= "md"
-            sx={{
-        px: {
-          xs: 3,
-          md: 0,
-        },
-      }}>
+            <SectionContent>
                 <Typography
                     variant="h2"
                     sx= {{
@@ -41,14 +36,14 @@ export const SponsorsSection = () => {
                     A Aceleradora Ágil só existe porque há quem acredite junto. Empresas, universidades e organizações que apoiam, investem e compartilham do mesmo propósito: ampliar acessos e transformar vidas por meio da tecnologia. <br />
                     Veja quem já faz parte dessa rede de apoio.
                 </Typography>
-            </Container>
+            </SectionContent>
             
-            <Container>
-            <Grid container sx={{ m: 0,
-                p: 0,
-                maxWidth: "928px",
-                mx: "auto",
-             }}>
+            <SectionContent variant="content-only">
+                <Grid container sx={{ 
+                    m: { xs: 0, md: "0 auto" },
+                    p: 0,
+                    maxWidth: "928px",
+                 }}>
                 <Grid item xs={12} md={8}
                 sx={{
                     mt: {xs:"16px", md: "0"},
@@ -164,7 +159,7 @@ export const SponsorsSection = () => {
                 </Box>
                 </Grid>
             </Grid>
-            </Container>
+            </SectionContent>
 
         </Box>
     )

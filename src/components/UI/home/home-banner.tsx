@@ -37,7 +37,7 @@ export const HomeBanner = () => {
         ...bannerStyles.container,
         minHeight: "500px",
         width: "100%",
-        marginTop: { xs: "-20px", md: "-15px" },
+        marginTop: { xs: "-20px", md: "-30px" },
         [theme.breakpoints.down("md")]: {
           flexDirection: "column",
         },
@@ -51,7 +51,7 @@ export const HomeBanner = () => {
           marginTop: { xs: "-100px", md: 0 },
           padding: {
             xs: "10px 5% 40px 5%",
-            md: "80px 0 80px 10%",
+            md: "40px 0 40px 10%",
           },
           [theme.breakpoints.down("md")]: {
             width: "100%",
