@@ -20,6 +20,7 @@ export const customStyles: Theme = {
       border: "1px solid transparent",
     },
   },
+
   buttonActive: {
     backgroundColor: themePalette.button,
     color: themePalette.baseBgColor,
@@ -272,20 +273,20 @@ export const customStyles: Theme = {
   },
   accessibilityMenu: {
     containerFab: {
-      position: 'fixed',
+      position: "fixed",
       bottom: 16,
       right: 16,
       zIndex: 1300,
-      '&:hover .label': {
+      "&:hover .label": {
         opacity: 1,
         transform: 'translateX(-10%)',
         pointerEvents: 'auto',
       },
     },
     labelFab: {
-      position: 'absolute',
+      position: "absolute",
       bottom: 16,
-      top: '15%',
+      top: "15%",
       right: 16,
       backgroundImage: `linear-gradient(270deg, ${themePalette.button}, ${themePalette.accentBlue})`,
       color: themePalette.baseBgColor,
@@ -303,52 +304,56 @@ export const customStyles: Theme = {
       boxShadow: `0px 4px 12px ${themePalette.defaultTextColor.replace('rgb', 'rgba').replace(')', ', 0.3)')}`,
     },
     fabButton: {
-      border: '4px transparent solid',
-      backgroundOrigin: 'border-box',
-      backgroundClip: 'border-box',
+      border: "4px transparent solid",
+      backgroundOrigin: "border-box",
+      backgroundClip: "border-box",
       boxShadow: `
         inset 0 0 0 4px white,
-        0px 4px 12px ${themePalette.defaultTextColor.replace('rgb', 'rgba').replace(')', ', 0.3)')}
+        0px 4px 12px ${themePalette.defaultTextColor
+          .replace("rgb", "rgba")
+          .replace(")", ", 0.3)")}
       `,
       backgroundImage: `linear-gradient(190deg, ${themePalette.button}, ${themePalette.accentBlue})`,
       width: 70,
       height: 70,
       padding: 0,
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      '&:hover': {
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      "&:hover": {
         backgroundImage: `linear-gradient(190deg, ${themePalette.button}, ${themePalette.button})`,
       },
-      '&:active': {
+      "&:active": {
         boxShadow: `
           inset 0 0 0 4px white,
-          0px 4px 12px ${themePalette.defaultTextColor.replace('rgb', 'rgba').replace(')', ', 0.3)')}
+          0px 4px 12px ${themePalette.defaultTextColor
+            .replace("rgb", "rgba")
+            .replace(")", ", 0.3)")}
         `,
       },
     },
     menuPaper: {
-      position: 'fixed',
+      position: "fixed",
       bottom: 90,
       width: 300,
       minHeight: 200,
-      display: 'flex',
+      display: "flex",
       right: 16,
       padding: 0,
       borderRadius: 2,
       zIndex: 1300,
-      overflow: 'hidden',
-      flexDirection: 'column',
+      overflow: "hidden",
+      flexDirection: "column",
       backgroundColor: themePalette.baseBgColor,
     },
 
     menuHeader: {
       backgroundImage: `linear-gradient(120deg, ${themePalette.accentBlue}, ${themePalette.button})`,
       color: themePalette.baseBgColor,
-      padding: '8px 10px',
-      display: 'flex',
-      justifyContent: 'space-between',
-      alignItems: 'center',
+      padding: "8px 10px",
+      display: "flex",
+      justifyContent: "space-between",
+      alignItems: "center",
       borderRadius: 0,
     },
 
@@ -359,16 +364,16 @@ export const customStyles: Theme = {
       minWidth: 20,
       minHeight: 20,
       padding: 1,
-      borderRadius: '50%',
+      borderRadius: "50%",
       backgroundColor: themePalette.button,
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-      border: '1px solid white',
-      '&:hover': {
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      border: "1px solid white",
+      "&:hover": {
         backgroundColor: themePalette.baseBgColor,
         color: themePalette.button,
-        border: '1px transparent solid',
+        border: "1px transparent solid",
       },
     },
 
@@ -381,15 +386,15 @@ export const customStyles: Theme = {
   },
 
     footerContainer: {
-      marginTop: 'auto',
-      display: 'flex',
-      flexDirection: 'column',
+      marginTop: "auto",
+      display: "flex",
+      flexDirection: "column",
     },
 
     footerLine: {
       backgroundImage: `linear-gradient(120deg, ${themePalette.accentPink}, ${themePalette.accentOrange})`,
       height: 4,
-      width: '100%',
+      width: "100%",
     },
 
     footerBox: {
@@ -409,10 +414,34 @@ export const customStyles: Theme = {
       width: 22,
       height: 4,
       borderRadius: 0.6,
-      backgroundColor: textSize >= size ? themePalette.baseBgColor : themePalette.button,
-      transition: 'background-color 0.3s ease',
-      border: textSize < size ? `1px solid ${themePalette.baseBgColor}` : `1px solid ${themePalette.baseBgColor}`,
+      backgroundColor:
+        textSize >= size ? themePalette.baseBgColor : themePalette.button,
+      transition: "background-color 0.3s ease",
+      border:
+        textSize < size
+          ? `1px solid ${themePalette.baseBgColor}`
+          : `1px solid ${themePalette.baseBgColor}`,
     }),
+
+    formControl: {
+      width: "100%",
+      "& .MuiInputLabel-root": {
+        color: "#000000",
+      },
+      "& .MuiInputLabel-root.Mui-focused": {
+        color: "#000000",
+      },
+      "& .MuiOutlinedInput-notchedOutline": {
+        borderColor: "#000000",
+        borderRadius: "5px",
+      },
+      "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline": {
+        border: `1px solid #000000`,
+      },
+      "& .MuiOutlinedInput-root": {
+        height: "40px",
+      },
+    },
   },
   impactSection: {
     background: themePalette.button,
@@ -438,9 +467,101 @@ export const customStyles: Theme = {
       backgroundSize: "cover",
     },
   },
+  studysection: { 
+    container: {
+      background: themePalette.baseBgColor,
+      color: themePalette.primaryTextColor,
+      paddingBottom: 4,
+    },
+    box: {
+      backgroundColor: themePalette.primaryTextColor,
+      color: themePalette.baseBgColor,
+      position: "relative",
+      borderRadius: "4px",
+      p: 2,
+      my:2,
+      zIndex:150,
+    },
+    icons: {
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      width: "100%",
+      height: "100%",
+      mb: 1.2,
+      background: "transparent",
+    },
+    card: {
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      justifyContent: 'center',
+      textAlign: 'center',
+      p: 2,
+      mb: 1,
+      borderRadius: 2,
+      height: '100px',
+      width: '100px',
+      boxShadow: 'none',
+      background: "transparent",
+    },
+    button: {
+       borderRadius: 1,
+       boxShadow: 4,
+       padding: "6px 16px",
+          '&:hover': {
+            backgroundColor: themePalette.primaryTextColor,
+            color: themePalette.baseBgColor,
+            boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.5)",
+          },
+    },
+  },
+  testimonials: {
+    background: themePalette.button,
+    color: themePalette.baseBgColor,
+  },
   sponsorsSection: {
     background: themePalette.button,
     color: themePalette.baseBgColor,
     textAlign: "center",
   },
+
+  accessibilityReadMask: (mouseY: number, maskHeight: number) => ({
+    background: {
+      position: "fixed",
+      top: 0,
+      left: 0,
+      width: "100vw",
+      height: "100vh",
+      background: `linear-gradient(
+                to bottom,
+                rgba(0,0,0,0.5) ${mouseY - maskHeight / 2}px,
+                transparent ${mouseY - maskHeight / 2}px,
+                transparent ${mouseY + maskHeight / 2}px,
+                rgba(0,0,0,0.5) ${mouseY + maskHeight / 2}px
+              )`,
+      pointerEvents: "none",
+      zIndex: 9999,
+    },
+    topLine: {
+      position: "fixed",
+      top: `${mouseY - maskHeight / 2}px`,
+      left: 0,
+      width: "100vw",
+      height: "3px",
+      backgroundColor: themePalette.accentBlue,
+      zIndex: 9999,
+      pointerEvents: "none",
+    },
+    bottonLine: {
+      position: "fixed",
+      top: `${mouseY + maskHeight / 2}px`,
+      left: 0,
+      width: "100vw",
+      height: "3px",
+      backgroundColor: themePalette.accentBlue,
+      zIndex: 9999,
+      pointerEvents: "none",
+    },
+  }),
 };

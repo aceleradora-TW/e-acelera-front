@@ -1,5 +1,5 @@
 'use client'
-import { Box, Fab, Grid, Paper, Typography } from '@mui/material';
+import { Box, Fab, Grid, Paper, Typography, useTheme } from '@mui/material';
 import AccessibilityNewIcon from '@mui/icons-material/AccessibilityNew';
 import { useAccessibility } from '../context/accessibility.context';
 import ContrastIcon from '@mui/icons-material/Contrast';
@@ -11,6 +11,8 @@ import React from 'react';
 import { themePalette } from '@/app/config/themes/palette';
 import CloseIcon from '@mui/icons-material/Close';
 import { customStyles } from '@/app/config/themes/components';
+import AccessibilityReadingMask from './accessibility-reading-mask';
+
 
 const AccessibilityMenu = () => {
   const {
@@ -25,23 +27,43 @@ const AccessibilityMenu = () => {
     changeFontFamily,
   } = useAccessibility();
 
+  const theme = useTheme();
+
   return (
     <>
-      <Box sx={customStyles.accessibilityMenu.containerFab}>
-        <Box className="label" sx={customStyles.accessibilityMenu.labelFab}>
-          <Typography variant='body1'> Menu de acessibilidade </Typography>
+      <Box sx={theme.customStyles.accessibilityMenu.containerFab}>
+        <Box className="label" sx={theme.customStyles.accessibilityMenu.labelFab}>
+          <Typography variant="body1"> Menu de acessibilidade </Typography>
         </Box>
-        <Fab color="primary" onClick={toggleMenu} sx={customStyles.accessibilityMenu.fabButton}>
-          <AccessibilityNewIcon sx={{ color: themePalette.baseBgColor, fontSize: 32 }} />
+        <Fab
+          color="primary"
+          onClick={toggleMenu}
+          sx={theme.customStyles.accessibilityMenu.fabButton}
+        >
+          <AccessibilityNewIcon
+            sx={{ color: themePalette.baseBgColor, fontSize: 32 }}
+          />
         </Fab>
       </Box>
 
       {isMenuOpen && (
-        <Paper elevation={4} sx={customStyles.accessibilityMenu.menuPaper}>
-          <Box sx={customStyles.accessibilityMenu.menuHeader}>
-            <Box sx={{ width: 20, height: 20, minWidth: 20, minHeight: 20, padding: 1 }} />
-            <Typography variant='h6'> Menu de Acessibilidade </Typography>
-            <ClickButton click={toggleMenu} backIcon={<CloseIcon sx={{ fontSize: 16 }} />} sx={customStyles.accessibilityMenu.closeButton} />
+        <Paper elevation={4} sx={theme.customStyles.accessibilityMenu.menuPaper}>
+          <Box sx={theme.customStyles.accessibilityMenu.menuHeader}>
+            <Box
+              sx={{
+                width: 20,
+                height: 20,
+                minWidth: 20,
+                minHeight: 20,
+                padding: 1,
+              }}
+            />
+            <Typography variant="h6"> Menu de Acessibilidade </Typography>
+            <ClickButton
+              click={toggleMenu}
+              backIcon={<CloseIcon sx={{ fontSize: 16 }} />}
+              sx={theme.customStyles.accessibilityMenu.closeButton}
+            />
           </Box>
           <Box sx={{ padding: 2, overflowY: 'auto' }}>
             <Grid container spacing={2}  direction="column" alignItems="stretch">
@@ -82,6 +104,7 @@ const AccessibilityMenu = () => {
           </Box>
         </Paper>
       )}
+      <AccessibilityReadingMask />
     </>
   );
 };

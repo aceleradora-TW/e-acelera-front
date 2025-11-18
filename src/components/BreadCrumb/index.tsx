@@ -1,5 +1,5 @@
 'use client';
-import { Box, Breadcrumbs, Stack } from '@mui/material';
+import { Box, Breadcrumbs, Stack, useTheme } from '@mui/material';
 import Link from "@mui/material/Link";
 import { usePathname } from 'next/navigation';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
@@ -9,6 +9,7 @@ import { theme } from '@/app/config/themes';
 export const BreadCrumb: React.FC = () => {
   const pathname: string = usePathname();
   const [isValidPage, setIsValidPage] = useState<boolean>(false);
+  const theme = useTheme();
 
   useEffect(() => {
     const checkPageStatus = async () => { 
@@ -51,7 +52,8 @@ export const BreadCrumb: React.FC = () => {
     isValidPage && (
       <Box >
       <Stack spacing={2} sx={theme.customStyles.breadCrumb}>
-        <Breadcrumbs separator={<NavigateNextIcon fontSize="small" sx={{ color: theme.palette.textColor?.main}} />}
+        <Breadcrumbs separator={
+          <NavigateNextIcon fontSize="small" sx={{ color: theme.palette.mode === 'dark' ? theme.palette.bgColor?.main : theme.palette.textColor?.main}} />}
             aria-label="trilha de navegação">
           {breadroutes.length !== 0 && (
                 <Link href="/" variant="body1" sx={theme.customStyles.breadCrumb}>

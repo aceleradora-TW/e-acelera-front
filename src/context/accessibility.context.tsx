@@ -50,6 +50,7 @@ export const AccessibilityProvider = ({
 
   const clearSettings = () => {
     setContrastEnabled(false);
+    localStorage.removeItem('contrastEnabled');
     setReadingMaskEnabled(false);
     setThemeFontFamily(undefined);
     localStorage.clear();
@@ -68,8 +69,7 @@ export const AccessibilityProvider = ({
         themeFontFamily,
         changeFontFamily,
       }}
-    >
-      {children}
+    >{children}
     </AccessibilityContext.Provider>
   );
 };
