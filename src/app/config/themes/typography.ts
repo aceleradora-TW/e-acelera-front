@@ -40,7 +40,7 @@ export const typography = {
     }
   },
   h3: {
-    lineHeight: 1.6,
+    lineHeight: 1.4,
     fontWeight: 500,
     letterSpacing: 0.15,
     "@media (min-width:0px)": {
@@ -79,7 +79,7 @@ export const typography = {
   },
   caption: {
     fontSize: "1.4rem",
-    lineHeight: 1.6,
+    lineHeight: 1.2,
     fontWeight: 500,
     letterSpacing: 0.15
   }
