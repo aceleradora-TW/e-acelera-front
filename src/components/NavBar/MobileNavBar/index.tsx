@@ -90,7 +90,7 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({ list }) => {
       <Typography
         noWrap
         component="a"
-        href="/"
+        href="/home"
         sx={{
           flexGrow: 1,
           display: { xs: "flex", md: "none" },

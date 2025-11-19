@@ -138,7 +138,7 @@ export const WebMenu: React.FC<WebMenuProps> = ({ list, session }) => {
       <Typography
         noWrap
         component="a"
-        href="/"
+        href="/home"
         sx={{
           display: { xs: "none", md: "flex" },
           ...theme.customStyles.logoType,
