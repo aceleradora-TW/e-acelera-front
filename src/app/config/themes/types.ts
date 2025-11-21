@@ -134,4 +134,5 @@ export interface Theme {
   };
   testimonials: ExtendedCSSProperties;
   sponsorsSection: ExtendedCSSProperties;
+  studysection: ExtendedCSSProperties;
 }

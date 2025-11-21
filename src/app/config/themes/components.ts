@@ -525,4 +525,9 @@ export const customStyles: Theme = {
       pointerEvents: "none",
     },
   }),
+  studysection: {
+    background: themePalette.baseBgColor,
+    color: themePalette.primaryTextColor,
+    paddingBottom: 4,
+  },
 };

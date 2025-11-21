@@ -7,8 +7,13 @@ interface SectionWrapperProps extends BoxProps {
 }
 
 //Componente wrapper para seções com espaçamento vertical padronizado
+
 export const SectionWrapper = ({
-  children, py = { xs: 4, md: 4 }, sx, ...props }: SectionWrapperProps) => (
+  children,
+  py = { xs: 4, md: 4 },
+  sx,
+  ...props
+}: SectionWrapperProps) => (
     <Box
       sx={{ py, ...sx, }}
       {...props}
