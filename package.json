@@ -17,6 +17,7 @@
     "@mui/icons-material": "^5.16.7",
     "@mui/material": "^5.15.18",
     "@mui/styled-engine-sc": "^6.0.0-alpha.18",
+    "@mui/system": "^7.3.5",
     "e-acelera-front": "file:",
     "next": "^14.2.33",
     "next-auth": "^4.24.8",

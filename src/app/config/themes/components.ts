@@ -525,9 +525,53 @@ export const customStyles: Theme = {
       pointerEvents: "none",
     },
   }),
-  studysection: {
-    background: themePalette.baseBgColor,
-    color: themePalette.primaryTextColor,
-    paddingBottom: 4,
+  studysection: { 
+    container: {
+      background: themePalette.baseBgColor,
+      color: themePalette.primaryTextColor,
+      paddingBottom: 4,
+    },
+    box: {
+      backgroundColor: themePalette.primaryTextColor,
+      color: themePalette.baseBgColor,
+      position: "relative",
+      borderRadius: "4px",
+      p: 2,
+      my:2,
+      zIndex:150,
+    },
+    icons: {
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      width: "100%",
+      height: "100%",
+      mb: 1.2,
+      background: "transparent",
+    },
+    card: {
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      justifyContent: 'center',
+      textAlign: 'center',
+      p: 2,
+      mb: 1,
+      borderRadius: 2,
+      height: '100px',
+      width: '100px',
+      boxShadow: 'none',
+      background: "transparent",
+    },
+    button: {
+       borderRadius: 1,
+       boxShadow: 4,
+       padding: "6px 16px",
+          '&:hover': {
+            backgroundColor: themePalette.primaryTextColor,
+            color: themePalette.baseBgColor,
+            boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.5)",
+          },
+    },
   },
-};
+}

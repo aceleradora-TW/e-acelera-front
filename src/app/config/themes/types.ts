@@ -134,5 +134,11 @@ export interface Theme {
   };
   testimonials: ExtendedCSSProperties;
   sponsorsSection: ExtendedCSSProperties;
-  studysection: ExtendedCSSProperties;
+  studysection: {
+    container:ExtendedCSSProperties;
+    box: ExtendedCSSProperties;
+    icons: ExtendedCSSProperties;
+    card: ExtendedCSSProperties;
+    button: ExtendedCSSProperties;
+  };
 }

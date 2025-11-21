@@ -67,7 +67,7 @@ export const technologyIcons: Record<string, IconData> = {
     alt: "Ícone do sistema de controle de versão Git",
   },
   GITHUB: {
-    src: "/assets/github-icon.svg",
+    src: "/assets/github-icon2.svg",
     name: "GitHub",
     alt: "Ícone da plataforma de hospedagem de código GitHub",
   },
