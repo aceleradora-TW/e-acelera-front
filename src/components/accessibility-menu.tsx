@@ -10,7 +10,6 @@ import SmartScreenIcon from '@mui/icons-material/SmartScreen';
 import React from 'react';
 import { themePalette } from '@/app/config/themes/palette';
 import CloseIcon from '@mui/icons-material/Close';
-import { customStyles } from '@/app/config/themes/components';
 import AccessibilityReadingMask from './accessibility-reading-mask';
 
 
@@ -25,6 +24,8 @@ const AccessibilityMenu = () => {
     toggleContrast,
     toggleReadingMask,
     changeFontFamily,
+    textSize,
+    increaseTextSize,
   } = useAccessibility();
 
   const theme = useTheme();
@@ -65,41 +66,68 @@ const AccessibilityMenu = () => {
               sx={theme.customStyles.accessibilityMenu.closeButton}
             />
           </Box>
-          <Box sx={{ padding: 2, overflowY: 'auto' }}>
-            <Grid container spacing={2}  direction="column" alignItems="stretch">
-              <Grid item xs={12}>
+          <Box sx={{ padding: 2, overflowY: "auto" }}>
+            <Grid container spacing={2}>
+              <Grid item xs={6}>
+                <ClickButton
+                  click={toggleContrast}
+                  title="Modo Escuro"
+                  backIcon={<ContrastIcon sx={{ fontSize: 36 }} />}
+                  isActive={contrastEnabled}
+                  sx={theme.customStyles.accessibilityMenu.buttonGrid}
+                />
+              </Grid>
+              <Grid item xs={6}>
                 <ClickButton
                   click={toggleReadingMask}
                   title="Máscara leitura"
                   backIcon={<SmartScreenIcon sx={{ fontSize: 36 }} />}
                   isActive={readingMaskEnabled}
-                  sx={customStyles.accessibilityMenu.buttonGrid} />
+                  sx={theme.customStyles.accessibilityMenu.buttonGrid}
+                />
               </Grid>
-              <Grid item xs={12}>
+              <Grid item xs={6}>
                 <ClickButton
-                  click={toggleContrast}
-                  title="Modo dark"
-                  backIcon={<ContrastIcon sx={{ fontSize: 36 }} />}
-                  isActive={contrastEnabled}
-                  sx={customStyles.accessibilityMenu.buttonGrid} />
+                  click={increaseTextSize}
+                  title="Texto maior"
+                  backIcon={<FormatSizeIcon sx={{ fontSize: 36 }} />}
+                  endIcon={
+                    <Box sx={theme.customStyles.accessibilityMenu.textLevelContainer}>
+                      {[18, 20, 22, 24].map((size, index) => (
+                        <Box
+                          key={index}
+                          sx={theme.customStyles.accessibilityMenu.textLevelIndicator(
+                            themePalette,
+                            textSize,
+                            size
+                          )}
+                        />
+                      ))}
+                    </Box>
+                  }
+                  isActive={textSize > 16}
+                  sx={theme.customStyles.accessibilityMenu.buttonGrid}
+                />
               </Grid>
-              <Grid item xs={12}>
+              <Grid item xs={6}>
                 <ClickButton
                   click={() => changeFontFamily("OpenDyslexic")}
-                  title={`Mudar fonte`}
+                  title="Mudar fonte"
                   backIcon={<FormatSizeIcon sx={{ fontSize: 36 }} />}
                   isActive={Boolean(themeFontFamily)}
-                  sx={customStyles.accessibilityMenu.buttonGrid} />
+                  sx={theme.customStyles.accessibilityMenu.buttonGrid}
+                />
               </Grid>
             </Grid>
           </Box>
-          <Box sx={customStyles.accessibilityMenu.footerContainer}>
-            <Box sx={customStyles.accessibilityMenu.footerLine} />
-            <Box sx={customStyles.accessibilityMenu.footerBox} >
+          <Box sx={theme.customStyles.accessibilityMenu.footerContainer}>
+            <Box sx={theme.customStyles.accessibilityMenu.footerLine} />
+            <Box sx={theme.customStyles.accessibilityMenu.footerBox}>
               <ClickButton
                 click={clearSettings}
                 title="Limpar Configurações"
-                backIcon={<RestartAltIcon sx={{ fontSize: 24 }} />} />
+                backIcon={<RestartAltIcon sx={{ fontSize: 24 }} />}
+              />
             </Box>
           </Box>
         </Paper>

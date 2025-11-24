@@ -1,5 +1,5 @@
-"use client";
-import { createContext, useContext, useEffect, useState } from "react";
+'use client'
+import { createContext, useContext, useEffect, useState } from 'react';
 
 interface AccessibilityContextType {
   isMenuOpen: boolean;
@@ -11,6 +11,8 @@ interface AccessibilityContextType {
   toggleReadingMask: () => void;
   themeFontFamily?: string;
   changeFontFamily: (fontFamily?: string) => void;
+  textSize: number;
+  increaseTextSize: () => void;
 }
 
 const AccessibilityContext = createContext<
@@ -28,32 +30,71 @@ export const AccessibilityProvider = ({
   const [themeFontFamily, setThemeFontFamily] = useState<string | undefined>(
     undefined
   );
+  const [textSize, setTextSize] = useState(16);
 
-  const toggleContrast = () => setContrastEnabled((prev) => !prev);
-  const toggleReadingMask = () => setReadingMaskEnabled((prev) => !prev);
+  useEffect(() => {
+    const storedContrast = localStorage.getItem('contrastEnabled');
+    if (storedContrast === 'true') {
+      setContrastEnabled(true);
+    }
+  }, []);
+
+  useEffect(() => {
+    const storedFont = localStorage.getItem('themeFontFamily');
+    if (storedFont === 'OpenDyslexic') {
+      setThemeFontFamily('OpenDyslexic');
+    }
+  }, []);
+
+  useEffect(() => {
+    const storedMask = localStorage.getItem('readingMaskEnabled');
+    if (storedMask === 'true') {
+      setReadingMaskEnabled(true);
+    }
+  }, []);
+
   const toggleMenu = () => setIsMenuOpen((prev) => !prev);
 
-  const changeFontFamily = (fontFamily?: string) => {
-    setThemeFontFamily((prev) => { 
-      const newFont = (prev ? undefined : fontFamily);
-      localStorage.setItem('themeFontFamily', String(newFont));
-      return newFont;
-    }); 
+  const toggleContrast = () => {
+    setContrastEnabled((prev) => {
+      const newValue = !prev;
+      localStorage.setItem('contrastEnabled', String(newValue));
+      return newValue;
+    });
   };
 
-    useEffect(() => {
-     const storedFont = localStorage.getItem('themeFontFamily');
-  if (storedFont === 'OpenDyslexic') {
-    setThemeFontFamily('OpenDyslexic');
-  }
-}, []);
+  const toggleReadingMask = () => {
+    setReadingMaskEnabled((prev) => {
+      const newValue = !prev;
+      localStorage.setItem('readingMaskEnabled', String(newValue));
+      return newValue;
+    });
+  };
+
+  const changeFontFamily = (fontFamily?: string) => {
+    setThemeFontFamily((prev) => {
+      const newFont = prev ? undefined : fontFamily;
+      if (newFont) {
+        localStorage.setItem('themeFontFamily', newFont);
+      } else {
+        localStorage.removeItem('themeFontFamily');
+      }
+      return newFont;
+    });
+  };
+
+  const increaseTextSize = () => {
+    setTextSize((prev) => (prev >= 24 ? 16 : prev + 2));
+  };
 
   const clearSettings = () => {
     setContrastEnabled(false);
-    localStorage.removeItem('contrastEnabled');
     setReadingMaskEnabled(false);
     setThemeFontFamily(undefined);
-    localStorage.clear();
+    setTextSize(16);
+    localStorage.removeItem('contrastEnabled');
+    localStorage.removeItem('readingMaskEnabled');
+    localStorage.removeItem('themeFontFamily');
   };
 
   return (
@@ -68,6 +109,8 @@ export const AccessibilityProvider = ({
         toggleReadingMask,
         themeFontFamily,
         changeFontFamily,
+        textSize,
+        increaseTextSize,
       }}
     >{children}
     </AccessibilityContext.Provider>

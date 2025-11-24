@@ -5,7 +5,7 @@ import { palette } from "./palette"
 import { customStyles } from "./components"
 import { typography } from "./typography"
 import { useAccessibility } from "@/context/accessibility.context"
-import { highContrastTheme } from "./highContrast"
+import { highContrastThemeBuilder } from "./highContrast"
 
 type ThemeProp = {
   children: JSX.Element
@@ -41,38 +41,50 @@ declare module '@mui/material/styles' {
   }
 }
 
-const themeBuilder = (fontFamily?: string) => createTheme({
-  palette,
-  typography:{
-    ...typography,
-    fontFamily,
-  },
-  customStyles,
-    components: {
-    MuiCssBaseline: {
-      styleOverrides: {
-        html: {
-          scrollBehavior: 'smooth'
-        }
-      }
-    }
-  }
+const applyFontFamily = (fontFamily?: string) => {
+  if (!fontFamily) return {};
+  return { fontFamily: `${fontFamily} !important` };
+};
 
-})
+const themeBuilder = (fontFamily?: string) => createTheme({
+    palette,
+    typography: {
+      ...typography,
+      ...(fontFamily && { fontFamily }),
+    },
+    customStyles,
+    components: {
+      MuiCssBaseline: {
+        styleOverrides: {
+          html: {
+            scrollBehavior: 'smooth',
+            ...applyFontFamily(fontFamily),
+          },
+          body: applyFontFamily(fontFamily),
+        },
+      },
+    },
+  })
 
 const defaultTheme = themeBuilder()
 
 export const ThemeConfig: React.FC<ThemeProp> = ({ children }) => {
-  const {themeFontFamily,contrastEnabled} = useAccessibility()
-  const theme = themeBuilder(themeFontFamily)
-    return(
-     <ThemeProvider
-      theme={contrastEnabled ? highContrastTheme : theme}
+  const { contrastEnabled, themeFontFamily } = useAccessibility();
+  
+  const normalTheme = themeBuilder(themeFontFamily);
+  const selectedTheme = contrastEnabled 
+    ? highContrastThemeBuilder(themeFontFamily)
+    : normalTheme;
+
+  return (
+    <ThemeProvider
+      theme={selectedTheme}
       key={contrastEnabled ? 'dark' : 'normal'}
     >
       <CssBaseline />
       {children}
     </ThemeProvider>
-  )}
+  )
+}
 
 export {defaultTheme as theme}
