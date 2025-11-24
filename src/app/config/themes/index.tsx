@@ -6,6 +6,7 @@ import { customStyles } from "./components"
 import { typography } from "./typography"
 import { useAccessibility } from "@/context/accessibility.context"
 import { highContrastTheme } from "./highContrast"
+import "@mui/material/Button";
 
 type ThemeProp = {
   children: JSX.Element
@@ -25,6 +26,10 @@ declare module '@mui/material/styles' {
     textColor?: PaletteColor
     bgColor?: PaletteColor
     customClass?: PaletteColor
+    borderColor?: {
+      start: string;
+      end: string;
+    };
   }
   interface PaletteOptions {
     button?: PaletteColorOptions;
@@ -37,6 +42,10 @@ declare module '@mui/material/styles' {
       blue: string;
       pink: string;
       orange: string;
+    }
+    borderColor?: {
+      start: string
+      end: string
     }
   }
 }

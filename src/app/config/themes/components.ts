@@ -270,6 +270,85 @@ export const customStyles: Theme = {
     height: "30%",
     boxShadow: "0 0 0.6em rgba(44 44 44 / 75%)",
   },
+  aboutSession: {
+    width: "100%",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: {
+      sm: "start",
+      lg: "center",
+    },
+    gap: 4,
+    height: "100%",
+    minHeight: 542,
+    flexWrap: { xs: "wrap", lg: "nowrap" },
+    padding: 4,
+  },
+
+  buttonHome: {
+    maxWidth: 300,
+    border: 1,
+    borderRadius: 1,
+    borderColor: "#0B497A",
+    color: "#0B497A",
+    fontWeight: "600",
+    boxShadow: 4,
+  },
+
+  cardAboutAgil: {
+    minHeight: 108,
+    border: 6,
+    paddingY: 2,
+    paddingX: 2,
+    width: {
+      xs: 337,
+      md: 386,
+    },
+    borderImage: `linear-gradient(${themePalette.borderPrimaryColor}, ${themePalette.borderSecondaryColor}) 1`,
+  },
+
+  sessionListContainer: {
+    width: "100%",
+    display: "flex",
+    justifyContent: "space-around",
+    alignItems: "center",
+    height: 384,
+    flexDirection: "row",
+    flexWrap: "wrap",
+    gap: 1,
+  },
+
+  cardAboutAgilContainer: {
+    width: "100%",
+    display: "flex",
+    justifyContent: "space-between",
+    flexWrap: "wrap",
+    gap: 2,
+  },
+
+  sessionFormacaoContainer: {
+    display: "flex",
+    width: { xs: 342, sm: 490 },
+    minHeight: 476,
+    height: "100%",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+
+  sessionFormacao: (isLarge?: boolean) => ({
+    width: isLarge ? { xs: "100%", md: "97%" } : { xs: "48%", md: "46%" },
+    flexWrap: "wrap",
+    minHeight: 67,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    bgcolor: "#0b497a",
+    borderRadius: 1,
+    color: "white",
+    boxShadow: 4,
+    overflowWrap: "break-word",
+  }),
   accessibilityMenu: {
     containerFab: {
       position: "fixed",
@@ -525,7 +604,7 @@ export const customStyles: Theme = {
       pointerEvents: "none",
     },
   }),
-  studysection: { 
+  studysection: {
     container: {
       background: themePalette.baseBgColor,
       color: themePalette.primaryTextColor,
@@ -537,8 +616,8 @@ export const customStyles: Theme = {
       position: "relative",
       borderRadius: "4px",
       p: 2,
-      my:2,
-      zIndex:150,
+      my: 2,
+      zIndex: 150,
     },
     icons: {
       display: "flex",
@@ -550,28 +629,28 @@ export const customStyles: Theme = {
       background: "transparent",
     },
     card: {
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      justifyContent: 'center',
-      textAlign: 'center',
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+      justifyContent: "center",
+      textAlign: "center",
       p: 2,
       mb: 1,
       borderRadius: 2,
-      height: '100px',
-      width: '100px',
-      boxShadow: 'none',
+      height: "100px",
+      width: "100px",
+      boxShadow: "none",
       background: "transparent",
     },
     button: {
-       borderRadius: 1,
-       boxShadow: 4,
-       padding: "6px 16px",
-          '&:hover': {
-            backgroundColor: themePalette.primaryTextColor,
-            color: themePalette.baseBgColor,
-            boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.5)",
-          },
+      borderRadius: 1,
+      boxShadow: 4,
+      padding: "6px 16px",
+      "&:hover": {
+        backgroundColor: themePalette.primaryTextColor,
+        color: themePalette.baseBgColor,
+        boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.5)",
+      },
     },
   },
-}
+};

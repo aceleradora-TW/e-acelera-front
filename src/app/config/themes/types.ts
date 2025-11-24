@@ -135,10 +135,87 @@ export interface Theme {
   testimonials: ExtendedCSSProperties;
   sponsorsSection: ExtendedCSSProperties;
   studysection: {
-    container:ExtendedCSSProperties;
+    container: ExtendedCSSProperties;
     box: ExtendedCSSProperties;
     icons: ExtendedCSSProperties;
     card: ExtendedCSSProperties;
     button: ExtendedCSSProperties;
+  };
+  aboutSession: {
+    width: string;
+    display: string;
+    alignItems: string;
+    justifyContent: {
+      sm: string;
+      lg: string;
+    };
+    gap: number;
+    height: string;
+    minHeight: number;
+    flexWrap: {
+      xs: string;
+      lg: string;
+    };
+    padding: number;
+  };
+  buttonHome: {
+    maxWidth: number;
+    border: number;
+    borderRadius: number;
+    borderColor: string;
+    color: string;
+    fontWeight: string;
+    boxShadow: number;
+  };
+  sessionFormacao: (isLarge?: boolean) => {
+    width: { xs: string; md: string };
+    flexWrap: string;
+    minHeight: number;
+    display: string;
+    justifyContent: string;
+    alignItems: string;
+    bgcolor: string;
+    borderRadius: number;
+    color: string;
+    boxShadow: number;
+    overflowWrap: string;
+  };
+
+  cardAboutAgil: {
+    width: { xs: number; md: number };
+    minHeight: number;
+    border: number;
+    paddingY: number;
+    paddingX: number;
+    borderImage: string;
+  };
+
+  sessionListContainer: {
+    width: string;
+    height: number;
+    display: string;
+    justifyContent: string;
+    alignItems: string;
+    flexDirection: string;
+    flexWrap: string;
+    gap: number;
+  };
+
+  sessionFormacaoContainer: {
+    width: { xs: number; sm: number };
+    minHeight: number;
+    height: string;
+    display: string;
+    flexDirection: string;
+    justifyContent: string;
+    alignItems: string;
+  };
+
+  cardAboutAgilContainer: {
+    width: string;
+    display: string;
+    justifyContent: string;
+    flexWrap: string;
+    gap: number;
   };
 }

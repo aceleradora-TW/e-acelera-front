@@ -5,7 +5,7 @@ import { TestimonialsSection } from "@/components/testimonials-section";
 import { HomeBanner } from "@/components/UI/home/home-banner";
 import { ImpactSection } from "@/components/UI/home/impact-section";
 import { SponsorsSection } from "@/components/UI/home/sponsors-section";
-import { SessionAccelerator } from "@/components/UI/home/session-the-agile-accelerator";
+import AboutAgil from "@/components/UI/home/session-the-agile-accelerator";
 import { StudySection } from "@/components/UI/home/study-section";
 
 export default function Home() {
@@ -19,7 +19,7 @@ export default function Home() {
       }}
     >
       <HomeBanner />
-      <SessionAccelerator />
+      <AboutAgil />
       <ImpactSection />
       <SponsorsSection />
       <StudySection />
