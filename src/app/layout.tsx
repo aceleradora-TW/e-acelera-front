@@ -9,7 +9,6 @@ import { ThemeConfig } from "./config/themes"
 import { Footer } from "@/components/Footer/Footer"
 import { AccessibilityProvider } from "@/context/accessibility.context"
 import AccessibilityMenu from "@/components/accessibility-menu"
-import { HomeBanner } from "@/components/UI/home/home-banner"
 
 const menuItems = ["Nivelamento", "Autoestudo"]
 const inter = Inter({ subsets: ["latin"] })
@@ -44,9 +43,6 @@ export default async function RootLayout({
                 <Box sx={{ marginBottom: "80px" }}>
                   <ResponsiveAppBar list={menuItems} session={session} />
                 </Box>
-                {/* <Box>
-                  <HomBanner />
-                </Box>e */}
                 <Box component="main" sx={{ flex: 1 }}>
                   <Container>
                     {children}
