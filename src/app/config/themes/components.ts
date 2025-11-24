@@ -285,27 +285,28 @@ export const customStyles: Theme = {
     padding: 4,
   },
 
-  buttonHome: {
-    maxWidth: 300,
-    border: 1,
-    borderRadius: 1,
-    borderColor: "#0B497A",
-    color: "#0B497A",
-    fontWeight: "600",
-    boxShadow: 4,
-  },
-
   cardAboutAgil: {
     minHeight: 108,
-    border: 6,
+    border: 4,
     paddingY: 2,
     paddingX: 2,
     width: {
-      xs: 337,
+      xs: '100%',
       md: 386,
     },
     borderImage: `linear-gradient(${themePalette.borderPrimaryColor}, ${themePalette.borderSecondaryColor}) 1`,
   },
+
+  buttonAboutAgil: {
+      borderRadius: 1,
+      boxShadow: 4,
+      padding: "6px 16px",
+      "&:hover": {
+        backgroundColor: themePalette.primaryTextColor,
+        color: themePalette.baseBgColor,
+        boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.5)",
+      },
+    },
 
   sessionListContainer: {
     width: "100%",

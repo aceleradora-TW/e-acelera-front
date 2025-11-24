@@ -1,5 +1,5 @@
 "use client";
-import { Box, Button, Link, Typography, useTheme } from "@mui/material";
+import { Box, Button, Link, Grid, Typography, useTheme } from "@mui/material";
 
 export default function AboutAgil() {
   const theme = useTheme();
@@ -15,13 +15,27 @@ export default function AboutAgil() {
     "Aulas de inglês focadas na área tech",
   ];
 
+  const AceleraButton = (
+    <Button 
+      aria-label="Começar minha trilha na plataforma e-Acelera" 
+      variant="outlined" 
+      sx={{
+        ...(theme as any).customStyles.button,
+        ...(theme as any).customStyles.buttonAboutAgil,
+        mt: 3,
+      }}
+    >
+      Saiba mais sobre o e-acelera
+    </Button>
+  );
+
   return (
     <Box sx={{ ...theme.customStyles.aboutSession }}>
       <Box
         sx={{ maxWidth: 788, minHeight: 552, width: "100%", height: "100%" }}
       >
-        <Box sx={{ gap: 4, display: "flex", flexDirection: "column" }}>
-          <Typography color={theme.palette.textColor?.main} variant="h2">
+        <Box sx={{display: "flex", flexDirection: "column" }}>
+          <Typography color={theme.palette.textColor?.main} variant="h2" sx={{ mb: 2 }}>
             Sobre a Aceleradora Ágil
           </Typography>
           <Typography>
@@ -30,20 +44,22 @@ export default function AboutAgil() {
             pessoas que muitas vezes não se viam na tecnologia a um espaço onde
             aprender, criar e crescer é possível.
           </Typography>
-          <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+          <Box sx={{ display: "flex", flexDirection: "column", gap: 2, mt: 2 }}>
             <Typography>O projeto oferece dois caminhos:</Typography>
             <Box sx={theme.customStyles.cardAboutAgilContainer}>
-              <Typography>
-                description="Uma plataforma de estudo gratuita e aberta, o e-Acelera,
-                onde qualquer pessoa pode começar sua jornada no seu ritmo."
-                textBold="plataforma de estudo"
-              </Typography>
-              <Typography>
-                description="Um programa de estágio intensivo de 18 semanas, voltado para
-                quem quer entrar no mercado de tecnologia com formação prática
-                e vivência real."
-                textBold="programa de estágio"
-              </Typography>
+              <Box sx={theme.customStyles.cardAboutAgil}>
+                <Typography>
+                  Uma <strong>plataforma de estudo</strong> gratuita e aberta, o e-Acelera,
+                  onde qualquer pessoa pode começar sua jornada no seu ritmo.
+                </Typography>
+              </Box>
+              <Box sx={theme.customStyles.cardAboutAgil}>
+                <Typography>
+                  Um <strong>programa de estágio</strong> intensivo de 18 semanas, voltado para
+                  quem quer entrar no mercado de tecnologia com formação prática
+                  e vivência real.
+                </Typography>
+              </Box>
             </Box>
             <Typography>
               Acreditamos em uma tecnologia feita por muitas mãos. Esse é o
@@ -52,6 +68,7 @@ export default function AboutAgil() {
                 target="_blank"
                 rel="noopener noreferrer"
                 href={"https://aceleradora-inclusiva.netlify.app/"}
+                sx={{ color: '#002C53' }}
               >
                 Aceleradora Inclusiva
               </Link>
@@ -63,13 +80,14 @@ export default function AboutAgil() {
                 href={
                   "https://www.thoughtworks.com/content/dam/thoughtworks/documents/e-book/tw_ebook_aceleradora_portuguese.pdf"
                 }
+                sx={{ color: '#002C53' }}
               >
                 e-book da Aceleradora Ágil e Inclusiva.
               </Link>
             </Typography>
           </Box>
-          <Box sx={{ display: { xs: "none", sm: "block" } }}>
-            <Button >Saiba mais sobre o e-acelera</Button>
+            <Box sx={{ display: { xs: 'none', md: 'block' } }}>
+             {AceleraButton}
           </Box>
         </Box>
       </Box>
@@ -105,8 +123,8 @@ export default function AboutAgil() {
           ))}
         </Box>
       </Box>
-      <Box sx={{ display: { xs: "block", sm: "none" } }}>
-        <Button>Saiba mais sobre o e-acelera</Button>
+      <Box sx={{ width: '100%', display: { md: 'none' } }}> 
+         {AceleraButton}
       </Box>
     </Box>
   );

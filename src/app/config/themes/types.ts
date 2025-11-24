@@ -158,15 +158,6 @@ export interface Theme {
     };
     padding: number;
   };
-  buttonHome: {
-    maxWidth: number;
-    border: number;
-    borderRadius: number;
-    borderColor: string;
-    color: string;
-    fontWeight: string;
-    boxShadow: number;
-  };
   sessionFormacao: (isLarge?: boolean) => {
     width: { xs: string; md: string };
     flexWrap: string;
@@ -182,13 +173,14 @@ export interface Theme {
   };
 
   cardAboutAgil: {
-    width: { xs: number; md: number };
+    width: { xs: string; md: number };
     minHeight: number;
     border: number;
     paddingY: number;
     paddingX: number;
     borderImage: string;
   };
+  buttonAboutAgil:ExtendedCSSProperties;
 
   sessionListContainer: {
     width: string;
