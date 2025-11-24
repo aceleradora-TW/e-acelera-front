@@ -5,6 +5,7 @@ import { palette } from "./palette"
 import { customStyles } from "./components"
 import { typography } from "./typography"
 import { useAccessibility } from "@/context/accessibility.context"
+import { highContrastThemeBuilder } from "./highContrast"
 
 type ThemeProp = {
   children: JSX.Element
@@ -18,7 +19,7 @@ declare module '@mui/material/styles' {
     customStyles?: typeof customStyles
   }
   interface Palette {
-    button?: PaletteColor 
+    button?: PaletteColor
     buttonHover?: PaletteColor
     statusSelect?: PaletteColor
     textColor?: PaletteColor
@@ -26,34 +27,64 @@ declare module '@mui/material/styles' {
     customClass?: PaletteColor
   }
   interface PaletteOptions {
-    button?: PaletteColorOptions
-    buttonHover?: PaletteColorOptions
-    statusSelect?: PaletteColorOptions
-    textColor?: PaletteColorOptions
-    bgColor?: PaletteColorOptions
-    customClass?: PaletteColorOptions
+    button?: PaletteColorOptions;
+    buttonHover?: PaletteColorOptions;
+    statusSelect?: PaletteColorOptions;
+    textColor?: PaletteColorOptions;
+    bgColor?: PaletteColorOptions;
+    customClass?: PaletteColorOptions;
+    accent?: {
+      blue: string;
+      pink: string;
+      orange: string;
+    }
   }
 }
 
+const applyFontFamily = (fontFamily?: string) => {
+  if (!fontFamily) return {};
+  return { fontFamily: `${fontFamily} !important` };
+};
+
 const themeBuilder = (fontFamily?: string) => createTheme({
-  palette,
-  typography:{
-    ...typography,
-    fontFamily,
-  },
-  customStyles
-})
+    palette,
+    typography: {
+      ...typography,
+      ...(fontFamily && { fontFamily }),
+    },
+    customStyles,
+    components: {
+      MuiCssBaseline: {
+        styleOverrides: {
+          html: {
+            scrollBehavior: 'smooth',
+            ...applyFontFamily(fontFamily),
+          },
+          body: applyFontFamily(fontFamily),
+        },
+      },
+    },
+  })
 
 const defaultTheme = themeBuilder()
 
 export const ThemeConfig: React.FC<ThemeProp> = ({ children }) => {
-  const {themeFontFamily} = useAccessibility()
-  const theme = themeBuilder(themeFontFamily)
-    return(
-    <ThemeProvider theme={theme}>
+  const { contrastEnabled, themeFontFamily } = useAccessibility();
+  
+  const normalTheme = themeBuilder(themeFontFamily);
+  const selectedTheme = contrastEnabled 
+    ? highContrastThemeBuilder(themeFontFamily)
+    : normalTheme;
+
+  return (
+    <ThemeProvider
+      theme={selectedTheme}
+      key={contrastEnabled ? 'dark' : 'normal'}
+    >
       <CssBaseline />
       {children}
     </ThemeProvider>
-  )}
+  )
+}
 
 export {defaultTheme as theme}

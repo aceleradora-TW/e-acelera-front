@@ -31,6 +31,11 @@ export const palette = {
   bgColor: {
     main: themePalette.baseBgColor,
     light: themePalette.dropdownContentColor
+  },
+  accent: {
+    blue: themePalette.accentBlue,
+    pink: themePalette.accentPink,
+    orange: themePalette.accentOrange
   }
 }
   
