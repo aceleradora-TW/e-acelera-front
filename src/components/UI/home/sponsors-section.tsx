@@ -81,41 +81,47 @@ export const SponsorsSection = () => {
                         display: "flex",
                         justifyContent: "space-around",
                         alignItems: "center",
-                        p: 1,
+                        // p: 1,
+                        marginBottom: "1000px",
                         gap: { xs: 1, md: 2 },
                         flexWrap: { xs: "wrap", md: "nowrap" },
+                        // mt: 2
+                        marginTop: "25px",
+                        // marginTop: "20px",
+                        // marginTop: "32px"
+
                     }}
                     >
                     <Box sx={{ textAlign: "center" }}>
-                        <Image width={56} height={62} src="/assets/logoTW.svg" alt="logo TW" />
-                        <Typography sx={{ 
-                            fontSize: { xs: theme.typography.body2.fontSize, md: theme.typography.body1.fontSize },
+                        <Image width={165} height={52} src="/assets/logoTW.webp" alt="logo TW" />
+                        {/* <Typography sx={{ 
+                            fontSize: { xs: theme.typography.body2.fontSize, md: theme.typography.body1.fontSize }, */}
                         
-                        }}>ThoughtWorks</Typography>
+                        {/* }}>ThoughtWorks</Typography> */}
                     </Box>
 
                     <Box sx={{ textAlign: "center" }}>
-                        <Image width={56} height={62} src="/assets/logoGlobo.svg" alt="logo Globo" />
-                        <Typography sx={{ 
+                        <Image width={130} height={48} src="/assets/logoGlobo.webp" alt="logo Globo" />
+                        {/* <Typography sx={{ 
                             fontSize: { xs: theme.typography.body2.fontSize, md: theme.typography.body1.fontSize },
                             
-                        }}>Globo</Typography>
+                        }}>Globo</Typography> */}
                     </Box>
 
                     <Box sx={{ textAlign: "center" }}>
-                        <Image width={56} height={62} src="/assets/logoPUC.svg" alt="logo PUC" />
-                        <Typography sx={{ 
+                        <Image width={110} height={48} src="/assets/logoPUC.png" alt="logo PUC" />
+                        {/* <Typography sx={{ 
                             fontSize: { xs: theme.typography.body2.fontSize, md: theme.typography.body1.fontSize },
                             
-                        }}>PUCRS</Typography>
+                        }}>PUCRS</Typography> */}
                     </Box>
 
                     <Box sx={{ textAlign: "center" }}>
-                        <Image width={56} height={62} src="/assets/logoTecnoPUC.svg" alt="logo TecnoPUC" />
-                        <Typography sx={{ 
+                        <Image width={155} height={36} src="/assets/logoTecnoPUC.webp" alt="logo TecnoPUC" />
+                        {/* <Typography sx={{ 
                             fontSize: { xs: theme.typography.body2.fontSize, md: theme.typography.body1.fontSize },
                             
-                        }}>TecnoPUC</Typography>
+                        }}>TecnoPUC</Typography> */}
                     </Box>
                     </Box>
                 </Box>
