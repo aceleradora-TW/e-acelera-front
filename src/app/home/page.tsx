@@ -1,6 +1,6 @@
 "use client";
 import { Box } from "@mui/material";
-import { Faq } from "@/components/faq";
+import { Faq } from "@/components/UI/home/faq";
 import { TestimonialsSection } from "@/components/testimonials-section";
 import { HomeBanner } from "@/components/UI/home/home-banner";
 import { ImpactSection } from "@/components/UI/home/impact-section";
@@ -16,6 +16,7 @@ export default function Home() {
         flexDirection: "column",
         width: "100%",
         overflowX: "hidden",
+        marginTop: "-40px",
       }}
     >
       <HomeBanner />

@@ -282,19 +282,7 @@ export const customStyles: Theme = {
     height: "100%",
     minHeight: 542,
     flexWrap: { xs: "wrap", lg: "nowrap" },
-    padding: 4,
-  },
-
-  cardAboutAgil: {
-    minHeight: 108,
-    border: 4,
-    paddingY: 2,
-    paddingX: 2,
-    width: {
-      xs: '100%',
-      md: 386,
-    },
-    borderImage: `linear-gradient(${themePalette.borderPrimaryColor}, ${themePalette.borderSecondaryColor}) 1`,
+    padding: 0,
   },
 
   buttonAboutAgil: {
@@ -308,8 +296,7 @@ export const customStyles: Theme = {
       },
     },
 
-  sessionListContainer: {
-    width: "100%",
+  sessionListContainer: {   
     display: "flex",
     justifyContent: "space-around",
     alignItems: "center",
@@ -317,6 +304,10 @@ export const customStyles: Theme = {
     flexDirection: "row",
     flexWrap: "wrap",
     gap: 1,
+    width: {
+      xs: "0 auto",
+    }
+
   },
 
   cardAboutAgilContainer: {
@@ -327,18 +318,34 @@ export const customStyles: Theme = {
     gap: 2,
   },
 
+  cardAboutAgil: {
+    minHeight: 108,
+    border: 4,
+    paddingY: 2,
+    paddingX: 2,
+    flex: 1,
+    minWidth: {
+      xs: '100%',
+      md: 250,
+    },
+    borderImage: `linear-gradient(${themePalette.borderPrimaryColor}, ${themePalette.borderSecondaryColor}) 1`,
+  },
+
   sessionFormacaoContainer: {
     display: "flex",
-    width: { xs: 342, sm: 490 },
+    width: { xs: 342, sm: 490, md: 800 },
     minHeight: 476,
+    maxWidth: "100%",
+    margin: "0 auto",
     height: "100%",
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
+    
   },
 
   sessionFormacao: (isLarge?: boolean) => ({
-    width: isLarge ? { xs: "100%", md: "97%" } : { xs: "48%", md: "46%" },
+    width: isLarge ? { xs: "100%", sm: "90%", md: "97%" } : { xs: "48%", sm: "40%", md: "46%" },
     flexWrap: "wrap",
     minHeight: 67,
     display: "flex",
@@ -347,7 +354,6 @@ export const customStyles: Theme = {
     bgcolor: "#0b497a",
     borderRadius: 1,
     color: "white",
-    boxShadow: 4,
     overflowWrap: "break-word",
   }),
   accessibilityMenu: {

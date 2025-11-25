@@ -1,7 +1,7 @@
 import { Box, Grid, Typography, useTheme } from "@mui/material";
-import { Accordion } from "./accordion";
+import { Accordion } from "../../accordion";
 import { FAQ_QUESTIONS } from "@/utils/constants";
-import { SectionContent } from "./UI/section-content";
+import { SectionContent } from "../section-content";
 
 export function Faq() {
   const theme = useTheme();
@@ -14,7 +14,7 @@ export function Faq() {
         width: "100%",
       }}
     >
-        <Grid sx={{ maxWidth: "1292px" }} container spacing={{ xs: 2, md: 4 }}>
+        <Grid container spacing={{ xs: 2, md: 4 }}>
         <Grid
           item
           xs={12}

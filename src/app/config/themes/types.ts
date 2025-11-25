@@ -168,46 +168,42 @@ export interface Theme {
     bgcolor: string;
     borderRadius: number;
     color: string;
-    boxShadow: number;
     overflowWrap: string;
   };
 
   cardAboutAgil: {
-    width: { xs: string; md: number };
+    minWidth: { xs: string; md: number};
     minHeight: number;
     border: number;
     paddingY: number;
     paddingX: number;
     borderImage: string;
+    flex: number;
+
   };
   buttonAboutAgil:ExtendedCSSProperties;
-
   sessionListContainer: {
-    width: string;
-    height: number;
+    width: { xs: string;};
     display: string;
     justifyContent: string;
     alignItems: string;
+    height: number;
     flexDirection: string;
     flexWrap: string;
     gap: number;
-  };
+  }
+  cardAboutAgilContainer: ExtendedCSSProperties;
 
   sessionFormacaoContainer: {
-    width: { xs: number; sm: number };
+    width: { xs: number; sm: number; md: number };
+    maxWidth: string;
+    margin: string;
     minHeight: number;
     height: string;
     display: string;
     flexDirection: string;
     justifyContent: string;
     alignItems: string;
-  };
-
-  cardAboutAgilContainer: {
-    width: string;
-    display: string;
-    justifyContent: string;
-    flexWrap: string;
-    gap: number;
+    
   };
 }

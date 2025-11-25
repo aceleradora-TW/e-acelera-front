@@ -1,7 +1,6 @@
 "use client"
 import React from "react";
 import { Box, Container, Grid, Typography, useTheme } from "@mui/material";
-import { SectionContent } from "../section-content";
 
 export const ImpactSection = () => {
   const theme = useTheme();
@@ -12,29 +11,36 @@ export const ImpactSection = () => {
       sx={{
         ...theme.customStyles.impactSection,
         pb: 4,
+        pt:4,
       }}
     >
-      <SectionContent>
-        <Typography
-          variant="h2"
-          sx={{
-            textAlign: { xs: 'left', md: 'center' },
-            pt: { xs: 4, md: 2 },
-            mb: { xs: 1, md: 2 },
-          }}
-        >
-          Impacto que transforma
-        </Typography>
+        <Container maxWidth="md"
+            sx={{
+              px: {
+                  xs: 3,
+                  md: 0,
+              },
+            }}>
+          <Typography
+            variant="h2"
+            sx={{
+              textAlign: { xs: 'left', md: 'center' },
+              pt: { xs: 4, md: 2 },
+              mb: { xs: 1, md: 2 },
+            }}
+          >
+            Impacto que transforma
+          </Typography>
 
-        <Typography
-          variant="body1"
-          sx={{
-            textAlign: { xs: 'left', md: 'center' }
-          }}
-        >
-          A Aceleradora Ágil é mais que uma iniciativa, é um movimento que muda trajetórias. Ao longo dos anos, já impulsionou pessoas, ideias e projetos que seguem gerando impacto real na tecnologia e na sociedade.
-        </Typography>
-      </SectionContent>
+          <Typography
+            variant="body1"
+            sx={{
+              textAlign: { xs: 'left', md: 'center' }
+            }}
+          >
+            A Aceleradora Ágil é mais que uma iniciativa, é um movimento que muda trajetórias. Ao longo dos anos, já impulsionou pessoas, ideias e projetos que seguem gerando impacto real na tecnologia e na sociedade.
+          </Typography>
+        </Container>
 
       <Box
         sx={{
