@@ -126,7 +126,6 @@ export const WebMenu: React.FC<WebMenuProps> = ({ list, session }) => {
                 {session.user.email || "email@example.com"}
               </Typography>
             </MenuItem>
-            {/* Mostra o Switch apenas para usuários de teste */}
             {is_test_user && (
               <MenuItem sx={{ cursor: "default" }}>
                 <FormControlLabel
