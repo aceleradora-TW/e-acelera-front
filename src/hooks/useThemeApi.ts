@@ -30,6 +30,9 @@ export const useThemeApi = (category: string) => {
     if (flag_adminjs.enabled || (is_test_user && adminjs_preference)) {
       console.log("Flagsmith: 'flag_adminjs' HABILITADA. Chamando a rota de API /api/themes.");
       url = `/api/themes`;
+      fetchOptions.headers = {
+        'category': category,
+      };
     } else {
       console.log("Flagsmith: 'flag_adminjs' DESABILITADA. Chamando a rota de API /api/stackbyApi/Themes.");
       url = `/api/stackbyApi/Themes`;

@@ -10,3 +10,8 @@ export const ARRAY_SPECIAL_CHARS = [
   { char: "%40;", replace: "@" },
 ];
 export const FLAGSMITH_ENVIRONMENT_ID = process.env.NEXT_PUBLIC_FLAGSMITH_ENVIRONMENT_ID
+
+export enum ThemeCategory {
+  LEVELING = "Leveling",
+  SELF_STUDY = "SelfStudy"
+}
