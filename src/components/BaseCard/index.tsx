@@ -20,7 +20,7 @@ interface CardProps {
   description?: string;
   textImage?: string;
   image?: string;
-  route: string;
+  route?: string;
   children?: React.ReactNode;
   cardType?: "theme" | "topic";
 }
@@ -48,7 +48,10 @@ export const BaseCard: React.FC<CardProps> = ({
   children,
 }) => {
   const router = useRouter();
-  const handleClick = (route: string) => {
+  const handleClick = (route?: string) => {
+    if(!route) {
+      return;
+    }
     router.push(`/${route}`);
   };
 

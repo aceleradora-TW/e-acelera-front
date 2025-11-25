@@ -16,7 +16,6 @@ export const ContainerCardTheme: React.FC<ContainerCardThemeProps> = ({
   const pathname = usePathname();
   const currentPath = pathname.slice(1);
   const { adminjs_preference } = useFlags([""], ["adminjs_preference"]);
-  console.log(data);
   return (
     <Grid container spacing={2} alignItems="stretch">
       {!adminjs_preference
@@ -54,7 +53,6 @@ export const ContainerCardTheme: React.FC<ContainerCardThemeProps> = ({
                   id={element.id}
                   title={element.title}
                   description={element?.description}
-                  route={`${currentPath}/${element.id}-${element?.title}`} //tratar rota 
                   image={element.image}
                   textImage={`${element?.alt}`}
                   cardType="theme"

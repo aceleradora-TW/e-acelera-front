@@ -1,13 +1,11 @@
 'use client';
 import { useState, useEffect } from 'react';
 import { useFlags } from 'flagsmith/react';
-// import flagsmith from 'flagsmith/isomorphic';
 import { useSession } from 'next-auth/react';
 
 export const useThemeApi = (category: string) => {
   const { flag_adminjs, is_test_user, adminjs_preference } = useFlags(['flag_adminjs'], ['is_test_user', 'adminjs_preference']);
   const {data: sessionData} = useSession();
-  // const flagsmithState = flagsmith.getState();
 
   const [data, setData] = useState<any>(null);
   const [loading, setLoading] = useState(true);
