@@ -1,5 +1,5 @@
 'use client'
-import { Box, Fab, Grid, Paper, SvgIcon, Typography } from '@mui/material';
+import { Box, Fab, Grid, Paper, SvgIcon , Typography} from '@mui/material';
 import AccessibilityNewIcon from '@mui/icons-material/AccessibilityNew';
 import { useAccessibility } from '../context/accessibility.context';
 import ContrastIcon from '@mui/icons-material/Contrast';
@@ -9,6 +9,8 @@ import SmartScreenIcon from '@mui/icons-material/SmartScreen';
 import React from 'react';
 import { themePalette } from '@/app/config/themes/palette';
 import CloseIcon from '@mui/icons-material/Close';
+import AccessibilityReadingMask from './accessibility-reading-mask';
+
 import { customStyles } from '@/app/config/themes/components';
 import { useMediaQuery, useTheme } from '@mui/material';
 
@@ -36,7 +38,7 @@ const AccessibilityMenu = () => {
           <Typography variant='body1'> Menu de acessibilidade </Typography>
         </Box>
         )}
-        <Fab color="primary" onClick={toggleMenu} sx={customStyles.accessibilityMenu.fabButton}>
+<Fab color="primary" onClick={toggleMenu} sx={customStyles.accessibilityMenu.fabButton}>
           <AccessibilityNewIcon sx={{ color: themePalette.baseBgColor, fontSize: 32 }} />
         </Fab>
       </Box>
@@ -55,7 +57,8 @@ const AccessibilityMenu = () => {
                   title="Máscara leitura"
                   backIcon={<SmartScreenIcon sx={{ fontSize: 36 }} />}
                   isActive={readingMaskEnabled}
-                  sx={customStyles.accessibilityMenu.buttonGrid} />
+                  sx={theme.customStyles.accessibilityMenu.buttonGrid}
+                />
               </Grid>
               <Grid item xs={12}>
                 <ClickButton
@@ -65,19 +68,21 @@ const AccessibilityMenu = () => {
                   isActive={contrastEnabled}
                   sx={customStyles.accessibilityMenu.buttonGrid} />
               </Grid>
-              <Grid item xs={12}>
+              <Grid item xs={6}>
                 <ClickButton
                   click={() => changeFontFamily("OpenDyslexic")}
                   title={`Fonte Acessível`}
                   backIcon={<FormatSizeIcon sx={{ fontSize: 36 }} />}
                   isActive={Boolean(themeFontFamily)}
-                  sx={customStyles.accessibilityMenu.buttonGrid} />
+                  sx={theme.customStyles.accessibilityMenu.buttonGrid}
+                />
               </Grid>
             </Grid>
           </Box>
-          <Box sx={customStyles.accessibilityMenu.footerContainer}>
-            <Box sx={customStyles.accessibilityMenu.footerLine} />
-            <Box sx={customStyles.accessibilityMenu.footerBox} >
+          <Box sx={theme.customStyles.accessibilityMenu.footerContainer}>
+            <Box sx={theme.customStyles.accessibilityMenu.footerLine} />
+            <Box sx={theme.customStyles.accessibilityMenu.footerBox}>
+
               <ClickButton
                 sx={{padding: themeFontFamily ? '8px 4px' : '8px 16px',}}
                 click={clearSettings}
@@ -97,6 +102,7 @@ const AccessibilityMenu = () => {
           </Box>
         </Paper>
       )}
+      <AccessibilityReadingMask />
     </>
   );
 };
