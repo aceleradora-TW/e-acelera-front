@@ -10,11 +10,12 @@ import { Footer } from "@/components/Footer/Footer"
 import flagsmith from "flagsmith/isomorphic";
 import { FeatureFlagProvider } from "../components/FeatureFlagProvider/featureFlagProvider";
 import React from "react";
+import { AccessibilityProvider } from "@/context/accessibility.context"
+import AccessibilityMenu from "@/components/accessibility-menu"
 
 const FLAGSMITH_ENVIRONMENT_ID = process.env.NEXT_PUBLIC_FLAGSMITH_ENVIRONMENT_ID
 
 const menuItems = ["Nivelamento", "Autoestudo"]
-
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
@@ -32,14 +33,9 @@ export default async function RootLayout({
   const session = await getServerSession();
 
   // Inicializa o FlagSmith no servidor com a identidade do usuário
-  // O trait 'is_test_user' deve ser configurado no painel do FlagSmith para identificar usuários de teste
-  // A feature flag 'flag_adminjs' controla se a funcionalidade AdminJS está disponível globalmente
   await flagsmith.init({
     environmentID: FLAGSMITH_ENVIRONMENT_ID,
     identity: session?.user?.email || undefined,
-    // defaultFlags: {
-    //   flag_adminjs: { enabled: true, value: null },
-    // },
     cacheFlags: false,
   })
 
@@ -49,9 +45,17 @@ export default async function RootLayout({
     <html lang="pt-br">
       <body className={inter.className}>
         <FeatureFlagProvider serverState={serverState}>
+        <AccessibilityProvider>
           <ClientSessionProvider>
             <ThemeConfig>
-              <Box sx={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}>
+              <Box
+                sx={{
+                  minHeight: "100vh",
+                  display: "flex",
+                  flexDirection: "column",
+                }}
+              >
+              <AccessibilityMenu />
                 <Box sx={{ marginBottom: "80px" }}>
                   <ResponsiveAppBar list={menuItems} session={session} />
                 </Box>
@@ -65,6 +69,7 @@ export default async function RootLayout({
               </Box>
             </ThemeConfig>
           </ClientSessionProvider>
+        </AccessibilityProvider>
         </FeatureFlagProvider>
       </body>
     </html>

@@ -7,7 +7,10 @@ export enum themePalette {
     statusNotStarted = "rgb(222, 229, 216)",
     baseBgColor = "rgb(255, 255, 255)",
     loginHover = "rgb(154, 192, 201)",
-    dropdownContentColor = "rgb(87, 87, 87)"
+    dropdownContentColor = "rgb(87, 87, 87)",
+    accentOrange = "rgb(245, 175, 85)",
+    accentPink = "rgb(235, 101, 140)",
+    accentBlue = "rgb(61, 143, 216)"
 }
   
 export const palette = {
@@ -28,6 +31,11 @@ export const palette = {
   bgColor: {
     main: themePalette.baseBgColor,
     light: themePalette.dropdownContentColor
+  },
+  accent: {
+    blue: themePalette.accentBlue,
+    pink: themePalette.accentPink,
+    orange: themePalette.accentOrange
   }
 }
   
