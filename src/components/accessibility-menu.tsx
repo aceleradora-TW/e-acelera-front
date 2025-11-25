@@ -35,7 +35,7 @@ const AccessibilityMenu = () => {
       <Box sx={customStyles.accessibilityMenu.containerFab}>
         {!isMobile && (
         <Box className="label" sx={customStyles.accessibilityMenu.labelFab}>
-          <Typography variant='body1'> Menu de acessibilidade </Typography>
+          <Typography variant='body1' noWrap> Menu de acessibilidade </Typography>
         </Box>
         )}
 <Fab color="primary" onClick={toggleMenu} sx={customStyles.accessibilityMenu.fabButton}>
