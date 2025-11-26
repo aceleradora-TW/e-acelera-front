@@ -4,6 +4,8 @@ import React from "react"
 import { palette } from "./palette"
 import { customStyles } from "./components"
 import { typography } from "./typography"
+import { useAccessibility } from "@/context/accessibility.context"
+import { highContrastTheme } from "./highContrast"
 
 type ThemeProp = {
   children: JSX.Element
@@ -17,7 +19,7 @@ declare module '@mui/material/styles' {
     customStyles?: typeof customStyles
   }
   interface Palette {
-    button?: PaletteColor 
+    button?: PaletteColor
     buttonHover?: PaletteColor
     statusSelect?: PaletteColor
     textColor?: PaletteColor
@@ -25,26 +27,47 @@ declare module '@mui/material/styles' {
     customClass?: PaletteColor
   }
   interface PaletteOptions {
-    button?: PaletteColorOptions
-    buttonHover?: PaletteColorOptions
-    statusSelect?: PaletteColorOptions
-    textColor?: PaletteColorOptions
-    bgColor?: PaletteColorOptions
-    customClass?: PaletteColorOptions
+    button?: PaletteColorOptions;
+    buttonHover?: PaletteColorOptions;
+    statusSelect?: PaletteColorOptions;
+    textColor?: PaletteColorOptions;
+    bgColor?: PaletteColorOptions;
+    customClass?: PaletteColorOptions;
+    accent?: {
+      blue: string;
+      pink: string;
+      orange: string;
+    }
   }
 }
 
 const theme = createTheme({
   palette,
   typography,
-  customStyles
+  customStyles,
+  components: {
+    MuiCssBaseline: {
+      styleOverrides: {
+        html: {
+          scrollBehavior: 'smooth'
+        }
+      }
+    }
+  }
 })
 
-export const ThemeConfig: React.FC<ThemeProp> = ({ children }) => (
-    <ThemeProvider theme={theme}>
+export const ThemeConfig: React.FC<ThemeProp> = ({ children }) => {
+  const { contrastEnabled } = useAccessibility();
+
+  return (
+    <ThemeProvider
+      theme={contrastEnabled ? highContrastTheme : theme}
+      key={contrastEnabled ? 'dark' : 'normal'}
+    >
       <CssBaseline />
       {children}
     </ThemeProvider>
   )
+}
 
 export { theme }

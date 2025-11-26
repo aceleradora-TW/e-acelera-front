@@ -29,6 +29,26 @@ export interface Theme {
   cardVideoDescription: ExtendedCSSProperties;
   advanceExercises: ExtendedCSSProperties;
   cardMediaImage: ExtendedCSSProperties;
+  buttonActive: ExtendedCSSProperties;
+  accessibilityMenu: {
+    containerFab: ExtendedCSSProperties;
+    fabButton: ExtendedCSSProperties;
+    menuPaper: ExtendedCSSProperties;
+    menuHeader: ExtendedCSSProperties;
+    closeButton: ExtendedCSSProperties;
+    buttonGrid: ExtendedCSSProperties;
+    textLevelContainer: ExtendedCSSProperties;
+    formControl: ExtendedCSSProperties;
+    textLevelIndicator: (
+      themePalette: any,
+      currentSize: number,
+      indicatorSize: number
+    ) => ExtendedCSSProperties;
+    footerContainer: ExtendedCSSProperties;
+    footerLine: ExtendedCSSProperties;
+    footerBox: ExtendedCSSProperties;
+    labelFab: ExtendedCSSProperties;
+  };
   cardLoginBox: {
     width: {
       xs: string;
@@ -60,19 +80,64 @@ export interface Theme {
     };
     marginBottom: string;
   };
+
+  accessibilityReadMask: (
+    mouseY: number,
+    maskHeight: number
+  ) => {
+    background: {
+      position: string;
+      top: number;
+      left: number;
+      width: string;
+      height: string;
+      background: string;
+      pointerEvents: string;
+      zIndex: number;
+    };
+    topLine: {
+      position: string;
+      top: string;
+      left: number;
+      width: string;
+      height: string;
+      backgroundColor: string;
+      zIndex: number;
+      pointerEvents: string;
+    };
+    bottonLine: {
+      position: string;
+      top: string;
+      left: number;
+      width: string;
+      height: string;
+      backgroundColor: string;
+      zIndex: number;
+      pointerEvents: string;
+    };
+  };
   Footer: {
-    background: string
-    color: string
-    mt: number
-    height: string
-    boxShadow: string
-  }
-  impactSection: ExtendedCSSProperties
-  styleExclamation: ExtendedCSSProperties
-  styleModal : ExtendedCSSProperties,
+    background: string;
+    color: string;
+    mt: number;
+    height: string;
+    boxShadow: string;
+  };
+  impactSection: ExtendedCSSProperties;
+  styleExclamation: ExtendedCSSProperties;
+  styleModal: ExtendedCSSProperties;
   banner: {
     container: ExtendedCSSProperties;
     contentBox: ExtendedCSSProperties;
     imageBox: ExtendedCSSProperties;
+  };
+  testimonials: ExtendedCSSProperties;
+  sponsorsSection: ExtendedCSSProperties;
+  studysection: {
+    container:ExtendedCSSProperties;
+    box: ExtendedCSSProperties;
+    icons: ExtendedCSSProperties;
+    card: ExtendedCSSProperties;
+    button: ExtendedCSSProperties;
   };
 }
