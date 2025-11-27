@@ -1,3 +1,5 @@
+
+
 export interface ApiResponse {
     data: DataItem[];
 }
@@ -79,9 +81,38 @@ export interface Theme {
   alt?: string;
 }
 
+export interface Topic {
+  id: string;
+  title: string;
+  shortDescription: string;
+  description: string;
+  references?: string;
+  themeId: string;
+  theme: Theme;        
+  exercises: Exercise[]; 
+  video: Video;       
+};
+
+export interface Exercise {
+  id: string;
+  title: string;
+  description: string;
+  shortDescription?: string;
+  sequence?: number;
+}
+
+export interface Video {
+  id: string;
+  title: string;
+  description: string;
+  references?: string;
+  link: string;
+  topicId: string;
+}
+
 export interface PostgresApiResponse {
   data: Theme[];
-} //Geovana
+} 
 
 
 export enum IdType {

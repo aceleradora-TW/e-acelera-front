@@ -1,6 +1,6 @@
-import { Grid,  useMediaQuery } from "@mui/material";
+import { Grid, useMediaQuery } from "@mui/material";
 import React from "react";
-import { usePathname } from 'next/navigation';
+import { usePathname } from "next/navigation";
 import { ButtonCard } from "@/components/ButtonCard";
 import { DescriptionFull } from "@/components/descriptions/description-full";
 interface ContainerCardsExercisesProps {
@@ -9,26 +9,31 @@ interface ContainerCardsExercisesProps {
   exercisesInfo: string;
 }
 
-export const ContainerCardsExercises: React.FC<ContainerCardsExercisesProps> = ({ exercises, exercisesDescription, exercisesInfo }) => {
-  const between = useMediaQuery('(min-width: 800px) and (max-width: 899px)')
-  const between2 = useMediaQuery('(min-width: 445px) and (max-width: 599px)')
-  const pathname = usePathname()
-  const currentPath = pathname.slice(1)
+export const ContainerCardsExercises: React.FC<
+  ContainerCardsExercisesProps
+> = ({ exercises, exercisesDescription, exercisesInfo }) => {
+  const between = useMediaQuery("(min-width: 800px) and (max-width: 899px)");
+  const between2 = useMediaQuery("(min-width: 445px) and (max-width: 599px)");
+  const pathname = usePathname();
+  const currentPath = pathname.slice(1);
 
-  const splitValues = (value: string):string[] => value.split(",");
+  const splitValues = (value: string): string[] => value.split(",");
   const exercisesArray = splitValues(exercises);
   const descriptionsArray = splitValues(exercisesDescription);
   const infoArray = splitValues(exercisesInfo);
 
-  const isInvalidData = exercises.trim() == "Untitle"|| !exercises.trim() || !exercisesDescription.trim() || !exercisesInfo.trim();
+  const isInvalidData =
+    exercises.trim() == "Untitle" ||
+    !exercises.trim() ||
+    !exercisesDescription.trim() ||
+    !exercisesInfo.trim();
 
-  if(isInvalidData) {
-    return <DescriptionFull text="## Nenhum exercício encontrado"/>
+  if (isInvalidData) {
+    return <DescriptionFull text="## Nenhum exercício encontrado" />;
   }
 
-
   return (
-    <Grid container spacing={2} columnSpacing={1} >
+    <Grid container spacing={2} columnSpacing={1}>
       {exercisesArray.map((exercise, index) => (
         <Grid
           item
@@ -44,10 +49,11 @@ export const ContainerCardsExercises: React.FC<ContainerCardsExercisesProps> = (
             id={`${infoArray[index]}`}
             title={exercise}
             description={descriptionsArray[index]}
-            route={`${currentPath}/${infoArray[index]}-${exercise}`} />
+            // nivelamento/themeId/topicId/exerciseId -> de cada card
+            route={`${currentPath}/${exerciseId}`}
+          />
         </Grid>
-      ))
-     }
+      ))}
     </Grid>
-  )
+  );
 };

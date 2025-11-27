@@ -9,7 +9,7 @@ import StatusSelect from "@/components/StatusSelect";
 import { ElementType } from "@/types/typeTopic";
 
 interface DetailingContentProps {
-  dataTopic: ApiResponse
+  dataTopic: ApiResponse;
   dataExercise: ApiResponse;
   id: string;
 }
@@ -17,7 +17,7 @@ interface DetailingContentProps {
 const ExerciseContent: React.FC<{
   field: ExercisesField;
   idExercise: string;
-  dataTopic: ApiResponse
+  dataTopic: ApiResponse;
 }> = ({ field, idExercise, dataTopic }) => (
   <>
     <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
@@ -36,14 +36,18 @@ const ExerciseContent: React.FC<{
         flexWrap: "wrap",
         justifyContent: "space-between",
         alignItems: "center",
-        marginBottom: 2
+        marginBottom: 2,
       }}
     >
       <Grid item>
         <Heading variant="h1" text={field.title} />
       </Grid>
-      <Grid item >
-        <StatusSelect elementType={ElementType.Exercise} id={idExercise} width="100%" />
+      <Grid item>
+        <StatusSelect
+          elementType={ElementType.Exercise}
+          id={idExercise}
+          width="100%"
+        />
       </Grid>
     </Grid>
     <DescriptionFull text={field.description} />
@@ -56,9 +60,11 @@ export const DetailingExerciseContent: React.FC<DetailingContentProps> = ({
   dataExercise,
   id,
 }) => {
+  // TODO: NÃO É NECESSARIO PARA ADMINJS
   const filteredData = dataExercise?.data.filter(
     (element: DataItem) => element.id === id.split("-")[0]
   );
+  // FIM TODO
 
   return (
     <>

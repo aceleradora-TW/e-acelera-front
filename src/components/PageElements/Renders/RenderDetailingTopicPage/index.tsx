@@ -26,52 +26,55 @@ const PageContent = ({ topicId }: { topicId: string }) => {
   );
   const { dataStatus } = useFetchTopicStatus(topicId);
 
-  const { data: renderData, isLoading: loading, error: error} = useFetchData('/api/stackbyApi/Topics', {
-    headers: {
-        operator: "rowIds",
-        value: topicId,
-    },
-  });
+  const {
+    data: renderData,
+    isLoading: loading,
+    error: error,
+  } = useFetchData(`/api/topics/${topicId}`);
 
   if (loading) return <Loading />;
   if (error) return <BadRequest />;
   if (!renderData) return <NoData />;
 
   return (
-    <GlobalContextProvider>
-    <DetailingTopicContext.Provider
-      value={{
-        topicStatus: dataStatus,
-        statusError: isModalOpen,
-        showStatusErrorModal,
-      }}
-    >
-      <LayoutPage>
-        <ErrorUpdateStatusModal
-          open={isModalOpen}
-          handleClose={() => setIsModalOpen(false)}
-        />
-        <DetailingTopicContent
-          data={renderData}
-          id={topicId}
-          topicProgress={progress?.progress ?? 0}
-        />
-      </LayoutPage>
-    </DetailingTopicContext.Provider>
-    </GlobalContextProvider>
+    <h1>{JSON.stringify(renderData)}</h1>
+    // <GlobalContextProvider>
+    //   <DetailingTopicContext.Provider
+    //     value={{
+    //       topicStatus: dataStatus,
+    //       statusError: isModalOpen,
+    //       showStatusErrorModal,
+    //     }}
+    //   >
+    //     <LayoutPage>
+    //       <ErrorUpdateStatusModal
+    //         open={isModalOpen}
+    //         handleClose={() => setIsModalOpen(false)}
+    //       />
+    //       <DetailingTopicContent
+    //         data={renderData}
+    //         id={topicId}
+    //         topicProgress={progress?.progress ?? 0}
+    //       />
+    //     </LayoutPage>
+    //   </DetailingTopicContext.Provider>
+    // </GlobalContextProvider>
   );
 };
 
 export const RenderDetailingTopicPage = (id: string) => {
+  /**TODO: NÃO É NECESSÁRIO PARA FLUXO DO ADMINJS */
   const extractId = (): string => {
     const parts = id.split("-");
     return parts[0];
   };
 
   const topicId = extractId();
+  //FIM TODO
 
   return (
     <GlobalContextProvider>
+      <h1>{topicId}</h1>
       <PageContent topicId={topicId} />
     </GlobalContextProvider>
   );
