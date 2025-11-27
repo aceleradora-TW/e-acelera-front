@@ -2,7 +2,7 @@ import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import "./globals.css"
 import ResponsiveAppBar from "@/components/NavBar"
-import { Box, Container } from "@mui/material"
+import { Box } from "@mui/material"
 import { getServerSession } from "next-auth"
 import ClientSessionProvider from "@/components/ClientSessionProvider"
 import { ThemeConfig } from "./config/themes"
@@ -44,9 +44,7 @@ export default async function RootLayout({
                   <ResponsiveAppBar list={menuItems} session={session} />
                 </Box>
                 <Box component="main" sx={{ flex: 1 }}>
-                  <Container>
                     {children}
-                  </Container>
                 </Box>
                 <Footer
                   linkedinUrl={"https://www.linkedin.com/school/aceleradora-%C3%A1gil/?originalSubdomain=br"}
