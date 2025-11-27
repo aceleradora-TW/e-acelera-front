@@ -12,10 +12,10 @@ import { useFetchProgress } from "@/components/fetchProgress";
 import { useGlobalContext } from "@/hooks/useGlobalContext";
 import { GlobalContextProvider } from "@/context/global.context";
 import { IdType } from "@/types/type";
+import { useTopicApi } from "@/hooks/useTopicApi"
 
 const PageContent = ({ topicId }: { topicId: string }) => {
   const [isModalOpen, setIsModalOpen] = React.useState<boolean>(false);
-
   const showStatusErrorModal = () => setIsModalOpen(true);
 
   const { progressTrigger } = useGlobalContext();
@@ -37,44 +37,45 @@ const PageContent = ({ topicId }: { topicId: string }) => {
   if (!renderData) return <NoData />;
 
   return (
-    <h1>{JSON.stringify(renderData)}</h1>
-    // <GlobalContextProvider>
-    //   <DetailingTopicContext.Provider
-    //     value={{
-    //       topicStatus: dataStatus,
-    //       statusError: isModalOpen,
-    //       showStatusErrorModal,
-    //     }}
-    //   >
-    //     <LayoutPage>
-    //       <ErrorUpdateStatusModal
-    //         open={isModalOpen}
-    //         handleClose={() => setIsModalOpen(false)}
-    //       />
-    //       <DetailingTopicContent
-    //         data={renderData}
-    //         id={topicId}
-    //         topicProgress={progress?.progress ?? 0}
-    //       />
-    //     </LayoutPage>
-    //   </DetailingTopicContext.Provider>
-    // </GlobalContextProvider>
+    <GlobalContextProvider>
+      <DetailingTopicContext.Provider
+        value={{
+          topicStatus: dataStatus,
+          statusError: isModalOpen,
+          showStatusErrorModal,
+        }}
+      >
+        <LayoutPage>
+          <ErrorUpdateStatusModal
+            open={isModalOpen}
+            handleClose={() => setIsModalOpen(false)}
+          />
+          <DetailingTopicContent
+            data={renderData}
+            id={topicId}
+            topicProgress={progress?.progress ?? 0}
+          />
+        </LayoutPage>
+      </DetailingTopicContext.Provider>
+    </GlobalContextProvider>
   );
 };
 
-export const RenderDetailingTopicPage = (id: string) => {
-  /**TODO: NÃO É NECESSÁRIO PARA FLUXO DO ADMINJS */
-  const extractId = (): string => {
-    const parts = id.split("-");
-    return parts[0];
-  };
+export const RenderDetailingTopicPage = (id: string, source: string) => {
+ // let topicId = id;
+  const topicId = source === "stackby" ? id.split("-")[0] : id;
 
-  const topicId = extractId();
-  //FIM TODO
+  // if (source === 'stakby'){
+  //   const extractId = (): string =>{
+  //   const parts = id.split("-");
+  //   return parts[0];
+    
+  // }}
+  // topicId = extractId();
+
 
   return (
     <GlobalContextProvider>
-      <h1>{topicId}</h1>
       <PageContent topicId={topicId} />
     </GlobalContextProvider>
   );

@@ -10,6 +10,7 @@ export const useTopicApi = (id: string) => {
   const [data, setData] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
+  const [source, setSource] = useState<'adminjs' | 'stackby' | null>(null);
 
   useEffect(() => {
     if(!id) return;
@@ -30,6 +31,7 @@ export const useTopicApi = (id: string) => {
     if (flag_adminjs.enabled || (is_test_user && adminjs_preference)) {
       console.log("Flagsmith: 'flag_adminjs' HABILITADA. Chamando a rota de API /api/topics/:id.");
       url = `/api/topics/${id}`;
+      setSource('adminjs');
     } else {
       console.log("Flagsmith: 'flag_adminjs' DESABILITADA. Chamando a rota de API /api/stackbyApi/Topics.");
       url = `/api/stackbyApi/Topics`;
@@ -38,6 +40,7 @@ export const useTopicApi = (id: string) => {
         'column': 'id',
         'value': id,
       };
+      setSource('stackby');
     }
 
     fetch(url, fetchOptions)
@@ -49,7 +52,7 @@ export const useTopicApi = (id: string) => {
         }
         return await res.json();
       })
-      .then(setData)
+      .then((payload) => setData(payload.data))
       .catch(err => {
         console.error("Erro no hook useTopicApi:", err);
         setError(true);
@@ -58,5 +61,5 @@ export const useTopicApi = (id: string) => {
 
   }, [sessionData?.user.email, id, flag_adminjs.enabled, flag_adminjs, is_test_user, adminjs_preference]);
 
-  return { data, loading, error };
+  return { data, loading, error, source };
 };
