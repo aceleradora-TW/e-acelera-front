@@ -1,9 +1,29 @@
 import { createTheme } from "@mui/material/styles";
-import { typography } from "./typography";
 import { themePalette } from "./palette";
+import { typography } from "./typography";
 
-export const highContrastTheme = createTheme({
-  typography, 
+const applyFontFamily = (fontFamily?: string) => {
+  if (!fontFamily) return {};
+  return { fontFamily: `${fontFamily} !important` };
+};
+
+export const highContrastThemeBuilder = (fontFamily?: string) => {
+  const fontFamilyStyle = applyFontFamily(fontFamily);
+  
+  const typographyVariants = ['h1', 'h2', 'h3', 'body1', 'caption'] as const;
+  const typographyOverrides = typographyVariants.reduce((acc, variant) => {
+    acc[variant] = {
+      color: "#E0E0E0 !important",
+      ...fontFamilyStyle,
+    };
+    return acc;
+  }, {} as Record<string, any>);
+
+  return createTheme({
+    typography: {
+      ...typography,
+      ...(fontFamily && { fontFamily }),
+    }, 
 
   palette: {
     mode: "dark",
@@ -29,10 +49,15 @@ export const highContrastTheme = createTheme({
   components: {
     MuiCssBaseline: {
       styleOverrides: {
+        html: fontFamilyStyle,
         body: {
           backgroundColor: "#121212 !important",
           color: "#E0E0E0 !important",
+          ...fontFamilyStyle,
         },
+        ...(fontFamily && {
+          '*': fontFamilyStyle,
+        }),
       },
     },
     MuiSwitch: {
@@ -53,6 +78,7 @@ export const highContrastTheme = createTheme({
           "&:hover": {
             backgroundColor: `${themePalette.button} !important`,
           },
+          ...fontFamilyStyle,
         },
       },
     },
@@ -65,6 +91,7 @@ export const highContrastTheme = createTheme({
           "&:hover": {
             backgroundColor: "#555555 !important",
           },
+          ...fontFamilyStyle,
         },
       },
     },
@@ -73,6 +100,7 @@ export const highContrastTheme = createTheme({
         root: {
           backgroundColor: "#222 !important",
           color: "#E0E0E0 !important",
+          ...fontFamilyStyle,
         },
       },
     },
@@ -98,6 +126,7 @@ export const highContrastTheme = createTheme({
           "&.Mui-focused": {
             color: "#E0E0E0 !important",
           },
+          ...fontFamilyStyle,
         },
       },
     },
@@ -113,21 +142,8 @@ export const highContrastTheme = createTheme({
     },
     MuiTypography: {
       styleOverrides: {
-        h1: {
-          color: "#E0E0E0 !important",
-        },
-        h2: {
-          color: "#E0E0E0 !important",
-        },
-        h3: {
-          color: "#E0E0E0 !important",
-        },
-        body1: {
-          color: "#E0E0E0 !important",
-        },
-        caption: {
-          color: "#E0E0E0 !important",
-        },
+        root: fontFamilyStyle,
+        ...typographyOverrides,
       },
     },
     MuiPaper: {
@@ -703,4 +719,7 @@ export const highContrastTheme = createTheme({
       },
     }),
   },
-});
+  });
+};
+
+export const highContrastTheme = highContrastThemeBuilder();

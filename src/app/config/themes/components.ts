@@ -147,11 +147,11 @@ export const customStyles: Theme = {
   },
   cardLoginBox: {
     width: {
-      xs: "90%",
-      sm: "60%",
-      md: "45%",
-      lg: "35%",
-      xl: "30%",
+      xs: "95%",
+      sm: "85%",
+      md: "60%",
+      lg: "50%",
+      xl: "40%",
     },
     height: "30%",
     boxShadow: "0 0 0.4em rgba(44, 44, 44, 0.4)",
@@ -162,6 +162,7 @@ export const customStyles: Theme = {
     display: "flex",
     justifyContent: "center",
     marginTop: "80px",
+    maxWidth: "100%",
   },
   boxLogoType: {
     display: "flex",
@@ -279,6 +280,7 @@ export const customStyles: Theme = {
       "&:hover .label": {
         opacity: 1,
         transform: "translateX(-15%)",
+        pointerEvents: "auto",
       },
     },
     labelFab: {
@@ -294,6 +296,7 @@ export const customStyles: Theme = {
       width: 210,
       whiteSpace: "nowrap",
       opacity: 0,
+      pointerEvents: "none",
       display: "flex",
       alignItems: "center",
       justifyContent: "left",
@@ -409,8 +412,8 @@ export const customStyles: Theme = {
     },
 
     textLevelContainer: {
-      display: "center",
-      justifycontent: "center",
+      display: "flex",
+      justifyContent: "center",
       gap: 0.5,
       marginTop: 1,
     },
@@ -452,7 +455,6 @@ export const customStyles: Theme = {
       },
     },
   },
-
   impactSection: {
     background: themePalette.button,
     color: themePalette.baseBgColor,
