@@ -10,7 +10,6 @@ import SmartScreenIcon from '@mui/icons-material/SmartScreen';
 import React from 'react';
 import { themePalette } from '@/app/config/themes/palette';
 import CloseIcon from '@mui/icons-material/Close';
-import { customStyles } from '@/app/config/themes/components';
 import AccessibilityReadingMask from './accessibility-reading-mask';
 
 
@@ -21,9 +20,11 @@ const AccessibilityMenu = () => {
     clearSettings,
     contrastEnabled,
     readingMaskEnabled,
-    textSize,
+    themeFontFamily,
     toggleContrast,
     toggleReadingMask,
+    changeFontFamily,
+    textSize,
     increaseTextSize,
   } = useAccessibility();
 
@@ -88,7 +89,7 @@ const AccessibilityMenu = () => {
               <Grid item xs={6}>
                 <ClickButton
                   click={increaseTextSize}
-                  title={`Texto maior`}
+                  title="Texto maior"
                   backIcon={<FormatSizeIcon sx={{ fontSize: 36 }} />}
                   endIcon={
                     <Box sx={theme.customStyles.accessibilityMenu.textLevelContainer}>
@@ -105,6 +106,15 @@ const AccessibilityMenu = () => {
                     </Box>
                   }
                   isActive={textSize > 16}
+                  sx={theme.customStyles.accessibilityMenu.buttonGrid}
+                />
+              </Grid>
+              <Grid item xs={6}>
+                <ClickButton
+                  click={() => changeFontFamily("OpenDyslexic")}
+                  title="Mudar fonte"
+                  backIcon={<FormatSizeIcon sx={{ fontSize: 36 }} />}
+                  isActive={Boolean(themeFontFamily)}
                   sx={theme.customStyles.accessibilityMenu.buttonGrid}
                 />
               </Grid>
