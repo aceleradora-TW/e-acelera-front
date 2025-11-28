@@ -533,12 +533,10 @@ export const highContrastThemeBuilder = (fontFamily?: string) => {
       buttonGrid: {
         flexDirection: "column",
         alignItems: "center",
-        justifyContent: "center",
         textAlign: "center",
+        minHeight: 90,
         width: "100%",
-        height: 90,
-        padding: 4,
-        lineHeight: 1,
+        padding: "8px 4px",
         "&:hover": {
           backgroundColor: `${themePalette.button} !important`,
         },
@@ -560,8 +558,7 @@ export const highContrastThemeBuilder = (fontFamily?: string) => {
         backgroundColor: "#222",
         display: "flex",
         justifyContent: "center",
-        padding: "10px",
-        height: 70,
+        padding: "12px 12px",
       },
 
       textLevelContainer: {
