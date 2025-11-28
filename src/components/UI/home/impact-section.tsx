@@ -50,13 +50,7 @@ export const ImpactSection = ()=> {
           backgroundColor: theme.palette.textColor?.main,
           padding: { xs: "24px", md: "24px 48px" },
           borderRadius: "4px",
-          border: "6px solid transparent",
-          backgroundImage: `
-            linear-gradient(${theme.palette.textColor?.main}, ${theme.palette.textColor?.main}),
-            linear-gradient(to right, #EB658C, #F5AF55)
-          `,
-          backgroundOrigin: "border-box",
-          backgroundClip: "padding-box, border-box",
+          border: "4px solid white",
         }}
       >
 
