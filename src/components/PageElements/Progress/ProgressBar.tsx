@@ -1,4 +1,5 @@
 import React from "react";
+import { useTheme } from "@mui/material/styles";
 
 interface ProgressBarProps {
   percentage: number; 
@@ -6,12 +7,13 @@ interface ProgressBarProps {
 
 export default function ProgressBar({ percentage }: ProgressBarProps) {
   const clamped = Math.min(Math.max(percentage, 0), 100);
+  const muiTheme = useTheme();
 
   return (
     <div
       style={{
         width: "100%",
-        backgroundColor: "#aceef5",
+        backgroundColor: muiTheme.palette.mode === 'dark' ? '#E0E0E0' : '#aceef5',
         borderRadius: 8,
         height: 6,
         overflow: "hidden",

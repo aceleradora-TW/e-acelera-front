@@ -7,7 +7,7 @@ import {
   Typography,
   useTheme,
 } from "@mui/material";
-import { TestimonialsSlider } from "./TestimonialsSlider";
+import { Slider } from "./UI/slider";
 import { TESTIMONIALS } from "@/utils/constants";
 
 type Testimonial = {
@@ -103,13 +103,13 @@ export const TestimonialsSection = () => {
           Aceleradora Ágil.
         </Typography>
 
-          <TestimonialsSlider>
+          <Slider>
           {TESTIMONIALS.map((item, index) => (
             <Box key={index}>
               <TestimonialCard item={item} />
             </Box>
           ))}
-          </TestimonialsSlider>
+          </Slider>
       </Container>
     </Box>
   );

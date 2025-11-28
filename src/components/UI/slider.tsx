@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { Box, IconButton, useMediaQuery, useTheme } from "@mui/material";
-import Slider from "react-slick";
+import SlickSlider from 'react-slick'
 import { ArrowBackIosNew, ArrowForwardIos } from "@mui/icons-material";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -27,11 +27,11 @@ const Arrow: React.FC<ArrowProps> = ({ onClick, direction }) => (
   </IconButton>
 );
 
-type TestimonialsSliderProps = {
+type SliderProps = {
   children: React.ReactNode;
 };
 
-export const TestimonialsSlider: React.FC<TestimonialsSliderProps> = ({ children }) => {
+export const Slider: React.FC<SliderProps> = ({ children }) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const isTablet = useMediaQuery(theme.breakpoints.between("sm", "md"));
@@ -73,7 +73,7 @@ export const TestimonialsSlider: React.FC<TestimonialsSliderProps> = ({ children
         },
       }}
     >
-      <Slider {...sliderSettings}>{children}</Slider>
+      <SlickSlider {...sliderSettings}>{children}</SlickSlider>
     </Box>
   );
 };
