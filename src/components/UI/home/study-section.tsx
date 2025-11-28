@@ -3,15 +3,15 @@ import Image from 'next/image';
 import { Box, Button, Card, Grid, Typography, useTheme } from "@mui/material";
 import { IconData, technologyIcons } from "@/utils/constants";
 import { SectionContent } from "../section-content";
-import { SxProps }from "@mui/system";
+import { SxProps } from "@mui/system";
 interface TechIconProps extends Omit<IconData, 'name'> {
-  size?: string;
-  iconStyles?: SxProps;
+    size?: string;
+    iconStyles?: SxProps;
 }
 
 interface TechGridProps {
-  cardStyles: SxProps;
-  iconStyles: SxProps;
+    cardStyles: SxProps;
+    iconStyles: SxProps;
 }
 
 const TechIcon = ({ src, alt, size = "100px", iconStyles }: TechIconProps) => (
@@ -85,7 +85,7 @@ export const StudySection = () => {
                         >
                             O e-Acelera é a plataforma de estudos da Aceleradora Ágil — gratuita, aberta e feita para quem quer aprender tecnologia com autonomia. Qualquer pessoa pode acessar e começar a estudar programação, mesmo sem experiência prévia.
                         </Typography>
-                
+
                         <Box>
                             <Typography
                                 variant="h5">
@@ -123,26 +123,32 @@ export const StudySection = () => {
                     </Grid>
                     <Grid item xs={12} md={6} order={{ xs: 3, md: 2 }}>
                         <Box sx={{ mt: { xs: 1, md: 0 } }}>
-                            <Button aria-label="Começar minha trilha na plataforma e-Acelera" variant="outlined" sx={{
-                            ...(theme as any).customStyles.button,
-                            ...studysectionStyles.button,
-                            mt: { xs: 3, xl: 0 },
-                        }}>Começar minha trilha</Button>
+                            <Button
+                                aria-label="Começar minha trilha na plataforma e-Acelera"
+                                variant="outlined"
+                                sx={{
+                                    ...(theme as any).customStyles.button,
+                                    ...studysectionStyles.button,
+                                    mt: { xs: 3, xl: 0 },
+                                }}
+                                href="/nivelamento" >Começar minha trilha
+                            </Button>
                         </Box>
                     </Grid>
                     <Grid item xs={12} sm={11} md={6}>
                         <Typography variant="h4" sx={{
-                            textAlign: { xs: 'left', md: 'left', lg: 'center' },
+                            textAlign: { xs: 'left', md: 'center', lg: 'center' },
                             mb: 4,
                             ml: { md: '40px', lg: '0px' },
-                            pt: { xs: 4, md: 7 }
+                            pt: { xs: 4, md: 7 },
+                            px: { lg: 8 }
 
                         }}>
-                            Durante essa trilha, você vai passar por tecnologias como:
+                            Durante as trilhas, você vai passar por tecnologias como:
                         </Typography>
-                        <TechGrid 
-                          cardStyles={studysectionStyles.card} 
-                          iconStyles={studysectionStyles.icons}
+                        <TechGrid
+                            cardStyles={studysectionStyles.card}
+                            iconStyles={studysectionStyles.icons}
                         />
                     </Grid>
                 </Grid>

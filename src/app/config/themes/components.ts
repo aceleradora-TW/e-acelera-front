@@ -286,17 +286,17 @@ export const customStyles: Theme = {
   },
 
   buttonAboutAgil: {
-      borderRadius: 1,
-      boxShadow: 4,
-      padding: "6px 16px",
-      "&:hover": {
-        backgroundColor: themePalette.primaryTextColor,
-        color: themePalette.baseBgColor,
-        boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.5)",
-      },
+    borderRadius: 1,
+    boxShadow: 4,
+    padding: "6px 16px",
+    "&:hover": {
+      backgroundColor: themePalette.primaryTextColor,
+      color: themePalette.baseBgColor,
+      boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.5)",
     },
+  },
 
-  sessionListContainer: {   
+  sessionListContainer: {
     display: "flex",
     justifyContent: "space-around",
     alignItems: "center",
@@ -304,10 +304,7 @@ export const customStyles: Theme = {
     flexDirection: "row",
     flexWrap: "wrap",
     gap: 1,
-    width: {
-      xs: "0 auto",
-    }
-
+    width: "0 auto",
   },
 
   cardAboutAgilContainer: {
@@ -320,12 +317,13 @@ export const customStyles: Theme = {
 
   cardAboutAgil: {
     minHeight: 108,
+    width: "100%",
     border: 4,
     paddingY: 2,
     paddingX: 2,
     flex: 1,
     minWidth: {
-      xs: '100%',
+      xs: "100%",
       md: 250,
     },
     borderImage: `linear-gradient(${themePalette.borderPrimaryColor}, ${themePalette.borderSecondaryColor}) 1`,
@@ -341,11 +339,12 @@ export const customStyles: Theme = {
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
-    
   },
 
   sessionFormacao: (isLarge?: boolean) => ({
-    width: isLarge ? { xs: "100%", sm: "90%", md: "97%" } : { xs: "48%", sm: "40%", md: "46%" },
+    width: isLarge
+      ? { xs: "100%", sm: "90%", md: "97%" }
+      : { xs: "48%", sm: "40%", md: "46%" },
     flexWrap: "wrap",
     minHeight: 67,
     display: "flex",
