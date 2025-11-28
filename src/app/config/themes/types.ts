@@ -116,7 +116,6 @@ export interface Theme {
       pointerEvents: string;
     };
   };
-
   Footer: {
     background: string;
     color: string;
@@ -134,4 +133,11 @@ export interface Theme {
   };
   testimonials: ExtendedCSSProperties;
   sponsorsSection: ExtendedCSSProperties;
+  studysection: {
+    container:ExtendedCSSProperties;
+    box: ExtendedCSSProperties;
+    icons: ExtendedCSSProperties;
+    card: ExtendedCSSProperties;
+    button: ExtendedCSSProperties;
+  };
 }

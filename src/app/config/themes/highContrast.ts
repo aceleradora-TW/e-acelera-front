@@ -1,8 +1,30 @@
 import { createTheme } from "@mui/material/styles";
-import { typography } from "./typography";
 import { themePalette } from "./palette";
+import { typography } from "./typography";
 
-export const highContrastTheme = createTheme({
+const applyFontFamily = (fontFamily?: string) => {
+  if (!fontFamily) return {};
+  return { fontFamily: `${fontFamily} !important` };
+};
+
+export const highContrastThemeBuilder = (fontFamily?: string) => {
+  const fontFamilyStyle = applyFontFamily(fontFamily);
+  
+  const typographyVariants = ['h1', 'h2', 'h3', 'body1', 'caption'] as const;
+  const typographyOverrides = typographyVariants.reduce((acc, variant) => {
+    acc[variant] = {
+      color: "#E0E0E0 !important",
+      ...fontFamilyStyle,
+    };
+    return acc;
+  }, {} as Record<string, any>);
+
+  return createTheme({
+    typography: {
+      ...typography,
+      ...(fontFamily && { fontFamily }),
+    }, 
+
   palette: {
     mode: "dark",
     background: {
@@ -27,10 +49,15 @@ export const highContrastTheme = createTheme({
   components: {
     MuiCssBaseline: {
       styleOverrides: {
+        html: fontFamilyStyle,
         body: {
           backgroundColor: "#121212 !important",
           color: "#E0E0E0 !important",
+          ...fontFamilyStyle,
         },
+        ...(fontFamily && {
+          '*': fontFamilyStyle,
+        }),
       },
     },
     MuiSwitch: {
@@ -51,6 +78,7 @@ export const highContrastTheme = createTheme({
           "&:hover": {
             backgroundColor: `${themePalette.button} !important`,
           },
+          ...fontFamilyStyle,
         },
       },
     },
@@ -63,6 +91,7 @@ export const highContrastTheme = createTheme({
           "&:hover": {
             backgroundColor: "#555555 !important",
           },
+          ...fontFamilyStyle,
         },
       },
     },
@@ -71,6 +100,7 @@ export const highContrastTheme = createTheme({
         root: {
           backgroundColor: "#222 !important",
           color: "#E0E0E0 !important",
+          ...fontFamilyStyle,
         },
       },
     },
@@ -96,6 +126,7 @@ export const highContrastTheme = createTheme({
           "&.Mui-focused": {
             color: "#E0E0E0 !important",
           },
+          ...fontFamilyStyle,
         },
       },
     },
@@ -111,26 +142,8 @@ export const highContrastTheme = createTheme({
     },
     MuiTypography: {
       styleOverrides: {
-        h1: {
-          ...typography.h1,
-          color: "#E0E0E0 !important",
-        },
-        h2: {
-          ...typography.h2,
-          color: "#E0E0E0 !important",
-        },
-        h3: {
-          ...typography.h3,
-          color: "#E0E0E0 !important",
-        },
-        body1: {
-          ...typography.body1,
-          color: "#E0E0E0 !important",
-        },
-        caption: {
-          ...typography.caption,
-          color: "#E0E0E0 !important",
-        },
+        root: fontFamilyStyle,
+        ...typographyOverrides,
       },
     },
     MuiPaper: {
@@ -630,6 +643,42 @@ export const highContrastTheme = createTheme({
       color: themePalette.baseBgColor,
       textAlign: "center",
     },
+    studysection: {
+      container: {
+        paddingBottom: 4,
+      },
+      box: {
+        backgroundColor: "#222222",
+        color: "#E0E0E0",
+        p: 2,
+        my:2,
+        borderRadius: "4px",
+        position: "relative",
+      },
+      icons: {
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        mb: 1.2,
+      },
+      card: {
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        textAlign: 'center',
+        p: 2,
+        mb: 1,
+        borderRadius: 2,
+        height: '100px',
+        width: '100px',
+        boxShadow: 'none',
+        background: "transparent",
+      },
+      button: {
+        padding: "6px 16px",
+      }
+    },
 
     accessibilityReadMask: (mouseY: number, maskHeight: number) => ({
       background: {
@@ -639,12 +688,12 @@ export const highContrastTheme = createTheme({
         width: "100vw",
         height: "100vh",
         background: `linear-gradient(
-                    to bottom,
-                    rgba(0,0,0,0.5) ${mouseY - maskHeight / 2}px,
-                    transparent ${mouseY - maskHeight / 2}px,
-                    transparent ${mouseY + maskHeight / 2}px,
-                    rgba(0,0,0,0.5) ${mouseY + maskHeight / 2}px
-                  )`,
+                      to bottom,
+                      rgba(0,0,0,0.5) ${mouseY - maskHeight / 2}px,
+                      transparent ${mouseY - maskHeight / 2}px,
+                      transparent ${mouseY + maskHeight / 2}px,
+                      rgba(0,0,0,0.5) ${mouseY + maskHeight / 2}px
+                    )`,
         pointerEvents: "none",
         zIndex: 9999,
       },
@@ -670,4 +719,7 @@ export const highContrastTheme = createTheme({
       },
     }),
   },
-});
+  });
+};
+
+export const highContrastTheme = highContrastThemeBuilder();

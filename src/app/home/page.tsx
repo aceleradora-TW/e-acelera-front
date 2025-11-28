@@ -1,6 +1,7 @@
 "use client";
 
 import { Faq } from "@/components/faq";
+import { StudySection } from "@/components/study-section";
 import { TestimonialsSection } from "@/components/testimonials-section";
 import { HomeBanner } from "@/components/UI/home/home-banner";
 import { ImpactSection } from "@/components/UI/home/impact-section";
@@ -12,8 +13,9 @@ export default function Home() {
       <HomeBanner />
       <ImpactSection />
       <SponsorsSection />
-      <Faq />
+      <StudySection />
       <TestimonialsSection />
+      <Faq />
     </>
   );
 }
