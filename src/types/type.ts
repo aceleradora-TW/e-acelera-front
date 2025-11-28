@@ -62,6 +62,28 @@ export interface Image {
     url: string;
 }
 
+//  Geovana
+
+export interface Theme {
+  id: number;
+  title: string;
+  card_description?: string;
+  description?: string;
+  topics?: string;
+  image?: string;
+  topics_info?: string;
+  category?: string;
+  sequence: number;
+  topics_description?: string;
+  id_themes?: number;
+  alt?: string;
+}
+
+export interface PostgresApiResponse {
+  data: Theme[];
+} //Geovana
+
+
 export enum IdType {
   TOPIC_ID = "topicId",
   THEME_ID = "themeId",

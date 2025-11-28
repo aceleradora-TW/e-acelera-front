@@ -6,30 +6,70 @@ import {
   Avatar,
   Box,
   Divider,
+  FormControlLabel,
   IconButton,
   Link,
   Menu,
   MenuItem,
   Tooltip,
   Typography,
+  Switch,
 } from "@mui/material"
 import Image from "next/image"
 import { usePathname, useRouter } from "next/navigation"
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown"
 import { signOut } from "next-auth/react"
-import { useState } from "react"
 import LogoutIcon from "@mui/icons-material/Logout"
 import { Session } from "next-auth"
+import { useState, useEffect } from "react";
+import { useFlagsmith, useFlags } from "flagsmith/react"
 
+// TODO: Login estava funcionando e com o feature flag parou de funcionar
+// TODO: Atualização do trait no FlagSmith não reflete atualização local
+// TODO: Não estamos conseguindo limitar os usuários que visualizam a flag através de configuração de grupo no FlagSmith
 interface WebMenuProps {
   list: string[]
   session: Session | null
 }
 
 export const WebMenu: React.FC<WebMenuProps> = ({ list, session }) => {
+  const flagsmith = useFlagsmith();
+  const { flag_adminjs, is_test_user, adminjs_preference } = useFlags(['flag_adminjs'], ['is_test_user', 'adminjs_preference']);
   const router = useRouter()
   const pathname = usePathname()
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const [isChecked, setIsChecked] = useState<boolean>(false);
+
+  // Verifica se o usuário é de teste através do trait
+  // const isTestUser = flagsmith.getTrait('is_test_user') === true;
+
+  // Carrega o valor inicial da preferência do usuário ou da feature flag
+  useEffect(() => {
+    if (session?.user?.email && is_test_user && adminjs_preference) {
+      // Para usuários de teste, verifica primeiro a preferência salva, depois a feature flag
+      // const adminJsPreference = flagsmith.getTrait('adminjs_preference');
+      setIsChecked(true);
+    } else {
+      // Se não há preferência salva, usa o valor da feature flag
+      setIsChecked(flag_adminjs?.enabled ?? false);
+    }
+  }, [session, flag_adminjs, is_test_user, adminjs_preference, flagsmith.getState()]);
+
+  const handleApiToggle = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (!is_test_user) return;
+
+    try {
+      const newValue = event.target.checked;
+      setIsChecked(newValue);
+
+      // Salva a preferência do usuário como trait no FlagSmith
+      await flagsmith.setTrait('adminjs_preference', newValue);
+    } catch (error) {
+      console.error("Erro ao salvar preferência no FlagSmith:", error);
+      // Reverte o estado em caso de erro
+      setIsChecked(!event.target.checked);
+    }
+  };
 
   const handleOpenMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget)
@@ -63,8 +103,8 @@ export const WebMenu: React.FC<WebMenuProps> = ({ list, session }) => {
                 alt={session.user.name || "Usuário"}
                 src={session.user.image || "/default-avatar.png"}
               />
-              <ArrowDropDownIcon 
-                sx={{transform: anchorEl ? "rotate(180deg)" : "rotate(0deg)",transition: "0.3s",}}
+              <ArrowDropDownIcon
+                sx={{ transform: anchorEl ? "rotate(180deg)" : "rotate(0deg)", transition: "0.3s", }}
               />
             </IconButton>
           </Tooltip>
@@ -73,14 +113,8 @@ export const WebMenu: React.FC<WebMenuProps> = ({ list, session }) => {
             open={Boolean(anchorEl)}
             onClose={handleCloseMenu}
             sx={{ mt: "45px" }}
-            anchorOrigin={{
-              vertical: "top",
-              horizontal: "right",
-            }}
-            transformOrigin={{
-              vertical: "top",
-              horizontal: "right",
-            }}
+            anchorOrigin={{ vertical: "top", horizontal: "right" }}
+            transformOrigin={{ vertical: "top", horizontal: "right" }}
           >
             <MenuItem sx={{ cursor: "default" }}>
               <Typography sx={{ color: theme.palette.textColor?.main }}>
@@ -92,6 +126,27 @@ export const WebMenu: React.FC<WebMenuProps> = ({ list, session }) => {
                 {session.user.email || "email@example.com"}
               </Typography>
             </MenuItem>
+            {is_test_user && (
+              <MenuItem sx={{ cursor: "default" }}>
+                <FormControlLabel
+                  control={
+                    <Switch
+                      checked={isChecked}
+                      onChange={handleApiToggle}
+                      disabled={false}
+                      size="small"
+                    />
+                  }
+                  label={
+                    <Typography sx={{ color: theme.palette.textColor?.light, fontSize: '0.9rem' }}>
+                      Usar AdminJS
+                    </Typography>
+                  }
+                  labelPlacement="start"
+                />
+              </MenuItem>
+            )}
+
             <Divider />
             <MenuItem onClick={() => signOut()}>
               <LogoutIcon
@@ -121,13 +176,7 @@ export const WebMenu: React.FC<WebMenuProps> = ({ list, session }) => {
   return (
     <AccessibilityProvider>
     <>
-      <Box
-        sx={{
-          mr: 2,
-          display: { xs: "none", md: "flex" },
-          marginLeft: 0,
-        }}
-      >
+      <Box sx={{ mr: 2, display: { xs: "none", md: "flex" }, marginLeft: 0 }}>
         <Image
           width={43}
           height={48}
@@ -135,26 +184,22 @@ export const WebMenu: React.FC<WebMenuProps> = ({ list, session }) => {
           alt="logo e-acelera"
         />
       </Box>
+
       <Typography
         noWrap
         component="a"
         href="/"
-        sx={{
-          display: { xs: "none", md: "flex" },
-          ...theme.customStyles.logoType,
-        }}
+        sx={{ display: { xs: "none", md: "flex" }, ...theme.customStyles.logoType }}
       >
         E-Acelera
       </Typography>
+
       <Box
         sx={{
           flexGrow: 1,
-          display: {
-            xs: "none",
-            md: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          },
+          display: { xs: "none", md: "flex" },
+          alignItems: "center",
+          justifyContent: "center",
         }}
       >
         {list.map((item) => (
@@ -162,9 +207,7 @@ export const WebMenu: React.FC<WebMenuProps> = ({ list, session }) => {
             key={item}
             href={item ? `/${item.toLowerCase()}` : `/`}
             underline="none"
-            sx={{
-              ...linkStyle(item),
-            }}
+            sx={{ ...linkStyle(item) }}
           >
             {item}
           </Link>
@@ -175,3 +218,4 @@ export const WebMenu: React.FC<WebMenuProps> = ({ list, session }) => {
     </AccessibilityProvider>
   )
 }
+
