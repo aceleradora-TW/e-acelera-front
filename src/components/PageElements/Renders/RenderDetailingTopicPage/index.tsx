@@ -28,9 +28,10 @@ const PageContent = ({ topicId }: { topicId: string }) => {
 
   const {
     data: renderData,
-    isLoading: loading,
+    loading: loading,
+    source,
     error: error,
-  } = useFetchData(`/api/topics/${topicId}`);
+  } = useTopicApi(topicId);
 
   if (loading) return <Loading />;
   if (error) return <BadRequest />;
@@ -61,22 +62,22 @@ const PageContent = ({ topicId }: { topicId: string }) => {
   );
 };
 
-export const RenderDetailingTopicPage = (id: string, source: string) => {
- // let topicId = id;
-  const topicId = source === "stackby" ? id.split("-")[0] : id;
+export const RenderDetailingTopicPage = (id: string) => {
+//  // let topicId = id;
+//   const topicId = source === "stackby" ? id.split("-")[0] : id;
 
-  // if (source === 'stakby'){
-  //   const extractId = (): string =>{
-  //   const parts = id.split("-");
-  //   return parts[0];
+//   // if (source === 'stakby'){
+//   //   const extractId = (): string =>{
+//   //   const parts = id.split("-");
+//   //   return parts[0];
     
-  // }}
-  // topicId = extractId();
+//   // }}
+//   // topicId = extractId();
 
 
   return (
     <GlobalContextProvider>
-      <PageContent topicId={topicId} />
+      <PageContent topicId={id} />
     </GlobalContextProvider>
   );
 };

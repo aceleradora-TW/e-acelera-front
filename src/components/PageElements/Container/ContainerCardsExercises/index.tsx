@@ -50,7 +50,7 @@ export const ContainerCardsExercises: React.FC<
             title={exercise}
             description={descriptionsArray[index]}
             // nivelamento/themeId/topicId/exerciseId -> de cada card
-            route={`${currentPath}/${exerciseId}`}
+            route={`${currentPath}/${exercise}`}
           />
         </Grid>
       ))}

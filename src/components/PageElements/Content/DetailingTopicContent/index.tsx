@@ -11,7 +11,7 @@ import { useGlobalContext } from "@/hooks/useGlobalContext"
 import { useFetchTopicStatus } from "@/components/fetchStatus/fecthStatusTopic"
 
 interface DetailingContentProps {
-  data: ApiResponse
+  data: DataItem[] | any[]
   id: string
   topicProgress: number
 }
@@ -72,8 +72,7 @@ export const DetailingTopicContent: React.FC<DetailingContentProps> = ({
 }) => {
   const { dataStatus } = useFetchTopicStatus(id)
   const { handleTopicStatus } = useGlobalContext();
-
-  const [ topicData ] = data?.data;
+  const [ topicData ] = data;
 
   useEffect(() => {
       handleTopicStatus(dataStatus)
