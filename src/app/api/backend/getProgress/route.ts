@@ -20,6 +20,13 @@ export async function GET(req: NextRequest) {
     )
   }
 
+  // Debug: log incoming getProgress request
+  try {
+    console.log('[api/backend/getProgress] incoming', { id, idType, hasToken: !!accessToken })
+  } catch (e) {
+    // ignore
+  }
+
   try {
     const baseUrl = process.env.BACKEND_BASE_URL
 
