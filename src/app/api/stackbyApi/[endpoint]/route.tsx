@@ -27,6 +27,7 @@ export async function GET(
       },
     });
 
+    console.log("@@@@ RESPONSE", response)
     if (!response.ok) {
       return NextResponse.json(
         {

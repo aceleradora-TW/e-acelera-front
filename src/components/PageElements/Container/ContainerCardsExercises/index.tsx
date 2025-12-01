@@ -3,8 +3,9 @@ import React from "react";
 import { usePathname } from "next/navigation";
 import { ButtonCard } from "@/components/ButtonCard";
 import { DescriptionFull } from "@/components/descriptions/description-full";
+import { Exercise } from "@/types/type";
 interface ContainerCardsExercisesProps {
-  exercises: string;
+  exercises?: string | Exercise[];
   exercisesDescription: string;
   exercisesInfo: string;
 }
@@ -18,15 +19,17 @@ export const ContainerCardsExercises: React.FC<
   const currentPath = pathname.slice(1);
 
   const splitValues = (value: string): string[] => value.split(",");
-  const exercisesArray = splitValues(exercises);
+  const exercisesArray = typeof exercises === "string" ? splitValues(exercises) : exercises ?? [];
   const descriptionsArray = splitValues(exercisesDescription);
   const infoArray = splitValues(exercisesInfo);
 
   const isInvalidData =
-    exercises.trim() == "Untitle" ||
-    !exercises.trim() ||
-    !exercisesDescription.trim() ||
-    !exercisesInfo.trim();
+  typeof exercises === "string"
+    ? exercises.trim() == "Untitle" ||
+      !exercises.trim() ||
+      !exercisesDescription.trim() ||
+      !exercisesInfo.trim()
+    : !exercises || exercises.length === 0;
 
   if (isInvalidData) {
     return <DescriptionFull text="## Nenhum exercício encontrado" />;
@@ -47,10 +50,10 @@ export const ContainerCardsExercises: React.FC<
         >
           <ButtonCard
             id={`${infoArray[index]}`}
-            title={exercise}
+            title={typeof exercise=== "string" ? exercise : exercise.title}
             description={descriptionsArray[index]}
             // nivelamento/themeId/topicId/exerciseId -> de cada card
-            route={`${currentPath}/${exercise}`}
+            route={`${currentPath}/${infoArray[index]}`}
           />
         </Grid>
       ))}

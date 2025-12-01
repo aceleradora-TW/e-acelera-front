@@ -14,7 +14,13 @@ import { GlobalContextProvider } from "@/context/global.context";
 import { IdType } from "@/types/type";
 import { useTopicApi } from "@/hooks/useTopicApi"
 
+
 const PageContent = ({ topicId }: { topicId: string }) => {
+  
+   console.log("PageContent recebeu →", {
+    topicId,
+  });
+  
   const [isModalOpen, setIsModalOpen] = React.useState<boolean>(false);
   const showStatusErrorModal = () => setIsModalOpen(true);
 
@@ -29,7 +35,6 @@ const PageContent = ({ topicId }: { topicId: string }) => {
   const {
     data: renderData,
     loading: loading,
-    source,
     error: error,
   } = useTopicApi(topicId);
 
@@ -38,14 +43,14 @@ const PageContent = ({ topicId }: { topicId: string }) => {
   if (!renderData) return <NoData />;
 
   return (
-    <GlobalContextProvider>
+    <GlobalContextProvider> 
       <DetailingTopicContext.Provider
         value={{
           topicStatus: dataStatus,
           statusError: isModalOpen,
           showStatusErrorModal,
         }}
-      >
+      >  
         <LayoutPage>
           <ErrorUpdateStatusModal
             open={isModalOpen}
@@ -55,29 +60,21 @@ const PageContent = ({ topicId }: { topicId: string }) => {
             data={renderData}
             id={topicId}
             topicProgress={progress?.progress ?? 0}
-          />
-        </LayoutPage>
-      </DetailingTopicContext.Provider>
+          />  
+      </LayoutPage> 
+      </DetailingTopicContext.Provider> 
     </GlobalContextProvider>
   );
 };
 
 export const RenderDetailingTopicPage = (id: string) => {
-//  // let topicId = id;
-//   const topicId = source === "stackby" ? id.split("-")[0] : id;
-
-//   // if (source === 'stakby'){
-//   //   const extractId = (): string =>{
-//   //   const parts = id.split("-");
-//   //   return parts[0];
-    
-//   // }}
-//   // topicId = extractId();
-
-
   return (
-    <GlobalContextProvider>
-      <PageContent topicId={id} />
-    </GlobalContextProvider>
-  );
-};
+     <GlobalContextProvider>
+       <PageContent topicId={id}/>
+     </GlobalContextProvider>
+   );
+ }
+
+
+  
+
