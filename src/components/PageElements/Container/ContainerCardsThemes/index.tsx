@@ -11,7 +11,7 @@ interface ContainerCardThemeProps {
 
 export const ContainerCardTheme: React.FC<ContainerCardThemeProps> = ({
   data,
-  category,
+
 }) => {
   const pathname = usePathname();
   const currentPath = pathname.slice(1);
@@ -27,7 +27,7 @@ export const ContainerCardTheme: React.FC<ContainerCardThemeProps> = ({
                   id={element.id}
                   title={field?.title}
                   description={field?.cardDescription}
-                  route={`${currentPath}/${element.id}-${field?.title}`}
+                  route={`/detailingTheme/${element.id}`}
                   image={field?.image ? field.image[0].url : ""}
                   textImage={`${field?.alt}`}
                   cardType="theme"
@@ -56,6 +56,7 @@ export const ContainerCardTheme: React.FC<ContainerCardThemeProps> = ({
                   image={element.image}
                   textImage={`${element?.alt}`}
                   cardType="theme"
+                  route={`/detailingTheme/${element.id}`}
                 />
               </Grid>
             );

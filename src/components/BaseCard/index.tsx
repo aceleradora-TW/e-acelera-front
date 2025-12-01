@@ -1,3 +1,5 @@
+"use client";
+
 import {
   CardActionArea,
   CardActions,
@@ -48,11 +50,12 @@ export const BaseCard: React.FC<CardProps> = ({
   children,
 }) => {
   const router = useRouter();
+
   const handleClick = (route?: string) => {
     if(!route) {
       return;
     }
-    router.push(`/${route}`);
+    router.push(route);
   };
 
   const { progress: fetchedProgress } = useFetchProgress(

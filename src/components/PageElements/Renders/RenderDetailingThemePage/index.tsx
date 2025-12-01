@@ -1,31 +1,28 @@
-//Mexer quando for id cod comentado no final da pag
-import useFetchData from "@/components/fetchData";
+"use client";
+
 import { Loading } from "@/components/Loading";
 import { LayoutPage } from "../../LayoutPage";
 import { DetailingThemeContent } from "../../Content/DetailingThemeContent";
 import { BadRequest } from "@/components/BadRequest";
 import { NoData } from "@/components/NoData";
 import React from "react";
+import { useThemeByIdApi } from "@/hooks/useThemeByIdApi";
 
 export const RenderDetailingThemePage = (id: string)=> {
-    const { data: renderData, isLoading: loading, error: error} = useFetchData('/api/stackbyApi/Themes', {
-            headers: {
-                operator: "rowIds",
-                value: id.split("-")[0],
-            },
-    });
+    const { data, loading, error } = useThemeByIdApi(id.split("-")[0]);
+
     if (loading) {
       return <Loading />
   }
   if (error) {
       return <BadRequest />
   }
-  if (!renderData) {
+  if (!data?.data) {
       return <NoData/>
   }
   return (
     <LayoutPage>
-      <DetailingThemeContent data={renderData} />
+      <DetailingThemeContent data={data} />
     </LayoutPage>
   );
 

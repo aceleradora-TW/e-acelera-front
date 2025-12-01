@@ -4,12 +4,19 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: NextRequest) {
   const header = headers();
-  const category = header.get("category") === "Nivelamento" ?
+
+  const category = 
+    header.get("category") === "Nivelamento" ?
             ThemeCategory.LEVELING
           : ThemeCategory.SELF_STUDY;
-  const accessToken = req.cookies.get("next-auth.session-token")?.value || req.cookies.get("__Secure-next-auth.session-token")?.value;
+
+  const accessToken = 
+    req.cookies.get("next-auth.session-token")?.value || 
+    req.cookies.get("__Secure-next-auth.session-token")?.value;
+
    try {
     const baseUrl = process.env.BACKEND_BASE_URL
+
     const response = await fetch(`${baseUrl}/themes?category=${category}`, {
       method: "GET",
       headers: {
@@ -27,7 +34,7 @@ export async function GET(req: NextRequest) {
 
     if (!response.ok) {
       return NextResponse.json(
-        { error: `Error fetching status: ${response.status} - ${response.statusText}` },
+        { error: `Error fetching themes: ${response.status} - ${response.statusText}` },
         { status: response.status }
       )
     }
