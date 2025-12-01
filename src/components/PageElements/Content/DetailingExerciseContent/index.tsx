@@ -56,20 +56,24 @@ export const DetailingExerciseContent: React.FC<DetailingContentProps> = ({
   dataExercise,
   id,
 }) => {
-  const filteredData = dataExercise?.data.filter(
-    (element: DataItem) => element.id === id.split("-")[0]
-  );
+  // const filteredData = dataExercise?.data.filter(
+  //   (element: DataItem) => element.id === id.split("-")[0]
+  // );
+
+  // TODO:implement conditional for adminjs_preference or stackbyApi
+  // const exerciseData = is_adminjsPreference ? dataExercise[0]?.data : dataExercise?.data
 
   return (
     <>
-      {filteredData.map((element: DataItem) => (
+      {/* {filteredData.map((element: DataItem) => (
         <ExerciseContent
           dataTopic={dataTopic}
           key={element.id}
           idExercise={element.id}
           field={element.field as ExercisesField}
         />
-      ))}
+      ))} */}
+      <code style={{ marginTop: '200px' }}>{JSON.stringify(dataExercise)}</code>
     </>
   );
 };

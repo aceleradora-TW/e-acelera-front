@@ -21,13 +21,6 @@ export async function GET(req: NextRequest) {
     )
   }
 
-  // Debug: log incoming request identifiers (no token values)
-  try {
-    console.log('[api/backend/getExerciseStatus] incoming', { topicId, itemId, hasToken: !!accessToken })
-  } catch (e) {
-    // ignore logging errors
-  }
-
   try {
     const baseUrl = process.env.BACKEND_BASE_URL
     const response = await fetch(`${baseUrl}/status/${topicId}/item/${itemId}`, {

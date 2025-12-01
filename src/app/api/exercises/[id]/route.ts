@@ -1,29 +1,11 @@
-import { headers } from "next/headers"
-import { NextRequest, NextResponse } from "next/server"
+import { NextRequest, NextResponse } from "next/server";
 
-export async function GET(req: NextRequest) {
-  const header = headers()
-  const topicId = header.get(`topicId`)
-  const itemId = header.get(`itemId`)
+export async function GET(req: NextRequest, {params}: {params: {id: string}}) {
   const accessToken = req.cookies.get("next-auth.session-token")?.value || req.cookies.get("__Secure-next-auth.session-token")?.value;
-
-  if (!topicId) {
-    return NextResponse.json(
-      { error: "topicId are required" },
-      { status: 400 }
-    )
-  }
-
-  if (!accessToken) {
-    return NextResponse.json(
-      { error: "accessToken are required" },
-      { status: 400 }
-    )
-  }
 
   try {
     const baseUrl = process.env.BACKEND_BASE_URL
-    const response = await fetch(`${baseUrl}/status/${topicId}/item/${itemId}`, {
+    const response = await fetch(`${baseUrl}/exercises/${params.id}`, {
       method: "GET",
       headers: {
         Authorization: `Bearer ${accessToken}`,
@@ -44,11 +26,8 @@ export async function GET(req: NextRequest) {
         { status: response.status }
       )
     }
-
-    const data = await response.json()
-    const statusData = data
-
-    return NextResponse.json({ status: statusData }, { status: 200 })
+    const data = await response.json();
+    return NextResponse.json({data}, { status: 200 })
   } catch (error) {
     console.error("Error fetching status:", error)
     return NextResponse.json(

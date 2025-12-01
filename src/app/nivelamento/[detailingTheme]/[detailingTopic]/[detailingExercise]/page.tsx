@@ -6,6 +6,5 @@ export default function DetailingExercise({
 }: {
   params: { detailingExercise: string };
 }) {
-
   return RenderDetailingExercisePage(params.detailingExercise)
 }

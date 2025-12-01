@@ -1,11 +1,11 @@
 import useFetchData from "@/components/fetchData";
-import { useExerciseApi } from "@/hooks/useExerciseApi";
 import { Loading } from "@/components/Loading";
 import { LayoutPage } from "../../LayoutPage";
 import { BadRequest } from "@/components/BadRequest";
 import { DetailingExerciseContent } from "../../Content/DetailingExerciseContent";
 import { NoData } from "@/components/NoData";
 import { GlobalContextProvider } from "@/context/global.context";
+import { useExerciseApi } from "@/hooks/useExerciseApi";
 
 export const RenderDetailingExercisePage = (id: string) => {
   const { data: renderDataExercise, loading: isExerciseLoading, error: exerciseError } = useExerciseApi(id);
@@ -25,9 +25,9 @@ export const RenderDetailingExercisePage = (id: string) => {
 
   return (
     <GlobalContextProvider>
-    <LayoutPage>
-      <DetailingExerciseContent dataExercise={renderDataExercise} dataTopic={renderDataTopic} id={id} />
-    </LayoutPage>
+      <LayoutPage>
+        <DetailingExerciseContent dataExercise={renderDataExercise} dataTopic={renderDataTopic} id={id} />
+      </LayoutPage>
     </GlobalContextProvider>
   );
 }
