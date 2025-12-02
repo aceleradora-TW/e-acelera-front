@@ -27,7 +27,7 @@ export const ContainerCardTheme: React.FC<ContainerCardThemeProps> = ({
                   id={element.id}
                   title={field?.title}
                   description={field?.cardDescription}
-                  route={`/detailingTheme/${element.id}`}
+                  route={`${pathname}/${element.id}`}
                   image={field?.image ? field.image[0].url : ""}
                   textImage={`${field?.alt}`}
                   cardType="theme"
@@ -56,7 +56,7 @@ export const ContainerCardTheme: React.FC<ContainerCardThemeProps> = ({
                   image={element.image}
                   textImage={`${element?.alt}`}
                   cardType="theme"
-                  route={`/detailingTheme/${element.id}`}
+                  route={`${pathname}/${element.id}`}
                 />
               </Grid>
             );
