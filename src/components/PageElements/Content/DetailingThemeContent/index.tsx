@@ -64,6 +64,9 @@ const ThemeContentAdminJS = ({ data }: { data: AdminJSThemeByIdResponse }) => {
   );
   // console.log(JSON.stringify(data.title));
   console.log("@@@@ data.title", data.title);
+  const topics = data.topic.map((t) => t.title).join(",");
+  const topicsDescription = data.topic.map((t) => t.shortDescription).join(",");
+  const topicsInfo = data.topic.map((t) => t.id).join(",");
 
   return (
     <>
@@ -87,11 +90,12 @@ const ThemeContentAdminJS = ({ data }: { data: AdminJSThemeByIdResponse }) => {
       <Grid item xl={12} lg={9} md={6} sm={3}>
         <Heading variant="h2" text={"Tópicos"} />
       </Grid>
-      {/* <ContainerCardTopics
-        topicsDescription={data.topicsDescription}
-        topicsInfo={data.topic}
-      /> */}
-    </>  
+      <ContainerCardTopics
+        topics={topics}
+        topicsDescription={topicsDescription}
+        topicsInfo={topicsInfo}
+      />
+    </>
   );
 };
 
