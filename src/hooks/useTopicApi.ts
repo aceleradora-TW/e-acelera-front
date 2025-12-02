@@ -2,25 +2,23 @@
 import { useState, useEffect } from 'react';
 import { useFlags } from 'flagsmith/react';
 import { useSession } from 'next-auth/react';
-import { DataItem }  from "@/types/type";
+import { DataItem, Topic }  from "@/types/type";
 
 export const useTopicApi = (id: string) => {
   const { flag_adminjs, is_test_user, adminjs_preference } = useFlags(['flag_adminjs'], ['is_test_user', 'adminjs_preference']);
   const {data: sessionData} = useSession();
 
-  const [data, setData] = useState<any[] | DataItem[]>([]);
+  const [data, setData] = useState<Topic | DataItem[]>();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
-  const [source, setSource] = useState<'adminjs' | 'stackby' | null>(null);
+   
+  const isAdminJS = flag_adminjs?.enabled || (is_test_user && adminjs_preference);
+  const source: 'adminjs' | 'stackby' = isAdminJS ? 'adminjs' : 'stackby';
+  const topicId = source === 'stackby' ? id.split('-')[0] : id;
 
   useEffect(() => {
     if(!id) return;
     
-    if (!flag_adminjs) {
-      setLoading(true);
-      return;
-    }
-
     setLoading(true);
     setError(false);
 
@@ -29,21 +27,17 @@ export const useTopicApi = (id: string) => {
       method: 'GET',
       headers: {},
     };
-    if (flag_adminjs.enabled || (is_test_user && adminjs_preference)) {
+    if (source === 'adminjs') {
       console.log("Flagsmith: 'flag_adminjs' HABILITADA. Chamando a rota de API /api/topics/:id.");
-      url = `/api/topics/${id}`;
-      setSource('adminjs');
+      url = `/api/topics/${topicId}`;
     } else {
       console.log("Flagsmith: 'flag_adminjs' DESABILITADA. Chamando a rota de API /api/stackbyApi/Topics.");
       url = `/api/stackbyApi/Topics`;
-
-      const formatedId = id.split("-")[0]
       fetchOptions.headers = {
         'operator': 'equal',
         'column': 'idTopics',
-        'value': formatedId,
+        'value': topicId,
       };
-      setSource('stackby');
     }
 
     fetch(url, fetchOptions)
@@ -63,7 +57,11 @@ export const useTopicApi = (id: string) => {
       })
       .finally(() => setLoading(false));
 
-  }, [sessionData?.user.email, id, flag_adminjs.enabled, flag_adminjs, is_test_user, adminjs_preference]);
+  }, [sessionData?.user.email, id, source, topicId]);
 
-  return { data, loading, error, source };
+  if (source === 'adminjs') {
+  return { data: data as Topic, loading, error, source };
+  } else {
+    return { data: data as DataItem[], loading, error, source };
+  }
 };

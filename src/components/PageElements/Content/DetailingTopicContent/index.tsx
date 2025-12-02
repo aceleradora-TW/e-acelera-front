@@ -1,7 +1,7 @@
 import React, { useEffect } from "react"
 import { Grid } from "@mui/material"
 import { BreadCrumb } from "@/components/BreadCrumb"
-import { ApiResponse, DataItem, IdType, Topic, TopicField } from "@/types/type"
+import { DataItem, Topic, TopicField } from "@/types/type"
 import { DescriptionReference } from "@/components/descriptions/description-reference"
 import { ContainerCardsExercises } from "../../Container/ContainerCardsExercises"
 import { DescriptionWithVideo } from "@/components/descriptions/description-with-video"
@@ -9,14 +9,12 @@ import { Heading } from "@/components/Heading"
 import ProgressBar from "@/components/PageElements/Progress/ProgressBar"
 import { useGlobalContext } from "@/hooks/useGlobalContext"
 import { useFetchTopicStatus } from "@/components/fetchStatus/fecthStatusTopic"
-import { Api } from "@mui/icons-material"
-import { useTopicApi } from "@/hooks/useTopicApi"
-import { log } from "console"
 
 interface DetailingContentProps {
   data: DataItem[] | Topic
   id: string
   topicProgress: number
+  source: "adminjs" | "stackby"
 }
 
 interface TopicContentProps {
@@ -71,7 +69,8 @@ const TopicContent: React.FC<TopicContentProps> = ({ field, topicProgress }) => 
 export const DetailingTopicContent: React.FC<DetailingContentProps> = ({
   data,
   id,
-  topicProgress
+  topicProgress,
+  source
 }) => {
   const { dataStatus } = useFetchTopicStatus(id)
   const { handleTopicStatus } = useGlobalContext();
@@ -81,7 +80,6 @@ export const DetailingTopicContent: React.FC<DetailingContentProps> = ({
     handleTopicStatus(dataStatus)
   }, [dataStatus, handleTopicStatus])
   
-  const source = Array.isArray(data) ? "stackby" : "adminjs";
   console.log("data:", data)
  
   if (source === "stackby") {
@@ -111,7 +109,7 @@ export const DetailingTopicContent: React.FC<DetailingContentProps> = ({
           textDescription={topic.description}
           textVideo={topic.video?.description}
           title={topic.video?.title}
-          videoLink={topic.video?.link}
+          videoLink={topic.video.link}
           references={topic.video?.references ?? ""}
           videoId={topic.video?.id}
         />

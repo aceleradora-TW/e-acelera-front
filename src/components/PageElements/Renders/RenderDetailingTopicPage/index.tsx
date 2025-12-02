@@ -1,5 +1,4 @@
 import * as React from "react";
-import useFetchData from "@/components/fetchData";
 import { Loading } from "@/components/Loading";
 import { LayoutPage } from "../../LayoutPage";
 import { DetailingTopicContent } from "../../Content/DetailingTopicContent";
@@ -14,12 +13,7 @@ import { GlobalContextProvider } from "@/context/global.context";
 import { IdType } from "@/types/type";
 import { useTopicApi } from "@/hooks/useTopicApi"
 
-
 const PageContent = ({ topicId }: { topicId: string }) => {
-  
-   console.log("PageContent recebeu →", {
-    topicId,
-  });
   
   const [isModalOpen, setIsModalOpen] = React.useState<boolean>(false);
   const showStatusErrorModal = () => setIsModalOpen(true);
@@ -36,6 +30,7 @@ const PageContent = ({ topicId }: { topicId: string }) => {
     data: renderData,
     loading: loading,
     error: error,
+    source
   } = useTopicApi(topicId);
 
   if (loading) return <Loading />;
@@ -43,7 +38,6 @@ const PageContent = ({ topicId }: { topicId: string }) => {
   if (!renderData) return <NoData />;
 
   return (
-    <GlobalContextProvider> 
       <DetailingTopicContext.Provider
         value={{
           topicStatus: dataStatus,
@@ -60,10 +54,10 @@ const PageContent = ({ topicId }: { topicId: string }) => {
             data={renderData}
             id={topicId}
             topicProgress={progress?.progress ?? 0}
+            source={source}
           />  
       </LayoutPage> 
       </DetailingTopicContext.Provider> 
-    </GlobalContextProvider>
   );
 };
 

@@ -86,7 +86,7 @@ export interface Topic {
   title: string;
   shortDescription: string;
   description: string;
-  references?: string;
+  references: string;
   themeId: string;
   theme: Theme;        
   exercises: Exercise[]; 
@@ -97,7 +97,7 @@ export interface Exercise {
   id: string;
   title: string;
   description: string;
-  shortDescription?: string;
+  shortDescription: string;
   sequence?: number;
 }
 
@@ -105,7 +105,7 @@ export interface Video {
   id: string;
   title: string;
   description: string;
-  references?: string;
+  references: string;
   link: string;
   topicId: string;
 }

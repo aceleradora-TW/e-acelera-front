@@ -8,7 +8,6 @@ export default function DetailingTopic({
   params: { detailingTopic: string };
 }) {
   const id = params.detailingTopic;
-  const source = id.includes("-") ? "stackby" : "adminjs";
-
-  return RenderDetailingTopicPage(id, source)
+ 
+  return RenderDetailingTopicPage(id)
 }
