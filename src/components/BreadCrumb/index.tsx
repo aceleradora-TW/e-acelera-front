@@ -4,9 +4,12 @@ import Link from "@mui/material/Link";
 import { usePathname } from 'next/navigation';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import { MouseEvent, useEffect, useState } from 'react';
-import { theme } from '@/app/config/themes';
 
-export const BreadCrumb: React.FC = () => {
+interface BreadCrumbProps {
+  title?: string;
+}
+
+export const BreadCrumb= ({ title }: BreadCrumbProps) => {
   const pathname: string = usePathname();
   const [isValidPage, setIsValidPage] = useState<boolean>(false);
   const theme = useTheme();
@@ -51,7 +54,7 @@ export const BreadCrumb: React.FC = () => {
   return (
     isValidPage && (
       <Box >
-      <Stack spacing={2} sx={theme.customStyles.breadCrumb}>
+      <Stack spacing={2} sx={(theme as any).customStyles?.breadCrumb}>
         <Breadcrumbs separator={
           <NavigateNextIcon fontSize="small" sx={{ color: theme.palette.mode === 'dark' ? theme.palette.bgColor?.main : theme.palette.textColor?.main}} />}
             aria-label="trilha de navegação">
@@ -65,15 +68,20 @@ export const BreadCrumb: React.FC = () => {
             const route: string = `/${breadroutes.slice(0, index + 1).join('/')}`;
             const isLast: boolean = index === breadcrumbs.length - 1;
             const textFormatted = capitalizeFirstLetter(path)
+
+            const displayText = (isLast && title) 
+                ? title 
+                : (path !== '' ? decodeURIComponent(textFormatted): textFormatted);
+
             return (
               <Link 
               variant="body1"
-              sx={theme.customStyles.breadCrumb}
+              sx={(theme as any).customStyles?.breadCrumb}
               key={path} 
               href={route}
               aria-current={isLast ? 'page' : undefined}
               onClick={(e) => handleBreadcrumbClick(route, e)}>
-                {path !== '' ? decodeURIComponent(textFormatted): textFormatted}
+                {displayText}
               </Link>
             );
           })}

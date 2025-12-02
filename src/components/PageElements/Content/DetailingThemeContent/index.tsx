@@ -29,7 +29,7 @@ const ThemeContent = ({
   return (
     <>
       <Grid item xl={12} lg={9} md={6} sm={3}>
-        <BreadCrumb />
+        <BreadCrumb title={content.field.title} />
         <Heading variant="h1" text={content.field.title} />
         <Box>
           <ProgressBar percentage={fetchedProgress?.progress ?? 0} />
@@ -68,7 +68,7 @@ const ThemeContentAdminJS = ({ data }: { data: AdminJSThemeByIdResponse }) => {
   return (
     <>
       <Grid item xl={12} lg={9} md={6} sm={3}>
-        <BreadCrumb />
+        <BreadCrumb title={data.title} />
         <Heading variant="h1" text={data.title} />
         <Box>
           <ProgressBar percentage={fetchedProgress?.progress ?? 0} />
