@@ -1,6 +1,28 @@
 export interface ApiResponse {
     data: DataItem[];
 }
+export interface AdminJSThemeByIdResponse {
+    id: string;
+    title: string;
+    description: string;
+    shortDescription: string;
+    image: string;
+    category: string;
+    sequence: number;
+    alt: string;
+    topic: Array<{
+        id: string;
+        title: string;
+        shortDescription: string;
+        description: string;
+        references: string;
+        themeId: string;
+    }>;
+}
+export interface StackbyThemeByIdResponse<T> {
+    id: string
+    field: T
+}
 export interface DataItem {
     id: string;
     field: CommonField | ThemeField | TopicField | VideoField | ExercisesField;

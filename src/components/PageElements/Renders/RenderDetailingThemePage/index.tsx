@@ -8,25 +8,24 @@ import { NoData } from "@/components/NoData";
 import React from "react";
 import { useThemeByIdApi } from "@/hooks/useThemeByIdApi";
 
-export const RenderDetailingThemePage = (id: string)=> {
-    const { data, loading, error } = useThemeByIdApi(id);
+export const RenderDetailingThemePage = (id: string) => {
+  const { data, loading, error } = useThemeByIdApi(id);
 
-    if (loading) {
-      return <Loading />
+  if (loading) {
+    return <Loading />;
   }
   if (error) {
-      return <BadRequest />
+    return <BadRequest />;
   }
   if (!data?.data) {
-      return <NoData/>
+    return <NoData />;
   }
   return (
     <LayoutPage>
-      <DetailingThemeContent data={data} />
+      <DetailingThemeContent data={data?.data} />
     </LayoutPage>
   );
-
-}
+};
 
 /* Testar depois
 

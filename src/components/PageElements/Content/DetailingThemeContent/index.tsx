@@ -2,18 +2,27 @@ import React from "react";
 import { Box, Grid } from "@mui/material";
 import { BreadCrumb } from "@/components/BreadCrumb";
 import { ContainerCardTopics } from "@/components/PageElements/Container/ContainerCardsTopics";
-import { ApiResponse, DataItem, IdType, ThemeField } from "@/types/type";
+import {
+  AdminJSThemeByIdResponse,
+  ApiResponse,
+  DataItem,
+  IdType,
+  StackbyThemeByIdResponse,
+  ThemeField,
+} from "@/types/type";
 import { DescriptionDivider } from "@/components/descriptions/description-divider";
 import { Heading } from "@/components/Heading";
 import ProgressBar from "../../Progress/ProgressBar";
 import { useFetchProgress } from "@/components/fetchProgress";
+import { useFlags } from "flagsmith/react";
 
-interface DetailingContentProps {
-  data: ApiResponse;
-}
-const ThemeContent: React.FC<{ field: ThemeField }> = ({ field }) => {
+const ThemeContent = ({
+  content,
+}: {
+  content: StackbyThemeByIdResponse<ThemeField>;
+}) => {
   const { progress: fetchedProgress } = useFetchProgress(
-    field.rowId,
+    content.field.rowId,
     IdType.THEME_ID
   );
 
@@ -21,7 +30,7 @@ const ThemeContent: React.FC<{ field: ThemeField }> = ({ field }) => {
     <>
       <Grid item xl={12} lg={9} md={6} sm={3}>
         <BreadCrumb />
-        <Heading variant="h1" text={field.title} />
+        <Heading variant="h1" text={content.field.title} />
         <Box>
           <ProgressBar percentage={fetchedProgress?.progress ?? 0} />
           <p
@@ -35,31 +44,78 @@ const ThemeContent: React.FC<{ field: ThemeField }> = ({ field }) => {
           </p>
         </Box>
       </Grid>
-      <DescriptionDivider text={field.description} />
+      <DescriptionDivider text={content.field.description} />
       <Grid item xl={12} lg={9} md={6} sm={3}>
         <Heading variant="h2" text={"Tópicos"} />
       </Grid>
       <ContainerCardTopics
-        topics={field.topics}
-        topicsDescription={field.topicsDescription}
-        topicsInfo={field.topicsInfo}
+        topics={content.field.topics}
+        topicsDescription={content.field.topicsDescription}
+        topicsInfo={content.field.topicsInfo}
       />
     </>
   );
 };
 
-export const DetailingThemeContent: React.FC<DetailingContentProps> = ({
-  data,
-}) => {
-    const themeData = Array.isArray(data?.data) ? data.data[0] : data.data;
-
-  if (!themeData) {
-    return null;
-  }
+const ThemeContentAdminJS = ({ data }: { data: AdminJSThemeByIdResponse }) => {
+  const { progress: fetchedProgress } = useFetchProgress(
+    data.id,
+    IdType.THEME_ID
+  );
+  // console.log(JSON.stringify(data.title));
+  console.log("@@@@ data.title", data.title);
 
   return (
     <>
-      <ThemeContent key={themeData.id} field={themeData.field as ThemeField} />
+      <Grid item xl={12} lg={9} md={6} sm={3}>
+        <BreadCrumb />
+        <Heading variant="h1" text={data.title} />
+        <Box>
+          <ProgressBar percentage={fetchedProgress?.progress ?? 0} />
+          <p
+            style={{
+              fontSize: "0.8rem",
+              textAlign: "right",
+              marginTop: "4px",
+            }}
+          >
+            {fetchedProgress?.progress ?? 0}% concluído
+          </p>
+        </Box>
+      </Grid>
+      <DescriptionDivider text={data.description} />
+      <Grid item xl={12} lg={9} md={6} sm={3}>
+        <Heading variant="h2" text={"Tópicos"} />
+      </Grid>
+      {/* <ContainerCardTopics
+        topicsDescription={data.topicsDescription}
+        topicsInfo={data.topic}
+      /> */}
+    </>  
+  );
+};
+
+export const DetailingThemeContent = ({
+  data,
+}: {
+  data: AdminJSThemeByIdResponse | StackbyThemeByIdResponse<ThemeField>;
+}) => {
+  // const themeData = Array.isArray(data?.data) ? data.data[0] : data.data;
+  const { flag_adminjs, is_test_user, adminjs_preference } = useFlags(
+    ["flag_adminjs"],
+    ["is_test_user", "adminjs_preference"]
+  );
+  return (
+    <>
+      {!adminjs_preference ? (
+        <ThemeContent
+          content={data as unknown as StackbyThemeByIdResponse<ThemeField>}
+        />
+      ) : (
+        <ThemeContentAdminJS
+          data={data as unknown as AdminJSThemeByIdResponse}
+        />
+      )}
     </>
   );
 };

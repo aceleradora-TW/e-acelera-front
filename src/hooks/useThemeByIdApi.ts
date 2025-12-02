@@ -3,15 +3,16 @@
 import { useState, useEffect } from 'react';
 import { useFlags } from 'flagsmith/react';
 import { useSession } from 'next-auth/react';
+import { AdminJSThemeByIdResponse, StackbyThemeByIdResponse, ThemeField } from '@/types/type';
 
-export const useThemeByIdApi = (id: string | number) => {
+export const useThemeByIdApi = (id: string) => {
   const { flag_adminjs, is_test_user, adminjs_preference } = useFlags(
     ['flag_adminjs'],
     ['is_test_user', 'adminjs_preference']
   );
   const { data: sessionData } = useSession();
 
-  const [data, setData] = useState<any>(null);
+  const [data, setData] = useState<{data: AdminJSThemeByIdResponse | StackbyThemeByIdResponse<ThemeField>} | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 
@@ -24,8 +25,8 @@ export const useThemeByIdApi = (id: string | number) => {
     setError(false);
 
     let url: string;
-    const fetchOptions: RequestInit = { 
-      method: 'GET', 
+    const fetchOptions: RequestInit = {
+      method: 'GET',
       headers: {} };
 
     const isAdminJsEnabled =
@@ -38,9 +39,8 @@ export const useThemeByIdApi = (id: string | number) => {
       console.log("Flagsmith desabilitada. Stackby filtrando por id");
       url = `/api/stackbyApi/Themes`;
       fetchOptions.headers = {
-        operator: 'equal',
-        column: 'id',
-        value: String(id),
+        operator: 'rowIds',
+        value: id,
       };
     }
 
@@ -52,7 +52,7 @@ export const useThemeByIdApi = (id: string | number) => {
         }
         return res.json();
       })
-      .then(setData)
+      .then(data => setData(data))
       .catch((err) => {
         console.error(err);
         setError(true);
@@ -67,5 +67,5 @@ export const useThemeByIdApi = (id: string | number) => {
     sessionData?.user.email,
   ]);
 
-  return { data, loading, error };
+  return { data, loading, error};
 };
