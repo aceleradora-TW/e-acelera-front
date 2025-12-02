@@ -9,7 +9,7 @@ import React from "react";
 import { useThemeByIdApi } from "@/hooks/useThemeByIdApi";
 
 export const RenderDetailingThemePage = (id: string)=> {
-    const { data, loading, error } = useThemeByIdApi(id.split("-")[0]);
+    const { data, loading, error } = useThemeByIdApi(id);
 
     if (loading) {
       return <Loading />

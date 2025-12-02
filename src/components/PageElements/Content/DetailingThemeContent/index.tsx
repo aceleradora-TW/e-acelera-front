@@ -51,7 +51,7 @@ const ThemeContent: React.FC<{ field: ThemeField }> = ({ field }) => {
 export const DetailingThemeContent: React.FC<DetailingContentProps> = ({
   data,
 }) => {
-  const [themeData] = data?.data;
+  const themeData = data?.data;
   return (
     <>
       <ThemeContent key={themeData.id} field={themeData.field as ThemeField} />
