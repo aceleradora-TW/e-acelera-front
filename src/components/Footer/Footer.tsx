@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React from "react";
 import { Box, Container, Grid, Link, Typography } from "@mui/material";
 import { Language, LinkedIn } from "@mui/icons-material";
@@ -15,9 +15,17 @@ export const Footer: React.FC<FooterProps> = ({ linkedinUrl, projectUrl }) => {
   const { contrastEnabled } = useAccessibility();
   const muiTheme = useTheme();
 
-  const footerBg = contrastEnabled ? "#222" : (muiTheme.customStyles?.Footer?.background ?? muiTheme.palette.primary.main);
-  const footerText = contrastEnabled ? "#E0E0E0" : (muiTheme.customStyles?.Footer?.color ?? muiTheme.palette.primary.contrastText);
-  const linkColor = contrastEnabled ? "#E0E0E0" : (muiTheme.palette.bgColor?.main ?? muiTheme.palette.primary.contrastText);
+  const footerBg = contrastEnabled
+    ? "#222"
+    : muiTheme.customStyles?.Footer?.background ??
+      muiTheme.palette.primary.main;
+  const footerText = contrastEnabled
+    ? "#E0E0E0"
+    : muiTheme.customStyles?.Footer?.color ??
+      muiTheme.palette.primary.contrastText;
+  const linkColor = contrastEnabled
+    ? "#E0E0E0"
+    : muiTheme.palette.bgColor?.main ?? muiTheme.palette.primary.contrastText;
 
   return (
     <Box
@@ -25,12 +33,13 @@ export const Footer: React.FC<FooterProps> = ({ linkedinUrl, projectUrl }) => {
       sx={{
         ...muiTheme.customStyles?.Footer,
         background: footerBg,
-        color: footerText
+        color: footerText,
       }}
     >
       <Container maxWidth="xl" sx={{ pt: 4, pb: 1 }}>
-        <Grid container spacing={{ xs: 4, md: 8 }}>
-          <Grid item xs={12} md={5}>
+        <Grid container spacing={{ xs: 4, md: 4 }}>
+
+          <Grid item xs={12} md={4.5}>
             <Typography variant="subtitle1" fontWeight="bold" sx={{ color: footerText }}>
               Sobre o e-Acelera
             </Typography>
@@ -40,8 +49,12 @@ export const Footer: React.FC<FooterProps> = ({ linkedinUrl, projectUrl }) => {
             </Typography>
           </Grid>
 
-          <Grid item xs={12} md={3}>
-            <Typography variant="subtitle1" fontWeight="bold" sx={{ color: footerText }}>
+          <Grid item xs={12} md={2}>
+            <Typography
+              variant="subtitle1"
+              fontWeight="bold"
+              sx={{ color: footerText }}
+            >
               Saiba mais
             </Typography>
             <Link
@@ -54,7 +67,9 @@ export const Footer: React.FC<FooterProps> = ({ linkedinUrl, projectUrl }) => {
               }}
               variant="body2"
             >
-              <Language sx={{ verticalAlign: "middle", mr: 1, color: linkColor }} />
+              <Language
+                sx={{ verticalAlign: "middle", mr: 1, color: linkColor }}
+              />
               Projeto Aceleradora
             </Link>
 
@@ -70,21 +85,40 @@ export const Footer: React.FC<FooterProps> = ({ linkedinUrl, projectUrl }) => {
               }}
               variant="body2"
             >
-              <LinkedIn sx={{ verticalAlign: "middle", mr: 1, color: linkColor }} />
+              <LinkedIn
+                sx={{ verticalAlign: "middle", mr: 1, color: linkColor }}
+              />
               LinkedIn
             </Link>
           </Grid>
 
-          <Grid item xs={12} md={4}>
-            <Typography variant="subtitle1" fontWeight="bold" sx={{ color: footerText }}>
+          <Grid item xs={8} md={2} sx={{marginLeft: "2px",}}>
+            <Typography
+              variant="subtitle1"
+              fontWeight="bold"
+              sx={{ color: footerText }}
+            >
               Patrocinadores
             </Typography>
 
-            <Box sx={{ mr: 2, display: { xs: "flex", md: "flex" }, marginLeft: 0, gap: 2 }}>
-              <Image width={43} height={48} src="/assets/logoGlobo.svg" alt="logo globo" />
-              <Image width={43} height={48} src="/assets/logoTecnoPUC.svg" alt="logo TecnoPUC" />
-              <Image width={43} height={48} src="/assets/logoPUC.svg" alt="logo PUC" />
-              <Image width={43} height={48} src="/assets/logoTW.svg" alt="logo TW" />
+            <Box
+              mt={2}
+              sx={{
+                display: "grid",
+                gridTemplateColumns: {
+                  sm: "repeat(4, 1fr)",
+                  xxs: "1fr",
+                },
+                gap: 2,
+                alignItems: "left",
+                justifyItems: "left",
+                filter: "brightness(0) invert(1)",
+              }}
+            >
+              <Image width={100} height={28} src="/assets/logoGlobo.webp" alt="logo globo"/>
+              <Image width={140} height={23} src="/assets/logoTecnoPUC.webp" alt="logo TecnoPUC"/>
+              <Image width={100} height={23} src="/assets/logoPUC.webp" alt="logo PUC" />
+              <Image width={130} height={28} src="/assets/logoTW.webp" alt="logo TW" /> 
             </Box>
           </Grid>
         </Grid>
@@ -97,7 +131,8 @@ export const Footer: React.FC<FooterProps> = ({ linkedinUrl, projectUrl }) => {
               fontSize: "0.75rem",
             }}
           >
-            Desenvolvido por Aceleradora Ágil • © {new Date().getFullYear()} Todos os direitos reservados.
+            Desenvolvido por Aceleradora Ágil • © {new Date().getFullYear()}{" "}
+            Todos os direitos reservados.
           </Typography>
         </Box>
       </Container>
