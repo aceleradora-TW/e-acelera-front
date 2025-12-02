@@ -18,19 +18,26 @@ export const ContainerCardsExercises: React.FC<
   const pathname = usePathname();
   const currentPath = pathname.slice(1);
 
-  const splitValues = (value: string): string[] => value.split(",");
-  const exercisesArray = typeof exercises === "string" ? splitValues(exercises) : exercises ?? [];
-  const descriptionsArray = splitValues(exercisesDescription);
-  const infoArray = splitValues(exercisesInfo);
+  const splitValues = (value: string): string[] =>
+    value ? value.split(",").map((v) => v.trim()) : [];
+  let exercisesArray: (string | Exercise)[] = [];
+  let descriptionsArray: string[] = [];
+  let infoArray: string[] = [];
+
+  if (typeof exercises === "string") {
+    exercisesArray = splitValues(exercises);
+    descriptionsArray = splitValues(exercisesDescription);
+    infoArray = splitValues(exercisesInfo);
+  } else if (Array.isArray(exercises)) {
+    exercisesArray = exercises;
+    descriptionsArray = exercises.map((ex) => ex.description ?? "");
+    infoArray = exercises.map((ex) => ex.id);
+  }
 
   const isInvalidData =
-  typeof exercises === "string"
-    ? exercises.trim() == "Untitle" ||
-      !exercises.trim() ||
-      !exercisesDescription.trim() ||
-      !exercisesInfo.trim()
-    : !exercises || exercises.length === 0;
-
+    exercisesArray.length === 0 ||
+    descriptionsArray.length === 0 ||
+    infoArray.length === 0;
   if (isInvalidData) {
     return <DescriptionFull text="## Nenhum exercício encontrado" />;
   }
@@ -52,8 +59,8 @@ export const ContainerCardsExercises: React.FC<
             id={`${infoArray[index]}`}
             title={typeof exercise=== "string" ? exercise : exercise.title}
             description={descriptionsArray[index]}
-            // nivelamento/themeId/topicId/exerciseId -> de cada card
-            route={`${currentPath}/${infoArray[index]}`}
+            // nivelamento/themeId/topicId/exerciseId -> ajustar rota para adminjs
+            route={`${currentPath}/${infoArray[index]}-${exercise}`}
           />
         </Grid>
       ))}
