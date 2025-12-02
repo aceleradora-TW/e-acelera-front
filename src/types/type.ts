@@ -89,3 +89,11 @@ export enum IdType {
   THEME_ID = "themeId",
 };
 
+export interface AdminJsExercise {
+  id: string;
+  title: string;
+  description: string;
+  sequence: number;
+  shortDescription: string;
+  topicId: string | null;
+}

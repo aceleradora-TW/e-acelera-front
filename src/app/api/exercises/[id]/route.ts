@@ -12,6 +12,8 @@ export async function GET(req: NextRequest, {params}: {params: {id: string}}) {
         "Content-Type": "application/json",
       },
     })
+    
+    console.log("Fetching:", `${baseUrl}/exercises/${params.id}`);
 
     if (response.status === 401) {
       return NextResponse.json(

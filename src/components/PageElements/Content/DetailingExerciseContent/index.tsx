@@ -7,11 +7,16 @@ import { ContainerButtonsExercise } from "../../Container/ContainerButtonsExerci
 import { Heading } from "@/components/Heading";
 import StatusSelect from "@/components/StatusSelect";
 import { ElementType } from "@/types/typeTopic";
+import { useExerciseApi } from "@/hooks/useExerciseApi";
+import { NoData } from "@/components/NoData";
+import { AdminJsExercise } from "@/types/type";
 
 interface DetailingContentProps {
   dataTopic: ApiResponse
-  dataExercise: ApiResponse;
+  dataExercise: AdminJsExercise | { data: DataItem[] };
   id: string;
+  // is_adminjsPreference: ApiResponse;
+  
 }
 
 const ExerciseContent: React.FC<{
@@ -51,29 +56,52 @@ const ExerciseContent: React.FC<{
   </>
 );
 
+  //is_adminjsPreference - estava dentro de detailingExerciseContent
 export const DetailingExerciseContent: React.FC<DetailingContentProps> = ({
   dataTopic,
   dataExercise,
   id,
 }) => {
-  // const filteredData = dataExercise?.data.filter(
-  //   (element: DataItem) => element.id === id.split("-")[0]
-  // );
 
-  // TODO:implement conditional for adminjs_preference or stackbyApi
+  const isStackby = "data" in dataExercise;
+
+  const normalized = isStackby
+  ? {
+    id: dataExercise.data?.[0]?.id,
+    field: dataExercise.data?.[0]?.field,
+  }
+  : {
+    id: dataExercise.id,
+    field: dataExercise as unknown as ExercisesField,
+  }
+
+  if (!normalized.id || !normalized.field) {
+    return <NoData />;
+  }
+
+  // const filteredData = dataExercise?.data.filter(
+  // (element: DataItem) => element.id === id.split("-")[0]); 
   // const exerciseData = is_adminjsPreference ? dataExercise[0]?.data : dataExercise?.data
+  // TODO:implement conditional for adminjs_preference or stackbyApi
+
 
   return (
     <>
-      {/* {filteredData.map((element: DataItem) => (
+        <ExerciseContent
+          dataTopic={dataTopic}
+          idExercise={normalized.id}
+          field={normalized.field}
+        />
+      {/* {filteredData?.map((element: DataItem) => (
         <ExerciseContent
           dataTopic={dataTopic}
           key={element.id}
           idExercise={element.id}
-          field={element.field as ExercisesField}
-        />
-      ))} */}
-      <code style={{ marginTop: '200px' }}>{JSON.stringify(dataExercise)}</code>
+          field={element.field as ExercisesField}/>
+      ))}, */}
+      <code style={{ marginTop: '200px' }}>
+        {JSON.stringify(dataExercise)}
+      </code>
     </>
   );
 };
