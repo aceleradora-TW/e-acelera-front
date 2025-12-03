@@ -6,8 +6,6 @@ interface SectionContentProps extends BoxProps {
   variant?: "standard" | "faq" | "content-only";
 }
 
-//Componente wrapper para conteúdo de seções com padding consistente
-
 export const SectionContent = ({
   children, variant = "standard",
   sx, ...props }: SectionContentProps) => {
