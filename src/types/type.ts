@@ -1,6 +1,15 @@
 export interface ApiResponse {
     data: DataItem[];
 }
+
+export interface AdminJSTopicThemesResponse { 
+     id: string;
+        title: string;
+        shortDescription: string;
+        description: string;
+        references: string;
+        themeId: string;
+}
 export interface AdminJSThemeByIdResponse {
     id: string;
     title: string;
@@ -10,15 +19,9 @@ export interface AdminJSThemeByIdResponse {
     category: string;
     sequence: number;
     alt: string;
-    topic: Array<{
-        id: string;
-        title: string;
-        shortDescription: string;
-        description: string;
-        references: string;
-        themeId: string;
-    }>;
+    topic: AdminJSTopicThemesResponse[];
 }
+
 export interface StackbyThemeByIdResponse<T> {
     id: string
     field: T

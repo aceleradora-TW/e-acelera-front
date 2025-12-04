@@ -5,43 +5,43 @@ import { DescriptionFull } from "./description-full";
 import { MarkdownRenderer } from "@/components/UI/markdown-renderer";
 import components from "./defs/description-divider.defs";
 interface DescriptionDividerProps {
-  text: string
+  text: string;
 }
 
 const boxStyle: object = {
-  width: "49%" 
-}
+  width: "49%",
+};
 
-
-export const DescriptionDivider: React.FC<DescriptionDividerProps> = ({ text }) => {
-
+export const DescriptionDivider: React.FC<DescriptionDividerProps> = ({
+  text,
+}) => {
+  console.log("Rendering DescriptionDivider", text);
   function textDivider(text: string): [string, string] {
-    let breakPoint = Math.floor((2 * text.length) / 3)
+    let breakPoint = Math.floor((2 * text.length) / 3);
 
-    const preferredBreaks = ['.', ',', '\n', ' ']
+    const preferredBreaks = [".", ",", "\n", " "];
 
     for (const breakChar of preferredBreaks) {
-      let tempPoint = breakPoint
+      let tempPoint = breakPoint;
 
       while (tempPoint > 0 && text[tempPoint] !== breakChar) {
-        tempPoint--
+        tempPoint--;
       }
 
       if (tempPoint > 0) {
-        breakPoint = tempPoint + 1
-        break
+        breakPoint = tempPoint + 1;
+        break;
       }
     }
 
-    const firstPart = text.slice(0, breakPoint).trim()
-    const secondPart = text.slice(breakPoint).trim()
+    const firstPart = text.slice(0, breakPoint).trim();
+    const secondPart = text.slice(breakPoint).trim();
 
-    return [firstPart, secondPart]
+    return [firstPart, secondPart];
   }
 
-
-  const textDividerArray: string[] = textDivider(text)
-  const isSmallScreen: boolean = useMediaQuery(theme.breakpoints.down('md'))
+  const textDividerArray: string[] = textDivider(text);
+  const isSmallScreen: boolean = useMediaQuery(theme.breakpoints.down("md"));
 
   return (
     <>
@@ -55,7 +55,12 @@ export const DescriptionDivider: React.FC<DescriptionDividerProps> = ({ text }) 
             </MarkdownRenderer>
           </Box>
 
-          <Divider color="black" flexItem orientation="vertical" sx={{ marginTop: 2 }} />
+          <Divider
+            color="black"
+            flexItem
+            orientation="vertical"
+            sx={{ marginTop: 2 }}
+          />
 
           <Box sx={boxStyle}>
             <MarkdownRenderer components={components}>
@@ -65,5 +70,5 @@ export const DescriptionDivider: React.FC<DescriptionDividerProps> = ({ text }) 
         </Box>
       )}
     </>
-  )
-}
+  );
+};

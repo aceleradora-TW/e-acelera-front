@@ -5,11 +5,18 @@ import { LayoutPage } from "../../LayoutPage";
 import { DetailingThemeContent } from "../../Content/DetailingThemeContent";
 import { BadRequest } from "@/components/BadRequest";
 import { NoData } from "@/components/NoData";
-import React from "react";
+import React, { useEffect } from "react";
 import { useThemeByIdApi } from "@/hooks/useThemeByIdApi";
 
 export const RenderDetailingThemePage = (id: string) => {
-  const { data, loading, error } = useThemeByIdApi(id);
+  const { data, loading, error, adminjs_preference } = useThemeByIdApi(id);
+
+  /* useEffect(() => {
+    if (adminjs_preference) {
+      router.replace("/nivelamento");
+    }
+    console.log(pathname);
+  }, [adminjs_preference]);*/
 
   if (loading) {
     return <Loading />;
@@ -20,9 +27,15 @@ export const RenderDetailingThemePage = (id: string) => {
   if (!data?.data) {
     return <NoData />;
   }
+
+  //if (adminjs_preference) return null;
+
   return (
     <LayoutPage>
-      <DetailingThemeContent data={data?.data} />
+      <DetailingThemeContent
+        adminjs_preference={adminjs_preference as boolean}
+        data={data?.data}
+      />
     </LayoutPage>
   );
 };

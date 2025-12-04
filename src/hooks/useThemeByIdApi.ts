@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useFlags } from 'flagsmith/react';
 import { useSession } from 'next-auth/react';
 import { AdminJSThemeByIdResponse, StackbyThemeByIdResponse, ThemeField } from '@/types/type';
+import { useRouter } from 'next/navigation';
 
 export const useThemeByIdApi = (id: string) => {
   const { flag_adminjs, is_test_user, adminjs_preference } = useFlags(
@@ -67,5 +68,5 @@ export const useThemeByIdApi = (id: string) => {
     sessionData?.user.email,
   ]);
 
-  return { data, loading, error};
+  return { data, loading, error, adminjs_preference };
 };

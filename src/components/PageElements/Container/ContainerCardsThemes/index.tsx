@@ -4,6 +4,7 @@ import { BaseCard } from "@/components/BaseCard";
 import { ApiResponse, DataItem, ThemeField } from "@/types/type";
 import { usePathname } from "next/navigation";
 import { useFlags } from "flagsmith/react";
+
 interface ContainerCardThemeProps {
   data: ApiResponse;
   category: string;
@@ -14,8 +15,8 @@ export const ContainerCardTheme: React.FC<ContainerCardThemeProps> = ({
 
 }) => {
   const pathname = usePathname();
-  const currentPath = pathname.slice(1);
   const { adminjs_preference } = useFlags([""], ["adminjs_preference"]);
+
   return (
     <Grid container spacing={2} alignItems="stretch">
       {!adminjs_preference

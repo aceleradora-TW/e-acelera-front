@@ -15,10 +15,12 @@ export async function GET(
     const column = header.get("column") ?? "";
     const value = header.get("value") ?? "";
 
-    const hasFilter = (!!operator && !!value) || (!!operator && !!column && !!value);
+    const hasFilter =
+      (!!operator && !!value) || (!!operator && !!column && !!value);
 
-    const url: string = `${BACKEND_BASE_URL}/stackby/${endpoint}?${uniqueParam}${hasFilter ? `&operator=${operator}&column=${column}&value=${value}` : ""}`;
-
+    const url: string = `${BACKEND_BASE_URL}/stackby/${endpoint}?${uniqueParam}${
+      hasFilter ? `&operator=${operator}&column=${column}&value=${value}` : ""
+    }`;
 
     const response: Response = await fetch(url, {
       method: "GET",

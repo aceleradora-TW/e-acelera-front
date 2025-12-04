@@ -1,30 +1,36 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Box, Grid } from "@mui/material";
 import { BreadCrumb } from "@/components/BreadCrumb";
 import { ContainerCardTopics } from "@/components/PageElements/Container/ContainerCardsTopics";
 import {
   AdminJSThemeByIdResponse,
-  ApiResponse,
-  DataItem,
   IdType,
   StackbyThemeByIdResponse,
+  AdminJSTopicThemesResponse,
   ThemeField,
 } from "@/types/type";
 import { DescriptionDivider } from "@/components/descriptions/description-divider";
 import { Heading } from "@/components/Heading";
 import ProgressBar from "../../Progress/ProgressBar";
 import { useFetchProgress } from "@/components/fetchProgress";
-import { useFlags } from "flagsmith/react";
+import { useRouter } from "next/navigation";
 
-const ThemeContent = ({
-  content,
-}: {
+interface ThemeContentProps {
   content: StackbyThemeByIdResponse<ThemeField>;
-}) => {
+  adminjs_preference: boolean;
+}
+
+const ThemeContent = ({ content, adminjs_preference }: ThemeContentProps) => {
   const { progress: fetchedProgress } = useFetchProgress(
-    content.field.rowId,
+    content?.field?.rowId ?? "",
     IdType.THEME_ID
   );
+
+  const cardTopicsData = {
+    topics: content.field.topics,
+    topicsDescription: content.field.topicsDescription,
+    topicsInfo: content.field.topicsInfo,
+  };
 
   return (
     <>
@@ -49,24 +55,29 @@ const ThemeContent = ({
         <Heading variant="h2" text={"Tópicos"} />
       </Grid>
       <ContainerCardTopics
-        topics={content.field.topics}
-        topicsDescription={content.field.topicsDescription}
-        topicsInfo={content.field.topicsInfo}
+        data={cardTopicsData}
+        adminjs_preference={adminjs_preference}
       />
     </>
   );
 };
 
-const ThemeContentAdminJS = ({ data }: { data: AdminJSThemeByIdResponse }) => {
+const ThemeContentAdminJS = ({
+  data,
+  adminjs_preference,
+}: {
+  data: AdminJSThemeByIdResponse;
+  adminjs_preference: boolean;
+}) => {
   const { progress: fetchedProgress } = useFetchProgress(
     data.id,
     IdType.THEME_ID
   );
-  // console.log(JSON.stringify(data.title));
-  console.log("@@@@ data.title", data.title);
-  const topics = data.topic.map((t) => t.title).join(",");
-  const topicsDescription = data.topic.map((t) => t.shortDescription).join(",");
-  const topicsInfo = data.topic.map((t) => t.id).join(",");
+
+  const cardTopicsAdminJSData = {
+    topic: data.topic as AdminJSTopicThemesResponse[],
+  };
+  console.log("cardTopicsAdminJSData", data);
 
   return (
     <>
@@ -91,9 +102,8 @@ const ThemeContentAdminJS = ({ data }: { data: AdminJSThemeByIdResponse }) => {
         <Heading variant="h2" text={"Tópicos"} />
       </Grid>
       <ContainerCardTopics
-        topics={topics}
-        topicsDescription={topicsDescription}
-        topicsInfo={topicsInfo}
+        data={cardTopicsAdminJSData}
+        adminjs_preference={adminjs_preference}
       />
     </>
   );
@@ -101,23 +111,23 @@ const ThemeContentAdminJS = ({ data }: { data: AdminJSThemeByIdResponse }) => {
 
 export const DetailingThemeContent = ({
   data,
+  adminjs_preference,
 }: {
   data: AdminJSThemeByIdResponse | StackbyThemeByIdResponse<ThemeField>;
+  adminjs_preference: boolean | null;
 }) => {
-  // const themeData = Array.isArray(data?.data) ? data.data[0] : data.data;
-  const { flag_adminjs, is_test_user, adminjs_preference } = useFlags(
-    ["flag_adminjs"],
-    ["is_test_user", "adminjs_preference"]
-  );
+  console.log("adminjs_preference", adminjs_preference);
   return (
     <>
       {!adminjs_preference ? (
         <ThemeContent
           content={data as unknown as StackbyThemeByIdResponse<ThemeField>}
+          adminjs_preference={adminjs_preference as boolean}
         />
       ) : (
         <ThemeContentAdminJS
           data={data as unknown as AdminJSThemeByIdResponse}
+          adminjs_preference={adminjs_preference as boolean}
         />
       )}
     </>
