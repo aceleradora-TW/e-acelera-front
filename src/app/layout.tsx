@@ -6,8 +6,13 @@ import { getServerSession } from "next-auth"
 import ClientSessionProvider from "@/components/ClientSessionProvider"
 import { ThemeConfig } from "./config/themes"
 import { Footer } from "@/components/Footer/Footer"
+import flagsmith from "flagsmith/isomorphic";
+import { FeatureFlagProvider } from "../components/FeatureFlagProvider/featureFlagProvider";
+import React from "react";
 import { AccessibilityProvider } from "@/context/accessibility.context"
 import AccessibilityMenu from "@/components/accessibility-menu"
+
+const FLAGSMITH_ENVIRONMENT_ID = process.env.NEXT_PUBLIC_FLAGSMITH_ENVIRONMENT_ID
 
 const menuItems = ["Nivelamento", "Autoestudo"]
 
@@ -22,15 +27,25 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  const session = await getServerSession()
+
+  const session = await getServerSession();
+
+  // Inicializa o FlagSmith no servidor com a identidade do usuário
+  await flagsmith.init({
+    environmentID: FLAGSMITH_ENVIRONMENT_ID,
+    identity: session?.user?.email || undefined,
+    cacheFlags: false,
+  })
+
+  const serverState = flagsmith.getState();
 
   return (
     <html lang="pt-br">
       <body>
+        <FeatureFlagProvider serverState={serverState}>
         <AccessibilityProvider>
-          <ThemeConfig>
-            <ClientSessionProvider>
-              <AccessibilityMenu />
+          <ClientSessionProvider>
+            <ThemeConfig>
               <Box
                 sx={{
                   minHeight: "100vh",
@@ -38,6 +53,7 @@ export default async function RootLayout({
                   flexDirection: "column",
                 }}
               >
+              <AccessibilityMenu />
                 <Box sx={{ marginBottom: "80px" }}>
                   <ResponsiveAppBar list={menuItems} session={session} />
                 </Box>
@@ -46,12 +62,15 @@ export default async function RootLayout({
                 </Box>
                 <Footer
                   linkedinUrl={"https://www.linkedin.com/school/aceleradora-%C3%A1gil/?originalSubdomain=br"}
-                  projectUrl={"https://www.thoughtworks.com/pt-br/about-us/diversity-and-inclusion/aceleradora"} />
+                  projectUrl={"https://www.thoughtworks.com/pt-br/about-us/diversity-and-inclusion/aceleradora"}
+                />
               </Box>
-            </ClientSessionProvider>
-          </ThemeConfig>
+            </ThemeConfig>
+          </ClientSessionProvider>
         </AccessibilityProvider>
+        </FeatureFlagProvider>
       </body>
     </html>
   );
 }
+

@@ -10,7 +10,6 @@ import React from 'react';
 import { themePalette } from '@/app/config/themes/palette';
 import CloseIcon from '@mui/icons-material/Close';
 import AccessibilityReadingMask from './accessibility-reading-mask';
-
 import { customStyles } from '@/app/config/themes/components';
 import { useMediaQuery, useTheme } from '@mui/material';
 
