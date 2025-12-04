@@ -24,9 +24,6 @@ import { Session } from "next-auth"
 import { useState, useEffect } from "react";
 import { useFlagsmith, useFlags } from "flagsmith/react"
 
-// TODO: Login estava funcionando e com o feature flag parou de funcionar
-// TODO: Atualização do trait no FlagSmith não reflete atualização local
-// TODO: Não estamos conseguindo limitar os usuários que visualizam a flag através de configuração de grupo no FlagSmith
 interface WebMenuProps {
   list: string[]
   session: Session | null
@@ -40,17 +37,10 @@ export const WebMenu: React.FC<WebMenuProps> = ({ list, session }) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [isChecked, setIsChecked] = useState<boolean>(false);
 
-  // Verifica se o usuário é de teste através do trait
-  // const isTestUser = flagsmith.getTrait('is_test_user') === true;
-
-  // Carrega o valor inicial da preferência do usuário ou da feature flag
   useEffect(() => {
     if (session?.user?.email && is_test_user && adminjs_preference) {
-      // Para usuários de teste, verifica primeiro a preferência salva, depois a feature flag
-      // const adminJsPreference = flagsmith.getTrait('adminjs_preference');
       setIsChecked(true);
     } else {
-      // Se não há preferência salva, usa o valor da feature flag
       setIsChecked(flag_adminjs?.enabled ?? false);
     }
   }, [session, flag_adminjs, is_test_user, adminjs_preference, flagsmith.getState()]);
@@ -61,12 +51,9 @@ export const WebMenu: React.FC<WebMenuProps> = ({ list, session }) => {
     try {
       const newValue = event.target.checked;
       setIsChecked(newValue);
-
-      // Salva a preferência do usuário como trait no FlagSmith
       await flagsmith.setTrait('adminjs_preference', newValue);
     } catch (error) {
       console.error("Erro ao salvar preferência no FlagSmith:", error);
-      // Reverte o estado em caso de erro
       setIsChecked(!event.target.checked);
     }
   };
