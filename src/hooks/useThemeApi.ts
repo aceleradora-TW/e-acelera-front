@@ -2,12 +2,14 @@
 import { useState, useEffect } from 'react';
 import { useFlags } from 'flagsmith/react';
 import { useSession } from 'next-auth/react';
+import { ApiResponse } from "@/types/type";
+
 
 export const useThemeApi = (category: string) => {
   const { flag_adminjs, is_test_user, adminjs_preference } = useFlags(['flag_adminjs'], ['is_test_user', 'adminjs_preference']);
   const {data: sessionData} = useSession();
-
-  const [data, setData] = useState<any>(null);
+  type ThemeHookResponse = ApiResponse | {data: ApiResponse };
+  const [data, setData] = useState<ThemeHookResponse | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 
