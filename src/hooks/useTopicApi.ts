@@ -28,10 +28,8 @@ export const useTopicApi = (id: string) => {
       headers: {},
     };
     if (source === 'adminjs') {
-      console.log("Flagsmith: 'flag_adminjs' HABILITADA. Chamando a rota de API /api/topics/:id.");
       url = `/api/topics/${topicId}`;
     } else {
-      console.log("Flagsmith: 'flag_adminjs' DESABILITADA. Chamando a rota de API /api/stackbyApi/Topics.");
       url = `/api/stackbyApi/Topics`;
       fetchOptions.headers = {
         'operator': 'equal',

@@ -60,11 +60,9 @@ export const DetailingExerciseContent: React.FC<DetailingContentProps> = ({
   dataExercise,
   id,
 }) => {
-  // TODO: NÃO É NECESSARIO PARA ADMINJS
   const filteredData = dataExercise?.data.filter(
     (element: DataItem) => element.id === id.split("-")[0]
   );
-  // FIM TODO
 
   return (
     <>

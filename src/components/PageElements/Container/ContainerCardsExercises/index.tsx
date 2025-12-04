@@ -4,6 +4,7 @@ import { usePathname } from "next/navigation";
 import { ButtonCard } from "@/components/ButtonCard";
 import { DescriptionFull } from "@/components/descriptions/description-full";
 import { Exercise } from "@/types/type";
+
 interface ContainerCardsExercisesProps {
   exercises?: string | Exercise[];
   exercisesDescription: string;
@@ -47,9 +48,20 @@ export const ContainerCardsExercises: React.FC<
   return (
     <Grid container spacing={2} columnSpacing={1}>
       {exercisesArray?.map((exercise, index) => {
-        const id = typeof exercise === "string" ? infoArray[index] : exercise.id;
-        const title = typeof exercise === "string" ? exercise : exercise.title;
+        let route = "";
+        let id = "";
+        let title = "";
         const description = descriptionsArray[index] ?? "";
+        
+        if (typeof exercise === "string") {
+          id =  infoArray[index];
+          title =  exercise;
+          route =  `${currentPath}/${id}-${title}`;
+        } else {
+          id =  exercise.id;
+          title =  exercise.title;
+          route =  `${currentPath}/${id}`;
+        }
 
         return (
           <Grid
@@ -66,7 +78,7 @@ export const ContainerCardsExercises: React.FC<
               id={id}
               title={title}
               description={description}
-              route={`${currentPath}/${id}`}
+              route={route}
             />
           </Grid>
 
