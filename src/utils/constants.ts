@@ -37,28 +37,49 @@ export const technologyIcons: Record<string, IconData> = {
 
 export const TESTIMONIALS = [
     {
-      text: "Lorem Ipsum has been the industry's standard dummy text ever since the 1500",
+      text: "A Aceleradora foi fundamental na minha colocação profissional como programador. Eu vinha cursando matemática na época, mas o meu interesse maior era na parte computacional e a Aceleradora foi a porta de entrada para o mundo profissional dessa área. Os aprendizados foram muito grandes, como desenvolvedor e como pessoa.",
       img: "/assets/avatar1.svg",
-      name: "Carlos Schallenberger",
-      class: "Turma 25",
+      name: "Pedro Henrique Salton",
+      class: "Turma 09",
     },
     {
-      text: "Lorem Ipsum is simply dummy text of the printings",
+      text: "A Aceleradora é um programa que exercita e desenvolve todas as áreas necessárias dentro de uma equipe ágil. Um lugar para evoluir tecnicamente e como pessoa, aprendendo a entregar software com qualidade, com alto foco em colaboração.",
       img: "/assets/avatar1.svg",
-      name: "Carlos Schallenberger",
-      class: "Turma 25",
+      name: "Lucas da Silva Veloso",
+      class: "Turma 7",
     },
     {
-      text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been.",
+      text: "A aceleradora teve um grande impacto na minha carreira profissional, através dela tive a oportunidade para ingressar na área de TI, e mesmo depois da aceleradora (como um ex-aluno) ela continua me ajudando em minha carreira profissional, através de todo o conhecimento adquirido participando do projeto.",
       img: "/assets/avatar1.svg",
-      name: "Carlos Schallenberger",
-      class: "Turma 25",
+      name: "Renan Schmitt",
+      class: "Turma 12",
     },
     {
-      text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,",
+      text: "A Aceleradora foi muito importante na minha carreira. Foi minha primeira experiência com desenvolvimento ágil de software e os workshops, discussões, desafios e aprendizado ajudaram a moldar e definir os rumos da minha carreira. Sou extremamente grato pela oportunidade.",
       img: "/assets/avatar1.svg",
-      name: "Carlos Schallenberger",
-      class: "Turma 25",
+      name: "Lucas Falk Beier",
+      class: "Turma 3",
+    },
+
+    {
+      text: "Melhor experiência de aprendizado para ingressar na área.",
+      img: "/assets/avatar1.svg",
+      name: "Luiz Felipe Trindade",
+      class: "Turma 11",
+    },
+
+    {
+      text: "A Aceleradora é um projeto de desenvolvimento incrível, os alunos evoluem em alguns meses, o que demorariam anos em outros lugares.",
+      img: "/assets/avatar1.svg",
+      name: "Andrei Rupertti",
+      class: "Turma 12",
+    },
+
+    {
+      text: "A aceleradora é um ambiente de aprendizagem muito importante para que alunos se sintam mais preparados para o mercado de trabalho. É o lugar fundamental para dar início à carreira e ter certeza do que deseja seguir na vida profissional.",
+      img: "/assets/avatar1.svg",
+      name: "Maria Eduarda de Abreu Bortoletti",
+      class: "Turma 14",
     },
   ];
 
@@ -70,15 +91,19 @@ export const FAQ_QUESTIONS = [
       "O E-acelera é a plataforma de estudos onde fica a trilha de nivelamento e a trilha de autoestudo, disponível gratuitamente para todas as pessoas. A Aceleradora Ágil é o projeto de estágio intensivo de 18 semanas, com formação prática, mentoria e desenvolvimento de produtos reais, voltado para quem quer entrar no mercado de tecnologia.",
   },
   {
-    question:
-      "Quem pode participar do Programa Aceleradora Ágil? E como funciona?",
+    question: "Quem pode participar do Programa Aceleradora Ágil? E como funciona?",
     answer:
-      "O programa é voltado para pessoas que querem entrar no mercado de tecnologia e já têm uma base inicial em programação. As turmas são semestrais, com 11 participantes por ciclo, e o formato é remoto, com estágio remunerado e certificado ao final. Para participar, você precisa:",
+      "O programa é voltado para pessoas que querem entrar no mercado de tecnologia e já têm uma base inicial em programação. As turmas são semestrais, com 11 participantes por ciclo, e o formato é remoto, com estágio remunerado e certificado ao final.\n\nPara participar, você precisa:\n- Estar matriculado em curso superior ou técnico\n- Ter disponibilidade nos turnos: 09h às 12h e 13h às 16h\n- Ter conhecimento em lógica de programação, HTML e CSS\n- Possuir acesso à internet e computador próprio\n- Residir em qualquer parte do Brasil\n\nO processo seletivo inclui um desafio técnico, seguido de entrevista em grupo e individual.\nAs inscrições acontecem em ciclos. Fique de olho nas [redes sociais da Aceleradora](https://www.linkedin.com/school/aceleradora-%C3%A1gil/) ou aqui no site para saber quando a próxima turma vai estar aberta.",
+  },
+  {
+    question: "Quem pode fazer as trilhas da plataforma e-acelera? E como acessar?",
+    answer:
+      "Qualquer pessoa interessada em aprender programação pode acessar a plataforma, ela é aberta, gratuita e feita para quem quer estudar no seu ritmo. As trilhas incluem conteúdos introdutórios, exercícios práticos e tecnologias usadas no mercado.\n\nAcesse diretamente a página da [Trilha de Nivelamento](https://aceleradora-agil.com.br/nivelamento) no e-Acelera para começar seus estudos.",
   },
   {
     question: "O que é a Aceleradora Inclusiva?",
     answer:
-      "A Aceleradora Inclusiva é uma iniciativa parceira que compartilha do mesmo propósito: formar pessoas diversas de forma inclusiva para atuarem na área de tecnologia. Ela também oferece formação prática, mentoria e apoio para quem quer transformar sua trajetória.",
+      "A Aceleradora Inclusiva é uma iniciativa parceira que compartilha do mesmo propósito: formar pessoas diversas de forma inclusiva para atuarem na área de tecnologia. Ela também oferece formação prática, mentoria e apoio para quem quer transformar sua trajetória.\n\nAcesse o site da [Aceleradora Inclusiva](https://aceleradorainclusiva.com.br/) para saber mais sobre o programa.",
   },
   {
     question: "O Programa Aceleradora Ágil garante vaga no mercado?",

@@ -1,5 +1,4 @@
 import type { Metadata } from "next"
-import { Inter } from "next/font/google"
 import "./globals.css"
 import ResponsiveAppBar from "@/components/NavBar"
 import { Box } from "@mui/material"
@@ -16,7 +15,6 @@ import AccessibilityMenu from "@/components/accessibility-menu"
 const FLAGSMITH_ENVIRONMENT_ID = process.env.NEXT_PUBLIC_FLAGSMITH_ENVIRONMENT_ID
 
 const menuItems = ["Nivelamento", "Autoestudo"]
-const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
   title: "E-acelera - Plataforma de Estudo para Desenvolvedores",
@@ -43,7 +41,7 @@ export default async function RootLayout({
 
   return (
     <html lang="pt-br">
-      <body className={inter.className}>
+      <body>
         <FeatureFlagProvider serverState={serverState}>
         <AccessibilityProvider>
           <ClientSessionProvider>
@@ -60,7 +58,7 @@ export default async function RootLayout({
                   <ResponsiveAppBar list={menuItems} session={session} />
                 </Box>
                 <Box component="main" sx={{ flex: 1 }}>
-                  {children}
+                    {children}
                 </Box>
                 <Footer
                   linkedinUrl={"https://www.linkedin.com/school/aceleradora-%C3%A1gil/?originalSubdomain=br"}
