@@ -46,5 +46,4 @@ export const ContainerButtonsExercise: React.FC<
       </Grid>
     </Grid>
   ): <></>
-  
 };

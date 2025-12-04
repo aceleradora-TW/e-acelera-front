@@ -22,7 +22,7 @@ export const RenderDetailingExercisePage = (id: string) => {
   if (!renderDataTopic || !renderDataExercise) {
     return <NoData />
   }
-
+  
   return (
     <GlobalContextProvider>
       <LayoutPage>
