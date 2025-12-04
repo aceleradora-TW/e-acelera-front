@@ -1,7 +1,4 @@
-import {
-  CardActionArea,
-  CardActions,
-} from "@mui/material";
+import { CardActionArea, CardActions } from "@mui/material";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
@@ -13,6 +10,7 @@ import { ClickButton } from "../ClickButton";
 import CircularProgressBar from "@/components/PageElements/Progress/CircularProgressBar";
 import { IdType } from "@/types/type";
 import { useFetchProgress } from "@/components/fetchProgress";
+import { useAccessibility } from "@/context/accessibility.context";
 
 interface CardProps {
   id: string;
@@ -25,10 +23,10 @@ interface CardProps {
   cardType?: "theme" | "topic";
 }
 
-const cardStyles = {
-  ...theme.customStyles.cardBody,
-  WebkitLineClamp: 6,
-};
+const cardStyles = (themeFontFamily?: string) => ({
+    ...theme.customStyles.cardBody,
+    WebkitLineClamp: themeFontFamily ? 4 : 6,
+  });
 
 const cardActionsStyle = {
   paddingBottom: 2,
@@ -57,6 +55,9 @@ export const BaseCard: React.FC<CardProps> = ({
     cardType === "topic" ? IdType.TOPIC_ID : IdType.THEME_ID
   );
 
+  const { themeFontFamily } = useAccessibility();
+  const cardStylesBuilt = cardStyles(themeFontFamily);
+
   return (
     <Card sx={theme.customStyles.cardContainer}>
       <CardActionArea onClick={() => handleClick(route)}>
@@ -76,7 +77,7 @@ export const BaseCard: React.FC<CardProps> = ({
           >
             {title}
           </Typography>
-          <Typography variant="body1" sx={cardStyles}>
+          <Typography variant="body1" sx={{ ...cardStylesBuilt }}>
             {description}
           </Typography>
         </CardContent>
