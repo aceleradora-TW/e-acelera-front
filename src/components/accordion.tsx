@@ -1,3 +1,4 @@
+import ReactMarkdown from "react-markdown";
 import { AccordionDetails, AccordionSummary, Accordion as MuiAccordion, Typography, useTheme } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
@@ -32,7 +33,18 @@ export function Accordion({ question, answer }: AccordionProps) {
       >
         <Typography component="span">{question}</Typography>
       </AccordionSummary>
-      <AccordionDetails>{answer}</AccordionDetails>
+      <AccordionDetails>
+        <ReactMarkdown
+           components={{
+            a: ({ href, children }) => (
+              <a href={href} target="_blank" rel="noopener noreferrer">
+                {children}
+              </a>
+            ),
+          }}
+        >
+          {answer}</ReactMarkdown>
+      </AccordionDetails>
     </MuiAccordion>
   );
 }

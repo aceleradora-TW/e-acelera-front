@@ -9,16 +9,27 @@ interface AccessibilityContextType {
   toggleContrast: () => void;
   readingMaskEnabled: boolean;
   toggleReadingMask: () => void;
+  themeFontFamily?: string;
+  changeFontFamily: (fontFamily?: string) => void;
   textSize: number;
   increaseTextSize: () => void;
 }
 
-const AccessibilityContext = createContext<AccessibilityContextType | undefined>(undefined);
+const AccessibilityContext = createContext<
+  AccessibilityContextType | undefined
+>(undefined);
 
-export const AccessibilityProvider = ({ children }: { children: React.ReactNode }) => {
+export const AccessibilityProvider = ({
+  children,
+}: {
+  children: React.ReactNode;
+}) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [contrastEnabled, setContrastEnabled] = useState(false);
   const [readingMaskEnabled, setReadingMaskEnabled] = useState(false);
+  const [themeFontFamily, setThemeFontFamily] = useState<string | undefined>(
+    undefined
+  );
   const [textSize, setTextSize] = useState(16);
 
   useEffect(() => {
@@ -28,12 +39,28 @@ export const AccessibilityProvider = ({ children }: { children: React.ReactNode 
     }
   }, []);
 
+  useEffect(() => {
+    const storedFont = localStorage.getItem('themeFontFamily');
+    if (storedFont === 'OpenDyslexic') {
+      setThemeFontFamily('OpenDyslexic');
+    }
+  }, []);
+
+  useEffect(() => {
+    const storedMask = localStorage.getItem('readingMaskEnabled');
+    if (storedMask === 'true') {
+      setReadingMaskEnabled(true);
+    }
+  }, []);
+
+  const toggleMenu = () => setIsMenuOpen((prev) => !prev);
+
   const toggleContrast = () => {
-    setContrastEnabled(prev => {
-      const newValue = !prev
-      localStorage.setItem('contrastEnabled', String(newValue))
-      return newValue
-    })
+    setContrastEnabled((prev) => {
+      const newValue = !prev;
+      localStorage.setItem('contrastEnabled', String(newValue));
+      return newValue;
+    });
   };
 
   const toggleReadingMask = () => {
@@ -43,26 +70,31 @@ export const AccessibilityProvider = ({ children }: { children: React.ReactNode 
       return newValue;
     });
   };
-  const toggleMenu = () => setIsMenuOpen(prev => !prev);
 
-  const increaseTextSize = () => {
-    setTextSize(prev => (prev >= 24 ? 16 : prev + 2));
+  const changeFontFamily = (fontFamily?: string) => {
+    setThemeFontFamily((prev) => {
+      const newFont = prev ? undefined : fontFamily;
+      if (newFont) {
+        localStorage.setItem('themeFontFamily', newFont);
+      } else {
+        localStorage.removeItem('themeFontFamily');
+      }
+      return newFont;
+    });
   };
 
-  useEffect(() => {
-    const storedMask = localStorage.getItem('readingMaskEnabled');
-    if (storedMask === 'true') {
-      setReadingMaskEnabled(true);
-    }
-  }, []);
-
+  const increaseTextSize = () => {
+    setTextSize((prev) => (prev >= 24 ? 16 : prev + 2));
+  };
 
   const clearSettings = () => {
     setContrastEnabled(false);
-    localStorage.removeItem('contrastEnabled');
     setReadingMaskEnabled(false);
+    setThemeFontFamily(undefined);
     setTextSize(16);
-    localStorage.clear();
+    localStorage.removeItem('contrastEnabled');
+    localStorage.removeItem('readingMaskEnabled');
+    localStorage.removeItem('themeFontFamily');
   };
 
   return (
@@ -75,6 +107,8 @@ export const AccessibilityProvider = ({ children }: { children: React.ReactNode 
         toggleContrast,
         readingMaskEnabled,
         toggleReadingMask,
+        themeFontFamily,
+        changeFontFamily,
         textSize,
         increaseTextSize,
       }}
@@ -85,6 +119,9 @@ export const AccessibilityProvider = ({ children }: { children: React.ReactNode 
 
 export const useAccessibility = () => {
   const context = useContext(AccessibilityContext);
-  if (!context) throw new Error('useAccessibility must be used within AccessibilityProvider');
+  if (!context)
+    {throw new Error(
+      "useAccessibility must be used within AccessibilityProvider"
+    );}
   return context;
 };
