@@ -58,7 +58,7 @@ export default async function RootLayout({
                   <ResponsiveAppBar list={menuItems} session={session} />
                 </Box>
                 <Box component="main" sx={{ flex: 1 }}>
-                  {children}
+                    {children}
                 </Box>
                 <Footer
                   linkedinUrl={"https://www.linkedin.com/school/aceleradora-%C3%A1gil/?originalSubdomain=br"}
