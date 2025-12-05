@@ -25,6 +25,10 @@ declare module '@mui/material/styles' {
     textColor?: PaletteColor
     bgColor?: PaletteColor
     customClass?: PaletteColor
+    borderColor?: {
+      start: string;
+      end: string;
+    };
   }
   interface PaletteOptions {
     button?: PaletteColorOptions;
@@ -38,6 +42,10 @@ declare module '@mui/material/styles' {
       pink: string;
       orange: string;
     }
+    borderColor?: {
+      start: string
+      end: string
+    }
   }
 }
 
@@ -47,32 +55,32 @@ const applyFontFamily = (fontFamily?: string) => {
 };
 
 const themeBuilder = (fontFamily?: string) => createTheme({
-    palette,
-    typography: {
-      ...typography,
-      ...(fontFamily && { fontFamily }),
-    },
-    customStyles,
-    components: {
-      MuiCssBaseline: {
-        styleOverrides: {
-          html: {
-            scrollBehavior: 'smooth',
-            ...applyFontFamily(fontFamily),
-          },
-          body: applyFontFamily(fontFamily),
+  palette,
+  typography: {
+    ...typography,
+    ...(fontFamily && { fontFamily }),
+  },
+  customStyles,
+  components: {
+    MuiCssBaseline: {
+      styleOverrides: {
+        html: {
+          scrollBehavior: 'smooth',
+          ...applyFontFamily(fontFamily),
         },
+        body: applyFontFamily(fontFamily),
       },
     },
-  })
+  },
+})
 
 const defaultTheme = themeBuilder()
 
 export const ThemeConfig: React.FC<ThemeProp> = ({ children }) => {
   const { contrastEnabled, themeFontFamily } = useAccessibility();
-  
+
   const normalTheme = themeBuilder(themeFontFamily);
-  const selectedTheme = contrastEnabled 
+  const selectedTheme = contrastEnabled
     ? highContrastThemeBuilder(themeFontFamily)
     : normalTheme;
 
@@ -87,4 +95,4 @@ export const ThemeConfig: React.FC<ThemeProp> = ({ children }) => {
   )
 }
 
-export {defaultTheme as theme}
+export { defaultTheme as theme }
