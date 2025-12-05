@@ -44,7 +44,7 @@ export const technologyIcons: Record<string, IconData> = {
   EXPRESS: {
     src: "/assets/express-icon.svg",
     name: "Express",
-    alt: "Ícone do framework web Express",
+    alt: "Ícone do framework w+eb Express",
   },
   POSTGRESQL: {
     src: "/assets/postgres-icon.svg",
