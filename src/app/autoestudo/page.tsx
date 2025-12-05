@@ -3,10 +3,10 @@
 import { Container } from "@mui/material";
 import { RenderThemePage } from "@/components/PageElements/Renders/RenderThemePage";
 
-export default function Nivelamento() {
+export default function Autoestudo() {
   return (
-    <Container sx={{ mt: 4, mb: 4 }}>
-      {RenderThemePage("Autoestudo")}
-    </Container>
+    //<Container sx={{ mt: 4, mb: 4 }}>
+      RenderThemePage("Autoestudo")
+    //</Container>
   );
 }

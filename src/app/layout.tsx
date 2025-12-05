@@ -8,6 +8,7 @@ import { ThemeConfig } from "./config/themes"
 import { Footer } from "@/components/Footer/Footer"
 import { AccessibilityProvider } from "@/context/accessibility.context"
 import AccessibilityMenu from "@/components/accessibility-menu"
+import MainWrapper from "@/components/UI/mainWrapper";
 
 const menuItems = ["Nivelamento", "Autoestudo"]
 
@@ -41,9 +42,7 @@ export default async function RootLayout({
                 <Box sx={{ marginBottom: "80px" }}>
                   <ResponsiveAppBar list={menuItems} session={session} />
                 </Box>
-                <Box component="main" sx={{ flex: 1 }}>
-                    {children}
-                </Box>
+                <MainWrapper>{children}</MainWrapper>
                 <Footer
                   linkedinUrl={"https://www.linkedin.com/school/aceleradora-%C3%A1gil/?originalSubdomain=br"}
                   projectUrl={"https://www.thoughtworks.com/pt-br/about-us/diversity-and-inclusion/aceleradora"} />
