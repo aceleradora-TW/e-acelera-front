@@ -77,12 +77,9 @@ export const WebMenu: React.FC<WebMenuProps> = ({ list, session }) => {
       const newValue = event.target.checked;
       setIsChecked(newValue);
 
-      // Salva a preferência do usuário como trait no FlagSmith
-
       await flagsmith.setTrait("adminjs_preference", newValue);
     } catch (error) {
       console.error("Erro ao salvar preferência no FlagSmith:", error);
-      // Reverte o estado em caso de erro
       setIsChecked(!event.target.checked);
     }
   };
@@ -124,7 +121,12 @@ export const WebMenu: React.FC<WebMenuProps> = ({ list, session }) => {
                 alt={session.user.name || "Usuário"}
                 src={session.user.image || "/default-avatar.png"}
               />
-
+              <ArrowDropDownIcon
+                sx={{
+                  transform: anchorEl ? "rotate(180deg)" : "rotate(0deg)",
+                  transition: "0.3s",
+                }}
+              />
             </IconButton>
           </Tooltip>
           <Menu
@@ -147,7 +149,7 @@ export const WebMenu: React.FC<WebMenuProps> = ({ list, session }) => {
             </MenuItem>
             {is_test_user && (
               <MenuItem sx={{ cursor: "default" }}>
-                <FormControlLabel
+                <FormControlLabel sx={{ ml: 0 }}
                   control={
                     <Switch
                       checked={isChecked}
@@ -164,7 +166,7 @@ export const WebMenu: React.FC<WebMenuProps> = ({ list, session }) => {
                           fontSize: "0.9rem",
                         }}
                       >
-                        Para trocar a flag, volte para o{" "}
+                        Para trocar a flag, volte para {" "}
                         <Link
                           href="/nivelamento"
                           sx={{ textDecoration: "underline" }}
