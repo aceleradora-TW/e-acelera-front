@@ -9,7 +9,8 @@ export const HomeBanner = () => {
   const title = "Acelerando talentos em tecnologia";
   const subtitle =
     "Plataforma aberta e gratuita de programação com possibilidade de programa de estágio remunerado de 18 semanas.";
-
+  const ctaText = "Conheça o Projeto Aceleradora e o e Acelera";
+  const ctaTargetId = "#study-section";
   const imageUrl = "/assets/home-banner.png";
 
   const blueColor = "#002C53";

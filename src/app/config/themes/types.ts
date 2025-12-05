@@ -116,7 +116,6 @@ export interface Theme {
       pointerEvents: string;
     };
   };
-
   Footer: {
     background: string;
     color: string;

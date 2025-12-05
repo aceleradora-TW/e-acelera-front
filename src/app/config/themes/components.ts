@@ -1,3 +1,4 @@
+import { Padding } from "@mui/icons-material";
 import { themePalette } from "./palette";
 import { Theme } from "./types";
 
@@ -147,11 +148,11 @@ export const customStyles: Theme = {
   },
   cardLoginBox: {
     width: {
-      xs: "90%",
-      sm: "60%",
-      md: "45%",
-      lg: "35%",
-      xl: "30%",
+      xs: "95%",
+      sm: "85%",
+      md: "60%",
+      lg: "50%",
+      xl: "40%",
     },
     height: "30%",
     boxShadow: "0 0 0.4em rgba(44, 44, 44, 0.4)",
@@ -162,6 +163,7 @@ export const customStyles: Theme = {
     display: "flex",
     justifyContent: "center",
     marginTop: "80px",
+    maxWidth: "100%",
   },
   boxLogoType: {
     display: "flex",
@@ -363,7 +365,8 @@ export const customStyles: Theme = {
       zIndex: 1300,
       "&:hover .label": {
         opacity: 1,
-        transform: "translateX(-15%)",
+        transform: "translateX(-10%)",
+        pointerEvents: "auto",
       },
     },
     labelFab: {
@@ -373,16 +376,17 @@ export const customStyles: Theme = {
       right: 16,
       backgroundImage: `linear-gradient(270deg, ${themePalette.button}, ${themePalette.accentBlue})`,
       color: themePalette.baseBgColor,
-      padding: "6px 12px",
+      padding: "6px 36px 6px 12px",
       borderRadius: "100px 0px 0px 100px",
       height: 45,
+      opacity: 0,
       width: 210,
       whiteSpace: "nowrap",
-      opacity: 0,
+      pointerEvents: "none",
       display: "flex",
       alignItems: "center",
       justifyContent: "left",
-      transform: "translateX(0)",
+      transform: "translateX(10px)",
       transition: "all 0.3s ease",
       boxShadow: `0px 4px 12px ${themePalette.defaultTextColor
         .replace("rgb", "rgba")
@@ -420,7 +424,7 @@ export const customStyles: Theme = {
     menuPaper: {
       position: "fixed",
       bottom: 90,
-      width: 300,
+      width: 280,
       minHeight: 200,
       display: "flex",
       right: 16,
@@ -435,7 +439,7 @@ export const customStyles: Theme = {
     menuHeader: {
       backgroundImage: `linear-gradient(120deg, ${themePalette.accentBlue}, ${themePalette.button})`,
       color: themePalette.baseBgColor,
-      padding: "8px 10px",
+      padding: "12px 12px",
       display: "flex",
       justifyContent: "space-between",
       alignItems: "center",
@@ -465,12 +469,10 @@ export const customStyles: Theme = {
     buttonGrid: {
       flexDirection: "column",
       alignItems: "center",
-      justifyContent: "center",
       textAlign: "center",
+      minHeight: 90,
       width: "100%",
-      height: 90,
-      padding: 4,
-      lineHeight: 1,
+      padding: "8px 4px",
     },
 
     footerContainer: {
@@ -489,13 +491,12 @@ export const customStyles: Theme = {
       backgroundColor: themePalette.accentBlue,
       display: "flex",
       justifyContent: "center",
-      padding: "10px",
-      height: 70,
+      padding: "12px 12px",
     },
 
     textLevelContainer: {
-      display: "center",
-      justifycontent: "center",
+      display: "flex",
+      justifyContent: "center",
       gap: 0.5,
       marginTop: 1,
     },
@@ -562,54 +563,6 @@ export const customStyles: Theme = {
       backgroundSize: "cover",
     },
   },
-  testimonials: {
-    background: themePalette.button,
-    color: themePalette.baseBgColor,
-  },
-  sponsorsSection: {
-    background: themePalette.button,
-    color: themePalette.baseBgColor,
-    textAlign: "center",
-  },
-
-  accessibilityReadMask: (mouseY: number, maskHeight: number) => ({
-    background: {
-      position: "fixed",
-      top: 0,
-      left: 0,
-      width: "100vw",
-      height: "100vh",
-      background: `linear-gradient(
-                to bottom,
-                rgba(0,0,0,0.5) ${mouseY - maskHeight / 2}px,
-                transparent ${mouseY - maskHeight / 2}px,
-                transparent ${mouseY + maskHeight / 2}px,
-                rgba(0,0,0,0.5) ${mouseY + maskHeight / 2}px
-              )`,
-      pointerEvents: "none",
-      zIndex: 9999,
-    },
-    topLine: {
-      position: "fixed",
-      top: `${mouseY - maskHeight / 2}px`,
-      left: 0,
-      width: "100vw",
-      height: "3px",
-      backgroundColor: themePalette.accentBlue,
-      zIndex: 9999,
-      pointerEvents: "none",
-    },
-    bottonLine: {
-      position: "fixed",
-      top: `${mouseY + maskHeight / 2}px`,
-      left: 0,
-      width: "100vw",
-      height: "3px",
-      backgroundColor: themePalette.accentBlue,
-      zIndex: 9999,
-      pointerEvents: "none",
-    },
-  }),
   studysection: {
     container: {
       background: themePalette.baseBgColor,
@@ -659,4 +612,53 @@ export const customStyles: Theme = {
       },
     },
   },
+
+  testimonials: {
+    background: themePalette.button,
+    color: themePalette.baseBgColor,
+  },
+  sponsorsSection: {
+    background: themePalette.button,
+    color: themePalette.baseBgColor,
+    textAlign: "center",
+  },
+
+  accessibilityReadMask: (mouseY: number, maskHeight: number) => ({
+    background: {
+      position: "fixed",
+      top: 0,
+      left: 0,
+      width: "100vw",
+      height: "100vh",
+      background: `linear-gradient(
+                to bottom,
+                rgba(0,0,0,0.5) ${mouseY - maskHeight / 2}px,
+                transparent ${mouseY - maskHeight / 2}px,
+                transparent ${mouseY + maskHeight / 2}px,
+                rgba(0,0,0,0.5) ${mouseY + maskHeight / 2}px
+              )`,
+      pointerEvents: "none",
+      zIndex: 9999,
+    },
+    topLine: {
+      position: "fixed",
+      top: `${mouseY - maskHeight / 2}px`,
+      left: 0,
+      width: "100vw",
+      height: "3px",
+      backgroundColor: themePalette.accentBlue,
+      zIndex: 9999,
+      pointerEvents: "none",
+    },
+    bottonLine: {
+      position: "fixed",
+      top: `${mouseY + maskHeight / 2}px`,
+      left: 0,
+      width: "100vw",
+      height: "3px",
+      backgroundColor: themePalette.accentBlue,
+      zIndex: 9999,
+      pointerEvents: "none",
+    },
+  }),
 };

@@ -11,36 +11,36 @@ export const ImpactSection = () => {
       sx={{
         ...theme.customStyles.impactSection,
         pb: 4,
-        pt:4,
+        pt: 4,
       }}
     >
-        <Container maxWidth="md"
-            sx={{
-              px: {
-                  xs: 3,
-                  md: 0,
-              },
-            }}>
-          <Typography
-            variant="h2"
-            sx={{
-              textAlign: { xs: 'left', md: 'center' },
-              pt: { xs: 4, md: 2 },
-              mb: { xs: 1, md: 2 },
-            }}
-          >
-            Impacto que transforma
-          </Typography>
+      <Container maxWidth="md"
+        sx={{
+          px: {
+            xs: 3,
+            md: 0,
+          },
+        }}>
+        <Typography
+          variant="h2"
+          sx={{
+            textAlign: { xs: 'left', md: 'center' },
+            pt: { xs: 4, md: 2 },
+            mb: { xs: 1, md: 2 },
+          }}
+        >
+          Impacto que transforma
+        </Typography>
 
-          <Typography
-            variant="body1"
-            sx={{
-              textAlign: { xs: 'left', md: 'center' }
-            }}
-          >
-            A Aceleradora Ágil é mais que uma iniciativa, é um movimento que muda trajetórias. Ao longo dos anos, já impulsionou pessoas, ideias e projetos que seguem gerando impacto real na tecnologia e na sociedade.
-          </Typography>
-        </Container>
+        <Typography
+          variant="body1"
+          sx={{
+            textAlign: { xs: 'left', md: 'center' }
+          }}
+        >
+          A Aceleradora Ágil é mais que uma iniciativa, é um movimento que muda trajetórias. Ao longo dos anos, já impulsionou pessoas, ideias e projetos que seguem gerando impacto real na tecnologia e na sociedade.
+        </Typography>
+      </Container>
 
       <Box
         sx={{
@@ -51,7 +51,6 @@ export const ImpactSection = () => {
           padding: { xs: "24px", md: "24px 48px" },
           borderRadius: "4px",
           border: "4px solid white",
-
         }}
       >
 
@@ -82,7 +81,7 @@ export const ImpactSection = () => {
                 lineHeight: 1.2,
                 mb: { md: "10px" },
               }}>
-              +XX participantes formados
+              +215 participantes formados
             </Typography>
 
             <Typography
@@ -106,7 +105,7 @@ export const ImpactSection = () => {
                 pr: { md: "10px" },
               }}
             >
-              +10 anos de atuação
+              +14 anos de atuação
             </Typography>
 
             <Typography
@@ -118,7 +117,7 @@ export const ImpactSection = () => {
                 },
               }}
             >
-              Uma jornada contínua de inclusão, formação e transformação social.
+              Uma jornada contínua de inclusão, já guiamos 28 turmas para formação e transformação social.
             </Typography>
           </Grid>
         </Grid>

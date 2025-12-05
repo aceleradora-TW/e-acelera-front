@@ -64,7 +64,7 @@ export const SponsorsSection = () => {
                             }}
                         >
                             <Box sx={{ textAlign: "center", py: 1 }}>
-                                <Typography variant="h4">Patrocinadores</Typography>
+                                <Typography variant="h4">Nossas Patrocinadoras</Typography>
                             </Box>
                         </Box>
 
@@ -85,39 +85,23 @@ export const SponsorsSection = () => {
                                     p: 1,
                                     gap: { xs: 1, md: 2 },
                                     flexWrap: { xs: "wrap", md: "nowrap" },
+                                    marginTop: "20px",
                                 }}
                             >
-                                <Box sx={{ textAlign: "center" }}
-                                >
-                                    <Image width={150} height={50} src="/assets/twlogopng.webp" alt="logo TW" />
-                                    <Typography sx={{
-                                        fontSize: { xs: theme.typography.body2.fontSize, md: theme.typography.body1.fontSize },
-
-                                    }}>ThoughtWorks</Typography>
+                                <Box sx={{ textAlign: "center", filter: "brightness(0) invert(1)" }}>
+                                    <Image width={150} height={37} src="/assets/logoTW.webp" alt="logo TW" />
                                 </Box>
 
-                                <Box sx={{ textAlign: "center" }}>
-                                    <Image width={58} height={55} src="/assets/logoGlobo.png" alt="logo Globo" />
-                                    <Typography sx={{
-                                        fontSize: { xs: theme.typography.body2.fontSize, md: theme.typography.body1.fontSize },
-
-                                    }}>Globo</Typography>
+                                <Box sx={{ textAlign: "center", filter: "brightness(0) invert(1)" }}>
+                                    <Image width={120} height={38} src="/assets/logoGlobo.webp" alt="logo Globo" />
                                 </Box>
 
-                                <Box sx={{ textAlign: "center" }}>
-                                    <Image width={56} height={58} src="/assets/logoPUC.svg" alt="logo PUC" />
-                                    <Typography sx={{
-                                        fontSize: { xs: theme.typography.body2.fontSize, md: theme.typography.body1.fontSize },
-
-                                    }}>PUCRS</Typography>
+                                <Box sx={{ textAlign: "center", filter: "brightness(0) invert(1)" }}>
+                                    <Image width={80} height={28} src="/assets/logoPUC.webp" alt="logo PUC" />
                                 </Box>
 
-                                <Box sx={{ textAlign: "center" }}>
-                                    <Image width={130} height={46} src="/assets/logotecnopuc.png" alt="logo TecnoPUC" />
-                                    <Typography sx={{
-                                        fontSize: { xs: theme.typography.body2.fontSize, md: theme.typography.body1.fontSize },
-
-                                    }}>TecnoPUC</Typography>
+                                <Box sx={{ textAlign: "center", filter: "brightness(0) invert(1)" }}>
+                                    <Image width={135} height={26} src="/assets/logoTecnoPUC.webp" alt="logo TecnoPUC" />
                                 </Box>
                             </Box>
                         </Box>
@@ -135,7 +119,7 @@ export const SponsorsSection = () => {
                             }}
                         >
                             <Box sx={{ textAlign: "center", py: 1 }}>
-                                <Typography variant="h4">Apoiadores</Typography>
+                                <Typography variant="h4">Nossas Apoiadoras</Typography>
                             </Box>
                         </Box>
 
@@ -151,16 +135,24 @@ export const SponsorsSection = () => {
                                     display: "flex",
                                     justifyContent: "space-around",
                                     alignItems: "center",
-                                    p: 2,
                                     gap: { xs: 1, md: 2 },
                                     flexWrap: { xs: "wrap", md: "nowrap" },
+                                    marginTop: "20px",
                                 }}
                             >
-                                <Box>
-                                    <Image width={76} height={80} src="/assets/logoDevMidia.svg" alt="logo DevMidia" />
+                                <Box
+                                    sx={{
+                                        filter: "brightness(0) invert(1)"
+                                    }}
+                                >
+                                    <Image width={61} height={61} src="/assets/logoDevMidia.svg" alt="logo DevMidia" />
                                 </Box>
-                                <Box>
-                                    <Image width={78} height={80} src="/assets/logoFeedz.svg" alt="logo Feedz" />
+                                <Box
+                                    sx={{
+                                        filter: "brightness(0) invert(1)"
+                                    }}
+                                >
+                                    <Image width={63} height={63} src="/assets/logoFeedz.svg" alt="logo Feedz" />
                                 </Box>
                             </Box>
                         </Box>

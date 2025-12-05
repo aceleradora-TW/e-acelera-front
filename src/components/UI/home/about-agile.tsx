@@ -1,10 +1,12 @@
 "use client";
-import { Box, Button, Link, Grid, Typography, useTheme } from "@mui/material";
+import { Box, Button, Grid, Link, Typography, useTheme } from "@mui/material";
 import { SectionContent } from "../section-content";
-import { color } from "@mui/system";
+import { useAccessibility } from "@/context/accessibility.context";
 
 export default function AboutAgil() {
   const theme = useTheme();
+  const { contrastEnabled } = useAccessibility();
+  const bg = contrastEnabled ? "#222" : "#0b497a";
 
   const listTitlesFormacao = [
     "Tecnologias modernas",
@@ -128,7 +130,11 @@ export default function AboutAgil() {
                   return (
                     <Box
                       key={title}
-                      sx={theme.customStyles.sessionFormacao(isLarge)}
+                      sx={{
+                        ...theme.customStyles.sessionFormacao(isLarge),
+                        backgroundColor: bg,
+                      }}
+
                     >
                       <Typography
                         variant="body1"

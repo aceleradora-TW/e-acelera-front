@@ -5,8 +5,7 @@ import { palette } from "./palette"
 import { customStyles } from "./components"
 import { typography } from "./typography"
 import { useAccessibility } from "@/context/accessibility.context"
-import { highContrastTheme } from "./highContrast"
-import "@mui/material/Button";
+import { highContrastThemeBuilder } from "./highContrast"
 
 type ThemeProp = {
   children: JSX.Element
@@ -50,27 +49,44 @@ declare module '@mui/material/styles' {
   }
 }
 
-const theme = createTheme({
+const applyFontFamily = (fontFamily?: string) => {
+  if (!fontFamily) return {};
+  return { fontFamily: `${fontFamily} !important` };
+};
+
+const themeBuilder = (fontFamily?: string) => createTheme({
   palette,
-  typography,
+  typography: {
+    ...typography,
+    ...(fontFamily && { fontFamily }),
+  },
   customStyles,
   components: {
     MuiCssBaseline: {
       styleOverrides: {
         html: {
-          scrollBehavior: 'smooth'
-        }
-      }
-    }
-  }
+          scrollBehavior: 'smooth',
+          ...applyFontFamily(fontFamily),
+        },
+        body: applyFontFamily(fontFamily),
+      },
+    },
+  },
 })
 
+const defaultTheme = themeBuilder()
+
 export const ThemeConfig: React.FC<ThemeProp> = ({ children }) => {
-  const { contrastEnabled } = useAccessibility();
+  const { contrastEnabled, themeFontFamily } = useAccessibility();
+
+  const normalTheme = themeBuilder(themeFontFamily);
+  const selectedTheme = contrastEnabled
+    ? highContrastThemeBuilder(themeFontFamily)
+    : normalTheme;
 
   return (
     <ThemeProvider
-      theme={contrastEnabled ? highContrastTheme : theme}
+      theme={selectedTheme}
       key={contrastEnabled ? 'dark' : 'normal'}
     >
       <CssBaseline />
@@ -79,4 +95,4 @@ export const ThemeConfig: React.FC<ThemeProp> = ({ children }) => {
   )
 }
 
-export { theme }
+export { defaultTheme as theme }
