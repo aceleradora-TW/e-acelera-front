@@ -5,9 +5,7 @@ import { RenderThemePage } from "@/components/PageElements/Renders/RenderThemePa
 
 export default function Nivelamento() {
   return (
-    <Container sx={{ mt: 4, mb: 4 }}>
-      <RenderThemePage category="Nivelamento" />;
-    </Container>
-  );
+      <RenderThemePage category="Nivelamento" />
+  )
 }
 

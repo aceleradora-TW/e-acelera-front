@@ -1,14 +1,7 @@
-<<<<<<< HEAD
 "use client";
 import { theme } from "@/app/config/themes";
 import { LoginButton } from "@/components/LoginButton";
 import { AccessibilityProvider } from "@/context/accessibility.context";
-=======
-'use client';
-import { theme } from "@/app/config/themes"
-import { LoginButton } from "@/components/LoginButton"
-import { AccessibilityProvider } from "@/context/accessibility.context"
->>>>>>> a35780b66f212ed50558496afc735abe6b92eb71
 import {
   Avatar,
   Box,
@@ -119,10 +112,6 @@ export const WebMenu: React.FC<WebMenuProps> = ({ list, session }) => {
             alignItems: "center",
           }}
         >
-<<<<<<< HEAD
-=======
-
->>>>>>> a35780b66f212ed50558496afc735abe6b92eb71
           <Tooltip title="Perfil">
             <IconButton
               onClick={handleOpenMenu}
@@ -133,14 +122,7 @@ export const WebMenu: React.FC<WebMenuProps> = ({ list, session }) => {
                 src={session.user.image || "/default-avatar.png"}
               />
               <ArrowDropDownIcon
-<<<<<<< HEAD
-                sx={{
-                  transform: anchorEl ? "rotate(180deg)" : "rotate(0deg)",
-                  transition: "0.3s",
-                }}
-=======
                 sx={{ transform: anchorEl ? "rotate(180deg)" : "rotate(0deg)", transition: "0.3s", }}
->>>>>>> a35780b66f212ed50558496afc735abe6b92eb71
               />
             </IconButton>
           </Tooltip>
@@ -240,9 +222,6 @@ export const WebMenu: React.FC<WebMenuProps> = ({ list, session }) => {
   return (
     <AccessibilityProvider>
       <>
-<<<<<<< HEAD
-        <Box sx={{ mr: 2, display: { xs: "none", md: "flex" }, marginLeft: 0 }}>
-=======
         <Box
           sx={{
             mr: 2,
@@ -250,7 +229,6 @@ export const WebMenu: React.FC<WebMenuProps> = ({ list, session }) => {
             marginLeft: 0,
           }}
         >
->>>>>>> a35780b66f212ed50558496afc735abe6b92eb71
           <Image
             width={43}
             height={48}
@@ -258,10 +236,6 @@ export const WebMenu: React.FC<WebMenuProps> = ({ list, session }) => {
             alt="logo e-acelera"
           />
         </Box>
-<<<<<<< HEAD
-
-=======
->>>>>>> a35780b66f212ed50558496afc735abe6b92eb71
         <Typography
           noWrap
           component="a"
@@ -273,15 +247,6 @@ export const WebMenu: React.FC<WebMenuProps> = ({ list, session }) => {
         >
           E-Acelera
         </Typography>
-<<<<<<< HEAD
-
-        <Box
-          sx={{
-            flexGrow: 1,
-            display: { xs: "none", md: "flex" },
-            alignItems: "center",
-            justifyContent: "center",
-=======
         <Box
           sx={{
             flexGrow: 1,
@@ -291,7 +256,6 @@ export const WebMenu: React.FC<WebMenuProps> = ({ list, session }) => {
               alignItems: "center",
               justifyContent: "center",
             },
->>>>>>> a35780b66f212ed50558496afc735abe6b92eb71
           }}
         >
           {list.map((item) => (
@@ -299,13 +263,9 @@ export const WebMenu: React.FC<WebMenuProps> = ({ list, session }) => {
               key={item}
               href={item ? `/${item.toLowerCase()}` : `/`}
               underline="none"
-<<<<<<< HEAD
-              sx={{ ...linkStyle(item) }}
-=======
               sx={{
                 ...linkStyle(item),
               }}
->>>>>>> a35780b66f212ed50558496afc735abe6b92eb71
             >
               {item}
             </Link>
