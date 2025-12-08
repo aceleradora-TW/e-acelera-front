@@ -17,9 +17,9 @@ export const CodeBlock = ({ node, inline, className, children, ...props }: any) 
   });
 
   codeString = String(codeString).replace(/\n$/, "");
-
   const [copySuccess, setCopySuccess] = useState(false);
   const { contrastEnabled } = useAccessibility();
+  const bg = contrastEnabled ? "#2b2b2b" : "#f5f5f5";
   const handleCopy = (code: string) => {
     navigator.clipboard.writeText(code).then(() => {
       setCopySuccess(true);
@@ -78,7 +78,7 @@ export const CodeBlock = ({ node, inline, className, children, ...props }: any) 
       component="span"
       sx={{
         fontFamily: "monospace",
-        backgroundColor: contrastEnabled ? "#222" : "#E0E0E0",
+        backgroundColor: bg,
         padding: "2px 4px",
         borderRadius: "4px",
         wordBreak: "break-word",

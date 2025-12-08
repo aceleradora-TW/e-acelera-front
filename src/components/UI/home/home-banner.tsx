@@ -15,8 +15,8 @@ export const HomeBanner = () => {
   const ctaTargetId = "#study-section";
   const imageUrl = "/assets/home-banner.png";
 
-  const corAzul = "#002C53";
-  const corAzulTransparente = "rgba(0, 44, 83, 0)";
+  const blueColor = "#002C53";
+  const blueColorTransparent = "rgba(0, 44, 83, 0)";
 
   const bannerImageStyle = {
     ...bannerStyles.imageBox,
@@ -27,8 +27,10 @@ export const HomeBanner = () => {
     minHeight: { xs: "300px", md: "auto" },
     order: { xs: -1, md: 0 },
     backgroundImage: {
-      md: `linear-gradient(to right, ${corAzul} 0%, ${corAzul} 1%, ${corAzulTransparente} 20%), url(${imageUrl})`,
-      xs: `linear-gradient(to top, ${corAzul} 0%, ${corAzul} 45%, ${corAzulTransparente} 65%), url(${imageUrl})`,
+      md: `linear-gradient(to right, ${blueColor} 0%, ${blueColor} 1%, ${blueColorTransparent
+        } 20%), url(${imageUrl})`,
+      xs: `linear-gradient(to top, ${blueColor} 0%, ${blueColor} 45%, ${blueColorTransparent
+        } 65%), url(${imageUrl})`,
     },
   };
 
@@ -39,7 +41,7 @@ export const HomeBanner = () => {
         ...bannerStyles.container,
         minHeight: "500px",
         width: "100%",
-        marginTop: { xs: "-20px", md: "-15px" },
+        marginTop: { xs: "-20px", md: "-30px" },
         [theme.breakpoints.down("md")]: {
           flexDirection: "column",
         },
@@ -49,14 +51,11 @@ export const HomeBanner = () => {
         sx={{
           ...bannerStyles.contentBox,
           width: { xs: "100%", md: "50%" },
-          backgroundColor: corAzul,
+          backgroundColor: blueColor,
           marginTop: { xs: "-100px", md: 0 },
           padding: {
             xs: "10px 5% 40px 5%",
-            md: "80px 0 80px 10%",
-          },
-          [theme.breakpoints.down("md")]: {
-            width: "100%",
+            md: "40px 0 40px 10%",
           },
         }}
       >
@@ -79,6 +78,7 @@ export const HomeBanner = () => {
           >
             {title}
           </Typography>
+
           <Typography
             variant="body1"
             sx={{
@@ -89,26 +89,48 @@ export const HomeBanner = () => {
           >
             {subtitle}
           </Typography>
-          <Link
+          <Typography
             variant="body1"
-            href={ctaTargetId}
-            underline="none"
-            aria-label="Ir para a seção 'Plataforma de Estudos do e-Acelera'"
             sx={{
-              fontSize: { xs: "1rem", md: "1.2rem" },
-              color: "inherit",
               display: "flex",
-              marginLeft: "-6px",
               alignItems: "center",
-              "&:hover": {
-                textDecoration: "underline",
-              },
+              marginLeft: "-6px",
+              fontSize: { xs: "1rem", md: "1.2rem" },
             }}
           >
-            <SouthIcon aria-hidden="true" /> {ctaText}
-          </Link>
+            <SouthIcon aria-hidden="true" />
+
+            <span style={{ marginLeft: "4px" }}>Conheça o </span>
+
+            <Link
+              href="#AboutAgil"
+              underline="always"
+              sx={{
+                color: "#fff",
+                textDecorationColor: "#fff",
+                ml: "4px",
+              }}
+            >
+              Projeto Aceleradora
+            </Link>
+
+            <span style={{ marginLeft: "4px" }}> e o </span>
+
+            <Link
+              href="#study-section"
+              underline="always"
+              sx={{
+                color: "#fff",
+                textDecorationColor: "#fff",
+                ml: "4px",
+              }}
+            >
+              e-Acelera
+            </Link>
+          </Typography>
         </Box>
       </Box>
+
       <Box sx={bannerImageStyle} />
     </Box>
   );
