@@ -1,6 +1,13 @@
 "use client"
+
+import { Container } from "@mui/material";
 import { RenderThemePage } from "@/components/PageElements/Renders/RenderThemePage";
 
 export default function Nivelamento() {
-  return <RenderThemePage category="Nivelamento" />;
+  return (
+    <Container sx={{ mt: 4, mb: 4 }}>
+      <RenderThemePage category="Nivelamento" />
+    </Container>
+  );
 }
+

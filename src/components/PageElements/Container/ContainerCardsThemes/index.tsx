@@ -39,7 +39,7 @@ export const ContainerCardTheme: React.FC<ContainerCardThemeProps> = ({
             data.data as unknown as Array<{
               id: string;
               title: string;
-              description: string;
+              shortDescription: string;
               cardDescription: string;
               image: string;
               category: string;
@@ -52,7 +52,7 @@ export const ContainerCardTheme: React.FC<ContainerCardThemeProps> = ({
                 <BaseCard
                   id={element.id}
                   title={element.title}
-                  description={element?.description}
+                  description={element?.shortDescription}
                   image={element.image}
                   textImage={`${element?.alt}`}
                   cardType="theme"

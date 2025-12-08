@@ -1,7 +1,7 @@
 'use client';
 import { theme } from "@/app/config/themes"
 import { LoginButton } from "@/components/LoginButton"
-import { AccessibilityProvider } from "@/context/accessibility.context" 
+import { AccessibilityProvider } from "@/context/accessibility.context"
 import {
   Avatar,
   Box,
@@ -83,7 +83,7 @@ export const WebMenu: React.FC<WebMenuProps> = ({ list, session }) => {
             alignItems: "center",
           }}
         >
-        
+
           <Tooltip title="Perfil">
             <IconButton onClick={handleOpenMenu} sx={{ p: 0, color: theme.palette.bgColor?.light }}>
               <Avatar
@@ -162,46 +162,58 @@ export const WebMenu: React.FC<WebMenuProps> = ({ list, session }) => {
 
   return (
     <AccessibilityProvider>
-    <>
-      <Box sx={{ mr: 2, display: { xs: "none", md: "flex" }, marginLeft: 0 }}>
-        <Image
-          width={43}
-          height={48}
-          src="/assets/logo.svg"
-          alt="logo e-acelera"
-        />
-      </Box>
-
-      <Typography
-        noWrap
-        component="a"
-        href="/"
-        sx={{ display: { xs: "none", md: "flex" }, ...theme.customStyles.logoType }}
-      >
-        E-Acelera
-      </Typography>
-
-      <Box
-        sx={{
-          flexGrow: 1,
-          display: { xs: "none", md: "flex" },
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
-        {list.map((item) => (
-          <Link
-            key={item}
-            href={item ? `/${item.toLowerCase()}` : `/`}
-            underline="none"
-            sx={{ ...linkStyle(item) }}
-          >
-            {item}
-          </Link>
-        ))}
-      </Box>
-      <Box sx={{ flexGrow: 0 }}>{renderComponent()}</Box>
-    </>
+      <>
+        <Box
+          sx={{
+            mr: 2,
+            display: { xs: "none", md: "flex" },
+            marginLeft: 0,
+          }}
+        >
+          <Image
+            width={43}
+            height={48}
+            src="/assets/logo.svg"
+            alt="logo e-acelera"
+          />
+        </Box>
+        <Typography
+          noWrap
+          component="a"
+          href="/"
+          sx={{
+            display: { xs: "none", md: "flex" },
+            ...theme.customStyles.logoType,
+          }}
+        >
+          E-Acelera
+        </Typography>
+        <Box
+          sx={{
+            flexGrow: 1,
+            display: {
+              xs: "none",
+              md: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            },
+          }}
+        >
+          {list.map((item) => (
+            <Link
+              key={item}
+              href={item ? `/${item.toLowerCase()}` : `/`}
+              underline="none"
+              sx={{
+                ...linkStyle(item),
+              }}
+            >
+              {item}
+            </Link>
+          ))}
+        </Box>
+        <Box sx={{ flexGrow: 0 }}>{renderComponent()}</Box>
+      </>
     </AccessibilityProvider>
   )
 }

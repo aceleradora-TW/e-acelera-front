@@ -69,3 +69,4 @@ export enum IdType {
   THEME_ID = "themeId",
 };
 
+export interface AdminJsApiResponse {}
