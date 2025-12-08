@@ -272,6 +272,91 @@ export const customStyles: Theme = {
     height: "30%",
     boxShadow: "0 0 0.6em rgba(44 44 44 / 75%)",
   },
+  aboutSession: {
+    width: "100%",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: {
+      sm: "start",
+      lg: "center",
+    },
+    gap: 4,
+    height: "100%",
+    minHeight: 542,
+    flexWrap: { xs: "wrap", lg: "nowrap" },
+    padding: 0,
+  },
+
+  buttonAboutAgil: {
+    borderRadius: 1,
+    boxShadow: 4,
+    padding: "6px 16px",
+    "&:hover": {
+      backgroundColor: themePalette.primaryTextColor,
+      color: themePalette.baseBgColor,
+      boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.5)",
+    },
+  },
+
+  sessionListContainer: {
+    display: "flex",
+    justifyContent: "space-around",
+    alignItems: "center",
+    height: 384,
+    flexDirection: "row",
+    flexWrap: "wrap",
+    gap: 1,
+    width: "0 auto",
+  },
+
+  cardAboutAgilContainer: {
+    width: "100%",
+    display: "flex",
+    justifyContent: "space-between",
+    flexWrap: "wrap",
+    gap: 2,
+  },
+
+  cardAboutAgil: {
+    minHeight: 108,
+    width: "100%",
+    border: 4,
+    paddingY: 2,
+    paddingX: 2,
+    flex: 1,
+    minWidth: {
+      xs: "100%",
+      md: 250,
+    },
+    borderImage: `linear-gradient(${themePalette.borderPrimaryColor}, ${themePalette.borderSecondaryColor}) 1`,
+  },
+
+  sessionFormacaoContainer: {
+    display: "flex",
+    width: { xs: 342, sm: 490, md: 800 },
+    minHeight: 476,
+    maxWidth: "100%",
+    margin: "0 auto",
+    height: "100%",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+
+  sessionFormacao: (isLarge?: boolean) => ({
+    width: isLarge
+      ? { xs: "100%", sm: "90%", md: "97%" }
+      : { xs: "48%", sm: "40%", md: "46%" },
+    flexWrap: "wrap",
+    minHeight: 67,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    bgcolor: "#0b497a",
+    borderRadius: 1,
+    color: "white",
+    overflowWrap: "break-word",
+  }),
   accessibilityMenu: {
     containerFab: {
       position: "fixed",
@@ -280,8 +365,8 @@ export const customStyles: Theme = {
       zIndex: 1300,
       "&:hover .label": {
         opacity: 1,
-        transform: 'translateX(-10%)',
-        pointerEvents: 'auto',
+        transform: "translateX(-10%)",
+        pointerEvents: "auto",
       },
     },
     labelFab: {
@@ -291,17 +376,21 @@ export const customStyles: Theme = {
       right: 16,
       backgroundImage: `linear-gradient(270deg, ${themePalette.button}, ${themePalette.accentBlue})`,
       color: themePalette.baseBgColor,
-      padding: '6px 36px 6px 12px',
+      padding: "6px 36px 6px 12px",
       borderRadius: "100px 0px 0px 100px",
       height: 45,
       opacity: 0,
-      pointerEvents: 'none',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'left',
-      transform: 'translateX(10px)',
-      transition: 'all 0.3s ease',
-      boxShadow: `0px 4px 12px ${themePalette.defaultTextColor.replace('rgb', 'rgba').replace(')', ', 0.3)')}`,
+      width: 210,
+      whiteSpace: "nowrap",
+      pointerEvents: "none",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "left",
+      transform: "translateX(10px)",
+      transition: "all 0.3s ease",
+      boxShadow: `0px 4px 12px ${themePalette.defaultTextColor
+        .replace("rgb", "rgba")
+        .replace(")", ", 0.3)")}`,
     },
     fabButton: {
       border: "4px transparent solid",
@@ -350,10 +439,10 @@ export const customStyles: Theme = {
     menuHeader: {
       backgroundImage: `linear-gradient(120deg, ${themePalette.accentBlue}, ${themePalette.button})`,
       color: themePalette.baseBgColor,
-      padding: '12px 12px',
-      display: 'flex',
-      justifyContent: 'space-between',
-      alignItems: 'center',
+      padding: "12px 12px",
+      display: "flex",
+      justifyContent: "space-between",
+      alignItems: "center",
       borderRadius: 0,
     },
 
@@ -378,13 +467,13 @@ export const customStyles: Theme = {
     },
 
     buttonGrid: {
-    flexDirection: 'column',
-    alignItems: 'center',
-    textAlign: 'center',
-    minHeight: 90,
-    width: '100%',
-    padding: "8px 4px",
-  },
+      flexDirection: "column",
+      alignItems: "center",
+      textAlign: "center",
+      minHeight: 90,
+      width: "100%",
+      padding: "8px 4px",
+    },
 
     footerContainer: {
       marginTop: "auto",
@@ -400,9 +489,9 @@ export const customStyles: Theme = {
 
     footerBox: {
       backgroundColor: themePalette.accentBlue,
-      display: 'flex',
-      justifyContent: 'center',
-      padding: '12px 12px',
+      display: "flex",
+      justifyContent: "center",
+      padding: "12px 12px",
     },
 
     textLevelContainer: {
@@ -449,6 +538,7 @@ export const customStyles: Theme = {
       },
     },
   },
+
   impactSection: {
     background: themePalette.button,
     color: themePalette.baseBgColor,
@@ -473,7 +563,7 @@ export const customStyles: Theme = {
       backgroundSize: "cover",
     },
   },
-  studysection: { 
+  studysection: {
     container: {
       background: themePalette.baseBgColor,
       color: themePalette.primaryTextColor,
@@ -485,8 +575,8 @@ export const customStyles: Theme = {
       position: "relative",
       borderRadius: "4px",
       p: 2,
-      my:2,
-      zIndex:150,
+      my: 2,
+      zIndex: 150,
     },
     icons: {
       display: "flex",
@@ -498,30 +588,31 @@ export const customStyles: Theme = {
       background: "transparent",
     },
     card: {
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      justifyContent: 'center',
-      textAlign: 'center',
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+      justifyContent: "center",
+      textAlign: "center",
       p: 2,
       mb: 1,
       borderRadius: 2,
-      height: '100px',
-      width: '100px',
-      boxShadow: 'none',
+      height: "100px",
+      width: "100px",
+      boxShadow: "none",
       background: "transparent",
     },
     button: {
-       borderRadius: 1,
-       boxShadow: 4,
-       padding: "6px 16px",
-          '&:hover': {
-            backgroundColor: themePalette.primaryTextColor,
-            color: themePalette.baseBgColor,
-            boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.5)",
-          },
+      borderRadius: 1,
+      boxShadow: 4,
+      padding: "6px 16px",
+      "&:hover": {
+        backgroundColor: themePalette.primaryTextColor,
+        color: themePalette.baseBgColor,
+        boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.5)",
+      },
     },
   },
+
   testimonials: {
     background: themePalette.button,
     color: themePalette.baseBgColor,

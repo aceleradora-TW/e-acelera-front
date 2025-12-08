@@ -9,6 +9,7 @@ import {
 } from "@mui/material";
 import { Slider } from "./UI/slider";
 import { TESTIMONIALS } from "@/utils/constants";
+import { SectionContent } from "./UI/section-content";
 
 type Testimonial = {
   text: string;
@@ -78,12 +79,12 @@ export const TestimonialsSection = () => {
         pb: 4,
       }}
     >
-      <Container maxWidth="lg">
+      <SectionContent>
         <Typography
           variant="h2"
           sx={{
             textAlign: "left",
-            pt: 4,
+            pt: { xs: 4, md: 2 },
             mb: { xs: 1, md: 2 },
           }}
         >
@@ -102,15 +103,17 @@ export const TestimonialsSection = () => {
           aprendeu, criou, se conectou e transformou sua trajetória com o Projeto
           Aceleradora Ágil.
         </Typography>
+      </SectionContent>
 
-          <Slider>
+      <SectionContent variant="content-only">
+        <Slider>
           {TESTIMONIALS.map((item, index) => (
             <Box key={index}>
               <TestimonialCard item={item} />
             </Box>
           ))}
-          </Slider>
-      </Container>
+        </Slider>
+      </SectionContent>
     </Box>
   );
 };

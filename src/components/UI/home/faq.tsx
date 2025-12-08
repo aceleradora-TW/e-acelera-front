@@ -1,15 +1,20 @@
 import { Box, Grid, Typography, useTheme } from "@mui/material";
-import { Accordion } from "./accordion";
+import { Accordion } from "../../accordion";
 import { FAQ_QUESTIONS } from "@/utils/constants";
+import { SectionContent } from "../section-content";
 
 export function Faq() {
   const theme = useTheme();
   return (
-    <Box
-      width={"100%"}
-      sx={{ display: "flex", justifyContent: "center", paddingY: 4 , paddingX: 2}}
+    <SectionContent
+      variant="faq"
+      sx={{ 
+        display: "flex", 
+        justifyContent: "center",
+        width: "100%",
+      }}
     >
-      <Grid sx={{ maxWidth: "1292px" }} container spacing={{ xs: 2, md: 4 }}>
+        <Grid container spacing={{ xs: 2, md: 4 }}>
         <Grid
           item
           xs={12}
@@ -42,6 +47,6 @@ export function Faq() {
           ))}
         </Grid>
       </Grid>
-    </Box>
+    </SectionContent>
   );
 }
