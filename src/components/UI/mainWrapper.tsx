@@ -10,11 +10,11 @@ export default function MainWrapper({ children }: { children: React.ReactNode })
       component="main"
       sx={{
         flex: 1,
-        mx: pathname === "/home" ? 0 : "auto", 
+        mx: pathname === "/" ? 0 : "auto", 
         my: 0,
-        px: pathname === "/home" ? 0 : 4,
+        px: pathname === "/" ? 0 : 4,
         width: "100%",
-        maxWidth: pathname === "/home" ? undefined : "1536px", 
+        maxWidth: pathname === "/" ? undefined : "1536px", 
       }}
     >
       {children}
