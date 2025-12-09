@@ -17,18 +17,17 @@ export const Footer: React.FC<FooterProps> = ({ linkedinUrl, projectUrl }) => {
 
   const footerBg = contrastEnabled
     ? "#222"
-    : muiTheme.customStyles?.Footer?.background ??
-      muiTheme.palette.primary.main;
+    : (muiTheme.customStyles?.Footer?.background ??
+      muiTheme.palette.primary.main);
 
   const footerText = contrastEnabled
     ? "#E0E0E0"
-    : muiTheme.customStyles?.Footer?.color ??
-      muiTheme.palette.primary.contrastText;
+    : (muiTheme.customStyles?.Footer?.color ??
+      muiTheme.palette.primary.contrastText);
 
   const linkColor = contrastEnabled
     ? "#E0E0E0"
-    : muiTheme.palette.bgColor?.main ??
-      muiTheme.palette.primary.contrastText;
+    : (muiTheme.palette.bgColor?.main ?? muiTheme.palette.primary.contrastText);
 
   return (
     <Box
@@ -114,54 +113,67 @@ export const Footer: React.FC<FooterProps> = ({ linkedinUrl, projectUrl }) => {
               sx={{
                 display: "grid",
                 gridTemplateColumns: {
-                  xs: "repeat(2, 1fr)",
-                  sm: "repeat(4, 1fr)",
+                  xs: "repeat(1, 1fr)",
+                  sm: "repeat(2, 1fr)",
+                  md: "repeat(4, 1fr)"
                 },
                 gap: 2,
                 alignItems: "center",
-                justifyItems: "center",
+                justifyItems: "left",
                 filter: "brightness(0) invert(1)",
               }}
             >
-              <Box sx={{ maxWidth: 120, width: "100%" }}>
-                <Image
-                  src="/assets/logoGlobo.webp"
-                  alt="logo Globo"
-                  width={70}
-                  height={40}
-                  style={{ width: "100%", height: "auto" }}
-                />
-              </Box>
+              <Box
+                component="img"
+                src="/assets/logoGlobo.webp"
+                alt="logo Globo"
+                sx={{
+                  width: {
+                    xs: 80,
+                    sm: 80,
+                  },
+                  height: "auto",
+                }}
+              />
 
-              <Box sx={{ maxWidth: 120, width: "100%" }}>
-                <Image
-                  src="/assets/logoTecnoPUC.webp"
-                  alt="logo TecnoPUC"
-                  width={70}
-                  height={80}
-                  style={{ width: "100%", height: "auto" }}
-                />
-              </Box>
+              <Box
+                component="img"
+                src="/assets/logoTecnoPUC.webp"
+                alt="logo TecnoPUC"
+                sx={{
+                  width: {
+                    xs: 100,
+                    sm: 100,
+                  },
+                  height: "auto",
+                }}
+              />
 
-              <Box sx={{ maxWidth: 120, width: "100%" }}>
-                <Image
-                  src="/assets/logoPUC.webp"
-                  alt="logo PUC"
-                  width={50}
-                  height={10}
-                  style={{ width: "100%", height: "auto" }}
-                />
-              </Box>
+              <Box
+                component="img"
+                src="/assets/logoPUC.webp"
+                alt="logo PUC"
+                sx={{
+                  width: {
+                    xs: 70,
+                    sm: 60,
+                  },
+                  height: "auto",
+                }}
+              />
 
-              <Box sx={{ maxWidth: 120, width: "100%" }}>
-                <Image
-                  src="/assets/logoTW.webp"
-                  alt="logo TW"
-                  width={100}
-                  height={60}
-                  style={{ width: "100%", height: "auto" }}
-                />
-              </Box>
+              <Box
+                component="img"
+                src="/assets/logoTW.webp"
+                alt="logo TW"
+                sx={{
+                  width: {
+                    xs: 120,
+                    sm: 100,
+                  },
+                  height: "auto",
+                }}
+              />
             </Box>
           </Grid>
         </Grid>
