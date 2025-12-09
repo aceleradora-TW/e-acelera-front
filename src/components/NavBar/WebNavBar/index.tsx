@@ -1,7 +1,7 @@
-'use client';
-import { theme } from "@/app/config/themes"
-import { LoginButton } from "@/components/LoginButton"
-import { AccessibilityProvider } from "@/context/accessibility.context"
+"use client";
+import { theme } from "@/app/config/themes";
+import { LoginButton } from "@/components/LoginButton";
+import { AccessibilityProvider } from "@/context/accessibility.context";
 import {
   Avatar,
   Box,
@@ -11,29 +11,34 @@ import {
   Link,
   Menu,
   MenuItem,
+  Switch,
   Tooltip,
   Typography,
-  Switch,
-} from "@mui/material"
-import Image from "next/image"
-import { usePathname, useRouter } from "next/navigation"
-import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown"
-import { signOut } from "next-auth/react"
-import LogoutIcon from "@mui/icons-material/Logout"
-import { Session } from "next-auth"
-import { useState, useEffect } from "react";
-import { useFlagsmith, useFlags } from "flagsmith/react"
+} from "@mui/material";
+import Image from "next/image";
+import { usePathname, useRouter } from "next/navigation";
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
+import { signOut } from "next-auth/react";
+import LogoutIcon from "@mui/icons-material/Logout";
+import { Session } from "next-auth";
+import { useEffect, useState } from "react";
+import { useFlags, useFlagsmith } from "flagsmith/react";
 
 interface WebMenuProps {
-  list: string[]
-  session: Session | null
+  list: string[];
+  session: Session | null;
 }
 
 export const WebMenu: React.FC<WebMenuProps> = ({ list, session }) => {
   const flagsmith = useFlagsmith();
-  const { flag_adminjs, is_test_user, adminjs_preference } = useFlags(['flag_adminjs'], ['is_test_user', 'adminjs_preference']);
-  const router = useRouter()
-  const pathname = usePathname()
+  const path = usePathname();
+  const isInternalPage = path.slice(1).split("/").length > 1;
+  const { flag_adminjs, is_test_user, adminjs_preference } = useFlags(
+    ["flag_adminjs"],
+    ["is_test_user", "adminjs_preference"]
+  );
+  const router = useRouter();
+  const pathname = usePathname();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [isChecked, setIsChecked] = useState<boolean>(false);
 
@@ -43,15 +48,22 @@ export const WebMenu: React.FC<WebMenuProps> = ({ list, session }) => {
     } else {
       setIsChecked(flag_adminjs?.enabled ?? false);
     }
-  }, [session, flag_adminjs, is_test_user, adminjs_preference, flagsmith.getState()]);
+  }, [
+    session,
+    flag_adminjs,
+    is_test_user,
+    adminjs_preference,
+    flagsmith.getState(),
+  ]);
 
-  const handleApiToggle = async (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleApiToggle = async (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
     if (!is_test_user) return;
-
     try {
       const newValue = event.target.checked;
       setIsChecked(newValue);
-      await flagsmith.setTrait('adminjs_preference', newValue);
+      await flagsmith.setTrait("adminjs_preference", newValue);
     } catch (error) {
       console.error("Erro ao salvar preferência no FlagSmith:", error);
       setIsChecked(!event.target.checked);
@@ -59,19 +71,22 @@ export const WebMenu: React.FC<WebMenuProps> = ({ list, session }) => {
   };
 
   const handleOpenMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorEl(event.currentTarget)
-  }
+    setAnchorEl(event.currentTarget);
+  };
 
   const handleCloseMenu = () => {
-    setAnchorEl(null)
-  }
+    setAnchorEl(null);
+  };
 
   const handlePageRedirectLogin = () => {
-    const currentUrl = encodeURIComponent(window.location.href)
-    router.push(`/login?callbackUrl=${currentUrl}`)
-  }
+    const currentUrl = encodeURIComponent(window.location.href);
+    router.push(`/login?callbackUrl=${currentUrl}`);
+  };
 
-  const linkStyle = (item: string) => pathname.startsWith(`/${item.toLowerCase()}`) ? theme.customStyles.linkActive : theme.customStyles.link
+  const linkStyle = (item: string) =>
+    pathname.startsWith(`/${item.toLowerCase()}`)
+      ? theme.customStyles.linkActive
+      : theme.customStyles.link;
 
   const renderComponent = () => {
     if (session?.user) {
@@ -83,15 +98,20 @@ export const WebMenu: React.FC<WebMenuProps> = ({ list, session }) => {
             alignItems: "center",
           }}
         >
-
           <Tooltip title="Perfil">
-            <IconButton onClick={handleOpenMenu} sx={{ p: 0, color: theme.palette.bgColor?.light }}>
+            <IconButton
+              onClick={handleOpenMenu}
+              sx={{ p: 0, color: theme.palette.bgColor?.light }}
+            >
               <Avatar
                 alt={session.user.name || "Usuário"}
                 src={session.user.image || "/default-avatar.png"}
               />
               <ArrowDropDownIcon
-                sx={{ transform: anchorEl ? "rotate(180deg)" : "rotate(0deg)", transition: "0.3s", }}
+                sx={{
+                  transform: anchorEl ? "rotate(180deg)" : "rotate(0deg)",
+                  transition: "0.3s",
+                }}
               />
             </IconButton>
           </Tooltip>
@@ -116,18 +136,41 @@ export const WebMenu: React.FC<WebMenuProps> = ({ list, session }) => {
             {is_test_user && (
               <MenuItem sx={{ cursor: "default" }}>
                 <FormControlLabel
+                  sx={{ ml: 0 }}
                   control={
                     <Switch
                       checked={isChecked}
                       onChange={handleApiToggle}
-                      disabled={false}
+                      disabled={pathname !== "/nivelamento"}
                       size="small"
                     />
                   }
                   label={
-                    <Typography sx={{ color: theme.palette.textColor?.light, fontSize: '0.9rem' }}>
-                      Usar AdminJS
-                    </Typography>
+                    pathname !== "/nivelamento" ? (
+                      <Typography
+                        sx={{
+                          color: theme.palette.textColor?.light,
+                          fontSize: "0.9rem",
+                        }}
+                      >
+                        Para trocar a flag, volte para{" "}
+                        <Link
+                          href="/nivelamento"
+                          sx={{ color: theme.palette.textColor?.main }}
+                        >
+                          nivelamento
+                        </Link>
+                      </Typography>
+                    ) : (
+                      <Typography
+                        sx={{
+                          color: theme.palette.textColor?.light,
+                          fontSize: "0.9rem",
+                        }}
+                      >
+                        Habilitar AdminJS
+                      </Typography>
+                    )
                   }
                   labelPlacement="start"
                 />
@@ -137,13 +180,19 @@ export const WebMenu: React.FC<WebMenuProps> = ({ list, session }) => {
             <Divider />
             <MenuItem onClick={() => signOut()}>
               <LogoutIcon
-                sx={{ color: theme.palette.bgColor?.light, fontSize: 15, marginRight: "7px" }}
+                sx={{
+                  color: theme.palette.bgColor?.light,
+                  fontSize: 15,
+                  marginRight: "7px",
+                }}
               />
-              <Typography sx={{ color: theme.palette.textColor?.light }}>Sair</Typography>
+              <Typography sx={{ color: theme.palette.textColor?.light }}>
+                Sair
+              </Typography>
             </MenuItem>
           </Menu>
         </Box>
-      )
+      );
     }
 
     return (
@@ -157,8 +206,8 @@ export const WebMenu: React.FC<WebMenuProps> = ({ list, session }) => {
       >
         <LoginButton click={() => handlePageRedirectLogin()} />
       </Box>
-    )
-  }
+    );
+  };
 
   return (
     <AccessibilityProvider>
@@ -215,6 +264,5 @@ export const WebMenu: React.FC<WebMenuProps> = ({ list, session }) => {
         <Box sx={{ flexGrow: 0 }}>{renderComponent()}</Box>
       </>
     </AccessibilityProvider>
-  )
-}
-
+  );
+};

@@ -1,34 +1,33 @@
-import type { Metadata } from "next"
-import "./globals.css"
-import ResponsiveAppBar from "@/components/NavBar"
-import { Box } from "@mui/material"
-import { getServerSession } from "next-auth"
-import ClientSessionProvider from "@/components/ClientSessionProvider"
-import { ThemeConfig } from "./config/themes"
-import { Footer } from "@/components/Footer/Footer"
+import type { Metadata } from "next";
+import "./globals.css";
+import ResponsiveAppBar from "@/components/NavBar";
+import { Box } from "@mui/material";
+import { getServerSession } from "next-auth";
+import ClientSessionProvider from "@/components/ClientSessionProvider";
+import { ThemeConfig } from "./config/themes";
+import { Footer } from "@/components/Footer/Footer";
 import flagsmith from "flagsmith/isomorphic";
-import { FeatureFlagContext } from "@/context/feature-flag.context"
+import { FeatureFlagContext } from "@/context/feature-flag.context";
 import React from "react";
-import { AccessibilityProvider } from "@/context/accessibility.context"
-import AccessibilityMenu from "@/components/accessibility-menu"
+import { AccessibilityProvider } from "@/context/accessibility.context";
+import AccessibilityMenu from "@/components/accessibility-menu";
 
+const FLAGSMITH_ENVIRONMENT_ID =
+  process.env.NEXT_PUBLIC_FLAGSMITH_ENVIRONMENT_ID;
 
-const FLAGSMITH_ENVIRONMENT_ID = process.env.NEXT_PUBLIC_FLAGSMITH_ENVIRONMENT_ID
-
-const menuItems = ["Nivelamento", "Autoestudo"]
+const menuItems = ["Nivelamento", "Autoestudo"];
 
 export const metadata: Metadata = {
   title: "E-acelera - Plataforma de Estudo para Desenvolvedores",
   description:
     "O E-acelera é uma plataforma inovadora que faz parte do programa Aceleradora Ágil. A plataforma oferece nivelamentos e desafios para desenvolvedores aprimorarem suas habilidades em programação.",
-}
+};
 
 export default async function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode
+  children: React.ReactNode;
 }>) {
-
   const session = await getServerSession();
 
   // Inicializa o FlagSmith no servidor com a identidade do usuário
@@ -36,7 +35,7 @@ export default async function RootLayout({
     environmentID: FLAGSMITH_ENVIRONMENT_ID,
     identity: session?.user?.email || undefined,
     cacheFlags: false,
-  })
+  });
 
   const serverState = flagsmith.getState();
 
@@ -44,33 +43,37 @@ export default async function RootLayout({
     <html lang="pt-br">
       <body>
         <FeatureFlagContext serverState={serverState}>
-        <AccessibilityProvider>
-          <ClientSessionProvider>
-            <ThemeConfig>
-              <Box
-                sx={{
-                  minHeight: "100vh",
-                  display: "flex",
-                  flexDirection: "column",
-                }}
-              >
-                <Box sx={{ marginBottom: "100px" }}>
-                  <ResponsiveAppBar list={menuItems} session={session} />
-                </Box>
-                <Box component="main" sx={{ flex: 1 }}>
+          <AccessibilityProvider>
+            <ClientSessionProvider>
+              <ThemeConfig>
+                <Box
+                  sx={{
+                    minHeight: "100vh",
+                    display: "flex",
+                    flexDirection: "column",
+                  }}
+                >
+                  <AccessibilityMenu />
+                  <Box sx={{ marginBottom: "100px" }}>
+                    <ResponsiveAppBar list={menuItems} session={session} />
+                  </Box>
+                  <Box component="main" sx={{ flex: 1 }}>
                     {children}
+                  </Box>
+                  <Footer
+                    linkedinUrl={
+                      "https://www.linkedin.com/school/aceleradora-%C3%A1gil/?originalSubdomain=br"
+                    }
+                    projectUrl={
+                      "https://www.thoughtworks.com/pt-br/about-us/diversity-and-inclusion/aceleradora"
+                    }
+                  />
                 </Box>
-                <Footer
-                  linkedinUrl={"https://www.linkedin.com/school/aceleradora-%C3%A1gil/?originalSubdomain=br"}
-                  projectUrl={"https://www.thoughtworks.com/pt-br/about-us/diversity-and-inclusion/aceleradora"}
-                />
-              </Box>
-            </ThemeConfig>
-          </ClientSessionProvider>
-        </AccessibilityProvider>
+              </ThemeConfig>
+            </ClientSessionProvider>
+          </AccessibilityProvider>
         </FeatureFlagContext>
       </body>
     </html>
   );
 }
-

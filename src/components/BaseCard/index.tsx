@@ -1,4 +1,9 @@
-import { CardActionArea, CardActions } from "@mui/material";
+"use client";
+
+import {
+  CardActionArea,
+  CardActions,
+} from "@mui/material";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
@@ -46,11 +51,12 @@ export const BaseCard: React.FC<CardProps> = ({
   children,
 }) => {
   const router = useRouter();
+
   const handleClick = (route?: string) => {
     if(!route) {
       return;
     }
-    router.push(`/${route}`);
+    router.push(route);
   };
 
   const { progress: fetchedProgress } = useFetchProgress(

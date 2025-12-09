@@ -10,7 +10,7 @@ export async function middleware(request: NextRequest) {
     const callbackUrl =
     new URLSearchParams(request.nextUrl.search).get("callbackUrl") || "/"
 
-    const parsedUrl = new URL(callbackUrl, request.url) 
+    const parsedUrl = new URL(callbackUrl, request.url)
 
   if (request.nextUrl.pathname.startsWith("/login") && sessionToken) {
     try {
@@ -27,8 +27,8 @@ export async function middleware(request: NextRequest) {
           { error: "Unauthorized: Invalid or expired token" },
           { status: 401 }
         )
-      } 
-      
+      }
+
       if (!response.ok) {
         return NextResponse.json({ error: "Failed to register user" }, { status: response.status })
       }

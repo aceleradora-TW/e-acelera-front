@@ -1,14 +1,10 @@
-import { ThemeCategory } from "@/utils/constants";
-import { headers } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 
-export async function GET(req: NextRequest) {
-  const header = headers();
-
-  const category =
-    header.get("category") === "Nivelamento"
-      ? ThemeCategory.LEVELING
-      : ThemeCategory.SELF_STUDY;
+export async function GET(
+  req: NextRequest,
+  { params }: { params: { id: string } }
+) {
+  const { id } = params;
 
   const accessToken =
     req.cookies.get("next-auth.session-token")?.value ||
@@ -17,25 +13,34 @@ export async function GET(req: NextRequest) {
   try {
     const baseUrl = process.env.BACKEND_BASE_URL;
 
-    const response = await fetch(`${baseUrl}/themes?category=${category}`, {
+    const response = await fetch(`${baseUrl}/themes/${id}`, {
       method: "GET",
       headers: {
+        Authorization: `Bearer ${accessToken}`,
         "Content-Type": "application/json",
       },
     });
 
+    if (response.status === 401) {
+      return NextResponse.json(
+        { error: "Unauthorized: Invalid or expired token" },
+        { status: 401 }
+      );
+    }
+
     if (!response.ok) {
       return NextResponse.json(
         {
-          error: `Error fetching themes: ${response.status} - ${response.statusText}`,
+          error: `Error fetching theme by ID: ${response.status} - ${response.statusText}`,
         },
         { status: response.status }
       );
     }
+
     const data = await response.json();
     return NextResponse.json({ data }, { status: 200 });
   } catch (error) {
-    console.error("Error fetching status:", error);
+    console.error("Error fetching theme by ID:", error);
     return NextResponse.json(
       { error: "Internal server error" },
       { status: 500 }

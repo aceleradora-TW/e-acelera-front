@@ -4,6 +4,7 @@ import { BaseCard } from "@/components/BaseCard";
 import { ApiResponse, DataItem, ThemeField } from "@/types/type";
 import { usePathname } from "next/navigation";
 import { useFlags } from "flagsmith/react";
+
 interface ContainerCardThemeProps {
   data: ApiResponse;
   category: string;
@@ -11,11 +12,10 @@ interface ContainerCardThemeProps {
 
 export const ContainerCardTheme: React.FC<ContainerCardThemeProps> = ({
   data,
-  category,
 }) => {
   const pathname = usePathname();
-  const currentPath = pathname.slice(1);
   const { adminjs_preference } = useFlags([""], ["adminjs_preference"]);
+
   return (
     <Grid container spacing={2} alignItems="stretch">
       {!adminjs_preference
@@ -27,7 +27,7 @@ export const ContainerCardTheme: React.FC<ContainerCardThemeProps> = ({
                   id={element.id}
                   title={field?.title}
                   description={field?.cardDescription}
-                  route={`${currentPath}/${element.id}-${field?.title}`}
+                  route={`${pathname}/${element.id}`}
                   image={field?.image ? field.image[0].url : ""}
                   textImage={`${field?.alt}`}
                   cardType="theme"
@@ -39,6 +39,7 @@ export const ContainerCardTheme: React.FC<ContainerCardThemeProps> = ({
             data.data as unknown as Array<{
               id: string;
               title: string;
+              description: string;
               shortDescription: string;
               cardDescription: string;
               image: string;
@@ -46,8 +47,7 @@ export const ContainerCardTheme: React.FC<ContainerCardThemeProps> = ({
               sequence: number;
               alt: string;
             }>
-          ).map((element, index) => {
-            return (
+          ).map((element, index) => (
               <Grid item xl={3} lg={4} md={4} sm={6} xs={12} key={index}>
                 <BaseCard
                   id={element.id}
@@ -56,10 +56,10 @@ export const ContainerCardTheme: React.FC<ContainerCardThemeProps> = ({
                   image={element.image}
                   textImage={`${element?.alt}`}
                   cardType="theme"
+                  route={`${pathname}/${element.id}`}
                 />
               </Grid>
-            );
-          })}
+            ))}
     </Grid>
   );
 };

@@ -15,7 +15,10 @@ export const FeatureFlagContext = ({
   const flagsmithInstance = useRef(createFlagsmithInstance());
 
   return (
-    <FlagsmithProvider flagsmith={flagsmithInstance.current} serverState={serverState}>
+    <FlagsmithProvider
+      flagsmith={flagsmithInstance.current}
+      serverState={serverState}
+    >
       <>{children}</>
     </FlagsmithProvider>
   );
