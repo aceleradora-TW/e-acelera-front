@@ -156,7 +156,7 @@ export const WebMenu: React.FC<WebMenuProps> = ({ list, session }) => {
                         Para trocar a flag, volte para{" "}
                         <Link
                           href="/nivelamento"
-                          sx={{ textDecoration: "underline" }}
+                          sx={{ color: theme.palette.textColor?.main }}
                         >
                           nivelamento
                         </Link>
