@@ -4,6 +4,6 @@ import { RenderThemePage } from "@/components/PageElements/Renders/RenderThemePa
 
 export default function Autoestudo() {
   return (
-      RenderThemePage("Autoestudo")
+      <RenderThemePage category="Autoestudo" />
   );
 }

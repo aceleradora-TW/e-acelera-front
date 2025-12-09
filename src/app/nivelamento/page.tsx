@@ -4,7 +4,7 @@ import { RenderThemePage } from "@/components/PageElements/Renders/RenderThemePa
 
 export default function Nivelamento() {
   return (
-      RenderThemePage("Nivelamento")
+      <RenderThemePage category="Nivelamento" />
   );
 }
 
