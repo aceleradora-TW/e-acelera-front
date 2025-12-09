@@ -7,26 +7,38 @@ import { NoData } from "@/components/NoData";
 import { GlobalContextProvider } from "@/context/global.context";
 
 export const RenderDetailingExercisePage = (id: string) => {
-  const { data: renderDataExercise, isLoading: isExerciseLoading, error: exerciseError } = useFetchData('/api/stackbyApi/Exercises');
-  const { data: renderDataTopic, isLoading: isTopicLoading, error: topicError } = useFetchData('/api/stackbyApi/Topics');
+  const {
+    data: renderDataExercise,
+    isLoading: isExerciseLoading,
+    error: exerciseError,
+  } = useFetchData("/api/stackbyApi/Exercises");
+  const {
+    data: renderDataTopic,
+    isLoading: isTopicLoading,
+    error: topicError,
+  } = useFetchData("/api/stackbyApi/Topics");
   const isLoading = isExerciseLoading || isTopicLoading;
   const error = exerciseError || topicError;
 
   if (isLoading) {
-    return <Loading />
+    return <Loading />;
   }
   if (error) {
-    return <BadRequest />
+    return <BadRequest />;
   }
   if (!renderDataTopic || !renderDataExercise) {
-    return <NoData />
+    return <NoData />;
   }
 
   return (
     <GlobalContextProvider>
-    <LayoutPage>
-      <DetailingExerciseContent dataExercise={renderDataExercise} dataTopic={renderDataTopic} id={id} />
-    </LayoutPage>
+      <LayoutPage>
+        <DetailingExerciseContent
+          dataExercise={renderDataExercise}
+          dataTopic={renderDataTopic}
+          id={id}
+        />
+      </LayoutPage>
     </GlobalContextProvider>
   );
-}
+};

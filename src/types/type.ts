@@ -1,3 +1,5 @@
+
+
 export interface ApiResponse {
     data: DataItem[];
 }
@@ -63,6 +65,57 @@ export interface Image {
     type: string;
     url: string;
 }
+
+//  Geovana
+
+export interface Theme {
+  id: number;
+  title: string;
+  card_description?: string;
+  description?: string;
+  topics?: string;
+  image?: string;
+  topics_info?: string;
+  category?: string;
+  sequence: number;
+  topics_description?: string;
+  id_themes?: number;
+  alt?: string;
+}
+
+export interface Topic {
+  id: string;
+  title: string;
+  shortDescription: string;
+  description: string;
+  references: string;
+  themeId: string;
+  theme: Theme;        
+  exercises: Exercise[]; 
+  video: Video;       
+};
+
+export interface Exercise {
+  id: string;
+  title: string;
+  description: string;
+  shortDescription: string;
+  sequence?: number;
+}
+
+export interface Video {
+  id: string;
+  title: string;
+  description: string;
+  references: string;
+  link: string;
+  topicId: string;
+}
+
+export interface PostgresApiResponse {
+  data: Theme[];
+} 
+
 
 export enum IdType {
   TOPIC_ID = "topicId",

@@ -1,5 +1,5 @@
 'use client';
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useFlags } from 'flagsmith/react';
 import { useSession } from 'next-auth/react';
 import { ApiResponse } from "@/types/type";
@@ -27,13 +27,11 @@ export function useThemeApi (category: string) {
       headers: {},
     };
     if (flag_adminjs.enabled || (is_test_user && adminjs_preference)) {
-      console.log("Flagsmith: 'flag_adminjs' HABILITADA. Chamando a rota de API /api/themes.");
       url = `/api/themes`;
       fetchOptions.headers = {
-        'category': category,
+        category,
       };
     } else {
-      console.log("Flagsmith: 'flag_adminjs' DESABILITADA. Chamando a rota de API /api/stackbyApi/Themes.");
       url = `/api/stackbyApi/Themes`;
       fetchOptions.headers = {
         'operator': 'equal',
