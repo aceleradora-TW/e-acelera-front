@@ -53,6 +53,7 @@ export default async function RootLayout({
                     flexDirection: "column",
                   }}
                 >
+                  <AccessibilityMenu />
                   <Box sx={{ marginBottom: "100px" }}>
                     <ResponsiveAppBar list={menuItems} session={session} />
                   </Box>
