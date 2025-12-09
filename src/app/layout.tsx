@@ -7,10 +7,11 @@ import ClientSessionProvider from "@/components/ClientSessionProvider"
 import { ThemeConfig } from "./config/themes"
 import { Footer } from "@/components/Footer/Footer"
 import flagsmith from "flagsmith/isomorphic";
-import { FeatureFlagProvider } from "../components/FeatureFlagProvider/featureFlagProvider";
+import { FeatureFlagContext } from "@/context/feature-flag.context"
 import React from "react";
 import { AccessibilityProvider } from "@/context/accessibility.context"
 import AccessibilityMenu from "@/components/accessibility-menu"
+
 
 const FLAGSMITH_ENVIRONMENT_ID = process.env.NEXT_PUBLIC_FLAGSMITH_ENVIRONMENT_ID
 
@@ -42,7 +43,7 @@ export default async function RootLayout({
   return (
     <html lang="pt-br">
       <body>
-        <FeatureFlagProvider serverState={serverState}>
+        <FeatureFlagContext serverState={serverState}>
         <AccessibilityProvider>
           <ClientSessionProvider>
             <ThemeConfig>
@@ -53,8 +54,7 @@ export default async function RootLayout({
                   flexDirection: "column",
                 }}
               >
-              <AccessibilityMenu />
-                <Box sx={{ marginBottom: "80px" }}>
+                <Box sx={{ marginBottom: "100px" }}>
                   <ResponsiveAppBar list={menuItems} session={session} />
                 </Box>
                 <Box component="main" sx={{ flex: 1 }}>
@@ -68,7 +68,7 @@ export default async function RootLayout({
             </ThemeConfig>
           </ClientSessionProvider>
         </AccessibilityProvider>
-        </FeatureFlagProvider>
+        </FeatureFlagContext>
       </body>
     </html>
   );

@@ -3,10 +3,12 @@
 export interface ApiResponse {
     data: DataItem[];
 }
+
 export interface DataItem {
     id: string;
     field: CommonField | ThemeField | TopicField | VideoField | ExercisesField;
 }
+
 export interface CommonField {
     rowId: string;
     sequence: number;
@@ -120,3 +122,4 @@ export enum IdType {
   THEME_ID = "themeId",
 };
 
+export interface AdminJsApiResponse {}

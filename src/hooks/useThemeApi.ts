@@ -1,13 +1,14 @@
 'use client';
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useFlags } from 'flagsmith/react';
 import { useSession } from 'next-auth/react';
+import { ApiResponse } from "@/types/type";
 
-export const useThemeApi = (category: string) => {
+
+export function useThemeApi (category: string) {
   const { flag_adminjs, is_test_user, adminjs_preference } = useFlags(['flag_adminjs'], ['is_test_user', 'adminjs_preference']);
   const {data: sessionData} = useSession();
-
-  const [data, setData] = useState<any>(null);
+  const [data, setData] = useState<ApiResponse | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 
@@ -28,7 +29,7 @@ export const useThemeApi = (category: string) => {
     if (flag_adminjs.enabled || (is_test_user && adminjs_preference)) {
       url = `/api/themes`;
       fetchOptions.headers = {
-        'category': category,
+        category,
       };
     } else {
       url = `/api/stackbyApi/Themes`;
@@ -48,12 +49,14 @@ export const useThemeApi = (category: string) => {
         }
         return await res.json();
       })
-      .then(setData)
+      .then((apiData) => setData(apiData))
       .catch(err => {
         console.error("Erro no hook useThemeApi:", err);
         setError(true);
       })
-      .finally(() => setLoading(false));
+      .finally(() => {
+        setLoading(false)
+      });
 
   }, [sessionData?.user.email, category, flag_adminjs.enabled, flag_adminjs, is_test_user, adminjs_preference]);
 
