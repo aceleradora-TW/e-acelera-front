@@ -12,7 +12,7 @@ export const RenderThemePage = ({ category }: { category: string }) => {
 
   if (loading) return <Loading />;
   if (error) return <BadRequest />;
-  if (!themes || !themes.data || themes.data.length === 0) return <NoData />;
+  if (!themes || themes.data.length === 0) return <NoData />;
 
   return (
     <GlobalContextProvider>

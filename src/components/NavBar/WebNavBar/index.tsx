@@ -11,9 +11,9 @@ import {
   Link,
   Menu,
   MenuItem,
+  Switch,
   Tooltip,
   Typography,
-  Switch,
 } from "@mui/material";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
@@ -21,12 +21,9 @@ import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import { signOut } from "next-auth/react";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { Session } from "next-auth";
-import { useState, useEffect } from "react";
-import { useFlagsmith, useFlags } from "flagsmith/react";
+import { useEffect, useState } from "react";
+import { useFlags, useFlagsmith } from "flagsmith/react";
 
-// TODO: Login estava funcionando e com o feature flag parou de funcionar
-// TODO: Atualização do trait no FlagSmith não reflete atualização local
-// TODO: Não estamos conseguindo limitar os usuários que visualizam a flag através de configuração de grupo no FlagSmith
 interface WebMenuProps {
   list: string[];
   session: Session | null;
@@ -43,31 +40,21 @@ export const WebMenu: React.FC<WebMenuProps> = ({ list, session }) => {
   const router = useRouter();
   const pathname = usePathname();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const [isChecked, setIsChecked] = useState<boolean>(
-    Boolean(adminjs_preference) && Boolean(is_test_user)
-  );
-  // let count = 0;
-  // Verifica se o usuário é de teste através do trait
-  // const isTestUser = flagsmith.getTrait('is_test_user') === true;
+  const [isChecked, setIsChecked] = useState<boolean>(false);
 
-  // Carrega o valor inicial da preferência do usuário ou da feature flag
-  // useEffect(() => {
-  //   if (session?.user?.email && is_test_user && adminjs_preference) {
-  //     // Para usuários de teste, verifica primeiro a preferência salva, depois a feature flag
-  //     // const adminJsPreference = flagsmith.getTrait('adminjs_preference');
-  //     setIsChecked(true);
-  //   } else {
-  //     // Se não há preferência salva, usa o valor da feature flag
-  //     setIsChecked(flag_adminjs?.enabled ?? false);
-  //   }
-  //   // console.log(count);
-  // }, [
-  //   session,
-  //   flag_adminjs,
-  //   is_test_user,
-  //   adminjs_preference,
-  //   flagsmith.getState(),
-  // ]);
+  useEffect(() => {
+    if (session?.user?.email && is_test_user && adminjs_preference) {
+      setIsChecked(true);
+    } else {
+      setIsChecked(flag_adminjs?.enabled ?? false);
+    }
+  }, [
+    session,
+    flag_adminjs,
+    is_test_user,
+    adminjs_preference,
+    flagsmith.getState(),
+  ]);
 
   const handleApiToggle = async (
     event: React.ChangeEvent<HTMLInputElement>
@@ -76,7 +63,6 @@ export const WebMenu: React.FC<WebMenuProps> = ({ list, session }) => {
     try {
       const newValue = event.target.checked;
       setIsChecked(newValue);
-
       await flagsmith.setTrait("adminjs_preference", newValue);
     } catch (error) {
       console.error("Erro ao salvar preferência no FlagSmith:", error);
@@ -122,7 +108,10 @@ export const WebMenu: React.FC<WebMenuProps> = ({ list, session }) => {
                 src={session.user.image || "/default-avatar.png"}
               />
               <ArrowDropDownIcon
-                sx={{ transform: anchorEl ? "rotate(180deg)" : "rotate(0deg)", transition: "0.3s", }}
+                sx={{
+                  transform: anchorEl ? "rotate(180deg)" : "rotate(0deg)",
+                  transition: "0.3s",
+                }}
               />
             </IconButton>
           </Tooltip>
@@ -146,7 +135,8 @@ export const WebMenu: React.FC<WebMenuProps> = ({ list, session }) => {
             </MenuItem>
             {is_test_user && (
               <MenuItem sx={{ cursor: "default" }}>
-                <FormControlLabel sx={{ ml: 0 }}
+                <FormControlLabel
+                  sx={{ ml: 0 }}
                   control={
                     <Switch
                       checked={isChecked}
@@ -163,7 +153,7 @@ export const WebMenu: React.FC<WebMenuProps> = ({ list, session }) => {
                           fontSize: "0.9rem",
                         }}
                       >
-                        Para trocar a flag, volte para {" "}
+                        Para trocar a flag, volte para{" "}
                         <Link
                           href="/nivelamento"
                           sx={{ textDecoration: "underline" }}

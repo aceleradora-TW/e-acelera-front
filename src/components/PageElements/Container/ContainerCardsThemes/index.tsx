@@ -12,7 +12,6 @@ interface ContainerCardThemeProps {
 
 export const ContainerCardTheme: React.FC<ContainerCardThemeProps> = ({
   data,
-
 }) => {
   const pathname = usePathname();
   const { adminjs_preference } = useFlags([""], ["adminjs_preference"]);
@@ -48,8 +47,7 @@ export const ContainerCardTheme: React.FC<ContainerCardThemeProps> = ({
               sequence: number;
               alt: string;
             }>
-          ).map((element, index) => {
-            return (
+          ).map((element, index) => (
               <Grid item xl={3} lg={4} md={4} sm={6} xs={12} key={index}>
                 <BaseCard
                   id={element.id}
@@ -61,8 +59,7 @@ export const ContainerCardTheme: React.FC<ContainerCardThemeProps> = ({
                   route={`${pathname}/${element.id}`}
                 />
               </Grid>
-            );
-          })}
+            ))}
     </Grid>
   );
 };
