@@ -134,10 +134,75 @@ export interface Theme {
   testimonials: ExtendedCSSProperties;
   sponsorsSection: ExtendedCSSProperties;
   studysection: {
-    container:ExtendedCSSProperties;
+    container: ExtendedCSSProperties;
     box: ExtendedCSSProperties;
     icons: ExtendedCSSProperties;
     card: ExtendedCSSProperties;
     button: ExtendedCSSProperties;
+  };
+  aboutSession: {
+    width: string;
+    display: string;
+    alignItems: string;
+    justifyContent: {
+      sm: string;
+      lg: string;
+    };
+    gap: number;
+    height: string;
+    minHeight: number;
+    flexWrap: {
+      xs: string;
+      lg: string;
+    };
+    padding: number;
+  };
+  sessionFormacao: (isLarge?: boolean) => {
+    width: { xs: string; md: string };
+    flexWrap: string;
+    minHeight: number;
+    display: string;
+    justifyContent: string;
+    alignItems: string;
+    bgcolor: string;
+    borderRadius: number;
+    color: string;
+    overflowWrap: string;
+  };
+
+  cardAboutAgil: {
+    minWidth: { xs: string; md: number };
+    minHeight: number;
+    border: number;
+    paddingY: number;
+    paddingX: number;
+    borderImage: string;
+    flex: number;
+    width: string;
+  };
+
+  buttonAboutAgil: ExtendedCSSProperties;
+  sessionListContainer: {
+    width: string;
+    display: string;
+    justifyContent: string;
+    alignItems: string;
+    height: number;
+    flexDirection: string;
+    flexWrap: string;
+    gap: number;
+  };
+  cardAboutAgilContainer: ExtendedCSSProperties;
+
+  sessionFormacaoContainer: {
+    width: { xs: number; sm: number; md: number };
+    maxWidth: string;
+    margin: string;
+    minHeight: number;
+    height: string;
+    display: string;
+    flexDirection: string;
+    justifyContent: string;
+    alignItems: string;
   };
 }

@@ -1,3 +1,4 @@
+//Mexer quando for id cod comentado no final da pag
 import useFetchData from "@/components/fetchData";
 import { Loading } from "@/components/Loading";
 import { LayoutPage } from "../../LayoutPage";
@@ -27,5 +28,4 @@ export const RenderDetailingThemePage = (id: string)=> {
       <DetailingThemeContent data={renderData} />
     </LayoutPage>
   );
-
 }

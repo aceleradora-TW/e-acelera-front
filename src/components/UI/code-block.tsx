@@ -2,8 +2,9 @@ import { ARRAY_SPECIAL_CHARS } from "@/utils/constants";
 import { Alert, Box, Snackbar, Typography } from "@mui/material";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import { useState } from "react";
+import { useAccessibility } from "@/context/accessibility.context";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-
+import { a11yDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 export const CodeBlock = ({ node, inline, className, children, ...props }: any) => {
   const match = /language-(\w+)/.exec(className || "");
@@ -16,8 +17,9 @@ export const CodeBlock = ({ node, inline, className, children, ...props }: any) 
   });
 
   codeString = String(codeString).replace(/\n$/, "");
-
   const [copySuccess, setCopySuccess] = useState(false);
+  const { contrastEnabled } = useAccessibility();
+  const bg = contrastEnabled ? "#2b2b2b" : "#f5f5f5";
   const handleCopy = (code: string) => {
     navigator.clipboard.writeText(code).then(() => {
       setCopySuccess(true);
@@ -35,7 +37,7 @@ export const CodeBlock = ({ node, inline, className, children, ...props }: any) 
       onClick={() => handleCopy(codeString)}
     >
       <SyntaxHighlighter
-        style="dark"
+        style={a11yDark}
         language={match[1]}
         PreTag="div"
         {...props}
@@ -76,7 +78,7 @@ export const CodeBlock = ({ node, inline, className, children, ...props }: any) 
       component="span"
       sx={{
         fontFamily: "monospace",
-        backgroundColor: "#f5f5f5",
+        backgroundColor: bg,
         padding: "2px 4px",
         borderRadius: "4px",
         wordBreak: "break-word",
