@@ -11,9 +11,9 @@ import {
   Link,
   Menu,
   MenuItem,
+  Switch,
   Tooltip,
   Typography,
-  Switch,
 } from "@mui/material"
 import Image from "next/image"
 import { usePathname, useRouter } from "next/navigation"
@@ -21,8 +21,8 @@ import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown"
 import { signOut } from "next-auth/react"
 import LogoutIcon from "@mui/icons-material/Logout"
 import { Session } from "next-auth"
-import { useState, useEffect } from "react";
-import { useFlagsmith, useFlags } from "flagsmith/react"
+import { useEffect, useState } from "react";
+import { useFlags, useFlagsmith } from "flagsmith/react"
 
 interface WebMenuProps {
   list: string[]
