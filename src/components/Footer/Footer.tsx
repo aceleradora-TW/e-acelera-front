@@ -39,12 +39,14 @@ export const Footer: React.FC<FooterProps> = ({ linkedinUrl, projectUrl }) => {
       }}
     >
       <Container maxWidth="xl" sx={{ pt: 4, pb: 1 }}>
-        <Grid container spacing={{ xs: 4, md: 4 }}>
+        <Grid container spacing={{ xs: 4, md: 4 }}
+          sx={{ justifyContent: "space-between", margin: "0 auto" }}
+        >
           <Grid item xs={12} md={4.5}>
             <Typography
               variant="subtitle1"
               fontWeight="bold"
-              sx={{ color: footerText }}
+              sx={{ color: footerText, padding: "0" }}
             >
               Sobre o e-Acelera
             </Typography>
@@ -99,7 +101,7 @@ export const Footer: React.FC<FooterProps> = ({ linkedinUrl, projectUrl }) => {
             </Link>
           </Grid>
 
-          <Grid item xs={12} md={3.5}>
+          <Grid item xs={12} md={4}>
             <Typography
               variant="subtitle1"
               fontWeight="bold"
@@ -111,16 +113,12 @@ export const Footer: React.FC<FooterProps> = ({ linkedinUrl, projectUrl }) => {
             <Box
               mt={2}
               sx={{
-                display: "grid",
-                gridTemplateColumns: {
-                  xs: "repeat(1, 1fr)",
-                  sm: "repeat(2, 1fr)",
-                  md: "repeat(4, 1fr)"
-                },
-                gap: 2,
-                alignItems: "center",
-                justifyItems: "left",
-                filter: "brightness(0) invert(1)",
+                  display: "flex",
+                  flexWrap: "wrap",
+                  gap: 2,
+                  alignItems: "center",
+                  justifyContent: { xs: "flex-start", md: "space-between" },
+                  filter: "brightness(0) invert(1)",
               }}
             >
               <Box
