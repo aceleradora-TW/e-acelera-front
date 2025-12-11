@@ -32,7 +32,6 @@ export default async function RootLayout({
 
   const session = await getServerSession();
 
-  // Inicializa o FlagSmith no servidor com a identidade do usuário
   await flagsmith.init({
     environmentID: FLAGSMITH_ENVIRONMENT_ID,
     identity: session?.user?.email || undefined,
@@ -47,6 +46,7 @@ export default async function RootLayout({
         <FeatureFlagContext serverState={serverState}>
         <AccessibilityProvider>
           <ClientSessionProvider>
+            <AccessibilityMenu />
             <ThemeConfig>
               <Box
                 sx={{

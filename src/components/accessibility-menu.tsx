@@ -44,7 +44,7 @@ const AccessibilityMenu = () => {
 
       {isMenuOpen && (
         <Paper elevation={4} sx={customStyles.accessibilityMenu.menuPaper}>
-          <Box sx={theme.customStyles.accessibilityMenu.menuHeader}>
+          <Box sx={customStyles.accessibilityMenu.menuHeader}>
             <Typography variant='h6'> Menu de Acessibilidade </Typography>
             <ClickButton click={toggleMenu} backIcon={<CloseIcon sx={{ fontSize: 16 }} />} sx={customStyles.accessibilityMenu.closeButton} />
           </Box>
@@ -56,7 +56,7 @@ const AccessibilityMenu = () => {
                   title="Máscara leitura"
                   backIcon={<SmartScreenIcon sx={{ fontSize: 36 }} />}
                   isActive={readingMaskEnabled}
-                  sx={theme.customStyles.accessibilityMenu.buttonGrid}
+                  sx={customStyles.accessibilityMenu.buttonGrid}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -73,14 +73,14 @@ const AccessibilityMenu = () => {
                   title={`Fonte Acessível`}
                   backIcon={<FormatSizeIcon sx={{ fontSize: 36 }} />}
                   isActive={Boolean(themeFontFamily)}
-                  sx={theme.customStyles.accessibilityMenu.buttonGrid}
+                  sx={customStyles.accessibilityMenu.buttonGrid}
                 />
               </Grid>
             </Grid>
           </Box>
-          <Box sx={theme.customStyles.accessibilityMenu.footerContainer}>
-            <Box sx={theme.customStyles.accessibilityMenu.footerLine} />
-            <Box sx={theme.customStyles.accessibilityMenu.footerBox}>
+          <Box sx={customStyles.accessibilityMenu.footerContainer}>
+            <Box sx={customStyles.accessibilityMenu.footerLine} />
+            <Box sx={customStyles.accessibilityMenu.footerBox}>
 
               <ClickButton
                 sx={{ padding: themeFontFamily ? '8px 4px' : '8px 16px', }}
