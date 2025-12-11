@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { Box, useTheme } from "@mui/material";
 import { useAccessibility } from "@/context/accessibility.context";
+import { customStyles } from '@/app/config/themes/components';
 
 export default function AccessibilityReadingMask() {
   const { readingMaskEnabled } = useAccessibility();
@@ -28,9 +29,9 @@ export default function AccessibilityReadingMask() {
     <>
       {readingMaskEnabled && (
         <>
-          <Box sx={theme.customStyles.accessibilityReadMask(mouseY, maskHeight).background} />
-          <Box sx={theme.customStyles.accessibilityReadMask(mouseY, maskHeight).topLine} />
-          <Box sx={theme.customStyles.accessibilityReadMask(mouseY, maskHeight).bottonLine}/>
+          <Box sx={customStyles.accessibilityReadMask(mouseY, maskHeight).background} />
+          <Box sx={customStyles.accessibilityReadMask(mouseY, maskHeight).topLine} />
+          <Box sx={customStyles.accessibilityReadMask(mouseY, maskHeight).bottonLine}/>
         </>
       )}
     </>

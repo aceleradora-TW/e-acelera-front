@@ -2,7 +2,8 @@ import * as React from "react"
 import Button, { ButtonProps } from "@mui/material/Button"
 import Stack from "@mui/material/Stack"
 import { ReactNode } from "react"
-import { SxProps, Theme, useTheme } from "@mui/material"
+import { SxProps, Theme } from "@mui/material"
+import { customStyles } from '@/app/config/themes/components';
 
 type CardProps = {
   title?: string,
@@ -20,16 +21,14 @@ export const ClickButton = ({
   backIcon,
   sx,
   isActive,
-}: CardProps) => {
-  const theme = useTheme();
-  return (
+}: CardProps) => (
     <aside>
       <Stack spacing={2} direction="row" onClick={click}>
         <Button
           variant="contained"
           sx={{
-            ...theme.customStyles.button,
-            ...(isActive && { ...theme.customStyles.buttonActive, }),
+            ...customStyles?.button,
+            ...(isActive && { ...customStyles?.buttonActive, }),
             ...sx,
           } as SxProps<Theme>}
         >
@@ -41,5 +40,4 @@ export const ClickButton = ({
         </Button>
       </Stack>
     </aside>
-  )
-};
+  );
