@@ -45,9 +45,9 @@ export default async function RootLayout({
       <body>
         <FeatureFlagContext serverState={serverState}>
         <AccessibilityProvider>
+            <ThemeConfig>
           <ClientSessionProvider>
             <AccessibilityMenu />
-            <ThemeConfig>
               <Box
                 sx={{
                   minHeight: "100vh",
@@ -64,8 +64,8 @@ export default async function RootLayout({
                   projectUrl={"https://www.thoughtworks.com/pt-br/about-us/diversity-and-inclusion/aceleradora"}
                 />
               </Box>
-            </ThemeConfig>
           </ClientSessionProvider>
+            </ThemeConfig>
         </AccessibilityProvider>
         </FeatureFlagContext>
       </body>
