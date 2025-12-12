@@ -152,7 +152,7 @@ export const FAQ_QUESTIONS = [
   {
     question: "O que é a Aceleradora Inclusiva?",
     answer:
-      "A Aceleradora Inclusiva é uma iniciativa parceira que compartilha do mesmo propósito: formar pessoas diversas de forma inclusiva para atuarem na área de tecnologia. Ela também oferece formação prática, mentoria e apoio para quem quer transformar sua trajetória.\n\nAcesse o site da [Aceleradora Inclusiva](https://aceleradorainclusiva.com.br/) para saber mais sobre o programa.",
+      "A Aceleradora Inclusiva é uma iniciativa parceira com um propósito claro: formar pessoas com deficiência motora ou mobilidade reduzida para atuarem na área de tecnologia. O programa oferece formação prática, mentoria e acessibilidade para impulsionar a carreira desses profissionais no setor.\n\nAcesse o site da [Aceleradora Inclusiva](https://aceleradorainclusiva.com.br/) para saber mais sobre o programa.",
   },
   {
     question: "O Programa Aceleradora Ágil garante vaga no mercado?",
