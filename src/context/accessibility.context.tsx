@@ -11,8 +11,6 @@ interface AccessibilityContextType {
   toggleReadingMask: () => void;
   themeFontFamily?: string;
   changeFontFamily: (fontFamily?: string) => void;
-  textSize: number;
-  increaseTextSize: () => void;
 }
 
 const AccessibilityContext = createContext<
@@ -30,7 +28,6 @@ export const AccessibilityProvider = ({
   const [themeFontFamily, setThemeFontFamily] = useState<string | undefined>(
     undefined
   );
-  const [textSize, setTextSize] = useState(16);
 
   useEffect(() => {
     const storedContrast = localStorage.getItem('contrastEnabled');
@@ -83,15 +80,10 @@ export const AccessibilityProvider = ({
     });
   };
 
-  const increaseTextSize = () => {
-    setTextSize((prev) => (prev >= 24 ? 16 : prev + 2));
-  };
-
   const clearSettings = () => {
     setContrastEnabled(false);
     setReadingMaskEnabled(false);
     setThemeFontFamily(undefined);
-    setTextSize(16);
     localStorage.removeItem('contrastEnabled');
     localStorage.removeItem('readingMaskEnabled');
     localStorage.removeItem('themeFontFamily');
@@ -109,8 +101,6 @@ export const AccessibilityProvider = ({
         toggleReadingMask,
         themeFontFamily,
         changeFontFamily,
-        textSize,
-        increaseTextSize,
       }}
     >{children}
     </AccessibilityContext.Provider>
