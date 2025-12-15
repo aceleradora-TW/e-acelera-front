@@ -39,7 +39,7 @@ export function Accordion({ question, answer }: AccordionProps) {
         <ReactMarkdown
            components={{
             a: ({ href, children }) => (
-              <a href={href} style={{color: contrastEnabled?"#3d8fd8":undefined }}  target="_blank" rel="noopener noreferrer">
+              <a href={href} style={{color: contrastEnabled?"#85b0d6":undefined }}  target="_blank" rel="noopener noreferrer">
                 {children}
               </a>
             ),
