@@ -1,6 +1,7 @@
 import ReactMarkdown from "react-markdown";
 import { AccordionDetails, AccordionSummary, Accordion as MuiAccordion, Typography, useTheme } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { useAccessibility } from "@/context/accessibility.context";
 
 interface AccordionProps { 
   question: string;
@@ -9,6 +10,7 @@ interface AccordionProps {
 
 export function Accordion({ question, answer }: AccordionProps) {
   const theme = useTheme();
+  const {contrastEnabled} = useAccessibility();
   return (
     <MuiAccordion
       sx={{
@@ -37,7 +39,7 @@ export function Accordion({ question, answer }: AccordionProps) {
         <ReactMarkdown
            components={{
             a: ({ href, children }) => (
-              <a href={href} target="_blank" rel="noopener noreferrer">
+              <a href={href} style={{color: contrastEnabled?"#85b0d6":undefined }}  target="_blank" rel="noopener noreferrer">
                 {children}
               </a>
             ),
