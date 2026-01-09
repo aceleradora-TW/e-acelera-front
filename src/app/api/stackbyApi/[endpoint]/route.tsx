@@ -39,7 +39,8 @@ export async function GET(
     }
 
     const data: ApiResponse = await response.json();
-    return NextResponse.json(data, {
+    const normalizedData = Array.isArray(data.data) ? data.data : [data.data];
+    return NextResponse.json({ ...data, data: normalizedData }, {
       status: 200,
     });
   } catch (error) {
