@@ -73,7 +73,7 @@ export const DetailingTopicContent: React.FC<DetailingContentProps> = ({
   const { dataStatus } = useFetchTopicStatus(id)
   const { handleTopicStatus } = useGlobalContext();
 
-  const [ topicData ] = data?.data;
+  const topicData  = data?.data as DataItem;
 
   useEffect(() => {
       handleTopicStatus(dataStatus)
