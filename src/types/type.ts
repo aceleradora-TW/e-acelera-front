@@ -1,5 +1,5 @@
 export interface ApiResponse {
-    data: DataItem[] |  DataItem;
+    data: DataItem[];
 }
 
 export interface DataItem {
