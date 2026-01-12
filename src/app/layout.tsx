@@ -12,6 +12,7 @@ import React from "react";
 import { AccessibilityProvider } from "@/context/accessibility.context"
 import AccessibilityMenu from "@/components/accessibility-menu"
 import MainWrapper from "@/components/UI/mainWrapper";
+import  FormPage  from "../components/Dashboard/form"
 
 
 const FLAGSMITH_ENVIRONMENT_ID = process.env.NEXT_PUBLIC_FLAGSMITH_ENVIRONMENT_ID
@@ -47,6 +48,7 @@ export default async function RootLayout({
         <AccessibilityProvider>
             <ThemeConfig>
           <ClientSessionProvider>
+            <FormPage />
             <AccessibilityMenu />
               <Box
                 sx={{
