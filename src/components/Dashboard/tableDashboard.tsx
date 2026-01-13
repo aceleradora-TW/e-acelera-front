@@ -1,12 +1,15 @@
+'use client';
 import { palette } from '@/app/config/themes/palette';
-import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
+import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow } from '@mui/material';
+import { useRouter } from 'next/navigation';
+import React from 'react';
 
 export interface Column {
     id: string;
     label: string;
 }
 
-export interface ContentTableProps {
+export interface TableDashboardProps {
     columns: Column[];
     rows: Record<string, any>[];
 }
@@ -18,46 +21,119 @@ export const mockColumns = [
     { id: 'reference', label: 'Referencia' },
     { id: 'video', label: 'Vídeo' },
     { id: 'links', label: 'Links' },
+    { id: 'conteudo', label: 'Conteúdo' },
+    { id: 'blabla', label: 'Conteúdo' },
+    { id: 'bleblae', label: 'Conteúdo' },
 ];
 
 export const mockRows = [
-    { titulo: 'Conteúdo 1', shortDescription: 'Breve desc 1Breve desc 1 Breve desc 1Breve desc 1 Breve desc 1Breve desc 1 Breve desc 1Breve desc 1', description: 'Desc completa 1', reference: 'Ref 1', video: 'Video 1', links: 'Link 1' },
-    { titulo: 'Conteúdo 2', shortDescription: 'Breve desc 2', description: 'Desc completa 2', reference: 'Ref 2', video: 'Video 2', links: 'Link 2' },
+    { id: '1', titulo: 'Conteúdo 1', shortDescription: 'Breve desc 1Breve desc 1 Breve desc 1Breve desc 1 Breve desc 1Breve desc 1 Breve desc 1Breve desc 1', description: 'Desc completa 1', reference: 'Ref 1', video: 'Video 1', links: 'Link 1' },
+    { id: '2', titulo: 'Conteúdo 2', shortDescription: 'Breve desc 2', description: 'Desc completa 2', reference: 'Ref 2', video: 'Video 2', links: 'Link 2' },
+    { id: '3', titulo: 'Conteúdo 3', shortDescription: 'Breve desc 3', description: 'Desc completa 3', reference: 'Ref 3', video: 'Video 3', links: 'Link 3' },
+    { id: '4', titulo: 'Conteúdo 4', shortDescription: 'Breve desc 4', description: 'Desc completa 4', reference: 'Ref 4', video: 'Video 4', links: 'Link 4' },
+    { id: '5', titulo: 'Conteúdo 5', shortDescription: 'Breve desc 5', description: 'Desc completa 5', reference: 'Ref 5', video: '', links: 'Link' },
+    { id: '6', titulo: 'Conteúdo 11', shortDescription: 'Breve desc 1Breve desc 1 Breve desc 1Breve desc 1 Breve desc 1Breve desc 1 Breve desc 1Breve desc 1', description: 'Desc completa 1', reference: 'Ref 1', video: 'Video 1', links: 'Link 1' },
+    { id: '7', titulo: 'Conteúdo 21', shortDescription: 'Breve desc 2', description: 'Desc completa 2', reference: 'Ref 2', video: 'Video 2', links: 'Link 2' },
+    { id: '8', titulo: 'Conteúdo 31', shortDescription: 'Breve desc 3', description: 'Desc completa 3', reference: 'Ref 3', video: 'Video 3', links: 'Link 3' },
+    { id: '9', titulo: 'Conteúdo 41', shortDescription: 'Breve desc 4', description: 'Desc completa 4', reference: 'Ref 4', video: 'Video 4', links: 'Link 4' },
+    { id: '10', titulo: 'Conteúdo 51', shortDescription: 'Breve desc 5', description: 'Desc completa 5', reference: 'Ref 5', video: '', links: 'Link' },
+    { id: '11', titulo: 'Conteúdo 12', shortDescription: 'Breve desc 1Breve desc 1 Breve desc 1Breve desc 1 Breve desc 1Breve desc 1 Breve desc 1Breve desc 1', description: 'Desc completa 1', reference: 'Ref 1', video: 'Video 1', links: 'Link 1' },
+    { id: '12', titulo: 'Conteúdo 22', shortDescription: 'Breve desc 2', description: 'Desc completa 2', reference: 'Ref 2', video: 'Video 2', links: 'Link 2' },
+    { id: '13', titulo: 'Conteúdo 32', shortDescription: 'Breve desc 3', description: 'Desc completa 3', reference: 'Ref 3', video: 'Video 3', links: 'Link 3' },
+    { id: '14', titulo: 'Conteúdo 42', shortDescription: 'Breve desc 4', description: 'Desc completa 4', reference: 'Ref 4', video: 'Video 4', links: 'Link 4' },
+    { id: '15', titulo: 'Conteúdo 52', shortDescription: 'Breve desc 5', description: 'Desc completa 5', reference: 'Ref 5', video: '', links: 'Link' },
+    { id: '16', titulo: 'Conteúdo 13', shortDescription: 'Breve desc 1Breve desc 1 Breve desc 1Breve desc 1 Breve desc 1Breve desc 1 Breve desc 1Breve desc 1', description: 'Desc completa 1', reference: 'Ref 1', video: 'Video 1', links: 'Link 1' },
+    { id: '17', titulo: 'Conteúdo 23', shortDescription: 'Breve desc 2', description: 'Desc completa 2', reference: 'Ref 2', video: 'Video 2', links: 'Link 2' },
+    { id: '18', titulo: 'Conteúdo 33', shortDescription: 'Breve desc 3', description: 'Desc completa 3', reference: 'Ref 3', video: 'Video 3', links: 'Link 3' },
+    { id: '19', titulo: 'Conteúdo 43', shortDescription: 'Breve desc 4', description: 'Desc completa 4', reference: 'Ref 4', video: 'Video 4', links: 'Link 4' },
+    { id: '20', titulo: 'Conteúdo 53', shortDescription: 'Breve desc 5', description: 'Desc completa 5', reference: 'Ref 5', video: '', links: 'Link' },
+    { id: '21', titulo: 'Conteúdo 14', shortDescription: 'Breve desc 1Breve desc 1 Breve desc 1Breve desc 1 Breve desc 1Breve desc 1 Breve desc 1Breve desc 1', description: 'Desc completa 1', reference: 'Ref 1', video: 'Video 1', links: 'Link 1' },
+    { id: '22', titulo: 'Conteúdo 24', shortDescription: 'Breve desc 2', description: 'Desc completa 2', reference: 'Ref 2', video: 'Video 2', links: 'Link 2' },
+    { id: '23', titulo: 'Conteúdo 34', shortDescription: 'Breve desc 3', description: 'Desc completa 3', reference: 'Ref 3', video: 'Video 3', links: 'Link 3' },
+    { id: '24', titulo: 'Conteúdo 44', shortDescription: 'Breve desc 4', description: 'Desc completa 4', reference: 'Ref 4', video: 'Video 4', links: 'Link 4' },
+    { id: '25', titulo: 'Conteúdo 54', shortDescription: 'Breve desc 5', description: 'Desc completa 5', reference: 'Ref 5', video: '', links: 'Link' },
+    { id: '26', titulo: 'Conteúdo 15', shortDescription: 'Breve desc 1Breve desc 1 Breve desc 1Breve desc 1 Breve desc 1Breve desc 1 Breve desc 1Breve desc 1', description: 'Desc completa 1', reference: 'Ref 1', video: 'Video 1', links: 'Link 1' },
+    { id: '27', titulo: 'Conteúdo 25', shortDescription: 'Breve desc 2', description: 'Desc completa 2', reference: 'Ref 2', video: 'Video 2', links: 'Link 2' },
+    { id: '28', titulo: 'Conteúdo 35', shortDescription: 'Breve desc 3', description: 'Desc completa 3', reference: 'Ref 3', video: 'Video 3', links: 'Link 3' },
+    { id: '29', titulo: 'Conteúdo 45', shortDescription: 'Breve desc 4', description: 'Desc completa 4', reference: 'Ref 4', video: 'Video 4', links: 'Link 4' },
+    { id: '30', titulo: 'Conteúdo 55', shortDescription: 'Breve desc 5', description: 'Desc completa 5', reference: 'Ref 5', video: '', links: 'Link' },
+    { id: '31', titulo: 'Conteúdo 16', shortDescription: 'Breve desc 1Breve desc 1 Breve desc 1Breve desc 1 Breve desc 1Breve desc 1 Breve desc 1Breve desc 1', description: 'Desc completa 1', reference: 'Ref 1', video: '', links: 'Link' },
+    { id: '32', titulo: 'Conteúdo 26', shortDescription: 'Breve desc 2', description: 'Desc completa 2', reference: 'Ref 2', video: 'Video 2', links: 'Link 2' },
+    { id: '33', titulo: 'Conteúdo 36', shortDescription: 'Breve desc 3', description: 'Desc completa 3', reference: 'Ref 3', video: 'Video 3', links: 'Link 3' },
+    { id: '34', titulo: 'Conteúdo 46', shortDescription: 'Breve desc 4', description: 'Desc completa 4', reference: 'Ref 4', video: 'Video 4', links: 'Link 4' },
+    { id: '35', titulo: 'Conteúdo 56', shortDescription: 'Breve desc 5', description: 'Desc completa 5', reference: 'Ref 5', video: '', links: 'Link' },
+    { id: '36', titulo: 'Conteúdo 17', shortDescription: 'Breve desc 1Breve desc 1 Breve desc 1Breve desc 1 Breve desc 1Breve desc 1 Breve desc 1Breve desc 1', description: 'Desc completa 1', reference: 'Ref 1', video: '', links: 'Link' },
+    { id: '37', titulo: 'Conteúdo 27', shortDescription: 'Breve desc 2', description: 'Desc completa 2', reference: 'Ref 2', video: 'Video 2', links: 'Link 2' },
+    { id: '38', titulo: 'Conteúdo 37', shortDescription: 'Breve desc 3', description: 'Desc completa 3', reference: 'Ref 3', video: 'Video 3', links: 'Link 3' },
+    { id: '39', titulo: 'Conteúdo 47', shortDescription: 'Breve desc 4', description: 'Desc completa 4', reference: 'Ref 4', video: 'Video 4', links: 'Link 4' },
+    { id: '40', titulo: 'Conteúdo 57', shortDescription: 'Breve desc 5', description: 'Desc completa 5', reference: 'Ref 5', video: '', links: 'Link' },
 ];
 
-export function TableDashboard({ columns, rows }: ContentTableProps) {
+export function TableDashboard({ columns, rows }: TableDashboardProps) {
+    const router = useRouter();
+    const [page, setPage] = React.useState(0);
+    const [rowsPerPage, setRowsPerPage] = React.useState(10);
+
+    const handleChangePage = (event: unknown, newPage: number) => {
+        setPage(newPage);
+    };
+
+    const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setRowsPerPage(+event.target.value);
+        setPage(0);
+    };
+
     return (
-        <TableContainer component={Paper}>
-            <Table sx={{ minWidth: 650 }} aria-label="simple table">
-                <TableHead>
-                    <TableRow>
-                        {columns.map((col) => (
-                            <TableCell key={col.id} sx={{ whiteSpace: 'nowrap', fontWeight: 'bold', color: palette.bgColor.main, backgroundColor: palette.buttonHover.main }}>{col.label}</TableCell>
-                        ))}
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-                    {rows.map((row, id) => (
-                        <TableRow
-                            key={id}
-                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                        >
+        < Paper sx={{ margin: '24px 32px' }}>
+            <TableContainer >
+                <Table stickyHeader aria-label="sticky table" sx={{ minWidth: 650 }}>
+                    <TableHead>
+                        <TableRow>
                             {columns.map((col) => (
                                 <TableCell
                                     key={col.id}
-                                    sx={{
-                                        whiteSpace: 'nowrap',
-                                        overflow: 'hidden',
-                                        textOverflow: 'ellipsis',
-                                        maxWidth: 200
-                                    }}>
-                                    {row[col.id]}
+                                    sx={{ typography: 'body1', whiteSpace: 'nowrap', fontWeight: 'bold', color: palette.bgColor.main, backgroundColor: palette.buttonHover.main }}>
+                                    {col.label}
                                 </TableCell>
                             ))}
                         </TableRow>
-                    ))}
-                </TableBody>
-            </Table>
-        </TableContainer>
+                    </TableHead>
+                    <TableBody>
+                        {rows
+                            .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                            .map((row) => (
+                                <TableRow
+                                    key={row.id}
+                                    hover
+                                    onClick={() => router.push(`/dashboard/${row.id}`)}
+                                    sx={{ cursor: 'pointer', '&:last-child td, &:last-child th': { border: 0 } }}>
+                                    {columns.map((col) => (
+                                        <TableCell
+                                            key={col.id}
+                                            sx={{
+                                                whiteSpace: 'nowrap',
+                                                overflow: 'hidden',
+                                                textOverflow: 'ellipsis',
+                                                maxWidth: 200
+                                            }}>
+                                            {row[col.id]}
+                                        </TableCell>
+                                    ))}
+                                </TableRow>
+                            ))}
+                    </TableBody>
+                </Table>
+            </TableContainer>
+            <TablePagination
+                rowsPerPageOptions={[10, 25, 100]}
+                component="div"
+                count={rows.length}
+                rowsPerPage={rowsPerPage}
+                page={page}
+                onPageChange={handleChangePage}
+                onRowsPerPageChange={handleChangeRowsPerPage}
+                labelRowsPerPage="Linhas por página"
+            />
+        </Paper>
     );
 };
