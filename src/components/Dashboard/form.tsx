@@ -3,6 +3,7 @@
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { ApiResponse, DataItem } from "../../types/type";
+import { Box, Container } from "@mui/material";
 
 /*type formPageProps = {
     SearchParams?:{
@@ -28,15 +29,31 @@ export default function FormPage(){
   }, [query]); 
 
   return (
-    <div>
-      <h1>Busca</h1>
+    <Container>
+      {/* <h1>Busca</h1> */}
 
       <form action="/form">
-        <input name="query" defaultValue={query} placeholder="Buscar..." />
-        <button type="submit">Buscar</button>
+        {/* <input name="query" defaultValue={query} placeholder="Buscar..." /> */}
+        <Box>
+          <p>Title</p>
+          <input name="query" defaultValue={query} />
+          
+          <p>ShortDescription</p>
+          <input name="query" defaultValue={query}/>
+
+          <p>description</p>
+          <input name="query" defaultValue={query}/>
+        </Box>
+
+        <Box>
+          {/* <button type="submit">Buscar</button> */}
+          <button type="submit">Cancelar</button>
+          <button type="submit">Salvar</button>
+        </Box>
+        
       </form>
 
-      {loading && <p>Carregando...</p>}
+      {/* {loading && <p>Carregando...</p>}
 
       {!loading && data.length > 0 && (
         <table>
@@ -60,10 +77,10 @@ export default function FormPage(){
             ))}
           </tbody>
         </table>
-      )}
+      )} */}
 
-      {!loading && data.length === 0 && query && <p>Nenhum resultado encontrado</p>}
-    </div>
+      {/* {!loading && data.length === 0 && query && <p>Nenhum resultado encontrado</p>} */}
+    </Container>
   );
 }
 

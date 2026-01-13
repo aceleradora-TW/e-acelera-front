@@ -48,7 +48,6 @@ export default async function RootLayout({
         <AccessibilityProvider>
             <ThemeConfig>
           <ClientSessionProvider>
-            <FormPage />
             <AccessibilityMenu />
               <Box
                 sx={{
