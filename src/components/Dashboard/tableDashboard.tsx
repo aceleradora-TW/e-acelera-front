@@ -1,6 +1,8 @@
 'use client';
 import { palette } from '@/app/config/themes/palette';
-import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow } from '@mui/material';
+import { DataGrid, GridColDef } from '@mui/x-data-grid';
+import { ptBR } from '@mui/x-data-grid/locales';
+import { Paper } from '@mui/material';
 import { useRouter } from 'next/navigation';
 import React from 'react';
 
@@ -69,70 +71,46 @@ export const mockRows = [
     { id: '40', titulo: 'Conteúdo 57', shortDescription: 'Breve desc 5', description: 'Desc completa 5', reference: 'Ref 5', video: '', links: 'Link' },
 ];
 
+
 export function TableDashboard({ columns, rows }: TableDashboardProps) {
     const router = useRouter();
-    const [page, setPage] = React.useState(0);
-    const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
-    const handleChangePage = (event: unknown, newPage: number) => {
-        setPage(newPage);
-    };
+    const gridColumns: GridColDef[] = columns.map((col) => ({
+        field: col.id,
+        headerName: col.label,
+        flex: 1,
+        sortable: true,
+    }));
 
-    const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setRowsPerPage(+event.target.value);
-        setPage(0);
-    };
+    const gridRows = rows.map((row) => ({
+        ...row,
+        id: row.id,
+    }));
 
     return (
         < Paper sx={{ margin: '24px 32px' }}>
-            <TableContainer >
-                <Table stickyHeader aria-label="sticky table" sx={{ minWidth: 650 }}>
-                    <TableHead>
-                        <TableRow>
-                            {columns.map((col) => (
-                                <TableCell
-                                    key={col.id}
-                                    sx={{ typography: 'body1', whiteSpace: 'nowrap', fontWeight: 'bold', color: palette.bgColor.main, backgroundColor: palette.buttonHover.main }}>
-                                    {col.label}
-                                </TableCell>
-                            ))}
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {rows
-                            .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                            .map((row) => (
-                                <TableRow
-                                    key={row.id}
-                                    hover
-                                    onClick={() => router.push(`/dashboard/${row.id}`)}
-                                    sx={{ cursor: 'pointer', '&:last-child td, &:last-child th': { border: 0 } }}>
-                                    {columns.map((col) => (
-                                        <TableCell
-                                            key={col.id}
-                                            sx={{
-                                                whiteSpace: 'nowrap',
-                                                overflow: 'hidden',
-                                                textOverflow: 'ellipsis',
-                                                maxWidth: 200
-                                            }}>
-                                            {row[col.id]}
-                                        </TableCell>
-                                    ))}
-                                </TableRow>
-                            ))}
-                    </TableBody>
-                </Table>
-            </TableContainer>
-            <TablePagination
-                rowsPerPageOptions={[10, 25, 100]}
-                component="div"
-                count={rows.length}
-                rowsPerPage={rowsPerPage}
-                page={page}
-                onPageChange={handleChangePage}
-                onRowsPerPageChange={handleChangeRowsPerPage}
-                labelRowsPerPage="Linhas por página"
+            <DataGrid
+                rows={gridRows}
+                columns={gridColumns}
+                pageSizeOptions={[10, 25, 100]}
+                initialState={{
+                    pagination: { paginationModel: { pageSize: 10, page: 0 } },
+                }}
+                disableRowSelectionOnClick
+                onRowClick={(params) => router.push(`/dashboard/${params.id}`)}
+                localeText={ptBR.components.MuiDataGrid.defaultProps.localeText}
+                sx={{
+                    '& .MuiDataGrid-columnHeader': {
+                        backgroundColor: palette.buttonHover.main,
+                        color: palette.bgColor.main,
+                    },
+                    '& .MuiDataGrid-cell:focus': { 
+                        outline: 'none', 
+                    },
+                   '& .MuiDataGrid-menuIconButton': { color: '#fff', }, 
+                   '& .MuiDataGrid-sortIcon': { color: palette.buttonHover.main },
+                   '& .MuiDataGrid-columnSeparator': { color: '#fff',  },
+                }}
             />
         </Paper>
     );
