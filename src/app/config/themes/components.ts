@@ -659,6 +659,13 @@ export const customStyles: Theme = {
       backgroundColor: themePalette.accentBlue,
       zIndex: 9999,
       pointerEvents: "none",
-    },
+    }, 
   }),
+  Form: {
+    background: themePalette.baseBgColor
+    // color: string;
+    // mt: number,
+    // height: string,
+    // boxShadow: string,
+  },
 };

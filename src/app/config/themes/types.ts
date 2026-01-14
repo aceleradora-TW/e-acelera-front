@@ -205,4 +205,12 @@ export interface Theme {
     justifyContent: string;
     alignItems: string;
   };
+
+  Form: {
+    background: string;
+    // color: string;
+    // mt: number;
+    // height: string;
+    // boxShadow: string;
+  };
 }

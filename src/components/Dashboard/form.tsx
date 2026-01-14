@@ -3,7 +3,7 @@
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { ApiResponse, DataItem } from "../../types/type";
-import { Box, Container } from "@mui/material";
+import { Box, Button, Container, TextField, Typography } from "@mui/material";
 
 /*type formPageProps = {
     SearchParams?:{
@@ -29,13 +29,108 @@ export default function FormPage(){
   }, [query]); 
 
   return (
-    <Container>
+  <Container
+    // maxWidth="sm"
+    component="form"
+    maxWidth="xl" 
+    sx={{
+      // pt: 4, pb: 1,
+      mt: 6,
+      backgroundColor: "#fff",
+      borderRadius: "12px",
+      p: 4,
+      boxShadow: "0px 4px 20px rgba(0,0,0,0.08)",
+      display: "flex",
+      flexDirection: "column",
+      gap: 3,
+      maxWidth: "100%"
+    }}
+  >
+    <Typography variant="h6" fontWeight={600}>
+      Cadastro
+    </Typography>
+
+   <TextField
+      label="Title"
+      fullWidth
+      sx={{
+        "& .MuiInputBase-root": {
+          height: 40,
+        },
+        "& input": {
+          padding: "10px 12px",
+        },
+      }}
+    />
+
+    <TextField
+      label="Short Description"
+      fullWidth
+      sx={{
+        "& .MuiInputBase-root": {
+          height: 40,
+        },
+        "& input": {
+          padding: "10px 12px",
+        },
+      }}
+    />
+
+   <TextField
+      label="Description"
+      fullWidth
+      multiline
+      sx={{
+        "& .MuiInputBase-root": {
+          alignItems: "flex-start",
+        },
+        "& textarea": {
+          padding: "10px 12px",
+        },
+      }}
+      rows={5}
+    />
+
+    <Box
+      sx={{
+        display: "flex",
+        justifyContent: "flex-end",
+        gap: 2,
+        mt: 2,
+      }}
+    >
+      <Button variant="outlined">
+        Cancelar
+      </Button>
+
+      <Button variant="contained">
+        Salvar
+      </Button>
+    </Box>
+  </Container>
+);
+
+
+  /*return (
+    <Container
+    maxWidth="sm"
+    sx={{
+      mt: 6,
+      backgroundColor:"#fff",
+      borderRadius: "12px",
+      padding:4,
+      boxShadow: "0px 4px 20px rgba(0,0,0,0,0.8)"
+
+    }}
+    >
       {/* <h1>Busca</h1> */}
 
-      <form action="/form">
-        {/* <input name="query" defaultValue={query} placeholder="Buscar..." /> */}
-        <Box>
-          <p>Title</p>
+     // <form action="/form">
+        //{/* <input name="query" defaultValue={query} placeholder="Buscar..." /> */}
+       // <Box
+          
+        // >
+         /* <p>Title</p>
           <input name="query" defaultValue={query} />
           
           <p>ShortDescription</p>
@@ -44,17 +139,17 @@ export default function FormPage(){
           <p>description</p>
           <input name="query" defaultValue={query}/>
         </Box>
-
-        <Box>
-          {/* <button type="submit">Buscar</button> */}
-          <button type="submit">Cancelar</button>
-          <button type="submit">Salvar</button>
-        </Box>
+*/
+       // <Box>
+         // {/* <button type="submit">Buscar</button> */}
+          //<button type="submit">Cancelar</button>
+         // <button type="submit">Salvar</button>
+        //</Box>
         
-      </form>
+      //</form> 
 
-      {/* {loading && <p>Carregando...</p>}
-
+     // {/* {loading && <p>Carregando...</p>}
+/*
       {!loading && data.length > 0 && (
         <table>
           <thead>
@@ -77,12 +172,12 @@ export default function FormPage(){
             ))}
           </tbody>
         </table>
-      )} */}
+      )} }
 
-      {/* {!loading && data.length === 0 && query && <p>Nenhum resultado encontrado</p>} */}
-    </Container>
-  );
-}
+      {/* {!loading && data.length === 0 && query && <p>Nenhum resultado encontrado</p>} }
+    //</Container>
+ // );
+//}
 
 
 
