@@ -205,4 +205,6 @@ export interface Theme {
     justifyContent: string;
     alignItems: string;
   };
+
+  tableDashboard: ExtendedCSSProperties;
 }
