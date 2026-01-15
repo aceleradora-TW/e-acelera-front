@@ -49,24 +49,22 @@ export function InputDashboard(
  */
 
 
-import { TextField, TextFieldProps } from "@mui/material";
+import { TextField} from "@mui/material";
 
 type modeInput = 'new' | 'edit' | 'read';
 
 type InputDashboardProps = {
   label: string;
-  mode?: modeInput;
-  InputProps?: TextFieldProps['InputProps'];
+  mode: modeInput;
   value?: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   multiline?: boolean;
   rows?: number;
 };
 
-export function InputDashboard({
+export function Input({
   label,
-  mode,
-  InputProps,
+  mode = 'new',
   value,
   onChange,
   multiline = false,
@@ -74,12 +72,13 @@ export function InputDashboard({
 }: InputDashboardProps) {
   return (
     <TextField
+      disabled={mode === "read"}
       label={label}
-      value={mode === 'new' ? "" : value}
-      onChange={mode === "read" ? undefined : onChange}
+      value={value}
+      onChange={onChange}
       multiline={multiline}
       rows={rows}
-      InputProps={{ readOnly: mode === "read" ? true : false }}
+      //InputProps={{ readOnly: mode === "read"}}
       fullWidth
     />
   );

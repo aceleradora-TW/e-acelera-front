@@ -125,7 +125,7 @@ export default function FormPage() {
 
 import { Box, Container, Typography } from "@mui/material";
 import { useState } from "react";
-import { InputDashboard } from "./input";
+import { Input } from "./input";
 import { ClickButton } from "../ClickButton";
 import { customStyles } from "@/app/config/themes/components";
 
@@ -148,28 +148,27 @@ export default function FormPage() {
         Themes
       </Typography>
 
-      <InputDashboard
+      <Input
         label="Título"
         value={title}
         mode="edit"
         onChange={(e) => setTitle(e.target.value)}
       />
 
-      <InputDashboard
+      <Input
         label="shortDescription"
         mode="new"
         value={shortDescription}
         onChange={(e) => setShortDescription(e.target.value)}
       />
 
-      <InputDashboard
+      <Input
         label="description"
         mode="read"
         multiline
         rows={4}
         value={description}
         onChange={(e) => setDescription(e.target.value)}
-        InputProps={{ readOnly: true }}
       />
 
       <Box sx={customStyles.FormPage.actions}>
