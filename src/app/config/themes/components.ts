@@ -668,4 +668,29 @@ export const customStyles: Theme = {
     // height: string,
     // boxShadow: string,
   },
+  
+  FormPage: {
+  container: {
+    mt: 6,
+    backgroundColor: themePalette.baseBgColor,
+    borderRadius: "12px",
+    p: 4,
+    boxShadow: "0px 4px 20px rgba(0,0,0,0.08)",
+    display: "flex",
+    flexDirection: "column",
+    gap: 3,
+  },
+
+  title: {
+    fontWeight: 600,
+  },
+
+  actions: {
+    display: "flex",
+    justifyContent: "flex-end",
+    gap: 2,
+    mt: 2,
+  },
+},
+
 };

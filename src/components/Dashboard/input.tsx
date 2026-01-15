@@ -1,4 +1,4 @@
-import { TextField, TextFieldProps } from "@mui/material";
+/*import { TextField, TextFieldProps } from "@mui/material";
 
 type InputDashboardProps = {
     label: string;    
@@ -47,3 +47,40 @@ export function InputDashboard(
  * editar registro => /admin/dashboard/theme/:id
  *  => contexto ou nova req -> pegar dados do tema que já existem 
  */
+
+
+import { TextField, TextFieldProps } from "@mui/material";
+
+type modeInput = 'new' | 'edit' | 'read';
+
+type InputDashboardProps = {
+  label: string;
+  mode?: modeInput;
+  InputProps?: TextFieldProps['InputProps'];
+  value?: string;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  multiline?: boolean;
+  rows?: number;
+};
+
+export function InputDashboard({
+  label,
+  mode,
+  InputProps,
+  value,
+  onChange,
+  multiline = false,
+  rows,
+}: InputDashboardProps) {
+  return (
+    <TextField
+      label={label}
+      value={mode === 'new' ? "" : value}
+      onChange={mode === "read" ? undefined : onChange}
+      multiline={multiline}
+      rows={rows}
+      InputProps={{ readOnly: mode === "read" ? true : false }}
+      fullWidth
+    />
+  );
+}

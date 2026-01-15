@@ -213,4 +213,10 @@ export interface Theme {
     // height: string;
     // boxShadow: string;
   };
+  
+  FormPage: {
+    container: ExtendedCSSProperties;
+    title: ExtendedCSSProperties;
+    actions: ExtendedCSSProperties;
+  };
 }
