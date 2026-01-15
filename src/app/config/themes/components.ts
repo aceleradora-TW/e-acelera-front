@@ -663,7 +663,8 @@ export const customStyles: Theme = {
   upperBanner: {
     container: {
       backgroundColor: palette.banner.background,
-      padding: 2,
+      paddingTop: 2,
+      paddingBottom: 2,
     },
     title: {
       color: palette.buttonHover.main,

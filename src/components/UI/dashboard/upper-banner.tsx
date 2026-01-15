@@ -1,9 +1,8 @@
 import { BreadCrumb } from "@/components/BreadCrumb";
 import { ClickButton } from "@/components/ClickButton";
-import { Grid, Typography } from "@mui/material";
+import { Grid, Typography, useTheme } from "@mui/material";
 import EditIcon from '@mui/icons-material/Edit';
 import { useState } from "react";
-import { customStyles } from "@/app/config/themes/components";
 
 type UpperBannerProps = {
     title: string,
@@ -20,6 +19,7 @@ export const UpperBanner = ({
     editButton,
     showBreadCrumb,
 }: UpperBannerProps) => {
+    const theme = useTheme();
     const [selectedTab, setSelectedTab] = useState<"themes" | "topics" | "exercises" | "videos">("themes"); 
     const handleCreate = () => { 
         switch (selectedTab) { 
@@ -34,12 +34,12 @@ export const UpperBanner = ({
             default: break; } };
     return (
     
-    <Grid container spacing={2} alignItems="center" justifyContent="space-between" sx={customStyles.upperBanner.container} >
+    <Grid container spacing={2} alignItems="center" justifyContent="space-between" sx={theme.customStyles.upperBanner.container} >
         <Grid item>
             <Grid container>
                 <Grid item>
                     {showBreadCrumb && (<BreadCrumb />)}
-                    <Typography variant="h2" sx={customStyles.upperBanner.title} >{title}</Typography>
+                    <Typography variant="h2" sx={theme.customStyles.upperBanner.title} >{title}</Typography>
                 </Grid>
             </Grid>
             {menuBanner && (
@@ -61,10 +61,10 @@ export const UpperBanner = ({
         </Grid>
         <Grid item>
             {createButton && (
-                <ClickButton title="Criar" click={handleCreate} sx={ customStyles.upperBanner.createButton } />
+                <ClickButton title="Criar" click={handleCreate} sx={ theme.customStyles.upperBanner.createButton } />
             )}
             {editButton && (
-                <ClickButton title="Editar" backIcon={<EditIcon />} click={() => console.log("Editar")} sx={customStyles.upperBanner.editButton} />
+                <ClickButton title="Editar" backIcon={<EditIcon />} click={() => console.log("Editar")} sx={theme.customStyles.upperBanner.editButton} />
             )}
         </Grid>
     </Grid>
