@@ -8,7 +8,6 @@ import { ImpactSection } from "@/components/UI/home/impact-section";
 import { SponsorsSection } from "@/components/UI/home/sponsors-section";
 import AboutAgil from "@/components/UI/home/about-agile";
 import { StudySection } from "@/components/UI/home/study-section";
-import FormPage from "@/components/Dashboard/form";
 
 export default function Home() {
   return (
@@ -28,7 +27,6 @@ export default function Home() {
       <StudySection />
       <TestimonialsSection />
       <Faq />
-      <FormPage />
     </Box>
   );
 }

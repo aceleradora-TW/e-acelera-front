@@ -1,9 +1,11 @@
-"use client"
+"use client";
 //import { Form } from 'next/';
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { ApiResponse, DataItem } from "../../types/type";
 import { Box, Button, Container, TextField, Typography } from "@mui/material";
+import { InputDashboard } from "./input";
+import { ClickButton } from "../ClickButton";
 
 /*type formPageProps = {
     SearchParams?:{
@@ -11,14 +13,16 @@ import { Box, Button, Container, TextField, Typography } from "@mui/material";
     }
 }
     */
-export default function FormPage(){
-    const searchParams = useSearchParams();
-    const query = searchParams?.get("query") || "";
-    const [data, setData] = useState<DataItem[]>([]);
-    const [loading, setLoading] = useState<boolean>(false);
-    
+
+
+export default function FormPage() {
+  const searchParams = useSearchParams();
+  const query = searchParams?.get("query") || "";
+  const [data, setData] = useState<DataItem[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
+
   useEffect(() => {
-    if (!query) return; 
+    if (!query) return;
 
     setLoading(true);
 
@@ -26,285 +30,93 @@ export default function FormPage(){
       .then((res) => res.json())
       .then((json) => setData(json))
       .finally(() => setLoading(false));
-  }, [query]); 
+  }, [query]);
 
   return (
-  <Container
-    // maxWidth="sm"
-    component="form"
-    maxWidth="xl" 
-    sx={{
-      // pt: 4, pb: 1,
-      mt: 6,
-      backgroundColor: "#fff",
-      borderRadius: "12px",
-      p: 4,
-      boxShadow: "0px 4px 20px rgba(0,0,0,0.08)",
-      display: "flex",
-      flexDirection: "column",
-      gap: 3,
-      maxWidth: "100%"
-    }}
-  >
-    <Typography variant="h6" fontWeight={600}>
-      Cadastro
-    </Typography>
-
-   <TextField
-      label="Title"
-      fullWidth
-      sx={{
-        "& .MuiInputBase-root": {
-          height: 40,
-        },
-        "& input": {
-          padding: "10px 12px",
-        },
-      }}
-    />
-
-    <TextField
-      label="Short Description"
-      fullWidth
-      sx={{
-        "& .MuiInputBase-root": {
-          height: 40,
-        },
-        "& input": {
-          padding: "10px 12px",
-        },
-      }}
-    />
-
-   <TextField
-      label="Description"
-      fullWidth
-      multiline
-      sx={{
-        "& .MuiInputBase-root": {
-          alignItems: "flex-start",
-        },
-        "& textarea": {
-          padding: "10px 12px",
-        },
-      }}
-      rows={5}
-    />
-
-    <Box
-      sx={{
-        display: "flex",
-        justifyContent: "flex-end",
-        gap: 2,
-        mt: 2,
-      }}
-    >
-      <Button variant="outlined">
-        Cancelar
-      </Button>
-
-      <Button variant="contained">
-        Salvar
-      </Button>
-    </Box>
-  </Container>
-);
-
-
-  /*return (
     <Container
-    maxWidth="sm"
-    sx={{
-      mt: 6,
-      backgroundColor:"#fff",
-      borderRadius: "12px",
-      padding:4,
-      boxShadow: "0px 4px 20px rgba(0,0,0,0,0.8)"
-
-    }}
+      // maxWidth="sm"
+      component="form"
+      maxWidth="xl"
+      sx={{
+        // pt: 4, pb: 1,
+        mt: 6,
+        backgroundColor: "#fff",
+        borderRadius: "12px",
+        p: 4,
+        boxShadow: "0px 4px 20px rgba(0,0,0,0.08)",
+        display: "flex",
+        flexDirection: "column",
+        gap: 3,
+        maxWidth: "100%",
+      }}
     >
-      {/* <h1>Busca</h1> */}
+      <Typography variant="h6" fontWeight={600}>
+        Cadastro
+      </Typography>
 
-     // <form action="/form">
-        //{/* <input name="query" defaultValue={query} placeholder="Buscar..." /> */}
-       // <Box
-          
-        // >
-         /* <p>Title</p>
-          <input name="query" defaultValue={query} />
-          
-          <p>ShortDescription</p>
-          <input name="query" defaultValue={query}/>
+      <InputDashboard  label="Titulo editar" value="conteudo" onChange={() => console.log('teste do criar')} />
+      <InputDashboard  label="Titulo ler" value="Somente leitura" InputProps={{ readOnly: true }} />
+      <InputDashboard  label="Titulo criar" onChange={() => console.log('teste do criar')}/>
 
-          <p>description</p>
-          <input name="query" defaultValue={query}/>
-        </Box>
-*/
-       // <Box>
-         // {/* <button type="submit">Buscar</button> */}
-          //<button type="submit">Cancelar</button>
-         // <button type="submit">Salvar</button>
-        //</Box>
-        
-      //</form> 
-
-     // {/* {loading && <p>Carregando...</p>}
-/*
-      {!loading && data.length > 0 && (
-        <table>
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Título</th>
-              <th>Descrição</th>
-            </tr>
-          </thead>
-          <tbody>
-            {data.map((item: any) => (
-              <tr key={item.id} className="text-gray-700 hover:bg-gray-50">
-                <td className="p-3 border-r border-gray-300">{item.title}</td>
-                <td className="p-3 border-r border-gray-300">{item.shortDesc}</td>
-                <td className="p-3 border-r border-gray-300">{item.description}</td>
-                <td className="p-3 border-r border-gray-300">Conteudo</td>
-                <td className="p-3 border-r border-gray-300">Conteudo</td>
-                <td className="p-3">Conteudo</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      )} }
-
-      {/* {!loading && data.length === 0 && query && <p>Nenhum resultado encontrado</p>} }
-    //</Container>
- // );
-//}
-
-
-
-/*"use client"
-import { 
-  Table, 
-  TableBody, 
-  TableCell, 
-  TableContainer, 
-  TableHead, 
-  TableRow, 
-  Paper, 
-  Box 
-} from "@mui/material";
-
-export default function Form() {
- 
-  const rows = Array(6).fill({
-    titulo: "Conteudo",
-    shorDescription: "Conteudo",
-    description: "Conteudo",
-  });
-
-  return (
-    <Box sx={{ p: 3 }}>
-      <TableContainer 
-        component={Paper} 
-        sx={{ 
-          borderRadius: 0, 
-          boxShadow: 'none', 
-          border: '1px solid #B0C4DE' 
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "flex-end",
+          gap: 2,
+          mt: 2,
         }}
       >
-        <Table sx={{ minWidth: 650 }} aria-label="tabela de dados">
-          <TableHead>
-            <TableRow sx={{ backgroundColor: "#004a7c" }}>
-              <TableCell sx={headerStyle}>Titulo</TableCell>
-              <TableCell sx={headerStyle}>shorDescription</TableCell>
-              <TableCell sx={headerStyle}>Description</TableCell>
-              <TableCell sx={headerStyle}>Titulo</TableCell>
-              <TableCell sx={headerStyle}>Titulo</TableCell>
-              <TableCell sx={headerStyle}>Titulo</TableCell>
-              <TableCell sx={{ ...headerStyle, borderRight: 'none' }}>Titulo</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {rows.map((row, index) => (
-              <TableRow key={index}>
-                <TableCell sx={cellStyle}>{row.titulo}</TableCell>
-                <TableCell sx={cellStyle}>{row.shorDescription}</TableCell>
-                <TableCell sx={cellStyle}>{row.description}</TableCell>
-                <TableCell sx={cellStyle}>Conteudo</TableCell>
-                <TableCell sx={cellStyle}>Conteudo</TableCell>
-                <TableCell sx={cellStyle}>Conteudo</TableCell>
-                <TableCell sx={{ ...cellStyle, borderRight: 'none' }}>Conteudo</TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-    </Box>
+
+        <ClickButton title="Cancelar" click={() => console.log('test')} />
+        <ClickButton title="Salvar" click={() => console.log('test')} isActive />
+
+      </Box>
+    </Container>
   );
 }
 
-const headerStyle = {
-  color: "white",
-  fontWeight: "bold",
-  fontSize: "0.9rem",
-  borderRight: "1px solid rgba(255, 255, 255, 0.2)", 
-  padding: "12px 16px"
-};
-
-const cellStyle = {
-  borderRight: "1px solid #B0C4DE", 
-  color: "#333",
-  padding: "12px 16px"
-};
-
-*/
-
-//Mile
-//oi
-// Não sei mais oq fazer testa isso pra ver kkkkk
-// Tô no layout agora pra testar kkkkkkkk
-//cada vez que pergunto pro gemini, ele responde algo diferente de tudo o que vcs estão fazendo
-// somos esses q peu e Amanda tá corrigindo kkkkk - kkkkkkkkkkkkkkkkkkk
-//eita, como é que testa, qual rota a gente coloca?
-
-// O gpt mandou criar esse componente Server Component para chamar query, ou fazer useEffect e useState será???
-//eu vi isso aqui, ele falou sobre criar usando o form como no html ou usando hooks mesmo
-// vamos fazer o hooks para testar {/* <Blz></Blz> } //kkkkkkkkkkkk
 
 
-//intervalo
+/*
 
+      <TextField
+        id="outlined-helperText"
+        label="Helper text"
+        defaultValue="Default Value"
+      />
+      <TextField id="outlined-search" label="Search field" type="search" />
+      <TextField
+        id="outlined-read-only-input"
+        label="Read Only"
+        defaultValue="ola"
+        InputProps={{ readOnly: true }}
+      />
 
-// Deu certo?
-// não deu mais erro, vou tentar descobrir porque não conseguimos usar o componente nativo
-// e porque esse dá certo
-// e qualquer coisa a gente segue por esse e desenvolve o nosso 
-// Olhei no Gpt e não entendi nada kkkk
-// Pois é, ele me disse que não pode usar o nativo e ao mesmo tempo disse que a doc está certa
-// Deu npm i ai?
-//não, vou dar agora
+      <TextField
+        label="Short Description"
+        fullWidth
+        sx={{
+          "& .MuiInputBase-root": {
+            height: 40,
+          },
+          "& input": {
+            padding: "10px 12px",
+          },
+        }}
+      />
 
-// Testa ai pra ver o que vai dar
-
-
-
-
-
-/* exemplo do google
-app/page.tsx (Este é um Server Component por padrão)
-import { createItem } from './actions'; // Importe a ação
-
-export default function Page() {
-  return (
-    <form action={createItem}>
-      <label htmlFor="name">Nome:</label>
-      <input type="text" id="name" name="name" required />
-      
-      <label htmlFor="description">Descrição:</label>
-      <textarea id="description" name="description" rows={4} />
-
-      <button type="submit">Enviar</button>
-    </form>
-  );
-}
-
-*/
+      <TextField
+        label="Description"
+        fullWidth
+        multiline
+        sx={{
+          "& .MuiInputBase-root": {
+            alignItems: "flex-start",
+          },
+          "& textarea": {
+            padding: "10px 12px",
+          },
+        }}
+        rows={5}
+      />
+      */
