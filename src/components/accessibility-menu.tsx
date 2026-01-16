@@ -18,10 +18,10 @@ const AccessibilityMenu = () => {
     isMenuOpen,
     toggleMenu,
     clearSettings,
-    contrastEnabled,
+    themeMode,
     readingMaskEnabled,
     themeFontFamily,
-    toggleContrast,
+    toggleThemeMode,
     toggleReadingMask,
     changeFontFamily,
   } = useAccessibility();
@@ -61,10 +61,10 @@ const AccessibilityMenu = () => {
               </Grid>
               <Grid item xs={12}>
                 <ClickButton
-                  click={toggleContrast}
+                  click={toggleThemeMode}
                   title="Modo dark"
                   backIcon={<ContrastIcon sx={{ fontSize: 36 }} />}
-                  isActive={contrastEnabled}
+                  isActive={themeMode === 'dark'}
                   sx={customStyles.accessibilityMenu.buttonGrid} />
               </Grid>
               <Grid item xs={6}>

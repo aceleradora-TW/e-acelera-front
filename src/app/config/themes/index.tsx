@@ -1,5 +1,5 @@
 'use client'
-import { CssBaseline, PaletteColor, PaletteColorOptions, ThemeProvider, createTheme } from "@mui/material"
+import { CssBaseline, PaletteColor, PaletteColorOptions, PaletteMode, ThemeProvider, createTheme } from "@mui/material"
 import React from "react"
 import { palette } from "./palette"
 import { customStyles } from "./components"
@@ -54,6 +54,44 @@ const applyFontFamily = (fontFamily?: string) => {
   return { fontFamily: `${fontFamily} !important` };
 };
 
+
+const themeBuilder = (mode: PaletteMode, fontFamily?: string) => createTheme({
+  palette: palette(mode),
+  typography: {
+    ...typography,
+    ...(fontFamily && { fontFamily }),
+  },
+  customStyles,
+  components: {
+    MuiCssBaseline: {
+      styleOverrides: {
+        html: {
+          scrollBehavior: 'smooth',
+          ...applyFontFamily(fontFamily),
+        },
+        body: applyFontFamily(fontFamily),
+      },
+    },
+  },
+})
+
+const defaultTheme = themeBuilder("light")
+
+export const ThemeConfig: React.FC<ThemeProp> = ({ children }) => {
+
+  const { themeFontFamily, themeMode } = useAccessibility();
+
+  const theme = React.useMemo(() => themeBuilder(themeMode, themeFontFamily), [themeMode, themeFontFamily]);
+
+  return (
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      {children}
+    </ThemeProvider>
+  );
+}
+
+/*
 const themeBuilder = (fontFamily?: string) => createTheme({
   palette,
   typography: {
@@ -94,5 +132,6 @@ export const ThemeConfig: React.FC<ThemeProp> = ({ children }) => {
     </ThemeProvider>
   )
 }
+}) */
 
 export { defaultTheme as theme }

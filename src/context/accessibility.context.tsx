@@ -1,12 +1,13 @@
 'use client'
+import { Palette, PaletteMode } from '@mui/material';
 import { createContext, useContext, useEffect, useState } from 'react';
 
 interface AccessibilityContextType {
   isMenuOpen: boolean;
   toggleMenu: () => void;
   clearSettings: () => void;
-  contrastEnabled: boolean;
-  toggleContrast: () => void;
+  themeMode: PaletteMode;
+  toggleThemeMode: () => void;
   readingMaskEnabled: boolean;
   toggleReadingMask: () => void;
   themeFontFamily?: string;
@@ -23,16 +24,16 @@ export const AccessibilityProvider = ({
   children: React.ReactNode;
 }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [contrastEnabled, setContrastEnabled] = useState(false);
+  const [themeMode, setThemeMode] = useState<PaletteMode>('light');
   const [readingMaskEnabled, setReadingMaskEnabled] = useState(false);
   const [themeFontFamily, setThemeFontFamily] = useState<string | undefined>(
     undefined
   );
 
   useEffect(() => {
-    const storedContrast = localStorage.getItem('contrastEnabled');
-    if (storedContrast === 'true') {
-      setContrastEnabled(true);
+    const storedContrast = localStorage.getItem('themeMode') as PaletteMode;
+    if (storedContrast) {
+      setThemeMode(storedContrast);
     }
   }, []);
 
@@ -52,10 +53,10 @@ export const AccessibilityProvider = ({
 
   const toggleMenu = () => setIsMenuOpen((prev) => !prev);
 
-  const toggleContrast = () => {
-    setContrastEnabled((prev) => {
-      const newValue = !prev;
-      localStorage.setItem('contrastEnabled', String(newValue));
+  const toggleThemeMode = () => {
+    setThemeMode((prev) => {
+      const newValue = prev === 'light' ? 'dark' : 'light';
+      localStorage.setItem('themeMode', newValue);
       return newValue;
     });
   };
@@ -81,10 +82,10 @@ export const AccessibilityProvider = ({
   };
 
   const clearSettings = () => {
-    setContrastEnabled(false);
+    setThemeMode('light');
     setReadingMaskEnabled(false);
     setThemeFontFamily(undefined);
-    localStorage.removeItem('contrastEnabled');
+    localStorage.removeItem('themeMode');
     localStorage.removeItem('readingMaskEnabled');
     localStorage.removeItem('themeFontFamily');
   };
@@ -95,8 +96,8 @@ export const AccessibilityProvider = ({
         isMenuOpen,
         toggleMenu,
         clearSettings,
-        contrastEnabled,
-        toggleContrast,
+        themeMode,
+        toggleThemeMode,
         readingMaskEnabled,
         toggleReadingMask,
         themeFontFamily,
