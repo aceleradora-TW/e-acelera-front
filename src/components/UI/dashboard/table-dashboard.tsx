@@ -2,10 +2,9 @@
 import { palette } from '@/app/config/themes/palette';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import { ptBR } from '@mui/x-data-grid/locales';
-import { Paper } from '@mui/material';
+import { Paper, useTheme } from '@mui/material';
 import { useRouter } from 'next/navigation';
 import React from 'react';
-import { customStyles } from '@/app/config/themes/components';
 
 export interface Column {
     id: string;
@@ -38,6 +37,7 @@ export const mockRows = [
 
 export function TableDashboard({ columns, rows }: TableDashboardProps) {
     const router = useRouter();
+    const theme = useTheme();
 
     const gridColumns: GridColDef[] = columns.map((col) => ({
         field: col.id,
@@ -63,7 +63,7 @@ export function TableDashboard({ columns, rows }: TableDashboardProps) {
                 disableRowSelectionOnClick
                 onRowClick={(params) => router.push(`/dashboard/${params.id}`)}
                 localeText={ptBR.components.MuiDataGrid.defaultProps.localeText}
-                sx={customStyles.tableDashboard}
+                sx={theme.customStyles.tableDashboard}
             />
         </Paper>
     );
