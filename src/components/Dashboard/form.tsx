@@ -75,6 +75,75 @@ export default function FormPage() {
   );
 }
 
+/*
+#### codigo test chat
+
+type FormMode = "create" | "edit" | "read";
+
+type FormField = { name: string; label: string; value?: string; multiline?: boolean; rows?: number; };
+const field: FormField[] = [
+  { name: "title", label: "Título", value: "Título do banco" },
+  { name: "shortDescription", label: "Descrição curta", value: "Texto curto do banco" },
+  { name: "description", label: "Descrição longa", value: "Texto longo do banco", multiline: true, rows: 4 },
+];
+
+
+export default function FormPage({
+  mode,
+  fields,
+}: {
+  mode: FormMode;
+  fields: FormField[];
+}) {
+  const [formData, setFormData] = useState(
+    fields.reduce((acc, field) => {
+      acc[field.name] = mode === "create" ? "" : field.value || "";
+      return acc;
+    }, {} as Record<string, string>)
+  );
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSave = () => {
+    console.log("Dados salvos:", formData);
+  };
+
+  return (
+    <Container component="form" sx={{ p: 4, backgroundColor: "#fff" }}>
+      {fields.map((field) => (
+        <InputDashboard
+          key={field.name}
+          label={field.label}
+          value={formData[field.name]}
+          onChange={handleChange}
+          InputProps={{readOnly: mode === "read"}}
+          multiline={field.multiline}
+          rows={rows}
+        />
+      ))}
+
+      {mode !== "read" && (
+        <Box sx={{ display: "flex", justifyContent: "flex-end", gap: 2 }}>
+          <ClickButton title="Cancelar" click={() => console.log("cancelar")} />
+          <ClickButton
+            title={mode === "create" ? "Criar" : "Salvar"}
+            click={handleSave}
+            isActive
+          />
+        </Box>
+      )}
+    </Container>
+  );
+}
+
+
+
+
+
+
 
 
 /*

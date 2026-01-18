@@ -1,26 +1,36 @@
 import { TextField, TextFieldProps } from "@mui/material";
+import React from "react";
+import { UseControllerProps, useController } from "react-hook-form";
 
 type InputDashboardProps = {
-    label: string;    
+    label: string;
     InputProps?: TextFieldProps['InputProps'];
     multiline?: boolean;
-    value?: string;
-    onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    // onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-export function InputDashboard( 
-  {label, InputProps, multiline, value, onChange}: InputDashboardProps
+type ExampleInput = {
+  example: string
+}
+export function InputDashboard(
+  {label, InputProps, multiline}: InputDashboardProps,
+  props: UseControllerProps<ExampleInput>,
   ){
+  const {field, fieldState} = useController(props);
   return (
+    <>
     <TextField
       label={label}
       InputProps={InputProps}
       multiline={multiline}
-      value={value}
-      onChange={onChange}
       fullWidth
       sx={{color: 'black'}}
+      {...field}
     />
+    <p>{fieldState.error && "error"}</p>
+    <p>{fieldState.invalid && "invalid"}</p>
+    <p>{fieldState.isTouched && "touched"}</p>
+    </>
   )
 }
 
@@ -43,7 +53,7 @@ export function InputDashboard(
 /**
  * adicionar novo registro => /admin/dashboard/theme/new
  * - campos vazios
- * 
+ *
  * editar registro => /admin/dashboard/theme/:id
- *  => contexto ou nova req -> pegar dados do tema que já existem 
+ *  => contexto ou nova req -> pegar dados do tema que já existem
  */
