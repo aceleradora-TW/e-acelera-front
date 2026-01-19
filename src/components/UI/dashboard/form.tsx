@@ -1,10 +1,12 @@
 import { Controller, SubmitHandler, useForm } from "react-hook-form"
 import {InputDashboard} from "@/components/Dashboard/input"
-import { Container, TextField, Typography } from "@mui/material"
+import { Box, Button, Container, TextField, Typography } from "@mui/material"
+import { textAlign } from "@mui/system"
 
 interface IFormInputs {
   title: string
   shortDescription: string
+  Description: string
 }
 
 //o formulario é dinâmico e devemos ter um arquivo a parte para dizer qual o tipo de formulario que estamos chamnado
@@ -13,6 +15,7 @@ export default function Form() {
     defaultValues: {
       title: "",
       shortDescription: "",
+      Description: ""
     },
   })
   const onSubmit: SubmitHandler<IFormInputs> = (data) => console.log(data)
@@ -57,7 +60,7 @@ export default function Form() {
       {/* errors will return when field validation fails  */}
       {/* {errors.exampleRequired && <span>This field is required</span>} */}
         <Controller
-          name="nome"
+          name="title"
           control={control}
           rules={{ required: true }}
           render={({field}) => <TextField  label="Titulo" {...field} />}
@@ -68,12 +71,41 @@ export default function Form() {
           rules={{ required: true }}
           render={({field}) => <TextField  label="Descrição pequena" {...field} />}
         />
+
+        <Controller
+          name="Description"
+          control={control}
+          rules={{ required: true }}
+          render={({field}) => <TextField  label="Descrição" {...field} />}
+        />
       {/* <InputDashboard  label="Titulo ler" value="Somente leitura" InputProps={{ readOnly: true }} /> */}
       {/* <InputDashboard  label="Titulo criar" onChange={() => console.log('teste do criar')}/> */}
-        <button type="button">Cancelar</button>
-        <button type="button">Salvar</button>
-        <input type="submit" />
-      {/* <input type="submit" /> */}
+      <Box
+        sx={{
+          display: "flex",
+          gap: 2,
+          justifyContent: { xs: "right", md: "right" },
+          // flexWrap: "wrap",
+          // flexDirection: "row",
+          // textAlign: "right",
+          // alignItems: "flex-end",
+        }}
+      >
+        <Button type="button"
+          sx={{
+            border: "solid 0.5px ",
+            
+          }}
+        >
+          Cancelar
+        </Button>
+        <Button type="button"
+          sx={{
+            border: "solid 0.5px"
+          }}
+        >Salvar</Button>
+        {/* <input type="submit" /> */}
+      </Box>
     </Container>
   )
 }
