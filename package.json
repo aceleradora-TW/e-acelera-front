@@ -34,7 +34,8 @@
     "remark-gfm": "^4.0.1",
     "slick-carousel": "^1.8.1",
     "styled-components": "^6.1.11",
-    "winston": "^3.16.0"
+    "winston": "^3.16.0",
+    "zod": "^4.3.5"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.28.5",
