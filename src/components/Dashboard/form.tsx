@@ -1,4 +1,4 @@
-"use client";
+/*"use client";
 //import { Form } from 'next/';
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -14,7 +14,7 @@ import { ClickButton } from "../ClickButton";
 }
     */
 
-
+/*
 export default function FormPage() {
   const searchParams = useSearchParams();
   const query = searchParams?.get("query") || "";
@@ -189,3 +189,61 @@ export default function FormPage({
         rows={5}
       />
       */
+
+    "use client";
+
+import { Box, Container, Typography } from "@mui/material";
+import { useState } from "react";
+import { Input } from "./input";
+import { ClickButton } from "../ClickButton";
+import { customStyles } from "@/app/config/themes/components";
+
+export default function FormPage() {
+  const [title, setTitle] = useState("");
+  const [shortDescription, setShortDescription] = useState("");
+  const [description, setDescription] = useState("");
+
+  function handleSave() {
+    console.log({ title, shortDescription, description });
+  }
+
+  function handleCancel() {
+    console.log("cancelar");
+  }
+
+  return (
+    <Container maxWidth="xl" sx={customStyles.FormPage.container}>
+      <Typography variant="h6" sx={customStyles.FormPage.title}>
+        Themes
+      </Typography>
+
+      <Input
+        label="Título"
+        value={title}
+        mode="edit"
+        onChange={(e) => setTitle(e.target.value)}
+      />
+
+      <Input
+        label="shortDescription"
+        mode="new"
+        value={shortDescription}
+        onChange={(e) => setShortDescription(e.target.value)}
+      />
+
+      <Input
+        label="description"
+        mode="read"
+        multiline
+        rows={4}
+        value={description}
+        onChange={(e) => setDescription(e.target.value)}
+      />
+
+      <Box sx={customStyles.FormPage.actions}>
+        <ClickButton title="Cancelar" click={handleCancel} />
+        <ClickButton title="Salvar" click={handleSave} isActive />
+      </Box>
+    </Container>
+  );
+}
