@@ -1,10 +1,9 @@
-import { Box, Grid, Typography, useTheme } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 import { Accordion } from "../../accordion";
 import { FAQ_QUESTIONS } from "@/utils/constants";
 import { SectionContent } from "../section-content";
 
 export function Faq() {
-  const theme = useTheme();
   return (
     <SectionContent
       variant="faq"
@@ -27,7 +26,7 @@ export function Faq() {
           <Typography
             variant="h3"
             gutterBottom
-            color={theme.palette.textColor?.main}
+            color="textColor.main"
           >
             Tire suas dúvidas - FAQ
           </Typography>

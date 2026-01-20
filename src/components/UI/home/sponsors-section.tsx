@@ -56,7 +56,7 @@ export const SponsorsSection = () => {
                         }}>
                         <Box
                             sx={{
-                                backgroundColor: theme.palette.textColor?.main,
+                                backgroundColor: "sameColor.darkBlue",
                                 border: "2px solid white",
                                 borderRadius: { xs: "4px", md: "4px 0 0 4px" },
                                 overflow: "hidden",
@@ -113,7 +113,7 @@ export const SponsorsSection = () => {
                         }}>
                         <Box
                             sx={{
-                                backgroundColor: theme.palette.textColor?.main,
+                                backgroundColor: "sameColor.darkBlue",
                                 border: "2px solid white",
                                 borderRadius: { xs: "4px", md: "0 4px 4px 0" },
                             }}

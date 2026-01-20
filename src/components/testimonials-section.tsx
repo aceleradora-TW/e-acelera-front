@@ -30,7 +30,7 @@ export const TestimonialsSection = () => {
         display: "flex",
         flexDirection: "column",
         justifyContent: "space-between",
-        backgroundColor: theme.palette.textColor?.main,
+        backgroundColor: "sameColor.darkBlue",
         padding: "12px",
         borderRadius: "4px",
         border: "3px solid white",
@@ -48,11 +48,11 @@ export const TestimonialsSection = () => {
           paddingRight: "2px",
           "&::-webkit-scrollbar": { width: "5px" },
           "&::-webkit-scrollbar-thumb": {
-            backgroundColor: "#ccc",
+            backgroundColor: "sameColor.white",
             borderRadius: "8px",
           },
           "&::-webkit-scrollbar-thumb:hover": {
-            backgroundColor: "#aaa",
+            backgroundColor: "accent.lightBlue",
           },
         }}
       >

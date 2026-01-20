@@ -47,7 +47,7 @@ export const ImpactSection = () => {
           position: "relative",
           margin: { xs: "16px 5%", md: "16px auto" },
           maxWidth: "928px",
-          backgroundColor: theme.palette.textColor?.main,
+          backgroundColor: "sameColor.darkBlue",
           padding: { xs: "24px", md: "24px 48px" },
           borderRadius: "4px",
           border: "4px solid white",

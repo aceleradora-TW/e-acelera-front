@@ -30,11 +30,13 @@ declare module '@mui/material/styles' {
       pink: string;
       orange: string;
       gradient?: string;
+      lightBlue?: string;
     };
     sameColor?: {
       white: string,
       blue: string,
       darkBlue: string,
+      gray: string,
     };
   }
   interface PaletteOptions {
@@ -49,11 +51,13 @@ declare module '@mui/material/styles' {
       pink: string;
       orange: string;
       gradient?: string;
+      lightBlue?: string;
     };
     sameColor?: {
       white: string,
       blue: string,
       darkBlue: string,
+      gray: string,
     };
   }
 }

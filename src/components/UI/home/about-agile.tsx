@@ -34,8 +34,8 @@ export default function AboutAgil() {
       <SectionContent>
         <Grid container spacing={4}>
           <Grid item xs={12} md={7}>
-            <Box sx={{ minHeight: 552, width: "95%", height: "100%" }}>
-              <Box sx={{ display: "flex", flexDirection: "column" }}>
+            <Box sx={{ minHeight: 552, width: "95%", height: "100%", color: "textColor.main"  }}>
+              <Box sx={{ display: "flex", flexDirection: "column"}}>
                 <Typography
                   color={"textColor.main"}
                   variant="h2"

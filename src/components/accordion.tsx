@@ -23,14 +23,15 @@ export function Accordion({ question, answer }: AccordionProps) {
     >
       <AccordionSummary
         expandIcon={
-          <ExpandMoreIcon sx={{ color: "bgColor.main" }} />
+          <ExpandMoreIcon sx={{ color: "sameColor.white" }} />
         }
         aria-controls="panel1-content"
         id="panel1-header"
         sx={{
-          backgroundColor: "textColor.main",
-          color: "bgColor.main",
+          backgroundColor: "bgColor.light",
+          color: "sameColor.white",
           boxShadow: "0em 0.2em 0.4em rgb(44 44 44 / 40%)",
+          borderRadius: 0.5,
         }}
       >
         <Typography component="span">{question}</Typography>

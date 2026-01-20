@@ -528,8 +528,8 @@ export const customStyles = {
   },
 
   impactSection: {
-    background: "buttonHover.main",
-    color: "bgColor.main",
+    backgroundColor: "buttonHover.dark",
+    color: "sameColor.white",
     textAlign: "center",
   },
   banner: {
@@ -558,8 +558,8 @@ export const customStyles = {
       paddingBottom: 4,
     },
     box: {
-      backgroundColor: "textColor.main",
-      color: "bgColor.main",
+      backgroundColor: "bgColor.light",
+      color: "sameColor.white",
       position: "relative",
       borderRadius: "4px",
       p: 2,
@@ -589,25 +589,15 @@ export const customStyles = {
       boxShadow: "none",
       background: "transparent",
     },
-    button: {
-      borderRadius: 1,
-      boxShadow: 4,
-      padding: "6px 16px",
-      "&:hover": {
-        backgroundColor: "textColor.main",
-        color: "bgColor.main",
-        boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.5)",
-      },
-    },
   },
 
   testimonials: {
-    background: "buttonHover.main",
-    color: "bgColor.main",
+    backgroundColor: "buttonHover.dark",
+    color: "sameColor.white",
   },
   sponsorsSection: {
-    background: "buttonHover.main",
-    color: "bgColor.main",
+    backgroundColor: "buttonHover.dark",
+    color: "sameColor.white",
     textAlign: "center",
   },
 

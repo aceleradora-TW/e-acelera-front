@@ -80,7 +80,6 @@ export const StudySection = () => {
                             sx={{
                                 mb: 3,
                                 textAlign: 'left',
-                                color: theme.palette.textColor?.light
                             }}
                         >
                             O e-Acelera é a plataforma de estudos da Aceleradora Ágil — gratuita, aberta e feita para quem quer aprender tecnologia com autonomia. Qualquer pessoa pode acessar e começar a estudar programação, mesmo sem experiência prévia.
@@ -116,7 +115,6 @@ export const StudySection = () => {
                             variant="body1"
                             sx={{
                                 mt: 3,
-                                color: theme.palette.textColor?.light
                             }}>
                             Tudo isso para preparar você para os próximos passos — seja continuar estudando, entrar no programa ou aplicar o que aprendeu em projetos reais.
                         </Typography>
@@ -128,7 +126,6 @@ export const StudySection = () => {
                                 variant="outlined"
                                 sx={{
                                     ...(theme as any).customStyles.button,
-                                    ...studysectionStyles.button,
                                     mt: { xs: 3, xl: 0 },
                                 }}
                                 href="/nivelamento" >Começar minha trilha

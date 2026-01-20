@@ -9,7 +9,7 @@ export enum themePalette {
   statusCompleted = "rgb(158, 255, 133)",
   statusNotStarted = "rgb(222, 229, 216)",
   baseBgColor = "rgb(255, 255, 255)",
-  //loginHover = "rgb(154, 192, 201)",
+  loginHover = "rgb(154, 192, 201)",
   dropdownContentColor = "rgb(87, 87, 87)",
   accentOrange = "rgb(245, 175, 85)",
   accentPink = "rgb(235, 101, 140)",
@@ -19,12 +19,6 @@ export enum themePalette {
   bannerCreateColor = "rgb(187, 84, 114)",
   bannerCreateHover = "rgb(154, 69, 95)",
 }
-/*
-backgrounds:
-main : branco baseBgColor
-light : azul escurto primaryTextColor
-dark : azul menos escuro button
-*/
 
 const commonColors = {
   accent: {
@@ -32,6 +26,7 @@ const commonColors = {
     pink: themePalette.accentPink,
     orange: themePalette.accentOrange,
     gradient: themePalette.accentGradient,
+    lightBlue: themePalette.loginHover,
   },
   statusSelect: {
     main: themePalette.statusNotStarted,
@@ -42,6 +37,7 @@ const commonColors = {
     white: themePalette.baseBgColor,
     blue: themePalette.button,
     darkBlue: themePalette.primaryTextColor,
+    gray: themePalette.dropdownContentColor,
   },
 };
 
@@ -55,7 +51,7 @@ const commonColors = {
         buttonHover: {
           main: themePalette.button,
           light: themePalette.button,
-         // contrastText: themePalette.baseBgColor,
+          dark: themePalette.button,
         },
         textColor: {
           main: themePalette.primaryTextColor,
@@ -78,7 +74,7 @@ const commonColors = {
         buttonHover: {
           main: themePalette.baseBgColor,
           light: themePalette.defaultTextColor,
-        // contrastText: "#E0E0E0",
+          dark: themePalette.primaryTextColor,
         }, 
         textColor: {
           main: themePalette.bannerBgColor,
@@ -86,7 +82,7 @@ const commonColors = {
         },
         bgColor: {
           main: themePalette.defaultTextColor,
-          light: themePalette.dropdownContentColor,
+          light: themePalette.defaultTextColor,
         },
         banner: {
           background: "#121212",
