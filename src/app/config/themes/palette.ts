@@ -13,6 +13,7 @@ export enum themePalette {
   accentBlue = "rgb(61, 143, 216)",
   borderPrimaryColor = "rgb(235, 101, 140)",
   borderSecondaryColor = "rgb(239, 174, 20)",
+  error = "rgb(244, 67, 54)"
 }
 
 export const palette = {
@@ -39,4 +40,8 @@ export const palette = {
     pink: themePalette.accentPink,
     orange: themePalette.accentOrange,
   },
+  buttonFormColor: {
+    blue: themePalette.button,
+    red: themePalette.error
+  }
 };

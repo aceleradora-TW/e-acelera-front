@@ -1,14 +1,16 @@
 import { Controller, SubmitHandler, useForm } from "react-hook-form"
 import { Box, Button, Container, TextField, Typography } from "@mui/material"
 import { ThemeFormData, themeFormDefs } from "./forms/defs/theme.defs"
+import { useTheme } from "@mui/material/styles";
 
 
 export default function Form() {
-  const { handleSubmit, control, reset } = useForm<ThemeFormData>({
+  const { handleSubmit, control, reset, formState: { isDirty }, } = useForm<ThemeFormData>({
     defaultValues: themeFormDefs.defaultValues
   })
 
   const onSubmit: SubmitHandler<ThemeFormData> = (data) => console.log(data)
+  const theme = useTheme();
 
   return (
     
@@ -53,15 +55,25 @@ export default function Form() {
       >
         <Button type="button"
           sx={{
-            border: "solid 0.5px ",
-            
+            border: "0.5px solid red",
+            color: theme.palette.buttonFormColor?.red,
+            "&:hover": {
+              "primary.dark" : "#E0E0E0",
+            },
           }}
         >
           Cancelar
         </Button>
+
         <Button type="submit"
+          disabled={!isDirty}
           sx={{
-            border: "solid 0.5px"
+            border: "0.5px solid",
+            backgroundColor: isDirty ? theme.palette.buttonFormColor?.blue : "#E0E0E0",
+            color: isDirty ? "#fff" : "#9E9E9E",
+            "&:hover": {
+              backgroundColor: isDirty ? "primary.dark" : "#E0E0E0",
+            },
           }}
         >Salvar</Button>
       </Box>

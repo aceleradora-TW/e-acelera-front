@@ -29,6 +29,10 @@ declare module '@mui/material/styles' {
       start: string;
       end: string;
     };
+    buttonFormColor?:{
+      blue: string;
+      red: string;
+    }
   }
   interface PaletteOptions {
     button?: PaletteColorOptions;
@@ -41,6 +45,10 @@ declare module '@mui/material/styles' {
       blue: string;
       pink: string;
       orange: string;
+    }
+    buttonFormColor?:{
+      blue: string;
+      red: string;
     }
     borderColor?: {
       start: string
