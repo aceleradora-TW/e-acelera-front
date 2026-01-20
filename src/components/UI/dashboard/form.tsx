@@ -1,33 +1,21 @@
 import { Controller, SubmitHandler, useForm } from "react-hook-form"
-import {InputDashboard} from "@/components/Dashboard/input"
 import { Box, Button, Container, TextField, Typography } from "@mui/material"
-import { textAlign } from "@mui/system"
+import { ThemeFormData, themeFormDefs } from "./forms/defs/theme.defs"
 
-interface IFormInputs {
-  title: string
-  shortDescription: string
-  Description: string
-}
 
-//o formulario é dinâmico e devemos ter um arquivo a parte para dizer qual o tipo de formulario que estamos chamnado
 export default function Form() {
-  const { handleSubmit, control, reset } = useForm<IFormInputs>({
-    defaultValues: {
-      title: "",
-      shortDescription: "",
-      Description: ""
-    },
+  const { handleSubmit, control, reset } = useForm<ThemeFormData>({
+    defaultValues: themeFormDefs.defaultValues
   })
-  const onSubmit: SubmitHandler<IFormInputs> = (data) => console.log(data)
+
+  const onSubmit: SubmitHandler<ThemeFormData> = (data) => console.log(data)
 
   return (
-    /* "handleSubmit" will validate your inputs before invoking "onSubmit" */
+    
       <Container
-      // maxWidth="sm"
       component="form"
       maxWidth="xl"
       sx={{
-        // pt: 4, pb: 1,
         mt: 6,
         backgroundColor: "#fff",
         borderRadius: "12px",
@@ -43,52 +31,24 @@ export default function Form() {
       <Typography variant="h6" fontWeight={600}>
         Cadastro
       </Typography>
-      {/* register your input into the hook by invoking the "register" function */}
-      {/* <input defaultplaceholder="test" {...register("example")} /> */}
-      {/* <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
-        <label htmlFor="title">Title</label>
-        <input id="title" type="text" placeholder={"Title"} />
 
-        <label htmlFor="shortDescription">ShortDescription</label>
-        <input id="shortDescription" type="text" placeholder={"ShortDescription"} />
-
-        <label htmlFor="description">Description</label>
-        <input id="description" type="text" placeholder={"Description"} />
-      </div> */}
-      {/* include validation with required or other standard HTML validation rules */}
-      {/* <input {...register("exampleRequired", { required: true })} /> */}
-      {/* errors will return when field validation fails  */}
-      {/* {errors.exampleRequired && <span>This field is required</span>} */}
-        <Controller
-          name="title"
-          control={control}
-          rules={{ required: true }}
-          render={({field}) => <TextField  label="Titulo" {...field} />}
-        />
-        <Controller
-          name="shortDescription"
-          control={control}
-          rules={{ required: true }}
-          render={({field}) => <TextField  label="Descrição pequena" {...field} />}
-        />
-
-        <Controller
-          name="Description"
-          control={control}
-          rules={{ required: true }}
-          render={({field}) => <TextField  label="Descrição" {...field} />}
-        />
-      {/* <InputDashboard  label="Titulo ler" value="Somente leitura" InputProps={{ readOnly: true }} /> */}
-      {/* <InputDashboard  label="Titulo criar" onChange={() => console.log('teste do criar')}/> */}
-      <Box
+      {
+        themeFormDefs.fields.map((field) => (
+          <Controller
+            key={field.name}
+            name={field.name}
+            control={control}
+            rules={{ required: true }}
+            render={({field: rhfField}) => (field.type === "text" ? <TextField  label={field.label} {...rhfField} /> : <TextField  label={field.label} multiline rows={5} {...rhfField} />)}
+          />
+        ))
+      }
+        
+       <Box
         sx={{
           display: "flex",
           gap: 2,
           justifyContent: { xs: "right", md: "right" },
-          // flexWrap: "wrap",
-          // flexDirection: "row",
-          // textAlign: "right",
-          // alignItems: "flex-end",
         }}
       >
         <Button type="button"
@@ -99,12 +59,11 @@ export default function Form() {
         >
           Cancelar
         </Button>
-        <Button type="button"
+        <Button type="submit"
           sx={{
             border: "solid 0.5px"
           }}
         >Salvar</Button>
-        {/* <input type="submit" /> */}
       </Box>
     </Container>
   )

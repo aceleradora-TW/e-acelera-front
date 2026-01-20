@@ -1,7 +1,7 @@
 export type FieldDef<T> = {
   name: keyof T;
   label: string;
-  type: "text" | "email" | "number" | "select" | "checkbox" | "combobox";
+  type: "text" | "email" | "number" | "select" | "checkbox" | "combobox" | "textarea";
   options?: { label: string; value: string }[];
 };
 
