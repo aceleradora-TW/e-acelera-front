@@ -38,7 +38,7 @@ const AccessibilityMenu = () => {
           </Box>
         )}
         <Fab color="primary" onClick={toggleMenu} sx={customStyles.accessibilityMenu.fabButton}>
-          <AccessibilityNewIcon sx={{ color: themePalette.baseBgColor, fontSize: 32 }} />
+          <AccessibilityNewIcon sx={{ color: "bgColor.main", fontSize: 32 }} />
         </Fab>
       </Box>
 

@@ -1,12 +1,9 @@
 "use client";
 import { Box, Button, Grid, Link, Typography, useTheme } from "@mui/material";
 import { SectionContent } from "../section-content";
-import { useAccessibility } from "@/context/accessibility.context";
 
 export default function AboutAgil() {
   const theme = useTheme();
-  const { contrastEnabled } = useAccessibility();
-  const bg = contrastEnabled ? "#222" : "#0b497a";
 
   const listTitlesFormacao = [
     "Tecnologias modernas",
@@ -21,11 +18,10 @@ export default function AboutAgil() {
 
   const AceleraButton = (
     <Button
-      aria-label="Começar minha trilha na plataforma e-Acelera"
+      aria-label="Saiba mais sobre a plataforma e-Acelera"
       variant="outlined"
       sx={{
         ...(theme as any).customStyles.button,
-        ...(theme as any).customStyles.buttonAboutAgil,
         mt: 3,
       }}
     >
@@ -41,7 +37,7 @@ export default function AboutAgil() {
             <Box sx={{ minHeight: 552, width: "95%", height: "100%" }}>
               <Box sx={{ display: "flex", flexDirection: "column" }}>
                 <Typography
-                  color={theme.palette.textColor?.main}
+                  color={"textColor.main"}
                   variant="h2"
                   sx={{ mb: 2 }}
                 >
@@ -85,7 +81,7 @@ export default function AboutAgil() {
                       target="_blank"
                       rel="noopener noreferrer"
                       href={"https://aceleradora-inclusiva.netlify.app/"}
-                      sx={{ color: "#002C53" }}
+                      sx={{ color: "textColor.main" }}
                     >
                       Aceleradora Inclusiva
                     </Link>
@@ -97,7 +93,7 @@ export default function AboutAgil() {
                       href={
                         "https://www.thoughtworks.com/content/dam/thoughtworks/documents/e-book/tw_ebook_aceleradora_portuguese.pdf"
                       }
-                      sx={{ color: "#002C53" }}
+                      sx={{ color: "textColor.main" }}
                     >
                       e-book da Aceleradora Ágil e Inclusiva.
                     </Link>
@@ -117,7 +113,7 @@ export default function AboutAgil() {
                 sx={{
                   fontSize: 19,
                   fontWeight: 600,
-                  color: theme.palette.textColor?.main,
+                  color: "textColor.main",
                 }}
                 mb={4}
               >
@@ -132,7 +128,7 @@ export default function AboutAgil() {
                       key={title}
                       sx={{
                         ...theme.customStyles.sessionFormacao(isLarge),
-                        backgroundColor: bg,
+                        backgroundColor: "buttonHover.light",
                       }}
 
                     >

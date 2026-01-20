@@ -3,6 +3,7 @@ type ExtendedCSSProperties = {
 };
 
 export interface Theme {
+  palette: any;
   button: ExtendedCSSProperties;
   description: ExtendedCSSProperties;
   linkActive: ExtendedCSSProperties;
@@ -40,7 +41,6 @@ export interface Theme {
     textLevelContainer: ExtendedCSSProperties;
     formControl: ExtendedCSSProperties;
     textLevelIndicator: (
-      themePalette: any,
       currentSize: number,
       indicatorSize: number
     ) => ExtendedCSSProperties;
@@ -179,9 +179,11 @@ export interface Theme {
     borderImage: string;
     flex: number;
     width: string;
+    borderStyle: string;
+    borderImageSlice: number;
+
   };
 
-  buttonAboutAgil: ExtendedCSSProperties;
   sessionListContainer: {
     width: string;
     display: string;

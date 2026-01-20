@@ -1,12 +1,10 @@
-import { Padding } from "@mui/icons-material";
 import { themePalette } from "./palette";
-import { Theme } from "./types";
 
-export const customStyles: Theme = {
+export const customStyles = {
   button: {
-    backgroundColor: themePalette.baseBgColor,
-    borderColor: themePalette.button,
-    color: themePalette.button,
+    backgroundColor: "bgColor.main",
+    borderColor: "buttonHover.main",
+    color: "buttonHover.main",
     fontSize: "1rem",
     lineHeight: 1.6,
     fontWeight: 500,
@@ -16,15 +14,15 @@ export const customStyles: Theme = {
     borderRadius: 2,
     border: "1px solid",
     "&:hover": {
-      backgroundColor: themePalette.button,
-      color: themePalette.baseBgColor,
+      backgroundColor: "buttonHover.main",
+      color: "bgColor.main",
       border: "1px solid transparent",
     },
   },
 
   buttonActive: {
-    backgroundColor: themePalette.button,
-    color: themePalette.baseBgColor,
+    backgroundColor: "buttonHover.main",
+    color: "bgColor.main",
     border: "1px transparent solid",
   },
 
@@ -39,9 +37,9 @@ export const customStyles: Theme = {
 
   linkActive: {
     borderBottom: "solid",
-    color: themePalette.primaryTextColor,
+    color: "textColor.main",
     borderBottomWidth: "3px",
-    borderBottomColor: themePalette.primaryTextColor,
+    borderBottomColor: "textColor.main",
     display: "block",
     textTransform: "none",
     fontSize: "18px",
@@ -56,7 +54,7 @@ export const customStyles: Theme = {
     borderRadius: "0",
   },
   link: {
-    color: themePalette.defaultTextColor,
+    color: "textColor.light",
     display: "block",
     textTransform: "none",
     fontSize: "18px",
@@ -71,7 +69,7 @@ export const customStyles: Theme = {
     borderRadius: "0",
   },
   linkReference: {
-    color: themePalette.defaultTextColor,
+    color: "textColor.light",
   },
   logoType: {
     fontSize: "1.2rem",
@@ -80,7 +78,7 @@ export const customStyles: Theme = {
     letterSpacing: "0.15px",
     lineHeight: 1.6,
     textDecoration: "none",
-    color: themePalette.primaryTextColor,
+    color: "textColor.main",
   },
   logoTypeLogin: {
     fontSize: "2.125rem",
@@ -88,10 +86,10 @@ export const customStyles: Theme = {
     letterSpacing: "0.25px",
     lineHeight: 1.2,
     textDecoration: "none",
-    color: themePalette.primaryTextColor,
+    color: "textColor.main",
   },
   cardBody: {
-    color: themePalette.defaultTextColor,
+    color: "textColor.light",
     wordWrap: "break-word",
     display: "-webkit-box",
     WebkitBoxOrient: "vertical",
@@ -103,13 +101,13 @@ export const customStyles: Theme = {
     display: "flex",
     flexDirection: "column",
     justifyContent: "space-between",
-    backgroundColor: themePalette.baseBgColor,
+    backgroundColor: "bgColor.main",
     maxWidth: "100%",
     height: "100%",
     borderWidth: 2,
   },
   cardButtonContainer: {
-    backgroundColor: themePalette.baseBgColor,
+    backgroundColor: "bgColor.main",
     maxWidth: 316,
     borderWidth: 2,
     height: "100%",
@@ -138,7 +136,7 @@ export const customStyles: Theme = {
     marginBottom: 5.5,
   },
   cardTitle: {
-    color: themePalette.primaryTextColor,
+    color: "textColor.main",
     wordWrap: "break-word",
     display: "-webkit-box",
     WebkitLineClamp: 3,
@@ -191,12 +189,12 @@ export const customStyles: Theme = {
   },
   title: {
     textAlign: "left",
-    color: themePalette.primaryTextColor,
+    color: "textColor.main",
     margin: "20px 0",
   },
   breadCrumb: {
     textDecoration: "none",
-    color: themePalette.primaryTextColor,
+    color: "textColor.main",
     marginTop: 1.2,
   },
   cardVideo: {
@@ -235,7 +233,7 @@ export const customStyles: Theme = {
     marginRight: 1.3,
   },
   advanceExercises: {
-    color: themePalette.button,
+    color: "buttonHover.main",
     padding: "10px 20px",
   },
   cardMediaImage: {
@@ -266,8 +264,8 @@ export const customStyles: Theme = {
     textAlign: "center",
   },
   Footer: {
-    background: themePalette.primaryTextColor,
-    color: themePalette.baseBgColor,
+    background: "textColor.main",
+    color: "bgColor.main",
     mt: 4,
     height: "30%",
     boxShadow: "0 0 0.6em rgba(44 44 44 / 75%)",
@@ -285,17 +283,6 @@ export const customStyles: Theme = {
     minHeight: 542,
     flexWrap: { xs: "wrap", lg: "nowrap" },
     padding: 0,
-  },
-
-  buttonAboutAgil: {
-    borderRadius: 1,
-    boxShadow: 4,
-    padding: "6px 16px",
-    "&:hover": {
-      backgroundColor: themePalette.primaryTextColor,
-      color: themePalette.baseBgColor,
-      boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.5)",
-    },
   },
 
   sessionListContainer: {
@@ -328,7 +315,9 @@ export const customStyles: Theme = {
       xs: "100%",
       md: 250,
     },
-    borderImage: `linear-gradient(${themePalette.borderPrimaryColor}, ${themePalette.borderSecondaryColor}) 1`,
+    borderStyle: "solid",
+    borderImage: themePalette.accentGradient,
+    borderImageSlice: 1,
   },
 
   sessionFormacaoContainer: {
@@ -374,8 +363,8 @@ export const customStyles: Theme = {
       bottom: 16,
       top: "15%",
       right: 16,
-      backgroundImage: `linear-gradient(270deg, ${themePalette.button}, ${themePalette.accentBlue})`,
-      color: themePalette.baseBgColor,
+      backgroundImage: `linear-gradient(270deg, ${"buttonHover.main"}, ${"accent.blue"})`,
+      color: "bgColor.main",
       padding: "6px 36px 6px 12px",
       borderRadius: "100px 0px 0px 100px",
       height: 45,
@@ -388,7 +377,7 @@ export const customStyles: Theme = {
       justifyContent: "left",
       transform: "translateX(10px)",
       transition: "all 0.3s ease",
-      boxShadow: `0px 4px 12px ${themePalette.defaultTextColor
+      boxShadow: `0px 4px 12px ${"textColor.light"
         .replace("rgb", "rgba")
         .replace(")", ", 0.3)")}`,
     },
@@ -398,11 +387,11 @@ export const customStyles: Theme = {
       backgroundClip: "border-box",
       boxShadow: `
         inset 0 0 0 4px white,
-        0px 4px 12px ${themePalette.defaultTextColor
+        0px 4px 12px ${"textColor.light"
           .replace("rgb", "rgba")
           .replace(")", ", 0.3)")}
       `,
-      backgroundImage: `linear-gradient(190deg, ${themePalette.button}, ${themePalette.accentBlue})`,
+      backgroundImage: `linear-gradient(190deg, ${"buttonHover.main"}, ${"accent.blue"})`,
       width: 70,
       height: 70,
       padding: 0,
@@ -410,12 +399,12 @@ export const customStyles: Theme = {
       alignItems: "center",
       justifyContent: "center",
       "&:hover": {
-        backgroundImage: `linear-gradient(190deg, ${themePalette.button}, ${themePalette.button})`,
+        backgroundImage: `linear-gradient(190deg, ${"buttonHover.main"}, ${"buttonHover.main"})`,
       },
       "&:active": {
         boxShadow: `
           inset 0 0 0 4px white,
-          0px 4px 12px ${themePalette.defaultTextColor
+          0px 4px 12px ${"textColor.light"
             .replace("rgb", "rgba")
             .replace(")", ", 0.3)")}
         `,
@@ -433,12 +422,12 @@ export const customStyles: Theme = {
       zIndex: 1300,
       overflow: "hidden",
       flexDirection: "column",
-      backgroundColor: themePalette.baseBgColor,
+      backgroundColor: "bgColor.main",
     },
 
     menuHeader: {
-      backgroundImage: `linear-gradient(120deg, ${themePalette.accentBlue}, ${themePalette.button})`,
-      color: themePalette.baseBgColor,
+      backgroundImage: `linear-gradient(120deg, ${"accent.blue"}, ${"buttonHover.main"})`,
+      color: "bgColor.main",
       padding: "12px 12px",
       display: "flex",
       justifyContent: "space-between",
@@ -447,21 +436,21 @@ export const customStyles: Theme = {
     },
 
     closeButton: {
-      color: themePalette.baseBgColor,
+      color: "bgColor.main",
       width: 20,
       height: 20,
       minWidth: 20,
       minHeight: 20,
       padding: 1,
       borderRadius: "50%",
-      backgroundColor: themePalette.button,
+      backgroundColor: "buttonHover.main",
       display: "flex",
       justifyContent: "center",
       alignItems: "center",
       border: "1px solid white",
       "&:hover": {
-        backgroundColor: themePalette.baseBgColor,
-        color: themePalette.button,
+        backgroundColor: "bgColor.main",
+        color: "buttonHover.main",
         border: "1px transparent solid",
       },
     },
@@ -482,13 +471,13 @@ export const customStyles: Theme = {
     },
 
     footerLine: {
-      backgroundImage: `linear-gradient(120deg, ${themePalette.accentPink}, ${themePalette.accentOrange})`,
+      backgroundImage: `linear-gradient(120deg, ${"accent.pink"}, ${"accent.orange"})`,
       height: 4,
       width: "100%",
     },
 
     footerBox: {
-      backgroundColor: themePalette.accentBlue,
+      backgroundColor: "accent.blue",
       display: "flex",
       justifyContent: "center",
       padding: "12px 12px",
@@ -502,7 +491,6 @@ export const customStyles: Theme = {
     },
 
     textLevelIndicator: (
-      themePalette: any,
       textSize: number,
       size: number
     ) => ({
@@ -510,12 +498,12 @@ export const customStyles: Theme = {
       height: 4,
       borderRadius: 0.6,
       backgroundColor:
-        textSize >= size ? themePalette.baseBgColor : themePalette.button,
+        textSize >= size ? "bgColor.main" : "buttonHover.main",
       transition: "background-color 0.3s ease",
       border:
         textSize < size
-          ? `1px solid ${themePalette.baseBgColor}`
-          : `1px solid ${themePalette.baseBgColor}`,
+          ? `1px solid ${"bgColor.main"}`
+          : `1px solid ${"bgColor.main"}`,
     }),
 
     formControl: {
@@ -540,8 +528,8 @@ export const customStyles: Theme = {
   },
 
   impactSection: {
-    background: themePalette.button,
-    color: themePalette.baseBgColor,
+    background: "buttonHover.main",
+    color: "bgColor.main",
     textAlign: "center",
   },
   banner: {
@@ -551,7 +539,7 @@ export const customStyles: Theme = {
     contentBox: {
       position: "relative",
       zIndex: 2,
-      color: themePalette.baseBgColor,
+      color: "bgColor.main",
       display: "flex",
       flexDirection: "column",
       justifyContent: "center",
@@ -565,13 +553,13 @@ export const customStyles: Theme = {
   },
   studysection: {
     container: {
-      background: themePalette.baseBgColor,
-      color: themePalette.primaryTextColor,
+      background: "bgColor.main",
+      color: "textColor.main",
       paddingBottom: 4,
     },
     box: {
-      backgroundColor: themePalette.primaryTextColor,
-      color: themePalette.baseBgColor,
+      backgroundColor: "textColor.main",
+      color: "bgColor.main",
       position: "relative",
       borderRadius: "4px",
       p: 2,
@@ -606,20 +594,20 @@ export const customStyles: Theme = {
       boxShadow: 4,
       padding: "6px 16px",
       "&:hover": {
-        backgroundColor: themePalette.primaryTextColor,
-        color: themePalette.baseBgColor,
+        backgroundColor: "textColor.main",
+        color: "bgColor.main",
         boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.5)",
       },
     },
   },
 
   testimonials: {
-    background: themePalette.button,
-    color: themePalette.baseBgColor,
+    background: "buttonHover.main",
+    color: "bgColor.main",
   },
   sponsorsSection: {
-    background: themePalette.button,
-    color: themePalette.baseBgColor,
+    background: "buttonHover.main",
+    color: "bgColor.main",
     textAlign: "center",
   },
 
@@ -646,7 +634,7 @@ export const customStyles: Theme = {
       left: 0,
       width: "100vw",
       height: "3px",
-      backgroundColor: themePalette.accentBlue,
+      backgroundColor: "accent.blue",
       zIndex: 9999,
       pointerEvents: "none",
     },
@@ -656,7 +644,7 @@ export const customStyles: Theme = {
       left: 0,
       width: "100vw",
       height: "3px",
-      backgroundColor: themePalette.accentBlue,
+      backgroundColor: "accent.blue",
       zIndex: 9999,
       pointerEvents: "none",
     },

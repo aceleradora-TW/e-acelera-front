@@ -11,11 +11,9 @@ export const HomeBanner = () => {
   const title = "Acelerando talentos em tecnologia";
   const subtitle =
     "Plataforma aberta e gratuita de programação com possibilidade de programa de estágio remunerado de 18 semanas.";
-  const ctaText = "Conheça o Projeto Aceleradora e o e Acelera";
-  const ctaTargetId = "#study-section";
   const imageUrl = "/assets/home-banner.png";
 
-  const blueColor = "#002C53";
+  const blueColor = theme.palette.sameColor?.darkBlue;
   const blueColorTransparent = "rgba(0, 44, 83, 0)";
 
   const bannerImageStyle = {
@@ -70,6 +68,7 @@ export const HomeBanner = () => {
             component="h1"
             sx={{
               fontWeight: 500,
+              color: "sameColor.white",
               fontSize: { xs: "2.4rem", sm: "2.5rem", md: "3.5rem" },
               lineHeight: 1.4,
               marginBottom: 2,
@@ -83,6 +82,7 @@ export const HomeBanner = () => {
             variant="body1"
             sx={{
               fontSize: { xs: "1.4rem", md: "1.6rem" },
+              color: "sameColor.white",
               marginBottom: 4,
               maxWidth: "700px",
             }}
@@ -93,6 +93,7 @@ export const HomeBanner = () => {
             variant="body1"
             sx={{
               display: "flex",
+              color: "sameColor.white",
               alignItems: "center",
               marginLeft: "-6px",
               fontSize: { xs: "1rem", md: "1.2rem" },
@@ -106,8 +107,8 @@ export const HomeBanner = () => {
               href="#AboutAgil"
               underline="always"
               sx={{
-                color: "#fff",
-                textDecorationColor: "#fff",
+                color: "sameColor.white",
+                textDecorationColor: "sameColor.white",
                 ml: "4px",
               }}
             >
@@ -120,8 +121,8 @@ export const HomeBanner = () => {
               href="#study-section"
               underline="always"
               sx={{
-                color: "#fff",
-                textDecorationColor: "#fff",
+                color: "sameColor.white",
+                textDecorationColor: "sameColor.white",
                 ml: "4px",
               }}
             >

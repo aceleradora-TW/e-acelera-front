@@ -25,9 +25,16 @@ declare module '@mui/material/styles' {
     textColor?: PaletteColor
     bgColor?: PaletteColor
     customClass?: PaletteColor
-    borderColor?: {
-      start: string;
-      end: string;
+    accent?: {
+      blue: string;
+      pink: string;
+      orange: string;
+      gradient?: string;
+    };
+    sameColor?: {
+      white: string,
+      blue: string,
+      darkBlue: string,
     };
   }
   interface PaletteOptions {
@@ -41,11 +48,13 @@ declare module '@mui/material/styles' {
       blue: string;
       pink: string;
       orange: string;
-    }
-    borderColor?: {
-      start: string
-      end: string
-    }
+      gradient?: string;
+    };
+    sameColor?: {
+      white: string,
+      blue: string,
+      darkBlue: string,
+    };
   }
 }
 

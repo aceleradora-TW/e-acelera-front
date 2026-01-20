@@ -1,5 +1,5 @@
 import { PaletteMode, PaletteOptions } from "@mui/material";
-import { red } from "@mui/material/colors";
+import { blue } from "@mui/material/colors";
 
 export enum themePalette {
   button = "rgb(11, 73, 122)",
@@ -9,17 +9,96 @@ export enum themePalette {
   statusCompleted = "rgb(158, 255, 133)",
   statusNotStarted = "rgb(222, 229, 216)",
   baseBgColor = "rgb(255, 255, 255)",
-  loginHover = "rgb(154, 192, 201)",
+  //loginHover = "rgb(154, 192, 201)",
   dropdownContentColor = "rgb(87, 87, 87)",
   accentOrange = "rgb(245, 175, 85)",
   accentPink = "rgb(235, 101, 140)",
   accentBlue = "rgb(61, 143, 216)",
-  borderPrimaryColor = "rgb(235, 101, 140)",
-  borderSecondaryColor = "rgb(239, 174, 20)",
+  accentGradient = "linear-gradient(rgb(235, 101, 140), rgb(245, 175, 85))",
   bannerBgColor = "rgb(225, 233, 239)",
   bannerCreateColor = "rgb(187, 84, 114)",
   bannerCreateHover = "rgb(154, 69, 95)",
 }
+/*
+backgrounds:
+main : branco baseBgColor
+light : azul escurto primaryTextColor
+dark : azul menos escuro button
+*/
+
+const commonColors = {
+  accent: {
+    blue: themePalette.accentBlue,
+    pink: themePalette.accentPink,
+    orange: themePalette.accentOrange,
+    gradient: themePalette.accentGradient,
+  },
+  statusSelect: {
+    main: themePalette.statusNotStarted,
+    light: themePalette.statusCompleted,
+    dark: themePalette.statusInProgress,
+  },
+  sameColor: {
+    white: themePalette.baseBgColor,
+    blue: themePalette.button,
+    darkBlue: themePalette.primaryTextColor,
+  },
+};
+
+
+  export const palette = (mode: PaletteMode): PaletteOptions => ({
+    mode,
+    ...commonColors,
+    ...(mode === 'light'
+      ? {
+
+        buttonHover: {
+          main: themePalette.button,
+          light: themePalette.button,
+         // contrastText: themePalette.baseBgColor,
+        },
+        textColor: {
+          main: themePalette.primaryTextColor,
+          light: themePalette.defaultTextColor,
+        },
+        bgColor: {
+          main: themePalette.baseBgColor,
+          light: themePalette.primaryTextColor,
+        },
+
+        banner: {
+          background: themePalette.bannerBgColor,
+          createButton: {
+            main: themePalette.bannerCreateColor,
+            hover: themePalette.bannerCreateHover,
+          },
+        },
+      }
+      : {
+        buttonHover: {
+          main: themePalette.baseBgColor,
+          light: themePalette.defaultTextColor,
+        // contrastText: "#E0E0E0",
+        }, 
+        textColor: {
+          main: themePalette.bannerBgColor,
+          light: themePalette.baseBgColor,
+        },
+        bgColor: {
+          main: themePalette.defaultTextColor,
+          light: themePalette.dropdownContentColor,
+        },
+        banner: {
+          background: "#121212",
+          createButton: {
+            main: "#444444",
+            hover: "#E0E0E0",
+          },
+        },
+      }),
+  });
+
+
 /*
 export const palette = {
   statusSelect: {
@@ -54,75 +133,3 @@ export const palette = {
   },
 };
 */
-
-
-
-
-export const palette = (mode: PaletteMode): PaletteOptions => ({
-  mode,
-  ...(mode === 'light'
-    ? {
-      statusSelect: {
-        main: themePalette.statusNotStarted,
-        light: themePalette.statusCompleted,
-        dark: themePalette.statusInProgress,
-      },
-      buttonHover: {
-        main: themePalette.button,
-        light: themePalette.loginHover,
-        contrastText: themePalette.baseBgColor,
-      },
-      textColor: {
-        main: themePalette.primaryTextColor,
-        light: themePalette.defaultTextColor,
-      },
-      bgColor: {
-        main: themePalette.baseBgColor,
-        light: themePalette.dropdownContentColor,
-      },
-      accent: {
-        blue: themePalette.accentBlue,
-        pink: themePalette.accentPink,
-        orange: themePalette.accentOrange,
-      },
-      banner: {
-        background: themePalette.bannerBgColor,
-        createButton: {
-          main: themePalette.bannerCreateColor,
-          hover: themePalette.bannerCreateHover,
-        },
-      },
-    }
-    : {
-      statusSelect: {
-        main: themePalette.statusNotStarted,
-        light: themePalette.statusCompleted,
-        dark: themePalette.statusInProgress,
-      },
-      buttonHover: {
-        main: themePalette.button,
-        light: themePalette.loginHover,
-        contrastText: themePalette.baseBgColor,
-      },
-      textColor: {
-        main: themePalette.primaryTextColor,
-        light: themePalette.defaultTextColor,
-      },
-      bgColor: {
-        main: themePalette.baseBgColor,
-        light: themePalette.dropdownContentColor,
-      },
-      accent: {
-        blue: themePalette.accentBlue,
-        pink: themePalette.accentPink,
-        orange: themePalette.accentOrange,
-      },
-      banner: {
-        background: themePalette.bannerBgColor,
-        createButton: {
-          main: themePalette.bannerCreateColor,
-          hover: themePalette.bannerCreateHover,
-        },
-      },
-    }),
-});
