@@ -13,7 +13,9 @@ export enum themePalette {
   accentBlue = "rgb(61, 143, 216)",
   borderPrimaryColor = "rgb(235, 101, 140)",
   borderSecondaryColor = "rgb(239, 174, 20)",
-  error = "rgb(244, 67, 54)"
+  error = "rgb(244, 67, 54)",
+  disableButton  = "rgb(224, 224, 224)",
+  buttonText = "rgb(158, 158, 158)",
 }
 
 export const palette = {
@@ -41,7 +43,9 @@ export const palette = {
     orange: themePalette.accentOrange,
   },
   buttonFormColor: {
-    blue: themePalette.button,
+    blueBackground: themePalette.button,
+    gray: themePalette.buttonText,
+    lightGray: themePalette.disableButton,
     red: themePalette.error
   }
 };

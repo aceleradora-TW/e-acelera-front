@@ -25,13 +25,20 @@ declare module '@mui/material/styles' {
     textColor?: PaletteColor
     bgColor?: PaletteColor
     customClass?: PaletteColor
+    accent?: {
+      blue: string;
+      pink: string;
+      orange: string;
+    }
     borderColor?: {
       start: string;
       end: string;
     };
     buttonFormColor?:{
-      blue: string;
+       blueBackground: string;
       red: string;
+      lightGray: string;
+      gray: string;
     }
   }
   interface PaletteOptions {
@@ -47,8 +54,10 @@ declare module '@mui/material/styles' {
       orange: string;
     }
     buttonFormColor?:{
-      blue: string;
+       blueBackground: string;
       red: string;
+      lightGray: string;
+      gray: string;
     }
     borderColor?: {
       start: string

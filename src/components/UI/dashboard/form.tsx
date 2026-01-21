@@ -3,7 +3,6 @@ import { Box, Button, Container, TextField, Typography } from "@mui/material"
 import { ThemeFormData, themeFormDefs } from "./forms/defs/theme.defs"
 import { useTheme } from "@mui/material/styles";
 
-
 export default function Form() {
   const { handleSubmit, control, reset, formState: { isDirty }, } = useForm<ThemeFormData>({
     defaultValues: themeFormDefs.defaultValues
@@ -19,7 +18,7 @@ export default function Form() {
       maxWidth="xl"
       sx={{
         mt: 6,
-        backgroundColor: "#fff",
+        backgroundColor: theme.palette.buttonHover?.contrastText,
         borderRadius: "12px",
         p: 4,
         boxShadow: "0px 4px 20px rgba(0,0,0,0.08)",
@@ -58,7 +57,9 @@ export default function Form() {
             border: "0.5px solid red",
             color: theme.palette.buttonFormColor?.red,
             "&:hover": {
-              "primary.dark" : "#E0E0E0",
+              backgroundColor: theme.palette.buttonFormColor?.red,
+              color: theme.palette.buttonHover?.contrastText,
+              borderColor:  theme.palette.buttonFormColor?.red,
             },
           }}
         >
@@ -69,10 +70,10 @@ export default function Form() {
           disabled={!isDirty}
           sx={{
             border: "0.5px solid",
-            backgroundColor: isDirty ? theme.palette.buttonFormColor?.blue : "#E0E0E0",
-            color: isDirty ? "#fff" : "#9E9E9E",
+            backgroundColor: isDirty ? theme.palette.buttonFormColor?.blueBackground : theme.palette.buttonFormColor?.lightGray,
+            color: isDirty ? theme.palette.buttonHover?.contrastText : theme.palette.buttonFormColor?.gray,
             "&:hover": {
-              backgroundColor: isDirty ? "primary.dark" : "#E0E0E0",
+              backgroundColor: isDirty ? "primary.dark" : theme.palette.accent?.blue
             },
           }}
         >Salvar</Button>
