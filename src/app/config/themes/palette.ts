@@ -1,5 +1,4 @@
 import { PaletteMode, PaletteOptions } from "@mui/material";
-import { blue } from "@mui/material/colors";
 
 export enum themePalette {
   button = "rgb(11, 73, 122)",
@@ -9,15 +8,64 @@ export enum themePalette {
   statusCompleted = "rgb(158, 255, 133)",
   statusNotStarted = "rgb(222, 229, 216)",
   baseBgColor = "rgb(255, 255, 255)",
-  loginHover = "rgb(154, 192, 201)",
   dropdownContentColor = "rgb(87, 87, 87)",
   accentOrange = "rgb(245, 175, 85)",
   accentPink = "rgb(235, 101, 140)",
   accentBlue = "rgb(61, 143, 216)",
-  accentGradient = "linear-gradient(rgb(235, 101, 140), rgb(245, 175, 85))",
   bannerBgColor = "rgb(225, 233, 239)",
   bannerCreateColor = "rgb(187, 84, 114)",
   bannerCreateHover = "rgb(154, 69, 95)",
+}
+
+export enum refactorThemePalette {
+  blueMedium = "rgb(11, 73, 122)",
+  blueDark = "rgb(0, 44, 83)",
+  black = "rgb(44, 44, 44)",
+  blueLight = "rgb(172, 238, 245)",
+  green = "rgb(40, 167, 69)",
+  white = "rgb(255, 255, 255)",
+  red = "rgb(220, 53, 69)",
+  gray = "rgb(87, 87, 87)",
+  orange = "rgb(245, 175, 85)",
+  pink = "rgb(235, 101, 140)",
+  blueBright = "rgb(61, 143, 216)",
+  whiteCool = "rgb(225, 233, 239)",
+  pinkDark = "rgb(187, 84, 114)",
+  pinkDeep = "rgb(154, 69, 95)",
+}
+
+const refactorCommonColors = {
+  blue: {
+    main: refactorThemePalette.blueMedium,
+    light: refactorThemePalette.blueLight,
+    dark: refactorThemePalette.blueDark,
+    bright: refactorThemePalette.blueBright,
+  },
+  green: {
+    success: refactorThemePalette.green,
+  },
+  red: {
+    error: refactorThemePalette.red,
+  },
+  white: {
+    main: refactorThemePalette.white,
+    cool: refactorThemePalette.whiteCool,
+  },
+  black: {
+    main: refactorThemePalette.black,
+  },
+  gray: {
+    main: refactorThemePalette.gray,
+  },
+  orange:
+  {
+    main: refactorThemePalette.orange,
+  },
+  pink: {
+    main: refactorThemePalette.pink,
+    dark: refactorThemePalette.pinkDark,
+    deep: refactorThemePalette.pinkDeep,
+  },
 }
 
 const commonColors = {
@@ -25,8 +73,7 @@ const commonColors = {
     blue: themePalette.accentBlue,
     pink: themePalette.accentPink,
     orange: themePalette.accentOrange,
-    gradient: themePalette.accentGradient,
-    lightBlue: themePalette.loginHover,
+    lightBlue: themePalette.statusInProgress,
   },
   statusSelect: {
     main: themePalette.statusNotStarted,
@@ -42,57 +89,105 @@ const commonColors = {
 };
 
 
-  export const palette = (mode: PaletteMode): PaletteOptions => ({
-    mode,
-    ...commonColors,
-    ...(mode === 'light'
-      ? {
 
-        buttonHover: {
-          main: themePalette.button,
-          light: themePalette.button,
-          dark: themePalette.button,
-        },
-        textColor: {
-          main: themePalette.primaryTextColor,
-          light: themePalette.defaultTextColor,
-        },
-        bgColor: {
-          main: themePalette.baseBgColor,
-          light: themePalette.primaryTextColor,
-        },
 
-        banner: {
-          background: themePalette.bannerBgColor,
-          createButton: {
-            main: themePalette.bannerCreateColor,
-            hover: themePalette.bannerCreateHover,
-          },
-        },
-      }
-      : {
-        buttonHover: {
-          main: themePalette.baseBgColor,
-          light: themePalette.defaultTextColor,
-          dark: themePalette.primaryTextColor,
+
+export const RefactorPalette = (mode: PaletteMode): PaletteOptions => ({
+  mode,
+  ...commonColors,
+  ...(mode === 'light'
+    ? {
+      button: {
+        default: {
+          bg: refactorThemePalette.blueMedium,
+          hover: refactorThemePalette.blueBright,
         }, 
-        textColor: {
-          main: themePalette.bannerBgColor,
-          light: themePalette.baseBgColor,
+      },
+      background: {
+        default: refactorThemePalette.white,
+        paper: refactorThemePalette.whiteCool,
+        primary: refactorThemePalette.blueMedium,
+        secondary: refactorThemePalette.blueMedium,
+        tertiary: refactorThemePalette.blueDark,
+      },
+      text: {
+        primary: refactorThemePalette.blueDark,
+        secondary: refactorThemePalette.black,
+      },
+    }
+    : {
+      button: {
+        default: {
+          bg: refactorThemePalette.blueMedium,
+          hover: refactorThemePalette.blueBright,
+        }, 
+      },
+      background: {
+        default: refactorThemePalette.white,
+        paper: refactorThemePalette.whiteCool,
+        primary: refactorThemePalette.blueMedium,
+        secondary: refactorThemePalette.blueMedium,
+        tertiary: refactorThemePalette.blueDark,
+      },
+      text: {
+        primary: refactorThemePalette.whiteCool,
+        secondary: refactorThemePalette.white,
+      },
+
+    }),
+});
+
+export const palette = (mode: PaletteMode): PaletteOptions => ({
+  mode,
+  ...commonColors,
+  ...(mode === 'light'
+    ? {
+
+      buttonHover: {
+        main: themePalette.button,
+        light: themePalette.button,
+        dark: themePalette.button,
+      },
+      textColor: {
+        main: themePalette.primaryTextColor,
+        light: themePalette.defaultTextColor,
+      },
+      bgColor: {
+        main: themePalette.baseBgColor,
+        light: themePalette.primaryTextColor,
+      },
+
+      banner: {
+        background: themePalette.bannerBgColor,
+        createButton: {
+          main: themePalette.bannerCreateColor,
+          hover: themePalette.bannerCreateHover,
         },
-        bgColor: {
-          main: themePalette.defaultTextColor,
-          light: themePalette.defaultTextColor,
+      },
+    }
+    : {
+      buttonHover: {
+        main: themePalette.baseBgColor,
+        light: themePalette.defaultTextColor,
+        dark: themePalette.primaryTextColor,
+      },
+      textColor: {
+        main: themePalette.bannerBgColor,
+        light: themePalette.baseBgColor,
+      },
+      bgColor: {
+        main: themePalette.defaultTextColor,
+        light: themePalette.defaultTextColor,
+      },
+      banner: {
+        background: "#121212",
+        createButton: {
+          main: "#444444",
+          hover: "#E0E0E0",
         },
-        banner: {
-          background: "#121212",
-          createButton: {
-            main: "#444444",
-            hover: "#E0E0E0",
-          },
-        },
-      }),
-  });
+      },
+    }),
+});
 
 
 /*
@@ -120,11 +215,11 @@ export const palette = {
     pink: themePalette.accentPink,
     orange: themePalette.accentOrange,
   },
-  /*banner: { 
-    background: themePalette.bannerBgColor, 
-    createButton: { 
-      main: themePalette.bannerCreateColor, 
-      hover: themePalette.bannerCreateHover, 
+  /*banner: {
+    background: themePalette.bannerBgColor,
+    createButton: {
+      main: themePalette.bannerCreateColor,
+      hover: themePalette.bannerCreateHover,
     },
   },
 };

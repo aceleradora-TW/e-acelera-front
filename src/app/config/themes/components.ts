@@ -316,7 +316,7 @@ export const customStyles = {
       md: 250,
     },
     borderStyle: "solid",
-    borderImage: themePalette.accentGradient,
+    borderImage: "linear-gradient(rgb(235, 101, 140), rgb(245, 175, 85))",
     borderImageSlice: 1,
   },
 
@@ -363,7 +363,7 @@ export const customStyles = {
       bottom: 16,
       top: "15%",
       right: 16,
-      backgroundImage: `linear-gradient(270deg, ${"buttonHover.main"}, ${"accent.blue"})`,
+      backgroundImage: `linear-gradient(270deg, rgb(11, 73, 122), rgb(61, 143, 216))`,
       color: "bgColor.main",
       padding: "6px 36px 6px 12px",
       borderRadius: "100px 0px 0px 100px",
@@ -391,7 +391,7 @@ export const customStyles = {
           .replace("rgb", "rgba")
           .replace(")", ", 0.3)")}
       `,
-      backgroundImage: `linear-gradient(190deg, ${"buttonHover.main"}, ${"accent.blue"})`,
+      backgroundImage: `linear-gradient(190deg, rgb(11, 73, 122), rgb(61, 143, 216))`,
       width: 70,
       height: 70,
       padding: 0,
