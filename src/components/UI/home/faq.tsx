@@ -7,13 +7,13 @@ export function Faq() {
   return (
     <SectionContent
       variant="faq"
-      sx={{ 
-        display: "flex", 
+      sx={{
+        display: "flex",
         justifyContent: "center",
         width: "100%",
       }}
     >
-        <Grid container spacing={{ xs: 2, md: 4 }}>
+      <Grid container spacing={{ xs: 2, md: 4 }}>
         <Grid
           item
           xs={12}
@@ -23,11 +23,7 @@ export function Faq() {
             flexDirection: "column",
           }}
         >
-          <Typography
-            variant="h3"
-            gutterBottom
-            color="textColor.main"
-          >
+          <Typography variant="h3" gutterBottom color="text.primary">
             Tire suas dúvidas - FAQ
           </Typography>
           <Typography variant="body2">
@@ -38,11 +34,7 @@ export function Faq() {
         </Grid>
         <Grid item xs={12} md={8}>
           {FAQ_QUESTIONS.map((item, i) => (
-            <Accordion
-              question={item.question}
-              answer={item.answer}
-              key={i}
-            />
+            <Accordion question={item.question} answer={item.answer} key={i} />
           ))}
         </Grid>
       </Grid>

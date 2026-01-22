@@ -26,6 +26,7 @@ export enum refactorThemePalette {
   white = "rgb(255, 255, 255)",
   red = "rgb(220, 53, 69)",
   gray = "rgb(87, 87, 87)",
+  grayLight = "rgb(179, 179, 179)",
   orange = "rgb(245, 175, 85)",
   pink = "rgb(235, 101, 140)",
   blueBright = "rgb(61, 143, 216)",
@@ -34,39 +35,100 @@ export enum refactorThemePalette {
   pinkDeep = "rgb(154, 69, 95)",
 }
 
-const refactorCommonColors = {
-  blue: {
+export const palette = (mode: PaletteMode): PaletteOptions => ({
+  mode,
+  primary: {
+    main:
+      mode === "light"
+        ? refactorThemePalette.blueMedium
+        : refactorThemePalette.blueDark,
+    light:
+      mode === "light"
+        ? refactorThemePalette.blueMedium
+        : refactorThemePalette.white,
+    dark:
+      mode === "light"
+        ? refactorThemePalette.blueMedium
+        : refactorThemePalette.black,
+  },
+
+  secondary: {
     main: refactorThemePalette.blueMedium,
-    light: refactorThemePalette.blueLight,
+    light: refactorThemePalette.whiteCool,
     dark: refactorThemePalette.blueDark,
-    bright: refactorThemePalette.blueBright,
   },
-  green: {
-    success: refactorThemePalette.green,
+
+  background: {
+    default:
+      mode === "light"
+        ? refactorThemePalette.white
+        : refactorThemePalette.black,
+    paper:
+      mode === "light"
+        ? refactorThemePalette.blueDark
+        : refactorThemePalette.black,
   },
-  red: {
+
+  text: {
+    primary:
+      mode === "light"
+        ? refactorThemePalette.blueDark
+        : refactorThemePalette.white,
+    secondary:
+      mode === "light"
+        ? refactorThemePalette.black
+        : refactorThemePalette.white,
+    disabled: refactorThemePalette.gray,
+    white: refactorThemePalette.white,
+    black: refactorThemePalette.black,
+  },
+
+  button: {
+    default: {
+      bg:
+        mode === "light"
+          ? refactorThemePalette.blueMedium
+          : refactorThemePalette.white,
+      hover: refactorThemePalette.blueBright,
+      contrastText:
+        mode === "light"
+          ? refactorThemePalette.white
+          : refactorThemePalette.blueDark,
+    },
+    create: {
+      bg: refactorThemePalette.pinkDark,
+      hover: refactorThemePalette.pinkDeep,
+      contrastText: refactorThemePalette.white,
+    },
+    danger: {
+      bg: refactorThemePalette.red,
+      hover: refactorThemePalette.pinkDeep,
+      contrastText: refactorThemePalette.white,
+    },
+    disabled: {
+      bg: refactorThemePalette.gray,
+      hover: refactorThemePalette.grayLight,
+      contrastText: refactorThemePalette.black,
+    },
+  },
+
+  status: {
     error: refactorThemePalette.red,
+    success: refactorThemePalette.green,
+    notStarted: refactorThemePalette.white,
+    inProgress: refactorThemePalette.blueLight,
   },
-  white: {
-    main: refactorThemePalette.white,
-    cool: refactorThemePalette.whiteCool,
+  accent: {
+    blue: refactorThemePalette.blueBright,
+    pink: refactorThemePalette.pink,
+    orange: refactorThemePalette.orange,
+    lightBlue: refactorThemePalette.blueLight,
+    gray: refactorThemePalette.gray,
   },
-  black: {
-    main: refactorThemePalette.black,
-  },
-  gray: {
-    main: refactorThemePalette.gray,
-  },
-  orange:
-  {
-    main: refactorThemePalette.orange,
-  },
-  pink: {
-    main: refactorThemePalette.pink,
-    dark: refactorThemePalette.pinkDark,
-    deep: refactorThemePalette.pinkDeep,
-  },
-}
+});
+
+/*
+REFATORAÇAO 1
 
 const commonColors = {
   accent: {
@@ -88,73 +150,23 @@ const commonColors = {
   },
 };
 
-
-
-
-
-export const RefactorPalette = (mode: PaletteMode): PaletteOptions => ({
-  mode,
-  ...commonColors,
-  ...(mode === 'light'
-    ? {
-      button: {
-        default: {
-          bg: refactorThemePalette.blueMedium,
-          hover: refactorThemePalette.blueBright,
-        }, 
-      },
-      background: {
-        default: refactorThemePalette.white,
-        paper: refactorThemePalette.whiteCool,
-        primary: refactorThemePalette.blueMedium,
-        secondary: refactorThemePalette.blueMedium,
-        tertiary: refactorThemePalette.blueDark,
-      },
-      text: {
-        primary: refactorThemePalette.blueDark,
-        secondary: refactorThemePalette.black,
-      },
-    }
-    : {
-      button: {
-        default: {
-          bg: refactorThemePalette.blueMedium,
-          hover: refactorThemePalette.blueBright,
-        }, 
-      },
-      background: {
-        default: refactorThemePalette.white,
-        paper: refactorThemePalette.whiteCool,
-        primary: refactorThemePalette.blueMedium,
-        secondary: refactorThemePalette.blueMedium,
-        tertiary: refactorThemePalette.blueDark,
-      },
-      text: {
-        primary: refactorThemePalette.whiteCool,
-        secondary: refactorThemePalette.white,
-      },
-
-    }),
-});
-
 export const palette = (mode: PaletteMode): PaletteOptions => ({
   mode,
   ...commonColors,
-  ...(mode === 'light'
+  ...(mode === "light"
     ? {
-
       buttonHover: {
-        main: themePalette.button,
-        light: themePalette.button,
-        dark: themePalette.button,
+        main: themePalette.button, //baseBgColor
+        light: themePalette.button, //defaultTextColor
+        dark: themePalette.button, //primaryTextColor
       },
       textColor: {
         main: themePalette.primaryTextColor,
         light: themePalette.defaultTextColor,
       },
       bgColor: {
-        main: themePalette.baseBgColor,
-        light: themePalette.primaryTextColor,
+        main: themePalette.baseBgColor, //defaultTextColor 
+        light: themePalette.primaryTextColor, //defaultTextColor 
       },
 
       banner: {
@@ -188,9 +200,12 @@ export const palette = (mode: PaletteMode): PaletteOptions => ({
       },
     }),
 });
-
+*/
 
 /*
+
+ORIGINALLLLLLLLLLL
+
 export const palette = {
   statusSelect: {
     main: themePalette.statusNotStarted,

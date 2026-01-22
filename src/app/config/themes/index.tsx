@@ -1,100 +1,56 @@
-'use client'
-import { CssBaseline, PaletteColor, PaletteColorOptions, PaletteMode, ThemeProvider, createTheme } from "@mui/material"
-import React from "react"
-import { palette } from "./palette"
-import { customStyles } from "./components"
-import { typography } from "./typography"
-import { useAccessibility } from "@/context/accessibility.context"
-import { highContrastThemeBuilder } from "./highContrast"
+"use client";
+import {
+  CssBaseline,
+  PaletteMode,
+  ThemeProvider,
+  createTheme,
+} from "@mui/material";
+import React from "react";
+import { palette } from "./palette";
+import { customStyles } from "./components";
+import { typography } from "./typography";
+import { useAccessibility } from "@/context/accessibility.context";
+import { highContrastThemeBuilder } from "./highContrast";
 
 type ThemeProp = {
-  children: JSX.Element
-}
-
-declare module '@mui/material/styles' {
-  interface Theme {
-    customStyles: typeof customStyles
-  }
-  interface ThemeOptions {
-    customStyles?: typeof customStyles
-  }
-  interface Palette {
-    button?: PaletteColor
-    buttonHover?: PaletteColor
-    statusSelect?: PaletteColor
-    textColor?: PaletteColor
-    bgColor?: PaletteColor
-    customClass?: PaletteColor
-    accent?: {
-      blue: string;
-      pink: string;
-      orange: string;
-      gradient?: string;
-      lightBlue?: string;
-    };
-    sameColor?: {
-      white: string,
-      blue: string,
-      darkBlue: string,
-      gray: string,
-    };
-  }
-  interface PaletteOptions {
-    button?: PaletteColorOptions;
-    buttonHover?: PaletteColorOptions;
-    statusSelect?: PaletteColorOptions;
-    textColor?: PaletteColorOptions;
-    bgColor?: PaletteColorOptions;
-    customClass?: PaletteColorOptions;
-    accent?: {
-      blue: string;
-      pink: string;
-      orange: string;
-      gradient?: string;
-      lightBlue?: string;
-    };
-    sameColor?: {
-      white: string,
-      blue: string,
-      darkBlue: string,
-      gray: string,
-    };
-  }
-}
+  children: JSX.Element;
+};
 
 const applyFontFamily = (fontFamily?: string) => {
   if (!fontFamily) return {};
   return { fontFamily: `${fontFamily} !important` };
 };
 
-
-const themeBuilder = (mode: PaletteMode, fontFamily?: string) => createTheme({
-  palette: palette(mode),
-  typography: {
-    ...typography,
-    ...(fontFamily && { fontFamily }),
-  },
-  customStyles,
-  components: {
-    MuiCssBaseline: {
-      styleOverrides: {
-        html: {
-          scrollBehavior: 'smooth',
-          ...applyFontFamily(fontFamily),
+const themeBuilder = (mode: PaletteMode, fontFamily?: string) =>
+  createTheme({
+    palette: palette(mode),
+    typography: {
+      ...typography,
+      ...(fontFamily && { fontFamily }),
+    },
+    customStyles,
+    components: {
+      MuiCssBaseline: {
+        styleOverrides: {
+          html: {
+            scrollBehavior: "smooth",
+            ...applyFontFamily(fontFamily),
+          },
+          body: applyFontFamily(fontFamily),
         },
-        body: applyFontFamily(fontFamily),
       },
     },
-  },
-})
+  });
 
-const defaultTheme = themeBuilder("light")
+const defaultTheme = themeBuilder("light");
 
 export const ThemeConfig: React.FC<ThemeProp> = ({ children }) => {
-
   const { themeFontFamily, themeMode } = useAccessibility();
 
-  const theme = React.useMemo(() => themeBuilder(themeMode, themeFontFamily), [themeMode, themeFontFamily]);
+  const theme = React.useMemo(
+    () => themeBuilder(themeMode, themeFontFamily),
+    [themeMode, themeFontFamily],
+  );
 
   return (
     <ThemeProvider theme={theme}>
@@ -102,7 +58,7 @@ export const ThemeConfig: React.FC<ThemeProp> = ({ children }) => {
       {children}
     </ThemeProvider>
   );
-}
+};
 
 /*
 const themeBuilder = (fontFamily?: string) => createTheme({
@@ -147,4 +103,4 @@ export const ThemeConfig: React.FC<ThemeProp> = ({ children }) => {
 }
 }) */
 
-export { defaultTheme as theme }
+export { defaultTheme as theme };

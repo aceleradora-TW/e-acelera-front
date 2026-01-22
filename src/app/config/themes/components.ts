@@ -2,9 +2,9 @@ import { themePalette } from "./palette";
 
 export const customStyles = {
   button: {
-    backgroundColor: "bgColor.main",
-    borderColor: "buttonHover.main",
-    color: "buttonHover.main",
+    backgroundColor: "button.default.contrastText",
+    borderColor: "button.default.bg",
+    color: "button.default.bg",
     fontSize: "1rem",
     lineHeight: 1.6,
     fontWeight: 500,
@@ -14,8 +14,8 @@ export const customStyles = {
     borderRadius: 2,
     border: "1px solid",
     "&:hover": {
-      backgroundColor: "buttonHover.main",
-      color: "bgColor.main",
+      backgroundColor: "button.default.bg",
+      color: "button.default.contrastText",
       border: "1px solid transparent",
     },
   },
@@ -490,15 +490,11 @@ export const customStyles = {
       marginTop: 1,
     },
 
-    textLevelIndicator: (
-      textSize: number,
-      size: number
-    ) => ({
+    textLevelIndicator: (textSize: number, size: number) => ({
       width: 22,
       height: 4,
       borderRadius: 0.6,
-      backgroundColor:
-        textSize >= size ? "bgColor.main" : "buttonHover.main",
+      backgroundColor: textSize >= size ? "bgColor.main" : "buttonHover.main",
       transition: "background-color 0.3s ease",
       border:
         textSize < size

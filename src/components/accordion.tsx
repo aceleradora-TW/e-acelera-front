@@ -1,30 +1,33 @@
 import ReactMarkdown from "react-markdown";
-import { AccordionDetails, AccordionSummary, Accordion as MuiAccordion, Typography } from "@mui/material";
+import {
+  AccordionDetails,
+  AccordionSummary,
+  Accordion as MuiAccordion,
+  Typography,
+} from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { useAccessibility } from "@/context/accessibility.context";
 
-interface AccordionProps { 
+interface AccordionProps {
   question: string;
   answer: string;
 }
 
 export function Accordion({ question, answer }: AccordionProps) {
-  const {themeMode} = useAccessibility();
+  const { themeMode } = useAccessibility();
 
   return (
     <MuiAccordion
       sx={{
         border: "1px solid",
         mb: "8px",
-        borderColor: "textColor.main",
+        borderColor: "text.primary",
         borderRadius: 1,
         boxShadow: "0em 0.4em 0.4em rgb(44 44 44 / 40%)",
       }}
     >
       <AccordionSummary
-        expandIcon={
-          <ExpandMoreIcon sx={{ color: "sameColor.white" }} />
-        }
+        expandIcon={<ExpandMoreIcon sx={{ color: "sameColor.white" }} />}
         aria-controls="panel1-content"
         id="panel1-header"
         sx={{
@@ -38,15 +41,21 @@ export function Accordion({ question, answer }: AccordionProps) {
       </AccordionSummary>
       <AccordionDetails>
         <ReactMarkdown
-           components={{
+          components={{
             a: ({ href, children }) => (
-              <a href={href} style={{color: themeMode === 'dark'?"#85b0d6":undefined }}  target="_blank" rel="noopener noreferrer">
+              <a
+                href={href}
+                style={{ color: themeMode === "dark" ? "#85b0d6" : undefined }}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 {children}
               </a>
             ),
           }}
         >
-          {answer}</ReactMarkdown>
+          {answer}
+        </ReactMarkdown>
       </AccordionDetails>
     </MuiAccordion>
   );
