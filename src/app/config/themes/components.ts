@@ -380,12 +380,12 @@ export const customStyles: Theme = {
       borderRadius: "100px 0px 0px 100px",
       height: 45,
       opacity: 0,
-      width: 210,
+      width: 260,
       whiteSpace: "nowrap",
       pointerEvents: "none",
       display: "flex",
       alignItems: "center",
-      justifyContent: "left",
+      justifyContent: "center",
       transform: "translateX(10px)",
       transition: "all 0.3s ease",
       boxShadow: `0px 4px 12px ${themePalette.defaultTextColor
@@ -504,7 +504,7 @@ export const customStyles: Theme = {
     textLevelIndicator: (
       themePalette: any,
       textSize: number,
-      size: number
+      size: number,
     ) => ({
       width: 22,
       height: 4,
