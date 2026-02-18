@@ -504,7 +504,7 @@ export const customStyles: Theme = {
     textLevelIndicator: (
       themePalette: any,
       textSize: number,
-      size: number,
+      size: number
     ) => ({
       width: 22,
       height: 4,
