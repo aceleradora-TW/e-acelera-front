@@ -46,6 +46,14 @@ declare module '@mui/material/styles' {
       start: string
       end: string
     }
+    dropdownContentColor?: string;
+    banner?: { 
+        background: string, 
+        createButton: { 
+          main: string, 
+          hover: string, 
+        },
+      },
   }
 }
 

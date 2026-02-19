@@ -8,6 +8,8 @@ import { ImpactSection } from "@/components/UI/home/impact-section";
 import { SponsorsSection } from "@/components/UI/home/sponsors-section";
 import AboutAgil from "@/components/UI/home/about-agile";
 import { StudySection } from "@/components/UI/home/study-section";
+import { UpperBanner } from "@/components/UI/dashboard/upper-banner";
+import { TableDashboard, mockColumns, mockRows } from "@/components/UI/dashboard/table-dashboard";
 
 export default function Home() {
   return (
@@ -22,6 +24,14 @@ export default function Home() {
     >
       <HomeBanner />
       <AboutAgil />
+      <UpperBanner
+        title="Dashboard"
+        menuBanner
+        createButton
+        editButton
+        showBreadCrumb
+      />
+      < TableDashboard columns={mockColumns} rows={mockRows} />
       <ImpactSection />
       <SponsorsSection />
       <StudySection />

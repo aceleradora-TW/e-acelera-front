@@ -205,4 +205,13 @@ export interface Theme {
     justifyContent: string;
     alignItems: string;
   };
+
+  tableDashboard: ExtendedCSSProperties;
+
+  upperBanner: { 
+    container: ExtendedCSSProperties; 
+    title: ExtendedCSSProperties; 
+    createButton: ExtendedCSSProperties; 
+    editButton: ExtendedCSSProperties; 
+  };
 }

@@ -1,5 +1,4 @@
-import { Padding } from "@mui/icons-material";
-import { themePalette } from "./palette";
+import { palette, themePalette } from "./palette";
 import { Theme } from "./types";
 
 export const customStyles: Theme = {
@@ -661,4 +660,57 @@ export const customStyles: Theme = {
       pointerEvents: "none",
     },
   }),
+
+  tableDashboard: {
+    '& .MuiDataGrid-columnHeader': {
+      backgroundColor: palette.buttonHover.main,
+      color: palette.bgColor.main,
+    },
+    '& .MuiDataGrid-columnHeaderTitleContainer': {
+      display: 'flex',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+    },
+    '& .MuiDataGrid-cell:focus': { outline: 'none' },
+    '& .MuiDataGrid-row:hover': { 
+      backgroundColor: palette.banner.background, 
+      cursor: 'pointer' 
+    },
+    '& .MuiDataGrid-menuIconButton': { color: palette.buttonHover.main, },
+    '& .MuiDataGrid-sortIcon': { color: palette.buttonHover.main, },
+    '& .MuiDataGrid-columnSeparator': { color: palette.bgColor.main, },
+    '& .MuiDataGrid-columnHeader .MuiIconButton-root': { backgroundColor: palette.banner.background, },
+    '& .MuiDataGrid-columnHeader .MuiIconButton-root:hover': { 
+      backgroundColor: palette.banner.background, 
+      opacity: 0.8, 
+    },
+  },
+  
+  upperBanner: {
+    container: {
+      backgroundColor: palette.banner.background,
+      paddingTop: 2,
+      paddingBottom: 2,
+    },
+    title: {
+      color: palette.buttonHover.main,
+    },
+    createButton: {
+      backgroundColor: palette.banner.createButton.main,
+      border: "none",
+      color: palette.bgColor.main,
+      "&:hover": { backgroundColor: palette.banner.createButton.hover }
+    },
+    editButton: {
+      backgroundColor: "transparent",
+      boxShadow: "none",
+      border: "none",
+      textTransform: "none",
+      "&:hover": {
+        backgroundColor: "transparent",
+        textDecoration: "underline",
+        boxShadow: "none",
+      },
+    },
+  },
 };
