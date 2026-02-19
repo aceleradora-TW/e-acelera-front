@@ -156,6 +156,30 @@ export const highContrastThemeBuilder = (fontFamily?: string) => {
       },
     },
     customStyles: {
+      tableDashboard: {
+          '& .MuiDataGrid-columnHeader': {
+            backgroundColor: themePalette.defaultTextColor,
+            color: themePalette.baseBgColor,
+          },
+          '& .MuiDataGrid-columnHeaderTitleContainer': {
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+          },
+          '& .MuiDataGrid-cell:focus': { outline: 'none' },
+          '& .MuiDataGrid-row:hover': { 
+            backgroundColor: themePalette.dropdownContentColor, 
+            cursor: 'pointer' 
+          },
+          '& .MuiDataGrid-menuIconButton': { color: themePalette.button, },
+          '& .MuiDataGrid-sortIcon': { color: themePalette.button, },
+          '& .MuiDataGrid-columnSeparator': { color: themePalette.baseBgColor, },
+          '& .MuiDataGrid-columnHeader .MuiIconButton-root': { backgroundColor: themePalette.bannerBgColor, },
+          '& .MuiDataGrid-columnHeader .MuiIconButton-root:hover': { 
+            backgroundColor: themePalette.bannerBgColor, 
+            opacity: 0.8, 
+          },
+        },
       upperBanner: {
         container: {
           backgroundColor: themePalette.defaultTextColor,

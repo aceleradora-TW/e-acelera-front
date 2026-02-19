@@ -660,6 +660,32 @@ export const customStyles: Theme = {
       pointerEvents: "none",
     },
   }),
+
+  tableDashboard: {
+    '& .MuiDataGrid-columnHeader': {
+      backgroundColor: palette.buttonHover.main,
+      color: palette.bgColor.main,
+    },
+    '& .MuiDataGrid-columnHeaderTitleContainer': {
+      display: 'flex',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+    },
+    '& .MuiDataGrid-cell:focus': { outline: 'none' },
+    '& .MuiDataGrid-row:hover': { 
+      backgroundColor: palette.banner.background, 
+      cursor: 'pointer' 
+    },
+    '& .MuiDataGrid-menuIconButton': { color: palette.buttonHover.main, },
+    '& .MuiDataGrid-sortIcon': { color: palette.buttonHover.main, },
+    '& .MuiDataGrid-columnSeparator': { color: palette.bgColor.main, },
+    '& .MuiDataGrid-columnHeader .MuiIconButton-root': { backgroundColor: palette.banner.background, },
+    '& .MuiDataGrid-columnHeader .MuiIconButton-root:hover': { 
+      backgroundColor: palette.banner.background, 
+      opacity: 0.8, 
+    },
+  },
+  
   upperBanner: {
     container: {
       backgroundColor: palette.banner.background,
