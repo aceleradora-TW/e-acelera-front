@@ -13,6 +13,9 @@ export enum themePalette {
   accentBlue = "rgb(61, 143, 216)",
   borderPrimaryColor = "rgb(235, 101, 140)",
   borderSecondaryColor = "rgb(239, 174, 20)",
+  bannerBgColor= "rgb(225, 233, 239)",
+  bannerCreateColor = "rgb(187, 84, 114)",
+  bannerCreateHover = "rgb(154, 69, 95)",
 }
 
 export const palette = {
@@ -38,5 +41,12 @@ export const palette = {
     blue: themePalette.accentBlue,
     pink: themePalette.accentPink,
     orange: themePalette.accentOrange,
+  },
+  banner: { 
+    background: themePalette.bannerBgColor, 
+    createButton: { 
+      main: themePalette.bannerCreateColor, 
+      hover: themePalette.bannerCreateHover, 
+    },
   },
 };

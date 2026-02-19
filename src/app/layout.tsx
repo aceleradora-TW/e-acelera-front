@@ -11,7 +11,7 @@ import { FeatureFlagContext } from "@/context/feature-flag.context"
 import React from "react";
 import { AccessibilityProvider } from "@/context/accessibility.context"
 import AccessibilityMenu from "@/components/accessibility-menu"
-import MainWrapper from "@/components/UI/mainWrapper";
+import MainWrapper from "@/components/UI/main-wrapper";
 
 
 const FLAGSMITH_ENVIRONMENT_ID = process.env.NEXT_PUBLIC_FLAGSMITH_ENVIRONMENT_ID

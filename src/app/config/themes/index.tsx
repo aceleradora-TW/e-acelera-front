@@ -46,6 +46,13 @@ declare module '@mui/material/styles' {
       start: string
       end: string
     }
+    banner?: { 
+        background: string, 
+        createButton: { 
+          main: string, 
+          hover: string, 
+        },
+      },
   }
 }
 

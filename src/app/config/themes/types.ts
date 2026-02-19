@@ -205,4 +205,11 @@ export interface Theme {
     justifyContent: string;
     alignItems: string;
   };
+
+  upperBanner: { 
+    container: ExtendedCSSProperties; 
+    title: ExtendedCSSProperties; 
+    createButton: ExtendedCSSProperties; 
+    editButton: ExtendedCSSProperties; 
+  };
 }
