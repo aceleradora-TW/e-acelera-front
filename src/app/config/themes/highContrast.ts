@@ -1,6 +1,7 @@
 import { createTheme } from "@mui/material/styles";
 import { themePalette } from "./palette";
 import { typography } from "./typography";
+import { textTransform } from "@mui/system";
 
 const applyFontFamily = (fontFamily?: string) => {
   if (!fontFamily) return {};
@@ -179,6 +180,33 @@ export const highContrastThemeBuilder = (fontFamily?: string) => {
             opacity: 0.8, 
           },
         },
+      upperBanner: {
+        container: {
+          backgroundColor: themePalette.defaultTextColor,
+          paddingTop: 2,
+          paddingBottom: 2,
+        },
+        title: {
+          color: themePalette.baseBgColor,
+        },
+        createButton: {
+          backgroundColor: `${themePalette.bannerCreateColor} !important`,
+          border: "none",
+          color: themePalette.baseBgColor,
+          "&:hover": { backgroundColor: `${themePalette.bannerCreateHover} !important` }
+        },
+        editButton: {
+          backgroundColor: "transparent !important",
+          boxShadow: "none",
+          border: "none",
+          textTransform: "none !important",
+          "&:hover": {
+            backgroundColor: "transparent !important",
+            textDecoration: "underline",
+            boxShadow: "none",
+          },
+        },
+      },
       button: {
         backgroundColor: themePalette.baseBgColor,
         borderColor: themePalette.button,
@@ -708,9 +736,9 @@ export const highContrastThemeBuilder = (fontFamily?: string) => {
             borderRadius: "5px",
           },
           "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
-            {
-              border: `1px solid #000000`,
-            },
+          {
+            border: `1px solid #000000`,
+          },
           "& .MuiOutlinedInput-root": {
             height: "40px",
           },

@@ -1,4 +1,3 @@
-import { Padding } from "@mui/icons-material";
 import { palette, themePalette } from "./palette";
 import { Theme } from "./types";
 
@@ -685,5 +684,33 @@ export const customStyles: Theme = {
       backgroundColor: palette.banner.background, 
       opacity: 0.8, 
     },
-  }
+  },
+  
+  upperBanner: {
+    container: {
+      backgroundColor: palette.banner.background,
+      paddingTop: 2,
+      paddingBottom: 2,
+    },
+    title: {
+      color: palette.buttonHover.main,
+    },
+    createButton: {
+      backgroundColor: palette.banner.createButton.main,
+      border: "none",
+      color: palette.bgColor.main,
+      "&:hover": { backgroundColor: palette.banner.createButton.hover }
+    },
+    editButton: {
+      backgroundColor: "transparent",
+      boxShadow: "none",
+      border: "none",
+      textTransform: "none",
+      "&:hover": {
+        backgroundColor: "transparent",
+        textDecoration: "underline",
+        boxShadow: "none",
+      },
+    },
+  },
 };

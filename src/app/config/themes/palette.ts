@@ -14,6 +14,8 @@ export enum themePalette {
   borderPrimaryColor = "rgb(235, 101, 140)",
   borderSecondaryColor = "rgb(239, 174, 20)",
   bannerBgColor= "rgb(225, 233, 239)",
+  bannerCreateColor = "rgb(187, 84, 114)",
+  bannerCreateHover = "rgb(154, 69, 95)",
 }
 
 export const palette = {
@@ -42,5 +44,9 @@ export const palette = {
   },
   banner: { 
     background: themePalette.bannerBgColor, 
+    createButton: { 
+      main: themePalette.bannerCreateColor, 
+      hover: themePalette.bannerCreateHover, 
+    },
   },
 };

@@ -207,4 +207,11 @@ export interface Theme {
   };
 
   tableDashboard: ExtendedCSSProperties;
+
+  upperBanner: { 
+    container: ExtendedCSSProperties; 
+    title: ExtendedCSSProperties; 
+    createButton: ExtendedCSSProperties; 
+    editButton: ExtendedCSSProperties; 
+  };
 }
