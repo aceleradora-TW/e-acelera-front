@@ -8,8 +8,6 @@ import { ImpactSection } from "@/components/UI/home/impact-section";
 import { SponsorsSection } from "@/components/UI/home/sponsors-section";
 import AboutAgil from "@/components/UI/home/about-agile";
 import { StudySection } from "@/components/UI/home/study-section";
-import Form from "@/components/UI/dashboard/form";
-// import Form2 from "@/components/UI/dashboard/form2";
 
 export default function Home() {
   return (
@@ -29,8 +27,6 @@ export default function Home() {
       <StudySection />
       <TestimonialsSection />
       <Faq />
-      <Form />
     </Box>
   );
 }
-//coloquei <FormPage />  para testar o cod

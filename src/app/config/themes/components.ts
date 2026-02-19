@@ -1,5 +1,4 @@
-import { Padding } from "@mui/icons-material";
-import { themePalette } from "./palette";
+import { palette, themePalette } from "./palette";
 import { Theme } from "./types";
 
 export const customStyles: Theme = {
@@ -380,12 +379,12 @@ export const customStyles: Theme = {
       borderRadius: "100px 0px 0px 100px",
       height: 45,
       opacity: 0,
-      width: 210,
+      width: 260,
       whiteSpace: "nowrap",
       pointerEvents: "none",
       display: "flex",
       alignItems: "center",
-      justifyContent: "left",
+      justifyContent: "center",
       transform: "translateX(10px)",
       transition: "all 0.3s ease",
       boxShadow: `0px 4px 12px ${themePalette.defaultTextColor
@@ -661,36 +660,85 @@ export const customStyles: Theme = {
       pointerEvents: "none",
     }, 
   }),
+
   Form: {
     background: themePalette.baseBgColor
-    // color: string;
-    // mt: number,
-    // height: string,
-    // boxShadow: string,
   },
   
   FormPage: {
-  container: {
-    mt: 6,
-    backgroundColor: themePalette.baseBgColor,
-    borderRadius: "12px",
-    p: 4,
-    boxShadow: "0px 4px 20px rgba(0,0,0,0.08)",
-    display: "flex",
-    flexDirection: "column",
-    gap: 3,
+    container: {
+      mt: 6,
+      backgroundColor: themePalette.baseBgColor,
+      borderRadius: "12px",
+      p: 4,
+      boxShadow: "0px 4px 20px rgba(0,0,0,0.08)",
+      display: "flex",
+      flexDirection: "column",
+      gap: 3,
+    },
+
+    title: {
+      fontWeight: 600,
+    },
+
+    actions: {
+      display: "flex",
+      justifyContent: "flex-end",
+      gap: 2,
+      mt: 2,
+    },
   },
 
-  title: {
-    fontWeight: 600,
+  tableDashboard: {
+    '& .MuiDataGrid-columnHeader': {
+      backgroundColor: palette.buttonHover.main,
+      color: palette.bgColor.main,
+    },
+    '& .MuiDataGrid-columnHeaderTitleContainer': {
+      display: 'flex',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+    },
+    '& .MuiDataGrid-cell:focus': { outline: 'none' },
+    '& .MuiDataGrid-row:hover': { 
+      backgroundColor: palette.banner.background, 
+      cursor: 'pointer' 
+    },
+    '& .MuiDataGrid-menuIconButton': { color: palette.buttonHover.main, },
+    '& .MuiDataGrid-sortIcon': { color: palette.buttonHover.main, },
+    '& .MuiDataGrid-columnSeparator': { color: palette.bgColor.main, },
+    '& .MuiDataGrid-columnHeader .MuiIconButton-root': { backgroundColor: palette.banner.background, },
+    '& .MuiDataGrid-columnHeader .MuiIconButton-root:hover': { 
+      backgroundColor: palette.banner.background, 
+      opacity: 0.8, 
+    },
   },
 
-  actions: {
-    display: "flex",
-    justifyContent: "flex-end",
-    gap: 2,
-    mt: 2,
+  upperBanner: {
+    container: {
+      backgroundColor: palette.banner.background,
+      paddingTop: 2,
+      paddingBottom: 2,
+    },
+    title: {
+      color: palette.buttonHover.main,
+    },
+    createButton: {
+      backgroundColor: palette.banner.createButton.main,
+      border: "none",
+      color: palette.bgColor.main,
+      "&:hover": { backgroundColor: palette.banner.createButton.hover }
+    },
+    editButton: {
+      backgroundColor: "transparent",
+      boxShadow: "none",
+      border: "none",
+      textTransform: "none",
+      "&:hover": {
+        backgroundColor: "transparent",
+        textDecoration: "underline",
+        boxShadow: "none",
+      },
+    },
   },
-},
-
-};
+}

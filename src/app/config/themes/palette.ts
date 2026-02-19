@@ -16,6 +16,9 @@ export enum themePalette {
   error = "rgb(244, 67, 54)",
   disableButton  = "rgb(224, 224, 224)",
   buttonText = "rgb(158, 158, 158)",
+  bannerBgColor= "rgb(225, 233, 239)",
+  bannerCreateColor = "rgb(187, 84, 114)",
+  bannerCreateHover = "rgb(154, 69, 95)",
 }
 
 export const palette = {
@@ -42,10 +45,19 @@ export const palette = {
     pink: themePalette.accentPink,
     orange: themePalette.accentOrange,
   },
+
   buttonFormColor: {
     blueBackground: themePalette.button,
     gray: themePalette.buttonText,
     lightGray: themePalette.disableButton,
     red: themePalette.error
-  }
+  },
+
+  banner: { 
+    background: themePalette.bannerBgColor, 
+    createButton: { 
+      main: themePalette.bannerCreateColor, 
+      hover: themePalette.bannerCreateHover, 
+    },
+  },
 };

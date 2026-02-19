@@ -208,15 +208,20 @@ export interface Theme {
 
   Form: {
     background: string;
-    // color: string;
-    // mt: number;
-    // height: string;
-    // boxShadow: string;
   };
   
   FormPage: {
     container: ExtendedCSSProperties;
     title: ExtendedCSSProperties;
     actions: ExtendedCSSProperties;
+  }
+
+  tableDashboard: ExtendedCSSProperties;
+
+  upperBanner: { 
+    container: ExtendedCSSProperties; 
+    title: ExtendedCSSProperties; 
+    createButton: ExtendedCSSProperties; 
+    editButton: ExtendedCSSProperties; 
   };
 }
