@@ -37,7 +37,7 @@ export default function RenderCmsPage() {
 
   return (
     <>
-      <UpperBanner title="CMS" menuBanner createButton />
+      <UpperBanner title="CMS - Themes" menuBanner createButton />
       {loading ? (
         <Typography variant="h6" sx={{ padding: "32px", textAlign: "left" }}>
           Carregando dados...
