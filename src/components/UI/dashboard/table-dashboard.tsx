@@ -1,5 +1,4 @@
 'use client';
-import { palette } from '@/app/config/themes/palette';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import { ptBR } from '@mui/x-data-grid/locales';
 import { Paper, useTheme } from '@mui/material';
@@ -14,9 +13,14 @@ export interface Column {
 export interface TableDashboardProps {
     columns: Column[];
     rows: Record<string, any>[];
+    rowCount: number;
+    pageSize: number;
+    page: number;
+    onPageChange: (newPage: number) => void;
+    onPageSizeChange: (newPageSize: number) => void;
 }
 
-export function TableDashboard({ columns, rows }: TableDashboardProps) {
+export function TableDashboard({ columns, rows, rowCount, pageSize, page, onPageChange, onPageSizeChange }: TableDashboardProps) {
     const router = useRouter();
     const theme = useTheme();
 
@@ -37,10 +41,14 @@ export function TableDashboard({ columns, rows }: TableDashboardProps) {
             <DataGrid
                 rows={gridRows}
                 columns={gridColumns}
-                pageSizeOptions={[10, 25, 50]}
-                initialState={{
-                    pagination: { paginationModel: { pageSize: 10, page: 0 } },
+                paginationMode="server"
+                rowCount={rowCount}
+                paginationModel={{ page, pageSize }}
+                onPaginationModelChange={(model) => {
+                    onPageChange(model.page);
+                    onPageSizeChange(model.pageSize);
                 }}
+                pageSizeOptions={[10, 25, 50]}
                 disableRowSelectionOnClick
                 onRowClick={(params) => router.push(`/dashboard/${params.id}`)}
                 localeText={ptBR.components.MuiDataGrid.defaultProps.localeText}
