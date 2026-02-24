@@ -10,7 +10,7 @@ export interface Column {
     label: string;
 }
 
-export interface TableDashboardProps {
+export interface TableCMSProps {
     columns: Column[];
     rows: Record<string, any>[];
     rowCount: number;
@@ -20,7 +20,7 @@ export interface TableDashboardProps {
     onPageSizeChange: (newPageSize: number) => void;
 }
 
-export function TableDashboard({ columns, rows, rowCount, pageSize, page, onPageChange, onPageSizeChange }: TableDashboardProps) {
+export function TableCMS({ columns, rows, rowCount, pageSize, page, onPageChange, onPageSizeChange }: TableCMSProps) {
     const router = useRouter();
     const theme = useTheme();
 
@@ -37,7 +37,7 @@ export function TableDashboard({ columns, rows, rowCount, pageSize, page, onPage
     }));
 
     return (
-        < Paper sx={{ margin: '24px 32px' }}>
+        <Paper>
             <DataGrid
                 rows={gridRows}
                 columns={gridColumns}
@@ -50,9 +50,9 @@ export function TableDashboard({ columns, rows, rowCount, pageSize, page, onPage
                 }}
                 pageSizeOptions={[10, 25, 50]}
                 disableRowSelectionOnClick
-                onRowClick={(params) => router.push(`/dashboard/${params.id}`)}
+                onRowClick={(params) => router.push(`/cms/${params.id}`)}
                 localeText={ptBR.components.MuiDataGrid.defaultProps.localeText}
-                sx={theme.customStyles.tableDashboard}
+                sx={theme.customStyles.tableCMS}
             />
         </Paper>
     );

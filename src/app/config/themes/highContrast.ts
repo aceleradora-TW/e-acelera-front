@@ -156,7 +156,7 @@ export const highContrastThemeBuilder = (fontFamily?: string) => {
       },
     },
     customStyles: {
-      tableDashboard: {
+      tableCMS: {
           '& .MuiDataGrid-columnHeader': {
             backgroundColor: themePalette.defaultTextColor,
             color: themePalette.baseBgColor,

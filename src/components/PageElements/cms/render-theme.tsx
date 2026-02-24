@@ -1,7 +1,7 @@
-import { TableDashboard } from "@/components/UI/dashboard/table-dashboard";
-import { UpperBanner } from "@/components/UI/dashboard/upper-banner";
+import { TableCMS } from "@/components/UI/cms/table-cms";
+import { UpperBanner } from "@/components/UI/cms/upper-banner";
 import { getThemes } from "@/utils/api/themes";
-import { Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 
 const columns = [
@@ -36,14 +36,14 @@ export default function RenderCmsPage() {
   }, [page, pageSize]);
 
   return (
-    <>
-      <UpperBanner title="CMS - Themes" menuBanner createButton />
+    <Box display="flex" flexDirection="column" gap={4}>
+      <UpperBanner title="CMS - Temas" menuBanner createButton />
       {loading ? (
-        <Typography variant="h6" sx={{ padding: "32px", textAlign: "left" }}>
+        <Typography variant="h6" sx={{ textAlign: "left" }}>
           Carregando dados...
         </Typography>
       ) : (
-        <TableDashboard
+        <TableCMS
           columns={columns}
           rows={rows}
           page={page}
@@ -53,6 +53,6 @@ export default function RenderCmsPage() {
           onPageSizeChange={setPageSize}
         />
       )}
-    </>
+    </Box>
   );
 }

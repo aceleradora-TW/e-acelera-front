@@ -25,20 +25,20 @@ export const UpperBanner = ({
   const pathname = usePathname();
 
   const handleCreate = () => {
-    if (pathname.startsWith("/dashboard/topics")) {
-      router.push("/dashboard/topics/create");
-    } else if (pathname.startsWith("/dashboard/exercises")) {
-      router.push("/dashboard/exercises/create");
+    if (pathname.startsWith("/cms/topics")) {
+      router.push("/cms/topics/create");
+    } else if (pathname.startsWith("/cms/exercises")) {
+      router.push("/cms/exercises/create");
     } else {
-      router.push("/dashboard/themes/create");
+      router.push("/cms/themes/create");
     }
   };
 
   return (
     <Grid
       container
-      spacing={2}
-      alignItems="center"
+      //spacing={2}
+      //alignItems="center"
       justifyContent="space-between"
       sx={theme.customStyles.upperBanner.container}
     >
@@ -55,20 +55,20 @@ export const UpperBanner = ({
           <Grid container spacing={2} justifyContent="center">
             <Grid item>
               <ClickButton
-                title="Themes"
-                click={() => router.push("/dashboard")}
+                title="Temas"
+                click={() => router.push("/cms")}
               />
             </Grid>
             <Grid item>
               <ClickButton
-                title="Topics"
-                click={() => router.push("/dashboard/topics")}
+                title="Tópicos"
+                click={() => router.push("/cms/topics")}
               />
             </Grid>
             <Grid item>
               <ClickButton
-                title="Exercises"
-                click={() => router.push("/dashboard/exercises")}
+                title="Exercícios"
+                click={() => router.push("/cms/exercises")}
               />
             </Grid>
           </Grid>

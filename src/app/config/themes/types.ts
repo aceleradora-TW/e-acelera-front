@@ -206,7 +206,7 @@ export interface Theme {
     alignItems: string;
   };
 
-  tableDashboard: ExtendedCSSProperties;
+  tableCMS: ExtendedCSSProperties;
 
   upperBanner: { 
     container: ExtendedCSSProperties; 
