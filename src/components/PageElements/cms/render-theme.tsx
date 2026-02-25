@@ -1,7 +1,7 @@
 import { TableCMS } from "@/components/UI/cms/table-cms";
 import { UpperBanner } from "@/components/UI/cms/upper-banner";
 import { getThemes } from "@/utils/api/themes";
-import { Box, Typography } from "@mui/material";
+import { Box } from "@mui/material";
 import { useEffect, useState } from "react";
 
 const columns = [
@@ -15,7 +15,6 @@ const columns = [
 
 export default function RenderCmsPage() {
   const [rows, setRows] = useState<any[]>([]);
-  const [loading, setLoading] = useState(true);
   const [page, setPage] = useState(0);
   const [pageSize, setPageSize] = useState(10);
   const [rowCount, setRowCount] = useState(0);
@@ -28,31 +27,32 @@ export default function RenderCmsPage() {
         setRowCount(res.meta.total);
       } catch (error) {
         console.error("Erro ao buscar temas:", error);
-      } finally {
-        setLoading(false);
-      }
+      } 
     }
     fetchThemes();
   }, [page, pageSize]);
 
   return (
-    <Box display="flex" flexDirection="column" gap={4}>
-      <UpperBanner title="CMS - Temas" menuBanner createButton />
-      {loading ? (
-        <Typography variant="h6" sx={{ textAlign: "left" }}>
-          Carregando dados...
-        </Typography>
-      ) : (
-        <TableCMS
-          columns={columns}
-          rows={rows}
-          page={page}
-          pageSize={pageSize}
-          rowCount={rowCount}
-          onPageChange={setPage}
-          onPageSizeChange={setPageSize}
-        />
-      )}
+    <Box
+      display="flex"
+      flexDirection="column"
+      gap={"36px"}
+      sx={{ width: "100%"}}
+    >
+      <UpperBanner 
+        title="CMS - Temas"   
+        menuBanner 
+        createButton 
+      />
+      <TableCMS
+        columns={columns}
+        rows={rows}
+        page={page}
+        pageSize={pageSize}
+        rowCount={rowCount}
+        onPageChange={setPage}
+        onPageSizeChange={setPageSize}
+      />
     </Box>
   );
 }

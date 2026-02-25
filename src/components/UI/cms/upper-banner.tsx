@@ -23,6 +23,7 @@ export const UpperBanner = ({
   const theme = useTheme();
   const router = useRouter();
   const pathname = usePathname();
+  const isActive = (path: string) => pathname.startsWith(path);
 
   const handleCreate = () => {
     if (pathname.startsWith("/cms/topics")) {
@@ -37,9 +38,9 @@ export const UpperBanner = ({
   return (
     <Grid
       container
-      //spacing={2}
-      //alignItems="center"
       justifyContent="space-between"
+      direction="row"
+      alignItems="end"
       sx={theme.customStyles.upperBanner.container}
     >
       <Grid item>
@@ -52,44 +53,62 @@ export const UpperBanner = ({
           </Grid>
         </Grid>
         {menuBanner && (
-          <Grid container spacing={2} justifyContent="center">
+          <Grid container spacing={4} >
             <Grid item>
               <ClickButton
                 title="Temas"
                 click={() => router.push("/cms/themes")}
+                sx={{
+                  ...theme.customStyles.button,
+                  ...(isActive("/cms/themes") && theme.customStyles.buttonActive),
+                }}
               />
             </Grid>
             <Grid item>
               <ClickButton
                 title="Tópicos"
                 click={() => router.push("/cms/topics")}
+                sx={{
+                  ...theme.customStyles.button,
+                  ...(isActive("/cms/topics") && theme.customStyles.buttonActive),
+                }}
               />
             </Grid>
             <Grid item>
               <ClickButton
                 title="Exercícios"
                 click={() => router.push("/cms/exercises")}
+                sx={{
+                  ...theme.customStyles.button,
+                  ...(isActive("/cms/exercises") && theme.customStyles.buttonActive),
+                }}
               />
             </Grid>
           </Grid>
         )}
       </Grid>
       <Grid item>
-        {createButton && (
-          <ClickButton
-            title="Criar"
-            click={handleCreate}
-            sx={theme.customStyles.upperBanner.createButton}
-          />
-        )}
-        {editButton && (
-          <ClickButton
-            title="Editar"
-            backIcon={<EditIcon />}
-            click={() => console.log("Editar")}
-            sx={theme.customStyles.upperBanner.editButton}
-          />
-        )}
+        <Grid container spacing={2} justifyContent="flex-end" sx={{ marginTop: 3 }} >
+          {createButton && (
+            <Grid item>
+              <ClickButton
+                title="Criar"
+                click={handleCreate}
+                sx={theme.customStyles.upperBanner.createButton}
+              />
+            </Grid>
+          )}
+          {editButton && (
+            <Grid item>
+              <ClickButton
+                title="Editar"
+                backIcon={<EditIcon />}
+                click={() => console.log("Editar")}
+                sx={theme.customStyles.upperBanner.editButton}
+              />
+            </Grid>
+          )}
+        </Grid>
       </Grid>
     </Grid>
   );

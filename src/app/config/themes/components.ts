@@ -688,15 +688,11 @@ export const customStyles: Theme = {
   
   upperBanner: {
     container: {
-      backgroundColor: palette.banner.background,
-      padding:"4px 4px",
-      width: "100vw",
-      position: "relative",
-      left: "0",
-      marginLeft: "calc(-50vw + 50%)",
+      
     },
     title: {
       color: palette.buttonHover.main,
+      mb:"12px",
     },
     createButton: {
       backgroundColor: palette.banner.createButton.main,
