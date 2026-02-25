@@ -56,7 +56,7 @@ export const UpperBanner = ({
             <Grid item>
               <ClickButton
                 title="Temas"
-                click={() => router.push("/cms")}
+                click={() => router.push("/cms/themes")}
               />
             </Grid>
             <Grid item>

@@ -2,7 +2,7 @@
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import { ptBR } from '@mui/x-data-grid/locales';
 import { Paper, useTheme } from '@mui/material';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter  } from 'next/navigation';
 import React from 'react';
 
 export interface Column {
@@ -23,6 +23,9 @@ export interface TableCMSProps {
 export function TableCMS({ columns, rows, rowCount, pageSize, page, onPageChange, onPageSizeChange }: TableCMSProps) {
     const router = useRouter();
     const theme = useTheme();
+    const pathname = usePathname();
+
+    const basePath = pathname.split("/")[2];
 
     const gridColumns: GridColDef[] = columns.map((col) => ({
         field: col.id,
@@ -50,7 +53,7 @@ export function TableCMS({ columns, rows, rowCount, pageSize, page, onPageChange
                 }}
                 pageSizeOptions={[10, 25, 50]}
                 disableRowSelectionOnClick
-                onRowClick={(params) => router.push(`/cms/${params.id}`)}
+                onRowClick={(params) => router.push(`/cms/${basePath}/${params.id}`)}
                 localeText={ptBR.components.MuiDataGrid.defaultProps.localeText}
                 sx={theme.customStyles.tableCMS}
             />
