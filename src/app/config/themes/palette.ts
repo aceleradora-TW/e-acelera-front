@@ -42,11 +42,11 @@ export const palette = {
     pink: themePalette.accentPink,
     orange: themePalette.accentOrange,
   },
-  banner: { 
+  banner: {
     background: themePalette.bannerBgColor, 
     createButton: { 
-      main: themePalette.bannerCreateColor, 
-      hover: themePalette.bannerCreateHover, 
+      main: themePalette.accentBlue, 
+      hover: themePalette.button, 
     },
   },
 };
