@@ -209,7 +209,6 @@ export interface Theme {
   tableCMS: ExtendedCSSProperties;
 
   upperBanner: { 
-    container: ExtendedCSSProperties; 
     title: ExtendedCSSProperties; 
     createButton: ExtendedCSSProperties; 
     editButton: ExtendedCSSProperties; 
