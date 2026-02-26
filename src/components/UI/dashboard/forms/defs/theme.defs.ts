@@ -2,10 +2,9 @@ import { FormDef } from "@/types/form.types";
 import z from "zod";
 
 export const ThemeFormSchema = z.object({
-  title: z.string(),
-  shortDescription: z.string(),
-  description: z.string()
- 
+  title: z.string().trim().nonempty("Título obrigatório"),
+  shortDescription: z.string().trim().nonempty("Descrição curta obrigatória"),
+  description: z.string().trim().nonempty("Descrição obrigatória")
 });
 
 export type ThemeFormData = z.infer<typeof ThemeFormSchema>;

@@ -1,19 +1,22 @@
 import { Controller, SubmitHandler, useForm } from "react-hook-form"
 import { Box, Button, Container, TextField, Typography } from "@mui/material"
-import { ThemeFormData, themeFormDefs } from "./forms/defs/theme.defs"
+import { ThemeFormData, ThemeFormSchema, themeFormDefs } from "./forms/defs/theme.defs"
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useTheme } from "@mui/material/styles";
 
 export default function Form() {
-  const { handleSubmit, control, reset, formState: { isDirty }, } = useForm<ThemeFormData>({
-    defaultValues: themeFormDefs.defaultValues
+  const { handleSubmit, control, formState: { isDirty, isValid }, } = useForm<ThemeFormData>({
+    resolver: zodResolver(ThemeFormSchema),
+    defaultValues: themeFormDefs.defaultValues,
+    mode: "onChange",
   })
 
   const onSubmit: SubmitHandler<ThemeFormData> = (data) => console.log(data)
   const theme = useTheme();
 
   return (
-    
-      <Container
+
+    <Container
       component="form"
       maxWidth="xl"
       sx={{
@@ -39,13 +42,22 @@ export default function Form() {
             key={field.name}
             name={field.name}
             control={control}
-            rules={{ required: true }}
-            render={({field: rhfField}) => (field.type === "text" ? <TextField  label={field.label} {...rhfField} /> : <TextField  label={field.label} multiline rows={5} {...rhfField} />)}
+            render={({ field: rhfField, fieldState }) => (
+              <TextField
+                {...rhfField}
+                label={field.label}
+                multiline={field.type === "textarea"}
+                rows={field.type === "textarea" ? 5 : undefined}
+                error={!!fieldState.error}
+                helperText={fieldState.error?.message}
+                fullWidth
+              />
+            )}
           />
         ))
       }
-        
-       <Box
+
+      <Box
         sx={{
           display: "flex",
           gap: 2,
@@ -59,7 +71,7 @@ export default function Form() {
             "&:hover": {
               backgroundColor: theme.palette.buttonFormColor?.red,
               color: theme.palette.buttonHover?.contrastText,
-              borderColor:  theme.palette.buttonFormColor?.red,
+              borderColor: theme.palette.buttonFormColor?.red,
             },
           }}
         >
@@ -67,13 +79,13 @@ export default function Form() {
         </Button>
 
         <Button type="submit"
-          disabled={!isDirty}
+          disabled={!isDirty || !isValid}
           sx={{
             border: "0.5px solid",
-            backgroundColor: isDirty ? theme.palette.buttonFormColor?.blueBackground : theme.palette.buttonFormColor?.lightGray,
-            color: isDirty ? theme.palette.buttonHover?.contrastText : theme.palette.buttonFormColor?.gray,
+            backgroundColor: isValid ? theme.palette.buttonFormColor?.blueBackground : theme.palette.buttonFormColor?.lightGray,
+            color: isValid ? theme.palette.buttonHover?.contrastText : theme.palette.buttonFormColor?.gray,
             "&:hover": {
-              backgroundColor: isDirty ? "primary.dark" : theme.palette.accent?.blue
+              backgroundColor: isValid ? "primary.dark" : theme.palette.accent?.blue
             },
           }}
         >Salvar</Button>
@@ -81,3 +93,7 @@ export default function Form() {
     </Container>
   )
 }
+
+/*function zodResolver(ThemeFormSchema: any): import("react-hook-form").Resolver<{ title: string; shortDescription: string; description: string; }, any, { title: string; shortDescription: string; description: string; }> | undefined {
+  throw new Error("Function not implemented.");
+}*/
