@@ -39,7 +39,6 @@ export default function Form() {
             name={field.name}
             control={control}
             render={({ field: rhfField, fieldState }) => {
-
               switch (field.type) {
                 case "text":
                 case "email":
