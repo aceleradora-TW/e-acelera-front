@@ -12,11 +12,11 @@
     "prepare": "husky"
   },
   "dependencies": {
-    "@emotion/react": "^11.11.4",
-    "@emotion/styled": "^11.11.5",
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.1",
     "@hookform/resolvers": "^5.2.2",
     "@mui/icons-material": "^5.16.7",
-    "@mui/material": "^5.15.18",
+    "@mui/material": "^5.18.0",
     "@mui/styled-engine-sc": "^6.0.0-alpha.18",
     "@mui/system": "^7.3.5",
     "@mui/x-data-grid": "^8.24.0",
