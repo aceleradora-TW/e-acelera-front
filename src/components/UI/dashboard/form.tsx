@@ -1,26 +1,23 @@
 import { Controller, SubmitHandler, useForm } from "react-hook-form"
-import { Box, Button, Container, TextField, Typography, useTheme } from "@mui/material"
+import { Container, Typography } from "@mui/material"
+import { useTheme } from "@mui/material"
 import { ThemeFormData, ThemeFormSchema, themeFormDefs } from "./forms/defs/theme.defs"
-import { zodResolver } from "@hookform/resolvers/zod";
-import {
-  actionsBoxStyles,
-  cancelButtonStyles,
-  containerStyles,
-  submitButtonStyles
-} from "./forms/form.styles";
+import { zodResolver } from "@hookform/resolvers/zod"
+import { containerStyles } from "./forms/form.styles"
+import { FieldRenderer } from "./forms/field-renderer"
+import { FormActions } from "./forms/form-actions"
 
 export default function Form() {
-  const { handleSubmit, control, formState: { isDirty, isValid }, } = useForm<ThemeFormData>({
+  const theme = useTheme()
+  const { handleSubmit, control, formState: { isDirty, isValid } } = useForm<ThemeFormData>({
     resolver: zodResolver(ThemeFormSchema),
     defaultValues: themeFormDefs.defaultValues,
     mode: "onChange",
   })
 
   const onSubmit: SubmitHandler<ThemeFormData> = (data) => console.log(data)
-  const theme = useTheme();
 
   return (
-
     <Container
       component="form"
       maxWidth="xl"
@@ -31,70 +28,18 @@ export default function Form() {
         Cadastro
       </Typography>
 
-      {
-        themeFormDefs.fields.map((field) => (
-          <Controller
-            key={field.name}
-            name={field.name}
-            control={control}
-            render={({ field: rhfField, fieldState }) => {
-              switch (field.type) {
-                case "text":
-                case "email":
-                case "number":
-                  return (
-                    <TextField
-                      {...rhfField}
-                      label={field.label}
-                      type={field.type}
-                      error={!!fieldState.error}
-                      helperText={fieldState.error?.message}
-                      fullWidth
-                    />
-                  )
+      {themeFormDefs.fields.map((field) => (
+        <Controller
+          key={field.name}
+          name={field.name}
+          control={control}
+          render={({ field: rhfField, fieldState }) => (
+            <FieldRenderer field={field} rhfField={rhfField} error={fieldState.error} />
+          )}
+        />
+      ))}
 
-                case "textarea":
-                  return (
-                    <TextField
-                      {...rhfField}
-                      label={field.label}
-                      multiline
-                      rows={5}
-                      error={!!fieldState.error}
-                      helperText={fieldState.error?.message}
-                      fullWidth
-                    />
-                  )
-                default:
-                  return (
-                    <TextField
-                      {...rhfField}
-                      label={`Tipo não suportado: ${field.type}`}
-                      error
-                      helperText={`Tipo de campo não implementado`}
-                      fullWidth
-                    />
-                  )
-              }
-            }}
-          />
-        ))
-      }
-
-      <Box
-        sx={actionsBoxStyles}
-      >
-        <Button sx={cancelButtonStyles(theme)}
-        >
-          Cancelar
-        </Button>
-
-        <Button type="submit"
-          variant="contained"
-          disabled={!isDirty || !isValid}
-          sx={submitButtonStyles(theme, isValid)}
-        >Salvar</Button>
-      </Box>
+      <FormActions isValid={isValid} isDirty={isDirty} />
     </Container>
   )
 }
