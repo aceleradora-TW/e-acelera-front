@@ -65,7 +65,6 @@ export default function Form() {
                       fullWidth
                     />
                   )
-
                 default:
                   return (
                     <TextField
