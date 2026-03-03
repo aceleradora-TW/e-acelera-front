@@ -5,6 +5,7 @@ import { ptBR } from '@mui/x-data-grid/locales';
 import { Paper, useTheme } from '@mui/material';
 import { useRouter } from 'next/navigation';
 import React from 'react';
+import { ThemeRow } from '@/types/theme.types';
 
 export interface Column {
     id: string;
@@ -26,14 +27,13 @@ export const mockColumns = [
     { id: 'conteudo', label: 'Conteúdo' },
 ];
 
-export const mockRows = [
-    { id: '1', titulo: 'Conteúdo 1', shortDescription: 'Breve desc 1Breve desc 1 Breve desc 1Breve desc 1 Breve desc 1Breve desc 1 Breve desc 1Breve desc 1', description: 'Desc completa 1', reference: 'Ref 1', video: 'Video 1', links: 'Link 1' },
-    { id: '2', titulo: 'Conteúdo 2', shortDescription: 'Breve desc 2', description: 'Desc completa 2', reference: 'Ref 2', video: 'Video 2', links: 'Link 2' },
-    { id: '3', titulo: 'Conteúdo 3', shortDescription: 'Breve desc 3', description: 'Desc completa 3', reference: 'Ref 3', video: 'Video 3', links: 'Link 3' },
-    { id: '4', titulo: 'Conteúdo 4', shortDescription: 'Breve desc 4', description: 'Desc completa 4', reference: 'Ref 4', video: 'Video 4', links: 'Link 4' },
-    { id: '5', titulo: 'Conteúdo 5', shortDescription: 'Breve desc 5', description: 'Desc completa 5', reference: 'Ref 5', video: '', links: 'Link' },
+export const mockRows: ThemeRow[] = [
+  { id: '1', titulo: 'Conteúdo 1', shortDescription: 'Breve desc 1...', description: 'Desc completa 1', reference: 'Ref 1', video: 'Video 1', links: 'Link 1', type: "theme" },
+  { id: '2', titulo: 'Conteúdo 2', shortDescription: 'Breve desc 2', description: 'Desc completa 2', reference: 'Ref 2', video: 'Video 2', links: 'Link 2', type: "theme" },
+  { id: '3', titulo: 'Conteúdo 3', shortDescription: 'Breve desc 3', description: 'Desc completa 3', reference: 'Ref 3', video: 'Video 3', links: 'Link 3', type: "theme" },
+  { id: '4', titulo: 'Conteúdo 4', shortDescription: 'Breve desc 4', description: 'Desc completa 4', reference: 'Ref 4', video: 'Video 4', links: 'Link 4', type: "theme" },
+  { id: '5', titulo: 'Conteúdo 5', shortDescription: 'Breve desc 5', description: 'Desc completa 5', reference: 'Ref 5', video: '', links: 'Link', type: "theme" },
 ];
-
 
 export function TableDashboard({ columns, rows }: TableDashboardProps) {
     const router = useRouter();

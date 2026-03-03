@@ -3,6 +3,7 @@ import { ClickButton } from "@/components/ClickButton";
 import { Grid, Typography, useTheme } from "@mui/material";
 import EditIcon from '@mui/icons-material/Edit';
 import { useState } from "react";
+import { useRouter } from 'next/navigation';
 
 type UpperBannerProps = {
     title: string,
@@ -20,10 +21,12 @@ export const UpperBanner = ({
     showBreadCrumb,
 }: UpperBannerProps) => {
     const theme = useTheme();
+    const router = useRouter();
     const [selectedTab, setSelectedTab] = useState<"themes" | "topics" | "exercises" | "videos">("themes"); 
+
     const handleCreate = () => { 
         switch (selectedTab) { 
-            case "themes": console.log("Abrir criação de Themes"); 
+            case "themes": router.push('/dashboard/create-themes'); 
             break; 
             case "topics": console.log("Abrir criação de Topics"); 
             break; 
@@ -70,4 +73,5 @@ export const UpperBanner = ({
     </Grid>
     );
 }
+
 

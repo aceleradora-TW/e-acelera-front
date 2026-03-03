@@ -4,7 +4,13 @@ import { ThemeFormData, ThemeFormSchema, themeFormDefs } from "./forms/defs/them
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useTheme } from "@mui/material/styles";
 
-export default function Form() {
+interface FormProps {
+  defaultValues?: Partial<ThemeFormData> & Record<string, any>; 
+  onCancel?: () => void;
+}
+
+export default function Form({ defaultValues, onCancel }: FormProps) {
+  const theme = useTheme();
   const { handleSubmit, control, formState: { isDirty, isValid }, } = useForm<ThemeFormData>({
     resolver: zodResolver(ThemeFormSchema),
     defaultValues: themeFormDefs.defaultValues,
@@ -12,7 +18,6 @@ export default function Form() {
   })
 
   const onSubmit: SubmitHandler<ThemeFormData> = (data) => console.log(data)
-  const theme = useTheme();
 
   return (
 
@@ -64,7 +69,10 @@ export default function Form() {
           justifyContent: { xs: "right", md: "right" },
         }}
       >
-        <Button type="button"
+        {onCancel && (
+        <Button 
+        type="button" 
+        onClick={onCancel}
           sx={{
             border: "0.5px solid red",
             color: theme.palette.buttonFormColor?.red,
@@ -77,6 +85,7 @@ export default function Form() {
         >
           Cancelar
         </Button>
+        )}
 
         <Button type="submit"
           disabled={!isDirty || !isValid}
