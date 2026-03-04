@@ -1,28 +1,13 @@
-import { SxProps, Theme } from "@mui/material"
-
-export const containerStyles = (
-  theme: Theme
-): SxProps<Theme> => ({
-  mt: 6,
-  backgroundColor: theme.palette.buttonHover?.contrastText,
-  borderRadius: "12px",
-  p: 4,
-  boxShadow: "0px 4px 20px rgba(0,0,0,0.08)",
-  display: "flex",
-  flexDirection: "column",
-  gap: 3,
+export const containerStyles = (theme: any) => ({
+  ...theme.customStyles.FormPage.container,
   maxWidth: "100%",
 })
 
-export const actionsBoxStyles: SxProps<Theme> = {
-  display: "flex",
-  gap: 2,
-  justifyContent: { xs: "right", md: "right" },
-}
+export const actionsBoxStyles = (theme: any) => ({
+  ...theme.customStyles.FormPage.actions,
+})
 
-export const cancelButtonStyles = (
-  theme: Theme
-): SxProps<Theme> => ({
+export const cancelButtonStyles = (theme: any) => ({
   border: "0.5px solid red",
   color: theme.palette.buttonFormColor?.red,
   "&:hover": {
@@ -33,9 +18,9 @@ export const cancelButtonStyles = (
 })
 
 export const submitButtonStyles = (
-  theme: Theme,
+  theme: any,
   isValid: boolean
-): SxProps<Theme> => ({
+) => ({
   border: "0.5px solid",
   backgroundColor: isValid
     ? theme.palette.buttonFormColor?.blueBackground
@@ -45,7 +30,7 @@ export const submitButtonStyles = (
     : theme.palette.buttonFormColor?.gray,
   "&:hover": {
     backgroundColor: isValid
-      ? "primary.dark"
+      ? theme.palette.primary.dark
       : theme.palette.accent?.blue,
   },
 })

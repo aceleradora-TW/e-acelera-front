@@ -208,7 +208,7 @@ export interface Theme {
 
   Form: {
     background: string;
-  };
+  }
   
   FormPage: {
     container: ExtendedCSSProperties;

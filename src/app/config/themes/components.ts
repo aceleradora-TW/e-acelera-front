@@ -1,5 +1,10 @@
 import { palette, themePalette } from "./palette";
 import { Theme } from "./types";
+import {
+  cancelButtonStyles,
+  containerStyles,
+  submitButtonStyles
+} from "@/components/UI/dashboard/forms/form.styles";
 
 export const customStyles: Theme = {
   button: {
@@ -658,7 +663,7 @@ export const customStyles: Theme = {
       backgroundColor: themePalette.accentBlue,
       zIndex: 9999,
       pointerEvents: "none",
-    }, 
+    },
   }),
 
   Form: {
@@ -676,16 +681,17 @@ export const customStyles: Theme = {
       flexDirection: "column",
       gap: 3,
     },
-
     title: {
+      color: themePalette.primaryTextColor,
+      fontSize: "1.5rem",
       fontWeight: 600,
+      marginBottom: 2,
     },
-
     actions: {
       display: "flex",
-      justifyContent: "flex-end",
       gap: 2,
-      mt: 2,
+      justifyContent: "flex-end",
+      marginTop: 3,
     },
   },
 
@@ -700,17 +706,17 @@ export const customStyles: Theme = {
       alignItems: 'center',
     },
     '& .MuiDataGrid-cell:focus': { outline: 'none' },
-    '& .MuiDataGrid-row:hover': { 
-      backgroundColor: palette.banner.background, 
-      cursor: 'pointer' 
+    '& .MuiDataGrid-row:hover': {
+      backgroundColor: palette.banner.background,
+      cursor: 'pointer'
     },
     '& .MuiDataGrid-menuIconButton': { color: palette.buttonHover.main, },
     '& .MuiDataGrid-sortIcon': { color: palette.buttonHover.main, },
     '& .MuiDataGrid-columnSeparator': { color: palette.bgColor.main, },
     '& .MuiDataGrid-columnHeader .MuiIconButton-root': { backgroundColor: palette.banner.background, },
-    '& .MuiDataGrid-columnHeader .MuiIconButton-root:hover': { 
-      backgroundColor: palette.banner.background, 
-      opacity: 0.8, 
+    '& .MuiDataGrid-columnHeader .MuiIconButton-root:hover': {
+      backgroundColor: palette.banner.background,
+      opacity: 0.8,
     },
   },
 
@@ -740,5 +746,5 @@ export const customStyles: Theme = {
         boxShadow: "none",
       },
     },
-  },
+  }, 
 }
