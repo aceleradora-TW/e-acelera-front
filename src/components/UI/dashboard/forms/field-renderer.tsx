@@ -17,6 +17,7 @@ const BaseTextField = ({ field, rhfField, error }: FieldRendererProps) => (
     error={!!error}
     helperText={error?.message}
     fullWidth
+    FormHelperTextProps={{ sx: { fontSize: '0.75rem' } }}
   />
 )
 
@@ -29,6 +30,7 @@ const TextAreaField = ({ field, rhfField, error }: FieldRendererProps) => (
     error={!!error}
     helperText={error?.message}
     fullWidth
+    FormHelperTextProps={{ sx: { fontSize: '0.75rem' } }}
   />
 )
 
