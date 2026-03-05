@@ -41,7 +41,6 @@ export const UpperBanner = ({
       justifyContent="space-between"
       direction="row"
       alignItems="end"
-      sx={theme.customStyles.upperBanner.container}
     >
       <Grid item>
         <Grid container>

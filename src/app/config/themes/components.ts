@@ -718,9 +718,6 @@ export const customStyles: Theme = {
   },
 
   upperBanner: {
-    container: {
-      
-    },
     title: {
       color: palette.buttonHover.main,
       mb:"12px",
