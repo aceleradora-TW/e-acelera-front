@@ -12,13 +12,16 @@ export const highContrastThemeBuilder = (fontFamily?: string) => {
   const fontFamilyStyle = applyFontFamily(fontFamily);
 
   const typographyVariants = ["h1", "h2", "h3", "body1", "caption"] as const;
-  const typographyOverrides = typographyVariants.reduce((acc, variant) => {
-    acc[variant] = {
-      color: "#E0E0E0 !important",
-      ...fontFamilyStyle,
-    };
-    return acc;
-  }, {} as Record<string, any>);
+  const typographyOverrides = typographyVariants.reduce(
+    (acc, variant) => {
+      acc[variant] = {
+        color: "#E0E0E0 !important",
+        ...fontFamilyStyle,
+      };
+      return acc;
+    },
+    {} as Record<string, any>,
+  );
 
   return createTheme({
     typography: {
@@ -174,44 +177,42 @@ export const highContrastThemeBuilder = (fontFamily?: string) => {
       },
     },
     customStyles: {
-      tableDashboard: {
-        '& .MuiDataGrid-columnHeader': {
-          backgroundColor: themePalette.defaultTextColor,
+      tableCMS: {
+        "& .MuiDataGrid-columnHeader": {
+          backgroundColor: themePalette.button,
           color: themePalette.baseBgColor,
         },
-        '& .MuiDataGrid-columnHeaderTitleContainer': {
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
+        "& .MuiDataGrid-columnHeaderTitleContainer": {
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
         },
-        '& .MuiDataGrid-cell:focus': { outline: 'none' },
-        '& .MuiDataGrid-row:hover': {
+        "& .MuiDataGrid-cell:focus": { outline: "none" },
+        "& .MuiDataGrid-row:hover": {
           backgroundColor: themePalette.dropdownContentColor,
-          cursor: 'pointer'
+          cursor: "pointer",
         },
-        '& .MuiDataGrid-menuIconButton': { color: themePalette.button, },
-        '& .MuiDataGrid-sortIcon': { color: themePalette.button, },
-        '& .MuiDataGrid-columnSeparator': { color: themePalette.baseBgColor, },
-        '& .MuiDataGrid-columnHeader .MuiIconButton-root': { backgroundColor: themePalette.bannerBgColor, },
-        '& .MuiDataGrid-columnHeader .MuiIconButton-root:hover': {
+        "& .MuiDataGrid-menuIconButton": { color: themePalette.button },
+        "& .MuiDataGrid-sortIcon": { color: themePalette.button },
+        "& .MuiDataGrid-columnSeparator": { color: themePalette.baseBgColor },
+        "& .MuiDataGrid-columnHeader .MuiIconButton-root": {
+          backgroundColor: themePalette.bannerBgColor,
+        },
+        "& .MuiDataGrid-columnHeader .MuiIconButton-root:hover": {
           backgroundColor: themePalette.bannerBgColor,
           opacity: 0.8,
         },
       },
       upperBanner: {
-        container: {
-          backgroundColor: themePalette.defaultTextColor,
-          paddingTop: 2,
-          paddingBottom: 2,
-        },
         title: {
           color: themePalette.baseBgColor,
+          mb: "12px",
         },
         createButton: {
-          backgroundColor: `${themePalette.bannerCreateColor} !important`,
+          backgroundColor: `${themePalette.accentBlue} !important`,
           border: "none",
           color: themePalette.baseBgColor,
-          "&:hover": { backgroundColor: `${themePalette.bannerCreateHover} !important` }
+          "&:hover": { backgroundColor: `${themePalette.button} !important` },
         },
         editButton: {
           backgroundColor: "transparent !important",
@@ -727,7 +728,7 @@ export const highContrastThemeBuilder = (fontFamily?: string) => {
         textLevelIndicator: (
           themePalette: any,
           textSize: number,
-          size: number
+          size: number,
         ) => ({
           width: 22,
           height: 4,
@@ -751,9 +752,10 @@ export const highContrastThemeBuilder = (fontFamily?: string) => {
             borderColor: "#000000",
             borderRadius: "5px",
           },
-          "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline": {
-            border: `1px solid #000000`,
-          },
+          "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
+            {
+              border: `1px solid #000000`,
+            },
           "& .MuiOutlinedInput-root": {
             height: "40px",
           },

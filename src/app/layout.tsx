@@ -44,30 +44,30 @@ export default async function RootLayout({
     <html lang="pt-br">
       <body>
         <FeatureFlagContext serverState={serverState}>
-        <AccessibilityProvider>
+          <AccessibilityProvider>
             <ThemeConfig>
-          <ClientSessionProvider>
-            <AccessibilityMenu />
-              <Box
-                sx={{
-                  minHeight: "100vh",
-                  display: "flex",
-                  flexDirection: "column",
-                }}
-              >
-                <Box sx={{ marginBottom: "100px" }}>
-                  <ResponsiveAppBar list={menuItems} session={session} />
-                </Box>
+              <ClientSessionProvider>
+                <AccessibilityMenu />
+                <Box
+                  sx={{
+                    minHeight: "100vh",
+                    display: "flex",
+                    flexDirection: "column",
+                  }}
+                >
+                  <Box sx={{ marginBottom: "100px" }}>
+                    <ResponsiveAppBar list={menuItems} session={session} />
+                  </Box>
                 
-                <MainWrapper>{children}</MainWrapper>
-                <Footer
-                  linkedinUrl={"https://www.linkedin.com/school/aceleradora-%C3%A1gil/?originalSubdomain=br"}
-                  projectUrl={"https://www.thoughtworks.com/pt-br/about-us/diversity-and-inclusion/aceleradora"}
-                />
-              </Box>
-          </ClientSessionProvider>
+                  <MainWrapper>{children}</MainWrapper>
+                  <Footer
+                    linkedinUrl={"https://www.linkedin.com/school/aceleradora-%C3%A1gil/?originalSubdomain=br"}
+                    projectUrl={"https://www.thoughtworks.com/pt-br/about-us/diversity-and-inclusion/aceleradora"}
+                  />
+                </Box>
+              </ClientSessionProvider>
             </ThemeConfig>
-        </AccessibilityProvider>
+          </AccessibilityProvider>
         </FeatureFlagContext>
       </body>
     </html>

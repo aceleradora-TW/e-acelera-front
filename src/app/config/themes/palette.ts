@@ -56,8 +56,8 @@ export const palette = {
   banner: { 
     background: themePalette.bannerBgColor, 
     createButton: { 
-      main: themePalette.bannerCreateColor, 
-      hover: themePalette.bannerCreateHover, 
+      main: themePalette.accentBlue, 
+      hover: themePalette.button, 
     },
   },
 };
