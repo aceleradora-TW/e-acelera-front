@@ -34,3 +34,15 @@ export const submitButtonStyles = (
     opacity: 0.4,
   },
 })
+
+export const textAreaStyles: SxProps<Theme> = {
+  "& .MuiInputBase-root": {
+    padding: "8px 12px !important",
+  },
+  "& .MuiInputBase-input": {
+    padding: "0 !important",
+  },
+  "& .MuiInputBase-inputMultiline": {
+    padding: "0 !important",
+  },
+}

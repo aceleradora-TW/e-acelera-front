@@ -2,6 +2,7 @@ import { TextField } from "@mui/material"
 import { ControllerRenderProps, FieldError } from "react-hook-form"
 import { ThemeFormData } from "./defs/theme.defs"
 import { FieldDef } from "@/types/form.types"
+import { textAreaStyles } from "./form.styles"
 
 interface FieldRendererProps {
   field: FieldDef<ThemeFormData>
@@ -31,6 +32,7 @@ const TextAreaField = ({ field, rhfField, error }: FieldRendererProps) => (
     helperText={error?.message}
     fullWidth
     FormHelperTextProps={{ sx: { fontSize: '0.75rem' } }}
+    sx={textAreaStyles}
   />
 )
 
