@@ -692,7 +692,7 @@ export const customStyles: Theme = {
     },
   },
 
-  tableDashboard: {
+  tableCMS: {
     '& .MuiDataGrid-columnHeader': {
       backgroundColor: palette.buttonHover.main,
       color: palette.bgColor.main,

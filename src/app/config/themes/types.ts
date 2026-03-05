@@ -216,7 +216,7 @@ export interface Theme {
     actions: ExtendedCSSProperties;
   }
 
-  tableDashboard: ExtendedCSSProperties;
+  tableCMS: ExtendedCSSProperties;
 
   upperBanner: { 
     title: ExtendedCSSProperties; 
