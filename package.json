@@ -12,10 +12,11 @@
     "prepare": "husky"
   },
   "dependencies": {
-    "@emotion/react": "^11.11.4",
-    "@emotion/styled": "^11.11.5",
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.1",
+    "@hookform/resolvers": "^5.2.2",
     "@mui/icons-material": "^5.16.7",
-    "@mui/material": "^5.15.18",
+    "@mui/material": "^5.18.0",
     "@mui/styled-engine-sc": "^6.0.0-alpha.18",
     "@mui/system": "^7.3.5",
     "@mui/x-data-grid": "^8.24.0",
@@ -27,6 +28,7 @@
     "react": "^18",
     "react-copy-to-clipboard": "^5.1.0",
     "react-dom": "^18",
+    "react-hook-form": "^7.71.1",
     "react-markdown": "^9.0.1",
     "react-slick": "^0.31.0",
     "react-syntax-highlighter": "^15.5.0",
@@ -34,7 +36,8 @@
     "remark-gfm": "^4.0.1",
     "slick-carousel": "^1.8.1",
     "styled-components": "^6.1.11",
-    "winston": "^3.16.0"
+    "winston": "^3.16.0",
+    "zod": "^4.3.6"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.28.5",

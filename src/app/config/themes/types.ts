@@ -206,6 +206,16 @@ export interface Theme {
     alignItems: string;
   };
 
+  Form: {
+    background: string;
+  }
+  
+  FormPage: {
+    container: ExtendedCSSProperties;
+    title: ExtendedCSSProperties;
+    actions: ExtendedCSSProperties;
+  }
+
   tableDashboard: ExtendedCSSProperties;
 
   upperBanner: { 

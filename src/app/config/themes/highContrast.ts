@@ -46,6 +46,16 @@ export const highContrastThemeBuilder = (fontFamily?: string) => {
         main: "#444444",
         contrastText: "#E0E0E0",
       },
+      buttonHover: {
+        main: "#555555",
+        contrastText: "#121212",
+      },
+      buttonFormColor: {
+        blueBackground: "#3d8fd8",
+        red: "#f44336",
+        lightGray: "#444444",
+        gray: "#888888",
+      },
     },
     components: {
       MuiCssBaseline: {
@@ -74,10 +84,16 @@ export const highContrastThemeBuilder = (fontFamily?: string) => {
       MuiButton: {
         styleOverrides: {
           root: {
-            backgroundColor: "#444444 !important",
             color: "#E0E0E0 !important",
+            "&:not(.MuiButton-contained)": {
+              backgroundColor: "#444444 !important",
+            },
+            "&.MuiButton-contained": {
+              backgroundColor: `${themePalette.button} !important`,
+            },
             "&:hover": {
               backgroundColor: `${themePalette.button} !important`,
+              filter: "brightness(1.2)",
             },
             ...fontFamilyStyle,
           },
@@ -116,7 +132,9 @@ export const highContrastThemeBuilder = (fontFamily?: string) => {
               border: "1px solid #E0E0E0 !important",
               borderRadius: "4px",
             },
-            height: "40px",
+          },
+          input: {
+            padding: "16.5px 14px",
           },
         },
       },
@@ -157,29 +175,29 @@ export const highContrastThemeBuilder = (fontFamily?: string) => {
     },
     customStyles: {
       tableDashboard: {
-          '& .MuiDataGrid-columnHeader': {
-            backgroundColor: themePalette.defaultTextColor,
-            color: themePalette.baseBgColor,
-          },
-          '& .MuiDataGrid-columnHeaderTitleContainer': {
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-          },
-          '& .MuiDataGrid-cell:focus': { outline: 'none' },
-          '& .MuiDataGrid-row:hover': { 
-            backgroundColor: themePalette.dropdownContentColor, 
-            cursor: 'pointer' 
-          },
-          '& .MuiDataGrid-menuIconButton': { color: themePalette.button, },
-          '& .MuiDataGrid-sortIcon': { color: themePalette.button, },
-          '& .MuiDataGrid-columnSeparator': { color: themePalette.baseBgColor, },
-          '& .MuiDataGrid-columnHeader .MuiIconButton-root': { backgroundColor: themePalette.bannerBgColor, },
-          '& .MuiDataGrid-columnHeader .MuiIconButton-root:hover': { 
-            backgroundColor: themePalette.bannerBgColor, 
-            opacity: 0.8, 
-          },
+        '& .MuiDataGrid-columnHeader': {
+          backgroundColor: themePalette.defaultTextColor,
+          color: themePalette.baseBgColor,
         },
+        '& .MuiDataGrid-columnHeaderTitleContainer': {
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+        },
+        '& .MuiDataGrid-cell:focus': { outline: 'none' },
+        '& .MuiDataGrid-row:hover': {
+          backgroundColor: themePalette.dropdownContentColor,
+          cursor: 'pointer'
+        },
+        '& .MuiDataGrid-menuIconButton': { color: themePalette.button, },
+        '& .MuiDataGrid-sortIcon': { color: themePalette.button, },
+        '& .MuiDataGrid-columnSeparator': { color: themePalette.baseBgColor, },
+        '& .MuiDataGrid-columnHeader .MuiIconButton-root': { backgroundColor: themePalette.bannerBgColor, },
+        '& .MuiDataGrid-columnHeader .MuiIconButton-root:hover': {
+          backgroundColor: themePalette.bannerBgColor,
+          opacity: 0.8,
+        },
+      },
       upperBanner: {
         container: {
           backgroundColor: themePalette.defaultTextColor,
@@ -714,13 +732,11 @@ export const highContrastThemeBuilder = (fontFamily?: string) => {
           width: 22,
           height: 4,
           borderRadius: 0.6,
-          backgroundColor:
-            textSize >= size ? themePalette.baseBgColor : themePalette.button,
+          backgroundColor: textSize >= size ? themePalette.baseBgColor : themePalette.button,
           transition: "background-color 0.3s ease",
-          border:
-            textSize < size
-              ? `1px solid ${themePalette.baseBgColor}`
-              : `1px solid ${themePalette.baseBgColor}`,
+          border: textSize < size
+            ? `1px solid ${themePalette.baseBgColor}`
+            : `1px solid ${themePalette.baseBgColor}`,
         }),
 
         formControl: {
@@ -735,8 +751,7 @@ export const highContrastThemeBuilder = (fontFamily?: string) => {
             borderColor: "#000000",
             borderRadius: "5px",
           },
-          "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
-          {
+          "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline": {
             border: `1px solid #000000`,
           },
           "& .MuiOutlinedInput-root": {
@@ -853,6 +868,30 @@ export const highContrastThemeBuilder = (fontFamily?: string) => {
           pointerEvents: "none",
         },
       }),
+      Form: {
+        background: "themePalette.baseBgColor."
+      },
+      FormPage: {
+        container: {
+          backgroundColor: "#121212;",
+          borderRadius: "12px",
+          p: 4,
+          boxShadow: "0px 4px 20px rgba(0,0,0,0.5)",
+          display: "flex",
+          flexDirection: "column",
+          gap: 3
+        },
+        title: {
+          color: themePalette.primaryTextColor,
+          fontSize: "1.5rem",
+          fontWeight: 600,
+        },
+        actions: {
+          display: "flex",
+          gap: 2,
+          justifyContent: "flex-end",
+        }
+      }
     },
   });
 };

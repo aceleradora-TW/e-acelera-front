@@ -58,6 +58,7 @@ export default async function RootLayout({
                 <Box sx={{ marginBottom: "100px" }}>
                   <ResponsiveAppBar list={menuItems} session={session} />
                 </Box>
+                
                 <MainWrapper>{children}</MainWrapper>
                 <Footer
                   linkedinUrl={"https://www.linkedin.com/school/aceleradora-%C3%A1gil/?originalSubdomain=br"}

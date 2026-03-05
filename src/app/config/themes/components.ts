@@ -1,5 +1,10 @@
 import { palette, themePalette } from "./palette";
 import { Theme } from "./types";
+import {
+  cancelButtonStyles,
+  containerStyles,
+  submitButtonStyles
+} from "@/components/UI/dashboard/forms/form.styles";
 
 export const customStyles: Theme = {
   button: {
@@ -661,6 +666,32 @@ export const customStyles: Theme = {
     },
   }),
 
+  Form: {
+    background: themePalette.baseBgColor
+  },
+  
+  FormPage: {
+    container: {
+      backgroundColor: themePalette.baseBgColor,
+      borderRadius: "12px",
+      p: 4,
+      boxShadow: "0px 4px 20px rgba(0,0,0,0.08)",
+      display: "flex",
+      flexDirection: "column",
+      gap: 3,
+    },
+    title: {
+      color: themePalette.primaryTextColor,
+      fontSize: "1.5rem",
+      fontWeight: 600,
+    },
+    actions: {
+      display: "flex",
+      gap: 2,
+      justifyContent: "flex-end",
+    },
+  },
+
   tableDashboard: {
     '& .MuiDataGrid-columnHeader': {
       backgroundColor: palette.buttonHover.main,
@@ -672,20 +703,20 @@ export const customStyles: Theme = {
       alignItems: 'center',
     },
     '& .MuiDataGrid-cell:focus': { outline: 'none' },
-    '& .MuiDataGrid-row:hover': { 
-      backgroundColor: palette.banner.background, 
-      cursor: 'pointer' 
+    '& .MuiDataGrid-row:hover': {
+      backgroundColor: palette.banner.background,
+      cursor: 'pointer'
     },
     '& .MuiDataGrid-menuIconButton': { color: palette.buttonHover.main, },
     '& .MuiDataGrid-sortIcon': { color: palette.buttonHover.main, },
     '& .MuiDataGrid-columnSeparator': { color: palette.bgColor.main, },
     '& .MuiDataGrid-columnHeader .MuiIconButton-root': { backgroundColor: palette.banner.background, },
-    '& .MuiDataGrid-columnHeader .MuiIconButton-root:hover': { 
-      backgroundColor: palette.banner.background, 
-      opacity: 0.8, 
+    '& .MuiDataGrid-columnHeader .MuiIconButton-root:hover': {
+      backgroundColor: palette.banner.background,
+      opacity: 0.8,
     },
   },
-  
+
   upperBanner: {
     container: {
       backgroundColor: palette.banner.background,
@@ -712,5 +743,5 @@ export const customStyles: Theme = {
         boxShadow: "none",
       },
     },
-  },
-};
+  }, 
+}
