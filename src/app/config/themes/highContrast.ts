@@ -851,12 +851,28 @@ export const highContrastThemeBuilder = (fontFamily?: string) => {
         },
       }),
       Form: {
-        background: ""
+        background: "themePalette.baseBgColor."
       },
       FormPage: {
-        container: {},
-        title: {},
-        actions: {}
+        container: {
+          backgroundColor: "#121212;",
+          borderRadius: "12px",
+          p: 4,
+          boxShadow: "0px 4px 20px rgba(0,0,0,0.5)",
+          display: "flex",
+          flexDirection: "column",
+          gap: 3
+        },
+        title: {
+          color: themePalette.primaryTextColor,
+          fontSize: "1.5rem",
+          fontWeight: 600,
+        },
+        actions: {
+          display: "flex",
+          gap: 2,
+          justifyContent: "flex-end",
+        }
       }
     },
   });

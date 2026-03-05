@@ -672,7 +672,6 @@ export const customStyles: Theme = {
   
   FormPage: {
     container: {
-      mt: 6,
       backgroundColor: themePalette.baseBgColor,
       borderRadius: "12px",
       p: 4,
@@ -685,13 +684,11 @@ export const customStyles: Theme = {
       color: themePalette.primaryTextColor,
       fontSize: "1.5rem",
       fontWeight: 600,
-      marginBottom: 2,
     },
     actions: {
       display: "flex",
       gap: 2,
       justifyContent: "flex-end",
-      marginTop: 3,
     },
   },
 
