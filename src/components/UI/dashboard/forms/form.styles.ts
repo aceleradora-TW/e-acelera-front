@@ -1,3 +1,5 @@
+import { SxProps, Theme } from "@mui/material"
+
 export const containerStyles = (theme: any) => ({
   ...theme.customStyles.FormPage.container,
   maxWidth: "100%",
@@ -18,19 +20,17 @@ export const cancelButtonStyles = (theme: any) => ({
 })
 
 export const submitButtonStyles = (
-  theme: any,
-  isValid: boolean
-) => ({
+  theme: Theme
+): SxProps<Theme> => ({
   border: "0.5px solid",
-  backgroundColor: isValid
-    ? theme.palette.buttonFormColor?.blueBackground
-    : theme.palette.buttonFormColor?.lightGray,
-  color: isValid
-    ? theme.palette.buttonHover?.contrastText
-    : theme.palette.buttonFormColor?.gray,
+  backgroundColor: theme.palette.buttonFormColor?.blueBackground,
+  color: theme.palette.buttonHover?.contrastText,
   "&:hover": {
-    backgroundColor: isValid
-      ? theme.palette.primary.dark
-      : theme.palette.accent?.blue,
+    backgroundColor: "primary.dark",
+  },
+  "&.Mui-disabled": {
+    backgroundColor: theme.palette.buttonFormColor?.blueBackground,
+    color: theme.palette.buttonHover?.contrastText,
+    opacity: 0.4,
   },
 })

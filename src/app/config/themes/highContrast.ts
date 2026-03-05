@@ -46,6 +46,16 @@ export const highContrastThemeBuilder = (fontFamily?: string) => {
         main: "#444444",
         contrastText: "#E0E0E0",
       },
+      buttonHover: {
+        main: "#555555",
+        contrastText: "#121212",
+      },
+      buttonFormColor: {
+        blueBackground: "#3d8fd8",
+        red: "#f44336",
+        lightGray: "#444444",
+        gray: "#888888",
+      },
     },
     components: {
       MuiCssBaseline: {
@@ -74,10 +84,16 @@ export const highContrastThemeBuilder = (fontFamily?: string) => {
       MuiButton: {
         styleOverrides: {
           root: {
-            backgroundColor: "#444444 !important",
             color: "#E0E0E0 !important",
+            "&:not(.MuiButton-contained)": {
+              backgroundColor: "#444444 !important",
+            },
+            "&.MuiButton-contained": {
+              backgroundColor: `${themePalette.button} !important`,
+            },
             "&:hover": {
               backgroundColor: `${themePalette.button} !important`,
+              filter: "brightness(1.2)",
             },
             ...fontFamilyStyle,
           },
@@ -116,7 +132,9 @@ export const highContrastThemeBuilder = (fontFamily?: string) => {
               border: "1px solid #E0E0E0 !important",
               borderRadius: "4px",
             },
-            height: "40px",
+          },
+          input: {
+            padding: "16.5px 14px",
           },
         },
       },

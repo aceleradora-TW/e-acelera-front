@@ -1,6 +1,6 @@
 import { Controller, SubmitHandler, useForm } from "react-hook-form"
 import { Container, Typography } from "@mui/material"
-import { useTheme } from "@mui/material/styles"
+import { useTheme } from "@mui/material"
 import { ThemeFormData, ThemeFormSchema, themeFormDefs } from "./forms/defs/theme.defs"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { containerStyles } from "./forms/form.styles"
@@ -9,20 +9,13 @@ import { FormActions } from "./forms/form-actions"
 
 export default function Form() {
   const theme = useTheme()
-
-  const {
-    handleSubmit,
-    control,
-    formState: { isDirty, isValid },
-  } = useForm<ThemeFormData>({
+  const { handleSubmit, control, formState: { isDirty, isValid } } = useForm<ThemeFormData>({
     resolver: zodResolver(ThemeFormSchema),
     defaultValues: themeFormDefs.defaultValues,
     mode: "onChange",
   })
 
-  const onSubmit: SubmitHandler<ThemeFormData> = (data) => {
-    console.log(data)
-  }
+  const onSubmit: SubmitHandler<ThemeFormData> = (data) => console.log(data)
 
   return (
     <Container
@@ -41,11 +34,7 @@ export default function Form() {
           name={field.name}
           control={control}
           render={({ field: rhfField, fieldState }) => (
-            <FieldRenderer
-              field={field}
-              rhfField={rhfField}
-              error={fieldState.error}
-            />
+            <FieldRenderer field={field} rhfField={rhfField} error={fieldState.error} />
           )}
         />
       ))}

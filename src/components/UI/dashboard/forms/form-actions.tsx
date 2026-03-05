@@ -19,7 +19,7 @@ export function FormActions({ isValid, isDirty }: FormActionsProps) {
         type="submit"
         variant="contained"
         disabled={!isDirty || !isValid}
-        sx={submitButtonStyles(theme, isValid)}
+        sx={submitButtonStyles(theme)}
       >
         Salvar
       </Button>
