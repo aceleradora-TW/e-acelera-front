@@ -10,12 +10,14 @@ export const actionsBoxStyles = (theme: any) => ({
 })
 
 export const cancelButtonStyles = (theme: any) => ({
+  ml: 2,
   border: "0.5px solid red",
+  backgroundColor: theme.palette.bgColor?.main,
   color: theme.palette.buttonFormColor?.red,
+
   "&:hover": {
-    backgroundColor: theme.palette.buttonFormColor?.red,
+    backgroundColor: "rgb(200, 34, 29)",
     color: theme.palette.buttonHover?.contrastText,
-    borderColor: theme.palette.buttonFormColor?.red,
   },
 })
 

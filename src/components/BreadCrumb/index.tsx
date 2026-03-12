@@ -4,15 +4,18 @@ import Link from "@mui/material/Link";
 import { usePathname } from 'next/navigation';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import { MouseEvent, useEffect, useState } from 'react';
-import { theme } from '@/app/config/themes';
 
-export const BreadCrumb: React.FC = () => {
+type BreadCrumbProps = {
+  lastLabel?: string;
+};
+
+export const BreadCrumb: React.FC<BreadCrumbProps> = ({ lastLabel }) => {
   const pathname: string = usePathname();
   const [isValidPage, setIsValidPage] = useState<boolean>(false);
   const theme = useTheme();
 
   useEffect(() => {
-    const checkPageStatus = async () => { 
+    const checkPageStatus = async () => {
       try {
         const response: Response = await fetch(pathname, {
           method: 'GET',
@@ -38,7 +41,12 @@ export const BreadCrumb: React.FC = () => {
       const hyphenIndex = crumb.indexOf('-');
       return hyphenIndex !== -1 ? crumb.substring(hyphenIndex + 1) : crumb;
     });
-    const capitalizeFirstLetter = (text: string): string => text.charAt(0).toUpperCase() + text.slice(1)
+
+  if (lastLabel && breadcrumbs.length > 0) {
+    breadcrumbs[breadcrumbs.length - 1] = lastLabel;
+  }
+
+  const capitalizeFirstLetter = (text: string): string => text.charAt(0).toUpperCase() + text.slice(1)
 
   const breadroutes: string[] = pathname.split('/').filter((crumb) => crumb);
 
@@ -51,35 +59,35 @@ export const BreadCrumb: React.FC = () => {
   return (
     isValidPage && (
       <Box >
-      <Stack spacing={2} sx={theme.customStyles.breadCrumb}>
-        <Breadcrumbs separator={
-          <NavigateNextIcon fontSize="small" sx={{ color: theme.palette.mode === 'dark' ? theme.palette.bgColor?.main : theme.palette.textColor?.main}} />}
+        <Stack spacing={2} sx={theme.customStyles.breadCrumb}>
+          <Breadcrumbs separator={
+            <NavigateNextIcon fontSize="small" sx={{ color: theme.palette.mode === 'dark' ? theme.palette.bgColor?.main : theme.palette.textColor?.main }} />}
             aria-label="trilha de navegação">
-          {breadroutes.length !== 0 && (
-                <Link href="/" variant="body1" sx={theme.customStyles.breadCrumb}>
-                  Home
-                </Link>
+            {breadroutes.length !== 0 && (
+              <Link href="/" variant="body1" sx={theme.customStyles.breadCrumb}>
+                Home
+              </Link>
             )
             }
-          {breadcrumbs.map((path: string, index: number) => {
-            const route: string = `/${breadroutes.slice(0, index + 1).join('/')}`;
-            const isLast: boolean = index === breadcrumbs.length - 1;
-            const textFormatted = capitalizeFirstLetter(path)
-            return (
-              <Link 
-              variant="body1"
-              sx={theme.customStyles.breadCrumb}
-              key={path} 
-              href={route}
-              aria-current={isLast ? 'page' : undefined}
-              onClick={(e) => handleBreadcrumbClick(route, e)}>
-                {path !== '' ? decodeURIComponent(textFormatted): textFormatted}
-              </Link>
-            );
-          })}
-        </Breadcrumbs>
-      </Stack>
+            {breadcrumbs.map((path: string, index: number) => {
+              const route: string = `/${breadroutes.slice(0, index + 1).join('/')}`;
+              const isLast: boolean = index === breadcrumbs.length - 1;
+              const textFormatted = capitalizeFirstLetter(path)
+              return (
+                <Link
+                  variant="body1"
+                  sx={theme.customStyles.breadCrumb}
+                  key={path}
+                  href={route}
+                  aria-current={isLast ? 'page' : undefined}
+                  onClick={(e) => handleBreadcrumbClick(route, e)}>
+                  {path !== '' ? decodeURIComponent(textFormatted) : textFormatted}
+                </Link>
+              );
+            })}
+          </Breadcrumbs>
+        </Stack>
       </Box>
-  )
+    )
   )
 }

@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react"
 import { Box, Button, TextField, Typography, useTheme } from "@mui/material"
 import { UpperBanner } from "@/components/UI/cms/upper-banner"
-// import { BreadCrumb } from "@/components/BreadCrumb"
+import { cancelButtonStyles } from "@/components/UI/dashboard/forms/form.styles"
 
 interface Theme {
   title: string
@@ -21,47 +21,21 @@ export default function DetailTheme({ id }: Props) {
 
   useEffect(() => {
     async function fetchTheme() {
-      // console.log("ID recebido:", id)
-
       const response = await fetch(`http://localhost:5002/themes/${id}`)
-
-      // console.log("response", response)
-
       const data = await response.json()
-
-      // console.log("data", data)
-
       setTheme(data)
     }
 
     fetchTheme()
   }, [id])
 
-  /* tá dando aqui, não aparece o nome do tema certinho. 
-  Tenho que arrumar esse regex, talvez. Ainda estamos investigando
-  */
-  useEffect(() => {
-    if (theme?.title) {
-      const slug = theme.title
-        .normalize("NFD")
-        .replace(/[\u0300-\u036f]/g, "")
-        .toLowerCase()
-        .replace(/\s+/g, "");
-
-      window.history.replaceState(
-        null,
-        "",
-        `/cms/themes/${id}-${slug}`
-      );
-    }
-  }, [theme, id]);
-
   return (
     <Box>
       <UpperBanner
-        title="Temas"
+        title={theme?.title || "Temas"}
         editButton
         showBreadCrumb
+        breadCrumbLabel={theme?.title}
       />
 
       <TextField
@@ -102,16 +76,9 @@ export default function DetailTheme({ id }: Props) {
           ARQUIVAR
         </Button>
 
-        <Button variant="contained" sx={{
-          ml: 2,
-          border: "0.5px solid red",
-          backgroundColor: muiTheme.palette.bgColor?.main,
-          color: muiTheme.palette.buttonFormColor?.red,
-          "&:hover": {
-            backgroundColor: "rgb(200, 34, 29)",
-            color: muiTheme.palette.buttonHover?.contrastText,
-          },
-        }}>
+        <Button variant="contained"
+          sx={(theme) => cancelButtonStyles(theme)}
+        >
           CANCELAR
         </Button>
 

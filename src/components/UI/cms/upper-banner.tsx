@@ -11,6 +11,7 @@ type UpperBannerProps = {
   createButton?: boolean;
   editButton?: boolean;
   showBreadCrumb?: boolean;
+  breadCrumbLabel?: string; //
 };
 
 export const UpperBanner = ({
@@ -19,6 +20,7 @@ export const UpperBanner = ({
   createButton,
   editButton,
   showBreadCrumb,
+  breadCrumbLabel
 }: UpperBannerProps) => {
   const theme = useTheme();
   const router = useRouter();
@@ -45,7 +47,7 @@ export const UpperBanner = ({
       <Grid item>
         <Grid container>
           <Grid item>
-            {showBreadCrumb && <BreadCrumb />}
+            {showBreadCrumb && <BreadCrumb lastLabel={breadCrumbLabel} />}
             <Typography variant="h2" sx={theme.customStyles.upperBanner.title}>
               {title}
             </Typography>
