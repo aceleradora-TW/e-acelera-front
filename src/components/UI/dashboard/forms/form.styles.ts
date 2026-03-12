@@ -48,3 +48,14 @@ export const textAreaStyles: SxProps<Theme> = {
     padding: "0 !important",
   },
 }
+
+export const textFieldStyles: SxProps<Theme> = {
+  "& .MuiOutlinedInput-root": {
+    "&:hover fieldset": {
+      borderColor: "rgba(0,0,0,0.23)"
+    },
+    "&.Mui-focused fieldset": {
+      borderColor: "rgba(0,0,0,0.23)"
+    }
+  }
+}

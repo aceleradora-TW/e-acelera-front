@@ -29,9 +29,6 @@ export default function Home() {
       <StudySection />
       <TestimonialsSection />
       <Faq />
-      {/* <Form /> */}
-      {/* <UpperBanner title="Bienvenido a nuestro sitio"/> */}
-      <DetailTheme id="1" />
     </Box>
   );
 }

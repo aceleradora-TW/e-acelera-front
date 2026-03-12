@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react"
 import { Box, Button, TextField, Typography, useTheme } from "@mui/material"
 import { UpperBanner } from "@/components/UI/cms/upper-banner"
-import { cancelButtonStyles } from "@/components/UI/dashboard/forms/form.styles"
+import { cancelButtonStyles, textFieldStyles } from "@/components/UI/dashboard/forms/form.styles"
 
 interface Theme {
   title: string
@@ -39,16 +39,19 @@ export default function DetailTheme({ id }: Props) {
       />
 
       <TextField
-        fullWidth
         label="Título"
         value={theme?.title || ""}
-        margin="normal"
+        fullWidth
+        InputProps={{
+          readOnly: true
+        }}
+        sx={textFieldStyles}
       />
-
       <TextField
         fullWidth
         label="Descrição curta"
         value={theme?.shortDescription || ""}
+        sx={textFieldStyles}
         margin="normal"
       />
 
@@ -56,6 +59,7 @@ export default function DetailTheme({ id }: Props) {
         fullWidth
         label="Descrição"
         value={theme?.description || ""}
+        sx={textFieldStyles}
         margin="normal"
         multiline
         rows={4}
