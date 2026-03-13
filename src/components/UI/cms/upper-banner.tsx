@@ -105,6 +105,7 @@ export const UpperBanner = ({
                 title="Editar"
                 backIcon={<EditIcon />}
                 click={() => console.log("Editar")}
+                variant="text"
                 sx={theme.customStyles.upperBanner.editButton}
               />
             </Grid>

@@ -14,7 +14,12 @@ export function FormActions({ isValid, isDirty }: FormActionsProps) {
 
   return (
     <Box sx={actionsBoxStyles}>
-      <Button sx={cancelButtonStyles(theme)}>Cancelar</Button>
+      <Button 
+        sx={cancelButtonStyles(theme)}
+      >
+        Cancelar
+      </Button>
+
       <Button
         type="submit"
         variant="contained"

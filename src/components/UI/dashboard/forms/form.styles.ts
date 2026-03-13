@@ -9,31 +9,40 @@ export const actionsBoxStyles = (theme: any) => ({
   ...theme.customStyles.FormPage.actions,
 })
 
-export const cancelButtonStyles = (theme: any) => ({
+export const cancelButtonStyles = (theme: Theme) => ({
   ml: 2,
-  border: "0.5px solid red",
-  backgroundColor: theme.palette.bgColor?.main,
-  color: theme.palette.buttonFormColor?.red,
+  border: `1px solid ${theme.palette.error.main}`,
+  color: `${theme.palette.error.main} !important`,
+  backgroundColor: "transparent",
 
   "&:hover": {
-    backgroundColor: "rgb(200, 34, 29)",
-    color: theme.palette.buttonHover?.contrastText,
+    backgroundColor: `${theme.palette.error.main} !important`,
+    borderColor: `${theme.palette.error.dark} !important`,
+    color: `${theme.palette.error.contrastText} !important`,
   },
 })
 
-export const submitButtonStyles = (
-  theme: Theme
-): SxProps<Theme> => ({
-  border: "0.5px solid",
-  backgroundColor: theme.palette.buttonFormColor?.blueBackground,
-  color: theme.palette.buttonHover?.contrastText,
+export const submitButtonStyles = (theme: Theme): SxProps<Theme> => ({
+  ml: 2,
+  border: `1px solid ${theme.palette.error.main}`,
+  color: `${theme.palette.error.main} !important`,
+  backgroundColor: "transparent",
+
   "&:hover": {
-    backgroundColor: "primary.dark",
+    borderColor: `${theme.palette.error.dark} !important`,
+    backgroundColor: `${theme.palette.error.main} !important`,
+    color: `${theme.palette.error.contrastText} !important`,
   },
-  "&.Mui-disabled": {
-    backgroundColor: theme.palette.buttonFormColor?.blueBackground,
-    color: theme.palette.buttonHover?.contrastText,
-    opacity: 0.4,
+})
+
+export const editButtonStyles = (theme: Theme) => ({
+  border: `1px solid ${theme.palette.primary.main}`,
+  color: theme.palette.primary.main,
+  backgroundColor: "transparent",
+
+  "&:hover": {
+    backgroundColor: theme.palette.action.hover,
+    borderColor: theme.palette.primary.dark,
   },
 })
 
@@ -49,13 +58,19 @@ export const textAreaStyles: SxProps<Theme> = {
   },
 }
 
-export const textFieldStyles: SxProps<Theme> = {
+export const textFieldStyles = (theme: Theme): SxProps<Theme> => ({
   "& .MuiOutlinedInput-root": {
+    backgroundColor:
+      theme.palette.mode === "dark"
+        ? theme.palette.background.paper
+        : "transparent",
+
     "&:hover fieldset": {
       borderColor: "rgba(0,0,0,0.23)"
     },
+
     "&.Mui-focused fieldset": {
       borderColor: "rgba(0,0,0,0.23)"
     }
   }
-}
+})

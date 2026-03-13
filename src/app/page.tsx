@@ -8,8 +8,6 @@ import { ImpactSection } from "@/components/UI/home/impact-section";
 import { SponsorsSection } from "@/components/UI/home/sponsors-section";
 import AboutAgil from "@/components/UI/home/about-agile";
 import { StudySection } from "@/components/UI/home/study-section";
-import DetailTheme from "@/components/PageElements/cms/detail-theme";
-// import { UpperBanner } from "@/components/UI/cms/upper-banner";
 
 export default function Home() {
   return (

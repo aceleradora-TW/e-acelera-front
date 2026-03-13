@@ -38,40 +38,45 @@ export default function DetailTheme({ id }: Props) {
         breadCrumbLabel={theme?.title}
       />
 
-      <TextField
-        label="Título"
-        value={theme?.title || ""}
-        fullWidth
-        InputProps={{
-          readOnly: true
-        }}
-        sx={textFieldStyles}
-      />
-      <TextField
-        fullWidth
-        label="Descrição curta"
-        value={theme?.shortDescription || ""}
-        sx={textFieldStyles}
-        margin="normal"
-      />
+      <Box sx={{
+        mt: 4,
+        display: "flex",
+        flexDirection: "column",
+        gap: 2
+      }} >
+        <TextField
+          label="Título"
+          value={theme?.title || ""}
+          fullWidth
+          InputProps={{
+            readOnly: true
+          }}
+          sx={textFieldStyles(muiTheme)}
+        />
+        <TextField
+          fullWidth
+          label="Descrição curta"
+          value={theme?.shortDescription || ""}
+          sx={textFieldStyles(muiTheme)}
+          margin="normal"
+        />
 
-      <TextField
-        fullWidth
-        label="Descrição"
-        value={theme?.description || ""}
-        sx={textFieldStyles}
-        margin="normal"
-        multiline
-        rows={4}
-      />
-
+        <TextField
+          fullWidth
+          label="Descrição"
+          value={theme?.description || ""}
+          sx={textFieldStyles(muiTheme)}
+          margin="normal"
+          multiline
+          rows={4}
+        />
+      </Box>
       <Box mt={3}
         sx={{
           display: "flex",
           justifyContent: "right",
         }}
       >
-
         <Button variant="contained" sx={{
           border: "0.5px solid",
           backgroundColor: muiTheme.palette.buttonFormColor?.blueBackground,
@@ -80,8 +85,8 @@ export default function DetailTheme({ id }: Props) {
           ARQUIVAR
         </Button>
 
-        <Button variant="contained"
-          sx={(theme) => cancelButtonStyles(theme)}
+        <Button variant="outlined"
+          sx={(theme) => cancelButtonStyles(muiTheme)}
         >
           CANCELAR
         </Button>
