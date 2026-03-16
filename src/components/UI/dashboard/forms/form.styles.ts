@@ -11,9 +11,11 @@ export const actionsBoxStyles = (theme: any) => ({
 
 export const cancelButtonStyles = (theme: Theme) => ({
   ml: 2,
-  border: `1px solid ${theme.palette.error.main}`,
-  color: `${theme.palette.error.main} !important`,
+  // border: `1px solid ${theme.palette.error.main}`,
+  color: `${theme.palette.primary.main} !important`,
   backgroundColor: "transparent",
+  // backgroundColor: "rgb(187, 114, 109)",
+  // backgroundColor: "rgba(0,2,3,8)",
 
   "&:hover": {
     backgroundColor: `${theme.palette.error.main} !important`,
@@ -38,7 +40,8 @@ export const submitButtonStyles = (theme: Theme): SxProps<Theme> => ({
 export const editButtonStyles = (theme: Theme) => ({
   border: `1px solid ${theme.palette.primary.main}`,
   color: theme.palette.primary.main,
-  backgroundColor: "transparent",
+  backgroundColor: `${theme.palette.error.main} !important`,
+  // backgroundColor: theme.palette.primary.contrastText,
 
   "&:hover": {
     backgroundColor: theme.palette.action.hover,

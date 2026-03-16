@@ -30,13 +30,15 @@ export default function DetailTheme({ id }: Props) {
   }, [id])
 
   return (
+
     <Box>
-      <UpperBanner
-        title={theme?.title || "Temas"}
-        editButton
-        showBreadCrumb
-        breadCrumbLabel={theme?.title}
-      />
+        <UpperBanner
+          title={theme?.title || "Temas"}
+          showBreadCrumb
+          breadCrumbLabel={theme?.title}
+          editButton
+
+        />
 
       <Box sx={{
         mt: 4,
@@ -78,20 +80,24 @@ export default function DetailTheme({ id }: Props) {
         }}
       >
         <Button variant="contained" sx={{
-          border: "0.5px solid",
+          // border: "0.5px solid",
           backgroundColor: muiTheme.palette.buttonFormColor?.blueBackground,
           color: muiTheme.palette.buttonHover?.contrastText
         }}>
           ARQUIVAR
         </Button>
 
-        <Button variant="outlined"
+        <Button variant="contained"
           sx={(theme) => cancelButtonStyles(muiTheme)}
         >
           CANCELAR
         </Button>
 
-        <Button variant="contained" disabled sx={{ ml: 2 }}>
+        <Button variant="outlined" disabled sx={{
+          ml: 2
+          // backgroundColor: muiTheme.palette.background.paper,
+          // color: muiTheme.palette.buttonHover?.contrastText
+        }}>
           SALVAR
         </Button>
 
