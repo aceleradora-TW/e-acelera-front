@@ -1,0 +1,62 @@
+import { TableCMS } from "@/components/UI/cms/table-cms";
+import { UpperBanner } from "@/components/UI/cms/upper-banner";
+import { getTopics } from "@/utils/api/topics";
+import { Box } from "@mui/material";
+import { useEffect, useState } from "react";
+
+const columns = [
+  { id: "id", label: "ID" },
+  { id: "themeTitle", label: "Tema" },
+  { id: "title", label: "Título" },
+  { id: "shortDescription", label: "Descrição curta" },
+  { id: "isActive", label: "Ativo" },
+];
+
+export default function RenderCmsPage() {
+  const [rows, setRows] = useState<any[]>([]);
+  const [page, setPage] = useState(0);
+  const [pageSize, setPageSize] = useState(10);
+  const [rowCount, setRowCount] = useState(0);
+
+  useEffect(() => {
+    async function fetchTopics() {
+      try {
+        const res = await getTopics(page + 1, pageSize);
+        console.log("Topics response:", res.data);
+        const transformedData = res.data.map((topic: any) => ({
+          ...topic,
+          themeTitle: topic.theme?.title || "Sem tema",
+        }));
+        setRows(transformedData);
+        setRowCount(res.meta.total);
+      } catch (error) {
+        console.error("Erro ao buscar tópicos:", error);
+      } 
+    }
+    fetchTopics();
+  }, [page, pageSize]);
+
+  return (
+    <Box
+      display="flex"
+      flexDirection="column"
+      gap={"36px"}
+      sx={{ width: "100%"}}
+    >
+      <UpperBanner 
+        title="CMS - Tópicos"   
+        menuBanner 
+        createButton 
+      />
+      <TableCMS
+        columns={columns}
+        rows={rows}
+        page={page}
+        pageSize={pageSize}
+        rowCount={rowCount}
+        onPageChange={setPage}
+        onPageSizeChange={setPageSize}
+      />
+    </Box>
+  );
+}
