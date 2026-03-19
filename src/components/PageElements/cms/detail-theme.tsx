@@ -1,9 +1,10 @@
 'use client'
 
 import { useEffect, useState } from "react"
-import { Box, Button, TextField, Typography, useTheme } from "@mui/material"
+import { useRouter } from "next/navigation"
+import { Box, Button, TextField, useTheme } from "@mui/material"
 import { UpperBanner } from "@/components/UI/cms/upper-banner"
-import { cancelButtonStyles, textFieldStyles } from "@/components/UI/dashboard/forms/form.styles"
+import { arrchiveButtonStyles, cancelButtonStyles, textFieldStyles } from "@/components/UI/dashboard/forms/form.styles"
 
 interface Theme {
   title: string
@@ -18,6 +19,7 @@ interface Props {
 export default function DetailTheme({ id }: Props) {
   const [theme, setTheme] = useState<Theme | null>(null)
   const muiTheme = useTheme()
+  const router = useRouter()
 
   useEffect(() => {
     async function fetchTheme() {
@@ -37,7 +39,6 @@ export default function DetailTheme({ id }: Props) {
           showBreadCrumb
           breadCrumbLabel={theme?.title}
           editButton
-
         />
 
       <Box sx={{
@@ -79,24 +80,21 @@ export default function DetailTheme({ id }: Props) {
           justifyContent: "right",
         }}
       >
-        <Button variant="contained" sx={{
-          // border: "0.5px solid",
-          backgroundColor: muiTheme.palette.buttonFormColor?.blueBackground,
-          color: muiTheme.palette.buttonHover?.contrastText
-        }}>
+        <Button variant="contained" 
+          sx={arrchiveButtonStyles(muiTheme)}
+        >
           ARQUIVAR
         </Button>
 
         <Button variant="contained"
-          sx={(theme) => cancelButtonStyles(muiTheme)}
+          sx={cancelButtonStyles(muiTheme)}
+          onClick={() => router.push("/cms/themes")}
         >
           CANCELAR
         </Button>
 
         <Button variant="outlined" disabled sx={{
           ml: 2
-          // backgroundColor: muiTheme.palette.background.paper,
-          // color: muiTheme.palette.buttonHover?.contrastText
         }}>
           SALVAR
         </Button>

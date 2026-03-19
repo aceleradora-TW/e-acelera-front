@@ -104,7 +104,7 @@ export const UpperBanner = ({
               <ClickButton
                 title="Editar"
                 backIcon={<EditIcon />}
-                click={() => console.log("Editar")}
+                click={() => router.push(`${pathname}/edit`)}
                 variant="contained"
                 sx={theme.customStyles.upperBanner.editButton}
               />
