@@ -10,6 +10,10 @@ interface Theme {
   title: string
   shortDescription: string
   description: string
+  imageUrl?: string
+  imageAlt?: string
+  category?: string
+  sequence?: number
 }
 
 interface Props {
@@ -32,73 +36,110 @@ export default function DetailTheme({ id }: Props) {
   }, [id])
 
   return (
-
     <Box>
-        <UpperBanner
-          title={theme?.title || "Temas"}
-          showBreadCrumb
-          breadCrumbLabel={theme?.title}
-          editButton
-        />
+      <UpperBanner
+        title={theme?.title || "Temas"}
+        showBreadCrumb
+        breadCrumbLabel={theme?.title}
+        editButton
+      />
 
-      <Box sx={{
-        mt: 4,
-        display: "flex",
-        flexDirection: "column",
-        gap: 2
-      }} >
+      <Box
+        sx={{
+          mt: 4,
+          display: "flex",
+          flexDirection: "column",
+          gap: 2
+        }}
+      >
         <TextField
           label="Título"
           value={theme?.title || ""}
           fullWidth
-          InputProps={{
-            readOnly: true
-          }}
+          InputProps={{ readOnly: true }}
           sx={textFieldStyles(muiTheme)}
-        />
-        <TextField
-          fullWidth
-          label="Descrição curta"
-          value={theme?.shortDescription || ""}
-          sx={textFieldStyles(muiTheme)}
-          margin="normal"
         />
 
         <TextField
+          label="Descrição curta"
+          value={theme?.shortDescription || ""}
           fullWidth
+          InputProps={{ readOnly: true }}
+          sx={textFieldStyles(muiTheme)}
+        />
+
+        <TextField
           label="Descrição"
           value={theme?.description || ""}
-          sx={textFieldStyles(muiTheme)}
-          margin="normal"
+          fullWidth
+          InputProps={{ readOnly: true }}
           multiline
           rows={4}
+          sx={textFieldStyles(muiTheme)}
+        />
+
+        <TextField
+          label="URL da imagem"
+          value={theme?.imageUrl || ""}
+          fullWidth
+          InputProps={{ readOnly: true }}
+          sx={textFieldStyles(muiTheme)}
+        />
+
+        <TextField
+          label="Texto alt da imagem"
+          value={theme?.imageAlt || ""}
+          fullWidth
+          InputProps={{ readOnly: true }}
+          sx={textFieldStyles(muiTheme)}
+        />
+
+        <TextField
+          label="Categoria"
+          value={theme?.category || ""}
+          fullWidth
+          InputProps={{ readOnly: true }}
+          sx={textFieldStyles(muiTheme)}
+        />
+
+        <TextField
+          label="Sequência"
+          value={theme?.sequence ?? ""}
+          fullWidth
+          InputProps={{ readOnly: true }}
+          sx={textFieldStyles(muiTheme)}
         />
       </Box>
-      <Box mt={3}
+
+      <Box
+        mt={3}
         sx={{
           display: "flex",
           justifyContent: "right",
         }}
       >
-        <Button variant="contained" 
+        <Button
+          variant="contained"
           sx={arrchiveButtonStyles(muiTheme)}
         >
           ARQUIVAR
         </Button>
 
-        <Button variant="contained"
+        <Button
+          variant="contained"
           sx={cancelButtonStyles(muiTheme)}
           onClick={() => router.push("/cms/themes")}
         >
           CANCELAR
         </Button>
 
-        <Button variant="outlined" disabled sx={{
-          ml: 2
-        }}>
+        <Button
+          variant="outlined"
+          disabled
+          sx={{ ml: 2 }}
+        >
           SALVAR
         </Button>
-
       </Box>
     </Box>
   )
