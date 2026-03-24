@@ -8,6 +8,7 @@ import React from 'react';
 export interface Column {
     id: string;
     label: string;
+    type?: 'string' | 'boolean' | 'number' | 'date';
 }
 
 export interface TableCMSProps {
@@ -27,12 +28,23 @@ export function TableCMS({ columns, rows, rowCount, pageSize, page, onPageChange
 
     const basePath = pathname.split("/")[2];
 
-    const gridColumns: GridColDef[] = columns.map((col) => ({
-        field: col.id,
-        headerName: col.label,
-        flex: 1,
-        sortable: true,
-    }));
+    const gridColumns: GridColDef[] = columns.map((col) => {
+        const baseColumn = {
+            field: col.id,
+            headerName: col.label,
+            flex: 1,
+            sortable: true,
+        };
+
+        if (col.type === 'boolean') {
+            return {
+                ...baseColumn,
+                renderCell: (params) => params.value ? 'true' : 'false',
+            };
+        }
+
+        return baseColumn;
+    });
 
     const gridRows = rows.map((row) => ({
         ...row,

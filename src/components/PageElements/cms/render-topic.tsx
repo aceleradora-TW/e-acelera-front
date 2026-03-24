@@ -1,15 +1,15 @@
-import { TableCMS } from "@/components/UI/cms/table-cms";
+import { Column, TableCMS } from "@/components/UI/cms/table-cms";
 import { UpperBanner } from "@/components/UI/cms/upper-banner";
 import { getTopics } from "@/utils/api/topics";
 import { Box } from "@mui/material";
 import { useEffect, useState } from "react";
 
-const columns = [
+const columns: Column[] = [
   { id: "id", label: "ID" },
-  { id: "themeTitle", label: "Tema" },
   { id: "title", label: "Título" },
+  { id: "themeTitle", label: "Tema" },
   { id: "shortDescription", label: "Descrição curta" },
-  { id: "isActive", label: "Ativo" },
+  { id: "isActive", label: "Ativo", type: "boolean" },
 ];
 
 export default function RenderCmsPage() {
