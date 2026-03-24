@@ -1,5 +1,6 @@
 import { headers } from "next/headers"
 import { NextRequest, NextResponse } from "next/server"
+import { getToken } from "next-auth/jwt"
 
 export async function PUT(req: NextRequest) {
   const header = headers()
@@ -9,7 +10,11 @@ export async function PUT(req: NextRequest) {
   const itemStatus = header.get(`itemStatus`)
   const elementType = header.get(`elementType`)
   const themeId = header.get(`themeId`)
-  const accessToken = req.cookies.get("next-auth.session-token")?.value || req.cookies.get("__Secure-next-auth.session-token")?.value
+  const accessToken = await getToken({
+    req,
+    secret: process.env.NEXTAUTH_SECRET,
+    raw: true,
+  })
 
   if (!topicId || !itemId) {
     return NextResponse.json(

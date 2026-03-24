@@ -1,11 +1,14 @@
 import { NextResponse } from "next/server"
 import type { NextRequest } from "next/server"
+import { getToken } from "next-auth/jwt"
 import { BACKEND_BASE_URL } from "./utils/constants"
 
 export async function middleware(request: NextRequest) {
-  const sessionToken =
-    request.cookies.get("next-auth.session-token") ||
-    request.cookies.get("__Secure-next-auth.session-token")
+  const sessionToken = await getToken({
+    req: request,
+    secret: process.env.NEXTAUTH_SECRET,
+    raw: true,
+  })
 
     const callbackUrl =
     new URLSearchParams(request.nextUrl.search).get("callbackUrl") || "/"
@@ -17,7 +20,7 @@ export async function middleware(request: NextRequest) {
       const response = await fetch(`${BACKEND_BASE_URL}/login`, {
         method: "POST",
         headers: {
-          "Authorization": `Bearer ${sessionToken.value}`,
+          "Authorization": `Bearer ${sessionToken}`,
           "Content-Type": "application/json",
         },
       })
