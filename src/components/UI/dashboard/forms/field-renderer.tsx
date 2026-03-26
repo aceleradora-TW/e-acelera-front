@@ -1,4 +1,4 @@
-import { TextField } from "@mui/material"
+import { MenuItem, TextField } from "@mui/material"
 import { ControllerRenderProps, FieldError } from "react-hook-form"
 import { ThemeFormData } from "./defs/theme.defs"
 import { FieldDef } from "@/types/form.types"
@@ -22,6 +22,22 @@ const BaseTextField = ({ field, rhfField, error }: FieldRendererProps) => (
   />
 )
 
+const NumberField = ({ field, rhfField, error }: FieldRendererProps) => (
+  <TextField
+    {...rhfField}
+    label={field.label}
+    type="number"
+    error={!!error}
+    helperText={error?.message}
+    fullWidth
+    FormHelperTextProps={{ sx: { fontSize: '0.75rem' } }}
+    onChange={(e) => {
+      const value = e.target.value
+      rhfField.onChange(value === '' ? undefined : Number(value))
+    }}
+  />
+)
+
 const TextAreaField = ({ field, rhfField, error }: FieldRendererProps) => (
   <TextField
     {...rhfField}
@@ -34,6 +50,24 @@ const TextAreaField = ({ field, rhfField, error }: FieldRendererProps) => (
     FormHelperTextProps={{ sx: { fontSize: '0.75rem' } }}
     sx={textAreaStyles}
   />
+)
+
+const SelectField = ({ field, rhfField, error }: FieldRendererProps) => (
+  <TextField
+    {...rhfField}
+    select
+    label={field.label}
+    error={!!error}
+    helperText={error?.message}
+    fullWidth
+    FormHelperTextProps={{ sx: { fontSize: '0.75rem' } }}
+  >
+    {field.options?.map((option) => (
+      <MenuItem key={option.value} value={option.value}>
+        {option.label}
+      </MenuItem>
+    ))}
+  </TextField>
 )
 
 const FallbackField = ({ field, rhfField }: FieldRendererProps) => (
@@ -49,8 +83,9 @@ const FallbackField = ({ field, rhfField }: FieldRendererProps) => (
 const fieldComponentMap: Record<string, (props: FieldRendererProps) => JSX.Element> = {
   text: BaseTextField,
   email: BaseTextField,
-  number: BaseTextField,
+  number: NumberField,
   textarea: TextAreaField,
+  select: SelectField,
 }
 
 export function FieldRenderer(props: FieldRendererProps) {
