@@ -9,7 +9,7 @@ const columns: Column[] = [
   { id: "title", label: "Título" },
   { id: "themeTitle", label: "Tema" },
   { id: "shortDescription", label: "Descrição curta" },
-  { id: "isActive", label: "Ativo", type: "boolean" },
+  { id: "isActive", label: "Ativo" },
 ];
 
 export default function RenderCmsPage() {
