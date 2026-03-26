@@ -8,7 +8,6 @@ import React from 'react';
 export interface Column {
     id: string;
     label: string;
-    type?: 'string' | 'boolean' | 'number' | 'date';
 }
 
 export interface TableCMSProps {
