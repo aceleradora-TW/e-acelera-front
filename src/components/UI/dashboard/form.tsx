@@ -11,13 +11,11 @@ import { useState } from "react"
 interface FormProps {
   title?: string
   onSubmit: (data: ThemeFormData) => Promise<void>
-  isLoading?: boolean
 }
 
 export default function Form({ 
   title = "Cadastro", 
   onSubmit: onSubmitProp,
-  isLoading: isLoadingProp = false 
 }: FormProps) {
   const theme = useTheme()
   const [error, setError] = useState<string | null>(null)
@@ -70,7 +68,7 @@ export default function Form({
         ))}
       </Stack>
 
-      <FormActions isValid={isValid && !(isLoading || isLoadingProp)} isDirty={isDirty} />
+      <FormActions isValid={isValid && !(isLoading)} isDirty={isDirty} />
     </Container>
   )
 }
