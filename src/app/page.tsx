@@ -28,7 +28,6 @@ export default function Home() {
       <StudySection />
       <TestimonialsSection />
       <Faq />
-      <Form />
     </Box>
   );
 }
