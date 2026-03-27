@@ -2,6 +2,9 @@ import { ThemeCategory } from "@/utils/constants";
 import { headers } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 
+
+//** TODO
+// fazer com que essa chamada, se não for passado nenhuma categoria, traga todos os temas */
 export async function GET(req: NextRequest) {
   const header = headers();
   const category = header.get("category") === "Nivelamento" ?
