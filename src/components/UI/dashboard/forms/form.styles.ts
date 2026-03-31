@@ -10,7 +10,6 @@ export const actionsBoxStyles = (theme: any) => ({
 })
 
 export const cancelButtonStyles = (theme: Theme) => ({
-  ml: 2,
   color: `${theme.palette.primary.main} !important`,
   backgroundColor: "transparent",
 
@@ -22,7 +21,18 @@ export const cancelButtonStyles = (theme: Theme) => ({
 })
 
 export const submitButtonStyles = (theme: Theme): SxProps<Theme> => ({
-  ml: 2,
+  border: `1px solid ${theme.palette.error.main}`,
+  color: `${theme.palette.error.main} !important`,
+  backgroundColor: "transparent",
+
+  "&:hover": {
+    borderColor: `${theme.palette.error.dark} !important`,
+    backgroundColor: `${theme.palette.error.main} !important`,
+    color: `${theme.palette.error.contrastText} !important`,
+  },
+})
+
+export const archiveButtonStyles = (theme: Theme): SxProps<Theme> => ({
   border: `1px solid ${theme.palette.error.main}`,
   color: `${theme.palette.error.main} !important`,
   backgroundColor: "transparent",
@@ -82,3 +92,17 @@ export const textFieldStyles = (theme: Theme): SxProps<Theme> => ({
     }
   }
 })
+
+export const textFieldsContainerStyles: SxProps<Theme> = {
+  mt: 4,
+  display: "flex",
+  flexDirection: "column",
+  gap: 2,
+};
+
+export const actionsContainerStyles: SxProps<Theme> = {
+  gap: 2,
+  mt: 3,
+  display: "flex",
+  justifyContent: "flex-end",
+};

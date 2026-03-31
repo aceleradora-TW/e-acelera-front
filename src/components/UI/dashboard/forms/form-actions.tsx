@@ -1,5 +1,6 @@
 import { Box, Button, useTheme } from "@mui/material"
 import { actionsBoxStyles, 
+  archiveButtonStyles, 
   cancelButtonStyles,
   submitButtonStyles
 } from "../forms/form.styles"
@@ -14,8 +15,17 @@ export function FormActions({ isValid, isDirty }: FormActionsProps) {
 
   return (
     <Box sx={actionsBoxStyles}>
+
+      <Button
+        variant="contained"
+        sx={archiveButtonStyles(theme)}
+      >
+        Arquivar
+      </Button>
+
       <Button 
-        sx={cancelButtonStyles(theme)}
+          variant="contained"
+          sx={cancelButtonStyles(theme)}
       >
         Cancelar
       </Button>
