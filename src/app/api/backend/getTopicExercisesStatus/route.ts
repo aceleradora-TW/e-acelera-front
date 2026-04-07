@@ -1,5 +1,6 @@
 import { headers } from "next/headers"
 import { NextRequest, NextResponse } from "next/server"
+import { hasProgressToken, isInvalidProgressParam, logProgressDebug } from "@/utils/progress-debug"
 
 export async function GET(req: NextRequest) {
   const header = headers()
@@ -7,14 +8,25 @@ export async function GET(req: NextRequest) {
   const itemId = header.get(`itemId`)
   const accessToken = req.cookies.get("next-auth.session-token")?.value || req.cookies.get("__Secure-next-auth.session-token")?.value;
 
-  if (!topicId) {
+  if (isInvalidProgressParam(topicId)) {
+    logProgressDebug("api:get-topic-exercises-status:invalid-topic", {
+      route: req.nextUrl.pathname,
+      topicId,
+      itemId,
+    });
     return NextResponse.json(
       { error: "topicId are required" },
       { status: 400 }
     )
   }
 
-  if (!accessToken) {
+  if (!hasProgressToken(accessToken)) {
+    logProgressDebug("api:get-topic-exercises-status:missing-token", {
+      route: req.nextUrl.pathname,
+      topicId,
+      itemId,
+      hasAccessToken: false,
+    });
     return NextResponse.json(
       { error: "accessToken are required" },
       { status: 400 }
@@ -23,32 +35,78 @@ export async function GET(req: NextRequest) {
 
   try {
     const baseUrl = process.env.BACKEND_BASE_URL
-    const response = await fetch(`${baseUrl}/status/${topicId}/item/${itemId}`, {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-        "Content-Type": "application/json",
-      },
-    })
+    const backendCandidates = isInvalidProgressParam(itemId)
+      ? [
+          `${baseUrl}/status/${topicId}`,
+          `${baseUrl}/status/${topicId}/item/null`,
+        ]
+      : [`${baseUrl}/status/${topicId}/item/${itemId}`]
 
-    if (response.status === 401) {
-      return NextResponse.json(
-        { error: "Unauthorized: Invalid or expired token" },
-        { status: 401 }
-      )
+    let lastResponseStatus = 500
+    let lastResponseStatusText = "Unknown error"
+
+    for (const backendUrl of backendCandidates) {
+      logProgressDebug("api:get-topic-exercises-status:forward-request", {
+        route: req.nextUrl.pathname,
+        backendUrl,
+        topicId,
+        itemId,
+        hasAccessToken: true,
+      })
+
+      const response = await fetch(backendUrl, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          "Content-Type": "application/json",
+        },
+      })
+
+      if (response.status === 401) {
+        return NextResponse.json(
+          { error: "Unauthorized: Invalid or expired token" },
+          { status: 401 }
+        )
+      }
+
+      if (response.status === 404 && backendCandidates.length > 1) {
+        lastResponseStatus = response.status
+        lastResponseStatusText = response.statusText
+        logProgressDebug("api:get-topic-exercises-status:retry-after-404", {
+          route: req.nextUrl.pathname,
+          backendUrl,
+          topicId,
+          itemId,
+          responseStatus: response.status,
+        })
+        continue
+      }
+
+      if (!response.ok) {
+        return NextResponse.json(
+          { error: `Error fetching status: ${response.status} - ${response.statusText}` },
+          { status: response.status }
+        )
+      }
+
+      const data = await response.json()
+      const statusData = data
+
+      logProgressDebug("api:get-topic-exercises-status:success", {
+        route: req.nextUrl.pathname,
+        backendUrl,
+        topicId,
+        itemId,
+        responseStatus: response.status,
+      })
+
+      return NextResponse.json({ status: statusData }, { status: 200 })
     }
 
-    if (!response.ok) {
-      return NextResponse.json(
-        { error: `Error fetching status: ${response.status} - ${response.statusText}` },
-        { status: response.status }
-      )
-    }
-
-    const data = await response.json()
-    const statusData = data
-
-    return NextResponse.json({ status: statusData }, { status: 200 })
+    return NextResponse.json(
+      { error: `Error fetching status: ${lastResponseStatus} - ${lastResponseStatusText}` },
+      { status: lastResponseStatus }
+    )
   } catch (error) {
     console.error("Error fetching status:", error)
     return NextResponse.json(

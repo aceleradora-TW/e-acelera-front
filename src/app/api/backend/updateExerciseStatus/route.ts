@@ -1,5 +1,6 @@
 import { headers } from "next/headers"
 import { NextRequest, NextResponse } from "next/server"
+import { hasProgressToken, isInvalidProgressParam, logProgressDebug } from "@/utils/progress-debug"
 
 export async function PUT(req: NextRequest) {
   const header = headers()
@@ -11,14 +12,28 @@ export async function PUT(req: NextRequest) {
   const themeId = header.get(`themeId`)
   const accessToken = req.cookies.get("next-auth.session-token")?.value || req.cookies.get("__Secure-next-auth.session-token")?.value
 
-  if (!topicId || !itemId) {
+  if (isInvalidProgressParam(topicId) || isInvalidProgressParam(itemId)) {
+    logProgressDebug("api:update-exercise-status:invalid-param", {
+      route: req.nextUrl.pathname,
+      topicId,
+      itemId,
+      itemStatus,
+      elementType,
+      themeId,
+    });
     return NextResponse.json(
       { error: "topicId and itemId are required" },
       { status: 400 }
     )
   }
 
-  if (!accessToken) {
+  if (!hasProgressToken(accessToken)) {
+    logProgressDebug("api:update-exercise-status:missing-token", {
+      route: req.nextUrl.pathname,
+      topicId,
+      itemId,
+      hasAccessToken: false,
+    });
     return NextResponse.json(
       { error: "accessToken are required" },
       { status: 400 }
@@ -27,8 +42,21 @@ export async function PUT(req: NextRequest) {
 
   try {
     const baseUrl = process.env.BACKEND_BASE_URL
+    const backendUrl = `${baseUrl}/status/${topicId}/item/${itemId}`
+
+    logProgressDebug("api:update-exercise-status:forward-request", {
+      route: req.nextUrl.pathname,
+      backendUrl,
+      topicId,
+      itemId,
+      hasAccessToken: true,
+      itemStatus,
+      elementType,
+      themeId,
+    });
+
     const response = await fetch(
-      `${baseUrl}/status/${topicId}/item/${itemId}`,
+      backendUrl,
       {
         method: "PUT",
         headers: {
@@ -54,6 +82,14 @@ export async function PUT(req: NextRequest) {
     }
 
     const data = await response.json()
+    logProgressDebug("api:update-exercise-status:success", {
+      route: req.nextUrl.pathname,
+      backendUrl,
+      topicId,
+      itemId,
+      responseStatus: response.status,
+    });
+
     return NextResponse.json({ data }, { status: 200 })
 
   } catch (error) {

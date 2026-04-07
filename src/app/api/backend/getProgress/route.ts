@@ -1,5 +1,6 @@
 import { headers } from "next/headers"
 import { NextRequest, NextResponse } from "next/server"
+import { hasProgressToken, isInvalidProgressParam, logProgressDebug } from "@/utils/progress-debug"
 
 
 export async function GET(req: NextRequest) {
@@ -8,22 +9,42 @@ export async function GET(req: NextRequest) {
   const idType = header.get(`idType`)
   const accessToken = req.cookies.get("next-auth.session-token")?.value || req.cookies.get("__Secure-next-auth.session-token")?.value;
 
-
-  if (!accessToken) {
-      return NextResponse.json(null, { status: 200 });
-    }
-
-  if (!id) {
+  if (isInvalidProgressParam(id) || isInvalidProgressParam(idType)) {
+    logProgressDebug("api:get-progress:invalid-param", {
+      route: req.nextUrl.pathname,
+      id,
+      idType,
+    });
     return NextResponse.json(
-      { error: "Id are required" },
+      { error: "id and idType are required" },
       { status: 400 }
     )
   }
 
+
+  if (!hasProgressToken(accessToken)) {
+      logProgressDebug("api:get-progress:missing-token", {
+        route: req.nextUrl.pathname,
+        id,
+        idType,
+        hasAccessToken: false,
+      });
+      return NextResponse.json(null, { status: 200 });
+    }
+
   try {
     const baseUrl = process.env.BACKEND_BASE_URL
+    const backendUrl = `${baseUrl}/progress/${id}/${idType}`
 
-    const response = await fetch(`${baseUrl}/progress/${id}/${idType}`, {
+    logProgressDebug("api:get-progress:forward-request", {
+      route: req.nextUrl.pathname,
+      backendUrl,
+      id,
+      idType,
+      hasAccessToken: true,
+    });
+
+    const response = await fetch(backendUrl, {
       method: "GET",
       headers: {
         Authorization: `Bearer ${accessToken}`,
@@ -47,6 +68,14 @@ export async function GET(req: NextRequest) {
 
     const data = await response.json()
     const statusData = data
+
+    logProgressDebug("api:get-progress:success", {
+      route: req.nextUrl.pathname,
+      backendUrl,
+      id,
+      idType,
+      responseStatus: response.status,
+    });
 
     return NextResponse.json(statusData, { status: 200 })
   } catch (error) {

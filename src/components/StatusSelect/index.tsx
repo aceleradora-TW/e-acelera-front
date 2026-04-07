@@ -12,6 +12,7 @@ import { useStatus } from "@/components/fetchStatus/fetchStatusExercise"
 import { LoginWarningModal } from "../Modals/LoginWarningModal"
 import { ElementType } from "@/types/typeTopic"
 import { useGlobalContext } from "@/hooks/useGlobalContext"
+import { isInvalidProgressParam, logProgressDebug } from "@/utils/progress-debug"
 
 interface StatusSelectProps {
   width?: "30%" | "70%" | "100%";
@@ -27,7 +28,7 @@ export default function StatusSelect({
   const [status, setStatus] = React.useState<string>("NotStarted");
   const [backgroundColor, setBackgroundColor] = React.useState<string>("rgb(225, 225, 225)");
   const [isModalOpen, setIsModalOpen] = React.useState<boolean>(false);
-  const { data: session } = useSession();
+  const { data: session, status: authStatus } = useSession();
   const statusSelectRef = React.useRef<HTMLDivElement>(null);
   const { topicStatus, triggerProgressUpdate } = useGlobalContext();
   const pathname = usePathname();
@@ -44,10 +45,14 @@ export default function StatusSelect({
     const parts = pathname.split("/");
     const themeId = parts[2]?.split("-")[0] || "";
     const topicId = parts[3]?.split("-")[0] || "";
-    return themeId && topicId ? [themeId, topicId] : null;
+    const isThemeIdValid = !isInvalidProgressParam(themeId);
+    const isTopicIdValid = !isInvalidProgressParam(topicId);
+    return isThemeIdValid && isTopicIdValid ? [themeId, topicId] : null;
   };
 
   const ids = extractIdsFromUrl(pathname);
+  const safeItemId = !isInvalidProgressParam(id) ? id || "" : "";
+  const hasSessionToken = authStatus === "authenticated";
 
   const {
     status: exerciseStatus,
@@ -56,7 +61,8 @@ export default function StatusSelect({
   } = useStatus({
     themeId: ids?.[0] || "",
     topicId: ids?.[1] || "",
-    itemId: id || "",
+    itemId: safeItemId,
+    hasSessionToken,
   });
 
   const handleChange = async (event: SelectChangeEvent) => {
@@ -68,13 +74,22 @@ export default function StatusSelect({
       return;
     }
 
-    if (!ids) return;
+    if (!ids || isInvalidProgressParam(safeItemId)) {
+      logProgressDebug("status-select:skipped-invalid-param", {
+        pathname,
+        themeId: ids?.[0] || "",
+        topicId: ids?.[1] || "",
+        itemId: safeItemId,
+        hasSessionToken,
+        elementType,
+      });
+      return;
+    }
 
     const success = await updateStatus(value, elementType);
     if (!success) return;
 
     try {
-      await updateStatus(value, elementType)
       triggerProgressUpdate()
     } catch (error) {
       console.error("Erro ao atualizar status:", error)
