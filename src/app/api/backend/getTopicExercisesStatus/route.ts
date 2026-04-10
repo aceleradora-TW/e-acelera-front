@@ -35,78 +35,50 @@ export async function GET(req: NextRequest) {
 
   try {
     const baseUrl = process.env.BACKEND_BASE_URL
-    const backendCandidates = isInvalidProgressParam(itemId)
-      ? [
-          `${baseUrl}/status/${topicId}`,
-          `${baseUrl}/status/${topicId}/item/null`,
-        ]
-      : [`${baseUrl}/status/${topicId}/item/${itemId}`]
+    const backendUrl = `${baseUrl}/status/${topicId}`
 
-    let lastResponseStatus = 500
-    let lastResponseStatusText = "Unknown error"
+    logProgressDebug("api:get-topic-exercises-status:forward-request", {
+      route: req.nextUrl.pathname,
+      backendUrl,
+      topicId,
+      itemId,
+      hasAccessToken: true,
+    })
 
-    for (const backendUrl of backendCandidates) {
-      logProgressDebug("api:get-topic-exercises-status:forward-request", {
-        route: req.nextUrl.pathname,
-        backendUrl,
-        topicId,
-        itemId,
-        hasAccessToken: true,
-      })
+    const response = await fetch(backendUrl, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        "Content-Type": "application/json",
+      },
+    })
 
-      const response = await fetch(backendUrl, {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-          "Content-Type": "application/json",
-        },
-      })
-
-      if (response.status === 401) {
-        return NextResponse.json(
-          { error: "Unauthorized: Invalid or expired token" },
-          { status: 401 }
-        )
-      }
-
-      if (response.status === 404 && backendCandidates.length > 1) {
-        lastResponseStatus = response.status
-        lastResponseStatusText = response.statusText
-        logProgressDebug("api:get-topic-exercises-status:retry-after-404", {
-          route: req.nextUrl.pathname,
-          backendUrl,
-          topicId,
-          itemId,
-          responseStatus: response.status,
-        })
-        continue
-      }
-
-      if (!response.ok) {
-        return NextResponse.json(
-          { error: `Error fetching status: ${response.status} - ${response.statusText}` },
-          { status: response.status }
-        )
-      }
-
-      const data = await response.json()
-      const statusData = data
-
-      logProgressDebug("api:get-topic-exercises-status:success", {
-        route: req.nextUrl.pathname,
-        backendUrl,
-        topicId,
-        itemId,
-        responseStatus: response.status,
-      })
-
-      return NextResponse.json({ status: statusData }, { status: 200 })
+    if (response.status === 401) {
+      return NextResponse.json(
+        { error: "Unauthorized: Invalid or expired token" },
+        { status: 401 }
+      )
     }
 
-    return NextResponse.json(
-      { error: `Error fetching status: ${lastResponseStatus} - ${lastResponseStatusText}` },
-      { status: lastResponseStatus }
-    )
+    if (!response.ok) {
+      return NextResponse.json(
+        { error: `Error fetching status: ${response.status} - ${response.statusText}` },
+        { status: response.status }
+      )
+    }
+
+    const data = await response.json()
+    const statusData = data
+
+    logProgressDebug("api:get-topic-exercises-status:success", {
+      route: req.nextUrl.pathname,
+      backendUrl,
+      topicId,
+      itemId,
+      responseStatus: response.status,
+    })
+
+    return NextResponse.json({ status: statusData }, { status: 200 })
   } catch (error) {
     console.error("Error fetching status:", error)
     return NextResponse.json(
