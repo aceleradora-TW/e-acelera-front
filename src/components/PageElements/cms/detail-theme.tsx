@@ -5,15 +5,16 @@ import { useCallback, useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
 import { Box, Button, TextField, useTheme } from "@mui/material"
 import { UpperBanner } from "@/components/UI/cms/upper-banner"
-import { actionsContainerStyles, arrchiveButtonStyles, cancelButtonStyles, textFieldStyles, textFieldsContainerStyles } from "@/components/UI/dashboard/forms/form.styles"
-import { Theme } from "@/types/type"
+import { actionsContainerStyles, archiveButtonStyles, cancelButtonStyles, textFieldStyles, textFieldsContainerStyles } from "@/components/UI/dashboard/forms/form.styles"
+import { CmsTheme } from "@/types/type"
 
 interface Props {
   id: string
+  onArchive?: (id: string) => void
 }
 
-export default function DetailTheme({ id }: Props) {
-  const [theme, setTheme] = useState<Theme | undefined>(undefined)
+export default function DetailTheme({ id, onArchive }: Props) {
+  const [theme, setTheme] = useState<CmsTheme | undefined>(undefined)
   const muiTheme = useTheme()
   const router = useRouter()
 
@@ -120,8 +121,9 @@ export default function DetailTheme({ id }: Props) {
       <Box sx={actionsContainerStyles}>
         <Button
           variant="contained"
-          sx={arrchiveButtonStyles(muiTheme)}
-          onClick={() => router.push("/cms/themes")}
+          sx={archiveButtonStyles(muiTheme)}
+          onClick={() => onArchive?.(id)}
+          disabled={!theme}
         >
           ARQUIVAR
         </Button>

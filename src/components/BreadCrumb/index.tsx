@@ -77,7 +77,7 @@ export const BreadCrumb: React.FC<BreadCrumbProps> = ({ lastLabel }) => {
                 <Link
                   variant="body1"
                   sx={theme.customStyles.breadCrumb}
-                  key={path}
+                  key={`${route}-${index}`}
                   href={route}
                   aria-current={isLast ? 'page' : undefined}
                   onClick={(e) => handleBreadcrumbClick(route, e)}>

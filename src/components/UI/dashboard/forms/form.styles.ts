@@ -15,52 +15,41 @@ export const cancelButtonStyles = (theme: Theme) => ({
 
   "&:hover": {
     backgroundColor: `${theme.palette.error.main} !important`,
-    borderColor: `${theme.palette.error.dark} !important`,
     color: `${theme.palette.error.contrastText} !important`,
   },
 })
 
 export const submitButtonStyles = (theme: Theme): SxProps<Theme> => ({
-  border: `1px solid ${theme.palette.error.main}`,
-  color: `${theme.palette.error.main} !important`,
+  border: `1px solid ${theme.palette.primary.main}`,
+  color: `${theme.palette.primary.main} !important`,
   backgroundColor: "transparent",
 
   "&:hover": {
-    borderColor: `${theme.palette.error.dark} !important`,
-    backgroundColor: `${theme.palette.error.main} !important`,
-    color: `${theme.palette.error.contrastText} !important`,
+    borderColor: `${theme.palette.primary.dark} !important`,
+    backgroundColor: `${theme.palette.primary.main} !important`,
+    color: `${theme.palette.primary.contrastText} !important`,
   },
 })
 
 export const archiveButtonStyles = (theme: Theme): SxProps<Theme> => ({
-  border: `1px solid ${theme.palette.error.main}`,
-  color: `${theme.palette.error.main} !important`,
-  backgroundColor: "transparent",
+  color: `${theme.palette.archiveFormButton?.contrastText} !important`,
+  backgroundColor: theme.palette.archiveFormButton?.main,
 
   "&:hover": {
-    borderColor: `${theme.palette.error.dark} !important`,
-    backgroundColor: `${theme.palette.error.main} !important`,
-    color: `${theme.palette.error.contrastText} !important`,
+    backgroundColor: `${theme.palette.archiveFormButton?.hover} !important`,
+    color: `${theme.palette.archiveFormButton?.contrastText} !important`,
   },
 })
+
 
 export const editButtonStyles = (theme: Theme) => ({
   border: `1px solid ${theme.palette.primary.main}`,
   color: theme.palette.primary.main,
-  backgroundColor: `${theme.palette.error.main} !important`,
+  backgroundColor: "transparent", 
 
   "&:hover": {
     backgroundColor: theme.palette.action.hover,
     borderColor: theme.palette.primary.dark,
-  },
-})
-
-export const arrchiveButtonStyles = (theme: Theme) => ({
-  backgroundColor: theme.palette.buttonFormColor?.blueBackground,
-  color: theme.palette.buttonHover?.contrastText,
-
-  "&:hover": {
-    backgroundColor: theme.palette.action.hover,
   },
 })
 
