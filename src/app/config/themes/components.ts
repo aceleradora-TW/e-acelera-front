@@ -741,4 +741,11 @@ export const customStyles: Theme = {
     },
   },
 
+  archiveFormButton : {
+    backgroundColor: themePalette.button,
+    color: themePalette.baseBgColor,
+    "&:hover": {
+      backgroundColor: themePalette.button,
+    },
+  }
 }
