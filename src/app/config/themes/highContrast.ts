@@ -893,6 +893,16 @@ export const highContrastThemeBuilder = (fontFamily?: string) => {
           gap: 2,
           justifyContent: "flex-end",
         }
+      },
+      archiveFormButton: {
+        backgroundColor: `${themePalette.button} !important`,
+        color: themePalette.baseBgColor,
+        border: "1px solid transparent",
+        "&:hover": {
+          backgroundColor: themePalette.baseBgColor,
+          color: themePalette.button,
+          border: `1px solid ${themePalette.button}`,
+        },
       }
     },
   });
