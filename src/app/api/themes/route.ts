@@ -4,34 +4,15 @@ import { NextRequest, NextResponse } from "next/server";
 export async function GET(req: NextRequest) {
   try {
     const searchParams = req.nextUrl.searchParams;
-    const rawCategory = searchParams.get("category")?.trim() || req.headers.get("category")?.trim();
+    const rawCategory = searchParams.get("category")?.trim();
     const page = searchParams.get("page")?.trim();
     const limit = searchParams.get("limit")?.trim();
 
-    const normalizeCategory = (value: string) =>
-      value
-        .normalize("NFD")
-        .replace(/[\u0300-\u036f]/g, "")
-        .toLowerCase()
-        .replace(/[\s_-]/g, "");
-
-    const categoryMap: Record<string, ThemeCategory> = {
-      nivelamento: ThemeCategory.LEVELING,
-      autoestudo: ThemeCategory.SELF_STUDY,
-      leveling: ThemeCategory.LEVELING,
-      selfstudy: ThemeCategory.SELF_STUDY,
-    };
-
-    let mappedCategory: ThemeCategory | undefined;
-    if (rawCategory) {
-      mappedCategory = categoryMap[normalizeCategory(rawCategory)];
-      if (!mappedCategory) {
-        return NextResponse.json(
-          { error: "Invalid category. Use Nivelamento or Autoestudo." },
-          { status: 400 }
-        );
-      }
-    }
+    const mappedCategory = rawCategory === "Nivelamento"
+      ? ThemeCategory.LEVELING
+      : rawCategory === "Autoestudo"
+        ? ThemeCategory.SELF_STUDY
+        : rawCategory;
 
     const backendQuery = new URLSearchParams();
     if (mappedCategory) backendQuery.set("category", mappedCategory);
