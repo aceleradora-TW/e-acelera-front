@@ -2,41 +2,55 @@ import { NextResponse } from "next/server"
 import type { NextRequest } from "next/server"
 import { BACKEND_BASE_URL } from "./utils/constants"
 
+async function isSessionValid(sessionToken: string) {
+  try {
+    const response = await fetch(`${BACKEND_BASE_URL}/login`, {
+      method: "POST",
+      headers: {
+        "Authorization": `Bearer ${sessionToken}`,
+        "Content-Type": "application/json",
+      },
+    })
+
+    return response.ok
+  } catch (error) {
+    console.error("Internal server error: ", error)
+    return false
+  }
+}
+
+function redirectToLogin(request: NextRequest) {
+  const callbackUrl = `${request.nextUrl.pathname}${request.nextUrl.search}`
+  const loginUrl = new URL("/login", request.url)
+  loginUrl.searchParams.set("callbackUrl", callbackUrl)
+  return NextResponse.redirect(loginUrl)
+}
+
 export async function middleware(request: NextRequest) {
   const sessionToken =
     request.cookies.get("next-auth.session-token") ||
     request.cookies.get("__Secure-next-auth.session-token")
 
-    const callbackUrl =
-    new URLSearchParams(request.nextUrl.search).get("callbackUrl") || "/"
+  const isLoginRoute = request.nextUrl.pathname.startsWith("/login")
+  const isCmsRoute = request.nextUrl.pathname.startsWith("/cms")
 
-    const parsedUrl = new URL(callbackUrl, request.url) 
+  if (isCmsRoute) {
+    if (!sessionToken) {
+      return redirectToLogin(request)
+    }
 
-  if (request.nextUrl.pathname.startsWith("/login") && sessionToken) {
-    try {
-      const response = await fetch(`${BACKEND_BASE_URL}/login`, {
-        method: "POST",
-        headers: {
-          "Authorization": `Bearer ${sessionToken.value}`,
-          "Content-Type": "application/json",
-        },
-      })
+    const validSession = await isSessionValid(sessionToken.value)
+    if (!validSession) {
+      return redirectToLogin(request)
+    }
+  }
 
-      if (response.status === 401) {
-        return NextResponse.json(
-          { error: "Unauthorized: Invalid or expired token" },
-          { status: 401 }
-        )
-      } 
-      
-      if (!response.ok) {
-        return NextResponse.json({ error: "Failed to register user" }, { status: response.status })
-      }
+  if (isLoginRoute && sessionToken) {
+    const callbackUrl = request.nextUrl.searchParams.get("callbackUrl") || "/"
+    const validSession = await isSessionValid(sessionToken.value)
 
-      return NextResponse.redirect(new URL(parsedUrl, request.url))
-    } catch (error) {
-      console.error("Internal server error: ", error)
-      return NextResponse.json({ error: "Internal server error" }, { status: 500 })
+    if (validSession) {
+      return NextResponse.redirect(new URL(callbackUrl, request.url))
     }
   }
 
@@ -44,5 +58,5 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/login"],
+  matcher: ["/login", "/cms/:path*"],
 }
