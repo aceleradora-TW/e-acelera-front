@@ -1,5 +1,9 @@
 export async function getThemes(page: number, limit: number) {
-  const res = await fetch(`http://localhost:5002/themes?page=${page}&limit=${limit}`);
+  const params = new URLSearchParams({
+    page: String(page),
+    limit: String(limit),
+  });
+  const res = await fetch(`/api/themes?${params.toString()}`);
   if (!res.ok) throw new Error("Erro ao buscar temas");
   return res.json();
 }
