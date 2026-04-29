@@ -22,7 +22,6 @@ export default function RenderCmsPage() {
     async function fetchTopics() {
       try {
         const res = await getTopics(page + 1, pageSize);
-        console.log("Topics response:", res.data);
         const transformedData = res.data.map((topic: any) => ({
           ...topic,
           themeTitle: topic.theme?.title || "Sem tema",
