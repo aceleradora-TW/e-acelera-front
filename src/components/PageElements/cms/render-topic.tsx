@@ -9,7 +9,7 @@ const columns: Column[] = [
   { id: "title", label: "Título" },
   { id: "themeTitle", label: "Tema" },
   { id: "shortDescription", label: "Descrição curta" },
-  { id: "isActive", label: "Ativo" },
+  { id: "themeID", label: "ID do tema" },
 ];
 
 export default function RenderCmsPage() {
@@ -22,12 +22,9 @@ export default function RenderCmsPage() {
     async function fetchTopics() {
       try {
         const res = await getTopics(page + 1, pageSize);
-        const transformedData = res.data.map((topic: any) => ({
-          ...topic,
-          themeTitle: topic.theme?.title || "Sem tema",
-        }));
-        setRows(transformedData);
-        setRowCount(res.meta.total);
+
+        setRows(res.data.data);
+        setRowCount(res.data.meta.total);
       } catch (error) {
         console.error("Erro ao buscar tópicos:", error);
       } 
