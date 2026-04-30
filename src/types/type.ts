@@ -69,4 +69,14 @@ export enum IdType {
   THEME_ID = "themeId",
 };
 
+export interface CmsTheme {
+  title: string;
+  shortDescription: string;
+  description: string;
+  imageUrl?: string;
+  imageAlt?: string;
+  category?: string;
+  sequence?: number;
+};
+
 export interface AdminJsApiResponse {}

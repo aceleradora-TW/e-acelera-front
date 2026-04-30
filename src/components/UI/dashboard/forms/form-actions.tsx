@@ -1,6 +1,8 @@
 import { Box, Button, useTheme } from "@mui/material"
 import { useRouter } from "next/navigation"
-import { actionsBoxStyles, 
+import {
+  actionsBoxStyles,
+  archiveButtonStyles,
   cancelButtonStyles,
   submitButtonStyles
 } from "../forms/form.styles"
@@ -16,7 +18,22 @@ export function FormActions({ isValid, isDirty }: FormActionsProps) {
 
   return (
     <Box sx={actionsBoxStyles}>
-      <Button sx={cancelButtonStyles(theme)} onClick={() => router.back()}>Cancelar</Button>
+
+      <Button
+        variant="contained"
+        sx={archiveButtonStyles(theme)}
+      >
+        Arquivar
+      </Button>
+
+      <Button
+        variant="contained"
+        sx={cancelButtonStyles(theme)}
+        onClick={() => router.back()}
+      >
+        Cancelar
+      </Button>
+
       <Button
         type="submit"
         variant="contained"
