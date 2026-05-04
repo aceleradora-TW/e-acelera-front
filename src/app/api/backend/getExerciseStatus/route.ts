@@ -1,5 +1,6 @@
 import { headers } from "next/headers"
 import { NextRequest, NextResponse } from "next/server"
+import { hasProgressToken, isInvalidProgressParam, logProgressDebug } from "@/utils/progress-debug"
 
 export async function GET(req: NextRequest) {
   const header = headers()
@@ -7,14 +8,25 @@ export async function GET(req: NextRequest) {
   const itemId = header.get(`itemId`)
   const accessToken = req.cookies.get("next-auth.session-token")?.value || req.cookies.get("__Secure-next-auth.session-token")?.value;
 
-  if (!topicId || !itemId) {
+  if (isInvalidProgressParam(topicId) || isInvalidProgressParam(itemId)) {
+    logProgressDebug("api:get-exercise-status:invalid-param", {
+      route: req.nextUrl.pathname,
+      topicId,
+      itemId,
+    });
     return NextResponse.json(
       { error: "topicId and itemId are required" },
       { status: 400 }
     )
   }
 
-  if (!accessToken) {
+  if (!hasProgressToken(accessToken)) {
+    logProgressDebug("api:get-exercise-status:missing-token", {
+      route: req.nextUrl.pathname,
+      topicId,
+      itemId,
+      hasAccessToken: false,
+    });
     return NextResponse.json(
       { error: "accessToken are required" },
       { status: 400 }
@@ -23,13 +35,34 @@ export async function GET(req: NextRequest) {
 
   try {
     const baseUrl = process.env.BACKEND_BASE_URL
-    const response = await fetch(`${baseUrl}/status/${topicId}/item/${itemId}`, {
+    const backendUrl = `${baseUrl}/status/${topicId}/item/${itemId}`
+
+    logProgressDebug("api:get-exercise-status:forward-request", {
+      route: req.nextUrl.pathname,
+      backendUrl,
+      topicId,
+      itemId,
+      hasAccessToken: true,
+    });
+
+    const response = await fetch(backendUrl, {
       method: "GET",
       headers: {
         Authorization: `Bearer ${accessToken}`,
         "Content-Type": "application/json",
       },
     })
+
+    if (response.status === 404) {
+      logProgressDebug("api:get-exercise-status:not-found-default", {
+        route: req.nextUrl.pathname,
+        backendUrl,
+        topicId,
+        itemId,
+        responseStatus: response.status,
+      });
+      return NextResponse.json({ status: "NotStarted" }, { status: 200 })
+    }
 
     if (response.status === 401) {
       return NextResponse.json(
@@ -47,6 +80,14 @@ export async function GET(req: NextRequest) {
 
     const data = await response.json()
     const statusData = data.itemStatus
+
+    logProgressDebug("api:get-exercise-status:success", {
+      route: req.nextUrl.pathname,
+      backendUrl,
+      topicId,
+      itemId,
+      responseStatus: response.status,
+    });
 
     return NextResponse.json({ status: statusData }, { status: 200 })
   } catch (error) {

@@ -1,5 +1,6 @@
 import { headers } from "next/headers"
 import { NextRequest, NextResponse } from "next/server"
+import { hasProgressToken, isInvalidProgressParam, logProgressDebug } from "@/utils/progress-debug"
 
 export async function GET(req: NextRequest) {
   const header = headers()
@@ -7,14 +8,25 @@ export async function GET(req: NextRequest) {
   const itemId = header.get(`itemId`)
   const accessToken = req.cookies.get("next-auth.session-token")?.value || req.cookies.get("__Secure-next-auth.session-token")?.value;
 
-  if (!topicId) {
+  if (isInvalidProgressParam(topicId)) {
+    logProgressDebug("api:get-topic-exercises-status:invalid-topic", {
+      route: req.nextUrl.pathname,
+      topicId,
+      itemId,
+    });
     return NextResponse.json(
       { error: "topicId are required" },
       { status: 400 }
     )
   }
 
-  if (!accessToken) {
+  if (!hasProgressToken(accessToken)) {
+    logProgressDebug("api:get-topic-exercises-status:missing-token", {
+      route: req.nextUrl.pathname,
+      topicId,
+      itemId,
+      hasAccessToken: false,
+    });
     return NextResponse.json(
       { error: "accessToken are required" },
       { status: 400 }
@@ -23,7 +35,17 @@ export async function GET(req: NextRequest) {
 
   try {
     const baseUrl = process.env.BACKEND_BASE_URL
-    const response = await fetch(`${baseUrl}/status/${topicId}/item/${itemId}`, {
+    const backendUrl = `${baseUrl}/status/${topicId}`
+
+    logProgressDebug("api:get-topic-exercises-status:forward-request", {
+      route: req.nextUrl.pathname,
+      backendUrl,
+      topicId,
+      itemId,
+      hasAccessToken: true,
+    })
+
+    const response = await fetch(backendUrl, {
       method: "GET",
       headers: {
         Authorization: `Bearer ${accessToken}`,
@@ -47,6 +69,14 @@ export async function GET(req: NextRequest) {
 
     const data = await response.json()
     const statusData = data
+
+    logProgressDebug("api:get-topic-exercises-status:success", {
+      route: req.nextUrl.pathname,
+      backendUrl,
+      topicId,
+      itemId,
+      responseStatus: response.status,
+    })
 
     return NextResponse.json({ status: statusData }, { status: 200 })
   } catch (error) {

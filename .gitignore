@@ -35,3 +35,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# generated investigation docs
+docs/investigations/progress-401-frontend-investigation.md
