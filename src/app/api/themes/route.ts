@@ -20,11 +20,6 @@ export async function GET(req: NextRequest) {
       ? `${baseUrl}/themes?category=${category}`
       : `${baseUrl}/themes`;
 
-  
-    console.log("categoryHeader:", categoryHeader);
-    console.log("category mapeada:", category);
-    console.log("url chamada:", url);
-
     const response = await fetch(url, {
       method: "GET",
       headers: {
