@@ -7,11 +7,11 @@ import { Box } from "@mui/material";
 import { useEffect, useState } from "react";
 
 const columns = [
+  { id: "id", label: "ID" },
   { id: "title", label: "Título" },
   { id: "shortDescription", label: "Descrição curta" },
-  { id: "description", label: "Descrição" },
   { id: "topic", label: "Tópico" },
-  { id: "sequence", label: "Sequência" },
+  { id: "theme", label: "Tema" },
   { id: "isActive", label: "Ativo" },
 ];
 
@@ -25,13 +25,14 @@ export default function RenderCmsPage() {
     async function fetchExercises() {
       try {
         const res = await getExercises(page + 1, pageSize);
-        const formattedRows = res.data.map((item: any) => ({
-          ...item,
-          topic: item.topic?.name || item.topic?.nome || "—",
-        }));
+        console.log("API RESPONSE:", res);
+        // const formattedRows = res.data.map((item: any) => ({
+        //   ...item,
+        //   topic: item.topic?.name || item.topic?.nome || "—",
+        // }));
 
-        setRows(formattedRows);
-        setRowCount(res.meta.total);
+        setRows(res.data.data);
+        setRowCount(res.data.meta.total);
       } catch (error) {
         console.error("Erro ao buscar exercícios:", error);
       }
