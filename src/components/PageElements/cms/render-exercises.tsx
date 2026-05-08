@@ -25,14 +25,10 @@ export default function RenderCmsPage() {
     async function fetchExercises() {
       try {
         const res = await getExercises(page + 1, pageSize);
-        console.log("API RESPONSE:", res);
-        // const formattedRows = res.data.map((item: any) => ({
-        //   ...item,
-        //   topic: item.topic?.name || item.topic?.nome || "—",
-        // }));
 
         setRows(res.data.data);
         setRowCount(res.data.meta.total);
+        
       } catch (error) {
         console.error("Erro ao buscar exercícios:", error);
       }
