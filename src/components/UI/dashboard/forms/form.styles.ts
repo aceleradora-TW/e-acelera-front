@@ -9,29 +9,47 @@ export const actionsBoxStyles = (theme: any) => ({
   ...theme.customStyles.FormPage.actions,
 })
 
-export const cancelButtonStyles = (theme: any) => ({
-  border: "0.5px solid red",
-  color: theme.palette.buttonFormColor?.red,
+export const cancelButtonStyles = (theme: Theme) => ({
+  color: `${theme.palette.primary.main} !important`,
+  backgroundColor: "transparent",
+
   "&:hover": {
-    backgroundColor: theme.palette.buttonFormColor?.red,
-    color: theme.palette.buttonHover?.contrastText,
-    borderColor: theme.palette.buttonFormColor?.red,
+    backgroundColor: `${theme.palette.error.main} !important`,
+    color: `${theme.palette.error.contrastText} !important`,
   },
 })
 
-export const submitButtonStyles = (
-  theme: Theme
-): SxProps<Theme> => ({
-  border: "0.5px solid",
-  backgroundColor: theme.palette.buttonFormColor?.blueBackground,
-  color: theme.palette.buttonHover?.contrastText,
+export const submitButtonStyles = (theme: Theme): SxProps<Theme> => ({
+  border: `1px solid ${theme.palette.primary.main}`,
+  color: `${theme.palette.primary.main} !important`,
+  backgroundColor: "transparent",
+
   "&:hover": {
-    backgroundColor: "primary.dark",
+    borderColor: `${theme.palette.primary.dark} !important`,
+    backgroundColor: `${theme.palette.primary.main} !important`,
+    color: `${theme.palette.primary.contrastText} !important`,
   },
-  "&.Mui-disabled": {
-    backgroundColor: theme.palette.buttonFormColor?.blueBackground,
-    color: theme.palette.buttonHover?.contrastText,
-    opacity: 0.4,
+})
+
+export const archiveButtonStyles = (theme: Theme): SxProps<Theme> => ({
+  color: `${theme.palette.archiveFormButton?.contrastText} !important`,
+  backgroundColor: theme.palette.archiveFormButton?.main,
+
+  "&:hover": {
+    backgroundColor: `${theme.palette.archiveFormButton?.hover} !important`,
+    color: `${theme.palette.archiveFormButton?.contrastText} !important`,
+  },
+})
+
+
+export const editButtonStyles = (theme: Theme) => ({
+  border: `1px solid ${theme.palette.primary.main}`,
+  color: theme.palette.primary.main,
+  backgroundColor: "transparent", 
+
+  "&:hover": {
+    backgroundColor: theme.palette.action.hover,
+    borderColor: theme.palette.primary.dark,
   },
 })
 
@@ -46,3 +64,34 @@ export const textAreaStyles: SxProps<Theme> = {
     padding: "0 !important",
   },
 }
+
+export const textFieldStyles = (theme: Theme): SxProps<Theme> => ({
+  "& .MuiOutlinedInput-root": {
+    backgroundColor:
+      theme.palette.mode === "dark"
+        ? theme.palette.background.paper
+        : "transparent",
+
+    "&:hover fieldset": {
+      borderColor: "rgba(0,0,0,0.23)"
+    },
+
+    "&.Mui-focused fieldset": {
+      borderColor: "rgba(0,0,0,0.23)"
+    }
+  }
+})
+
+export const textFieldsContainerStyles: SxProps<Theme> = {
+  mt: 4,
+  display: "flex",
+  flexDirection: "column",
+  gap: 2,
+};
+
+export const actionsContainerStyles: SxProps<Theme> = {
+  gap: 2,
+  mt: 3,
+  display: "flex",
+  justifyContent: "flex-end",
+};

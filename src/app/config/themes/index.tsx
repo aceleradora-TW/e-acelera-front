@@ -40,6 +40,11 @@ declare module '@mui/material/styles' {
       lightGray: string;
       gray: string;
     }
+    archiveFormButton?: {
+      main: string;
+      hover: string;
+      contrastText: string;
+    } 
   }
   interface PaletteOptions {
     button?: PaletteColorOptions;

@@ -11,6 +11,7 @@ type UpperBannerProps = {
   createButton?: boolean;
   editButton?: boolean;
   showBreadCrumb?: boolean;
+  breadCrumbLabel?: string;
 };
 
 export const UpperBanner = ({
@@ -19,6 +20,7 @@ export const UpperBanner = ({
   createButton,
   editButton,
   showBreadCrumb,
+  breadCrumbLabel,
 }: UpperBannerProps) => {
   const theme = useTheme();
   const router = useRouter();
@@ -40,12 +42,12 @@ export const UpperBanner = ({
       container
       justifyContent="space-between"
       direction="row"
-      alignItems="end"
+      alignItems="center"
     >
       <Grid item>
         <Grid container>
           <Grid item>
-            {showBreadCrumb && <BreadCrumb />}
+            {showBreadCrumb && <BreadCrumb lastLabel={breadCrumbLabel} />} 
             <Typography variant="h2" sx={theme.customStyles.upperBanner.title}>
               {title}
             </Typography>
@@ -87,7 +89,7 @@ export const UpperBanner = ({
         )}
       </Grid>
       <Grid item>
-        <Grid container spacing={2} justifyContent="flex-end" sx={{ marginTop: 3 }} >
+        <Grid container spacing={2} justifyContent="flex-end" sx={{ marginTop: 1 }} >
           {createButton && (
             <Grid item>
               <ClickButton
@@ -102,7 +104,8 @@ export const UpperBanner = ({
               <ClickButton
                 title="Editar"
                 backIcon={<EditIcon />}
-                click={() => console.log("Editar")}
+                click={() => router.push(`${pathname}/edit`)}
+                variant="contained"
                 sx={theme.customStyles.upperBanner.editButton}
               />
             </Grid>
