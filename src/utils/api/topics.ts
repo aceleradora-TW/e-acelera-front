@@ -1,17 +1,9 @@
-export async function getTopics(page: number, limit: number) {
-    const res = await fetch(`http://localhost:5002/topics?page=${page}&limit=${limit}`);
-    if (!res.ok) throw new Error("Erro ao buscar tópicos");
-    return res.json();
-}
-
 export async function createTopic(topicData: {
     title: string;
     shortDescription: string;
-    description: string;
-    image: string;
-    alt: string;
-    category: "Leveling" | "SelfStudy";
-    sequence?: number;
+    references: string[];
+    themeId: string;
+    videoUrl?: string;
 }) {
     const res = await fetch(`/api/topics`, {
         method: "POST",

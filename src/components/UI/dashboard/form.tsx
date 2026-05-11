@@ -1,39 +1,67 @@
-import { Controller, SubmitHandler, useForm } from "react-hook-form"
-import { Alert, Container, Stack, Typography } from "@mui/material"
-import { useTheme } from "@mui/material"
-import { ThemeFormData, ThemeFormSchema, themeFormDefs } from "./forms/defs/theme.defs"
+import { useState } from "react"
+
+import {
+  Controller,
+  FieldValues,
+  SubmitHandler,
+  useForm,
+} from "react-hook-form"
+
 import { zodResolver } from "@hookform/resolvers/zod"
+
+import {
+  Alert,
+  Container,
+  Stack,
+  Typography,
+} from "@mui/material"
+
+import { useTheme } from "@mui/material"
+
 import { containerStyles } from "./forms/form.styles"
 import { FieldRenderer } from "./forms/field-renderer"
 import { FormActions } from "./forms/form-actions"
-import { useState } from "react"
 
-interface FormProps {
+interface FormProps<T extends FieldValues> {
   title?: string
-  onSubmit: (data: ThemeFormData) => Promise<void>
+  onSubmit: (data: T) => Promise<void>
+  schema: any
+  formDefs: {
+    fields: any[]
+    defaultValues: any
+  }
 }
 
-export default function Form({ 
-  title = "Cadastro", 
+export default function Form<T extends FieldValues>({
+  title = "Cadastro",
   onSubmit: onSubmitProp,
-}: FormProps) {
+  schema,
+  formDefs,
+}: FormProps<T>) {
   const theme = useTheme()
+
   const [error, setError] = useState<string | null>(null)
   const [isLoading, setIsLoading] = useState(false)
 
-  const { handleSubmit, control, formState: { isDirty, isValid } } = useForm<ThemeFormData>({
-    resolver: zodResolver(ThemeFormSchema),
-    defaultValues: themeFormDefs.defaultValues,
+  const {
+    handleSubmit,
+    control,
+    formState: { isDirty, isValid },
+  } = useForm<T>({
+    resolver: zodResolver(schema) as any,
+    defaultValues: formDefs.defaultValues,
     mode: "onChange",
   })
 
-  const onSubmit: SubmitHandler<ThemeFormData> = async (data) => {
+  const onSubmit: SubmitHandler<T> = async (data) => {
     setError(null)
     setIsLoading(true)
+
     try {
       await onSubmitProp(data)
     } catch (err: any) {
       setError(err?.message || "Erro ao processar formulário")
+    } finally {
       setIsLoading(false)
     }
   }
@@ -45,7 +73,11 @@ export default function Form({
       sx={containerStyles(theme)}
       onSubmit={handleSubmit(onSubmit)}
     >
-      <Typography variant="h6" fontWeight={600} sx={{ mb: 3 }}>
+      <Typography
+        variant="h6"
+        fontWeight={600}
+        sx={{ mb: 3 }}
+      >
         {title}
       </Typography>
 
@@ -56,19 +88,26 @@ export default function Form({
       )}
 
       <Stack spacing={2.5}>
-        {themeFormDefs.fields.map((field) => (
+        {formDefs.fields.map((field) => (
           <Controller
             key={field.name as string}
-            name={field.name}
+            name={field.name as any}
             control={control}
             render={({ field: rhfField, fieldState }) => (
-              <FieldRenderer field={field} rhfField={rhfField} error={fieldState.error} />
+              <FieldRenderer
+                field={field}
+                rhfField={rhfField}
+                error={fieldState.error}
+              />
             )}
           />
         ))}
       </Stack>
 
-      <FormActions isValid={isValid && !(isLoading)} isDirty={isDirty} />
+      <FormActions
+        isValid={isValid && !isLoading}
+        isDirty={isDirty}
+      />
     </Container>
   )
 }
