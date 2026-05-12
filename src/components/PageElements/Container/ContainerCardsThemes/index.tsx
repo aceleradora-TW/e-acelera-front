@@ -16,59 +16,59 @@ export const ContainerCardTheme: React.FC<ContainerCardThemeProps> = ({
   const pathname = usePathname();
   const currentPath = pathname.slice(1);
   const { adminjs_preference } = useFlags([""], ["adminjs_preference"]);
-  const themes = Array.isArray(data.data)
-    ? data.data
-    : Array.isArray((data.data as any)?.data)
-      ? (data.data as any).data
-      : [];
+  const themes = data.data 
 
-  const filteredData = themes.filter((element: DataItem) => {
-    const theme = element?.field as ThemeField | undefined;
-    return theme?.category === category;
-  });
+  if (!adminjs_preference) {
+    const filteredData = data.data.filter((element: DataItem) => {
+      const theme = element?.field as ThemeField | undefined;
+      return theme?.category === category;
+    });
+
+    return (
+      <Grid container spacing={2} alignItems="stretch">
+        {filteredData.map((element: DataItem, index: number) => {
+          const field = element?.field as ThemeField;
+          return (
+            <Grid item xl={3} lg={4} md={4} sm={6} xs={12} key={index}>
+              <BaseCard
+                id={element.id}
+                title={field?.title}
+                description={field?.cardDescription}
+                route={`${currentPath}/${element.id}-${field?.title}`}
+                image={field?.image ? field.image[0].url : ""}
+                textImage={`${field?.alt}`}
+                cardType="theme"
+              />
+            </Grid>
+          );
+        })}
+      </Grid>
+    );
+  }
 
   return (
     <Grid container spacing={2} alignItems="stretch">
-      {!adminjs_preference
-        ? filteredData.map((element: DataItem, index: number) => {
-            const field = element?.field as ThemeField;
-            return (
-              <Grid item xl={3} lg={4} md={4} sm={6} xs={12} key={index}>
-                <BaseCard
-                  id={element.id}
-                  title={field?.title}
-                  description={field?.cardDescription}
-                  route={`${currentPath}/${element.id}-${field?.title}`}
-                  image={field?.image ? field.image[0].url : ""}
-                  textImage={`${field?.alt}`}
-                  cardType="theme"
-                />
-              </Grid>
-            );
-          })
-        : (
-            (themes as unknown as Array<{
-              id: string;
-              title: string;
-              shortDescription: string;
-              cardDescription: string;
-              image: string;
-              category: string;
-              sequence: number;
-              alt: string;
-            }>).filter((element) => element.category === category)
-          ).map((element, index) => (
-              <Grid item xl={3} lg={4} md={4} sm={6} xs={12} key={index}>
-                <BaseCard
-                  id={element.id}
-                  title={element.title}
-                  description={element?.shortDescription}
-                  image={element.image}
-                  textImage={`${element?.alt}`}
-                  cardType="theme"
-                />
-              </Grid>
-            ))}
+      {(data.data as unknown as Array<{
+        id: string;
+        title: string;
+        shortDescription: string;
+        cardDescription: string;
+        image: string;
+        category: string;
+        sequence: number;
+        alt: string;
+      }>).filter((element) => element.category === category).map((element, index) => (
+        <Grid item xl={3} lg={4} md={4} sm={6} xs={12} key={index}>
+          <BaseCard
+            id={element.id}
+            title={element.title}
+            description={element?.shortDescription}
+            image={element.image}
+            textImage={`${element?.alt}`}
+            cardType="theme"
+          />
+        </Grid>
+      ))}
     </Grid>
   );
 };
