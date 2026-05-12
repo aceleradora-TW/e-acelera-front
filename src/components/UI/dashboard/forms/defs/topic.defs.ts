@@ -41,8 +41,8 @@ export const topicFormDefs: FormDef<TopicFormData> = {
     {
       name: "themeId",
       label: "Tema",
-      type: "select",
-      options: [],
+      type: "text",
+      // options: [],
     },
     {
       name: "videoUrl",
