@@ -1,5 +1,29 @@
+export interface DatabaseTheme {
+        id: string;
+        title: string;
+        shortDescription: string;
+        cardDescription: string;
+        image: string;
+        category: string;
+        sequence: number;
+        alt: string;
+}
+
+export interface DatabaseThemesResponse {
+  data: {
+    data: DatabaseTheme[]
+  };
+}
+
+export type CardThemeData = ApiResponse | DatabaseThemesResponse;
+
 export interface ApiResponse {
     data: DataItem[];
+}
+
+export interface ContainerCardThemeProps {
+  data: CardThemeData;
+  category: string;
 }
 
 export interface DataItem {

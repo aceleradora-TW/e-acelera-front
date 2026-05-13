@@ -1,13 +1,10 @@
 import { Grid } from "@mui/material";
 import React from "react";
 import { BaseCard } from "@/components/BaseCard";
-import { ApiResponse, DataItem, ThemeField } from "@/types/type";
+import { ApiResponse, ContainerCardThemeProps ,DataItem, DatabaseThemesResponse, ThemeField } from "@/types/type";
 import { usePathname } from "next/navigation";
 import { useFlags } from "flagsmith/react";
-interface ContainerCardThemeProps {
-  data: ApiResponse;
-  category: string;
-}
+
 
 export const ContainerCardTheme: React.FC<ContainerCardThemeProps> = ({
   data,
@@ -16,14 +13,23 @@ export const ContainerCardTheme: React.FC<ContainerCardThemeProps> = ({
   const pathname = usePathname();
   const currentPath = pathname.slice(1);
   const { adminjs_preference } = useFlags([""], ["adminjs_preference"]);
-  const themes = data.data 
 
-  if (!adminjs_preference) {
+function isApiResponse(data: any): data is ApiResponse {
+  return Array.isArray(data.data);
+}
+
+function isDatabaseThemesResponse(data: any): data is DatabaseThemesResponse {
+  return data.data && Array.isArray(data.data.data);
+}
+
+
+  
+  if (!adminjs_preference && isApiResponse(data)) {
     const filteredData = data.data.filter((element: DataItem) => {
-      const theme = element?.field as ThemeField | undefined;
+      const theme = element?.field as ThemeField;
       return theme?.category === category;
     });
-
+    
     return (
       <Grid container spacing={2} alignItems="stretch">
         {filteredData.map((element: DataItem, index: number) => {
@@ -48,16 +54,7 @@ export const ContainerCardTheme: React.FC<ContainerCardThemeProps> = ({
 
   return (
     <Grid container spacing={2} alignItems="stretch">
-      {(data.data as unknown as Array<{
-        id: string;
-        title: string;
-        shortDescription: string;
-        cardDescription: string;
-        image: string;
-        category: string;
-        sequence: number;
-        alt: string;
-      }>).filter((element) => element.category === category).map((element, index) => (
+      {isDatabaseThemesResponse(data) && data.data.data.map((element, index) => (
         <Grid item xl={3} lg={4} md={4} sm={6} xs={12} key={index}>
           <BaseCard
             id={element.id}
@@ -72,3 +69,5 @@ export const ContainerCardTheme: React.FC<ContainerCardThemeProps> = ({
     </Grid>
   );
 };
+
+
