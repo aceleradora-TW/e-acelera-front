@@ -12,6 +12,7 @@ type CardProps = {
   backIcon?: ReactNode,
   sx?: ButtonProps['sx'],
   isActive?: boolean,
+  variant?: ButtonProps['variant'];
 }
 
 export const ClickButton = ({
@@ -21,11 +22,12 @@ export const ClickButton = ({
   backIcon,
   sx,
   isActive,
+  variant = "contained",
 }: CardProps) => (
     <aside>
       <Stack spacing={2} direction="row" onClick={click}>
         <Button
-          variant="contained"
+          variant={variant}
           sx={{
             ...customStyles?.button,
             ...(isActive && { ...customStyles?.buttonActive, }),

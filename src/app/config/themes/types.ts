@@ -223,4 +223,6 @@ export interface Theme {
     createButton: ExtendedCSSProperties; 
     editButton: ExtendedCSSProperties; 
   };
+
+  archiveFormButton: ExtendedCSSProperties; 
 }

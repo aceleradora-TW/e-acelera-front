@@ -3,8 +3,11 @@ export async function getThemes(page: number, limit: number) {
     page: String(page),
     limit: String(limit),
   });
+
   const res = await fetch(`/api/themes?${params.toString()}`);
+
   if (!res.ok) throw new Error("Erro ao buscar temas");
+
   return res.json();
 }
 

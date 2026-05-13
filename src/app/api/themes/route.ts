@@ -1,6 +1,9 @@
 import { ThemeCategory } from "@/utils/constants";
 import { NextRequest, NextResponse } from "next/server";
 
+
+//** TODO
+// fazer com que essa chamada, se não for passado nenhuma categoria, traga todos os temas */
 export async function GET(req: NextRequest) {
   try {
     const searchParams = req.nextUrl.searchParams;
