@@ -4,6 +4,7 @@ import z from "zod"
 export const TopicFormSchema = z.object({
   title: z.string().trim().nonempty("Título obrigatório"),
   shortDescription: z.string().trim().nonempty("Descrição obrigatória"),
+  description: z.string().trim().nonempty("Descrição detalhada obrigatória"),
   sequence: z.number().int().nonnegative("Sequência deve ser um número não-negativo").optional(),
   references: z.string().default(""),
   themeId: z.string().nonempty("Tema obrigatório"),
@@ -16,6 +17,7 @@ export const topicFormDefs: FormDef<TopicFormData> = {
   defaultValues: {
     title: "",
     shortDescription: "",
+    description: "",  
     sequence: 0,
     themeId: "",
     references: "",
@@ -34,6 +36,11 @@ export const topicFormDefs: FormDef<TopicFormData> = {
       type: "textarea",
     },
     {
+      name: "description",
+      label: "Descrição detalhada",
+      type: "textarea",
+    },
+    {
       name: "sequence",
       label: "Sequência",
       type: "number",
@@ -42,7 +49,7 @@ export const topicFormDefs: FormDef<TopicFormData> = {
       name: "themeId",
       label: "Tema",
       type: "text",
-      // options: [],
+      options: [],
     },
     {
       name: "videoUrl",

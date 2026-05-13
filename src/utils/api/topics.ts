@@ -1,14 +1,12 @@
-import { BACKEND_BASE_URL } from "../constants";
-
 export async function createTopic(topicData: {
     title: string;
+    description: string;
     shortDescription: string;
     references: string[];
     themeId: string;
     videoUrl?: string;
 }) {
-    const baseURL = BACKEND_BASE_URL;
-    const res = await fetch("/api/topics/create", {
+    const res = await fetch("/api/topics", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -21,4 +19,3 @@ export async function createTopic(topicData: {
     }
     return res.json();
 }
-

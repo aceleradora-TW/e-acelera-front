@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from "next/server";
-// import { headers } from "next/headers";
 
 export async function POST(req: NextRequest) {
   try {
@@ -16,7 +15,7 @@ export async function POST(req: NextRequest) {
     const body = await req.json();
     const baseUrl = process.env.BACKEND_BASE_URL;
 
-    const response = await fetch(`${baseUrl}/topics/create`, {
+    const response = await fetch(`${baseUrl}/topics`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -28,7 +27,7 @@ export async function POST(req: NextRequest) {
     if (!response.ok) {
       const errorData = await response.json().catch(() => ({}));
       return NextResponse.json(
-        { error: errorData.message || `Error creating topic: ${response.statusText}` },
+        { error: errorData || `Error creating topic: ${response.statusText}` },
         { status: response.status }
       );
     }
