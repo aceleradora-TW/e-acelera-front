@@ -7,8 +7,8 @@ export async function createTopic(topicData: {
     themeId: string;
     videoUrl?: string;
 }) {
-    const baseURL = BACKEND_BASE_URL || "http://localhost:5002";
-    const res = await fetch(`${baseURL}/topics/create`, {
+    const baseURL = BACKEND_BASE_URL;
+    const res = await fetch("/api/topics/create", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",

@@ -16,7 +16,7 @@ export async function POST(req: NextRequest) {
     const body = await req.json();
     const baseUrl = process.env.BACKEND_BASE_URL;
 
-    const response = await fetch(`${baseUrl}/topics`, {
+    const response = await fetch(`${baseUrl}/topics/create`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
