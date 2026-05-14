@@ -1,26 +1,32 @@
 import { ThemeCategory } from "@/utils/constants";
-import { headers } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: NextRequest) {
-  const header = headers();
-  const categoryHeader = header.get("category");
-
-  const categoryMap: Record<string, ThemeCategory> = {
-    Nivelamento: ThemeCategory.LEVELING,
-    Autoestudo: ThemeCategory.SELF_STUDY,
-  };
-
-  const category = categoryHeader ? categoryMap[categoryHeader] : undefined;
-
   try {
+    const searchParams = req.nextUrl.searchParams;
+    const rawCategory = searchParams.get("category")?.trim();
+    const page = searchParams.get("page")?.trim();
+    const limit = searchParams.get("limit")?.trim();
+
+    const mappedCategory = rawCategory === "Nivelamento"
+      ? ThemeCategory.LEVELING
+      : rawCategory === "Autoestudo"
+        ? ThemeCategory.SELF_STUDY
+        : rawCategory;
+
+    const backendQuery = new URLSearchParams();
+    if (mappedCategory) backendQuery.set("category", mappedCategory);
+    if (page) backendQuery.set("page", page);
+    if (limit) backendQuery.set("limit", limit);
+
     const baseUrl = process.env.BACKEND_BASE_URL;
+    const backendUrl = new URL("/themes", baseUrl);
+    const queryString = backendQuery.toString();
+    if (queryString) {
+      backendUrl.search = queryString;
+    }
 
-    const url = category
-      ? `${baseUrl}/themes?category=${category}`
-      : `${baseUrl}/themes`;
-
-    const response = await fetch(url, {
+    const response = await fetch(backendUrl.toString(), {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -35,10 +41,8 @@ export async function GET(req: NextRequest) {
         { status: response.status }
       );
     }
-
-    const data = await response.json();
-
-    return NextResponse.json({ data }, { status: 200 });
+    const payload = await response.json();
+    return NextResponse.json(payload, { status: response.status });
   } catch (error) {
     console.error("Error fetching themes:", error);
 
