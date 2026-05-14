@@ -1,10 +1,13 @@
-import { BACKEND_BASE_URL } from "../constants";
+export async function getThemes(page: number, limit: number) {
+  const params = new URLSearchParams({
+    page: String(page),
+    limit: String(limit),
+  });
 
-//** TODO
-// mover essa função da pasta utils para o proxy do next: /src/app/api/themes */
-export async function getThemes(page: number = 1, limit: number = 10) {
-  const res = await fetch(`${BACKEND_BASE_URL}/themes?page=${page}&limit=${limit}`);
+  const res = await fetch(`/api/themes?${params.toString()}`);
+
   if (!res.ok) throw new Error("Erro ao buscar temas");
+
   return res.json();
 }
 
