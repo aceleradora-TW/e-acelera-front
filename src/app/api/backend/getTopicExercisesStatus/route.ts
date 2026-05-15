@@ -1,10 +1,10 @@
 import { headers } from "next/headers"
 import { NextRequest, NextResponse } from "next/server"
+import { BACKEND_BASE_URL } from "@/utils/constants"
 
 export async function GET(req: NextRequest) {
   const header = headers()
   const topicId = header.get(`topicId`)
-  const itemId = header.get(`itemId`)
   const accessToken = req.cookies.get("next-auth.session-token")?.value || req.cookies.get("__Secure-next-auth.session-token")?.value;
 
   if (!topicId) {
@@ -22,8 +22,8 @@ export async function GET(req: NextRequest) {
   }
 
   try {
-    const baseUrl = process.env.BACKEND_BASE_URL
-    const response = await fetch(`${baseUrl}/status/${topicId}/item/${itemId}`, {
+    const baseUrl = BACKEND_BASE_URL
+    const response = await fetch(`${baseUrl}/status/${topicId}/topicId`, {
       method: "GET",
       headers: {
         Authorization: `Bearer ${accessToken}`,

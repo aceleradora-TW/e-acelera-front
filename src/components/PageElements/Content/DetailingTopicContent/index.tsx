@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"
+import React /* { useEffect } */ from "react"
 import { Grid } from "@mui/material"
 import { BreadCrumb } from "@/components/BreadCrumb"
 import { ApiResponse, DataItem, IdType, TopicField } from "@/types/type"
@@ -8,7 +8,7 @@ import { DescriptionWithVideo } from "@/components/descriptions/description-with
 import { Heading } from "@/components/Heading"
 import ProgressBar from "@/components/PageElements/Progress/ProgressBar"
 import { useGlobalContext } from "@/hooks/useGlobalContext"
-import { useFetchTopicStatus } from "@/components/fetchStatus/fecthStatusTopic"
+/* import { useFetchTopicStatus } from "@/components/fetchStatus/fecthStatusTopic" */
 
 interface DetailingContentProps {
   data: ApiResponse
@@ -70,14 +70,9 @@ export const DetailingTopicContent: React.FC<DetailingContentProps> = ({
   id,
   topicProgress
 }) => {
-  const { dataStatus } = useFetchTopicStatus(id)
   const { handleTopicStatus } = useGlobalContext();
 
   const [topicData]  = data?.data;
-
-  useEffect(() => {
-      handleTopicStatus(dataStatus)
-  }, [dataStatus, handleTopicStatus])
 
   return (
     <TopicContent
