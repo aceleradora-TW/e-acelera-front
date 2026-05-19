@@ -1,14 +1,13 @@
-import React /* { useEffect } */ from "react"
+import React from "react"
 import { Grid } from "@mui/material"
 import { BreadCrumb } from "@/components/BreadCrumb"
-import { ApiResponse, DataItem, IdType, TopicField } from "@/types/type"
+import { ApiResponse, TopicField } from "@/types/type"
 import { DescriptionReference } from "@/components/descriptions/description-reference"
 import { ContainerCardsExercises } from "../../Container/ContainerCardsExercises"
 import { DescriptionWithVideo } from "@/components/descriptions/description-with-video"
 import { Heading } from "@/components/Heading"
 import ProgressBar from "@/components/PageElements/Progress/ProgressBar"
 import { useGlobalContext } from "@/hooks/useGlobalContext"
-/* import { useFetchTopicStatus } from "@/components/fetchStatus/fecthStatusTopic" */
 
 interface DetailingContentProps {
   data: ApiResponse
