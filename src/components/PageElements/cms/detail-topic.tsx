@@ -1,67 +1,123 @@
 
-'use client'
+'use client';
 
-import { useCallback, useEffect, useState } from "react"
-import { useRouter } from "next/navigation"
-import { Box, Button, TextField, useTheme } from "@mui/material"
-import { UpperBanner } from "@/components/UI/cms/upper-banner"
-import { actionsContainerStyles, archiveButtonStyles, cancelButtonStyles, textFieldStyles, textFieldsContainerStyles } from "@/components/UI/dashboard/forms/form.styles"
-import { CmsTopic } from "@/types/type"
+import { useCallback, useEffect, useMemo, useState } from "react";
+import { useRouter } from "next/navigation";
+import { Box, Button, Link, TextField, Typography, useTheme } from "@mui/material";
+import { UpperBanner } from "@/components/UI/cms/upper-banner";
+import {
+  cancelButtonStyles,
+  textFieldStyles,
+  textFieldsContainerStyles,
+} from "@/components/UI/dashboard/forms/form.styles";
+import { BadRequest } from "@/components/BadRequest";
+import { Loading } from "@/components/Loading";
+import { NoData } from "@/components/NoData";
+import { CmsTopic } from "@/types/type";
 
 interface Props {
-  id: string
-  onArchive?: (id: string) => void
+  id: string;
 }
 
-export default function DetailTopic({ id, onArchive }: Props) {
-  const [topic, setTopic] = useState<CmsTheme | undefined>(undefined)
-  const muiTheme = useTheme()
-  const router = useRouter()
+const getYouTubeEmbedUrl = (url: string) => {
+  const videoId = url.split("v=")[1]?.split("&")[0];
 
+  if (!videoId) {
+    return null;
+  }
+
+  return `https://www.youtube.com/embed/${videoId}`;
+};
+
+export default function DetailTopic({ id }: Props) {
+  const [topic, setTopic] = useState<CmsTopic | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [errorStatus, setErrorStatus] = useState<number | null>(null);
+  const muiTheme = useTheme();
+  const router = useRouter();
 
   const fetchTopic = useCallback(async () => {
+    setLoading(true);
+    setErrorStatus(null);
 
     try {
-      const url = `/api/topic/getTopicById`;
-      const response = await fetch(url, {
+      const response = await fetch("/api/topics/getTopicById", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
           id,
-        }
+        },
       });
 
-      
-      if (!response.ok) throw new Error(`Erro: ${response.status}`);
-      
-      const data = await response.json();
+      if (!response.ok) {
+        setErrorStatus(response.status);
+        setTopic(null);
+        return;
+      }
 
-      setTheme(data.data);
-      
+      const data = await response.json();
+      setTopic(data.data as CmsTopic);
     } catch (error) {
-      console.error("Erro ao buscar tema:", error);
+      console.error("Erro ao buscar tópico:", error);
+      setErrorStatus(500);
+      setTopic(null);
+    } finally {
+      setLoading(false);
     }
   }, [id]);
 
   useEffect(() => {
-    fetchTheme();
-  }, [fetchTheme]);
+    fetchTopic();
+  }, [fetchTopic]);
+
+  const topicStatus = useMemo(
+    () => (topic?.isActive ? "Ativo" : "Inativo"),
+    [topic?.isActive]
+  );
+
+  if (loading) return <Loading />;
+  if (errorStatus === 404) return <NoData />;
+  if (errorStatus) return <BadRequest />;
+  if (!topic) return <NoData />;
+
+  const videoEmbedUrl = topic.video?.link ? getYouTubeEmbedUrl(topic.video.link) : null;
 
   return (
     <Box>
       <UpperBanner
-        title={theme?.title || "Temas"}
+        title={topic.title || "Tópicos"}
         showBreadCrumb
-        breadCrumbLabel={theme?.title}
-        editButton
+        breadCrumbLabel={topic.title}
       />
 
-      <Box
-        sx={textFieldsContainerStyles}
-      >
+      <Box sx={textFieldsContainerStyles}>
+        <TextField
+          label="ID"
+          value={topic.id}
+          fullWidth
+          InputProps={{ readOnly: true }}
+          sx={textFieldStyles(muiTheme)}
+        />
+
+        <TextField
+          label="Tema"
+          value={topic.theme?.title || ""}
+          fullWidth
+          InputProps={{ readOnly: true }}
+          sx={textFieldStyles(muiTheme)}
+        />
+
         <TextField
           label="Título"
-          value={theme?.title || ""}
+          value={topic.title || ""}
+          fullWidth
+          InputProps={{ readOnly: true }}
+          sx={textFieldStyles(muiTheme)}
+        />
+
+        <TextField
+          label="Ativo/Inativo"
+          value={topicStatus}
           fullWidth
           InputProps={{ readOnly: true }}
           sx={textFieldStyles(muiTheme)}
@@ -69,80 +125,96 @@ export default function DetailTopic({ id, onArchive }: Props) {
 
         <TextField
           label="Descrição curta"
-          value={theme?.shortDescription || ""}
+          value={topic.shortDescription || ""}
           fullWidth
           InputProps={{ readOnly: true }}
           sx={textFieldStyles(muiTheme)}
         />
 
         <TextField
-          label="Descrição"
-          value={theme?.description || ""}
+          label="Descrição longa"
+          value={topic.description || ""}
           fullWidth
           InputProps={{ readOnly: true }}
           multiline
-          rows={4}
-          sx={textFieldStyles(muiTheme)}
-        />
-
-        <TextField
-          label="URL da imagem"
-          value={theme?.imageUrl || ""}
-          fullWidth
-          InputProps={{ readOnly: true }}
-          sx={textFieldStyles(muiTheme)}
-        />
-
-        <TextField
-          label="Texto alt da imagem"
-          value={theme?.imageAlt || ""}
-          fullWidth
-          InputProps={{ readOnly: true }}
-          sx={textFieldStyles(muiTheme)}
-        />
-
-        <TextField
-          label="Categoria"
-          value={theme?.category || ""}
-          fullWidth
-          InputProps={{ readOnly: true }}
-          sx={textFieldStyles(muiTheme)}
-        />
-
-        <TextField
-          label="Sequência"
-          value={theme?.sequence ?? ""}
-          fullWidth
-          InputProps={{ readOnly: true }}
+          minRows={4}
           sx={textFieldStyles(muiTheme)}
         />
       </Box>
 
-      <Box sx={actionsContainerStyles}>
-        <Button
-          variant="contained"
-          sx={archiveButtonStyles(muiTheme)}
-          onClick={() => onArchive?.(id)}
-          disabled={!theme}
-        >
-          ARQUIVAR
-        </Button>
+      <Box sx={{ mt: 4 }}>
+        <Typography variant="h5" component="h2" sx={{ mb: 2 }}>
+          Vídeo
+        </Typography>
 
+        {topic.video ? (
+          <Box sx={{ display: "grid", gap: 2 }}>
+            <TextField
+              label="Título do vídeo"
+              value={topic.video.title || ""}
+              fullWidth
+              InputProps={{ readOnly: true }}
+              sx={textFieldStyles(muiTheme)}
+            />
+
+            <TextField
+              label="Explicação do vídeo"
+              value={topic.video.description || ""}
+              fullWidth
+              multiline
+              minRows={4}
+              InputProps={{ readOnly: true }}
+              sx={textFieldStyles(muiTheme)}
+            />
+
+            <TextField
+              label="Referências do vídeo"
+              value={topic.video.references || ""}
+              fullWidth
+              InputProps={{ readOnly: true }}
+              sx={textFieldStyles(muiTheme)}
+            />
+
+            <TextField
+              label="Link do vídeo"
+              value={topic.video.link || ""}
+              fullWidth
+              InputProps={{ readOnly: true }}
+              sx={textFieldStyles(muiTheme)}
+            />
+
+            {videoEmbedUrl ? (
+              <Box sx={{ width: "100%", overflow: "hidden", borderRadius: 2 }}>
+                <iframe
+                  width="100%"
+                  height="332"
+                  src={videoEmbedUrl}
+                  title={topic.video.title || "Vídeo do tópico"}
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  referrerPolicy="strict-origin-when-cross-origin"
+                  allowFullScreen
+                />
+              </Box>
+            ) : (
+              <Link href={topic.video.link} target="_blank" rel="noopener noreferrer">
+                Abrir vídeo em nova aba
+              </Link>
+            )}
+          </Box>
+        ) : (
+          <Typography variant="body1">Nenhum vídeo cadastrado para este tópico.</Typography>
+        )}
+      </Box>
+
+      <Box sx={{ display: "flex", justifyContent: "flex-end", mt: 4 }}>
         <Button
           variant="contained"
           sx={cancelButtonStyles(muiTheme)}
-          onClick={() => router.push("/cms/themes")}
+          onClick={() => router.push("/cms/topics")}
         >
-          CANCELAR
-        </Button>
-
-        <Button
-          variant="contained"
-          disabled
-        >
-          SALVAR
+          VOLTAR PARA LISTA
         </Button>
       </Box>
     </Box>
-  )
+  );
 }

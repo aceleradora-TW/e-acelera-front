@@ -103,10 +103,27 @@ export interface CmsTheme {
     sequence?: number;
 };
 
+export interface CmsTopicTheme {
+    id: string;
+    title: string;
+}
+
+export interface CmsTopicVideo {
+    id: string;
+    title: string;
+    description: string;
+    references: string;
+    link: string;
+}
+
 export interface CmsTopic {
+    id: string;
     title: string;
     shortDescription: string;
     description: string;
+    isActive: boolean;
+    theme?: CmsTopicTheme | null;
+    video?: CmsTopicVideo | null;
 }
 
 export interface AdminJsApiResponse { }
