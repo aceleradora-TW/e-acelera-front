@@ -60,4 +60,10 @@ export const palette = {
       hover: themePalette.button, 
     },
   },
+
+  archiveFormButton: {
+    main: themePalette.button,
+    hover: themePalette.accentBlue,
+    contrastText: themePalette.baseBgColor,
+  }
 };

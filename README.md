@@ -71,3 +71,11 @@ Este projeto implementa uma tela home básica utilizando Material-UI para estili
 
 ## Contribuição
 **Contribuições são bem-vindas! Sinta-se à vontade para abrir issues e pull requests.**
+
+## Issues e Debrief
+
+Este projeto usa o board da organização para acompanhamento de cards:
+
+- https://github.com/orgs/aceleradora-TW/projects/10
+
+O passo a passo para listar issues, obter contexto e correr o skill **debrief-issue** está no repositório **aceleradora-agent-toolkit** (mesmo workspace). Onde gravar o debrief **neste** repositório (nunca em `doc/`): ver `docs/debriefings/AGENTS.md`.

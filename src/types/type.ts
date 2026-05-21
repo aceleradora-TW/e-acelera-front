@@ -1,5 +1,29 @@
+export interface DatabaseTheme {
+        id: string;
+        title: string;
+        shortDescription: string;
+        cardDescription: string;
+        image: string;
+        category: string;
+        sequence: number;
+        alt: string;
+}
+
+export interface DatabaseThemesResponse {
+  data: {
+    data: DatabaseTheme[]
+  };
+}
+
+export type CardThemeData = ApiResponse | DatabaseThemesResponse;
+
 export interface ApiResponse {
     data: DataItem[];
+}
+
+export interface ContainerCardThemeProps {
+  data: CardThemeData;
+  category: string;
 }
 
 export interface DataItem {
@@ -67,6 +91,16 @@ export interface Image {
 export enum IdType {
   TOPIC_ID = "topicId",
   THEME_ID = "themeId",
+};
+
+export interface CmsTheme {
+  title: string;
+  shortDescription: string;
+  description: string;
+  imageUrl?: string;
+  imageAlt?: string;
+  category?: string;
+  sequence?: number;
 };
 
 export interface AdminJsApiResponse {}
