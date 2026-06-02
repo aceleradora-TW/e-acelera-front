@@ -65,7 +65,7 @@ export const textAreaStyles: SxProps<Theme> = {
   },
 }
 
-export const textFieldStyles = (theme: Theme): SxProps<Theme> => ({
+export const textFieldStyles: SxProps<Theme> = (theme: Theme) => ({
   "& .MuiOutlinedInput-root": {
     backgroundColor:
       theme.palette.mode === "dark"

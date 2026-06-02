@@ -103,4 +103,12 @@ export interface CmsTheme {
   sequence?: number;
 };
 
+export interface CmsExercise {
+  title: string;
+  description: string;
+  shortDescription: string;
+  topic: string;
+  isActive: boolean;
+};
+
 export interface AdminJsApiResponse {}
