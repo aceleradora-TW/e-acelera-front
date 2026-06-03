@@ -62,7 +62,6 @@ export async function POST(req: NextRequest) {
         const body = await req.json();
 
         const baseUrl = process.env.BACKEND_BASE_URL;  
-        // const backendUrl = new URL("/exercises", baseUrl);
 
         const response = await fetch(`${baseUrl}/exercises`, {
             method: "POST",
