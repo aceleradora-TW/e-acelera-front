@@ -25,7 +25,7 @@ export async function POST(req: NextRequest) {
     });
 
     if (!response.ok) {
-      const errorData = await response.json().catch(() => ({}));
+      const errorData = await response.json();
       return NextResponse.json(
         { error: errorData || `Error creating topic: ${response.statusText}` },
         { status: response.status }

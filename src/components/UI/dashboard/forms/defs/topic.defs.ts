@@ -8,7 +8,7 @@ export const TopicFormSchema = z.object({
   sequence: z.number().int().nonnegative("Sequência deve ser um número não-negativo").optional(),
   references: z.string().default(""),
   themeId: z.string().nonempty("Tema obrigatório"),
-  videoUrl: z.url("URL do vídeo inválida").optional(),
+  videoUrl: z.url("URL do vídeo inválida").nonempty("URL do vídeo obrigatória"),
 })
 
 export type TopicFormData = z.infer<typeof TopicFormSchema>
