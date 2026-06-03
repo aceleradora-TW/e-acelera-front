@@ -9,6 +9,13 @@ declare module "next-auth" {
     user: {
       /** Oauth access token */
       token?: accessToken;
+      role?: string;
     } & DefaultSession["user"];
   }
 }
+
+declare module "next-auth/jwt" {
+  interface JWT {
+    role?: string;
+  }
+} 
