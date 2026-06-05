@@ -44,7 +44,6 @@ export async function GET(
       status: 200,
     });
   } catch (error) {
-    console.log("Internal server error:", error);
     return NextResponse.json(
       {
         error: `Erro interno de servidor: ${error}`,
