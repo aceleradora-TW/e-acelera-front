@@ -32,6 +32,9 @@ export default function DetailExercise({ id, onArchive }: Props) {
 
       const data = await response.json();
 
+      console.log("RESPOSTA DA API:", data);
+
+
       setExercise(data.data);
     } catch (error) {
       console.error("Erro ao buscar exercício:", error);
@@ -82,7 +85,24 @@ export default function DetailExercise({ id, onArchive }: Props) {
           rows={2}
           sx={textFieldStyles}
         />
-        
+        <TextField
+          label="Tópico"
+          value={exercise?.topic || ""}
+          InputProps={{
+            readOnly: true,
+          }}
+          sx={textFieldStyles}
+        />
+
+        <TextField
+          label="Status"
+          value={exercise?.isActive ? "Ativo" : "Inativo"}
+          InputProps={{
+            readOnly: true,
+          }}
+          sx={textFieldStyles}
+        />
+
       </Box>
 
       <Box sx={actionsContainerStyles}>
