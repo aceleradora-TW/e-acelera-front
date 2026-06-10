@@ -1,18 +1,18 @@
 export interface DatabaseTheme {
-        id: string;
-        title: string;
-        shortDescription: string;
-        cardDescription: string;
-        image: string;
-        category: string;
-        sequence: number;
-        alt: string;
+    id: string;
+    title: string;
+    shortDescription: string;
+    cardDescription: string;
+    image: string;
+    category: string;
+    sequence: number;
+    alt: string;
 }
 
 export interface DatabaseThemesResponse {
-  data: {
-    data: DatabaseTheme[]
-  };
+    data: {
+        data: DatabaseTheme[]
+    };
 }
 
 export type CardThemeData = ApiResponse | DatabaseThemesResponse;
@@ -22,8 +22,8 @@ export interface ApiResponse {
 }
 
 export interface ContainerCardThemeProps {
-  data: CardThemeData;
-  category: string;
+    data: CardThemeData;
+    category: string;
 }
 
 export interface DataItem {
@@ -45,7 +45,7 @@ export interface CommonField {
     createdAt: string;
     title: string;
     description: string;
-    category?:string
+    category?: string
 }
 
 export interface ThemeField extends CommonField {
@@ -89,18 +89,41 @@ export interface Image {
 }
 
 export enum IdType {
-  TOPIC_ID = "topicId",
-  THEME_ID = "themeId",
+    TOPIC_ID = "topicId",
+    THEME_ID = "themeId",
 };
 
 export interface CmsTheme {
-  title: string;
-  shortDescription: string;
-  description: string;
-  imageUrl?: string;
-  imageAlt?: string;
-  category?: string;
-  sequence?: number;
+    title: string;
+    shortDescription: string;
+    description: string;
+    imageUrl?: string;
+    imageAlt?: string;
+    category?: string;
+    sequence?: number;
 };
 
-export interface AdminJsApiResponse {}
+export interface CmsTopicTheme {
+    id: string;
+    title: string;
+}
+
+export interface CmsTopicVideo {
+    id: string;
+    title: string;
+    description: string;
+    references: string;
+    link: string;
+}
+
+export interface CmsTopic {
+    id: string;
+    title: string;
+    shortDescription: string;
+    description: string;
+    isActive: boolean;
+    theme?: CmsTopicTheme | null;
+    video?: CmsTopicVideo | null;
+}
+
+export interface AdminJsApiResponse { }
