@@ -13,7 +13,6 @@ const fetchData = async (url: string, options?: Record<string, any>): Promise<Ap
 
     return data;
   } catch (error) {
-    console.log("erro " + error);
     throw new Error(`Error: ${error}`)
   }
 };
