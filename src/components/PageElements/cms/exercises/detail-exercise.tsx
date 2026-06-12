@@ -114,23 +114,6 @@ export default function DetailExercise({ id, onArchive }: Props) {
           VOLTAR PARA LISTA
         </Button>
       </Box>
-
-      {/* <Box sx={actionsContainerStyles}>
-        <Button
-          variant="contained"
-          sx={archiveButtonStyles(muiTheme)}
-          onClick={() => onArchive && onArchive(id)}
-        >
-          Arquivar
-        </Button>
-        <Button
-          variant="outlined"
-          sx={cancelButtonStyles(muiTheme)}
-          onClick={() => router.back()}
-        >
-          Cancelar
-        </Button>
-      </Box> */}
     </Box>
   );
 }   
