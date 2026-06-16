@@ -41,3 +41,6 @@ next-env.d.ts
 
 # cursor
 *.code-workspace
+
+.vscode/
+.vscode/settings.json

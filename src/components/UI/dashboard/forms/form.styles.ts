@@ -19,6 +19,16 @@ export const cancelButtonStyles = (theme: Theme) => ({
   },
 })
 
+export const returnToListStyles = (theme: Theme) => ({
+  color: `${theme.palette.primary.main} !important`,
+  backgroundColor: "transparent",
+
+  "&:hover": {
+    backgroundColor: `${theme.palette.primary.main} !important`,
+    color: `${theme.palette.primary.contrastText} !important`,
+  },
+})
+
 export const submitButtonStyles = (theme: Theme): SxProps<Theme> => ({
   border: `1px solid ${theme.palette.primary.main}`,
   color: `${theme.palette.primary.main} !important`,
