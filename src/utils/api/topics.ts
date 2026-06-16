@@ -1,23 +1,27 @@
 export async function createTopic(topicData: {
-    title: string;
-    description: string;
-    shortDescription: string;
-    references: string[];
-    themeId: string;
-    videoUrl?: string;
+  title: string;
+  description: string;
+  shortDescription: string;
+  references: string[];
+  themeId: string;
+  videoUrl?: string;
 }) {
-    const res = await fetch("/api/topics", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(topicData),
-    });
-    if (!res.ok) {
-        const error = await res.json().catch(() => ({}));
-        throw new Error(error.error || "Erro ao criar tópico");
+  const res = await fetch("/api/topics", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(topicData),
+  });
+  if (!res.ok) {
+
+    if (res.status === 403) {
+      throw new Error("Você não tem permissão para criar ou modificar tópicos.");
     }
-    return res.json();
+    const error = await res.json().catch();
+    throw new Error(error.error?.message || "Erro ao criar tópico");
+  }
+  return res.json();
 }
 
 export async function getTopics(page: number, limit: number) {
