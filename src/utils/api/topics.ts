@@ -18,7 +18,7 @@ export async function createTopic(topicData: {
     if (res.status === 403) {
       throw new Error("Você não tem permissão para criar ou modificar tópicos.");
     }
-    const error = await res.json().catch();
+    const error = await res.json();
     throw new Error(error.error?.message || "Erro ao criar tópico");
   }
   return res.json();
