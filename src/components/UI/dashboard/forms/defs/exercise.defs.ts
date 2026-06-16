@@ -2,7 +2,6 @@ import { z } from "zod";
 import { FormDef } from "@/types/form.types";
 
 export const ExerciseSchema = z.object({
-  // id: z.string(),
   title: z.string().trim().nonempty("Título obrigatório"),
   shortDescription: z.string().trim().nonempty("Descrição curta obrigatória"),
   description: z.string().trim().nonempty("Descrição obrigatória"),
@@ -47,7 +46,6 @@ export const ExerciseFormDef: FormDef<ExerciseFormData> = ({
       name: "topicId",
       label: "Tópico",  
       type: "text",
-      // options: [], // As opções devem ser carregadas dinamicamente
     },
   ],
 });

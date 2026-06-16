@@ -15,7 +15,7 @@ export async function createExercises(exerciseData: {
   shortDescription: string;
   description: string;
   sequence?: number;
-  topicId?: string; 
+  topicId?: string;
 }) {
   const res = await fetch("/api/exercises", {
     method: "POST",
@@ -25,9 +25,15 @@ export async function createExercises(exerciseData: {
     body: JSON.stringify(exerciseData),
   });
 
-   if(!res.ok){
-      const errorData = await res.json();
-      throw new Error(errorData.message || "Erro ao criar exercício");
+  if (!res.ok) {
+    
+    if (res.status === 403) {
+      throw new Error("Você não tem permissão para criar ou modificar exercícios.");
     }
-    return res.json();
+
+    const errorData = await res.json();
+    throw new Error(errorData.error.message || "Erro ao criar exercício");
+
+  }
+  return res.json();
 }
