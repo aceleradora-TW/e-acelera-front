@@ -9,9 +9,10 @@ import { useEffect, useState } from "react";
 const columns = [
   { id: "id", label: "ID" },
   { id: "title", label: "Título" },
+  { id: "description", label: "Descrição" },
   { id: "shortDescription", label: "Descrição curta" },
   { id: "topic", label: "Tópico" },
-  { id: "theme", label: "Tema" },
+  /* { id: "theme", label: "Tema" }, */
   { id: "isActive", label: "Ativo" },
 ];
 

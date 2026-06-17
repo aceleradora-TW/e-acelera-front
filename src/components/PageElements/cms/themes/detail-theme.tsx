@@ -31,7 +31,6 @@ export default function DetailTheme({ id, onArchive }: Props) {
         }
       });
 
-      
       if (!response.ok) throw new Error(`Erro: ${response.status}`);
       
       const data = await response.json();
@@ -64,7 +63,7 @@ export default function DetailTheme({ id, onArchive }: Props) {
           value={theme?.title || ""}
           fullWidth
           InputProps={{ readOnly: true }}
-          sx={textFieldStyles(muiTheme)}
+          sx={textFieldStyles}
         />
 
         <TextField
@@ -72,7 +71,7 @@ export default function DetailTheme({ id, onArchive }: Props) {
           value={theme?.shortDescription || ""}
           fullWidth
           InputProps={{ readOnly: true }}
-          sx={textFieldStyles(muiTheme)}
+          sx={textFieldStyles}
         />
 
         <TextField
@@ -82,15 +81,7 @@ export default function DetailTheme({ id, onArchive }: Props) {
           InputProps={{ readOnly: true }}
           multiline
           rows={4}
-          sx={textFieldStyles(muiTheme)}
-        />
-
-        <TextField
-          label="URL da imagem"
-          value={theme?.imageUrl || ""}
-          fullWidth
-          InputProps={{ readOnly: true }}
-          sx={textFieldStyles(muiTheme)}
+          sx={textFieldStyles}
         />
 
         <TextField
@@ -98,7 +89,7 @@ export default function DetailTheme({ id, onArchive }: Props) {
           value={theme?.imageAlt || ""}
           fullWidth
           InputProps={{ readOnly: true }}
-          sx={textFieldStyles(muiTheme)}
+          sx={textFieldStyles}
         />
 
         <TextField
@@ -106,7 +97,7 @@ export default function DetailTheme({ id, onArchive }: Props) {
           value={theme?.category || ""}
           fullWidth
           InputProps={{ readOnly: true }}
-          sx={textFieldStyles(muiTheme)}
+          sx={textFieldStyles}
         />
 
         <TextField
@@ -114,7 +105,7 @@ export default function DetailTheme({ id, onArchive }: Props) {
           value={theme?.sequence ?? ""}
           fullWidth
           InputProps={{ readOnly: true }}
-          sx={textFieldStyles(muiTheme)}
+          sx={textFieldStyles}
         />
       </Box>
 
