@@ -126,4 +126,12 @@ export interface CmsTopic {
     video?: CmsTopicVideo | null;
 }
 
+export interface CmsExercise {
+    title: string;
+    description: string;
+    shortDescription: string;
+    topic: string;
+    isActive: boolean;
+}
+
 export interface AdminJsApiResponse { }
