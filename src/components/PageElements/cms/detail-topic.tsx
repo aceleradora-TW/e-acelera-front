@@ -96,7 +96,7 @@ export default function DetailTopic({ id }: Props) {
           value={topic.id}
           fullWidth
           InputProps={{ readOnly: true }}
-          sx={textFieldStyles(muiTheme)}
+          sx={textFieldStyles}
         />
 
         <TextField
@@ -104,7 +104,7 @@ export default function DetailTopic({ id }: Props) {
           value={topic.theme?.title || ""}
           fullWidth
           InputProps={{ readOnly: true }}
-          sx={textFieldStyles(muiTheme)}
+          sx={textFieldStyles}
         />
 
         <TextField
@@ -112,7 +112,7 @@ export default function DetailTopic({ id }: Props) {
           value={topic.title || ""}
           fullWidth
           InputProps={{ readOnly: true }}
-          sx={textFieldStyles(muiTheme)}
+          sx={textFieldStyles}
         />
 
         <TextField
@@ -120,7 +120,7 @@ export default function DetailTopic({ id }: Props) {
           value={topicStatus}
           fullWidth
           InputProps={{ readOnly: true }}
-          sx={textFieldStyles(muiTheme)}
+          sx={textFieldStyles}
         />
 
         <TextField
@@ -128,7 +128,7 @@ export default function DetailTopic({ id }: Props) {
           value={topic.shortDescription || ""}
           fullWidth
           InputProps={{ readOnly: true }}
-          sx={textFieldStyles(muiTheme)}
+          sx={textFieldStyles}
         />
 
         <TextField
@@ -138,7 +138,7 @@ export default function DetailTopic({ id }: Props) {
           InputProps={{ readOnly: true }}
           multiline
           minRows={4}
-          sx={textFieldStyles(muiTheme)}
+          sx={textFieldStyles}
         />
       </Box>
 
@@ -154,7 +154,7 @@ export default function DetailTopic({ id }: Props) {
               value={topic.video.title || ""}
               fullWidth
               InputProps={{ readOnly: true }}
-              sx={textFieldStyles(muiTheme)}
+              sx={textFieldStyles}
             />
 
             <TextField
@@ -164,7 +164,7 @@ export default function DetailTopic({ id }: Props) {
               multiline
               minRows={4}
               InputProps={{ readOnly: true }}
-              sx={textFieldStyles(muiTheme)}
+              sx={textFieldStyles}
             />
 
             <TextField
@@ -172,7 +172,7 @@ export default function DetailTopic({ id }: Props) {
               value={topic.video.references || ""}
               fullWidth
               InputProps={{ readOnly: true }}
-              sx={textFieldStyles(muiTheme)}
+              sx={textFieldStyles}
             />
 
             <TextField
@@ -180,7 +180,7 @@ export default function DetailTopic({ id }: Props) {
               value={topic.video.link || ""}
               fullWidth
               InputProps={{ readOnly: true }}
-              sx={textFieldStyles(muiTheme)}
+              sx={textFieldStyles}
             />
 
             {videoEmbedUrl ? (
