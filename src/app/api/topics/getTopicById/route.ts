@@ -1,20 +1,9 @@
 import { headers } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
-import { getToken } from "next-auth/jwt";
 
 export async function GET(req: NextRequest) {
   const header = headers();
   const id = header.get("id");
-
-  const accessToken = await getToken({
-    req,
-    secret: process.env.NEXTAUTH_SECRET,
-    raw: true,
-  });
-
-  if (!accessToken) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-  }
 
   if (!id) {
     return NextResponse.json({ error: "Id is required" }, { status: 400 });
@@ -26,7 +15,6 @@ export async function GET(req: NextRequest) {
     const response = await fetch(`${baseUrl}/topics/${id}`, {
       method: "GET",
       headers: {
-        Authorization: `Bearer ${accessToken}`,
         "Content-Type": "application/json",
       },
     });
