@@ -19,12 +19,12 @@ export const cancelButtonStyles = (theme: Theme) => ({
   },
 })
 
-export const returnToList = (theme: Theme) => ({
+export const returnToListStyles = (theme: Theme) => ({
   color: `${theme.palette.primary.main} !important`,
   backgroundColor: "transparent",
 
   "&:hover": {
-     borderColor: `${theme.palette.primary.dark} !important`,
+    borderColor: `${theme.palette.primary.dark} !important`,
     backgroundColor: `${theme.palette.primary.main} !important`,
     color: `${theme.palette.primary.contrastText} !important`,
   },

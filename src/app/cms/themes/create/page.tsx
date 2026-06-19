@@ -1,6 +1,10 @@
 "use client";
 
-import { ThemeFormData, ThemeFormSchema, themeFormDefs } from "@/components/UI/dashboard/forms/defs/theme.defs";
+import {
+  ThemeFormData,
+  ThemeFormSchema,
+  themeFormDefs,
+} from "@/components/UI/dashboard/forms/defs/theme.defs";
 import Form from "@/components/UI/dashboard/form";
 import { createTheme } from "@/utils/api/themes";
 import { useRouter } from "next/navigation";
@@ -19,6 +23,8 @@ export default function CreateThemePage() {
       schema={ThemeFormSchema}
       formDefs={themeFormDefs}
       onSubmit={handleSubmit}
+      mode="create"
+      entityPath="cms/themes"
     />
   );
 }

@@ -4,7 +4,7 @@ import { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Box, Button, TextField, useTheme } from "@mui/material";
 import { UpperBanner } from "@/components/UI/cms/upper-banner";
-import { actionsContainerStyles,archiveButtonStyles, cancelButtonStyles, returnToList, textFieldStyles, textFieldsContainerStyles } from "@/components/UI/dashboard/forms/form.styles";
+import { actionsContainerStyles, returnToListStyles, textFieldStyles, textFieldsContainerStyles } from "@/components/UI/dashboard/forms/form.styles";
 import { CmsExercise } from "@/types/type";
 
 interface Props {
@@ -108,7 +108,7 @@ export default function DetailExercise({ id, onArchive }: Props) {
       <Box sx={actionsContainerStyles}>
         <Button
           variant="contained"
-          sx={returnToList(muiTheme)}
+          sx={returnToListStyles(muiTheme)}
           onClick={() => router.push("/cms/exercises")}
         >
           VOLTAR PARA LISTA

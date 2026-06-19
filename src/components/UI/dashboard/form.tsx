@@ -1,35 +1,33 @@
-import { useState } from "react"
+import { useState } from "react";
 
 import {
   Controller,
   FieldValues,
   SubmitHandler,
   useForm,
-} from "react-hook-form"
+} from "react-hook-form";
 
-import { zodResolver } from "@hookform/resolvers/zod"
+import { zodResolver } from "@hookform/resolvers/zod";
 
-import {
-  Alert,
-  Container,
-  Stack,
-  Typography,
-} from "@mui/material"
+import { Alert, Container, Stack, Typography } from "@mui/material";
 
-import { useTheme } from "@mui/material"
+import { useTheme } from "@mui/material";
 
-import { containerStyles } from "./forms/form.styles"
-import { FieldRenderer } from "./forms/field-renderer"
-import { FormActions } from "./forms/form-actions"
+import { containerStyles } from "./forms/form.styles";
+import { FieldRenderer } from "./forms/field-renderer";
+import { FormActions } from "./forms/form-actions";
 
 interface FormProps<T extends FieldValues> {
-  title?: string
-  onSubmit: (data: T) => Promise<void>
-  schema: any
+  title?: string;
+  mode: "create" | "edit" | "view";
+  onSubmit: (data: T) => Promise<void>;
+  entityPath: string;
+  entityId?: string;
+  schema: any;
   formDefs: {
-    fields: any[]
-    defaultValues: any
-  }
+    fields: any[];
+    defaultValues: any;
+  };
 }
 
 export default function Form<T extends FieldValues>({
@@ -37,11 +35,14 @@ export default function Form<T extends FieldValues>({
   onSubmit: onSubmitProp,
   schema,
   formDefs,
+  mode,
+  entityPath,
+  entityId,
 }: FormProps<T>) {
-  const theme = useTheme()
+  const theme = useTheme();
 
-  const [error, setError] = useState<string | null>(null)
-  const [isLoading, setIsLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const {
     handleSubmit,
@@ -51,20 +52,20 @@ export default function Form<T extends FieldValues>({
     resolver: zodResolver(schema) as any,
     defaultValues: formDefs.defaultValues,
     mode: "onChange",
-  })
+  });
 
   const onSubmit: SubmitHandler<T> = async (data) => {
-    setError(null)
-    setIsLoading(true)
+    setError(null);
+    setIsLoading(true);
 
     try {
-      await onSubmitProp(data)
+      await onSubmitProp(data);
     } catch (err: any) {
-      setError(err?.message || "Erro ao processar formulário")
+      setError(err?.message || "Erro ao processar formulário");
     } finally {
-      setIsLoading(false)
+      setIsLoading(false);
     }
-  }
+  };
 
   return (
     <Container
@@ -73,11 +74,7 @@ export default function Form<T extends FieldValues>({
       sx={containerStyles(theme)}
       onSubmit={handleSubmit(onSubmit)}
     >
-      <Typography
-        variant="h6"
-        fontWeight={600}
-        sx={{ mb: 3 }}
-      >
+      <Typography variant="h6" fontWeight={600} sx={{ mb: 3 }}>
         {title}
       </Typography>
 
@@ -105,9 +102,12 @@ export default function Form<T extends FieldValues>({
       </Stack>
 
       <FormActions
-        isValid={isValid && !isLoading}
+        isValid={isValid}
         isDirty={isDirty}
+        mode={mode}
+        entityPath={entityPath}
+        entityId={entityId}
       />
     </Container>
-  )
+  );
 }
