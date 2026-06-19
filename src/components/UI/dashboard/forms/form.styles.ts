@@ -24,17 +24,7 @@ export const returnToListStyles = (theme: Theme) => ({
   backgroundColor: "transparent",
 
   "&:hover": {
-    backgroundColor: `${theme.palette.primary.main} !important`,
-    color: `${theme.palette.primary.contrastText} !important`,
-  },
-})
-
-export const returnToList = (theme: Theme) => ({
-  color: `${theme.palette.primary.main} !important`,
-  backgroundColor: "transparent",
-
-  "&:hover": {
-     borderColor: `${theme.palette.primary.dark} !important`,
+    borderColor: `${theme.palette.primary.dark} !important`,
     backgroundColor: `${theme.palette.primary.main} !important`,
     color: `${theme.palette.primary.contrastText} !important`,
   },
