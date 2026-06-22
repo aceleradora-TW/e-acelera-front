@@ -42,6 +42,10 @@ export default function DetailTopic({ id }: Props) {
   const muiTheme = useTheme();
   const router = useRouter();
 
+  const [isEditing, setIsEditing] = useState(false);
+
+  const [draftTopic, setDraftTopic] = useState<CmsTopic | null>(null);
+
   const fetchTopic = useCallback(async () => {
     setLoading(true);
     setErrorStatus(null);
@@ -94,6 +98,7 @@ export default function DetailTopic({ id }: Props) {
         title={topic.title || "Tópicos"}
         showBreadCrumb
         breadCrumbLabel={topic.title}
+        editButton
       />
 
       <Box sx={textFieldsContainerStyles}>
