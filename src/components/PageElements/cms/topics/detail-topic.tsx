@@ -2,11 +2,16 @@
 'use client';
 
 import { useCallback, useEffect, useMemo, useState } from "react";
+import Form from "@/components/UI/dashboard/form";
+import {
+  TopicFormSchema,
+  topicFormDefs,
+} from "@/components/UI/dashboard/forms/defs/topic.defs";
 import { useRouter } from "next/navigation";
 import { Box, Button, Link, TextField, Typography, useTheme } from "@mui/material";
 import { UpperBanner } from "@/components/UI/cms/upper-banner";
 import {
-  cancelButtonStyles,
+  actionsContainerStyles,
   textFieldStyles,
   textFieldsContainerStyles,
 } from "@/components/UI/dashboard/forms/form.styles";
@@ -14,6 +19,7 @@ import { BadRequest } from "@/components/BadRequest";
 import { Loading } from "@/components/Loading";
 import { NoData } from "@/components/NoData";
 import { CmsTopic } from "@/types/type";
+import { FormActions } from "@/components/UI/dashboard/forms/form-actions";
 
 interface Props {
   id: string;
@@ -206,14 +212,14 @@ export default function DetailTopic({ id }: Props) {
         )}
       </Box>
 
-      <Box sx={{ display: "flex", justifyContent: "flex-end", mt: 4 }}>
-        <Button
-          variant="contained"
-          sx={cancelButtonStyles(muiTheme)}
-          onClick={() => router.push("/cms/topics")}
-        >
-          VOLTAR PARA LISTA
-        </Button>
+      <Box sx={actionsContainerStyles}>
+              <FormActions
+                isValid
+                isDirty={false}
+                mode="view"
+                entityPath="cms/topics"
+                entityId={id}
+              />
       </Box>
     </Box>
   );
