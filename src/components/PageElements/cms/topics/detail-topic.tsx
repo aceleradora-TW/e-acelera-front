@@ -8,7 +8,7 @@ import {
   topicFormDefs,
 } from "@/components/UI/dashboard/forms/defs/topic.defs";
 import { useRouter } from "next/navigation";
-import { Box, Button, Link, TextField, Typography, useTheme } from "@mui/material";
+import { Alert ,Box, Button, Link, TextField, Typography, useTheme } from "@mui/material";
 import { UpperBanner } from "@/components/UI/cms/upper-banner";
 import {
   actionsContainerStyles,
@@ -20,6 +20,8 @@ import { Loading } from "@/components/Loading";
 import { NoData } from "@/components/NoData";
 import { CmsTopic } from "@/types/type";
 import { FormActions } from "@/components/UI/dashboard/forms/form-actions";
+import { cancelButtonStyles } from "@/components/UI/dashboard/forms/form.styles"
+import { fi } from "zod/v4/locales";
 
 interface Props {
   id: string;
@@ -36,15 +38,15 @@ const getYouTubeEmbedUrl = (url: string) => {
 };
 
 export default function DetailTopic({ id }: Props) {
-  const [topic, setTopic] = useState<CmsTopic | null>(null);
+  const [topic, setTopic] = useState<CmsTopic | undefined>(undefined);
+  const [originalTopic, setOriginalTopic] = useState<CmsTopic | undefined>(undefined)
+  const [isEditing, setIsEditing] = useState(false);
   const [loading, setLoading] = useState(true);
   const [errorStatus, setErrorStatus] = useState<number | null>(null);
+  const [errorMessage, setErrorMessage] = useState("")
   const muiTheme = useTheme();
   const router = useRouter();
 
-  const [isEditing, setIsEditing] = useState(false);
-
-  const [draftTopic, setDraftTopic] = useState<CmsTopic | null>(null);
 
   const fetchTopic = useCallback(async () => {
     setLoading(true);
@@ -59,31 +61,73 @@ export default function DetailTopic({ id }: Props) {
         },
       });
 
-      if (!response.ok) {
-        setErrorStatus(response.status);
-        setTopic(null);
-        return;
-      }
+       if (!response.ok) throw new Error(`Erro: ${response.status}`)
 
       const data = await response.json();
-      setTopic(data.data as CmsTopic);
+
+      setTopic(data.data)
+      setOriginalTopic(data.data)
     } catch (error) {
       console.error("Erro ao buscar tópico:", error);
-      setErrorStatus(500);
-      setTopic(null);
-    } finally {
-      setLoading(false);
-    }
+    } 
   }, [id]);
 
   useEffect(() => {
     fetchTopic();
   }, [fetchTopic]);
 
-  const topicStatus = useMemo(
+  /* const topicStatus = useMemo(
     () => (topic?.isActive ? "Ativo" : "Inativo"),
     [topic?.isActive]
-  );
+  ); */
+
+  function handleChange(field: keyof CmsTopic, value: string) {
+    if (!topic) return
+
+    setTopic({
+      ...topic,
+      [field]: value,
+
+    })
+  }
+
+  function handleEdit() {
+    setOriginalTopic(topic)
+    setIsEditing(true)
+    setErrorMessage("")
+  }
+  
+function handleCancelEdit() {
+    const confirmCancel = window.confirm(
+      "Deseja cancelar a edição? As alterações serão perdidas."
+    )
+
+    if (!confirmCancel) return
+
+    setTopic(originalTopic)
+    setIsEditing(false)
+    setErrorMessage("")
+  }
+
+  /* Começa aqui */
+  /* async function handleSave() {
+    if (!topic) return
+    
+    try {
+      setErrorMessage("")
+
+      const payload = {
+        id: topic.id,
+        title: topic.title,
+        shortDescription: topic.shortDescription,
+        description: topic.description,
+        isActive: topic.isActive,
+        url: topic.url,
+        urlTitle: topic.urlTitle,
+      }
+    }
+  } */
+
 
   if (loading) return <Loading />;
   if (errorStatus === 404) return <NoData />;
@@ -126,13 +170,13 @@ export default function DetailTopic({ id }: Props) {
           sx={textFieldStyles}
         />
 
-        <TextField
+        {/* <TextField
           label="Ativo/Inativo"
           value={topicStatus}
           fullWidth
           InputProps={{ readOnly: true }}
           sx={textFieldStyles}
-        />
+        /> */}
 
         <TextField
           label="Descrição curta"
