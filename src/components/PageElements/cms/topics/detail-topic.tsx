@@ -94,6 +94,7 @@ export default function DetailTopic({ id }: Props) {
         title={topic.title || "Tópicos"}
         showBreadCrumb
         breadCrumbLabel={topic.title}
+        editButton
       />
 
       <Box sx={textFieldsContainerStyles}>
