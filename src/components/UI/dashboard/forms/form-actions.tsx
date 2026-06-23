@@ -4,6 +4,7 @@ import {
   actionsBoxStyles,
   archiveButtonStyles,
   cancelButtonStyles,
+  returnToList,
   submitButtonStyles
 } from "../forms/form.styles"
 
@@ -41,6 +42,14 @@ export function FormActions({ isValid, isDirty }: FormActionsProps) {
         sx={submitButtonStyles(theme)}
       >
         Salvar
+      </Button>
+
+      <Button
+        variant="contained"
+        sx={returnToList(theme)}
+        onClick={() => router.push("/cms/exercises")}
+      >
+        VOLTAR PARA LISTA
       </Button>
     </Box>
   )
