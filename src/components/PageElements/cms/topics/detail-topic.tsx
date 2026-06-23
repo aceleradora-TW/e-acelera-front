@@ -18,7 +18,7 @@ import {
 import { BadRequest } from "@/components/BadRequest";
 import { Loading } from "@/components/Loading";
 import { NoData } from "@/components/NoData";
-import { CmsTopic } from "@/types/type";
+import { CmsTopic, CmsTopicVideo } from "@/types/type";
 import { FormActions } from "@/components/UI/dashboard/forms/form-actions";
 import { cancelButtonStyles } from "@/components/UI/dashboard/forms/form.styles"
 import { fi } from "zod/v4/locales";
@@ -81,7 +81,7 @@ export default function DetailTopic({ id }: Props) {
     [topic?.isActive]
   ); */
 
-  function handleChange(field: keyof CmsTopic, value: string) {
+  function handleChange(field: keyof CmsTopic , value: string) {
     if (!topic) return
 
     setTopic({
@@ -89,6 +89,18 @@ export default function DetailTopic({ id }: Props) {
       [field]: value,
 
     })
+  }
+
+  function handleVideoChange(field: keyof CmsTopicVideo, value: string) {
+    if (!topic || !topic.video) return
+
+    setTopic({
+      ...topic,
+      video: {
+        ...topic.video,
+        [field]: value,
+      } as CmsTopicVideo
+    });
   }
 
   function handleEdit() {
@@ -110,63 +122,126 @@ function handleCancelEdit() {
   }
 
   /* Começa aqui */
-  /* async function handleSave() {
+  async function handleSave() {
     if (!topic) return
     
     try {
       setErrorMessage("")
 
       const payload = {
-        id: topic.id,
         title: topic.title,
         shortDescription: topic.shortDescription,
         description: topic.description,
         isActive: topic.isActive,
-        url: topic.url,
-        urlTitle: topic.urlTitle,
+        videoTitle: topic.video?.title,
+        videoDescription: topic.video?.description,
+        videoReferences: topic.video?.references,
+        videoLink: topic.video?.link,
       }
+
+      const response = await fetch("/api/topics/updateTopic", {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        "id": String(id),
+      },
+      body: JSON.stringify(payload),
+    });
+
+    if (!response.ok) {
+      throw new Error(`Erro: ${response.status}`)
     }
-  } */
+
+    const data = await response.json()
+
+    setTopic(data.data ?? topic)
+    setOriginalTopic(data.data ?? topic)
+    setIsEditing(false)
+  } catch (error) {
+      console.error("Erro ao salvar tópico:", error);
+      setErrorMessage("Ocorreu um erro ao salvar o tópico. Por favor, tente novamente.");
+    }
+
+}
 
 
-  if (loading) return <Loading />;
+/*   if (loading) return <Loading />;
   if (errorStatus === 404) return <NoData />;
   if (errorStatus) return <BadRequest />;
-  if (!topic) return <NoData />;
+  if (!topic) return <NoData />; */
 
-  const videoEmbedUrl = topic.video?.link ? getYouTubeEmbedUrl(topic.video.link) : null;
+/*   const videoEmbedUrl = topic.video?.link ? getYouTubeEmbedUrl(topic.video.link) : null; */
 
   return (
     <Box>
       <UpperBanner
-        title={topic.title || "Tópicos"}
+        title={topic?.title || "Tópicos"}
         showBreadCrumb
-        breadCrumbLabel={topic.title}
-        editButton
+        breadCrumbLabel={topic?.title}
       />
 
-      <Box sx={textFieldsContainerStyles}>
-        <TextField
+       <Box sx={textFieldsContainerStyles}>
+
+        <Box
+        sx={{
+          backgroundColor: "#EAF3FA",
+          minHeight: "120px",
+          px: { xs: 3, md: 10 },
+          py: 4,
+          mt: -2,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+        }}
+      >
+        <Typography
+          sx={{
+            color: "#004A7C",
+            fontSize: "36px",
+            fontWeight: 700,
+          }}
+        >
+          Topics
+        </Typography>
+
+        {!isEditing && (
+          <Button
+            onClick={handleEdit}
+            disabled={!topic}
+            sx={{
+              color: "#5E8CB5",
+              textTransform: "none",
+              fontSize: "16px",
+              fontWeight: 400,
+            }}
+          >
+            ✎ Editar
+          </Button>
+        )}
+      </Box>
+
+        {/* <TextField
           label="ID"
           value={topic.id}
           fullWidth
           InputProps={{ readOnly: true }}
           sx={textFieldStyles}
-        />
+        /> */} 
 
-        <TextField
+        {/* <TextField
           label="Tema"
           value={topic.theme?.title || ""}
           fullWidth
           InputProps={{ readOnly: true }}
           sx={textFieldStyles}
-        />
+        /> */}
 
         <TextField
           label="Título"
-          value={topic.title || ""}
+          value={topic?.title || ""}
           fullWidth
-          InputProps={{ readOnly: true }}
+          InputProps={{ readOnly: !isEditing }}
+           onChange={(event) => handleChange("title", event.target.value)}
           sx={textFieldStyles}
         />
 
@@ -180,17 +255,19 @@ function handleCancelEdit() {
 
         <TextField
           label="Descrição curta"
-          value={topic.shortDescription || ""}
+          value={topic?.shortDescription || ""}
           fullWidth
-          InputProps={{ readOnly: true }}
+          InputProps={{ readOnly: !isEditing }}
+          onChange={(event) => handleChange("shortDescription", event.target.value)}
           sx={textFieldStyles}
         />
 
         <TextField
           label="Descrição longa"
-          value={topic.description || ""}
+          value={topic?.description || ""}
           fullWidth
-          InputProps={{ readOnly: true }}
+          InputProps={{ readOnly: !isEditing }}
+           onChange={(event) => handleChange("description", event.target.value)}
           multiline
           minRows={4}
           sx={textFieldStyles}
@@ -202,13 +279,14 @@ function handleCancelEdit() {
           Vídeo
         </Typography>
 
-        {topic.video ? (
+        {topic?.video ? (
           <Box sx={{ display: "grid", gap: 2 }}>
             <TextField
               label="Título do vídeo"
               value={topic.video.title || ""}
               fullWidth
-              InputProps={{ readOnly: true }}
+              InputProps={{ readOnly: !isEditing }}
+              onChange={(event) => handleVideoChange("title", event.target.value)}
               sx={textFieldStyles}
             />
 
@@ -218,7 +296,8 @@ function handleCancelEdit() {
               fullWidth
               multiline
               minRows={4}
-              InputProps={{ readOnly: true }}
+              InputProps={{ readOnly: !isEditing }}
+              onChange={(event) => handleVideoChange("description", event.target.value)}
               sx={textFieldStyles}
             />
 
@@ -226,7 +305,8 @@ function handleCancelEdit() {
               label="Referências do vídeo"
               value={topic.video.references || ""}
               fullWidth
-              InputProps={{ readOnly: true }}
+              InputProps={{ readOnly: !isEditing }}
+              onChange={(event) => handleVideoChange("references", event.target.value)}
               sx={textFieldStyles}
             />
 
@@ -234,11 +314,52 @@ function handleCancelEdit() {
               label="Link do vídeo"
               value={topic.video.link || ""}
               fullWidth
-              InputProps={{ readOnly: true }}
+              InputProps={{ readOnly: !isEditing }}
+              onChange={(event) => handleVideoChange("link", event.target.value)}
               sx={textFieldStyles}
             />
 
-            {videoEmbedUrl ? (
+            {isEditing && (
+                      <Box
+                        sx={{
+                          display: "flex",
+                          justifyContent: "flex-end",
+                          gap: 2,
+                          mt: 4,
+                        }}
+                      >
+                        <Button
+                          variant="outlined"
+                          sx={{
+                            ...cancelButtonStyles(muiTheme),
+                            borderColor: "red",
+                            color: "red",
+                            backgroundColor: "#fff",
+                            px: 4,
+                          }}
+                          onClick={handleCancelEdit}
+                        >
+                          CANCELAR
+                        </Button>
+            
+                        <Button
+                          variant="contained"
+                          onClick={handleSave}
+                          disabled={!topic}
+                          sx={{
+                            backgroundColor: "#004A7C",
+                            px: 4,
+                            "&:hover": {
+                              backgroundColor: "#003B63",
+                            },
+                          }}
+                        >
+                          SALVAR
+                        </Button>
+                      </Box>
+                    )}
+
+            {/* {videoEmbedUrl ? (
               <Box sx={{ width: "100%", overflow: "hidden", borderRadius: 2 }}>
                 <iframe
                   width="100%"
@@ -254,22 +375,14 @@ function handleCancelEdit() {
               <Link href={topic.video.link} target="_blank" rel="noopener noreferrer">
                 Abrir vídeo em nova aba
               </Link>
-            )}
+            )} */}
           </Box>
         ) : (
           <Typography variant="body1">Nenhum vídeo cadastrado para este tópico.</Typography>
         )}
       </Box>
 
-      <Box sx={actionsContainerStyles}>
-              <FormActions
-                isValid
-                isDirty={false}
-                mode="view"
-                entityPath="cms/topics"
-                entityId={id}
-              />
-      </Box>
+  
     </Box>
   );
 }
