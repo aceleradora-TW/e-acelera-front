@@ -42,6 +42,10 @@ export default function DetailTopic({ id }: Props) {
   const muiTheme = useTheme();
   const router = useRouter();
 
+  const [isEditing, setIsEditing] = useState(false);
+
+  const [draftTopic, setDraftTopic] = useState<CmsTopic | null>(null);
+
   const fetchTopic = useCallback(async () => {
     setLoading(true);
     setErrorStatus(null);

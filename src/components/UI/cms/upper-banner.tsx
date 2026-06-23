@@ -10,6 +10,7 @@ type UpperBannerProps = {
   menuBanner?: boolean;
   createButton?: boolean;
   editButton?: boolean;
+  onEditClick?: () => void;
   showBreadCrumb?: boolean;
   breadCrumbLabel?: string;
 };
@@ -19,6 +20,7 @@ export const UpperBanner = ({
   menuBanner,
   createButton,
   editButton,
+  onEditClick,
   showBreadCrumb,
   breadCrumbLabel,
 }: UpperBannerProps) => {
@@ -104,7 +106,7 @@ export const UpperBanner = ({
               <ClickButton
                 title="Editar"
                 backIcon={<EditIcon />}
-                click={() => router.push(`${pathname}/edit`)}
+                click={onEditClick ?? (() => router.push(`${pathname}/edit`))}
                 variant="contained"
                 sx={theme.customStyles.upperBanner.editButton}
               />
