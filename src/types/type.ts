@@ -104,12 +104,19 @@ export interface CmsTheme {
 };
 
 export interface CmsExercise {
+  title: string;
+  shortDescription: string;
+  description: string;
+
+  sequence?: number;
+  isActive?: boolean;
+
+  topic?: {
+    id: string;
     title: string;
-    shortDescription: string;
-    description: string;
-    sequence?: number;
-    isActive?: boolean;
-    topic?: string;
+  };
+
+  topicId?: string;
 }
 
 export interface AdminJsApiResponse { }

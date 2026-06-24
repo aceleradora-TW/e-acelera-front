@@ -44,44 +44,51 @@ export default function DetailExercise({ id, onArchive, isEditing }: Props) {
     fetchExercise();
   }, [fetchExercise]);
 
-const handleSave = async () => {
-  if (!formData) return;
+  const handleSave = async () => {
+    if (!formData) return;
 
-  try {
-    const payload = {
-      title: formData.title,
-      description: formData.description,
-      shortDescription: formData.shortDescription,
-      topic: formData.topic,
-    };
+    try {
+      // const payload = {
+      //   title: formData.title,
+      //   description: formData.description,
+      //   shortDescription: formData.shortDescription,
+      //   topic: formData.topic,
+      // };
 
-    const url = `/api/exercises/updateExercise`;
-    console.log("Payload:", payload);
-console.log("ID:", id);
-    const response = await fetch(url, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-        id,
-      },
-      body: JSON.stringify(payload),
-    });
+      const payload = {
+        title: formData.title,
+        description: formData.description,
+        shortDescription: formData.shortDescription,
 
-    if (!response.ok) {
-      throw new Error(`Erro ao atualizar exercício: ${response.status}`);
+        topicId: formData.topic?.id,
+      };
+
+      const url = `/api/exercises/updateExercise`;
+
+      const response = await fetch(url, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          id,
+        },
+        body: JSON.stringify(payload),
+      });
+
+      if (!response.ok) {
+        throw new Error(`Erro ao atualizar exercício: ${response.status}`);
+      }
+
+      const data = await response.json();
+      console.log("Exercício atualizado com sucesso!", data);
+
+      // Redireciona com sucesso para a listagem
+      router.push("/cms/exercises");
+
+    } catch (error) {
+      console.error("Erro ao salvar as alterações do exercício:", error);
+      alert("Não foi possível salvar as alterações. Verifique o console.");
     }
-
-    const data = await response.json();
-    console.log("Exercício atualizado com sucesso!", data);
-
-    // Redireciona com sucesso para a listagem
-    router.push("/cms/exercises");
-    
-  } catch (error) {
-    console.error("Erro ao salvar as alterações do exercício:", error);
-    alert("Não foi possível salvar as alterações. Verifique o console.");
-  }
-};
+  };
   const handleCancel = () => {
     router.push(`/cms/exercises/${id}`);
   };
@@ -124,10 +131,10 @@ console.log("ID:", id);
 
             <Button
               variant="contained"
-              sx={{ 
-                backgroundColor: "#004A7C", 
+              sx={{
+                backgroundColor: "#004A7C",
                 height: "40px",
-                "&:hover": { backgroundColor: "#003B63" } 
+                "&:hover": { backgroundColor: "#003B63" }
               }}
               onClick={handleSave}
             >
@@ -174,11 +181,29 @@ console.log("ID:", id);
 
         <TextField
           label="Tópico"
-          value={formData?.topic || ""}
+          value={formData?.topic?.title || ""}
+
           onChange={(e) =>
-            setFormData((prev) => (prev ? { ...prev, topic: e.target.value } : prev))
+            setFormData((prev) =>
+              prev
+                ? {
+                  ...prev,
+
+                  topic: prev.topic
+                    ? {
+                      ...prev.topic,
+                      title: e.target.value,
+                    }
+                    : undefined,
+                }
+                : prev
+            )
           }
-          InputProps={{ readOnly: !isEditing }}
+
+          InputProps={{
+            readOnly: !isEditing,
+          }}
+
           sx={textFieldStyles}
         />
 
