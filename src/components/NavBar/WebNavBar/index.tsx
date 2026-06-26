@@ -38,12 +38,12 @@ export const WebMenu: React.FC<WebMenuProps> = ({ list, session }) => {
   const [isChecked, setIsChecked] = useState<boolean>(false);
 
   useEffect(() => {
-    if (session?.user?.email && is_test_user && adminjs_preference) {
-      setIsChecked(true);
+    if (session?.user?.email && is_test_user) {
+      setIsChecked(Boolean(adminjs_preference));
     } else {
       setIsChecked(flag_adminjs?.enabled ?? false);
     }
-  }, [session, flag_adminjs, is_test_user, adminjs_preference, flagsmith.getState()]);
+  }, [session, flag_adminjs, is_test_user, adminjs_preference]);
 
   const handleApiToggle = async (event: React.ChangeEvent<HTMLInputElement>) => {
     if (!is_test_user) return;
@@ -114,24 +114,44 @@ export const WebMenu: React.FC<WebMenuProps> = ({ list, session }) => {
               </Typography>
             </MenuItem>
             {is_test_user && (
-              <MenuItem sx={{ cursor: "default" }}>
-                <FormControlLabel
-                  control={
-                    <Switch
-                      checked={isChecked}
-                      onChange={handleApiToggle}
-                      disabled={false}
-                      size="small"
-                    />
-                  }
-                  label={
-                    <Typography sx={{ color: theme.palette.textColor?.light, fontSize: '0.9rem' }}>
-                      Usar AdminJS
+              <>
+                <MenuItem sx={{ cursor: "default" }}>
+                  <FormControlLabel
+                    control={
+                      <Switch
+                        checked={isChecked}
+                        onChange={handleApiToggle}
+                        disabled={false}
+                        size="small"
+                      />
+                    }
+                    label={
+                      <Typography sx={{ color: theme.palette.textColor?.light, fontSize: '0.9rem' }}>
+                        Usar AdminJS
+                      </Typography>
+                    }
+                    labelPlacement="start"
+                  />
+                </MenuItem>
+
+                {isChecked && (
+                  <MenuItem
+                    onClick={() => {
+                      console.log("ADMIN CLICK");
+                      handleCloseMenu();
+                      router.push("/cms/themes");
+                    }}
+                  >
+                    <Typography
+                      sx={{
+                        color: theme.palette.textColor?.light,
+                      }}
+                    >
+                      Admin
                     </Typography>
-                  }
-                  labelPlacement="start"
-                />
-              </MenuItem>
+                  </MenuItem>
+                )}
+              </>
             )}
 
             <Divider />
