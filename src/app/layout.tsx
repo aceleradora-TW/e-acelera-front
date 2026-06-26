@@ -12,6 +12,7 @@ import React from "react";
 import { AccessibilityProvider } from "@/context/accessibility.context"
 import AccessibilityMenu from "@/components/accessibility-menu"
 import MainWrapper from "@/components/UI/main-wrapper";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route"
 
 
 const FLAGSMITH_ENVIRONMENT_ID = process.env.NEXT_PUBLIC_FLAGSMITH_ENVIRONMENT_ID
@@ -30,7 +31,7 @@ export default async function RootLayout({
   children: React.ReactNode
 }>) {
 
-  const session = await getServerSession();
+  const session = await getServerSession(authOptions);
 
   await flagsmith.init({
     environmentID: FLAGSMITH_ENVIRONMENT_ID,

@@ -30,20 +30,48 @@ interface WebMenuProps {
 }
 
 export const WebMenu: React.FC<WebMenuProps> = ({ list, session }) => {
+
   const flagsmith = useFlagsmith();
+
   const { flag_adminjs, is_test_user, adminjs_preference } = useFlags(['flag_adminjs'], ['is_test_user', 'adminjs_preference']);
   const router = useRouter()
   const pathname = usePathname()
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [isChecked, setIsChecked] = useState<boolean>(false);
+  const [currentRole, setCurrentRole] = useState(session?.user?.role);
+
+
+
+
+  const canSeeAdmin =
+    currentRole === "ADMIN" ||
+    currentRole === "EDITOR";
 
   useEffect(() => {
-    if (session?.user?.email && is_test_user) {
-      setIsChecked(Boolean(adminjs_preference));
+    if (session?.user?.email && is_test_user && adminjs_preference) {
+      setIsChecked(true);
     } else {
       setIsChecked(flag_adminjs?.enabled ?? false);
     }
-  }, [session, flag_adminjs, is_test_user, adminjs_preference]);
+  }, [session, flag_adminjs, is_test_user, adminjs_preference, flagsmith.getState()]);
+
+  useEffect(() => {
+    const fetchRole = async () => {
+      if (!session?.user?.email) return;
+
+      const response = await fetch("/api/user/getRole", {
+        headers: {
+          email: session.user.email,
+        },
+      });
+
+      const data = await response.json();
+
+      setCurrentRole(data.role);
+    };
+
+    fetchRole();
+  }, [session?.user?.email]);
 
   const handleApiToggle = async (event: React.ChangeEvent<HTMLInputElement>) => {
     if (!is_test_user) return;
@@ -127,17 +155,17 @@ export const WebMenu: React.FC<WebMenuProps> = ({ list, session }) => {
                     }
                     label={
                       <Typography sx={{ color: theme.palette.textColor?.light, fontSize: '0.9rem' }}>
-                        Usar AdminJS
+                        Usar Postgres
                       </Typography>
                     }
                     labelPlacement="start"
                   />
                 </MenuItem>
 
-                {isChecked && (
+                {canSeeAdmin && (
                   <MenuItem
                     onClick={() => {
-                      console.log("ADMIN CLICK");
+
                       handleCloseMenu();
                       router.push("/cms/themes");
                     }}
@@ -147,7 +175,7 @@ export const WebMenu: React.FC<WebMenuProps> = ({ list, session }) => {
                         color: theme.palette.textColor?.light,
                       }}
                     >
-                      Admin
+                      Painel Administrativo
                     </Typography>
                   </MenuItem>
                 )}
