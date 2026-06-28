@@ -73,9 +73,7 @@ export default function DetailExercise({ id, onArchive, isEditing }: Props) {
       }
 
       const data = await response.json();
-      console.log("Exercício atualizado com sucesso!", data);
 
-      // Redireciona com sucesso para a listagem
       router.push("/cms/exercises");
 
     } catch (error) {
@@ -97,45 +95,6 @@ export default function DetailExercise({ id, onArchive, isEditing }: Props) {
           editButton={!isEditing}
         />
 
-        {isEditing && (
-          <Box
-            sx={{
-              position: "absolute",
-              top: { xs: 45, sm: 12 },
-              right: 0,
-              display: "flex",
-              gap: 2,
-              zIndex: 10,
-            }}
-          >
-            <Button
-              variant="outlined"
-              sx={{
-                ...cancelButtonStyles(muiTheme),
-                borderColor: "red",
-                color: "red",
-                backgroundColor: "#fff",
-                height: "40px",
-                "&:hover": { borderColor: "darkred", backgroundColor: "#fff5f5" },
-              }}
-              onClick={handleCancel}
-            >
-              CANCELAR
-            </Button>
-
-            <Button
-              variant="contained"
-              sx={{
-                backgroundColor: "#004A7C",
-                height: "40px",
-                "&:hover": { backgroundColor: "#003B63" }
-              }}
-              onClick={handleSave}
-            >
-              SALVAR
-            </Button>
-          </Box>
-        )}
       </Box>
 
       <Box sx={textFieldsContainerStyles}>
