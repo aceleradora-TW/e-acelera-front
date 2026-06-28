@@ -23,7 +23,7 @@ export async function PATCH(req: NextRequest) {
     return NextResponse.json(
       { error: "Id is required" },
       { status: 400 }
-    );
+    )
   }
 
   try {
@@ -36,9 +36,9 @@ export async function PATCH(req: NextRequest) {
         Authorization: `Bearer ${accessToken}`,
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(body),
+      body: JSON.stringify(body)
     });
-
+    
     const responseText = await response.text();
     const payload = responseText ? JSON.parse(responseText) : null;
 
@@ -49,7 +49,7 @@ export async function PATCH(req: NextRequest) {
         payload,
       });
 
-      return NextResponse.json(
+        return NextResponse.json(
         {
           error:
             payload?.error ||
@@ -62,7 +62,8 @@ export async function PATCH(req: NextRequest) {
     }
 
     return NextResponse.json({ data: payload });
-  } catch (error) {
+
+  } catch(error) {
     console.error("Error updating exercise:", error);
 
     return NextResponse.json(

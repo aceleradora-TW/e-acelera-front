@@ -48,12 +48,6 @@ export default function DetailExercise({ id, onArchive, isEditing }: Props) {
     if (!formData) return;
 
     try {
-      // const payload = {
-      //   title: formData.title,
-      //   description: formData.description,
-      //   shortDescription: formData.shortDescription,
-      //   topic: formData.topic,
-      // };
 
       const payload = {
         title: formData.title,

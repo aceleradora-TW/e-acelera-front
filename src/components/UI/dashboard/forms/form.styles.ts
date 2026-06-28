@@ -24,7 +24,7 @@ export const returnToList = (theme: Theme) => ({
   backgroundColor: "transparent",
 
   "&:hover": {
-     borderColor: `${theme.palette.primary.dark} !important`,
+    borderColor: `${theme.palette.primary.dark} !important`,
     backgroundColor: `${theme.palette.primary.main} !important`,
     color: `${theme.palette.primary.contrastText} !important`,
   },
