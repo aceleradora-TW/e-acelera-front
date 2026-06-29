@@ -1,7 +1,6 @@
 import { headers } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 import { getToken } from "next-auth/jwt";
-import { error } from "console";
 
 export async function PATCH(req: NextRequest) {
   const header = headers();
@@ -16,9 +15,9 @@ export async function PATCH(req: NextRequest) {
   if (!accessToken) {
     return NextResponse.json(
       { error: "Unauthorized" },
-       { status: 401 }
-      );
-    }
+      { status: 401 }
+    );
+  }
 
   if (!id) {
     return NextResponse.json(
@@ -63,7 +62,8 @@ export async function PATCH(req: NextRequest) {
     }
 
     return NextResponse.json({ data: payload });
-  } catch{error} {
+
+  } catch(error) {
     console.error("Error updating exercise:", error);
 
     return NextResponse.json(

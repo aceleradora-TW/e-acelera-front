@@ -2,12 +2,11 @@ import { Box, Button, useTheme } from "@mui/material";
 import { useRouter } from "next/navigation";
 import {
   actionsBoxStyles,
-  archiveButtonStyles,
   cancelButtonStyles,
-  editButtonStyles,
-  returnToListStyles,
-  submitButtonStyles,
-} from "../forms/form.styles";
+  returnToList,
+  submitButtonStyles
+} from "../forms/form.styles"
+
 
 interface FormActionsProps {
   isValid: boolean;
@@ -29,19 +28,32 @@ export function FormActions({
 
   return (
     <Box sx={actionsBoxStyles}>
-      {mode === "edit" &&(
+      {mode === "view" && (
         <>
-          {/* <Button
+          <Button
             variant="contained"
-            sx={archiveButtonStyles(theme)}
+            sx={returnToList(theme)}
+            onClick={() => router.push(`/${entityPath}/${entityId}/edit`)}
           >
-            Arquivar
-          </Button>*/}
+            Editar
+          </Button>
 
           <Button
             variant="contained"
-            sx={cancelButtonStyles(theme)}
+            sx={returnToList(theme)}
             onClick={() => router.push(`/${entityPath}`)}
+          >
+            VOLTAR PARA LISTA
+          </Button>
+        </>
+      )}
+
+      {mode === "edit" && (
+        <>
+          <Button
+            variant="contained"
+            sx={cancelButtonStyles(theme)}
+            onClick={() => router.push(`/${entityPath}/${entityId}`)}
           >
             Cancelar
           </Button>
@@ -53,33 +65,6 @@ export function FormActions({
             sx={submitButtonStyles(theme)}
           >
             Salvar
-          </Button>
-        </>
-      )}
-
-      {mode === "view" && (
-        <>
-          {/* <Button
-            variant="contained"
-            sx={archiveButtonStyles(theme)}
-          >
-            Arquivar
-          </Button>*/}
-
-          <Button
-            variant="contained"
-            sx={editButtonStyles(theme)}
-            onClick={() => router.push(`/${entityPath}/${entityId}/edit`)}
-          >
-            Editar
-          </Button>
-
-          <Button
-            variant="contained"
-            sx={returnToListStyles(theme)}
-            onClick={() => router.push(`/${entityPath}`)}
-          >
-            VOLTAR PARA LISTA
           </Button>
         </>
       )}
