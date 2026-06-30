@@ -19,7 +19,7 @@ export const cancelButtonStyles = (theme: Theme) => ({
   },
 })
 
-export const returnToListStyles = (theme: Theme) => ({
+export const returnToList = (theme: Theme) => ({
   color: `${theme.palette.primary.main} !important`,
   backgroundColor: "transparent",
 

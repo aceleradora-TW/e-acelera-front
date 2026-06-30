@@ -1,6 +1,6 @@
 "use client"
 
-import RenderCmsPage from "@/components/PageElements/cms/render-topic";
+import RenderCmsPage from "@/components/PageElements/cms/topics/render-topic";
 
 export default function PageCms() {
     return (
