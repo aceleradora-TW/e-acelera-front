@@ -19,6 +19,8 @@ import {
 import { CmsTopic, CmsTopicVideo } from "@/types/type";
 import { FormActions } from "@/components/UI/dashboard/forms/form-actions";
 import { fi } from "zod/v4/locales";
+import PreviousMap_ from "postcss/lib/previous-map";
+import { Description } from "@mui/icons-material";
 
 interface Props {
   id: string;
@@ -73,10 +75,9 @@ export default function DetailTopic({ id, onArchive, isEditing }: Props) {
     try {
       const payload = {
         title: formData.title,
-        shortDescription: formData.shortDescription,
         description: formData.description,
-        isActive: formData.isActive,
-        videoTitle: formData.video?.title,
+        shortDescription: formData.shortDescription,
+        /* videoTitle: formData.video?.title, */
         videoDescription: formData.video?.description,
         videoReferences: formData.video?.references,
         videoLink: formData.video?.link,
@@ -148,7 +149,7 @@ export default function DetailTopic({ id, onArchive, isEditing }: Props) {
           label="Descrição curta"
           value={formData?.shortDescription || ""}
           onChange={(e) =>
-            setFormData((prev) => (prev ? { ...prev, description: e.target.value } : prev))
+            setFormData((prev) => (prev ? { ...prev, shortDescription: e.target.value } : prev))
           }
           InputProps={{ readOnly: !isEditing }}
           multiline
@@ -156,136 +157,119 @@ export default function DetailTopic({ id, onArchive, isEditing }: Props) {
           sx={textFieldStyles}
         />
 
-        {/* <TextField
-          label="Ativo/Inativo"
-          value={topicStatus}
-          fullWidth
-          InputProps={{ readOnly: true }}
-          sx={textFieldStyles}
-        /> */}
-
-        
-
-        
-      </Box>
-
-      <Box sx={{ mt: 4 }}>
-        <Typography variant="h5" component="h2" sx={{ mb: 2 }}>
-          Vídeo
-        </Typography>
-
-        {topic?.video ? (
-          <Box sx={{ display: "grid", gap: 2 }}>
-            <TextField
+        <TextField
               label="Título do vídeo"
-              value={topic.video.title || ""}
-              fullWidth
-              InputProps={{ readOnly: !isEditing }}
-              onChange={(event) =>
-                handleVideoChange("title", event.target.value)
+              value={formData?.video?.title || ""}
+              onChange={(e) =>
+                setFormData((prev) => {
+                  prev ? {
+                    ...prev,
+                    video: {
+                      ...(prev.video || {}),
+                      title: e.target.value,
+                    },
+                  } : prev
+                })
               }
+              InputProps={{ readOnly: !isEditing }}
+              rows={4}
               sx={textFieldStyles}
             />
 
             <TextField
-              label="Explicação do vídeo"
-              value={topic.video.description || ""}
-              fullWidth
-              multiline
-              minRows={4}
-              InputProps={{ readOnly: !isEditing }}
-              onChange={(event) =>
-                handleVideoChange("description", event.target.value)
+              label="Descrição do vídeo"
+              value={formData?.video?.description || ""}
+              onChange={(e) =>
+                setFormData((prev) => {
+                  prev ? {
+                    ...prev,
+                    video: {
+                      ...(prev.video || {}),
+                      description: e.target.value,
+                    },
+                  } : prev
+                })
               }
+              InputProps={{ readOnly: !isEditing }}
+              
               sx={textFieldStyles}
             />
 
             <TextField
               label="Referências do vídeo"
-              value={topic.video.references || ""}
-              fullWidth
-              InputProps={{ readOnly: !isEditing }}
-              onChange={(event) =>
-                handleVideoChange("references", event.target.value)
+              value={formData?.video?.references || ""}
+              onChange={(e) =>
+                setFormData((prev) => {
+                  prev ? {
+                    ...prev,
+                    video: {
+                      ...(prev.video || {}),
+                      references: e.target.value,
+                    },
+                  } : prev
+                })
               }
+              InputProps={{ readOnly: !isEditing }}
+              rows={4}
               sx={textFieldStyles}
             />
 
             <TextField
               label="Link do vídeo"
-              value={topic.video.link || ""}
-              fullWidth
-              InputProps={{ readOnly: !isEditing }}
-              onChange={(event) =>
-                handleVideoChange("link", event.target.value)
+              value={formData?.video?.link || ""}
+              onChange={(e) =>
+                setFormData((prev) => {
+                  prev ? {
+                    ...prev,
+                    video: {
+                      ...(prev.video || {}),
+                      link: e.target.value,
+                    },
+                  } : prev
+                })
               }
+              InputProps={{ readOnly: !isEditing }}
+              rows={4}
               sx={textFieldStyles}
             />
+      </Box>
 
-            {isEditing && (
-              <Box
-                sx={{
-                  display: "flex",
-                  justifyContent: "flex-end",
-                  gap: 2,
-                  mt: 4,
-                }}
-              >
-                <Button
-                  variant="outlined"
-                  sx={{
-                    ...cancelButtonStyles(muiTheme),
-                    borderColor: "red",
-                    color: "red",
-                    backgroundColor: "#fff",
-                    px: 4,
-                  }}
-                  onClick={handleCancelEdit}
-                >
-                  CANCELAR
-                </Button>
+      <Box sx={actionsContainerStyles}>
+        {isEditing ? (
+          <>
+            <Button
+              variant="outlined"
+              sx={{
+                ...cancelButtonStyles(muiTheme),
+                borderColor: "red",
+                color: "red",
+                "&:hover": { borderColor: "darkred" },
+              }}
+              onClick={handleCancel}
+            >
+              CANCELAR
+            </Button>
 
-                <Button
-                  variant="contained"
-                  onClick={handleSave}
-                  disabled={!topic}
-                  sx={{
-                    backgroundColor: "#004A7C",
-                    px: 4,
-                    "&:hover": {
-                      backgroundColor: "#003B63",
-                    },
-                  }}
-                >
-                  SALVAR
-                </Button>
-              </Box>
-            )}
-
-            {/* {videoEmbedUrl ? (
-              <Box sx={{ width: "100%", overflow: "hidden", borderRadius: 2 }}>
-                <iframe
-                  width="100%"
-                  height="332"
-                  src={videoEmbedUrl}
-                  title={topic.video.title || "Vídeo do tópico"}
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  referrerPolicy="strict-origin-when-cross-origin"
-                  allowFullScreen
-                />
-              </Box>
-            ) : (
-              <Link href={topic.video.link} target="_blank" rel="noopener noreferrer">
-                Abrir vídeo em nova aba
-              </Link>
-            )} */}
-          </Box>
+            <Button
+              variant="contained"
+              sx={{ backgroundColor: "#004A7C", "&:hover": { backgroundColor: "#003B63" } }}
+              onClick={handleSave}
+            >
+              SALVAR
+            </Button>
+          </>
         ) : (
-          <Typography variant="body1">
-            Nenhum vídeo cadastrado para este tópico.
-          </Typography>
+          <Button
+            variant="contained"
+            sx={returnToList(muiTheme)}
+            onClick={() => router.push("/cms/topics")}
+          >
+            VOLTAR PARA LISTA
+          </Button>
         )}
       </Box>
+
+      
     </Box>
   );
 }

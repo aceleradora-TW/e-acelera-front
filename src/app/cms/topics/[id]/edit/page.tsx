@@ -1,4 +1,4 @@
-'use client';
+/* 'use client';
 
 import Form from "@/components/UI/dashboard/form";
 import {
@@ -91,4 +91,21 @@ return (
   />
 )
 
-};
+}; */
+
+import DetailTopic from "@/components/PageElements/cms/topics/detail-topic";
+
+interface PageProps {
+  params: {
+    id: string;
+  };
+}
+
+export default function Page({ params }: PageProps) {
+  return (
+    <DetailTopic 
+      id={params.id} 
+      isEditing // Isso vai habilitar os campos automaticamente!
+    />
+  );
+}
