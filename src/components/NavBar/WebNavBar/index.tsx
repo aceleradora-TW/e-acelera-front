@@ -23,6 +23,7 @@ import LogoutIcon from "@mui/icons-material/Logout"
 import { Session } from "next-auth"
 import { useEffect, useState } from "react";
 import { useFlags, useFlagsmith } from "flagsmith/react"
+import AdminPanelSettingsOutlinedIcon from "@mui/icons-material/AdminPanelSettingsOutlined";
 
 interface WebMenuProps {
   list: string[]
@@ -165,14 +166,25 @@ export const WebMenu: React.FC<WebMenuProps> = ({ list, session }) => {
                 {canSeeAdmin && (
                   <MenuItem
                     onClick={() => {
-
                       handleCloseMenu();
-                      router.push("/cms/themes");
+                      router.push("/cms");
+                    }}
+                    sx={{
+                      gap: 1,
+                      py: 1,
                     }}
                   >
+                    <AdminPanelSettingsOutlinedIcon
+                      sx={{
+                        color: theme.palette.bgColor?.light,
+                        fontSize: 18,
+                      }}
+                    />
+
                     <Typography
                       sx={{
                         color: theme.palette.textColor?.light,
+                        fontSize: "0.95rem",
                       }}
                     >
                       Painel Administrativo
