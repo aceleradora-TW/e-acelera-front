@@ -31,8 +31,6 @@ export default function RenderCmsPage() {
         const sortBy = sortModel[0]?.field;
         const sortOrder = sortModel[0]?.sort;
         const res = await getTopics(page + 1, pageSize, sortBy, sortOrder);
-        //TO-DO: FIX SORTORDER PARAM TYPE
-        //TEST WITH npm run build
 
         setRows(res.data.data);
         setRowCount(res.data.meta.total);

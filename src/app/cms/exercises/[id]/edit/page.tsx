@@ -10,7 +10,7 @@ export default function Page({ params }: PageProps) {
   return (
     <DetailExercise 
       id={params.id} 
-      isEditing // Isso vai habilitar os campos automaticamente!
+      isEditing
     />
   );
 }
