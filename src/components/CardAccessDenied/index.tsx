@@ -26,7 +26,6 @@ export const CardAccessDenied = () => {
     <Box sx={theme.customStyles.containerLogin}>
       <Box sx={theme.customStyles.cardLoginBox}>
         <Grid container spacing={2.5} sx={{ textAlign: "center" }}>
-          {/* Logo e título */}
           <Grid item xs={12}>
             <Typography
               variant="h4"
@@ -35,43 +34,43 @@ export const CardAccessDenied = () => {
               Acesso Negado
             </Typography>
           </Grid>
-
-          {/* Ícone */}
           <Grid item xs={12}>
             <LockIcon
               sx={{ fontSize: 80, color: theme.palette.bgColor?.light }}
             />
           </Grid>
-
-          {/* Informação do usuário */}
           {session?.user && (
             <Grid item xs={12}>
               <Box
                 sx={{
-                  backgroundColor: theme.palette.bgColor?.light,
+                  backgroundColor: "#F8F9FA",
+                  border: "1px solid #E9ECEF",
                   p: 2,
-                  borderRadius: 1,
+                  borderRadius: 2,
                   mb: 2,
                 }}
               >
                 <Typography
                   variant="body2"
-                  sx={{ color: theme.palette.textColor?.main }}
+                  sx={{ color: theme.palette.textColor?.main || "#333333" }}
                 >
                   <strong>Usuário:</strong> {userEmail}
                 </Typography>
                 <Typography
                   variant="body2"
-                  sx={{ color: theme.palette.textColor?.main, mt: 1 }}
+                  sx={{
+                    color: theme.palette.textColor?.main || "#333333",
+                    mt: 1,
+                  }}
                 >
                   <strong>Role:</strong>{" "}
-                  <span style={{ color: "#ff6b6b" }}>{userRole}</span>
+                  <span style={{ color: "#D32F2F", fontWeight: "bold" }}>
+                    {userRole}
+                  </span>
                 </Typography>
               </Box>
             </Grid>
           )}
-
-          {/* Mensagem clara sobre 403 */}
           <Grid item xs={12}>
             <Typography
               variant="body1"
@@ -87,8 +86,6 @@ export const CardAccessDenied = () => {
               <strong>EDITOR</strong> podem acessar o CMS.
             </Typography>
           </Grid>
-
-          {/* Botões de ação */}
           <Grid item xs={12}>
             <Box
               sx={{
