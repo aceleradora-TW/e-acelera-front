@@ -6,10 +6,13 @@ import { UpperBanner } from "@/components/UI/cms/upper-banner";
 import {
   actionsContainerStyles,
   cancelButtonStyles,
+  returnToList,
   textFieldStyles,
   textFieldsContainerStyles,
 } from "@/components/UI/dashboard/forms/form.styles";
 import { CmsTheme } from "@/types/type";
+import { useRouter } from "next/navigation";
+import { useTheme } from "@mui/material";
 
 interface Props {
   id: string;
@@ -20,6 +23,8 @@ export default function DetailTheme({ id }: Props) {
   const [originalTheme, setOriginalTheme] = useState<CmsTheme | undefined>(undefined);
   const [isEditing, setIsEditing] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+
+  const router = useRouter();
 
   const fetchTheme = useCallback(async () => {
     try {
@@ -129,6 +134,7 @@ export default function DetailTheme({ id }: Props) {
         title="Themes"
         showBreadCrumb
         breadCrumbLabel={theme?.title}
+        editButton={!isEditing}
       />
 
       {errorMessage && (
@@ -144,7 +150,7 @@ export default function DetailTheme({ id }: Props) {
           fullWidth
           InputProps={{ readOnly: !isEditing }}
           onChange={(event) => handleChange("title", event.target.value)}
-          sx={currentTextFieldStyles}
+          sx={textFieldStyles}
         />
 
         <TextField
@@ -153,7 +159,7 @@ export default function DetailTheme({ id }: Props) {
           fullWidth
           InputProps={{ readOnly: !isEditing }}
           onChange={(event) => handleChange("shortDescription", event.target.value)}
-          sx={currentTextFieldStyles}
+          sx={textFieldStyles}
         />
 
         <TextField
@@ -164,7 +170,7 @@ export default function DetailTheme({ id }: Props) {
           onChange={(event) => handleChange("description", event.target.value)}
           multiline
           rows={4}
-          sx={currentTextFieldStyles}
+          sx={textFieldStyles}
         />
 
         <TextField
@@ -173,7 +179,7 @@ export default function DetailTheme({ id }: Props) {
           fullWidth
           InputProps={{ readOnly: !isEditing }}
           onChange={(event) => handleChange("imageAlt", event.target.value)}
-          sx={currentTextFieldStyles}
+          sx={textFieldStyles}
         />
 
         <TextField
@@ -182,7 +188,7 @@ export default function DetailTheme({ id }: Props) {
           fullWidth
           InputProps={{ readOnly: !isEditing }}
           onChange={(event) => handleChange("category", event.target.value)}
-          sx={currentTextFieldStyles}
+          sx={textFieldStyles}
         />
 
         <TextField
@@ -191,15 +197,23 @@ export default function DetailTheme({ id }: Props) {
           fullWidth
           InputProps={{ readOnly: !isEditing }}
           onChange={(event) => handleChange("sequence", event.target.value)}
-          sx={currentTextFieldStyles}
+          sx={textFieldStyles}
         />
       </Box>
 
       <Box sx={actionsContainerStyles}>
         {!isEditing ? (
-          <Button onClick={handleEdit} disabled={!theme} variant="contained">
-            EDITAR
-          </Button>
+          <>
+            <Button onClick={handleEdit} disabled={!theme} variant="contained">
+              EDITAR
+            </Button>
+            
+            <Button
+              variant="contained"
+              onClick={() => router.push(`/cms/themes`)}>
+                        VOLTAR PARA LISTA
+            </Button>
+          </>
         ) : (
           <>
             <Button
