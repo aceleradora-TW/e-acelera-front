@@ -121,8 +121,12 @@ export interface CmsTopic {
   shortDescription: string;
   description: string;
   isActive: boolean;
-  theme?: CmsTopicTheme | null;
+  theme?: {
+    id: string;
+    title: string;
+  }
   video?: CmsTopicVideo | null;
+  themeId?: string;
 }
 
 export interface CmsExercise {

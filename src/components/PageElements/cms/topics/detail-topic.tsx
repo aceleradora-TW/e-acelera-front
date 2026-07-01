@@ -77,10 +77,8 @@ export default function DetailTopic({ id, onArchive, isEditing }: Props) {
         title: formData.title,
         description: formData.description,
         shortDescription: formData.shortDescription,
-        /* videoTitle: formData.video?.title, */
-        videoDescription: formData.video?.description,
-        videoReferences: formData.video?.references,
-        videoLink: formData.video?.link,
+        themeId: formData.theme?.id,
+        references: formData.video?.references ?? "",
       };
 
       const url = `/api/topics/updateTopic`;
@@ -157,7 +155,7 @@ export default function DetailTopic({ id, onArchive, isEditing }: Props) {
           sx={textFieldStyles}
         />
 
-        <TextField
+        {/* <TextField
               label="Título do vídeo"
               value={formData?.video?.title || ""}
               onChange={(e) =>
@@ -231,7 +229,7 @@ export default function DetailTopic({ id, onArchive, isEditing }: Props) {
               InputProps={{ readOnly: !isEditing }}
               rows={4}
               sx={textFieldStyles}
-            />
+            /> */}
       </Box>
 
       <Box sx={actionsContainerStyles}>
