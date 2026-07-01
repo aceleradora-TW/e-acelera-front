@@ -12,7 +12,7 @@ const columns = [
   { id: "description", label: "Descrição" },
   { id: "shortDescription", label: "Descrição curta" },
   { id: "topic", label: "Tópico" },
-  /* { id: "theme", label: "Tema" }, */
+  { id: "theme", label: "Tema" },
   { id: "isActive", label: "Ativo" },
 ];
 
@@ -27,13 +27,22 @@ export default function RenderCmsPage() {
       try {
         const res = await getExercises(page + 1, pageSize);
 
-        setRows(res.data.data);
+        const formattedRows = res.data.data.map((exercise: any) => ({
+          ...exercise,
+          topic: exercise.topic?.title ?? exercise.topic?.name ?? "-",
+          theme:
+            exercise.topic?.theme?.title ??
+            exercise.topic?.theme?.name ??
+            "-",
+        }));
+
+        setRows(formattedRows);
         setRowCount(res.data.meta.total);
-        
       } catch (error) {
         console.error("Erro ao buscar exercícios:", error);
       }
     }
+
     fetchExercises();
   }, [page, pageSize]);
 
@@ -44,11 +53,7 @@ export default function RenderCmsPage() {
       gap={"36px"}
       sx={{ width: "100%" }}
     >
-      <UpperBanner
-        title="CMS - Exercícios"
-        menuBanner
-        createButton
-      />
+      <UpperBanner title="CMS - Exercícios" menuBanner createButton />
       <TableCMS
         columns={columns}
         rows={rows}
@@ -60,4 +65,4 @@ export default function RenderCmsPage() {
       />
     </Box>
   );
-}   
+}
