@@ -26,7 +26,6 @@ export default function RenderCmsPage() {
         const formattedRows = res.data.data.map((topic: any) => ({
           ...topic,
           themeTitle: topic.theme?.title ?? "-",
-          isActive: topic.isActive ? "Ativo" : "Inativo",
         }));
 
         setRows(formattedRows);
