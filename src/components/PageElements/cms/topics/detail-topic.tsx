@@ -2,26 +2,16 @@
 'use client';
 
 import { useCallback, useEffect, useMemo, useState } from "react";
-import Form from "@/components/UI/dashboard/form";
-import {
-  TopicFormSchema,
-  topicFormDefs,
-} from "@/components/UI/dashboard/forms/defs/topic.defs";
 import { useRouter } from "next/navigation";
 import { Alert ,Box, Button, Link, TextField, Typography, useTheme } from "@mui/material";
 import { UpperBanner } from "@/components/UI/cms/upper-banner";
 import {
-  actionsContainerStyles,
   textFieldStyles,
   textFieldsContainerStyles,
 } from "@/components/UI/dashboard/forms/form.styles";
-import { BadRequest } from "@/components/BadRequest";
-import { Loading } from "@/components/Loading";
-import { NoData } from "@/components/NoData";
 import { CmsTopic, CmsTopicVideo } from "@/types/type";
-import { FormActions } from "@/components/UI/dashboard/forms/form-actions";
 import { cancelButtonStyles } from "@/components/UI/dashboard/forms/form.styles"
-import { fi } from "zod/v4/locales";
+
 
 interface Props {
   id: string;
@@ -76,10 +66,10 @@ export default function DetailTopic({ id }: Props) {
     fetchTopic();
   }, [fetchTopic]);
 
-  /* const topicStatus = useMemo(
+  const topicStatus = useMemo(
     () => (topic?.isActive ? "Ativo" : "Inativo"),
     [topic?.isActive]
-  ); */
+  );
 
   function handleChange(field: keyof CmsTopic , value: string) {
     if (!topic) return
@@ -121,7 +111,6 @@ function handleCancelEdit() {
     setErrorMessage("")
   }
 
-  /* Começa aqui */
   async function handleSave() {
     if (!topic) return
     
@@ -163,14 +152,6 @@ function handleCancelEdit() {
     }
 
 }
-
-
-/*   if (loading) return <Loading />;
-  if (errorStatus === 404) return <NoData />;
-  if (errorStatus) return <BadRequest />;
-  if (!topic) return <NoData />; */
-
-/*   const videoEmbedUrl = topic.video?.link ? getYouTubeEmbedUrl(topic.video.link) : null; */
 
   return (
     <Box>
@@ -220,21 +201,13 @@ function handleCancelEdit() {
         )}
       </Box>
 
-        {/* <TextField
-          label="ID"
-          value={topic.id}
-          fullWidth
-          InputProps={{ readOnly: true }}
-          sx={textFieldStyles}
-        /> */} 
-
-        {/* <TextField
+        <TextField
           label="Tema"
-          value={topic.theme?.title || ""}
+          value={topic?.theme?.title || ""}
           fullWidth
           InputProps={{ readOnly: true }}
           sx={textFieldStyles}
-        /> */}
+        />
 
         <TextField
           label="Título"
@@ -245,13 +218,13 @@ function handleCancelEdit() {
           sx={textFieldStyles}
         />
 
-        {/* <TextField
+        <TextField
           label="Ativo/Inativo"
           value={topicStatus}
           fullWidth
           InputProps={{ readOnly: true }}
           sx={textFieldStyles}
-        /> */}
+        /> 
 
         <TextField
           label="Descrição curta"
@@ -358,31 +331,11 @@ function handleCancelEdit() {
                         </Button>
                       </Box>
                     )}
-
-            {/* {videoEmbedUrl ? (
-              <Box sx={{ width: "100%", overflow: "hidden", borderRadius: 2 }}>
-                <iframe
-                  width="100%"
-                  height="332"
-                  src={videoEmbedUrl}
-                  title={topic.video.title || "Vídeo do tópico"}
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  referrerPolicy="strict-origin-when-cross-origin"
-                  allowFullScreen
-                />
-              </Box>
-            ) : (
-              <Link href={topic.video.link} target="_blank" rel="noopener noreferrer">
-                Abrir vídeo em nova aba
-              </Link>
-            )} */}
           </Box>
         ) : (
           <Typography variant="body1">Nenhum vídeo cadastrado para este tópico.</Typography>
         )}
       </Box>
-
-  
     </Box>
   );
 }
