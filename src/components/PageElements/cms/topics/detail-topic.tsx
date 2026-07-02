@@ -25,6 +25,7 @@ import { fi } from "zod/v4/locales";
 
 interface Props {
   id: string;
+  isEditing?: boolean;
 }
 
 const getYouTubeEmbedUrl = (url: string) => {
@@ -37,10 +38,10 @@ const getYouTubeEmbedUrl = (url: string) => {
   return `https://www.youtube.com/embed/${videoId}`;
 };
 
-export default function DetailTopic({ id }: Props) {
+export default function DetailTopic({ id, isEditing }: Props) {
   const [topic, setTopic] = useState<CmsTopic | undefined>(undefined);
   const [originalTopic, setOriginalTopic] = useState<CmsTopic | undefined>(undefined)
-  const [isEditing, setIsEditing] = useState(false);
+  /*const [isEditing, setIsEditing] = useState(false);*/
   const [loading, setLoading] = useState(true);
   const [errorStatus, setErrorStatus] = useState<number | null>(null);
   const [errorMessage, setErrorMessage] = useState("")
@@ -104,12 +105,11 @@ export default function DetailTopic({ id }: Props) {
   }
 
   function handleEdit() {
-    setOriginalTopic(topic)
-    setIsEditing(true)
-    setErrorMessage("")
+    router.push(`/cms/topics/${id}/edit`);
   }
   
-function handleCancelEdit() {
+function handleCancel() {
+  router.push(`/cms/topics/${id}`);
     const confirmCancel = window.confirm(
       "Deseja cancelar a edição? As alterações serão perdidas."
     )
@@ -117,7 +117,6 @@ function handleCancelEdit() {
     if (!confirmCancel) return
 
     setTopic(originalTopic)
-    setIsEditing(false)
     setErrorMessage("")
   }
 
@@ -133,10 +132,10 @@ function handleCancelEdit() {
         shortDescription: topic.shortDescription,
         description: topic.description,
         isActive: topic.isActive,
-        videoTitle: topic.video?.title,
+        /*videoTitle: topic.video?.title,
         videoDescription: topic.video?.description,
         videoReferences: topic.video?.references,
-        videoLink: topic.video?.link,
+        videoLink: topic.video?.link,*/
       }
 
       const response = await fetch("/api/topics/updateTopic", {
@@ -154,15 +153,20 @@ function handleCancelEdit() {
 
     const data = await response.json()
 
+    router.push("/cms/topics");
+
     setTopic(data.data ?? topic)
     setOriginalTopic(data.data ?? topic)
-    setIsEditing(false)
   } catch (error) {
       console.error("Erro ao salvar tópico:", error);
       setErrorMessage("Ocorreu um erro ao salvar o tópico. Por favor, tente novamente.");
     }
 
 }
+
+const handleBack = () => {
+    router.push(`/cms/topics`);
+  }
 
 
 /*   if (loading) return <Loading />;
@@ -319,46 +323,6 @@ function handleCancelEdit() {
               sx={textFieldStyles}
             />
 
-            {isEditing && (
-                      <Box
-                        sx={{
-                          display: "flex",
-                          justifyContent: "flex-end",
-                          gap: 2,
-                          mt: 4,
-                        }}
-                      >
-                        <Button
-                          variant="outlined"
-                          sx={{
-                            ...cancelButtonStyles(muiTheme),
-                            borderColor: "red",
-                            color: "red",
-                            backgroundColor: "#fff",
-                            px: 4,
-                          }}
-                          onClick={handleCancelEdit}
-                        >
-                          CANCELAR
-                        </Button>
-            
-                        <Button
-                          variant="contained"
-                          onClick={handleSave}
-                          disabled={!topic}
-                          sx={{
-                            backgroundColor: "#004A7C",
-                            px: 4,
-                            "&:hover": {
-                              backgroundColor: "#003B63",
-                            },
-                          }}
-                        >
-                          SALVAR
-                        </Button>
-                      </Box>
-                    )}
-
             {/* {videoEmbedUrl ? (
               <Box sx={{ width: "100%", overflow: "hidden", borderRadius: 2 }}>
                 <iframe
@@ -380,6 +344,20 @@ function handleCancelEdit() {
         ) : (
           <Typography variant="body1">Nenhum vídeo cadastrado para este tópico.</Typography>
         )}
+      </Box>
+
+      <Box sx={actionsContainerStyles}>
+              <FormActions
+                isValid={!!topic?.title && !!topic?.shortDescription && !!topic?.description}
+                isDirty={JSON.stringify(topic) !== JSON.stringify(originalTopic)}
+                mode={isEditing ? "edit" : "view"}
+                entityPath="cms/topics"
+                entityId={id}
+                onSave={handleSave}
+                onCancel={handleCancel}
+                onEdit={handleEdit}
+                onBack={handleBack}
+              />
       </Box>
 
   

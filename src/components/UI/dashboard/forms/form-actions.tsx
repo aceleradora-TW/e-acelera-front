@@ -87,8 +87,9 @@ export function FormActions({
           <Button
             variant="contained"
             sx={cancelButtonStyles(theme)}
-            onClick={() => router.push(`/${entityPath}/${entityId}`)
-  }
+            onClick={() =>
+        onCancel ? onCancel() : router.push(`/${entityPath}`)
+      }
           >
             Cancelar
           </Button>

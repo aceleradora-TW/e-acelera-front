@@ -17,12 +17,13 @@ import { FormActions } from "@/components/UI/dashboard/forms/form-actions";
 
 interface Props {
   id: string;
+  isEditing?: boolean;
 }
 
-export default function DetailTheme({ id }: Props) {
+export default function DetailTheme({ id, isEditing }: Props) {
   const [theme, setTheme] = useState<CmsTheme | undefined>(undefined);
   const [originalTheme, setOriginalTheme] = useState<CmsTheme | undefined>(undefined);
-  const [isEditing, setIsEditing] = useState(false);
+  /*const [isEditing, setIsEditing] = useState(false);*/
   const [errorMessage, setErrorMessage] = useState("");
 
   const router = useRouter();
@@ -62,25 +63,20 @@ export default function DetailTheme({ id }: Props) {
   }
 
   function handleEdit() {
-    setOriginalTheme(theme);
-    setIsEditing(true);
-    setErrorMessage("");
-    /*router.push(`/cms/themes/${id}/edit`);*/
+    router.push(`/cms/themes/${id}/edit`);
   }
 
-  function handleCancelEdit() {
+  function handleCancel() {
+    router.push(`/cms/themes/${id}`);
     const confirmCancel = window.confirm(
       "Deseja cancelar a edição? As alterações serão perdidas."
     );
-
-    if (!confirmCancel) return;
-
-    setTheme(originalTheme);
-    setIsEditing(false);
-    setErrorMessage("");
+    if (!confirmCancel) {
+      return;
+    }
   }
 
-  async function handleSave() {
+  const handleSave = async () => {
     if (!theme) return;
 
     try {
@@ -110,9 +106,10 @@ export default function DetailTheme({ id }: Props) {
 
       const data = await response.json();
 
+      router.push("/cms/themes");
+
       setTheme(data.data ?? theme);
       setOriginalTheme(data.data ?? theme);
-      setIsEditing(false);
     } catch (error) {
       console.error("Erro ao salvar tema:", error);
       setErrorMessage("Não foi possível salvar as alterações do tema. Tente novamente.");
@@ -199,16 +196,16 @@ const handleBack = () => {
       <Box sx={actionsContainerStyles}>
               <FormActions
                 isValid={!!theme?.title && !!theme?.shortDescription && !!theme?.description}
-                isDirty={JSON.stringify(theme) !== JSON.stringify(theme)}
+                isDirty={JSON.stringify(theme) !== JSON.stringify(originalTheme)}
                 mode={isEditing ? "edit" : "view"}
                 entityPath="cms/themes"
                 entityId={id}
                 onSave={handleSave}
-                onCancel={handleCancelEdit}
+                onCancel={handleCancel}
                 onEdit={handleEdit}
                 onBack={handleBack}
               />
-            </Box>
+      </Box>
     </Box>
   );
 }
