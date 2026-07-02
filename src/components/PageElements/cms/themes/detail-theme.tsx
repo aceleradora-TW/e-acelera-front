@@ -62,10 +62,10 @@ export default function DetailTheme({ id }: Props) {
   }
 
   function handleEdit() {
-    /*setOriginalTheme(theme);
+    setOriginalTheme(theme);
     setIsEditing(true);
-    setErrorMessage("");*/
-    router.push(`/cms/themes/${id}/edit`);
+    setErrorMessage("");
+    /*router.push(`/cms/themes/${id}/edit`);*/
   }
 
   function handleCancelEdit() {

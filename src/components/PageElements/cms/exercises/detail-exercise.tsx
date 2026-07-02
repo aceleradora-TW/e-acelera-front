@@ -94,7 +94,8 @@ export default function DetailExercise({ id, onArchive, isEditing }: Props) {
   };
 
   const handleEdit = () => {
-    router.push(`/cms/exercises/${id}/edit`);
+    /*router.push(`/cms/exercises/${id}/edit`);*/
+    
   }
 
   const handleBack = () => {
