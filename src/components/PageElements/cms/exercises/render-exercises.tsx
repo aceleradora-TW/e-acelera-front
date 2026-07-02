@@ -12,7 +12,6 @@ const columns = [
   { id: "description", label: "Descrição" },
   { id: "shortDescription", label: "Descrição curta" },
   { id: "topic", label: "Tópico" },
-  /* { id: "theme", label: "Tema" }, */
   { id: "isActive", label: "Ativo" },
 ];
 
@@ -48,6 +47,7 @@ export default function RenderCmsPage() {
         title="CMS - Exercícios"
         menuBanner
         createButton
+        showBreadCrumb
       />
       <TableCMS
         columns={columns}

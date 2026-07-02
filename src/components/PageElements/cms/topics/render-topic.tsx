@@ -51,7 +51,8 @@ export default function RenderCmsPage() {
       <UpperBanner 
         title="CMS - Tópicos"   
         menuBanner 
-        createButton 
+        createButton
+        showBreadCrumb 
       />
       <TableCMS
         columns={columns}
