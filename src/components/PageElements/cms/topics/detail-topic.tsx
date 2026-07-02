@@ -155,6 +155,8 @@ export default function DetailTopic({ id, onArchive, isEditing }: Props) {
           sx={textFieldStyles}
         />
 
+        {/* Campos para edição de vídeo */}
+        
         {/* <TextField
               label="Título do vídeo"
               value={formData?.video?.title || ""}
