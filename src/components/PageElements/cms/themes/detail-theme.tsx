@@ -13,6 +13,7 @@ import {
 import { CmsTheme } from "@/types/type";
 import { useRouter } from "next/navigation";
 import { useTheme } from "@mui/material";
+import { FormActions } from "@/components/UI/dashboard/forms/form-actions";
 
 interface Props {
   id: string;
@@ -61,9 +62,10 @@ export default function DetailTheme({ id }: Props) {
   }
 
   function handleEdit() {
-    setOriginalTheme(theme);
+    /*setOriginalTheme(theme);
     setIsEditing(true);
-    setErrorMessage("");
+    setErrorMessage("");*/
+    router.push(`/cms/themes/${id}/edit`);
   }
 
   function handleCancelEdit() {
@@ -117,16 +119,9 @@ export default function DetailTheme({ id }: Props) {
     }
   }
 
-  const currentTextFieldStyles = {
-    ...textFieldStyles,
-    ...(isEditing
-      ? {}
-      : {
-          "& .MuiOutlinedInput-notchedOutline": {
-            border: "none",
-          },
-        }),
-  };
+const handleBack = () => {
+    router.push(`/cms/themes`);
+  }
 
   return (
     <Box>
@@ -202,38 +197,18 @@ export default function DetailTheme({ id }: Props) {
       </Box>
 
       <Box sx={actionsContainerStyles}>
-        {!isEditing ? (
-          <>
-            <Button onClick={handleEdit} disabled={!theme} variant="contained">
-              EDITAR
-            </Button>
-            
-            <Button
-              variant="contained"
-              onClick={() => router.push(`/cms/themes`)}>
-                        VOLTAR PARA LISTA
-            </Button>
-          </>
-        ) : (
-          <>
-            <Button
-              variant="outlined"
-              sx={cancelButtonStyles}
-              onClick={handleCancelEdit}
-            >
-              CANCELAR
-            </Button>
-
-            <Button
-              variant="contained"
-              onClick={handleSave}
-              disabled={!theme}
-            >
-              SALVAR
-            </Button>
-          </>
-        )}
-      </Box>
+              <FormActions
+                isValid={!!theme?.title && !!theme?.shortDescription && !!theme?.description}
+                isDirty={JSON.stringify(theme) !== JSON.stringify(theme)}
+                mode={isEditing ? "edit" : "view"}
+                entityPath="cms/themes"
+                entityId={id}
+                onSave={handleSave}
+                onCancel={handleCancelEdit}
+                onEdit={handleEdit}
+                onBack={handleBack}
+              />
+            </Box>
     </Box>
   );
 }

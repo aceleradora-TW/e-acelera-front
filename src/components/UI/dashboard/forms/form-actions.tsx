@@ -14,6 +14,10 @@ interface FormActionsProps {
   mode: "create" | "edit" | "view";
   entityPath: string;
   entityId?: string;
+  onSave?: () => void;
+  onCancel?: () => void;
+  onEdit?: () => void;
+  onBack?: () => void;
 }
 
 export function FormActions({
@@ -22,6 +26,10 @@ export function FormActions({
   mode,
   entityPath,
   entityId,
+  onSave,
+  onCancel,
+  onEdit,
+  onBack
 }: FormActionsProps) {
   const theme = useTheme();
   const router = useRouter();
@@ -33,7 +41,9 @@ export function FormActions({
           <Button
             variant="contained"
             sx={returnToList(theme)}
-            onClick={() => router.push(`/${entityPath}/${entityId}/edit`)}
+            onClick={() =>
+    onEdit ? onEdit() : router.push(`/${entityPath}/${entityId}/edit`)
+  }
           >
             Editar
           </Button>
@@ -41,7 +51,7 @@ export function FormActions({
           <Button
             variant="contained"
             sx={returnToList(theme)}
-            onClick={() => router.push(`/${entityPath}`)}
+            onClick={() => (onBack ? onBack() : router.push(`/${entityPath}`))}
           >
             VOLTAR PARA LISTA
           </Button>
@@ -53,16 +63,19 @@ export function FormActions({
           <Button
             variant="contained"
             sx={cancelButtonStyles(theme)}
-            onClick={() => router.push(`/${entityPath}/${entityId}`)}
+            onClick={() =>
+    onCancel ? onCancel() : router.push(mode === "edit" ? `/${entityPath}/${entityId}` : `/${entityPath}`)
+  }
           >
             Cancelar
           </Button>
 
           <Button
-            type="submit"
+            type={onSave ? "button" : "submit"}
             variant="contained"
             disabled={!isDirty || !isValid}
             sx={submitButtonStyles(theme)}
+            onClick={onSave}
           >
             Salvar
           </Button>
@@ -74,7 +87,8 @@ export function FormActions({
           <Button
             variant="contained"
             sx={cancelButtonStyles(theme)}
-            onClick={() => router.push(`/${entityPath}`)}
+            onClick={() => router.push(`/${entityPath}/${entityId}`)
+  }
           >
             Cancelar
           </Button>
@@ -84,6 +98,7 @@ export function FormActions({
             variant="contained"
             disabled={!isDirty || !isValid}
             sx={submitButtonStyles(theme)}
+            onClick={onSave}
           >
             Salvar
           </Button>

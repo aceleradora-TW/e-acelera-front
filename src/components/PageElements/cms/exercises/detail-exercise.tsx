@@ -6,6 +6,7 @@ import { Box, Button, TextField, useTheme } from "@mui/material";
 import { UpperBanner } from "@/components/UI/cms/upper-banner";
 import { actionsContainerStyles, cancelButtonStyles, returnToList, textFieldStyles, textFieldsContainerStyles } from "@/components/UI/dashboard/forms/form.styles";
 import { CmsExercise } from "@/types/type";
+import { FormActions } from "@/components/UI/dashboard/forms/form-actions";
 
 interface Props {
   id: string;
@@ -81,9 +82,25 @@ export default function DetailExercise({ id, onArchive, isEditing }: Props) {
       alert("Não foi possível salvar as alterações. Verifique o console.");
     }
   };
+  
   const handleCancel = () => {
     router.push(`/cms/exercises/${id}`);
+    const confirmCancel = window.confirm(
+      "Deseja cancelar a edição? As alterações serão perdidas."
+    );
+    if (!confirmCancel) {
+      return;
+    }
   };
+
+  const handleEdit = () => {
+    router.push(`/cms/exercises/${id}/edit`);
+  }
+
+  const handleBack = () => {
+    router.push(`/cms/exercises`);
+  }
+
 
   return (
     <Box>
@@ -169,38 +186,17 @@ export default function DetailExercise({ id, onArchive, isEditing }: Props) {
       </Box>
 
       <Box sx={actionsContainerStyles}>
-        {isEditing ? (
-          <>
-            <Button
-              variant="outlined"
-              sx={{
-                ...cancelButtonStyles(muiTheme),
-                borderColor: "red",
-                color: "red",
-                "&:hover": { borderColor: "darkred" },
-              }}
-              onClick={handleCancel}
-            >
-              CANCELAR
-            </Button>
-
-            <Button
-              variant="contained"
-              sx={{ backgroundColor: "#004A7C", "&:hover": { backgroundColor: "#003B63" } }}
-              onClick={handleSave}
-            >
-              SALVAR
-            </Button>
-          </>
-        ) : (
-          <Button
-            variant="contained"
-            sx={returnToList(muiTheme)}
-            onClick={() => router.push("/cms/exercises")}
-          >
-            VOLTAR PARA LISTA
-          </Button>
-        )}
+        <FormActions
+          isValid={!!formData?.title && !!formData?.description && !!formData?.shortDescription}
+          isDirty={JSON.stringify(formData) !== JSON.stringify(exercise)}
+          mode={isEditing ? "edit" : "view"}
+          entityPath="cms/exercises"
+          entityId={id}
+          onSave={handleSave}
+          onCancel={handleCancel}
+          onEdit={handleEdit}
+          onBack={handleBack}
+        />
       </Box>
     </Box>
   );
