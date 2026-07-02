@@ -3,11 +3,12 @@ import { UpperBanner } from "@/components/UI/cms/upper-banner";
 import { getTopics } from "@/utils/api/topics";
 import { Box } from "@mui/material";
 import { useEffect, useState } from "react";
+import type { GridSortModel } from "@mui/x-data-grid";
 
 const columns: Column[] = [
   { id: "id", label: "ID" },
   { id: "title", label: "Título" },
-  { id: "themeTitle", label: "Tema" },
+  { id: "themeTitle", label: "Tema", sortable: false },
   { id: "shortDescription", label: "Descrição curta" },
   { id: "themeID", label: "ID do tema" },
 ];
@@ -17,11 +18,19 @@ export default function RenderCmsPage() {
   const [page, setPage] = useState(0);
   const [pageSize, setPageSize] = useState(10);
   const [rowCount, setRowCount] = useState(0);
+  const [sortModel, setSortModel] = useState<GridSortModel>([]);
+
+  const handleSortModelChange = (newModel: GridSortModel) => {
+    setSortModel(newModel);
+    setPage(0);
+  };
 
   useEffect(() => {
     async function fetchTopics() {
       try {
-        const res = await getTopics(page + 1, pageSize);
+        const sortBy = sortModel[0]?.field;
+        const sortOrder = sortModel[0]?.sort;
+        const res = await getTopics(page + 1, pageSize, sortBy, sortOrder);
 
         setRows(res.data.data);
         setRowCount(res.data.meta.total);
@@ -30,7 +39,7 @@ export default function RenderCmsPage() {
       } 
     }
     fetchTopics();
-  }, [page, pageSize]);
+  }, [page, pageSize, sortModel]);
 
   return (
     <Box
@@ -53,6 +62,8 @@ export default function RenderCmsPage() {
         rowCount={rowCount}
         onPageChange={setPage}
         onPageSizeChange={setPageSize}
+        sortModel={sortModel}
+        onSortModelChange={handleSortModelChange}
       />
     </Box>
   );
