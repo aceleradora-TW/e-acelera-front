@@ -1,3 +1,5 @@
+"use client";
+
 import { Column, TableCMS } from "@/components/UI/cms/table-cms";
 import { UpperBanner } from "@/components/UI/cms/upper-banner";
 import { getTopics } from "@/utils/api/topics";
@@ -5,7 +7,7 @@ import { Box } from "@mui/material";
 import { useEffect, useState } from "react";
 import type { GridSortModel } from "@mui/x-data-grid";
 
-const columns: Column[] = [
+const columns = [
   { id: "id", label: "ID" },
   { id: "title", label: "Título" },
   { id: "themeTitle", label: "Tema", sortable: false },
