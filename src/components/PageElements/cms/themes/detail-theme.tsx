@@ -67,13 +67,15 @@ export default function DetailTheme({ id, isEditing }: Props) {
   }
 
   function handleCancel() {
-    router.push(`/cms/themes/${id}`);
+
     const confirmCancel = window.confirm(
       "Deseja cancelar a edição? As alterações serão perdidas."
     );
     if (!confirmCancel) {
       return;
     }
+
+        router.push(`/cms/themes/${id}`);
   }
 
   const handleSave = async () => {

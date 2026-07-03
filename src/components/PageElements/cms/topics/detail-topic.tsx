@@ -109,7 +109,6 @@ export default function DetailTopic({ id, isEditing }: Props) {
   }
   
 function handleCancel() {
-  router.push(`/cms/topics/${id}`);
     const confirmCancel = window.confirm(
       "Deseja cancelar a edição? As alterações serão perdidas."
     )
@@ -118,6 +117,8 @@ function handleCancel() {
 
     setTopic(originalTopic)
     setErrorMessage("")
+    
+    router.push(`/cms/topics/${id}`);
   }
 
   /* Começa aqui */

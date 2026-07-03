@@ -84,13 +84,14 @@ export default function DetailExercise({ id, onArchive, isEditing }: Props) {
   };
   
   const handleCancel = () => {
-    router.push(`/cms/exercises/${id}`);
     const confirmCancel = window.confirm(
       "Deseja cancelar a edição? As alterações serão perdidas."
     );
     if (!confirmCancel) {
       return;
     }
+
+    router.push(`/cms/exercises/${id}`);
   };
 
   const handleEdit = () => {
