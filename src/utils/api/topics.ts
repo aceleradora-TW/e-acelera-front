@@ -1,4 +1,4 @@
-import { error } from "console";
+import { GridSortDirection } from "@mui/x-data-grid";
 
 export async function createTopic(topicData: {
     title: string;
@@ -22,11 +22,13 @@ export async function createTopic(topicData: {
     return res.json();
 }
 
-export async function getTopics(page: number, limit: number) {
+export async function getTopics(page: number, limit: number, sortBy?: string, sortOrder?: GridSortDirection) {
   const query = new URLSearchParams({
     page: String(page),
     limit: String(limit),
   });
+  if (sortBy) query.set("sortBy", sortBy);
+  if (sortOrder) query.set("sortOrder", sortOrder);
   const res = await fetch(`/api/topics?${query.toString()}`);
   if (!res.ok) throw new Error("Erro ao buscar tópicos");
   return res.json();
