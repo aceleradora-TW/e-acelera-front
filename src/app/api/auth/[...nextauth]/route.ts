@@ -49,10 +49,7 @@ const handler = NextAuth({
             },
           });
 
-          const roleText = await roleResponse.text();
-          console.log(
-            `[NextAuth] /api/user/getRole resposta: ${roleResponse.status} - ${roleText}`,
-          );
+const roleText = await roleResponse.text();
 
           if (roleResponse.ok) {
             const userData = JSON.parse(roleText);
