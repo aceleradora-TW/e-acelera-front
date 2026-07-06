@@ -95,21 +95,22 @@ export const CardAccessDenied = () => {
                 flexWrap: "wrap",
               }}
             >
-              <Link href="/">
-                <Button
-                  variant="contained"
-                  sx={{
-                    backgroundColor: theme.palette.buttonHover?.main,
-                    color: theme.palette.buttonHover?.contrastText,
-                    padding: "10px 24px",
-                    "&:hover": {
-                      backgroundColor: theme.palette.bgColor?.light,
-                    },
-                  }}
-                >
-                  Voltar para Home
-                </Button>
-              </Link>
+<Link href="/" passHref legacyBehavior>
+  <Button
+    component="a"
+    variant="contained"
+    sx={{
+      backgroundColor: theme.palette.buttonHover?.main,
+      color: theme.palette.buttonHover?.contrastText,
+      padding: "10px 24px",
+      "&:hover": {
+        backgroundColor: theme.palette.bgColor?.light,
+      },
+    }}
+  >
+    Voltar para Home
+  </Button>
+</Link>
               <Button
                 variant="outlined"
                 onClick={() => signOut({ callbackUrl: "/login" })}
