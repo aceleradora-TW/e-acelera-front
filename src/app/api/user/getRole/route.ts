@@ -32,10 +32,7 @@ export async function GET(req: NextRequest) {
       },
     });
 
-    const responseText = await response.text();
-    console.log(
-      `[getRole] Backend resposta: ${response.status} - ${responseText}`,
-    );
+const responseText = await response.text();
 
     if (!response.ok) {
       console.error(`[getRole] ❌ Backend retornou erro ${response.status}`);
