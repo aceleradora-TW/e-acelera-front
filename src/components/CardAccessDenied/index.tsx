@@ -1,26 +1,15 @@
 "use client";
 import { Box, Button, Grid, Typography } from "@mui/material";
 import { theme } from "@/app/config/themes";
-import Image from "next/image";
 import Link from "next/link";
 import LockIcon from "@mui/icons-material/Lock";
 import { signOut, useSession } from "next-auth/react";
-import { useEffect, useState } from "react";
 
 export const CardAccessDenied = () => {
   const { data: session } = useSession();
-  const [userEmail, setUserEmail] = useState<string>("");
-  const [userRole, setUserRole] = useState<string>("");
 
-  useEffect(() => {
-    if (session?.user) {
-      setUserEmail(session.user.email || "Desconhecido");
-      setUserRole(session.user.role || "SEM ROLE");
-      console.log(
-        `[403] Usuário ${session.user.email} com role ${session.user.role} bloqueado do CMS`,
-      );
-    }
-  }, [session]);
+  const userEmail = session?.user?.email || "Desconhecido";
+  const userRole = session?.user?.role || "SEM ROLE";
 
   return (
     <Box sx={theme.customStyles.containerLogin}>
