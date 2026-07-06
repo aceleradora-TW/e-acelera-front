@@ -1,11 +1,6 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
-import Form from "@/components/UI/dashboard/form";
-import {
-  TopicFormSchema,
-  topicFormDefs,
-} from "@/components/UI/dashboard/forms/defs/topic.defs";
 import { useRouter } from "next/navigation";
 import { Box, Button, TextField, Typography, useTheme } from "@mui/material";
 import { UpperBanner } from "@/components/UI/cms/upper-banner";
@@ -16,29 +11,13 @@ import {
   textFieldStyles,
   textFieldsContainerStyles,
 } from "@/components/UI/dashboard/forms/form.styles";
-import { CmsTopic, CmsTopicVideo } from "@/types/type";
-import { FormActions } from "@/components/UI/dashboard/forms/form-actions";
-import { fi } from "zod/v4/locales";
-import PreviousMap_ from "postcss/lib/previous-map";
-import { Description } from "@mui/icons-material";
-
+import { CmsTopic } from "@/types/type";
 interface Props {
   id: string;
-  onArchive?: (id: string) => void;
   isEditing?: boolean;
 }
 
-const getYouTubeEmbedUrl = (url: string) => {
-  const videoId = url.split("v=")[1]?.split("&")[0];
-
-  if (!videoId) {
-    return null;
-  }
-
-  return `https://www.youtube.com/embed/${videoId}`;
-};
-
-export default function DetailTopic({ id, onArchive, isEditing }: Props) {
+export default function DetailTopic({ id, isEditing }: Props) {
   const [topic, setTopic] = useState<CmsTopic | undefined>(undefined);
   const [formData, setFormData] = useState<CmsTopic | undefined>();
   const muiTheme = useTheme();
@@ -78,7 +57,7 @@ export default function DetailTopic({ id, onArchive, isEditing }: Props) {
         description: formData.description,
         shortDescription: formData.shortDescription,
         themeId: formData.theme?.id,
-        references: formData.video?.references ?? "",
+        /* references: formData.video?.references ?? "", */
       };
 
       const url = `/api/topics/updateTopic`;
@@ -94,8 +73,6 @@ export default function DetailTopic({ id, onArchive, isEditing }: Props) {
       if (!response.ok) {
         throw new Error(`Erro ao atualizar tópico: ${response.status}`);
       }
-
-      const data = await response.json();
 
       router.push("/cms/topics");
     } catch (error) {
