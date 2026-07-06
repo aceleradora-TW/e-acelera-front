@@ -1,11 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
-import { headers } from "next/headers";
 
 export async function GET(req: NextRequest) {
-  const header = headers();
-  const email = header.get("email");
-
-  console.log(`[getRole] Requisição recebida - Email: ${email}`);
+  const email = req.headers.get("email");
 
   if (!email) {
     console.error("[getRole] ❌ Email header não fornecido");
@@ -33,9 +29,6 @@ export async function GET(req: NextRequest) {
     });
 
     const responseText = await response.text();
-    console.log(
-      `[getRole] Backend resposta: ${response.status} - ${responseText}`,
-    );
 
     if (!response.ok) {
       console.error(`[getRole] ❌ Backend retornou erro ${response.status}`);
