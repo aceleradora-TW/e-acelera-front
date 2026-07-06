@@ -12,6 +12,7 @@ import {
   textFieldsContainerStyles,
 } from "@/components/UI/dashboard/forms/form.styles";
 import { CmsTopic } from "@/types/type";
+import { FormActions } from "@/components/UI/dashboard/forms/form-actions";
 interface Props {
   id: string;
   isEditing?: boolean;
@@ -19,6 +20,11 @@ interface Props {
 
 export default function DetailTopic({ id, isEditing }: Props) {
   const [topic, setTopic] = useState<CmsTopic | undefined>(undefined);
+  const [originalTopic, setOriginalTopic] = useState<CmsTopic | undefined>(
+    undefined,
+  );
+  const [errorStatus, setErrorStatus] = useState<number | null>(null);
+  const [errorMessage, setErrorMessage] = useState("")
   const [formData, setFormData] = useState<CmsTopic | undefined>();
   const muiTheme = useTheme();
   const router = useRouter();
@@ -48,19 +54,21 @@ export default function DetailTopic({ id, isEditing }: Props) {
     fetchTopic();
   }, [fetchTopic]);
 
-  const handleSave = async () => {
-    if (!formData) return;
+  async function handleSave() {
+    if (!topic) return
 
     try {
+      setErrorMessage("")
+
       const payload = {
         title: topic.title,
         shortDescription: topic.shortDescription,
         description: topic.description,
         isActive: topic.isActive,
-        /*videoTitle: topic.video?.title,
+        /* videoTitle: topic.video?.title,
         videoDescription: topic.video?.description,
         videoReferences: topic.video?.references,
-        videoLink: topic.video?.link,*/
+        videoLink: topic.video?.link, */
       }
 
       const response = await fetch("/api/topics/updateTopic", {
@@ -76,20 +84,40 @@ export default function DetailTopic({ id, isEditing }: Props) {
       throw new Error(`Erro: ${response.status}`)
     }
 
-      if (!response.ok) {
-        throw new Error(`Erro ao atualizar tópico: ${response.status}`);
-      }
+    const data = await response.json()
 
-      router.push("/cms/topics");
-    } catch (error) {
-      console.error("Erro ao salvar as alterações do tópico:", error);
-      alert("Não foi possível salvar as alterações. Verifique o console.");
+    router.push("/cms/topics");
+
+    setTopic(data.data ?? topic)
+    setOriginalTopic(data.data ?? topic)
+  } catch (error) {
+      console.error("Erro ao salvar tópico:", error);
+      setErrorMessage("Ocorreu um erro ao salvar o tópico. Por favor, tente novamente.");
     }
-  };
+
+}
 
   const handleCancel = () => {
     router.push(`/cms/topics/${id}`);
   };
+
+  function handleEdit() {
+    router.push(`/cms/topics/${id}/edit`);
+  }
+
+  const handleBack = () => {
+    router.push(`/cms/topics`);
+  };
+
+  function handleChange(field: keyof CmsTopic , value: string) {
+    if (!topic) return
+
+    setTopic({
+      ...topic,
+      [field]: value,
+
+    })
+  }
 
   return (
     <Box>
@@ -103,23 +131,18 @@ export default function DetailTopic({ id, isEditing }: Props) {
       </Box>
 
       <Box sx={textFieldsContainerStyles}>
-
         <TextField
           label="Título"
-          value={formData?.title || ""}
-          onChange={(e) =>
-            setFormData((prev) => (prev ? { ...prev, title: e.target.value } : prev))
-          }
+          value={topic?.title || ""}
+          onChange={(event) => handleChange("title", event.target.value)}
           InputProps={{ readOnly: !isEditing }}
           sx={textFieldStyles}
         />
 
         <TextField
           label="Descrição"
-          value={formData?.description || ""}
-          onChange={(e) =>
-            setFormData((prev) => (prev ? { ...prev, description: e.target.value } : prev))
-          }
+          value={topic?.description || ""}
+          onChange={(event) => handleChange("description", event.target.value)}
           InputProps={{ readOnly: !isEditing }}
           multiline
           rows={4}
@@ -128,10 +151,8 @@ export default function DetailTopic({ id, isEditing }: Props) {
 
         <TextField
           label="Descrição curta"
-          value={formData?.shortDescription || ""}
-          onChange={(e) =>
-            setFormData((prev) => (prev ? { ...prev, shortDescription: e.target.value } : prev))
-          }
+          value={topic?.shortDescription || ""}
+          onChange={(event) => handleChange("shortDescription", event.target.value)}
           InputProps={{ readOnly: !isEditing }}
           multiline
           rows={4}
@@ -139,7 +160,7 @@ export default function DetailTopic({ id, isEditing }: Props) {
         />
 
         {/* Campos para edição de vídeo */}
-        
+
         {/* <TextField
               label="Título do vídeo"
               value={formData?.video?.title || ""}
@@ -218,55 +239,20 @@ export default function DetailTopic({ id, isEditing }: Props) {
       </Box>
 
       <Box sx={actionsContainerStyles}>
-        {isEditing ? (
-          <>
-            <Button
-              variant="outlined"
-              sx={{
-                ...cancelButtonStyles(muiTheme),
-                borderColor: "red",
-                color: "red",
-                "&:hover": { borderColor: "darkred" },
-              }}
-              onClick={handleCancel}
-            >
-              CANCELAR
-            </Button>
-
-            <Button
-              variant="contained"
-              sx={{ backgroundColor: "#004A7C", "&:hover": { backgroundColor: "#003B63" } }}
-              onClick={handleSave}
-            >
-              SALVAR
-            </Button>
-          </>
-        ) : (
-          <Button
-            variant="contained"
-            sx={returnToList(muiTheme)}
-            onClick={() => router.push("/cms/topics")}
-          >
-            VOLTAR PARA LISTA
-          </Button>
-        )}
+        <FormActions
+          isValid={
+            !!topic?.title && !!topic?.shortDescription && !!topic?.description
+          }
+          isDirty={JSON.stringify(topic) !== JSON.stringify(originalTopic)}
+          mode={isEditing ? "edit" : "view"}
+          entityPath="cms/topics"
+          entityId={id}
+          onSave={handleSave}
+          onCancel={handleCancel}
+          onEdit={handleEdit}
+          onBack={handleBack}
+        />
       </Box>
-
-      <Box sx={actionsContainerStyles}>
-              <FormActions
-                isValid={!!topic?.title && !!topic?.shortDescription && !!topic?.description}
-                isDirty={JSON.stringify(topic) !== JSON.stringify(originalTopic)}
-                mode={isEditing ? "edit" : "view"}
-                entityPath="cms/topics"
-                entityId={id}
-                onSave={handleSave}
-                onCancel={handleCancel}
-                onEdit={handleEdit}
-                onBack={handleBack}
-              />
-      </Box>
-
-  
     </Box>
   );
 }
