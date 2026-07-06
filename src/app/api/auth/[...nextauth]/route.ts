@@ -31,10 +31,7 @@ const handler = NextAuth({
             },
           });
 
-          const loginText = await loginResponse.text();
-          console.log(
-            `[NextAuth] Backend /login resposta: ${loginResponse.status} - ${loginText}`,
-          );
+// Resposta do backend omitida para evitar log de dados sensíveis.
 
           if (!loginResponse.ok) {
             console.warn(
