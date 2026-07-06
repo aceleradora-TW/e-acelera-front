@@ -19,9 +19,7 @@ const handler = NextAuth({
           const backendUrl =
             process.env.BACKEND_BASE_URL || "http://localhost:5002";
 
-          console.log(
-            `[NextAuth] Login iniciado - Provider: ${account.provider}, Email: ${user.email}`,
-          );
+// Evitar logar PII (ex.: email) durante o login.
 
           // 1. Primeiro: Registrar/validar o usuário no backend
           console.log("[NextAuth] Registrando usuário no backend...");
