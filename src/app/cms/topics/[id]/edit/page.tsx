@@ -109,7 +109,7 @@ export default function Page({ params }: PageProps) {
   return (
     <DetailTopic 
       id={params.id} 
-      isEditing // Isso vai habilitar os campos automaticamente!
+      isEditing 
     />
   );
 }
