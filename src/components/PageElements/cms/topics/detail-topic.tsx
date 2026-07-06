@@ -53,22 +53,28 @@ export default function DetailTopic({ id, isEditing }: Props) {
 
     try {
       const payload = {
-        title: formData.title,
-        description: formData.description,
-        shortDescription: formData.shortDescription,
-        themeId: formData.theme?.id,
-        /* references: formData.video?.references ?? "", */
-      };
+        title: topic.title,
+        shortDescription: topic.shortDescription,
+        description: topic.description,
+        isActive: topic.isActive,
+        /*videoTitle: topic.video?.title,
+        videoDescription: topic.video?.description,
+        videoReferences: topic.video?.references,
+        videoLink: topic.video?.link,*/
+      }
 
-      const url = `/api/topics/updateTopic`;
-      const response = await fetch(url, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-          id,
-        },
-        body: JSON.stringify(payload),
-      });
+      const response = await fetch("/api/topics/updateTopic", {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        "id": String(id),
+      },
+      body: JSON.stringify(payload),
+    });
+
+    if (!response.ok) {
+      throw new Error(`Erro: ${response.status}`)
+    }
 
       if (!response.ok) {
         throw new Error(`Erro ao atualizar tópico: ${response.status}`);
@@ -246,7 +252,21 @@ export default function DetailTopic({ id, isEditing }: Props) {
         )}
       </Box>
 
-      
+      <Box sx={actionsContainerStyles}>
+              <FormActions
+                isValid={!!topic?.title && !!topic?.shortDescription && !!topic?.description}
+                isDirty={JSON.stringify(topic) !== JSON.stringify(originalTopic)}
+                mode={isEditing ? "edit" : "view"}
+                entityPath="cms/topics"
+                entityId={id}
+                onSave={handleSave}
+                onCancel={handleCancel}
+                onEdit={handleEdit}
+                onBack={handleBack}
+              />
+      </Box>
+
+  
     </Box>
   );
 }

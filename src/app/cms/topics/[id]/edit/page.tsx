@@ -1,4 +1,4 @@
-/* 'use client';
+/*'use client';
 
 import Form from "@/components/UI/dashboard/form";
 import {
@@ -77,18 +77,22 @@ export default function EditTopicPage({ params }: Props) {
 
 
 return (
-  <Form
-    title="Editar Tópico"
-    onSubmit={handleSubmit}
-    schema={TopicFormSchema}
-    formDefs={{
-      ...topicFormDefs,
-      defaultValues: topic,
-    }}
-    mode="edit"
-    entityPath="/api/topics"
-    entityId={params.id}
-  />
+  <>
+    
+    <Form
+      title="Editar Tópico"
+      onSubmit={handleSubmit}
+      schema={TopicFormSchema}
+      formDefs={{
+        ...topicFormDefs,
+        defaultValues: topic,
+      }}
+      mode="edit"
+      entityPath="/api/topics"
+      entityId={params.id}
+      
+    />
+  </>
 )
 
 }; */
