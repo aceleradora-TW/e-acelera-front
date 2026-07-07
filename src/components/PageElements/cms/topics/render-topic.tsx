@@ -12,7 +12,7 @@ const columns = [
   { id: "title", label: "Título" },
   { id: "themeTitle", label: "Tema", sortable: false },
   { id: "shortDescription", label: "Descrição curta" },
-  { id: "themeID", label: "ID do tema" },
+  { id: "isActive", label: "Ativo" },
 ];
 
 export default function RenderCmsPage() {
@@ -34,12 +34,18 @@ export default function RenderCmsPage() {
         const sortOrder = sortModel[0]?.sort;
         const res = await getTopics(page + 1, pageSize, sortBy, sortOrder);
 
-        setRows(res.data.data);
+        const formattedRows = res.data.data.map((topic: any) => ({
+          ...topic,
+          themeTitle: topic.theme?.title ?? "-",
+        }));
+
+        setRows(formattedRows);
         setRowCount(res.data.meta.total);
       } catch (error) {
         console.error("Erro ao buscar tópicos:", error);
-      } 
+      }
     }
+
     fetchTopics();
   }, [page, pageSize, sortModel]);
 
@@ -48,14 +54,15 @@ export default function RenderCmsPage() {
       display="flex"
       flexDirection="column"
       gap={"36px"}
-      sx={{ width: "100%"}}
+      sx={{ width: "100%" }}
     >
-      <UpperBanner 
-        title="CMS - Tópicos"   
-        menuBanner 
+      <UpperBanner
+        title="CMS - Tópicos"
+        menuBanner
         createButton
-        showBreadCrumb 
+        showBreadCrumb
       />
+
       <TableCMS
         columns={columns}
         rows={rows}
