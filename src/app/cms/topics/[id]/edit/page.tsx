@@ -1,4 +1,4 @@
-'use client';
+/*'use client';
 
 import Form from "@/components/UI/dashboard/form";
 import {
@@ -77,18 +77,38 @@ export default function EditTopicPage({ params }: Props) {
 
 
 return (
-  <Form
-    title="Editar Tópico"
-    onSubmit={handleSubmit}
-    schema={TopicFormSchema}
-    formDefs={{
-      ...topicFormDefs,
-      defaultValues: topic,
-    }}
-    mode="edit"
-    entityPath="/api/topics"
-    entityId={params.id}
-  />
+  <>
+    
+    <Form
+      title="Editar Tópico"
+      onSubmit={handleSubmit}
+      schema={TopicFormSchema}
+      formDefs={{
+        ...topicFormDefs,
+        defaultValues: topic,
+      }}
+      mode="edit"
+      entityPath="/api/topics"
+      entityId={params.id}
+      
+    />
+  </>
 )
 
-};
+};*/
+
+import DetailTopic from "@/components/PageElements/cms/topics/detail-topic";
+
+interface PageProps {
+  params: {
+    id: string;
+  };
+}
+
+export default function Page({ params }: { params: { id: string } }) {
+  return (
+    <DetailTopic
+    id={params.id}
+    isEditing 
+    />)
+}

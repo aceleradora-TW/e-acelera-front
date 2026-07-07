@@ -6,20 +6,27 @@ import { UpperBanner } from "@/components/UI/cms/upper-banner";
 import {
   actionsContainerStyles,
   cancelButtonStyles,
+  returnToList,
   textFieldStyles,
   textFieldsContainerStyles,
 } from "@/components/UI/dashboard/forms/form.styles";
 import { CmsTheme } from "@/types/type";
+import { useRouter } from "next/navigation";
+import { useTheme } from "@mui/material";
+import { FormActions } from "@/components/UI/dashboard/forms/form-actions";
 
 interface Props {
   id: string;
+  isEditing?: boolean;
 }
 
-export default function DetailTheme({ id }: Props) {
+export default function DetailTheme({ id, isEditing }: Props) {
   const [theme, setTheme] = useState<CmsTheme | undefined>(undefined);
   const [originalTheme, setOriginalTheme] = useState<CmsTheme | undefined>(undefined);
-  const [isEditing, setIsEditing] = useState(false);
+  /*const [isEditing, setIsEditing] = useState(false);*/
   const [errorMessage, setErrorMessage] = useState("");
+
+  const router = useRouter();
 
   const fetchTheme = useCallback(async () => {
     try {
@@ -56,24 +63,22 @@ export default function DetailTheme({ id }: Props) {
   }
 
   function handleEdit() {
-    setOriginalTheme(theme);
-    setIsEditing(true);
-    setErrorMessage("");
+    router.push(`/cms/themes/${id}/edit`);
   }
 
-  function handleCancelEdit() {
+  function handleCancel() {
+
     const confirmCancel = window.confirm(
       "Deseja cancelar a edição? As alterações serão perdidas."
     );
+    if (!confirmCancel) {
+      return;
+    }
 
-    if (!confirmCancel) return;
-
-    setTheme(originalTheme);
-    setIsEditing(false);
-    setErrorMessage("");
+        router.push(`/cms/themes/${id}`);
   }
 
-  async function handleSave() {
+  const handleSave = async () => {
     if (!theme) return;
 
     try {
@@ -103,25 +108,19 @@ export default function DetailTheme({ id }: Props) {
 
       const data = await response.json();
 
+      router.push("/cms/themes");
+
       setTheme(data.data ?? theme);
       setOriginalTheme(data.data ?? theme);
-      setIsEditing(false);
     } catch (error) {
       console.error("Erro ao salvar tema:", error);
       setErrorMessage("Não foi possível salvar as alterações do tema. Tente novamente.");
     }
   }
 
-  const currentTextFieldStyles = {
-    ...textFieldStyles,
-    ...(isEditing
-      ? {}
-      : {
-          "& .MuiOutlinedInput-notchedOutline": {
-            border: "none",
-          },
-        }),
-  };
+const handleBack = () => {
+    router.push(`/cms/themes`);
+  }
 
   return (
     <Box>
@@ -129,6 +128,7 @@ export default function DetailTheme({ id }: Props) {
         title="Themes"
         showBreadCrumb
         breadCrumbLabel={theme?.title}
+        editButton={!isEditing}
       />
 
       {errorMessage && (
@@ -144,7 +144,7 @@ export default function DetailTheme({ id }: Props) {
           fullWidth
           InputProps={{ readOnly: !isEditing }}
           onChange={(event) => handleChange("title", event.target.value)}
-          sx={currentTextFieldStyles}
+          sx={textFieldStyles}
         />
 
         <TextField
@@ -153,7 +153,7 @@ export default function DetailTheme({ id }: Props) {
           fullWidth
           InputProps={{ readOnly: !isEditing }}
           onChange={(event) => handleChange("shortDescription", event.target.value)}
-          sx={currentTextFieldStyles}
+          sx={textFieldStyles}
         />
 
         <TextField
@@ -164,7 +164,7 @@ export default function DetailTheme({ id }: Props) {
           onChange={(event) => handleChange("description", event.target.value)}
           multiline
           rows={4}
-          sx={currentTextFieldStyles}
+          sx={textFieldStyles}
         />
 
         <TextField
@@ -173,7 +173,7 @@ export default function DetailTheme({ id }: Props) {
           fullWidth
           InputProps={{ readOnly: !isEditing }}
           onChange={(event) => handleChange("imageAlt", event.target.value)}
-          sx={currentTextFieldStyles}
+          sx={textFieldStyles}
         />
 
         <TextField
@@ -182,7 +182,7 @@ export default function DetailTheme({ id }: Props) {
           fullWidth
           InputProps={{ readOnly: !isEditing }}
           onChange={(event) => handleChange("category", event.target.value)}
-          sx={currentTextFieldStyles}
+          sx={textFieldStyles}
         />
 
         <TextField
@@ -191,34 +191,22 @@ export default function DetailTheme({ id }: Props) {
           fullWidth
           InputProps={{ readOnly: !isEditing }}
           onChange={(event) => handleChange("sequence", event.target.value)}
-          sx={currentTextFieldStyles}
+          sx={textFieldStyles}
         />
       </Box>
 
       <Box sx={actionsContainerStyles}>
-        {!isEditing ? (
-          <Button onClick={handleEdit} disabled={!theme} variant="contained">
-            EDITAR
-          </Button>
-        ) : (
-          <>
-            <Button
-              variant="outlined"
-              sx={cancelButtonStyles}
-              onClick={handleCancelEdit}
-            >
-              CANCELAR
-            </Button>
-
-            <Button
-              variant="contained"
-              onClick={handleSave}
-              disabled={!theme}
-            >
-              SALVAR
-            </Button>
-          </>
-        )}
+              <FormActions
+                isValid={!!theme?.title && !!theme?.shortDescription && !!theme?.description}
+                isDirty={JSON.stringify(theme) !== JSON.stringify(originalTheme)}
+                mode={isEditing ? "edit" : "view"}
+                entityPath="cms/themes"
+                entityId={id}
+                onSave={handleSave}
+                onCancel={handleCancel}
+                onEdit={handleEdit}
+                onBack={handleBack}
+              />
       </Box>
     </Box>
   );

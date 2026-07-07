@@ -29,6 +29,8 @@ export default function RenderCmsPage() {
 
         const formattedRows = res.data.data.map((exercise: any) => ({
           ...exercise,
+          topicData: exercise.topic,
+          themeData: exercise.topic?.theme,
           topic: exercise.topic?.title ?? exercise.topic?.name ?? "-",
           theme:
             exercise.topic?.theme?.title ??
@@ -53,7 +55,13 @@ export default function RenderCmsPage() {
       gap={"36px"}
       sx={{ width: "100%" }}
     >
-      <UpperBanner title="CMS - Exercícios" menuBanner createButton />
+      <UpperBanner
+        title="CMS - Exercícios"
+        menuBanner
+        createButton
+        showBreadCrumb
+      />
+
       <TableCMS
         columns={columns}
         rows={rows}
