@@ -95,7 +95,7 @@ return (
   </>
 )
 
-};*/
+}; */
 
 import DetailTopic from "@/components/PageElements/cms/topics/detail-topic";
 
@@ -105,10 +105,11 @@ interface PageProps {
   };
 }
 
-export default function Page({ params }: { params: { id: string } }) {
+export default function Page({ params }: PageProps) {
   return (
-    <DetailTopic
-    id={params.id}
-    isEditing 
-    />)
+    <DetailTopic 
+      id={params.id} 
+      isEditing 
+    />
+  );
 }

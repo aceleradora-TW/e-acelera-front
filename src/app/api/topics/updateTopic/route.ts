@@ -49,7 +49,7 @@ export async function PATCH(req: NextRequest) {
         payload,
       });
 
-      return NextResponse.json(
+        return NextResponse.json(
         {
           error:
             payload?.error ||
