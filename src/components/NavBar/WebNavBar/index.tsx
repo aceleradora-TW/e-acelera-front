@@ -23,6 +23,7 @@ import LogoutIcon from "@mui/icons-material/Logout"
 import { Session } from "next-auth"
 import { useEffect, useState } from "react";
 import { useFlags, useFlagsmith } from "flagsmith/react"
+import AdminPanelSettingsOutlinedIcon from "@mui/icons-material/AdminPanelSettingsOutlined";
 
 interface WebMenuProps {
   list: string[]
@@ -30,12 +31,22 @@ interface WebMenuProps {
 }
 
 export const WebMenu: React.FC<WebMenuProps> = ({ list, session }) => {
+
   const flagsmith = useFlagsmith();
+
   const { flag_adminjs, is_test_user, adminjs_preference } = useFlags(['flag_adminjs'], ['is_test_user', 'adminjs_preference']);
   const router = useRouter()
   const pathname = usePathname()
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [isChecked, setIsChecked] = useState<boolean>(false);
+  const [currentRole, setCurrentRole] = useState(session?.user?.role);
+
+
+
+
+  const canSeeAdmin =
+    currentRole === "ADMIN" ||
+    currentRole === "EDITOR";
 
   useEffect(() => {
     if (session?.user?.email && is_test_user && adminjs_preference) {
@@ -44,6 +55,24 @@ export const WebMenu: React.FC<WebMenuProps> = ({ list, session }) => {
       setIsChecked(flag_adminjs?.enabled ?? false);
     }
   }, [session, flag_adminjs, is_test_user, adminjs_preference, flagsmith.getState()]);
+
+  useEffect(() => {
+    const fetchRole = async () => {
+      if (!session?.user?.email) return;
+
+      const response = await fetch("/api/user/getRole", {
+        headers: {
+          email: session.user.email,
+        },
+      });
+
+      const data = await response.json();
+
+      setCurrentRole(data.role);
+    };
+
+    fetchRole();
+  }, [session?.user?.email]);
 
   const handleApiToggle = async (event: React.ChangeEvent<HTMLInputElement>) => {
     if (!is_test_user) return;
@@ -114,24 +143,55 @@ export const WebMenu: React.FC<WebMenuProps> = ({ list, session }) => {
               </Typography>
             </MenuItem>
             {is_test_user && (
-              <MenuItem sx={{ cursor: "default" }}>
-                <FormControlLabel
-                  control={
-                    <Switch
-                      checked={isChecked}
-                      onChange={handleApiToggle}
-                      disabled={false}
-                      size="small"
+              <>
+                <MenuItem sx={{ cursor: "default" }}>
+                  <FormControlLabel
+                    control={
+                      <Switch
+                        checked={isChecked}
+                        onChange={handleApiToggle}
+                        disabled={false}
+                        size="small"
+                      />
+                    }
+                    label={
+                      <Typography sx={{ color: theme.palette.textColor?.light, fontSize: '0.9rem' }}>
+                        Usar Postgres
+                      </Typography>
+                    }
+                    labelPlacement="start"
+                  />
+                </MenuItem>
+
+                {canSeeAdmin && (
+                  <MenuItem
+                    onClick={() => {
+                      handleCloseMenu();
+                      router.push("/cms");
+                    }}
+                    sx={{
+                      gap: 1,
+                      py: 1,
+                    }}
+                  >
+                    <AdminPanelSettingsOutlinedIcon
+                      sx={{
+                        color: theme.palette.bgColor?.light,
+                        fontSize: 18,
+                      }}
                     />
-                  }
-                  label={
-                    <Typography sx={{ color: theme.palette.textColor?.light, fontSize: '0.9rem' }}>
-                      Usar AdminJS
+
+                    <Typography
+                      sx={{
+                        color: theme.palette.textColor?.light,
+                        fontSize: "0.95rem",
+                      }}
+                    >
+                      Painel Administrativo
                     </Typography>
-                  }
-                  labelPlacement="start"
-                />
-              </MenuItem>
+                  </MenuItem>
+                )}
+              </>
             )}
 
             <Divider />

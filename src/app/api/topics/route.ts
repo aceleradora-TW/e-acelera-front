@@ -53,11 +53,15 @@ export async function GET(req: NextRequest) {
 
         const page = searchParams.get("page")?.trim();
         const limit = searchParams.get("limit")?.trim();
+        const sortBy = searchParams.get("sortBy")?.trim();
+        const sortOrder = searchParams.get("sortOrder")?.trim();
 
         const query = new URLSearchParams();
 
         if (page) query.set("page", page);
         if (limit) query.set("limit", limit);
+        if (sortBy) query.set("sortBy", sortBy);
+        if (sortOrder) query.set("sortOrder", sortOrder);
 
         const baseUrl = process.env.BACKEND_BASE_URL;
 
