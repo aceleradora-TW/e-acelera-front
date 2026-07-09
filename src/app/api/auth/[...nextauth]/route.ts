@@ -19,12 +19,6 @@ const handler = NextAuth({
           const backendUrl =
             process.env.BACKEND_BASE_URL || "http://localhost:5002";
 
-          console.log(
-            `[NextAuth] Login iniciado - Provider: ${account.provider}, Email: ${user.email}`,
-          );
-
-          // 1. Primeiro: Registrar/validar o usuário no backend
-          console.log("[NextAuth] Registrando usuário no backend...");
           const loginResponse = await fetch(`${backendUrl}/login`, {
             method: "POST",
             headers: {
@@ -34,9 +28,6 @@ const handler = NextAuth({
           });
 
           const loginText = await loginResponse.text();
-          console.log(
-            `[NextAuth] Backend /login resposta: ${loginResponse.status} - ${loginText}`,
-          );
 
           if (!loginResponse.ok) {
             console.warn(
@@ -44,8 +35,6 @@ const handler = NextAuth({
             );
           }
 
-          // 2. Depois: Buscar a role do usuário
-          console.log("[NextAuth] Buscando role do usuário...");
           const roleResponse = await fetch(`${baseUrl}/api/user/getRole`, {
             method: "GET",
             headers: {
@@ -55,14 +44,10 @@ const handler = NextAuth({
           });
 
           const roleText = await roleResponse.text();
-          console.log(
-            `[NextAuth] /api/user/getRole resposta: ${roleResponse.status} - ${roleText}`,
-          );
 
           if (roleResponse.ok) {
             const userData = JSON.parse(roleText);
             token.role = userData.role || "VIEWER";
-            console.log(`[NextAuth] ✅ Role atribuída: ${token.role}`);
           } else {
             console.error(
               `[NextAuth] ❌ Erro ao buscar role: ${roleResponse.status}`,

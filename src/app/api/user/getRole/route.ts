@@ -19,7 +19,6 @@ export async function GET(req: NextRequest) {
       return NextResponse.json({ role: "VIEWER" }, { status: 200 });
     }
 
-    console.log(`[getRole] 🔍 Buscando role no backend: ${baseUrl}/user/role`);
     const response = await fetch(`${baseUrl}/user/role`, {
       method: "GET",
       headers: {
@@ -37,7 +36,6 @@ export async function GET(req: NextRequest) {
 
     const userData = JSON.parse(responseText);
     const finalRole = userData.role || "VIEWER";
-    console.log(`[getRole] ✅ Role encontrada: ${finalRole}`);
 
     return NextResponse.json({ role: finalRole }, { status: 200 });
   } catch (error) {

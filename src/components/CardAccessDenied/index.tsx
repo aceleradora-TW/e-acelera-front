@@ -9,7 +9,7 @@ export const CardAccessDenied = () => {
   const { data: session } = useSession();
 
   const userEmail = session?.user?.email || "Desconhecido";
-  const userRole = session?.user?.role || "SEM ROLE";
+  const userRole = session?.user?.role || "VIEWER";
   return (
     <Box sx={theme.customStyles.containerLogin}>
       <Box sx={theme.customStyles.cardLoginBox}>
