@@ -38,7 +38,7 @@ export function FormActions({
     <Box sx={actionsBoxStyles}>
       {mode === "view" && (
         <>
-          <Button
+          {/*<Button
             variant="contained"
             sx={returnToList(theme)}
             onClick={() =>
@@ -46,14 +46,14 @@ export function FormActions({
   }
           >
             Editar
-          </Button>
+          </Button>*/}
 
           <Button
             variant="contained"
             sx={returnToList(theme)}
             onClick={() => (onBack ? onBack() : router.push(`/${entityPath}`))}
           >
-            VOLTAR PARA LISTA
+            Voltar para a lista
           </Button>
         </>
       )}
@@ -101,7 +101,7 @@ export function FormActions({
             sx={submitButtonStyles(theme)}
             onClick={onSave}
           >
-            Salvar
+            Criar
           </Button>
         </>
       )}
