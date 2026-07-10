@@ -1,16 +1,62 @@
-
-
-import { Grid } from "@mui/material";
-import React from "react";
-import { BaseCard } from "@/components/BaseCard";
+import { Grid } from '@mui/material';
+import React from 'react';
+import { BaseCard } from '@/components/BaseCard';
 import {
   ApiResponse,
   ContainerCardThemeProps,
   DataItem,
+  DatabaseThemesResponse,
   ThemeField,
-} from "@/types/type";
-import { usePathname } from "next/navigation";
-import { useFlags } from "flagsmith/react";
+} from '@/types/type';
+import { usePathname } from 'next/navigation';
+
+function isStackbyResponse(data: unknown): data is ApiResponse {
+  if (
+    !data ||
+    typeof data !== 'object' ||
+    !('data' in data) ||
+    !Array.isArray(data.data)
+  ) {
+    return false;
+  }
+
+  if (data.data.length === 0) {
+    return false;
+  }
+
+  const firstItem = data.data[0];
+
+  return (
+    typeof firstItem === 'object' &&
+    firstItem !== null &&
+    'field' in firstItem
+  );
+}
+
+function isDatabaseThemesResponse(
+  data: unknown
+): data is DatabaseThemesResponse {
+  if (
+    !data ||
+    typeof data !== 'object' ||
+    !('data' in data) ||
+    !Array.isArray(data.data)
+  ) {
+    return false;
+  }
+
+  if (data.data.length === 0) {
+    return true;
+  }
+
+  const firstItem = data.data[0];
+
+  return !(
+    typeof firstItem === 'object' &&
+    firstItem !== null &&
+    'field' in firstItem
+  );
+}
 
 export const ContainerCardTheme: React.FC<ContainerCardThemeProps> = ({
   data,
@@ -19,38 +65,34 @@ export const ContainerCardTheme: React.FC<ContainerCardThemeProps> = ({
   const pathname = usePathname();
   const currentPath = pathname.slice(1);
 
-  const { is_test_user, adminjs_preference, flag_adminjs } = useFlags(
-    ["flag_adminjs"],
-    ["is_test_user", "adminjs_preference"]
-  );
-
-  const shouldUsePostgres =
-    flag_adminjs?.enabled || (is_test_user && adminjs_preference);
-
-  function isApiResponse(data: any): data is ApiResponse {
-    return Array.isArray(data?.data);
-  }
-
-  if (!shouldUsePostgres && isApiResponse(data)) {
+  if (isStackbyResponse(data)) {
     const filteredData = data.data.filter((element: DataItem) => {
-      const theme = element?.field as ThemeField;
+      const theme = element.field as ThemeField;
       return theme?.category === category;
     });
 
     return (
       <Grid container spacing={2} alignItems="stretch">
-        {filteredData.map((element: DataItem, index: number) => {
-          const field = element?.field as ThemeField;
+        {filteredData.map((element: DataItem) => {
+          const field = element.field as ThemeField;
 
           return (
-            <Grid item xl={3} lg={4} md={4} sm={6} xs={12} key={index}>
+            <Grid
+              item
+              xl={3}
+              lg={4}
+              md={4}
+              sm={6}
+              xs={12}
+              key={element.id}
+            >
               <BaseCard
                 id={element.id}
                 title={field?.title}
                 description={field?.cardDescription}
                 route={`${currentPath}/${element.id}-${field?.title}`}
-                image={field?.image ? field.image[0].url : ""}
-                textImage={`${field?.alt}`}
+                image={field?.image?.[0]?.url ?? ''}
+                textImage={field?.alt ?? ''}
                 cardType="theme"
               />
             </Grid>
@@ -60,23 +102,38 @@ export const ContainerCardTheme: React.FC<ContainerCardThemeProps> = ({
     );
   }
 
-  const databaseThemes = Array.isArray(data?.data) ? data.data : [];
+  if (isDatabaseThemesResponse(data)) {
+    return (
+      <Grid container spacing={2} alignItems="stretch">
+        {data.data.map((element) => (
+          <Grid
+            item
+            xl={3}
+            lg={4}
+            md={4}
+            sm={6}
+            xs={12}
+            key={element.id}
+          >
+            <BaseCard
+              id={element.id}
+              title={element.title}
+              description={
+                element.shortDescription ||
+                element.cardDescription ||
+                element.description ||
+                ''
+              }
+              route={`${currentPath}/${element.id}-${element.title}`}
+              image={element.image ?? ''}
+              textImage={element.alt ?? ''}
+              cardType="theme"
+            />
+          </Grid>
+        ))}
+      </Grid>
+    );
+  }
 
-  return (
-    <Grid container spacing={2} alignItems="stretch">
-      {databaseThemes.map((element: any, index: number) => (
-        <Grid item xl={3} lg={4} md={4} sm={6} xs={12} key={index}>
-          <BaseCard
-            id={element.id}
-            title={element.title}
-            description={element.shortDescription}
-            route={`${currentPath}/${element.id}-${element.title}`}
-            image={element.image}
-            textImage={`${element.alt}`}
-            cardType="theme"
-          />
-        </Grid>
-      ))}
-    </Grid>
-  );
+  return null;
 };

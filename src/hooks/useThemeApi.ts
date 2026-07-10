@@ -1,65 +1,108 @@
 'use client';
+
 import { useEffect, useState } from 'react';
 import { useFlags } from 'flagsmith/react';
 import { useSession } from 'next-auth/react';
-import { ApiResponse } from "@/types/type";
+import { ApiResponse, DatabaseThemesResponse } from '@/types/type';
 
+type ThemeApiResponse = ApiResponse | DatabaseThemesResponse;
 
-export function useThemeApi (category: string) {
-  const { flag_adminjs, is_test_user, adminjs_preference } = useFlags(['flag_adminjs'], ['is_test_user', 'adminjs_preference']);
-  const {data: sessionData} = useSession();
-  const [data, setData] = useState<ApiResponse | null>(null);
+function traitIsTrue(value: unknown): boolean {
+  return (
+    value === true ||
+    value === 'true' ||
+    value === 1 ||
+    value === '1'
+  );
+}
+
+export function useThemeApi(category: string) {
+  const { flag_adminjs, is_test_user, adminjs_preference } = useFlags(
+    ['flag_adminjs'],
+    ['is_test_user', 'adminjs_preference']
+  );
+
+  const { data: sessionData } = useSession();
+
+  const [data, setData] = useState<ThemeApiResponse | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 
   useEffect(() => {
-    if (!flag_adminjs) {
-      setLoading(true);
-      return;
-    }
-
     setLoading(true);
     setError(false);
 
+    const isTestUser = traitIsTrue(is_test_user);
+    const useAdminJs =
+      flag_adminjs?.enabled === true ||
+      (isTestUser && traitIsTrue(adminjs_preference));
+
+    console.log('useThemeApi:', {
+      flagAdminJs: flag_adminjs?.enabled,
+      isTestUser,
+      adminjsPreference: adminjs_preference,
+      useAdminJs,
+    });
+
     let url: string;
+
     const fetchOptions: RequestInit = {
       method: 'GET',
       headers: {},
     };
-    if (flag_adminjs.enabled || (is_test_user && adminjs_preference)) {
-      console.log("Flagsmith: 'flag_adminjs' HABILITADA. Chamando a rota de API /api/themes.");
-      const params = new URLSearchParams({ category });
+
+    if (useAdminJs) {
+      const params = new URLSearchParams({
+        category,
+        limit: '100',
+      });
+
       url = `/api/themes?${params.toString()}`;
-      fetchOptions.headers = {};
+
+      console.log('Chamando CMS/Postgres:', url);
     } else {
-      console.log("Flagsmith: 'flag_adminjs' DESABILITADA. Chamando a rota de API /api/stackbyApi/Themes.");
-      url = `/api/stackbyApi/Themes`;
+      url = '/api/stackbyApi/Themes';
+
       fetchOptions.headers = {
-        'operator': 'equal',
-        'column': 'category',
-        'value': category,
+        operator: 'equal',
+        column: 'category',
+        value: category,
       };
+
+      console.log('Chamando Stackby:', url);
     }
 
     fetch(url, fetchOptions)
-      .then(async res => {
-        if (!res.ok) {
-          return res.json().then(err => {
-            throw new Error(err.error || `A requisição para ${url} falhou: ${res.status}`);
-          });
+      .then(async (response) => {
+        if (!response.ok) {
+          const responseError = await response.json().catch(() => null);
+
+          throw new Error(
+            responseError?.error ||
+              `A requisição para ${url} falhou: ${response.status}`
+          );
         }
-        return await res.json();
+
+        return response.json();
       })
-      .then((apiData) => setData(apiData))
-      .catch(err => {
-        console.error("Erro no hook useThemeApi:", err);
+      .then((apiData: ThemeApiResponse) => {
+        console.log('Dados recebidos em useThemeApi:', apiData);
+        setData(apiData);
+      })
+      .catch((requestError) => {
+        console.error('Erro no hook useThemeApi:', requestError);
         setError(true);
       })
       .finally(() => {
-        setLoading(false)
+        setLoading(false);
       });
-
-  }, [sessionData?.user.email, category, flag_adminjs.enabled, flag_adminjs, is_test_user, adminjs_preference]);
+  }, [
+    sessionData?.user?.email,
+    category,
+    flag_adminjs?.enabled,
+    is_test_user,
+    adminjs_preference,
+  ]);
 
   return { data, loading, error };
-};
+}
