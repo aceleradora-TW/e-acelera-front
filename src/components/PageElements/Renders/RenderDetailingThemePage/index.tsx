@@ -8,6 +8,7 @@ import { LayoutPage } from '../../LayoutPage';
 import { DetailingThemeContent } from '../../Content/DetailingThemeContent';
 import { BadRequest } from '@/components/BadRequest';
 import { NoData } from '@/components/NoData';
+import { DatabaseTheme } from '@/types/type';
 
 interface RenderDetailingThemePageProps {
   id: string;
@@ -39,7 +40,7 @@ export const RenderDetailingThemePage: React.FC<
     (isTestUser && traitIsTrue(adminjs_preference));
 
   const url = usePostgres
-    ? `/api/themes/${extractedThemeId}`
+    ? '/api/themes?category=Nivelamento&limit=100'
     : '/api/stackbyApi/Themes';
 
   const fetchOptions: RequestInit = usePostgres
@@ -77,6 +78,30 @@ export const RenderDetailingThemePage: React.FC<
 
   if (!renderData) {
     return <NoData />;
+  }
+
+  if (usePostgres) {
+    const themes = Array.isArray(renderData.data)
+      ? (renderData.data as unknown as DatabaseTheme[])
+      : [];
+
+    const selectedTheme = themes.find(
+      (theme) => theme.id === extractedThemeId
+    );
+
+    if (!selectedTheme) {
+      return <NoData />;
+    }
+
+    return (
+      <LayoutPage>
+        <DetailingThemeContent
+          data={{
+            data: selectedTheme,
+          }}
+        />
+      </LayoutPage>
+    );
   }
 
   return (
