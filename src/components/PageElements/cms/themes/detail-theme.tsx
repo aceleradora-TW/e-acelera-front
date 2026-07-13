@@ -1,18 +1,15 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
-import { Alert, Box, Button, TextField } from "@mui/material";
+import { Alert, Box, TextField } from "@mui/material";
 import { UpperBanner } from "@/components/UI/cms/upper-banner";
 import {
   actionsContainerStyles,
-  cancelButtonStyles,
-  returnToList,
   textFieldStyles,
   textFieldsContainerStyles,
 } from "@/components/UI/dashboard/forms/form.styles";
 import { CmsTheme } from "@/types/type";
 import { useRouter } from "next/navigation";
-import { useTheme } from "@mui/material";
 import { FormActions } from "@/components/UI/dashboard/forms/form-actions";
 
 interface Props {
@@ -23,7 +20,6 @@ interface Props {
 export default function DetailTheme({ id, isEditing }: Props) {
   const [theme, setTheme] = useState<CmsTheme | undefined>(undefined);
   const [originalTheme, setOriginalTheme] = useState<CmsTheme | undefined>(undefined);
-  /*const [isEditing, setIsEditing] = useState(false);*/
   const [errorMessage, setErrorMessage] = useState("");
 
   const router = useRouter();
