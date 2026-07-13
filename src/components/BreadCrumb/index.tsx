@@ -9,6 +9,13 @@ type BreadCrumbProps = {
   lastLabel?: string;
 };
 
+const translations: Record<string, string> = {
+  themes: 'Temas',
+  topics: 'Tópicos',
+  exercises: 'Exercícios',
+  cms: 'Admin',
+};
+
 export const BreadCrumb: React.FC<BreadCrumbProps> = ({ lastLabel }) => {
   const pathname: string = usePathname();
   const [isValidPage, setIsValidPage] = useState<boolean>(false);
@@ -39,7 +46,9 @@ export const BreadCrumb: React.FC<BreadCrumbProps> = ({ lastLabel }) => {
     .filter((crumb) => crumb)
     .map((crumb) => {
       const hyphenIndex = crumb.indexOf('-');
-      return hyphenIndex !== -1 ? crumb.substring(hyphenIndex + 1) : crumb;
+      const rawText = hyphenIndex !== -1 ? crumb.substring(hyphenIndex + 1) : crumb;
+
+      return translations[rawText.toLowerCase()] || rawText;
     });
 
   if (lastLabel && breadcrumbs.length > 0) {

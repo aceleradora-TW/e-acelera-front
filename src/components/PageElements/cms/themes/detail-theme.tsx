@@ -121,7 +121,7 @@ const handleBack = () => {
   return (
     <Box>
       <UpperBanner
-        title={theme?.title || "Temas"}
+        title="Temas"
         showBreadCrumb
         breadCrumbLabel={theme?.title}
         editButton={!isEditing}
