@@ -41,15 +41,21 @@ export const BreadCrumb: React.FC<BreadCrumbProps> = ({ lastLabel }) => {
     checkPageStatus();
   }, [pathname]);
 
-  const breadcrumbs: string[] = pathname
-    .split('/')
-    .filter((crumb) => crumb)
-    .map((crumb) => {
-      const hyphenIndex = crumb.indexOf('-');
-      const rawText = hyphenIndex !== -1 ? crumb.substring(hyphenIndex + 1) : crumb;
+  const routeSegments: string[] = pathname.split('/').filter((crumb) => crumb);
+  const isEditPage: boolean = Boolean(lastLabel) && routeSegments.at(-1) === 'edit';
 
-      return translations[rawText.toLowerCase()] || rawText;
-    });
+  const breadcrumbs: string[] = [];
+
+  routeSegments.forEach((crumb, index) => {
+    if (isEditPage && index === routeSegments.length - 2) {
+      return;
+    }
+
+    const hyphenIndex = crumb.indexOf('-');
+    const rawText = hyphenIndex !== -1 ? crumb.substring(hyphenIndex + 1) : crumb;
+
+    breadcrumbs.push(translations[rawText.toLowerCase()] || rawText);
+  });
 
   if (lastLabel && breadcrumbs.length > 0) {
     breadcrumbs[breadcrumbs.length - 1] = lastLabel;
@@ -57,7 +63,7 @@ export const BreadCrumb: React.FC<BreadCrumbProps> = ({ lastLabel }) => {
 
   const capitalizeFirstLetter = (text: string): string => text.charAt(0).toUpperCase() + text.slice(1)
 
-  const breadroutes: string[] = pathname.split('/').filter((crumb) => crumb);
+  const breadroutes: string[] = routeSegments;
 
   const handleBreadcrumbClick = (href: string, event: MouseEvent<HTMLAnchorElement, globalThis.MouseEvent>) => {
     if (href === pathname) {
