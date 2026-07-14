@@ -8,10 +8,11 @@ import { LayoutPage } from '../../LayoutPage';
 import { DetailingThemeContent } from '../../Content/DetailingThemeContent';
 import { BadRequest } from '@/components/BadRequest';
 import { NoData } from '@/components/NoData';
-import { DatabaseTheme } from '@/types/type';
+import { ApiResponse } from '@/types/type';
 
 interface RenderDetailingThemePageProps {
   id: string;
+  category?: string;
 }
 
 function traitIsTrue(value: unknown): boolean {
@@ -26,7 +27,11 @@ function traitIsTrue(value: unknown): boolean {
 export const RenderDetailingThemePage: React.FC<
   RenderDetailingThemePageProps
 > = ({ id }) => {
-  const { flag_adminjs, is_test_user, adminjs_preference } = useFlags(
+  const {
+    flag_adminjs,
+    is_test_user,
+    adminjs_preference,
+  } = useFlags(
     ['flag_adminjs'],
     ['is_test_user', 'adminjs_preference']
   );
@@ -40,12 +45,15 @@ export const RenderDetailingThemePage: React.FC<
     (isTestUser && traitIsTrue(adminjs_preference));
 
   const url = usePostgres
-    ? '/api/themes?category=Nivelamento&limit=100'
+    ? '/api/themes/getThemeById'
     : '/api/stackbyApi/Themes';
 
   const fetchOptions: RequestInit = usePostgres
     ? {
         method: 'GET',
+        headers: {
+          id: extractedThemeId,
+        },
       }
     : {
         method: 'GET',
@@ -61,13 +69,6 @@ export const RenderDetailingThemePage: React.FC<
     error,
   } = useFetchData(url, fetchOptions);
 
-  console.log('RenderDetailingThemePage:', {
-    extractedThemeId,
-    usePostgres,
-    url,
-    renderData,
-  });
-
   if (loading) {
     return <Loading />;
   }
@@ -81,24 +82,23 @@ export const RenderDetailingThemePage: React.FC<
   }
 
   if (usePostgres) {
-    const themes = Array.isArray(renderData.data)
-      ? (renderData.data as unknown as DatabaseTheme[])
-      : [];
-
-    const selectedTheme = themes.find(
-      (theme) => theme.id === extractedThemeId
-    );
-
-    if (!selectedTheme) {
-      return <NoData />;
-    }
+    const normalizedData =
+      typeof renderData === 'object' &&
+      renderData !== null &&
+      'data' in renderData
+        ? renderData
+        : {
+            data: renderData,
+          };
 
     return (
       <LayoutPage>
         <DetailingThemeContent
-          data={{
-            data: selectedTheme,
-          }}
+          data={
+            normalizedData as React.ComponentProps<
+              typeof DetailingThemeContent
+            >['data']
+          }
         />
       </LayoutPage>
     );
@@ -106,7 +106,9 @@ export const RenderDetailingThemePage: React.FC<
 
   return (
     <LayoutPage>
-      <DetailingThemeContent data={renderData} />
+      <DetailingThemeContent
+        data={renderData as ApiResponse}
+      />
     </LayoutPage>
   );
 };
