@@ -130,9 +130,9 @@ export default function DetailTopic({ id, isEditing }: Props) {
     <Box>
       <Box sx={{ position: "relative" }}>
         <UpperBanner
-          title={"Tópicos"}
+          title={topic?.title || ""}
           showBreadCrumb
-          breadCrumbLabel={topic?.title}
+          breadCrumbLabel={topic?.title || ""}
           editButton={!isEditing}
         />
       </Box>
