@@ -21,6 +21,7 @@ export default function DetailTheme({ id, isEditing }: Props) {
   const [theme, setTheme] = useState<CmsTheme | undefined>(undefined);
   const [originalTheme, setOriginalTheme] = useState<CmsTheme | undefined>(undefined);
   const [errorMessage, setErrorMessage] = useState("");
+  const [formData, setFormData] = useState<CmsTheme | undefined>();
 
   const router = useRouter();
 
@@ -37,9 +38,9 @@ export default function DetailTheme({ id, isEditing }: Props) {
       if (!response.ok) throw new Error(`Erro: ${response.status}`);
 
       const data = await response.json();
-
       setTheme(data.data);
       setOriginalTheme(data.data);
+      setFormData(data.data);
     } catch (error) {
       console.error("Erro ao buscar tema:", error);
     }
@@ -50,10 +51,10 @@ export default function DetailTheme({ id, isEditing }: Props) {
   }, [fetchTheme]);
 
   function handleChange(field: keyof CmsTheme, value: string) {
-    if (!theme) return;
+    if (!formData) return;
 
-    setTheme({
-      ...theme,
+    setFormData({
+      ...formData,
       [field]: value,
     });
   }
@@ -63,7 +64,6 @@ export default function DetailTheme({ id, isEditing }: Props) {
   }
 
   function handleCancel() {
-
     const confirmCancel = window.confirm(
       "Deseja cancelar a edição? As alterações serão perdidas."
     );
@@ -71,22 +71,22 @@ export default function DetailTheme({ id, isEditing }: Props) {
       return;
     }
 
-        router.push(`/cms/themes/${id}`);
+    router.push(`/cms/themes/${id}`);
   }
 
-  const handleSave = async () => {
-    if (!theme) return;
+  const handleSave = useCallback(async () => {
+    if (!formData) return;
 
     try {
       setErrorMessage("");
 
       const payload = {
-        title: theme.title,
-        shortDescription: theme.shortDescription,
-        description: theme.description,
-        imageAlt: theme.imageAlt,
-        category: theme.category,
-        sequence: theme.sequence,
+        title: formData.title,
+        shortDescription: formData.shortDescription,
+        description: formData.description,
+        imageAlt: formData.imageAlt,
+        category: formData.category,
+        sequence: formData.sequence,
       };
 
       const response = await fetch(`/api/themes/updateTheme`, {
@@ -106,17 +106,18 @@ export default function DetailTheme({ id, isEditing }: Props) {
 
       router.push("/cms/themes");
 
-      setTheme(data.data ?? theme);
-      setOriginalTheme(data.data ?? theme);
+      setTheme(data.data);
+      setOriginalTheme(data.data);
+      setFormData(data.data);
     } catch (error) {
       console.error("Erro ao salvar tema:", error);
       setErrorMessage("Não foi possível salvar as alterações do tema. Tente novamente.");
     }
-  }
+  }, [formData, theme, id]);
 
-const handleBack = () => {
+  const handleBack = () => {
     router.push(`/cms/themes`);
-  }
+  };
 
   return (
     <Box>
@@ -136,7 +137,7 @@ const handleBack = () => {
       <Box sx={textFieldsContainerStyles}>
         <TextField
           label="Título"
-          value={theme?.title || ""}
+          value={formData?.title || ""}
           fullWidth
           InputProps={{ readOnly: !isEditing }}
           onChange={(event) => handleChange("title", event.target.value)}
@@ -145,7 +146,7 @@ const handleBack = () => {
 
         <TextField
           label="Descrição curta"
-          value={theme?.shortDescription || ""}
+          value={formData?.shortDescription || ""}
           fullWidth
           InputProps={{ readOnly: !isEditing }}
           onChange={(event) => handleChange("shortDescription", event.target.value)}
@@ -154,7 +155,7 @@ const handleBack = () => {
 
         <TextField
           label="Descrição"
-          value={theme?.description || ""}
+          value={formData?.description || ""}
           fullWidth
           InputProps={{ readOnly: !isEditing }}
           onChange={(event) => handleChange("description", event.target.value)}
@@ -165,7 +166,7 @@ const handleBack = () => {
 
         <TextField
           label="Texto alt da imagem"
-          value={theme?.imageAlt || ""}
+          value={formData?.imageAlt || ""}
           fullWidth
           InputProps={{ readOnly: !isEditing }}
           onChange={(event) => handleChange("imageAlt", event.target.value)}
@@ -174,7 +175,7 @@ const handleBack = () => {
 
         <TextField
           label="Categoria"
-          value={theme?.category || ""}
+          value={formData?.category || ""}
           fullWidth
           InputProps={{ readOnly: !isEditing }}
           onChange={(event) => handleChange("category", event.target.value)}
@@ -183,7 +184,7 @@ const handleBack = () => {
 
         <TextField
           label="Sequência"
-          value={theme?.sequence ?? ""}
+          value={formData?.sequence ?? ""}
           fullWidth
           InputProps={{ readOnly: !isEditing }}
           onChange={(event) => handleChange("sequence", event.target.value)}
@@ -192,17 +193,17 @@ const handleBack = () => {
       </Box>
 
       <Box sx={actionsContainerStyles}>
-              <FormActions
-                isValid={!!theme?.title && !!theme?.shortDescription && !!theme?.description}
-                isDirty={JSON.stringify(theme) !== JSON.stringify(originalTheme)}
-                mode={isEditing ? "edit" : "view"}
-                entityPath="cms/themes"
-                entityId={id}
-                onSave={handleSave}
-                onCancel={handleCancel}
-                onEdit={handleEdit}
-                onBack={handleBack}
-              />
+        <FormActions
+          isValid={!!formData?.title && !!formData?.shortDescription && !!formData?.description}
+          isDirty={JSON.stringify(formData) !== JSON.stringify(originalTheme)}
+          mode={isEditing ? "edit" : "view"}
+          entityPath="cms/themes"
+          entityId={id}
+          onSave={handleSave}
+          onCancel={handleCancel}
+          onEdit={handleEdit}
+          onBack={handleBack}
+        />
       </Box>
     </Box>
   );

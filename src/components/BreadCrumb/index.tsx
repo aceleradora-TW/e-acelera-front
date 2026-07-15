@@ -16,6 +16,20 @@ const translations: Record<string, string> = {
   cms: 'Admin',
 };
 
+const breadcrumbTranslations: Record<string, string> = {
+  ...translations,
+  themeslist: 'Admin',
+  topicslist: 'Admin',
+  exerciseslist: 'Admin',
+};
+
+const breadcrumbCheck: Record<string, boolean> = {
+  themes: true,
+  topics: true,
+  exercises: true,
+  "": true,
+};
+
 export const BreadCrumb: React.FC<BreadCrumbProps> = ({ lastLabel }) => {
   const pathname: string = usePathname();
   const [isValidPage, setIsValidPage] = useState<boolean>(false);
@@ -43,27 +57,42 @@ export const BreadCrumb: React.FC<BreadCrumbProps> = ({ lastLabel }) => {
 
   const routeSegments: string[] = pathname.split('/').filter((crumb) => crumb);
   const isEditPage: boolean = Boolean(lastLabel) && routeSegments.at(-1) === 'edit';
+  
+  const normalizedSegments: string[] = routeSegments.map(segment => {
+    const match = segment.match(/^([^-]+)-/);
+    return match ? match[1] : segment;
+  });
+
+  const baseSegments: string[] = normalizedSegments.slice(0, 2);
+  
+  const isListPage: boolean = ['themes', 'topics', 'exercises'].includes(baseSegments[1]?.toLowerCase());
+
+  const visibleSegments: string[] = isListPage 
+    ? ['cms']
+    : lastLabel
+      ? routeSegments.slice(0, isEditPage ? -2 : -1)
+      : routeSegments;
 
   const breadcrumbs: string[] = [];
 
-  routeSegments.forEach((crumb, index) => {
-    if (isEditPage && index === routeSegments.length - 2) {
-      return;
-    }
-
+  visibleSegments.forEach((crumb) => {
     const hyphenIndex = crumb.indexOf('-');
     const rawText = hyphenIndex !== -1 ? crumb.substring(hyphenIndex + 1) : crumb;
-
-    breadcrumbs.push(translations[rawText.toLowerCase()] || rawText);
+    
+    const segmentKey = crumbsTranslate(rawText.toLowerCase());
+    breadcrumbs.push(breadcrumbTranslations[segmentKey] || translations[rawText.toLowerCase()] || rawText);
   });
 
-  if (lastLabel && breadcrumbs.length > 0) {
-    breadcrumbs[breadcrumbs.length - 1] = lastLabel;
+  function crumbsTranslate(segment: string): string {
+    if (breadcrumbTranslations[segment as keyof typeof breadcrumbTranslations] !== undefined) {
+      return segment as keyof typeof breadcrumbTranslations;
+    }
+    return segment;
   }
 
   const capitalizeFirstLetter = (text: string): string => text.charAt(0).toUpperCase() + text.slice(1)
 
-  const breadroutes: string[] = routeSegments;
+  const breadroutes: string[] = visibleSegments;
 
   const handleBreadcrumbClick = (href: string, event: MouseEvent<HTMLAnchorElement, globalThis.MouseEvent>) => {
     if (href === pathname) {

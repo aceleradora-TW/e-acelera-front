@@ -57,7 +57,7 @@ export default function RenderCmsPage() {
       sx={{ width: "100%" }}
     >
       <UpperBanner
-        title="Admin - Tópicos"
+        title="Tópicos"
         menuBanner
         createButton
         showBreadCrumb
