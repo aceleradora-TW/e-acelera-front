@@ -2,12 +2,10 @@
 
 import { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { Box, Button, TextField, Typography, useTheme } from "@mui/material";
+import { Box, TextField, useTheme } from "@mui/material";
 import { UpperBanner } from "@/components/UI/cms/upper-banner";
 import {
   actionsContainerStyles,
-  cancelButtonStyles,
-  returnToList,
   textFieldStyles,
   textFieldsContainerStyles,
 } from "@/components/UI/dashboard/forms/form.styles";
@@ -44,6 +42,7 @@ export default function DetailTopic({ id, isEditing }: Props) {
 
       const data = await response.json();
       setTopic(data.data);
+      setOriginalTopic(data.data);
       setFormData(data.data);
     } catch (error) {
       console.error("Erro ao buscar tópico:", error);
@@ -97,9 +96,17 @@ export default function DetailTopic({ id, isEditing }: Props) {
 
 }
 
-  const handleCancel = () => {
-    router.push(`/cms/topics/${id}`);
-  };
+  function handleCancel() {
+
+    const confirmCancel = window.confirm(
+      "Deseja cancelar a edição? As alterações serão perdidas."
+    );
+    if (!confirmCancel) {
+      return;
+    }
+
+        router.push(`/cms/topics/${id}`);
+  }
 
   function handleEdit() {
     router.push(`/cms/topics/${id}/edit`);
@@ -123,7 +130,7 @@ export default function DetailTopic({ id, isEditing }: Props) {
     <Box>
       <Box sx={{ position: "relative" }}>
         <UpperBanner
-          title={topic?.title || "Tópicos"}
+          title={"Tópicos"}
           showBreadCrumb
           breadCrumbLabel={topic?.title}
           editButton={!isEditing}
@@ -240,9 +247,7 @@ export default function DetailTopic({ id, isEditing }: Props) {
 
       <Box sx={actionsContainerStyles}>
         <FormActions
-          isValid={
-            !!topic?.title && !!topic?.shortDescription && !!topic?.description
-          }
+          isValid={!!topic?.title && !!topic?.shortDescription && !!topic?.description}
           isDirty={JSON.stringify(topic) !== JSON.stringify(originalTopic)}
           mode={isEditing ? "edit" : "view"}
           entityPath="cms/topics"

@@ -4,9 +4,8 @@ import {
   actionsBoxStyles,
   cancelButtonStyles,
   returnToList,
-  submitButtonStyles
-} from "../forms/form.styles"
-
+  submitButtonStyles,
+} from "../forms/form.styles";
 
 interface FormActionsProps {
   isValid: boolean;
@@ -29,7 +28,7 @@ export function FormActions({
   onSave,
   onCancel,
   onEdit,
-  onBack
+  onBack,
 }: FormActionsProps) {
   const theme = useTheme();
   const router = useRouter();
@@ -41,19 +40,9 @@ export function FormActions({
           <Button
             variant="contained"
             sx={returnToList(theme)}
-            onClick={() =>
-    onEdit ? onEdit() : router.push(`/${entityPath}/${entityId}/edit`)
-  }
-          >
-            Editar
-          </Button>
-
-          <Button
-            variant="contained"
-            sx={returnToList(theme)}
             onClick={() => (onBack ? onBack() : router.push(`/${entityPath}`))}
           >
-            VOLTAR PARA LISTA
+            Voltar para a lista
           </Button>
         </>
       )}
@@ -64,8 +53,14 @@ export function FormActions({
             variant="contained"
             sx={cancelButtonStyles(theme)}
             onClick={() =>
-    onCancel ? onCancel() : router.push(mode === "edit" ? `/${entityPath}/${entityId}` : `/${entityPath}`)
-  }
+              onCancel
+                ? onCancel()
+                : router.push(
+                    mode === "edit"
+                      ? `/${entityPath}/${entityId}`
+                      : `/${entityPath}`,
+                  )
+            }
           >
             Cancelar
           </Button>
@@ -88,8 +83,8 @@ export function FormActions({
             variant="contained"
             sx={cancelButtonStyles(theme)}
             onClick={() =>
-        onCancel ? onCancel() : router.push(`/${entityPath}`)
-      }
+              onCancel ? onCancel() : router.push(`/${entityPath}`)
+            }
           >
             Cancelar
           </Button>
@@ -101,7 +96,7 @@ export function FormActions({
             sx={submitButtonStyles(theme)}
             onClick={onSave}
           >
-            Salvar
+            Criar
           </Button>
         </>
       )}
