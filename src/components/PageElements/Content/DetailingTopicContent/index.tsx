@@ -7,7 +7,7 @@ import { ContainerCardsExercises } from "../../Container/ContainerCardsExercises
 import { DescriptionWithVideo } from "@/components/descriptions/description-with-video"
 import { Heading } from "@/components/Heading"
 import ProgressBar from "@/components/PageElements/Progress/ProgressBar"
-import { useGlobalContext } from "@/hooks/useGlobalContext"
+import { NoData } from "@/components/NoData";
 
 interface DetailingContentProps {
   data: ApiResponse
@@ -66,17 +66,74 @@ const TopicContent: React.FC<TopicContentProps> = ({ field, topicProgress }) => 
 
 export const DetailingTopicContent: React.FC<DetailingContentProps> = ({
   data,
-  id,
-  topicProgress
+  topicProgress,
 }) => {
-  const { handleTopicStatus } = useGlobalContext();
+  const responseData = data?.data;
 
-  const [topicData]  = data?.data;
+  const topicData = Array.isArray(responseData)
+    ? responseData[0]
+    : responseData;
+
+  if (!topicData) {
+    return <NoData />;
+  }
+
+  if (
+    typeof topicData === "object" &&
+    topicData !== null &&
+    "field" in topicData &&
+    topicData.field
+  ) {
+    return (
+      <TopicContent
+        field={topicData.field as TopicField}
+        topicProgress={topicProgress}
+      />
+    );
+  }
+
+  const databaseTopic = topicData as any;
+
+  const exerciseList =
+    databaseTopic.exercise ??
+    databaseTopic.exercises ??
+    [];
+
+  const normalizedField: TopicField = {
+    ...databaseTopic,
+
+    exercises: Array.isArray(exerciseList)
+      ? exerciseList
+          .map((exercise) => exercise.title ?? "")
+          .join(",")
+      : exerciseList ?? "",
+
+    exercisesDescription: Array.isArray(exerciseList)
+      ? exerciseList
+          .map(
+            (exercise) =>
+              exercise.shortDescription ??
+              exercise.description ??
+              ""
+          )
+          .join(",")
+      : databaseTopic.exercisesDescription ?? "",
+
+    exercisesInfo: Array.isArray(exerciseList)
+      ? exerciseList
+          .map((exercise) => exercise.id ?? "")
+          .join(",")
+      : databaseTopic.exercisesInfo ?? "",
+
+    references: Array.isArray(databaseTopic.references)
+      ? databaseTopic.references.join(",")
+      : databaseTopic.references ?? "",
+  };
 
   return (
     <TopicContent
-      field={topicData?.field as TopicField}
+      field={normalizedField}
       topicProgress={topicProgress}
     />
-  )
-}
+  );
+};

@@ -1,23 +1,43 @@
 import React from "react";
 import { Grid } from "@mui/material";
 import { BreadCrumb } from "@/components/BreadCrumb";
-import { ApiResponse, DataItem, ExercisesField } from "@/types/type";
+import {
+  ApiResponse,
+  DataItem,
+  ExercisesField,
+} from "@/types/type";
 import { DescriptionFull } from "@/components/descriptions/description-full";
 import { ContainerButtonsExercise } from "../../Container/ContainerButtonsExercise";
 import { Heading } from "@/components/Heading";
 import StatusSelect from "@/components/StatusSelect";
 import { ElementType } from "@/types/typeTopic";
+import { NoData } from "@/components/NoData";
+
+interface DatabaseExercise {
+  id: string;
+  title?: string;
+  description?: string;
+}
+
+interface DatabaseExerciseResponse {
+  data: DatabaseExercise | DatabaseExercise[];
+}
 
 interface DetailingContentProps {
-  dataTopic: ApiResponse
-  dataExercise: ApiResponse;
+  dataTopic: ApiResponse;
+  dataExercise: ApiResponse | DatabaseExerciseResponse;
   id: string;
+}
+
+interface NormalizedExercise {
+  id: string;
+  field: ExercisesField;
 }
 
 const ExerciseContent: React.FC<{
   field: ExercisesField;
   idExercise: string;
-  dataTopic: ApiResponse
+  dataTopic: ApiResponse;
 }> = ({ field, idExercise, dataTopic }) => (
   <>
     <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
@@ -36,40 +56,95 @@ const ExerciseContent: React.FC<{
         flexWrap: "wrap",
         justifyContent: "space-between",
         alignItems: "center",
-        marginBottom: 2
+        marginBottom: 2,
       }}
     >
       <Grid item>
-        <Heading variant="h1" text={field.title} />
+        <Heading
+          variant="h1"
+          text={field.title ?? ""}
+        />
       </Grid>
-      <Grid item >
-        <StatusSelect elementType={ElementType.Exercise} id={idExercise} width="100%" />
+
+      <Grid item>
+        <StatusSelect
+          elementType={ElementType.Exercise}
+          id={idExercise}
+          width="100%"
+        />
       </Grid>
     </Grid>
-    <DescriptionFull text={field.description} />
-    <ContainerButtonsExercise idExercise={idExercise} data={dataTopic} />
+
+    <DescriptionFull text={field.description ?? ""} />
+
+    <ContainerButtonsExercise
+      idExercise={idExercise}
+      data={dataTopic}
+    />
   </>
 );
 
-export const DetailingExerciseContent: React.FC<DetailingContentProps> = ({
+const isStackbyItem = (
+  item: DataItem | DatabaseExercise
+): item is DataItem => (
+    typeof item === "object" &&
+    item !== null &&
+    "field" in item
+  );
+
+const normalizeExercises = (
+  dataExercise: ApiResponse | DatabaseExerciseResponse
+): NormalizedExercise[] => {
+  const responseData = dataExercise?.data;
+
+  const exerciseArray = Array.isArray(responseData)
+    ? responseData
+    : responseData
+      ? [responseData]
+      : [];
+
+  return exerciseArray.map((exercise) => {
+    if (isStackbyItem(exercise)) {
+      return {
+        id: exercise.id,
+        field: exercise.field as ExercisesField,
+      };
+    }
+
+    return {
+      id: exercise.id,
+      field: {
+        title: exercise.title ?? "",
+        description: exercise.description ?? "",
+      } as ExercisesField,
+    };
+  });
+};
+
+export const DetailingExerciseContent: React.FC<
+  DetailingContentProps
+> = ({
   dataTopic,
   dataExercise,
   id,
 }) => {
-  const filteredData = dataExercise?.data.filter(
-    (element: DataItem) => element.id === id.split("-")[0]
+  const exerciseId = decodeURIComponent(id).split("-")[0];
+
+  const exercises = normalizeExercises(dataExercise);
+
+  const selectedExercise = exercises.find(
+    (exercise) => exercise.id === exerciseId
   );
 
+  if (!selectedExercise) {
+    return <NoData />;
+  }
+
   return (
-    <>
-      {filteredData.map((element: DataItem) => (
-        <ExerciseContent
-          dataTopic={dataTopic}
-          key={element.id}
-          idExercise={element.id}
-          field={element.field as ExercisesField}
-        />
-      ))}
-    </>
+    <ExerciseContent
+      dataTopic={dataTopic}
+      idExercise={selectedExercise.id}
+      field={selectedExercise.field}
+    />
   );
 };
