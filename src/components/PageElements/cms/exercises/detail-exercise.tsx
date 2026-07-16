@@ -108,7 +108,7 @@ export default function DetailExercise({ id, onArchive, isEditing }: Props) {
     <Box>
       <Box sx={{ position: "relative" }}>
         <UpperBanner
-          title={"Exercícios"}
+          title={exercise?.title || ""}
           showBreadCrumb
           breadCrumbLabel={exercise?.title}
           editButton={!isEditing}

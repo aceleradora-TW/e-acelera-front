@@ -53,51 +53,45 @@ export default function DetailTopic({ id, isEditing }: Props) {
     fetchTopic();
   }, [fetchTopic]);
 
-  async function handleSave() {
-    if (!topic) return
+  const handleSave = useCallback(async () => {
+    if (!formData) return;
 
     try {
-      setErrorMessage("")
+      setErrorMessage("");
 
       const payload = {
-        title: topic.title,
-        shortDescription: topic.shortDescription,
-        description: topic.description,
-        isActive: topic.isActive,
-        /* videoTitle: topic.video?.title,
-        videoDescription: topic.video?.description,
-        videoReferences: topic.video?.references,
-        videoLink: topic.video?.link, */
-      }
+        title: formData.title,
+        shortDescription: formData.shortDescription,
+        description: formData.description,
+        isActive: topic?.isActive,
+      };
 
       const response = await fetch("/api/topics/updateTopic", {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-        "id": String(id),
-      },
-      body: JSON.stringify(payload),
-    });
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          "id": String(id),
+        },
+        body: JSON.stringify(payload),
+      });
 
-    if (!response.ok) {
-      throw new Error(`Erro: ${response.status}`)
-    }
+      if (!response.ok) {
+        throw new Error(`Erro: ${response.status}`);
+      }
 
-    const data = await response.json()
-
-    router.push("/cms/topics");
-
-    setTopic(data.data ?? topic)
-    setOriginalTopic(data.data ?? topic)
-  } catch (error) {
+      const data = await response.json();
+      router.push("/cms/topics");
+      
+      setTopic(data.data);
+      setOriginalTopic(data.data);
+      setFormData(data.data);
+    } catch (error) {
       console.error("Erro ao salvar tópico:", error);
       setErrorMessage("Ocorreu um erro ao salvar o tópico. Por favor, tente novamente.");
     }
-
-}
+  }, [formData, topic, id]);
 
   function handleCancel() {
-
     const confirmCancel = window.confirm(
       "Deseja cancelar a edição? As alterações serão perdidas."
     );
@@ -105,7 +99,7 @@ export default function DetailTopic({ id, isEditing }: Props) {
       return;
     }
 
-        router.push(`/cms/topics/${id}`);
+    router.push(`/cms/topics/${id}`);
   }
 
   function handleEdit() {
@@ -116,23 +110,22 @@ export default function DetailTopic({ id, isEditing }: Props) {
     router.push(`/cms/topics`);
   };
 
-  function handleChange(field: keyof CmsTopic , value: string) {
-    if (!topic) return
+  function handleChange(field: keyof CmsTopic, value: string) {
+    if (!formData) return;
 
-    setTopic({
-      ...topic,
+    setFormData({
+      ...formData,
       [field]: value,
-
-    })
+    });
   }
 
   return (
     <Box>
       <Box sx={{ position: "relative" }}>
         <UpperBanner
-          title={"Tópicos"}
+          title={topic?.title || ""}
           showBreadCrumb
-          breadCrumbLabel={topic?.title}
+          breadCrumbLabel={topic?.title || ""}
           editButton={!isEditing}
         />
       </Box>
@@ -140,7 +133,7 @@ export default function DetailTopic({ id, isEditing }: Props) {
       <Box sx={textFieldsContainerStyles}>
         <TextField
           label="Título"
-          value={topic?.title || ""}
+          value={formData?.title || ""}
           onChange={(event) => handleChange("title", event.target.value)}
           InputProps={{ readOnly: !isEditing }}
           sx={textFieldStyles}
@@ -148,7 +141,7 @@ export default function DetailTopic({ id, isEditing }: Props) {
 
         <TextField
           label="Descrição"
-          value={topic?.description || ""}
+          value={formData?.description || ""}
           onChange={(event) => handleChange("description", event.target.value)}
           InputProps={{ readOnly: !isEditing }}
           multiline
@@ -158,7 +151,7 @@ export default function DetailTopic({ id, isEditing }: Props) {
 
         <TextField
           label="Descrição curta"
-          value={topic?.shortDescription || ""}
+          value={formData?.shortDescription || ""}
           onChange={(event) => handleChange("shortDescription", event.target.value)}
           InputProps={{ readOnly: !isEditing }}
           multiline
@@ -169,86 +162,86 @@ export default function DetailTopic({ id, isEditing }: Props) {
         {/* Campos para edição de vídeo */}
 
         {/* <TextField
-              label="Título do vídeo"
-              value={formData?.video?.title || ""}
-              onChange={(e) =>
-                setFormData((prev) => {
-                  prev ? {
-                    ...prev,
-                    video: {
-                      ...(prev.video || {}),
-                      title: e.target.value,
-                    },
-                  } : prev
-                })
-              }
-              InputProps={{ readOnly: !isEditing }}
-              rows={4}
-              sx={textFieldStyles}
-            />
+          label="Título do vídeo"
+          value={formData?.video?.title || ""}
+          onChange={(e) =>
+            setFormData((prev) => {
+              prev ? {
+                ...prev,
+                video: {
+                  ...(prev.video || {}),
+                  title: e.target.value,
+                },
+              } : prev
+            })
+          }
+          InputProps={{ readOnly: !isEditing }}
+          rows={4}
+          sx={textFieldStyles}
+        />
 
-            <TextField
-              label="Descrição do vídeo"
-              value={formData?.video?.description || ""}
-              onChange={(e) =>
-                setFormData((prev) => {
-                  prev ? {
-                    ...prev,
-                    video: {
-                      ...(prev.video || {}),
-                      description: e.target.value,
-                    },
-                  } : prev
-                })
-              }
-              InputProps={{ readOnly: !isEditing }}
-              
-              sx={textFieldStyles}
-            />
+        <TextField
+          label="Descrição do vídeo"
+          value={formData?.video?.description || ""}
+          onChange={(e) =>
+            setFormData((prev) => {
+              prev ? {
+                ...prev,
+                video: {
+                  ...(prev.video || {}),
+                  description: e.target.value,
+                },
+              } : prev
+            })
+          }
+          InputProps={{ readOnly: !isEditing }}
+          
+          sx={textFieldStyles}
+        />
 
-            <TextField
-              label="Referências do vídeo"
-              value={formData?.video?.references || ""}
-              onChange={(e) =>
-                setFormData((prev) => {
-                  prev ? {
-                    ...prev,
-                    video: {
-                      ...(prev.video || {}),
-                      references: e.target.value,
-                    },
-                  } : prev
-                })
-              }
-              InputProps={{ readOnly: !isEditing }}
-              rows={4}
-              sx={textFieldStyles}
-            />
+        <TextField
+          label="Referências do vídeo"
+          value={formData?.video?.references || ""}
+          onChange={(e) =>
+            setFormData((prev) => {
+              prev ? {
+                ...prev,
+                video: {
+                  ...(prev.video || {}),
+                  references: e.target.value,
+                },
+              } : prev
+            })
+          }
+          InputProps={{ readOnly: !isEditing }}
+          rows={4}
+          sx={textFieldStyles}
+        />
 
-            <TextField
-              label="Link do vídeo"
-              value={formData?.video?.link || ""}
-              onChange={(e) =>
-                setFormData((prev) => {
-                  prev ? {
-                    ...prev,
-                    video: {
-                      ...(prev.video || {}),
-                      link: e.target.value,
-                    },
-                  } : prev
-                })
-              }
-              InputProps={{ readOnly: !isEditing }}
-              rows={4}
-              sx={textFieldStyles}
-            /> */}
+        <TextField
+          label="Link do vídeo"
+          value={formData?.video?.link || ""}
+          onChange={(e) =>
+            setFormData((prev) => {
+              prev ? {
+                ...prev,
+                video: {
+                  ...(prev.video || {}),
+                  link: e.target.value,
+                },
+              } : prev
+            })
+          }
+          InputProps={{ readOnly: !isEditing }}
+          rows={4}
+          sx={textFieldStyles}
+        /> */}
       </Box>
 
       <Box sx={actionsContainerStyles}>
         <FormActions
-          isValid={!!topic?.title && !!topic?.shortDescription && !!topic?.description}
-          isDirty={JSON.stringify(topic) !== JSON.stringify(originalTopic)}
+          isValid={!!formData?.title && !!formData?.shortDescription && !!formData?.description}
+          isDirty={JSON.stringify(formData) !== JSON.stringify(originalTopic)}
           mode={isEditing ? "edit" : "view"}
           entityPath="cms/topics"
           entityId={id}
