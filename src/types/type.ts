@@ -1,19 +1,26 @@
 export interface DatabaseTheme {
-    id: string;
-    title: string;
-    shortDescription: string;
-    cardDescription: string;
-    image: string;
-    category: string;
-    sequence: number;
-    alt: string;
+  id: string;
+  title: string;
+  description?: string;
+  shortDescription: string;
+  cardDescription?: string;
+  image: string;
+  category: string;
+  sequence: number;
+  alt: string;
+  isActive?: boolean;
 }
 
 export interface DatabaseThemesResponse {
-    data: {
-        data: DatabaseTheme[]
-    };
+  data: DatabaseTheme[];
+  meta?: {
+    total: number;
+    page: number;
+    limit: number;
+    totalPages: number;
+  };
 }
+
 
 export type CardThemeData = ApiResponse | DatabaseThemesResponse;
 

@@ -6,7 +6,5 @@ export default function DetailingTheme({
 }: {
   params: { detailingTheme: string };
 }) {
-  const id = params.detailingTheme;
-
-  return RenderDetailingThemePage(id)
+  return <RenderDetailingThemePage id={params.detailingTheme} category="Autoestudo" />;
 }
