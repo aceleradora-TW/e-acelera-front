@@ -139,56 +139,104 @@ export default function DetailTheme({ id, isEditing }: Props) {
           label="Título"
           value={formData?.title || ""}
           fullWidth
-          InputProps={{ readOnly: !isEditing }}
+          // InputProps={{ readOnly: !isEditing }}
           onChange={(event) => handleChange("title", event.target.value)}
-          sx={textFieldStyles}
+          InputProps={{
+            readOnly: !isEditing,
+          }}
+
+          sx={{
+            "& .MuiOutlinedInput-notchedOutline": {
+              border: isEditing ? undefined : "none",
+            },
+          }}
         />
 
         <TextField
           label="Descrição curta"
           value={formData?.shortDescription || ""}
           fullWidth
-          InputProps={{ readOnly: !isEditing }}
+          // InputProps={{ readOnly: !isEditing }}
           onChange={(event) => handleChange("shortDescription", event.target.value)}
-          sx={textFieldStyles}
+          InputProps={{
+            readOnly: !isEditing,
+          }}
+
+          sx={{
+            "& .MuiOutlinedInput-notchedOutline": {
+              border: isEditing ? undefined : "none",
+            },
+          }}
         />
 
         <TextField
           label="Descrição"
           value={formData?.description || ""}
           fullWidth
-          InputProps={{ readOnly: !isEditing }}
+          // InputProps={{ readOnly: !isEditing }}
           onChange={(event) => handleChange("description", event.target.value)}
           multiline
           rows={4}
-          sx={textFieldStyles}
+          InputProps={{
+            readOnly: !isEditing,
+          }}
+
+          sx={{
+            "& .MuiOutlinedInput-notchedOutline": {
+              border: isEditing ? undefined : "none",
+            },
+          }}
         />
 
         <TextField
           label="Texto alt da imagem"
           value={formData?.imageAlt || ""}
           fullWidth
-          InputProps={{ readOnly: !isEditing }}
+          // InputProps={{ readOnly: !isEditing }}
           onChange={(event) => handleChange("imageAlt", event.target.value)}
-          sx={textFieldStyles}
+          InputProps={{
+            readOnly: !isEditing,
+          }}
+
+          sx={{
+            "& .MuiOutlinedInput-notchedOutline": {
+              border: isEditing ? undefined : "none",
+            },
+          }}
         />
 
         <TextField
           label="Categoria"
           value={formData?.category || ""}
           fullWidth
-          InputProps={{ readOnly: !isEditing }}
+          // InputProps={{ readOnly: !isEditing }}
           onChange={(event) => handleChange("category", event.target.value)}
-          sx={textFieldStyles}
+          InputProps={{
+            readOnly: !isEditing,
+          }}
+
+          sx={{
+            "& .MuiOutlinedInput-notchedOutline": {
+              border: isEditing ? undefined : "none",
+            },
+          }}
         />
 
         <TextField
           label="Sequência"
           value={formData?.sequence ?? ""}
           fullWidth
-          InputProps={{ readOnly: !isEditing }}
+          // InputProps={{ readOnly: !isEditing }}
           onChange={(event) => handleChange("sequence", event.target.value)}
-          sx={textFieldStyles}
+          InputProps={{
+            readOnly: !isEditing,
+          }}
+
+          sx={{
+            "& .MuiOutlinedInput-notchedOutline": {
+              border: isEditing ? undefined : "none",
+            },
+          }}
         />
       </Box>
 

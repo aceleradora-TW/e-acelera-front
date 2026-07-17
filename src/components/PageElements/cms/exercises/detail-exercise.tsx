@@ -82,7 +82,7 @@ export default function DetailExercise({ id, onArchive, isEditing }: Props) {
       alert("Não foi possível salvar as alterações. Verifique o console.");
     }
   };
-  
+
   const handleCancel = () => {
     const confirmCancel = window.confirm(
       "Deseja cancelar a edição? As alterações serão perdidas."
@@ -96,7 +96,7 @@ export default function DetailExercise({ id, onArchive, isEditing }: Props) {
 
   const handleEdit = () => {
     router.push(`/cms/exercises/${id}/edit`);
-    
+
   }
 
   const handleBack = () => {
@@ -121,10 +121,16 @@ export default function DetailExercise({ id, onArchive, isEditing }: Props) {
           label="Título"
           value={formData?.title || ""}
           onChange={(e) =>
-            setFormData((prev) => (prev ? { ...prev, title: e.target.value } : prev))
+            setFormData((prev) =>
+              prev ? { ...prev, title: e.target.value } : prev
+            )
           }
           InputProps={{ readOnly: !isEditing }}
-          sx={textFieldStyles}
+          sx={{
+            "& .MuiOutlinedInput-notchedOutline": {
+              border: isEditing ? undefined : "none",
+            },
+          }}
         />
 
         <TextField
@@ -134,9 +140,11 @@ export default function DetailExercise({ id, onArchive, isEditing }: Props) {
             setFormData((prev) => (prev ? { ...prev, description: e.target.value } : prev))
           }
           InputProps={{ readOnly: !isEditing }}
-          multiline
-          rows={4}
-          sx={textFieldStyles}
+          sx={{
+            "& .MuiOutlinedInput-notchedOutline": {
+              border: isEditing ? undefined : "none",
+            },
+          }}
         />
 
         <TextField
@@ -146,9 +154,11 @@ export default function DetailExercise({ id, onArchive, isEditing }: Props) {
             setFormData((prev) => (prev ? { ...prev, shortDescription: e.target.value } : prev))
           }
           InputProps={{ readOnly: !isEditing }}
-          multiline
-          rows={2}
-          sx={textFieldStyles}
+          sx={{
+            "& .MuiOutlinedInput-notchedOutline": {
+              border: isEditing ? undefined : "none",
+            },
+          }}
         />
 
         <TextField
@@ -176,14 +186,22 @@ export default function DetailExercise({ id, onArchive, isEditing }: Props) {
             readOnly: !isEditing,
           }}
 
-          sx={textFieldStyles}
+          sx={{
+            "& .MuiOutlinedInput-notchedOutline": {
+              border: isEditing ? undefined : "none",
+            },
+          }}
         />
 
         <TextField
           label="Status"
           value={exercise?.isActive ? "Ativo" : "Inativo"}
           InputProps={{ readOnly: true }}
-          sx={textFieldStyles}
+          sx={{
+            "& .MuiOutlinedInput-notchedOutline": {
+              border: isEditing ? undefined : "none",
+            },
+          }}
         />
       </Box>
 
