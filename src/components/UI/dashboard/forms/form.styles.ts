@@ -76,22 +76,26 @@ export const textAreaStyles: SxProps<Theme> = {
   },
 }
 
-export const textFieldStyles: SxProps<Theme> = (theme: Theme) => ({
+export const textFieldStyles = (theme: Theme): SxProps<Theme> => ({
   "& .MuiOutlinedInput-root": {
     backgroundColor:
       theme.palette.mode === "dark"
         ? theme.palette.background.paper
         : "transparent",
 
+    "& fieldset": {
+      border: "none",
+    },
+
     "&:hover fieldset": {
-      borderColor: "rgba(0,0,0,0.23)"
+      border: "none",
     },
 
     "&.Mui-focused fieldset": {
-      borderColor: "rgba(0,0,0,0.23)"
-    }
-  }
-})
+      border: "none",
+    },
+  },
+});
 
 export const textFieldsContainerStyles: SxProps<Theme> = {
   mt: 4,

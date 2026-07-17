@@ -135,28 +135,52 @@ export default function DetailTopic({ id, isEditing }: Props) {
           label="Título"
           value={formData?.title || ""}
           onChange={(event) => handleChange("title", event.target.value)}
-          InputProps={{ readOnly: !isEditing }}
-          sx={textFieldStyles}
+          // InputProps={{ readOnly: !isEditing }}
+          InputProps={{
+            readOnly: !isEditing,
+          }}
+
+          sx={{
+            "& .MuiOutlinedInput-notchedOutline": {
+              border: isEditing ? undefined : "none",
+            },
+          }}
         />
 
         <TextField
           label="Descrição"
           value={formData?.description || ""}
           onChange={(event) => handleChange("description", event.target.value)}
-          InputProps={{ readOnly: !isEditing }}
+          // InputProps={{ readOnly: !isEditing }}
           multiline
           rows={4}
-          sx={textFieldStyles}
+          InputProps={{
+            readOnly: !isEditing,
+          }}
+
+          sx={{
+            "& .MuiOutlinedInput-notchedOutline": {
+              border: isEditing ? undefined : "none",
+            },
+          }}
         />
 
         <TextField
           label="Descrição curta"
           value={formData?.shortDescription || ""}
           onChange={(event) => handleChange("shortDescription", event.target.value)}
-          InputProps={{ readOnly: !isEditing }}
+          // InputProps={{ readOnly: !isEditing }}
           multiline
           rows={4}
-          sx={textFieldStyles}
+          InputProps={{
+            readOnly: !isEditing,
+          }}
+
+          sx={{
+            "& .MuiOutlinedInput-notchedOutline": {
+              border: isEditing ? undefined : "none",
+            },
+          }}
         />
 
         {/* Campos para edição de vídeo */}
@@ -175,9 +199,17 @@ export default function DetailTopic({ id, isEditing }: Props) {
               } : prev
             })
           }
-          InputProps={{ readOnly: !isEditing }}
+          // InputProps={{ readOnly: !isEditing }}
           rows={4}
-          sx={textFieldStyles}
+          InputProps={{
+            readOnly: !isEditing,
+          }}
+
+          sx={{
+            "& .MuiOutlinedInput-notchedOutline": {
+              border: isEditing ? undefined : "none",
+            },
+          }}
         />
 
         <TextField
@@ -194,9 +226,17 @@ export default function DetailTopic({ id, isEditing }: Props) {
               } : prev
             })
           }
-          InputProps={{ readOnly: !isEditing }}
+          // InputProps={{ readOnly: !isEditing }}
           
-          sx={textFieldStyles}
+          InputProps={{
+            readOnly: !isEditing,
+          }}
+
+          sx={{
+            "& .MuiOutlinedInput-notchedOutline": {
+              border: isEditing ? undefined : "none",
+            },
+          }}
         />
 
         <TextField
@@ -213,9 +253,17 @@ export default function DetailTopic({ id, isEditing }: Props) {
               } : prev
             })
           }
-          InputProps={{ readOnly: !isEditing }}
+          // InputProps={{ readOnly: !isEditing }}
           rows={4}
-          sx={textFieldStyles}
+          InputProps={{
+            readOnly: !isEditing,
+          }}
+
+          sx={{
+            "& .MuiOutlinedInput-notchedOutline": {
+              border: isEditing ? undefined : "none",
+            },
+          }}
         />
 
         <TextField
@@ -232,9 +280,17 @@ export default function DetailTopic({ id, isEditing }: Props) {
               } : prev
             })
           }
-          InputProps={{ readOnly: !isEditing }}
+          // InputProps={{ readOnly: !isEditing }}
           rows={4}
-          sx={textFieldStyles}
+          InputProps={{
+            readOnly: !isEditing,
+          }}
+
+          sx={{
+            "& .MuiOutlinedInput-notchedOutline": {
+              border: isEditing ? undefined : "none",
+            },
+          }}
         /> */}
       </Box>
 
