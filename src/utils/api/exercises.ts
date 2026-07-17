@@ -31,3 +31,37 @@ export async function createExercises(exerciseData: {
     }
     return res.json();
 }
+
+export async function getExerciseById(id: string) {
+  const res = await fetch(`/api/exercises/${id}`);
+
+  if (!res.ok) {
+    const errorData = await res.json().catch(() => null);
+    throw new Error(errorData?.error || "Erro ao buscar exercício");
+  }
+
+  return res.json();
+}
+
+export async function updateExercise(id: string, exerciseData: {
+  title: string;
+  shortDescription: string;
+  description: string;
+  sequence?: number;
+  topicId?: string;
+}) {
+  const res = await fetch(`/api/exercises/${id}`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(exerciseData),
+  });
+
+  if (!res.ok) {
+    const errorData = await res.json().catch(() => null);
+    throw new Error(errorData?.error || "Erro ao atualizar exercício");
+  }
+
+  return res.json();
+}

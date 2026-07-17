@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 const columns = [
   { id: "id", label: "ID" },
   { id: "title", label: "Título" },
+  { id: "description", label: "Descrição" },
   { id: "shortDescription", label: "Descrição curta" },
   { id: "topic", label: "Tópico" },
   { id: "theme", label: "Tema" },
@@ -26,13 +27,24 @@ export default function RenderCmsPage() {
       try {
         const res = await getExercises(page + 1, pageSize);
 
-        setRows(res.data.data);
+        const formattedRows = res.data.data.map((exercise: any) => ({
+          ...exercise,
+          topicData: exercise.topic,
+          themeData: exercise.topic?.theme,
+          topic: exercise.topic?.title ?? exercise.topic?.name ?? "-",
+          theme:
+            exercise.topic?.theme?.title ??
+            exercise.topic?.theme?.name ??
+            "-",
+        }));
+
+        setRows(formattedRows);
         setRowCount(res.data.meta.total);
-        
       } catch (error) {
         console.error("Erro ao buscar exercícios:", error);
       }
     }
+
     fetchExercises();
   }, [page, pageSize]);
 
@@ -44,10 +56,12 @@ export default function RenderCmsPage() {
       sx={{ width: "100%" }}
     >
       <UpperBanner
-        title="CMS - Exercícios"
+        title="Exercícios"
         menuBanner
         createButton
+        showBreadCrumb
       />
+
       <TableCMS
         columns={columns}
         rows={rows}
@@ -59,4 +73,4 @@ export default function RenderCmsPage() {
       />
     </Box>
   );
-}   
+}

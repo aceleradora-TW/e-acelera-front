@@ -40,9 +40,10 @@ export default function RenderCmsPage() {
       sx={{ width: "100%"}}
     >
       <UpperBanner 
-        title="CMS - Temas"   
+        title="Temas"   
         menuBanner 
-        createButton 
+        createButton
+        showBreadCrumb
       />
       <TableCMS
         columns={columns}

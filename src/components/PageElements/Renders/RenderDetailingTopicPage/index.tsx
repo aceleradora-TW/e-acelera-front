@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useFlags } from "flagsmith/react";
 import useFetchData from "@/components/fetchData";
 import { Loading } from "@/components/Loading";
 import { LayoutPage } from "../../LayoutPage";
@@ -13,29 +14,84 @@ import { useGlobalContext } from "@/hooks/useGlobalContext";
 import { GlobalContextProvider } from "@/context/global.context";
 import { IdType } from "@/types/type";
 
-const PageContent = ({ topicId }: { topicId: string }) => {
-  const [isModalOpen, setIsModalOpen] = React.useState<boolean>(false);
+function traitIsTrue(value: unknown): boolean {
+  return (
+    value === true ||
+    value === "true" ||
+    value === 1 ||
+    value === "1"
+  );
+}
 
-  const showStatusErrorModal = () => setIsModalOpen(true);
+const PageContent = ({ topicId }: { topicId: string }) => {
+  const [isModalOpen, setIsModalOpen] =
+    React.useState<boolean>(false);
+
+  const {
+    flag_adminjs,
+    is_test_user,
+    adminjs_preference,
+  } = useFlags(
+    ["flag_adminjs"],
+    ["is_test_user", "adminjs_preference"]
+  );
+
+  const isTestUser = traitIsTrue(is_test_user);
+
+  const usePostgres =
+    flag_adminjs?.enabled === true ||
+    (isTestUser && traitIsTrue(adminjs_preference));
+
+  const showStatusErrorModal = () => {
+    setIsModalOpen(true);
+  };
 
   const { progressTrigger } = useGlobalContext();
+
   const { progress } = useFetchProgress(
     topicId,
     IdType.TOPIC_ID,
     progressTrigger
   );
+
   const { dataStatus } = useFetchTopicStatus(topicId);
 
-  const { data: renderData, isLoading: loading, error: error} = useFetchData('/api/stackbyApi/Topics', {
-    headers: {
-        operator: "rowIds",
-        value: topicId,
-    },
-  });
+  const url = usePostgres
+    ? "/api/topics/getTopicById"
+    : "/api/stackbyApi/Topics";
 
-  if (loading) return <Loading />;
-  if (error) return <BadRequest />;
-  if (!renderData) return <NoData />;
+  const fetchOptions: RequestInit = usePostgres
+    ? {
+        method: "GET",
+        headers: {
+          id: topicId,
+        },
+      }
+    : {
+        method: "GET",
+        headers: {
+          operator: "rowIds",
+          value: topicId,
+        },
+      };
+
+  const {
+    data: renderData,
+    isLoading: loading,
+    error,
+  } = useFetchData(url, fetchOptions);
+
+  if (loading) {
+    return <Loading />;
+  }
+
+  if (error) {
+    return <BadRequest />;
+  }
+
+  if (!renderData) {
+    return <NoData />;
+  }
 
   return (
     <DetailingTopicContext.Provider
@@ -50,6 +106,7 @@ const PageContent = ({ topicId }: { topicId: string }) => {
           open={isModalOpen}
           handleClose={() => setIsModalOpen(false)}
         />
+
         <DetailingTopicContent
           data={renderData}
           id={topicId}
@@ -61,12 +118,9 @@ const PageContent = ({ topicId }: { topicId: string }) => {
 };
 
 export const RenderDetailingTopicPage = (id: string) => {
-  const extractId = (): string => {
-    const parts = id.split("-");
-    return parts[0];
-  };
+  const decodedId = decodeURIComponent(id);
 
-  const topicId = extractId();
+  const topicId = decodedId.split("-")[0];
 
   return (
     <GlobalContextProvider>

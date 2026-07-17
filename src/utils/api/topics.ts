@@ -1,3 +1,5 @@
+import { GridSortDirection } from "@mui/x-data-grid";
+
 export async function createTopic(topicData: {
     title: string;
     description: string;
@@ -20,12 +22,43 @@ export async function createTopic(topicData: {
     return res.json();
 }
 
-export async function getTopics(page: number, limit: number) {
+export async function getTopics(page: number, limit: number, sortBy?: string, sortOrder?: GridSortDirection) {
   const query = new URLSearchParams({
     page: String(page),
     limit: String(limit),
   });
+  if (sortBy) query.set("sortBy", sortBy);
+  if (sortOrder) query.set("sortOrder", sortOrder);
   const res = await fetch(`/api/topics?${query.toString()}`);
   if (!res.ok) throw new Error("Erro ao buscar tópicos");
   return res.json();
+}
+
+export async function getTopicById(id: string) {
+    const res = await fetch(`/api/topics/getTopicById?id=${id}`, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+        },
+    });
+    if (!res.ok) {
+        const error = await res.json().catch(() => ({}));
+        throw new Error(error.error || "Erro ao buscar tópico");
+    }
+    return res.json();
+}
+
+export async function updateTopic(id: string, topicData: any) {
+    const res = await fetch(`/api/topics/${id}`, {
+        method: "PATCH",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(topicData),
+    });
+    if (!res.ok) {
+        const error = await res.json().catch(() => ({}));
+        throw new Error(error.error || "Erro ao atualizar tópico");
+    }
+    return res.json();
 }
