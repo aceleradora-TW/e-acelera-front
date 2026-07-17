@@ -11,7 +11,7 @@ export default function AboutAgil() {
   const listTitlesFormacao = [
     "Tecnologias modernas",
     "Mentoria 1:1",
-    "Metdologias ágeis",
+    "Metodologias ágeis",
     "Mentorias técnicas",
     "Palestras",
     "Workshops",

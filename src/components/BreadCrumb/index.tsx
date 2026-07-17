@@ -56,22 +56,25 @@ export const BreadCrumb: React.FC<BreadCrumbProps> = ({ lastLabel }) => {
   }, [pathname]);
 
   const routeSegments: string[] = pathname.split('/').filter((crumb) => crumb);
-  const isEditPage: boolean = Boolean(lastLabel) && routeSegments.at(-1) === 'edit';
-  
-  const normalizedSegments: string[] = routeSegments.map(segment => {
-    const match = segment.match(/^([^-]+)-/);
-    return match ? match[1] : segment;
-  });
+    const isEditPage: boolean = Boolean(lastLabel) && routeSegments.at(-1) === 'edit';
+ 
+    const normalizedSegments: string[] = routeSegments.map(segment => {
+      const match = segment.match(/^([^-]+)-/);
+      return match ? match[1] : segment;
+    });
 
-  const baseSegments: string[] = normalizedSegments.slice(0, 2);
-  
-  const isListPage: boolean = ['themes', 'topics', 'exercises'].includes(baseSegments[1]?.toLowerCase());
+    const baseSegments: string[] = normalizedSegments.slice(0, 2);
+ 
+    // List pages have exactly 2 segments after filtering (e.g., /cms/themes)
+    // Detail pages have 3+ segments (e.g., /cms/themes/123)
+    const isListPage: boolean = ['themes', 'topics', 'exercises'].includes(baseSegments[1]?.toLowerCase())
+      && normalizedSegments.length === 2;
 
-  const visibleSegments: string[] = isListPage 
-    ? ['cms']
-    : lastLabel
-      ? routeSegments.slice(0, isEditPage ? -2 : -1)
-      : routeSegments;
+  const visibleSegments: string[] = isListPage
+      ? ['cms']
+      : lastLabel
+        ? routeSegments.slice(0, isEditPage ? -2 : -1)
+        : routeSegments;
 
   const breadcrumbs: string[] = [];
 
